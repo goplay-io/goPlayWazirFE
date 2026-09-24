@@ -1,5 +1,5 @@
 <template>
-  <!-- Header: toolbar first; announcement strip below (same as logged-in Header) -->
+  <!-- Header: announcement above toolbar (WazirWin reference) -->
   <v-app-bar
     v-if="!(isMobile && isClearScreenPage)"
     ref="guestAppBarRef"
@@ -8,11 +8,14 @@
     class="tw-bg-theme-header guest-app-bar tw-py-0"
     :class="{ 'guest-app-bar--search-open': !isMobile && showSearchDropdown }" elevation="0">
     <div class="guest-app-bar-inner header-shell tw-flex tw-flex-col tw-w-full tw-max-w-full tw-min-h-0">
-      <!-- <div v-if="showDesktopTopStrip" class="header-top-strip tw-shrink-0" aria-hidden="true"></div> -->
+      <HeaderAnnouncementBar
+        v-if="showAnnouncementStrip"
+        @dismiss="dismissAnnouncementStrip"
+      />
 
       <div
-        class="guest-toolbar-row tw-flex tw-items-center tw-w-full tw-min-h-[39px] tw-h-[57px] md:tw-min-h-[59px] md:tw-h-[59px] tw-shrink-0">
-        <div class="guest-toolbar-left tw-inline-flex tw-items-center tw-gap-2 tw-flex-none md:tw-gap-3">
+        class="guest-toolbar-row tw-flex tw-items-center tw-w-full tw-min-h-[39px] tw-h-[54px] md:tw-min-h-[90px] md:tw-h-[90px] tw-shrink-0">
+        <div class="guest-toolbar-left tw-inline-flex tw-items-center tw-gap-0 tw-flex-none md:tw-gap-3">
         <router-link v-if="isCasinoPage && authStore.isUiAuthenticated" to="/sports/live"
           class="guest-mobile-menu-btn guest-mobile-home-btn md:tw-hidden"
           :aria-label="t('components.mobileBottomNav.live')">
@@ -24,8 +27,8 @@
             src="/svg/burger-menu.png"
             alt=""
             class="guest-mobile-menu-btn__icon"
-            width="21"
-            height="15"
+            width="12"
+            height="14"
           />
         </button>
 
@@ -35,39 +38,51 @@
         />
         </div>
 
-        <!-- Right: search → wallet (demo mobile) → profile / auth -->
+        <!-- Desktop center search (reference layout) -->
         <div
-          class="guest-toolbar-right tw-flex tw-items-center tw-justify-end tw-min-w-0 tw-gap-1.5 md:tw-gap-4 tw-ml-auto">
-          <template v-if="!isMobile && (authStore.isUiAuthenticated || authStore.isDemoUser) && !isAuthPage">
-            <!-- <router-link to="/rules" class="header-nav-link tw-hidden md:tw-inline-flex">
-              {{ t('components.mobileBottomNav.rules') }}
-            </router-link> -->
-            <div ref="desktopInlineSearchRoot"
-              class="header-inline-search tw-relative tw-hidden md:tw-flex tw-items-center tw-h-9 tw-min-w-[220px] md:tw-min-w-[260px] tw-max-w-[320px]">
-              <SearchMagnify :size="18" :stroke-width="2" class="header-inline-search__icon" />
-             <!-- <span class="header-inline-search__divider" aria-hidden="true"></span> -->
-              <input ref="headerSearchInput" v-model="inlineSearchQuery" type="text"
-                :placeholder="t('components.searchDialog.desktopPlaceholder')"
-                class="header-inline-search__input tw-flex-1 tw-min-w-0 tw-bg-transparent tw-border-0 tw-outline-none tw-text-sm"
-                @focus="ensureInlineSearchData" @keydown.enter.prevent="submitInlineSearch" />
-              <div v-if="showSearchDropdown" class="header-search-dropdown">
-                <div class="header-search-dropdown__body">
-                  <SearchResults :search-query="debouncedSearchQuery" :loading="searchLoading" :error="searchError"
-                    :casino-games="casinoGames" @event-selected="handleInlineEventSelected"
-                    @game-selected="handleInlineGameSelected" />
-                </div>
+          v-if="!isMobile && !isAuthPage"
+          class="header-desktop-search-slot tw-hidden md:tw-flex tw-flex-1 tw-justify-center tw-min-w-0 tw-px-4"
+        >
+          <div
+            ref="desktopInlineSearchRoot"
+            class="header-desktop-search tw-relative tw-flex tw-items-center tw-w-full tw-max-w-[280px] xl:tw-max-w-[380px]"
+          >
+            <SearchMagnify :size="15" :stroke-width="2" class="header-desktop-search__icon" />
+            <input
+              ref="headerSearchInput"
+              v-model="inlineSearchQuery"
+              type="text"
+              :placeholder="t('components.searchDialog.desktopPlaceholder')"
+              class="header-desktop-search__input tw-flex-1 tw-min-w-0 tw-bg-transparent tw-border-0 tw-outline-none"
+              @focus="ensureInlineSearchData"
+              @keydown.enter.prevent="submitInlineSearch"
+            />
+            <div v-if="showSearchDropdown" class="header-search-dropdown header-search-dropdown--desktop">
+              <div class="header-search-dropdown__body">
+                <SearchResults
+                  :search-query="debouncedSearchQuery"
+                  :loading="searchLoading"
+                  :error="searchError"
+                  :casino-games="casinoGames"
+                  @event-selected="handleInlineEventSelected"
+                  @game-selected="handleInlineGameSelected"
+                />
               </div>
             </div>
-          </template>
+          </div>
+        </div>
 
+        <!-- Right: wallet (demo) → profile / auth -->
+        <div
+          class="guest-toolbar-right tw-flex tw-items-center tw-justify-end tw-min-w-0 tw-gap-1.5 md:tw-gap-4 tw-ml-auto">
           <button
             v-if="isMobile && (authStore.isUiAuthenticated || authStore.isDemoUser) && !isAuthPage"
             type="button"
             @click="openInlineSearch"
             :aria-label="t('common.search')"
-            class="search-icon-btn header-mobile-icon-btn header-announce-search md:tw-hidden"
+            class="header-mobile-search-btn md:tw-hidden"
           >
-            <SearchMagnify :size="16" :stroke-width="2" />
+            <SearchMagnify :size="22" :stroke-width="2" class="header-mobile-search-btn__icon" />
           </button>
 
           <!-- Demo user mobile: combined wallet + profile pill -->
@@ -103,45 +118,48 @@
             </div>
           </template>
 
-          <!-- Pure guest: navigation links + sign-up + login -->
+          <!-- Pure guest: WazirWin reference auth actions -->
           <template v-else>
-            <!-- <div class="tw-hidden md:tw-flex tw-items-center tw-gap-2">
-              <router-link to="/about-us" class="header-nav-link" active-class="header-nav-link-active">
-                {{ t('pages.aboutUs.title') }}
+            <div v-if="!isMobile" class="guest-desktop-auth-cluster tw-flex tw-items-center tw-gap-2 tw-shrink-0">
+              <div class="header-desktop-datetime">
+                <div class="header-desktop-datetime__date">{{ formattedHeaderDate }}</div>
+                <span class="header-desktop-datetime__time">{{ formattedHeaderTime }}</span>
+              </div>
+              <div class="guest-desktop-auth-actions tw-flex tw-items-center tw-gap-1">
+                <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--login" @click="handleGuestLoginClick">
+                  <v-icon size="17" class="guest-ref-auth-btn__icon">mdi-login</v-icon>
+                  <span>{{ t('components.mobileBottomNav.login') }}</span>
+                </button>
+                <router-link to="/signup" class="guest-ref-auth-btn guest-ref-auth-btn--register" @click="handleGuestSignupClick">
+                  <v-icon size="16" class="guest-ref-auth-btn__icon">mdi-account-plus-outline</v-icon>
+                  <span>{{ t('auth.login.registerCta') }}</span>
+                </router-link>
+                <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--get-id" @click="handleGuestGetIdClick">
+                  <v-icon size="17" class="guest-ref-auth-btn__icon">mdi-login</v-icon>
+                  <span>{{ t('auth.login.getIdCta') }}</span>
+                </button>
+              </div>
+            </div>
+            <div v-else class="guest-auth-pair tw-inline-flex tw-items-center">
+              <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--login guest-ref-auth-btn--mobile" @click="handleGuestLoginClick">
+                <span>{{ t('components.mobileBottomNav.login') }}</span>
+              </button>
+              <router-link to="/signup" class="guest-ref-auth-btn guest-ref-auth-btn--register guest-ref-auth-btn--mobile" @click="handleGuestSignupClick">
+                <span>{{ t('auth.login.signupCta') }}</span>
               </router-link>
-              <router-link to="/contact" class="header-nav-link" active-class="header-nav-link-active">
-                {{ t('pages.contact.title') }}
-              </router-link>
-              <router-link to="/terms-and-conditions" class="header-nav-link" active-class="header-nav-link-active">
-                {{ t('pages.termsAndConditions.title') }}
-              </router-link>
-            </div> -->
-            <div class="guest-auth-pair tw-inline-flex tw-items-center">
-              <router-link to="/signup" class="signup-btn" @click="handleGuestSignupClick">
-                <span class="signup-text">{{ t('auth.login.signupCta') }}</span>
-              </router-link>
-              <button type="button" class="login-btn" @click="handleGuestLoginClick">
-                <span class="login-text">{{ t('auth.login.loginButton') }}</span>
+              <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--get-id guest-ref-auth-btn--mobile" @click="handleGuestGetIdClick">
+                <span>{{ t('auth.login.getIdCta') }}</span>
               </button>
             </div>
           </template>
         </div>
       </div>
 
-      <!-- Announcement marquee below toolbar (logged-out + demo; matches logged-in) -->
-      <div v-if="showAnnouncementStrip"
-        class="header-announce-strip header-announce-strip--lane header-announce-strip--below header-announce-strip--with-message tw-shrink-0 tw-flex tw-items-center tw-w-full tw-relative">
-        <div class="header-announce-speaker" aria-hidden="true">
-          <img src="/svg/speaker_icon.png" alt="" class="header-announce-speaker__img" width="22" height="20" />
-        </div>
-        <div class="header-ticker-wrap header-ticker-wrap--strip tw-min-w-0 tw-flex-1">
-          <div class="header-ticker-track-wrap">
-            <div ref="guestTickerTrackRef" class="header-ticker-track" :style="{ animationDuration: tickerDuration }">
-              <span class="header-ticker-text">{{ tickerText }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-              <span class="header-ticker-text">{{ tickerText }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            </div>
-          </div>
-        </div>
+      <div
+        v-if="shouldShowSubHeader"
+        class="header-subheader-wrap tw-shrink-0 tw-px-2 md:tw-px-0"
+      >
+        <HeaderSubHeader />
       </div>
 
     </div>
@@ -180,9 +198,12 @@
   <!-- Main content with sidebar -->
   <div
     class="guest-layout-root tw-bg-theme-background tw-flex tw-flex-col"
-    :class="(useMobileBodyScroll || showSiteFooter)
-      ? 'tw-min-h-screen'
-      : 'tw-h-full tw-max-h-full tw-overflow-hidden'"
+    :class="[
+      (useMobileBodyScroll || showSiteFooter)
+        ? 'tw-min-h-screen'
+        : 'tw-h-full tw-max-h-full tw-overflow-hidden',
+      { 'layout-home-shell-bg': showHomeExchangeSection },
+    ]"
   >
     <!-- Reserve space for fixed v-app-bar (same pattern as Layout.vue) -->
     <div
@@ -191,12 +212,6 @@
       :style="{ height: guestDesktopHeaderFlowSpacerPx + 'px', width: '100%' }"
       aria-hidden="true"
     />
-
-    <!-- Top Navigation bar (sticky, below header) -->
-    <!-- <div v-if="!isMobile && !isClearScreenPage && !showHomeExchangeSection && !isExchangeSportDetailPage" class="guest-layout-top-nav tw-sticky tw-z-30 tw-w-full tw-shrink-0"
-      :style="{ top: guestHeaderInsetPx + 'px' }">
-      <TopNavigation />
-    </div> -->
 
     <div
       class="guest-layout-body-stack tw-flex tw-flex-1 tw-min-h-0 tw-flex-col"
@@ -207,17 +222,24 @@
       } : undefined"
     >
     <div
-      class="guest-layout-body tw-flex tw-min-w-0 tw-gap-0 tw-bg-white"
+      class="guest-layout-body tw-flex tw-min-w-0 tw-gap-0"
       :class="[
+        showHomeExchangeSection ? '' : 'tw-bg-white',
         useMobileBodyScroll ? 'guest-layout-body--mobile-body' : '',
         showSiteFooter
           ? 'guest-layout-body--footer-doc'
           : 'tw-flex-1 tw-min-h-0',
+        useReferenceSportsLayout ? 'guest-layout-body--reference-pad' : '',
         showLayoutRightRail ? 'guest-layout-body--with-right-rail' : '',
         isFullWidthPage ? 'guest-layout-body--full-width' : '',
       ]"
     >
-      <Sidebar v-if="!isCasinoListingPage && !isClearScreenPage && !isFullWidthPage" v-model="sidebarOpen" :top-offset="mobileSidebarTopOffsetPx" />
+      <div
+        v-if="!isCasinoListingPage && !isClearScreenPage && !isFullWidthPage"
+        class="layout-sidebar-column"
+      >
+        <Sidebar v-model="sidebarOpen" :top-offset="mobileSidebarTopOffsetPx" />
+      </div>
 
       <!-- Scrollable content column: spacer sits outside the scrollport so content never paints under the nav -->
       <div
@@ -250,13 +272,16 @@
             :class="{ 'guest-sports-shell--single-col': !isMobile && (isBetPage || isMultiMarketPage || !showDesktopSportsShellRail) }">
             <div
               class="guest-sports-shell__content"
-              :class="{ 'guest-sports-shell__content--home-pad': showHomeExchangeSection }"
+              :class="{
+                'guest-sports-shell__content--home-pad': showHomeExchangeSection,
+                'guest-sports-shell__content--reference-home': showHomeExchangeSection,
+              }"
             >
               <SportsMainBanner v-if="isSportsShellPage && showSportsShellMainBanner && !isMultiMarketPage" />
+              <HomeReferenceMiddleSections v-if="showHomeExchangeSection && !isMultiMarketPage" />
               <SportsSharedGifRow
-                v-if="isSportsShellPage && showSportsShellGifRow && !isMultiMarketPage && !isMobile"
+                v-if="isSportsShellPage && showSportsShellGifRow && !isMultiMarketPage && !isMobile && !showHomeExchangeSection"
               />
-              <HomeExchangeSection v-if="showHomeExchangeSection && !isMultiMarketPage" />
               <div v-if="isSportsShellPage && isMobile && showMobileNewLaunchInShell"
                 class="layout-mobile-new-launch-wrap md:tw-hidden">
                 <NewLaunchGames />
@@ -286,9 +311,11 @@
       <!-- Right rail: bet slip + promo (desktop) -->
       <LayoutRightRail
         v-if="showLayoutRightRail"
-        show-whatsapp
+        :show-whatsapp="!showHomeExchangeSection"
         :whatsapp-url="guestWhatsappUrl"
         :sticky-footer-doc="showSiteFooter"
+        :open-bets-use-unsettled="showHomeExchangeSection"
+        :home-reference-layout="showHomeExchangeSection"
       />
     </div>
 
@@ -330,7 +357,6 @@ import { useRoute } from 'vue-router'
 import Footer from '@/components/Footer.vue'
 import HomeMobileEndSections from '@/components/home/HomeMobileEndSections.vue'
 import Sidebar from '@/layouts/Sidebar.vue'
-import TopNavigation from '@/layouts/TopNavigation.vue'
 import useDevices from '@/composables/useDevices.js'
 import { useUIStore } from '@/stores/ui.js'
 import { useAuthStore } from '@/stores/auth.js'
@@ -346,17 +372,21 @@ import MobileBottomNav from '@/components/MobileBottomNav.vue'
 import DesktopCustomerSupportFloat from '@/components/DesktopCustomerSupportFloat.vue'
 import SportsSharedRail from '@/components/sports/SportsSharedRail.vue'
 import LayoutRightRail from '@/components/layout/LayoutRightRail.vue'
+import HomeReferenceMiddleSections from '@/components/home/HomeReferenceMiddleSections.vue'
 import SportsMainBanner from '@/components/sports/SportsMainBanner.vue'
 import SportsSharedGifRow from '@/components/sports/SportsSharedGifRow.vue'
-import HomeExchangeSection from '@/components/sports/HomeExchangeSection.vue'
 // import LayoutMobileSportsTabStrip from '@/components/sports/LayoutMobileSportsTabStrip.vue'
 import NewLaunchGames from '@/views/sports/Home/NewLaunchGames.vue'
 import { useMobileSportsShellChrome } from '@/composables/useMobileSportsShellChrome.js'
-import { useHeaderLayoutMetrics, useAppBarHeightObserver, ANNOUNCE_MARQUEE_PX_PER_SEC } from '@/composables/useHeaderLayoutMetrics.js'
+import { useHeaderLayoutMetrics, useAppBarHeightObserver } from '@/composables/useHeaderLayoutMetrics.js'
 import WalletInfo from '@/components/WalletInfo.vue'
 import UserAccountDrawer from '@/components/UserAccountDrawer.vue'
+import HeaderAnnouncementBar from '@/components/HeaderAnnouncementBar.vue'
+import HeaderSubHeader from '@/components/HeaderSubHeader.vue'
 import { useExposureDialog } from '@/composables/useExposureDialog'
 import { useSettingsStore } from '@/stores/settings.js'
+import { openLoginModal } from '@/composables/useLoginModal.js'
+import { buildWhatsAppSupportUrl } from '@/utils/whatsappSupportUrl.js'
 
 const { t } = useI18n()
 
@@ -412,6 +442,10 @@ const isClearScreenPage = computed(() =>
 /** Info/doc pages that span the full content width (no sidebar or right rail). */
 const isFullWidthPage = computed(() => route.meta?.layoutProps?.fullWidth === true)
 
+const isSportsBookPage = computed(
+  () => route.path === '/sports-book' || route.path.startsWith('/sports-book/'),
+)
+
 const isMultiMarketPage = computed(() => route.name === 'multi-market')
 
 const {
@@ -430,6 +464,15 @@ const {
   isCasinoListingPage,
   isHorseGreyhoundRacingPage,
 } = useMobileSportsShellChrome()
+
+const useReferenceSportsLayout = computed(
+  () =>
+    !isMobile.value &&
+    !isClearScreenPage.value &&
+    !isCasinoListingPage.value &&
+    !isSportsBookPage.value &&
+    !isFullWidthPage.value,
+)
 
 const showMobileBottomNav = computed(
   () => isMobile.value && !isClearScreenPage.value,
@@ -508,11 +551,12 @@ watch(isMobile, (newIsMobile) => {
 
 onMounted(() => {
   syncBodyScrollClasses()
+  guestHeaderClockTimer = setInterval(() => {
+    currentDateTime.value = new Date()
+  }, 1000)
   if (isMobile.value && uiStore.isSidebarOpen) {
     uiStore.closeSidebar()
   }
-  nextTick().then(measureGuestTickerCopyWidth)
-  window.addEventListener('resize', measureGuestTickerCopyWidth, { passive: true })
 })
 
 const SITE_FOOTER_BODY_SCROLL_CLASS = 'site-footer-page-scroll'
@@ -540,14 +584,59 @@ const closeMobileSidebarOverlay = () => {
   if (uiStore.isSidebarOpen) uiStore.closeSidebar()
 }
 
+const currentDateTime = ref(new Date())
+let guestHeaderClockTimer = null
+
+function getOrdinal(day) {
+  if (day > 3 && day < 21) return 'th'
+  switch (day % 10) {
+    case 1: return 'st'
+    case 2: return 'nd'
+    case 3: return 'rd'
+    default: return 'th'
+  }
+}
+
+const formattedHeaderDate = computed(() => {
+  const d = currentDateTime.value
+  const month = d.toLocaleString('en-US', { month: 'long' })
+  const day = d.getDate()
+  return `${month} ${day}${getOrdinal(day)} ${d.getFullYear()}`
+})
+
+const formattedHeaderTime = computed(() =>
+  currentDateTime.value
+    .toLocaleString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true,
+    })
+    .toLowerCase()
+)
+
+const whatsappLink = computed(() => {
+  const channel = settingsStore.whatsappChannel
+  return channel ? buildWhatsAppSupportUrl(channel) : ''
+})
+
 const handleGuestLoginClick = () => {
   closeMobileSidebarOverlay()
   if (route.name === 'login') return
-  router.push({ name: 'login' })
+  openLoginModal()
 }
 
 const handleGuestSignupClick = () => {
   closeMobileSidebarOverlay()
+}
+
+const handleGuestGetIdClick = () => {
+  closeMobileSidebarOverlay()
+  if (whatsappLink.value) {
+    window.open(whatsappLink.value, '_blank', 'noopener,noreferrer')
+    return
+  }
+  router.push({ name: 'signup' })
 }
 
 const openInlineSearch = () => {
@@ -677,7 +766,7 @@ watch(isAuthPage, (onAuthPage) => {
 })
 
 onUnmounted(() => {
-  window.removeEventListener('resize', measureGuestTickerCopyWidth)
+  if (guestHeaderClockTimer) clearInterval(guestHeaderClockTimer)
   if (searchDebounceTimer) clearTimeout(searchDebounceTimer)
   if (typeof document !== 'undefined') {
     document.removeEventListener('pointerdown', onDocumentPointerDownCloseDesktopSearch, true)
@@ -753,8 +842,9 @@ const openExposureModal = () => {
 }
 
 const {
-  tickerText,
   showAnnouncementStrip,
+  dismissAnnouncementStrip,
+  shouldShowSubHeader,
   appBarHeightPx: guestAppBarHeightPx,
   effectiveHeaderInsetPx: guestHeaderInsetPx,
   desktopHeaderFlowSpacerPx: guestDesktopHeaderFlowSpacerPx,
@@ -762,35 +852,6 @@ const {
 
 const guestAppBarRef = ref(null)
 useAppBarHeightObserver(guestAppBarRef)
-
-const showAnnouncementMessage = computed(() => !!tickerText.value)
-
-const guestTickerTrackRef = ref(null)
-const guestTickerCopyWidthPx = ref(0)
-
-const measureGuestTickerCopyWidth = () => {
-  const track = guestTickerTrackRef.value
-  if (!track) return
-  const first = track.querySelector('.header-ticker-text')
-  if (!first) return
-  const width = first.getBoundingClientRect().width
-  if (width > 0) guestTickerCopyWidthPx.value = width
-}
-
-const tickerDuration = computed(() => {
-  const width = guestTickerCopyWidthPx.value || Math.max(tickerText.value.length * 7, 400)
-  const secs = Math.max(8, width / ANNOUNCE_MARQUEE_PX_PER_SEC)
-  return `${secs.toFixed(2)}s`
-})
-
-watch([tickerText, showAnnouncementStrip], async () => {
-  await nextTick()
-  measureGuestTickerCopyWidth()
-}, { flush: 'post' })
-
-const showDesktopTopStrip = computed(() =>
-  !isMobile.value && !showAnnouncementStrip.value && !authStore.isDemoUser,
-)
 
 </script>
 
@@ -850,16 +911,15 @@ const showDesktopTopStrip = computed(() =>
   max-width: 100%;
 }
 
-.guest-layout-body-stack--footer-doc :deep(.sidebar-desktop) {
-  position: sticky !important;
+.guest-layout-body-stack--footer-doc .layout-sidebar-column :deep(.sidebar-desktop) {
+  height: 100% !important;
+  max-height: 100% !important;
+}
+
+.guest-layout-body-stack--footer-doc .layout-sidebar-column {
+  position: sticky;
   top: var(--layout-sticky-top, 0px);
-  align-self: flex-start !important;
-  flex: 0 0 290px !important;
-  width: 290px !important;
-  min-width: 290px !important;
-  max-width: 290px !important;
-  height: var(--layout-sticky-pane-h, 100vh) !important;
-  max-height: var(--layout-sticky-pane-h, 100vh) !important;
+  max-height: var(--layout-sticky-pane-h, 100vh);
   z-index: 2;
   overflow: hidden;
 }
@@ -924,8 +984,7 @@ const showDesktopTopStrip = computed(() =>
 
 @media (max-width: 767px) {
   .guest-sports-shell__content--home-pad {
-    padding: 4px;
-    padding-top: 7px;
+    padding: 0 4px 4px;
     box-sizing: border-box;
   }
 }
@@ -994,7 +1053,7 @@ const showDesktopTopStrip = computed(() =>
   .guest-sports-shell {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: var(--layout-shell-section-gap, 6px);
   }
 
   .guest-sports-shell__rail {
@@ -1017,18 +1076,32 @@ const showDesktopTopStrip = computed(() =>
   }
 }
 
-:deep(.v-toolbar.v-app-bar) {
-  background: var(--color-header-bg) !important;
-  box-shadow: none !important;
-  border: none !important;
+@media (min-width: 768px) {
+  :deep(.v-toolbar.v-app-bar) {
+    background: var(--color-header-bg-gradient, var(--color-header-bg)) !important;
+    background-image: var(--color-header-bg-gradient, none) !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  :deep(.v-toolbar__content) {
+    background: var(--color-header-bg-gradient, var(--color-header-bg)) !important;
+    background-image: var(--color-header-bg-gradient, none) !important;
+    padding: 0 !important;
+    align-items: stretch !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
 }
 
-:deep(.v-toolbar__content) {
-  background: var(--color-header-bg) !important;
-  padding: 0 !important;
-  align-items: stretch !important;
-  box-shadow: none !important;
-  border: none !important;
+@media (max-width: 767.98px) {
+  :deep(.v-toolbar.v-app-bar),
+  :deep(.v-toolbar__content) {
+    padding: 0 !important;
+    align-items: stretch !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
 }
 
 .guest-app-bar--search-open {
@@ -1044,8 +1117,9 @@ const showDesktopTopStrip = computed(() =>
 
   :deep(.guest-app-bar.v-toolbar.v-app-bar),
   :deep(.guest-app-bar .v-toolbar__content) {
-    background: var(--color-header-bg, #360952) !important;
+    background: var(--color-header-bg-gradient, var(--color-header-bg, #360952)) !important;
     background-color: var(--color-header-bg, #360952) !important;
+    background-image: var(--color-header-bg-gradient, none) !important;
     box-shadow: none !important;
     border: none !important;
   }
@@ -1152,15 +1226,14 @@ const showDesktopTopStrip = computed(() =>
 
 @media (min-width: 768px) {
   .guest-toolbar-row {
-    padding-bottom: 0;
-    padding-left: 40px;
-    padding-right: 40px;
-    height: 59px;
-    min-height: 59px;
+    padding: 0 16px;
+    height: 90px;
+    min-height: 90px;
     width: 100%;
     box-sizing: border-box;
-    border-bottom: 1px solid #ffffff;
-    background: var(--color-header-bg, #360952);
+    border-bottom: none;
+    background: var(--color-header-bg-gradient, var(--color-header-bg, #360952));
+    gap: 8px;
   }
 
   .guest-header-brand {
@@ -1171,10 +1244,14 @@ const showDesktopTopStrip = computed(() =>
   }
 
   .guest-header-brand :deep(.header-brand-img) {
-    height: 30px;
+    height: 45px;
     width: auto;
-    max-width: none;
+    max-width: 240px;
     object-fit: contain;
+  }
+
+  .guest-desktop-auth-cluster {
+    gap: 8px;
   }
 
   .guest-toolbar-right {
@@ -1205,6 +1282,23 @@ const showDesktopTopStrip = computed(() =>
   .guest-demo-user-cluster :deep(.wallet-info-root--desktop) {
     background: #000000 !important;
   } */
+}
+
+@media (min-width: 1280px) {
+  .guest-toolbar-row {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+
+  .guest-ref-auth-btn--register {
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid var(--color-get-id-border, #4ec9ee);
+  }
+
+  .guest-ref-auth-btn--register .guest-ref-auth-btn__icon {
+    color: var(--color-wazir-green, #49915e) !important;
+  }
 }
 
 .header-ticker-wrap--strip {
@@ -1537,99 +1631,126 @@ const showDesktopTopStrip = computed(() =>
   border-bottom: none !important;
 }
 
-/* Sign Up + Login — reference loginSmall: 76×25, 10.02px/700, radius 3.12px */
+/* WazirWin guest auth buttons (reference Header logged-out) */
+.header-desktop-search {
+  height: 36px;
+  border-radius: 9999px;
+  border: 1px solid var(--color-search-input-border, #545454);
+  background: var(--color-search-input-bg, #333333);
+  padding: 0 12px 0 36px;
+}
+
+.header-desktop-search__icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ffffff !important;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+.header-desktop-search__input {
+  color: #ffffff !important;
+  font-size: 12px;
+  line-height: 1.25;
+  width: 100%;
+  height: 100%;
+}
+
+.header-desktop-search__input::placeholder {
+  color: #9ca3af;
+}
+
+.header-search-dropdown--desktop {
+  left: 0;
+  right: 0;
+  top: calc(100% + 8px);
+}
+
+.header-desktop-datetime {
+  display: flex;
+  flex-direction: column;
+  padding: 0 8px;
+  flex-shrink: 0;
+}
+
+.header-desktop-datetime__date {
+  font-size: 12px;
+  line-height: 1.25;
+  color: var(--color-header-date-text, #eed1d5);
+  white-space: nowrap;
+}
+
+.header-desktop-datetime__time {
+  font-size: 14px;
+  line-height: 1.25;
+  font-weight: 600;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.guest-ref-auth-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 35px;
+  padding: 4px 16px;
+  border: none;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-decoration: none !important;
+  white-space: nowrap;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: filter 0.15s ease, background-color 0.15s ease;
+}
+
+.guest-ref-auth-btn__icon {
+  color: #000000 !important;
+  flex-shrink: 0;
+}
+
+.guest-ref-auth-btn--login,
+.guest-ref-auth-btn--get-id {
+  background: var(--color-wazir-green, #49915e);
+  color: #000000;
+}
+
+.guest-ref-auth-btn--register {
+  background: var(--color-signup-btn-bg, #48494b);
+  color: var(--color-wazir-green, #49915e);
+}
+
+.guest-ref-auth-btn--login:hover,
+.guest-ref-auth-btn--get-id:hover,
+.guest-ref-auth-btn--register:hover {
+  filter: brightness(1.06);
+}
+
 .guest-auth-pair {
   flex-shrink: 0;
   gap: 4px;
-  /* Reference wraps buttons in -m-0.5 so the pair sits flush to the 40px pad */
   margin: -2px;
 }
 
-.signup-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 76px;
-  height: 25px;
-  min-width: 76px;
-  min-height: 25px;
-  padding: 0;
-  box-sizing: border-box;
-  font-size: 10.02px;
-  font-weight: 700;
-  line-height: 1.5;
-  letter-spacing: normal;
-  color: #ffffff;
-  background: linear-gradient(to left top, #40135c, #a31bf5, #ca86f3);
-  border: none;
-  border-radius: 3.12px;
-  cursor: pointer;
-  transition: filter 0.15s ease;
-  gap: 0;
-  text-decoration: none;
-  text-transform: uppercase;
-  white-space: nowrap;
+.guest-ref-auth-btn--mobile {
+  height: 27px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 10px;
+  letter-spacing: 0.06em;
 }
 
-.signup-btn:hover {
-  filter: brightness(1.08);
+.guest-ref-auth-btn--mobile.guest-ref-auth-btn--register {
+  color: var(--color-wazir-green, #49915e);
 }
 
-.signup-icon {
-  color: #ffffff !important;
-}
-
-.login-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 76px;
-  height: 25px;
-  min-width: 76px;
-  min-height: 25px;
-  padding: 0;
-  box-sizing: border-box;
-  font-size: 10.02px;
-  font-weight: 700;
-  line-height: 1.5;
-  letter-spacing: normal;
-  color: #ffffff;
-  background: transparent;
-  border: 1px solid #ffffff;
-  border-radius: 3.12px;
-  cursor: pointer;
-  transition: background-color 0.15s ease;
-  gap: 0;
-  box-shadow: none;
-  text-transform: uppercase;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.login-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.login-btn:active {
-  background: rgba(255, 255, 255, 0.12);
-}
-
-.login-icon {
-  color: #ffffff !important;
-  transition: none;
-}
-
-.login-btn:hover .login-icon {
-  transform: none;
-}
-
-.signup-text,
-.login-text {
-  font-size: inherit;
-  font-weight: 700;
-  letter-spacing: normal;
-  line-height: inherit;
-  text-transform: uppercase;
+.guest-ref-auth-btn--mobile .guest-ref-auth-btn__icon {
+  display: none;
 }
 
 @media (max-width: 768px) {
@@ -1751,19 +1872,12 @@ const showDesktopTopStrip = computed(() =>
     color: #5a6a72;
   }
 
-  /* Mobile default: use shared purple header */
-  .guest-app-bar :deep(.v-toolbar.v-app-bar),
-  .guest-app-bar :deep(.v-toolbar__content) {
-    background: var(--color-header-bg) !important;
-    background-color: var(--color-header-bg) !important;
-  }
-
-  /* Mobile search open: gold bar + search row */
+  /* Mobile search open: keep loginInputBg shell (mobile-header.css owns default layering) */
   .guest-app-bar--search-open :deep(.v-toolbar.v-app-bar),
   .guest-app-bar--search-open :deep(.v-toolbar__content),
   .guest-app-bar--search-open .mobile-inline-search-wrap {
-    background: var(--color-header-bg) !important;
-    background-color: var(--color-header-bg) !important;
+    background: var(--color-login-input-bg, #23201f) !important;
+    background-color: var(--color-login-input-bg, #23201f) !important;
   }
 
   .guest-auth-pair {

@@ -87,17 +87,17 @@ const fallbackMobileSlides = computed(() => MAIN_BANNER_SLIDES.map((slide) => ({
   src: slide.mobileSrc || slide.src,
 })));
 
-/** Use CMS slides only when the section has at least one image; otherwise static fallback. */
+/** Prefer reference banner slides; CMS is fallback when reference list is empty. */
 const desktopSlides = computed(() => (
-  configuredDesktopSlides.value.length > 0
-    ? configuredDesktopSlides.value
-    : fallbackDesktopSlides.value
+  fallbackDesktopSlides.value.length > 0
+    ? fallbackDesktopSlides.value
+    : configuredDesktopSlides.value
 ));
 
 const mobileSlides = computed(() => (
-  configuredMobileSlides.value.length > 0
-    ? configuredMobileSlides.value
-    : fallbackMobileSlides.value
+  fallbackMobileSlides.value.length > 0
+    ? fallbackMobileSlides.value
+    : configuredMobileSlides.value
 ));
 
 const slides = computed(() => (isMobile.value ? mobileSlides.value : desktopSlides.value));
@@ -184,7 +184,7 @@ onMounted(async () => {
 .main-banner-slider-wrap {
   width: 100%;
   box-sizing: border-box;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
 }
 
@@ -193,7 +193,7 @@ onMounted(async () => {
   padding-bottom: 0;
   box-sizing: border-box;
   position: relative;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
 }
 
@@ -212,46 +212,23 @@ onMounted(async () => {
   cursor: pointer;
   font-family: inherit;
   line-height: 0;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
+  /* Reference monkeydon banner: 606×262 */
+  aspect-ratio: 606 / 262;
+  height: auto;
 }
 
 .main-slider__img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: fill;
   object-position: center;
-  border-radius: 8px;
+  border-radius: 10px;
 }
 
-/* Mobile: reference md:hidden banner — aviator-mobile.webp, h-[148px], w-[99vw], mt-[-5px] */
 @media (max-width: 767.98px) {
-  .main-banner-slider-wrap {
-    width: 99vw;
-    max-width: 99vw;
-    margin-top: -5px;
-    border-radius: 6px;
-  }
-
-  .main-slider {
-    border-radius: 6px;
-  }
-
-  .main-slider__link {
-    height: 148px;
-    min-height: 148px;
-    max-height: 250px;
-    border-radius: 8px;
-  }
-
-  .main-slider__img {
-    width: 100%;
-    height: 148px;
-    min-height: 148px;
-    max-height: 250px;
-  }
-
   .main-slider :deep(.swiper-pagination) {
     position: absolute;
     bottom: 10px;
@@ -285,17 +262,6 @@ onMounted(async () => {
 @media (min-width: 768px) {
   .main-slider :deep(.swiper-pagination) {
     display: none;
-  }
-
-  .main-slider__link {
-    /* Reference CMS desktop banner: 1500×400 */
-    aspect-ratio: 1500 / 400;
-    height: auto;
-  }
-
-  .main-slider__img {
-    width: 100%;
-    height: 100%;
   }
 }
 </style>

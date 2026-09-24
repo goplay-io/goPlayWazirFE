@@ -153,6 +153,9 @@
     }
   },
   "footer": {
+    "connectWithUs": "Connect with us",
+    "downloadLabel": "Download",
+    "androidAppLabel": "Android App",
     "followUs": "Follow us on",
     "help": {
       "title": "Help"
@@ -208,6 +211,8 @@
       "downloadAppNote": "[For Android Users]",
       "promotions": "Promotions",
       "rules": "Rules",
+      "rulesAndRegulations": "Rules & Regulations",
+      "exclusionPolicy": "Exclusion Policy",
       "joinAffiliate": "Join as Affiliate",
       "sitemap": "Sitemap"
     },
@@ -301,6 +306,8 @@
       "demoFailed": "Demo login failed",
       "signupPrompt": "New here ?",
       "signupCta": "Sign Up",
+      "registerCta": "Register",
+      "getIdCta": "Get ID",
       "forgotPasswordLink": "Forgot password?",
       "showPassword": "Show password",
       "hidePassword": "Hide password"
@@ -1015,10 +1022,27 @@
       "noDataAvailable": "No Data Available"
     },
     "betSlipToolbar": {
-      "betslip": "Betslip",
+      "betslip": "Bet Slip",
       "openBet": "Open Bets",
       "emptyMessage": "Click on the odds to add selections to the betslip.",
-      "emptyStateTitle": "Your Bet Slip is Empty"
+      "emptyStateTitle": "Your Bet Slip is Empty",
+      "loginForOpenBets": "Please login to see your open bets.",
+      "loginLink": "Login"
+    },
+    "homePromotion": {
+      "title": "Promotions & Bonuses",
+      "depositTitle": "Buy Crypto",
+      "depositSubtitle": "USDT, BTC, etc.",
+      "referTitle": "Refer and Earn",
+      "referSubtitle": "Earn Commission"
+    },
+    "homeGameProviders": {
+      "title": "Game Providers",
+      "seeAll": "See All"
+    },
+    "homeEvents": {
+      "inplayTitle": "In Play",
+      "upcomingTitle": "Upcoming events"
     },
     "betHistory": {
       "back": "back",

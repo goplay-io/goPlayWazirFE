@@ -168,7 +168,9 @@ export function useMobileSportsShellChrome() {
       isLayoutShellPage.value &&
       !DESKTOP_SHELL_RAIL_EXCLUDED.has(route.name) &&
       !isExchangeSportDetailPage.value &&
-      !isHorseGreyhoundRacingPage.value,
+      !isHorseGreyhoundRacingPage.value &&
+      route.name !== "live" &&
+      route.name !== "e-sports",
   );
 
   /** Exchange / Casino / Sports Book + sport filters — home page only. */

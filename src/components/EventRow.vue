@@ -35,7 +35,18 @@ const props = defineProps({
     showUpcomingOddsOverlay: {
         type: Boolean,
         default: false
-    }
+    },
+    /** Reference home table row: date/time column + stacked team names (GamesTableData). */
+    referenceLayout: {
+        type: Boolean,
+        default: false
+    },
+    /** Reference home section: inplay rows show live badge, upcoming rows show date/time. */
+    referencePlayMode: {
+        type: String,
+        default: '',
+        validator: (value) => !value || value === 'inplay' || value === 'upcoming',
+    },
 });
 
 const router = useRouter();
@@ -63,9 +74,28 @@ const isInPlay = computed(
         isILive({ openDate: props.event?.open_date }),
 );
 
-const shouldShowUpcomingOddsOverlay = computed(
-    () => props.showUpcomingOddsOverlay && !isInPlay.value,
+const shouldShowUpcomingOddsOverlay = computed(() => {
+    if (!props.showUpcomingOddsOverlay) return false;
+    if (props.referenceLayout) return props.referencePlayMode === 'upcoming';
+    return !isInPlay.value;
+});
+
+const showReferenceInplayBadge = computed(
+    () => props.referenceLayout && props.referencePlayMode === 'inplay',
 );
+
+const showInplayBadge = computed(
+    () => (props.referenceLayout ? showReferenceInplayBadge.value : isInPlay.value),
+);
+
+/** Reference home: green TV icon when isTv === 1 (monkeydon bundle) or a stream URL exists. */
+const showReferenceTvIcon = computed(() => {
+    if (!props.referenceLayout) return false;
+    const event = props.event;
+    if (event?.isTv === 1 || event?.is_tv === 1) return true;
+    const stream = event?.tv_channel || event?.tv_live_stream_url;
+    return !!(stream && String(stream).trim());
+});
 
 const competitionName = computed(() => {
     const name = props.event?.competition_name;
@@ -95,6 +125,35 @@ const formattedDate = computed(() => {
     }
 });
 
+/** Reference GamesTableData: Today / Tomorrow / DD/MM/YYYY in the date column. */
+const primaryDateLabel = computed(() => {
+    if (!props.event.open_date) return '';
+    try {
+        const d = new Date(props.event.open_date);
+        const now = new Date();
+        const tomorrow = new Date(now);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        if (d.toDateString() === now.toDateString()) return 'Today';
+        if (d.toDateString() === tomorrow.toDateString()) return 'Tomorrow';
+        const day = String(d.getDate()).padStart(2, '0');
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        return `${day}/${month}/${d.getFullYear()}`;
+    } catch (e) {
+        return '';
+    }
+});
+
+/** Reference GamesTableData: HH:mm in the date column. */
+const secondaryTimeLabel = computed(() => {
+    if (!props.event.open_date) return '';
+    try {
+        const d = new Date(props.event.open_date);
+        return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+    } catch (e) {
+        return '';
+    }
+});
+
 /** Upcoming pill: HH:mm if today, else DD MMM (ZU reference). */
 const timePillLabel = computed(() => {
     if (!props.event.open_date) return '';
@@ -118,6 +177,54 @@ const hasActivePrice = (price) => {
 };
 
 const getPriceDisplay = (price) => (hasActivePrice(price) ? price : '--');
+
+const formatReferenceOddPrice = (price) => {
+    if (!hasActivePrice(price)) return '-';
+    const n = Number(price);
+    if (Number.isNaN(n)) return '-';
+    const fixed = n.toFixed(2);
+    return fixed.endsWith('.00') ? fixed.split('.')[0] : fixed;
+};
+
+const getReferenceOddPrice = (teamKey, side) =>
+    formatReferenceOddPrice(getOddRawPrice(teamKey, side));
+
+const getReferenceOddStake = (teamKey, side) => {
+    const idx = side === 'lay' ? 8 : 2;
+    const size = props.event?.values?.[teamKey]?.[idx];
+    if (size == null || size === '') return '';
+    const n = Number(size);
+    if (Number.isNaN(n) || n <= 0) return '';
+    return String(n);
+};
+
+/** Reference inPlayTime column: live score lines or date/time fallback. */
+const referenceStatusLines = computed(() => {
+    const eventData = props.event ?? {};
+    if (props.referencePlayMode === 'inplay') {
+        const scoreLines = [
+            eventData.score_line1 ?? eventData.live_score_line1 ?? eventData.inplay_score_1,
+            eventData.score_line2 ?? eventData.live_score_line2 ?? eventData.inplay_score_2,
+            eventData.score_line3 ?? eventData.live_score_line3 ?? eventData.inplay_score_3,
+        ]
+            .map((line) => (line == null ? '' : String(line).trim()))
+            .filter(Boolean);
+        if (scoreLines.length) return scoreLines.slice(0, 3);
+        if (Array.isArray(eventData.live_score_lines)) {
+            return eventData.live_score_lines.map((line) => String(line).trim()).filter(Boolean).slice(0, 3);
+        }
+        if (typeof eventData.live_score === 'string' && eventData.live_score.includes('\n')) {
+            return eventData.live_score.split('\n').map((line) => line.trim()).filter(Boolean).slice(0, 3);
+        }
+        if (secondaryTimeLabel.value) return [secondaryTimeLabel.value];
+        return ['Live'];
+    }
+
+    const lines = [];
+    if (primaryDateLabel.value) lines.push(primaryDateLabel.value);
+    if (secondaryTimeLabel.value) lines.push(secondaryTimeLabel.value);
+    return lines;
+});
 
 const getSizeDisplay = (size) => {
     if (size == null || size === '') return '';
@@ -173,11 +280,105 @@ function handleOddsButtonClick(e) {
     <div
         @click="handleEventClick"
         class="event-row-card tw-cursor-pointer"
+        :class="{ 'event-row-card--reference': referenceLayout }"
         :style="{ animationDelay: `${animationDelay}s` }"
     >
         <div class="event-row-content">
-            <!-- Mobile (<768px) -->
-            <div class="event-row-mobile">
+            <!-- Mobile reference home (<768px) — monkeydon 50/50 teams | odds row -->
+            <div
+                v-if="referenceLayout"
+                class="event-row-reference-mobile"
+                :class="{ 'event-row-reference-mobile--upcoming': referencePlayMode === 'upcoming' }"
+            >
+                <div class="event-row-ref-mobile-teams">
+                    <div class="event-row-ref-mobile-score">
+                        <span
+                            v-for="(line, idx) in referenceStatusLines"
+                            :key="`m-score-${idx}-${line}`"
+                            class="event-row-ref-mobile-score-line"
+                        >
+                            {{ line }}
+                        </span>
+                    </div>
+                    <div class="event-row-ref-mobile-names">
+                        <span
+                            v-for="(line, idx) in teamNameLines"
+                            :key="`m-name-${idx}-${line}`"
+                            class="event-row-ref-mobile-name"
+                        >
+                            {{ line }}
+                        </span>
+                    </div>
+                </div>
+
+                <div
+                    class="event-row-ref-mobile-odds"
+                    @touchstart.passive="onMobileOddsTouchStart"
+                    @touchend="onMobileOddsTouchEnd"
+                >
+                    <div
+                        v-if="shouldShowUpcomingOddsOverlay"
+                        class="event-row-ref-mobile-odds-overlay"
+                        aria-hidden="true"
+                    >
+                        Upcoming
+                    </div>
+                    <div
+                        class="event-row-ref-mobile-odds-track"
+                        :class="{ 'event-row-ref-mobile-odds-track--lay': mobileOddsSide === 'lay' }"
+                    >
+                        <div class="event-row-ref-mobile-odds-panel">
+                            <button
+                                v-for="teamKey in MOBILE_ODDS_TEAMS"
+                                :key="`ref-back-${teamKey}`"
+                                type="button"
+                                class="event-row-ref-mobile-btn"
+                                :class="teamKey === 'TEAM_3'
+                                    ? 'event-row-ref-mobile-btn--empty'
+                                    : 'event-row-ref-mobile-btn--back'"
+                                @click="handleOddsButtonClick"
+                            >
+                                <span class="event-row-ref-mobile-btn__price">
+                                    {{ teamKey === 'TEAM_3' ? '-' : getReferenceOddPrice(teamKey, 'back') }}
+                                </span>
+                                <span class="event-row-ref-mobile-btn__stake">
+                                    {{
+                                        teamKey === 'TEAM_3'
+                                            ? '-'
+                                            : (getReferenceOddStake(teamKey, 'back') || '-')
+                                    }}
+                                </span>
+                            </button>
+                        </div>
+                        <div class="event-row-ref-mobile-odds-panel">
+                            <button
+                                v-for="teamKey in MOBILE_ODDS_TEAMS"
+                                :key="`ref-lay-${teamKey}`"
+                                type="button"
+                                class="event-row-ref-mobile-btn"
+                                :class="teamKey === 'TEAM_3'
+                                    ? 'event-row-ref-mobile-btn--empty'
+                                    : 'event-row-ref-mobile-btn--lay'"
+                                @click="handleOddsButtonClick"
+                            >
+                                <span class="event-row-ref-mobile-btn__price">
+                                    {{ teamKey === 'TEAM_3' ? '-' : getReferenceOddPrice(teamKey, 'lay') }}
+                                </span>
+                                <span class="event-row-ref-mobile-btn__stake">
+                                    {{
+                                        teamKey === 'TEAM_3'
+                                            ? '-'
+                                            : (getReferenceOddStake(teamKey, 'lay') || '-')
+                                    }}
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile standard (<768px) -->
+            <div v-else class="event-row-mobile">
                 <div class="event-row-mobile__name-wrap">
                     <div class="event-row-mobile__name-block">
                         <p v-if="competitionName" class="event-row-mobile-competition">
@@ -200,7 +401,7 @@ function handleOddsButtonClick(e) {
                         <span v-if="isVirtual" class="event-row-market-symbol">V</span>
                         <span v-if="event.custom_active" class="event-row-market-symbol">{{ event.custom_active }}</span>
                     </div>
-                    <span v-if="isInPlay" class="event-row-inplay-badge">Inplay</span>
+                    <span v-if="showInplayBadge" class="event-row-inplay-badge">Inplay</span>
                     <span v-else-if="timePillLabel" class="event-row-time-pill">{{ timePillLabel }}</span>
                 </div>
 
@@ -240,38 +441,100 @@ function handleOddsButtonClick(e) {
                 </div>
             </div>
 
-            <!-- Desktop (768px+) -->
-            <div class="event-row-desktop">
+            <!-- Desktop reference home row (monkeydon GamesTableData layout) -->
+            <div v-if="referenceLayout" class="event-row-reference-desktop">
+                <div class="event-row-reference-body">
+                    <div class="event-row-reference-left">
+                        <div class="event-row-reference-score">
+                            <span
+                                v-for="(line, idx) in referenceStatusLines"
+                                :key="`score-${idx}-${line}`"
+                                class="event-row-reference-score-line"
+                            >
+                                {{ line }}
+                            </span>
+                        </div>
+                        <div class="event-row-reference-names">
+                            <div class="event-row-reference-names__stack">
+                                <div
+                                    v-for="(line, idx) in teamNameLines"
+                                    :key="`${idx}-${line}`"
+                                    class="event-row-reference-name-row"
+                                >
+                                    <span class="event-row-reference-name-dot" aria-hidden="true" />
+                                    <span class="event-row-reference-name">{{ line }}</span>
+                                </div>
+                            </div>
+                            <span
+                                v-if="showReferenceTvIcon"
+                                class="event-row-reference-tv-icon"
+                                aria-label="TV stream available"
+                            >
+                                <img
+                                    src="/svg/sports-icons/event-row-tv-icon.svg"
+                                    alt=""
+                                    width="13"
+                                    height="11"
+                                />
+                            </span>
+                        </div>
+                    </div>
+                    <div class="event-row-reference-odds">
+                        <div
+                            v-if="shouldShowUpcomingOddsOverlay"
+                            class="event-row-reference-odds-overlay"
+                            aria-hidden="true"
+                        >
+                            Upcoming
+                        </div>
+                        <div class="event-row-reference-odds-group">
+                            <button type="button" class="event-odd-btn event-odd-btn--back" @click="handleOddsButtonClick">
+                                <span class="event-odd-btn__price">{{ getReferenceOddPrice('TEAM_2', 'back') }}</span>
+                                <span v-if="getOddStake('TEAM_2', 'back')" class="event-odd-btn__stake">{{ getOddStake('TEAM_2', 'back') }}</span>
+                            </button>
+                            <button type="button" class="event-odd-btn event-odd-btn--lay" @click="handleOddsButtonClick">
+                                <span class="event-odd-btn__price">{{ getReferenceOddPrice('TEAM_2', 'lay') }}</span>
+                                <span v-if="getOddStake('TEAM_2', 'lay')" class="event-odd-btn__stake">{{ getOddStake('TEAM_2', 'lay') }}</span>
+                            </button>
+                        </div>
+                        <div class="event-row-reference-odds-group">
+                            <button type="button" class="event-odd-btn event-odd-btn--back event-odd-btn--empty" @click="handleOddsButtonClick">
+                                <span class="event-odd-btn__price">-</span>
+                            </button>
+                            <button type="button" class="event-odd-btn event-odd-btn--lay event-odd-btn--empty" @click="handleOddsButtonClick">
+                                <span class="event-odd-btn__price">-</span>
+                            </button>
+                        </div>
+                        <div class="event-row-reference-odds-group">
+                            <button type="button" class="event-odd-btn event-odd-btn--back" @click="handleOddsButtonClick">
+                                <span class="event-odd-btn__price">{{ getReferenceOddPrice('TEAM_1', 'back') }}</span>
+                                <span v-if="getOddStake('TEAM_1', 'back')" class="event-odd-btn__stake">{{ getOddStake('TEAM_1', 'back') }}</span>
+                            </button>
+                            <button type="button" class="event-odd-btn event-odd-btn--lay" @click="handleOddsButtonClick">
+                                <span class="event-odd-btn__price">{{ getReferenceOddPrice('TEAM_1', 'lay') }}</span>
+                                <span v-if="getOddStake('TEAM_1', 'lay')" class="event-odd-btn__stake">{{ getOddStake('TEAM_1', 'lay') }}</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Desktop default row -->
+            <div v-else class="event-row-desktop">
                 <div class="event-row-desktop__status">
                     <span v-if="isInPlay" class="event-row-inplay-badge event-row-inplay-badge--desktop">Inplay</span>
                     <span v-else-if="timePillLabel" class="event-row-time-pill event-row-time-pill--desktop">{{ timePillLabel }}</span>
                 </div>
 
                 <div class="event-row-desktop__left">
-                    <!-- Favorite / star icon
-                    <button
-                        v-if="showStar"
-                        type="button"
-                        class="event-row-star-btn event-row-desktop__star"
-                        :class="{ 'event-row-star-btn--active': isStarred }"
-                        :aria-pressed="isStarred"
-                        :title="isStarred ? 'Remove from favorites' : 'Add to favorites'"
-                        @click.stop="handleStarClick"
-                    >
-                        <v-icon :size="14" :color="isStarred ? '#d4a017' : '#9ca3af'">
-                            {{ isStarred ? 'mdi-star' : 'mdi-star-outline' }}
-                        </v-icon>
-                    </button>
-                    -->
                     <div class="event-row-name-wrap">
-                        <span v-if="competitionName" class="event-row-competition-pill">
+                        <span v-if="competitionName && showCompetition" class="event-row-competition-pill">
                             {{ competitionName }}
                         </span>
                         <template v-for="(line, idx) in teamNameLines" :key="`${idx}-${line}`">
                             <br v-if="idx > 0" class="event-row-name-break" />
                             <span class="event-row-name">{{ line }}</span>
                         </template>
-                        <!-- <span v-if="formattedDate" class="event-row-date">{{ formattedDate }}</span> -->
                     </div>
                 </div>
 
@@ -303,18 +566,10 @@ function handleOddsButtonClick(e) {
                         </button>
                     </div>
                     <div class="event-odd-stack">
-                        <button
-                            type="button"
-                            class="event-odd-btn event-odd-btn--empty"
-                            @click="handleOddsButtonClick"
-                        >
+                        <button type="button" class="event-odd-btn event-odd-btn--empty" @click="handleOddsButtonClick">
                             <span class="event-odd-btn__price">--</span>
                         </button>
-                        <button
-                            type="button"
-                            class="event-odd-btn event-odd-btn--empty"
-                            @click="handleOddsButtonClick"
-                        >
+                        <button type="button" class="event-odd-btn event-odd-btn--empty" @click="handleOddsButtonClick">
                             <span class="event-odd-btn__price">--</span>
                         </button>
                     </div>
@@ -360,7 +615,9 @@ function handleOddsButtonClick(e) {
 }
 
 .event-row-mobile,
-.event-row-desktop {
+.event-row-desktop,
+.event-row-reference-desktop,
+.event-row-reference-mobile {
     display: none;
 }
 
@@ -377,15 +634,20 @@ function handleOddsButtonClick(e) {
         height: 100%;
     }
 
-    .event-row-desktop {
+    .event-row-desktop,
+    .event-row-reference-desktop {
         display: flex;
-        align-items: center;
-        gap: 16px;
+        align-items: stretch;
         min-width: 0;
         width: 100%;
         height: 44px;
         min-height: 44px;
         box-sizing: border-box;
+    }
+
+    .event-row-reference-desktop {
+        height: 48px;
+        min-height: 48px;
     }
 
     .event-row-desktop__status {
@@ -516,6 +778,181 @@ function handleOddsButtonClick(e) {
 
     .event-row-content {
         padding: 0;
+    }
+
+    /* Reference home mobile — measured monkeydon.com @ 390px */
+    .event-row-reference-mobile {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+        min-width: 0;
+        height: 48px;
+        min-height: 48px;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+
+    .event-row-card--reference {
+        height: 48px !important;
+        min-height: 48px !important;
+        border-bottom: none !important;
+    }
+
+    .event-row-ref-mobile-teams {
+        display: grid;
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        align-items: stretch;
+        min-width: 0;
+        height: 100%;
+        box-sizing: border-box;
+    }
+
+    .event-row-ref-mobile-score {
+        grid-column: span 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-width: 0;
+        padding: 0 2px;
+        box-sizing: border-box;
+    }
+
+    .event-row-ref-mobile-score-line {
+        display: block;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 9px;
+        font-weight: 500;
+        line-height: 13.5px;
+        text-align: center;
+        color: #4cae50;
+    }
+
+    .event-row-reference-mobile--upcoming .event-row-ref-mobile-score-line {
+        color: rgba(255, 255, 255, 0.85);
+    }
+
+    .event-row-ref-mobile-names {
+        grid-column: span 5;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-width: 0;
+        padding: 0 4px;
+        border-left: 1px solid rgba(84, 84, 84, 0.6);
+        border-right: 1px solid rgba(84, 84, 84, 0.6);
+        box-sizing: border-box;
+    }
+
+    .event-row-ref-mobile-name {
+        display: block;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 11px;
+        font-weight: 700;
+        line-height: 16.5px;
+        color: rgba(255, 255, 255, 0.95);
+    }
+
+    .event-row-ref-mobile-odds {
+        position: relative;
+        min-width: 0;
+        height: 100%;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+
+    .event-row-ref-mobile-odds-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.8);
+        color: #d1d5db;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.2;
+        pointer-events: auto;
+    }
+
+    .event-row-ref-mobile-odds-track {
+        display: flex;
+        width: 200%;
+        height: 100%;
+        transition: transform 0.2s ease;
+        touch-action: pan-y;
+    }
+
+    .event-row-ref-mobile-odds-track--lay {
+        transform: translateX(-50%);
+    }
+
+    .event-row-ref-mobile-odds-panel {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1px;
+        width: 50%;
+        height: 100%;
+        padding: 1px;
+        box-sizing: border-box;
+        flex-shrink: 0;
+    }
+
+    .event-row-ref-mobile-btn {
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        margin: 0;
+        padding: 1px 4px;
+        border: none;
+        border-radius: 2px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        cursor: pointer;
+        color: #000;
+    }
+
+    .event-row-ref-mobile-btn--back {
+        background: #a7d8fd;
+    }
+
+    .event-row-ref-mobile-btn--lay {
+        background: #f9c9d4;
+    }
+
+    .event-row-ref-mobile-btn--empty {
+        background: #a3a3a3;
+        cursor: default;
+    }
+
+    .event-row-ref-mobile-btn__price {
+        display: block;
+        width: 100%;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 20px;
+        text-align: center;
+        color: #000;
+    }
+
+    .event-row-ref-mobile-btn__stake {
+        display: block;
+        width: 100%;
+        font-size: 10px;
+        font-weight: 400;
+        line-height: 12px;
+        text-align: center;
+        color: #000;
     }
 
     .event-row-mobile {
@@ -863,6 +1300,193 @@ function handleOddsButtonClick(e) {
     border-radius: 2.83px;
     font-size: 9.06px;
     font-weight: 700;
+}
+
+/* Reference home desktop row — measured from monkeydon.com */
+.event-row-reference-body {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    width: 100%;
+    height: 100%;
+    min-height: 48px;
+}
+
+.event-row-reference-left {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 5fr);
+    min-width: 0;
+    height: 100%;
+}
+
+.event-row-reference-score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 36px;
+    padding: 0 2px;
+    box-sizing: border-box;
+}
+
+.event-row-reference-score-line {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 9px;
+    font-weight: 500;
+    line-height: 13.5px;
+    text-align: center;
+    color: #4cae50;
+}
+
+.event-row-reference-names {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    height: 100%;
+    padding: 0 4px;
+    border-left: 1px solid rgba(84, 84, 84, 0.6);
+    border-right: 1px solid rgba(84, 84, 84, 0.6);
+    box-sizing: border-box;
+}
+
+.event-row-reference-names__stack {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+    min-width: 0;
+    flex: 1 1 auto;
+    margin-right: 4px;
+}
+
+.event-row-reference-name-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    min-width: 0;
+    height: 20px;
+}
+
+.event-row-reference-name-dot {
+    width: 5px;
+    height: 5px;
+    margin-right: 2px;
+    padding: 1px;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+.event-row-reference-name {
+    display: block;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+    color: #ffffff;
+}
+
+.event-row-reference-tv-icon {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 13px;
+    height: 11px;
+    pointer-events: none;
+}
+
+.event-row-reference-tv-icon img {
+    display: block;
+    width: 13px;
+    height: 11px;
+    object-fit: contain;
+}
+
+.event-row-reference-odds {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 0 2px;
+    height: 100%;
+    min-width: 0;
+    padding: 1px 2px 1px 0;
+    box-sizing: border-box;
+}
+
+.event-row-reference-odds-group {
+    grid-column: span 4;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    height: 100%;
+    min-width: 0;
+}
+
+.event-row-reference-odds .event-odd-btn {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    padding: 1px 4px;
+    border-radius: 2px;
+    gap: 0;
+}
+
+.event-row-reference-odds .event-odd-btn--back {
+    background: #a7d8fd;
+}
+
+.event-row-reference-odds .event-odd-btn--lay {
+    background: #f9c9d4;
+}
+
+.event-row-reference-odds .event-odd-btn--empty.event-odd-btn--back {
+    background: #a7d8fd;
+}
+
+.event-row-reference-odds .event-odd-btn--empty.event-odd-btn--lay {
+    background: #f9c9d4;
+}
+
+.event-row-reference-odds .event-odd-btn__price {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 20px;
+    color: #000000 !important;
+}
+
+.event-row-reference-odds .event-odd-btn__stake {
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 12px;
+    margin-top: 0;
+    color: #000000 !important;
+    text-align: center;
+}
+
+.event-row-reference-odds-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.8);
+    color: #d1d5db;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.2;
+    text-align: center;
+    pointer-events: auto;
+    white-space: nowrap;
 }
 
 .event-row-time-pill {

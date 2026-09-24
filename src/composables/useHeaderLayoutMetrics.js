@@ -2,36 +2,36 @@ import { ref, computed, watch, watchEffect, nextTick, onMounted, onUnmounted } f
 import { useSettingsStore } from '@/stores/settings.js'
 import { useAuthStore } from '@/stores/auth'
 import useDevices from '@/composables/useDevices.js'
+import {
+  useSubHeaderVisibility,
+  SUB_HEADER_TOTAL_PX,
+} from '@/composables/useSubHeaderVisibility.js'
 
 /** Primary toolbar row — must match Header.vue / GuestLayout.vue. */
-export const HEADER_TOOLBAR_DESKTOP_PX = 66
-/** Guest / logged-out mobile toolbar. */
-export const HEADER_TOOLBAR_MOBILE_PX = 57
-/** Logged-in mobile toolbar — reference navbar row is 65.5px. */
-export const HEADER_TOOLBAR_MOBILE_AUTH_PX = 65.5
+export const HEADER_TOOLBAR_DESKTOP_PX = 90
+/** Mobile toolbar — reference Header.tsx h-[54px]. */
+export const HEADER_TOOLBAR_MOBILE_PX = 54
+export const HEADER_TOOLBAR_MOBILE_AUTH_PX = 54
 
-/** Logged-out guest toolbar — reference navbar row is 59px. */
-export const GUEST_TOOLBAR_DESKTOP_PX = 59
+/** Logged-out guest toolbar — matches WazirWin reference desktop header (90px). */
+export const GUEST_TOOLBAR_DESKTOP_PX = 90
 
-/** Authenticated header announcement lane. */
-export const ANNOUNCE_STRIP_DESKTOP_PX = 30
-export const ANNOUNCE_STRIP_MOBILE_PX = 28
+/** WazirWin reference announcement bar height. */
+export const ANNOUNCE_STRIP_DESKTOP_PX = 32
+export const ANNOUNCE_STRIP_MOBILE_PX = 32
+
+const ANNOUNCEMENT_CLOSED_STORAGE_KEY = 'announcement_closed'
 
 /**
  * Match reference <marquee scrollamount="5" scrolldelay="85"> ≈ 58.82 px/s.
  */
 export const ANNOUNCE_MARQUEE_PX_PER_SEC = 5 / 0.085
 
-/**
- * Reference main uses md:mt-[100px] under a ~95.5px fixed navbar, leaving a ~4–5px
- * white band under the announcement. Keep content/sticky offset in sync with that gap.
- */
-export const HEADER_CONTENT_FOLLOW_GAP_DESKTOP_PX = 4
+/** Extra space below fixed header before main content (0 = flush with sports subheader). */
+export const HEADER_CONTENT_FOLLOW_GAP_DESKTOP_PX = 0
 
-/**
- * Logged-out reference: 59 + 30 = 89px bar, md:mt-[100px] → 11px white band.
- */
-export const GUEST_HEADER_CONTENT_FOLLOW_GAP_DESKTOP_PX = 11
+/** Guest layout — same flush alignment under sports subheader. */
+export const GUEST_HEADER_CONTENT_FOLLOW_GAP_DESKTOP_PX = 0
 
 /** Guest/demo header announcement lane (taller desktop strip). */
 export const GUEST_ANNOUNCE_STRIP_MESSAGE_PX = 42
@@ -44,7 +44,15 @@ export const GUEST_HEADER_TOP_STRIP_PX = 6
 export const HEADER_SLIDER_STRIP_PX = 56
 
 /** Session-scoped — shared between Header/GuestLayout and Layout. */
-const isAnnouncementStripDismissed = ref(false)
+const isAnnouncementStripDismissed = ref(
+  typeof sessionStorage !== 'undefined'
+    && sessionStorage.getItem(ANNOUNCEMENT_CLOSED_STORAGE_KEY) === 'true',
+)
+
+function readAnnouncementDismissedFromStorage() {
+  if (typeof sessionStorage === 'undefined') return false
+  return sessionStorage.getItem(ANNOUNCEMENT_CLOSED_STORAGE_KEY) === 'true'
+}
 
 /** Live measured height of the fixed v-app-bar (ResizeObserver). */
 export const measuredAppBarHeightPx = ref(0)
@@ -116,6 +124,7 @@ export function useHeaderLayoutMetrics(options = {}) {
   const settingsStore = useSettingsStore()
   const authStore = useAuthStore()
   const { isMobile } = useDevices()
+  const { shouldShowSubHeader } = useSubHeaderVisibility()
 
   const tickerText = computed(() => {
     const list = settingsStore.announcement
@@ -140,7 +149,14 @@ export function useHeaderLayoutMetrics(options = {}) {
 
   function dismissAnnouncementStrip() {
     isAnnouncementStripDismissed.value = true
+    if (typeof sessionStorage !== 'undefined') {
+      sessionStorage.setItem(ANNOUNCEMENT_CLOSED_STORAGE_KEY, 'true')
+    }
   }
+
+  onMounted(() => {
+    isAnnouncementStripDismissed.value = readAnnouncementDismissedFromStorage()
+  })
 
   const announceStripPx = computed(() => {
     if (!showAnnouncementStrip.value) return 0
@@ -150,19 +166,20 @@ export function useHeaderLayoutMetrics(options = {}) {
     return isMobile.value ? ANNOUNCE_STRIP_MOBILE_PX : GUEST_ANNOUNCE_STRIP_MESSAGE_PX
   })
 
+  const subHeaderPx = computed(() => (shouldShowSubHeader.value ? SUB_HEADER_TOTAL_PX : 0))
+
   const headerBarTotalPx = computed(() => {
     const toolbar = isMobile.value
       ? (variant === 'auth' ? HEADER_TOOLBAR_MOBILE_AUTH_PX : HEADER_TOOLBAR_MOBILE_PX)
       : variant === 'guest'
         ? GUEST_TOOLBAR_DESKTOP_PX
         : HEADER_TOOLBAR_DESKTOP_PX
-    let total = toolbar
+    let total = announceStripPx.value + toolbar + subHeaderPx.value
 
     if (variant === 'guest' && !isMobile.value && !showAnnouncementStrip.value && !usesAuthMarqueeLayout.value) {
       total += GUEST_HEADER_TOP_STRIP_PX
     }
 
-    total += announceStripPx.value
     return total
   })
 
@@ -227,6 +244,8 @@ export function useHeaderLayoutMetrics(options = {}) {
     tickerText,
     showAnnouncementStrip,
     dismissAnnouncementStrip,
+    shouldShowSubHeader,
+    subHeaderPx,
     headerBarTotalPx,
     effectiveHeaderInsetPx,
     appBarHeightPx,

@@ -4,10 +4,15 @@
       'header-bar--mobile-drawer-open': isMobile && uiStore.isSidebarOpen
     }" elevation="0">
     <div class="header-shell tw-flex tw-flex-col tw-w-full tw-max-w-full tw-min-h-0">
+      <HeaderAnnouncementBar
+        v-if="showAnnouncementStrip"
+        @dismiss="dismissAnnouncementStrip"
+      />
+
       <!-- Primary toolbar row -->
       <div
-        class="header-toolbar-row tw-flex tw-items-center tw-w-full tw-min-h-[41px] tw-h-[65.5px] md:tw-min-h-[66px] md:tw-h-[66px] tw-shrink-0">
-        <div class="header-toolbar-left tw-inline-flex tw-items-center tw-gap-2 tw-flex-none md:tw-gap-3">
+        class="header-toolbar-row tw-flex tw-items-center tw-w-full tw-min-h-[41px] tw-h-[54px] md:tw-min-h-[90px] md:tw-h-[90px] tw-shrink-0">
+        <div class="header-toolbar-left tw-inline-flex tw-items-center tw-gap-0 tw-flex-none md:tw-gap-3">
         <router-link
           v-if="isCasinoPage && authStore.isUiAuthenticated"
           to="/sports/live"
@@ -27,8 +32,8 @@
             src="/svg/burger-menu.png"
             alt=""
             class="header-mobile-menu-btn__icon"
-            width="21"
-            height="15"
+            width="12"
+            height="14"
           />
         </button>
 
@@ -38,6 +43,40 @@
 
           <!-- Desktop logged-in: icons removed per design -->
         </div>
+        </div>
+
+        <!-- Desktop center search (logged-in reference layout) -->
+        <div
+          v-if="authStore.isUiAuthenticated && !isMobile"
+          class="header-desktop-search-slot tw-hidden md:tw-flex tw-flex-1 tw-justify-center tw-min-w-0 tw-px-4"
+        >
+          <div
+            ref="desktopInlineSearchRoot"
+            class="header-desktop-search tw-relative tw-flex tw-items-center tw-w-full tw-max-w-[280px] xl:tw-max-w-[380px]"
+          >
+            <SearchMagnify :size="15" :stroke-width="2" class="header-desktop-search__icon" />
+            <input
+              ref="headerSearchInput"
+              v-model="inlineSearchQuery"
+              type="text"
+              :placeholder="t('components.searchDialog.desktopPlaceholder')"
+              class="header-desktop-search__input tw-flex-1 tw-min-w-0 tw-bg-transparent tw-border-0 tw-outline-none"
+              @focus="ensureInlineSearchData"
+              @keydown.enter.prevent="submitInlineSearch"
+            />
+            <div v-if="showSearchDropdown" class="header-search-dropdown header-search-dropdown--desktop">
+              <div class="header-search-dropdown__body">
+                <SearchResults
+                  :search-query="debouncedSearchQuery"
+                  :loading="searchLoading"
+                  :error="searchError"
+                  :casino-games="casinoGames"
+                  @event-selected="handleInlineEventSelected"
+                  @game-selected="handleInlineGameSelected"
+                />
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- Right cluster: nav links → tools → wallet (grouped + separated for scanability) -->
@@ -62,96 +101,167 @@
             {{ t('components.mobileBottomNav.rules') }}
           </router-link> -->
 
-          <!-- Logged-in desktop: search + deposit/withdraw share reference gap/alignment -->
+          <!-- Guest auth (reference Header.tsx mobile: Login / Sign Up / Get ID) -->
           <template v-if="!authStore.isUiAuthenticated">
-            <div class="guest-auth-pair tw-inline-flex tw-items-center">
-              <router-link to="/signup" class="signup-btn" @click="handleGuestSignupClick">
-                <span class="signup-text">{{ t('auth.login.signupCta') }}</span>
+            <div v-if="!isMobile" class="guest-desktop-auth-actions tw-flex tw-items-center tw-gap-1">
+              <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--login" @click="handleGuestLoginClick">
+                <v-icon size="17" class="guest-ref-auth-btn__icon">mdi-login</v-icon>
+                <span>{{ t('components.mobileBottomNav.login') }}</span>
+              </button>
+              <router-link to="/signup" class="guest-ref-auth-btn guest-ref-auth-btn--register" @click="handleGuestSignupClick">
+                <v-icon size="16" class="guest-ref-auth-btn__icon">mdi-account-plus-outline</v-icon>
+                <span>{{ t('auth.login.registerCta') }}</span>
               </router-link>
-              <button type="button" class="login-btn" @click="handleGuestLoginClick">
-                <span class="login-text">{{ t('auth.login.loginButton') }}</span>
+              <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--get-id" @click="handleGuestGetIdClick">
+                <v-icon size="17" class="guest-ref-auth-btn__icon">mdi-login</v-icon>
+                <span>{{ t('auth.login.getIdCta') }}</span>
+              </button>
+            </div>
+            <div v-else class="guest-auth-pair tw-inline-flex tw-items-center">
+              <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--login guest-ref-auth-btn--mobile" @click="handleGuestLoginClick">
+                <span>{{ t('components.mobileBottomNav.login') }}</span>
+              </button>
+              <router-link to="/signup" class="guest-ref-auth-btn guest-ref-auth-btn--register guest-ref-auth-btn--mobile" @click="handleGuestSignupClick">
+                <span>{{ t('auth.login.signupCta') }}</span>
+              </router-link>
+              <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--get-id guest-ref-auth-btn--mobile" @click="handleGuestGetIdClick">
+                <span>{{ t('auth.login.getIdCta') }}</span>
               </button>
             </div>
           </template>
 
-          <!-- Authenticated (real + full demo): Deposit/Withdraw + BAL/EXP + profile -->
+          <!-- Authenticated (real + full demo) -->
           <template v-else>
-            <div class="header-wallet-cluster">
-              <div
-                v-if="!isMobile"
-                ref="desktopInlineSearchRoot"
-                class="header-inline-search tw-relative tw-flex tw-items-center tw-h-7 tw-w-[169px] tw-min-w-[169px] tw-max-w-[169px]"
+            <!-- Desktop: reference layout (search center, datetime, balance, deposit/withdraw, account) -->
+            <div v-if="!isMobile" class="header-desktop-auth-cluster tw-flex tw-items-center tw-gap-2 tw-shrink-0">
+              <div class="header-desktop-datetime">
+                <div class="header-desktop-datetime__date">{{ formattedHeaderDate }}</div>
+                <span class="header-desktop-datetime__time">{{ formattedHeaderTime }}</span>
+              </div>
+
+              <div class="header-desktop-wallet">
+                <div class="header-desktop-wallet__lines">
+                  <span>
+                    <span class="header-desktop-wallet__label">{{ t('header.user.walletSummary.balance') }}:</span>
+                    {{ formattedBalance }}
+                  </span>
+                  <span
+                    class="header-desktop-wallet__exp"
+                    role="button"
+                    tabindex="0"
+                    @click="openModal"
+                    @keydown.enter.prevent="openModal"
+                    @keydown.space.prevent="openModal"
+                  >
+                    <span class="header-desktop-wallet__label">{{ t('header.user.walletSummary.exposure') }}:</span>
+                    {{ formattedExposure }}
+                  </span>
+                </div>
+                <v-menu
+                  location="bottom end"
+                  :z-index="4000"
+                  :open-on-hover="true"
+                  :open-delay="150"
+                  :close-delay="250"
+                  :close-on-content-click="false"
+                  transition="scale-transition"
+                >
+                  <template #activator="{ props: menuProps }">
+                    <button
+                      type="button"
+                      class="header-desktop-wallet__info"
+                      v-bind="menuProps"
+                      :aria-label="t('components.walletInfo.balanceBreakdown')"
+                    >
+                      <v-icon size="16">mdi-information-outline</v-icon>
+                    </button>
+                  </template>
+                  <div class="balance-info-popup">
+                    <div class="balance-info-popup__row">
+                      <span class="balance-info-popup__label">{{ t('components.walletInfo.cashable') }}</span>
+                      <span class="balance-info-popup__value">{{ formattedCashableBreakdown }}</span>
+                    </div>
+                    <div class="balance-info-popup__row">
+                      <span class="balance-info-popup__label">{{ t('components.walletInfo.non-cashable') }}</span>
+                      <span class="balance-info-popup__value">{{ formattedNonCashableBreakdown }}</span>
+                    </div>
+                  </div>
+                </v-menu>
+              </div>
+
+              <div class="header-desktop-pay-actions">
+                <router-link to="/deposit" class="header-ref-pay-btn header-ref-pay-btn--deposit">
+                  <img src="/svg/header-deposit-icon.svg" alt="" class="header-ref-pay-btn__icon" width="21" height="19" />
+                  <span>{{ t('wallet.deposit.title') }}</span>
+                </router-link>
+                <router-link to="/withdrawal" class="header-ref-pay-btn header-ref-pay-btn--withdraw">
+                  <img src="/svg/header-withdraw-icon.svg" alt="" class="header-ref-pay-btn__icon" width="21" height="19" />
+                  <span>{{ t('wallet.withdrawal.title') }}</span>
+                </router-link>
+              </div>
+
+              <button
+                type="button"
+                class="header-ref-account-btn"
+                :aria-label="t('components.mobileBottomNav.account')"
+                @click="userMenuOpen = true"
               >
-                <input ref="headerSearchInput" v-model="inlineSearchQuery" type="text"
-                  :placeholder="t('components.searchDialog.desktopPlaceholder')"
-                  class="header-inline-search__input tw-flex-1 tw-min-w-0 tw-w-full tw-bg-transparent tw-border-0 tw-outline-none tw-text-xs"
-                  @focus="ensureInlineSearchData" @keydown.enter.prevent="submitInlineSearch" />
-                <div v-if="showSearchDropdown" class="header-search-dropdown">
-                  <div class="header-search-dropdown__body">
-                    <SearchResults :search-query="debouncedSearchQuery" :loading="searchLoading" :error="searchError"
-                      :casino-games="casinoGames" @event-selected="handleInlineEventSelected"
-                      @game-selected="handleInlineGameSelected" />
+                <v-icon size="18">mdi-cog-outline</v-icon>
+                <span>{{ t('components.mobileBottomNav.account') }}</span>
+              </button>
+            </div>
+
+            <!-- Mobile: reference search + wallet pill + account icon -->
+            <div v-else class="header-mobile-auth-cluster">
+              <button
+                type="button"
+                class="header-mobile-search-btn"
+                :aria-label="t('common.search')"
+                @click="openInlineSearch"
+              >
+                <SearchMagnify :size="22" :stroke-width="2" class="header-mobile-search-btn__icon" />
+              </button>
+
+              <div class="header-mobile-wallet-pill">
+                <div class="header-mobile-wallet-pill__lines">
+                  <div class="header-mobile-wallet-pill__row">
+                    {{ t('components.walletInfo.balanceShort') }}:
+                    <span>{{ formattedBalance }}</span>
+                  </div>
+                  <div
+                    class="header-mobile-wallet-pill__row header-mobile-wallet-pill__row--exp"
+                    role="button"
+                    tabindex="0"
+                    @click="openModal"
+                    @keydown.enter.prevent="openModal"
+                    @keydown.space.prevent="openModal"
+                  >
+                    {{ t('components.walletInfo.exposureShort') }}:
+                    <span>{{ formattedExposure }}</span>
                   </div>
                 </div>
               </div>
 
-              <div class="header-action-col tw-flex tw-flex-col tw-gap-0.5 tw-items-center">
-                <router-link to="/deposit" class="header-action-btn header-action-btn--deposit">
-                  Deposit
-                </router-link>
-                <div class="header-bal-exp__row">
-                  <span>(</span><span class="tw-font-semibold">BAL:</span><span> {{ formattedBalance }})</span>
-                </div>
-              </div>
-              <div class="header-action-col tw-flex tw-flex-col tw-gap-0.5 tw-items-center">
-                <router-link to="/withdrawal" class="header-action-btn header-action-btn--withdraw">
-                  Withdraw
-                </router-link>
-                <div class="header-bal-exp__row header-bal-exp__row--exp" @click="openModal">
-                  <span>(</span><span class="tw-font-semibold">EXP:</span><span> {{ formattedExposure }})</span>
-                </div>
-              </div>
-            </div>
-
-            <div
-              class="header-auth-cluster tw-flex tw-items-center tw-min-w-0 md:tw-gap-2 md:tw-pl-2 md:tw-ml-1 max-md:tw-contents">
-              <button v-if="!isMobile" type="button"
-                class="header-account-icon-btn"
+              <button
+                type="button"
+                class="header-mobile-user-btn"
                 :aria-label="userName"
-                @click="userMenuOpen = true">
-                <img
-                  src="/svg/green-avatar.png"
-                  alt=""
-                  class="header-account-icon-btn__img"
-                  width="28"
-                  height="28"
-                />
+                @click="userMenuOpen = true"
+              >
+                <v-icon size="20">mdi-account-circle</v-icon>
               </button>
             </div>
           </template>
         </div>
       </div>
 
-      <!-- Announcement marquee below toolbar -->
-      <div v-if="showAnnouncementStrip"
-        class="header-announce-strip header-announce-strip--lane header-announce-strip--below header-announce-strip--with-message tw-shrink-0 tw-flex tw-items-center tw-w-full tw-relative">
-        <div class="header-announce-speaker" aria-hidden="true">
-          <img src="/svg/speaker_icon.png" alt="" class="header-announce-speaker__img" width="22" height="20" />
-        </div>
-        <div class="header-ticker-wrap header-ticker-wrap--strip tw-min-w-0 tw-flex-1">
-          <div class="header-ticker-track-wrap">
-            <div
-              ref="tickerTrackRef"
-              class="header-ticker-track"
-              :class="{ 'header-ticker-track--from-right': isMobile && authStore.isUiAuthenticated }"
-              :style="{ animationDuration: tickerDuration }"
-            >
-              <span class="header-ticker-text">{{ tickerText }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-              <span class="header-ticker-text">{{ tickerText }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            </div>
-          </div>
-        </div>
+      <div
+        v-if="shouldShowSubHeader"
+        class="header-subheader-wrap tw-shrink-0 tw-px-2 md:tw-px-0"
+      >
+        <HeaderSubHeader />
       </div>
+
     </div>
   </v-app-bar>
   <SearchDialog v-model="showSearchDialog" />
@@ -231,17 +341,64 @@ import SearchResults from '@/components/SearchResults.vue'
 import MobileSearchModal from '@/components/MobileSearchModal.vue'
 import HeaderBrandLink from '@/components/HeaderBrandLink.vue'
 import { useWallet } from '@/composables/useWallet.js'
-import BankDepositIcon from '@/components/Icons/BankDepositIcon.vue'
-import WalletIcon from '@/components/Icons/WalletIcon.vue'
+import SearchMagnify from '@/components/Icons/SearchMagnify.vue'
 import UserAccountDrawer from '@/components/UserAccountDrawer.vue'
+import HeaderAnnouncementBar from '@/components/HeaderAnnouncementBar.vue'
+import HeaderSubHeader from '@/components/HeaderSubHeader.vue'
 import {
   useHeaderLayoutMetrics,
   useAppBarHeightObserver,
-  ANNOUNCE_MARQUEE_PX_PER_SEC,
 } from '@/composables/useHeaderLayoutMetrics.js'
+import { useSettingsStore } from '@/stores/settings.js'
+import { buildWhatsAppSupportUrl } from '@/utils/whatsappSupportUrl.js'
 
 const { t, locale } = useI18n()
-const { formattedBalance, formattedExposure, formattedBonus, fetchWalletBalance } = useWallet()
+const {
+  formattedBalance,
+  formattedExposure,
+  formattedBonus,
+  fetchWalletBalance,
+  balance,
+  cashable,
+  formatAmount,
+} = useWallet()
+
+const formattedCashableBreakdown = computed(() => formatAmount(cashable.value))
+const formattedNonCashableBreakdown = computed(() => {
+  const nonCashable = parseFloat(balance.value ?? 0) - parseFloat(cashable.value ?? 0)
+  return formatAmount(Math.max(0, nonCashable))
+})
+
+const currentDateTime = ref(new Date())
+let headerClockTimer = null
+
+function getOrdinal(day) {
+  if (day > 3 && day < 21) return 'th'
+  switch (day % 10) {
+    case 1: return 'st'
+    case 2: return 'nd'
+    case 3: return 'rd'
+    default: return 'th'
+  }
+}
+
+const formattedHeaderDate = computed(() => {
+  const d = currentDateTime.value
+  const month = d.toLocaleString('en-US', { month: 'long' })
+  const day = d.getDate()
+  return `${month} ${day}${getOrdinal(day)} ${d.getFullYear()}`
+})
+
+const formattedHeaderTime = computed(() =>
+  currentDateTime.value
+    .toLocaleString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true,
+    })
+    .toLowerCase()
+)
 
 const walletSummaryRows = computed(() => [
   { key: 'balance', labelKey: 'header.user.walletSummary.balance', value: formattedBalance.value },
@@ -252,49 +409,22 @@ const featuredEventsStore = useFeaturedEventsStore()
 const eventsStore = useEventsStore()
 const { isMobile } = useDevices()
 const authStore = useAuthStore()
+const settingsStore = useSettingsStore()
+
+const whatsappLink = computed(() =>
+  buildWhatsAppSupportUrl(settingsStore.whatsappChannel),
+)
 
 const {
-  tickerText,
   showAnnouncementStrip,
+  dismissAnnouncementStrip,
+  shouldShowSubHeader,
   appBarHeightPx,
   effectiveHeaderInsetPx,
 } = useHeaderLayoutMetrics({ variant: 'auth' })
 
 const appBarRef = ref(null)
 useAppBarHeightObserver(appBarRef)
-
-const tickerTrackRef = ref(null)
-const tickerCopyWidthPx = ref(0)
-
-const measureTickerCopyWidth = () => {
-  const track = tickerTrackRef.value
-  if (!track) return
-  const first = track.querySelector('.header-ticker-text')
-  if (!first) return
-  const width = first.getBoundingClientRect().width
-  if (width > 0) tickerCopyWidthPx.value = width
-}
-
-const tickerDuration = computed(() => {
-  const width = tickerCopyWidthPx.value || Math.max(tickerText.value.length * 7, 400)
-  const secs = Math.max(8, width / ANNOUNCE_MARQUEE_PX_PER_SEC)
-  return `${secs.toFixed(2)}s`
-})
-
-watch([tickerText, showAnnouncementStrip], async () => {
-  await nextTick()
-  measureTickerCopyWidth()
-}, { flush: 'post' })
-
-onMounted(async () => {
-  await nextTick()
-  measureTickerCopyWidth()
-  window.addEventListener('resize', measureTickerCopyWidth, { passive: true })
-})
-
-onUnmounted(() => {
-  window.removeEventListener('resize', measureTickerCopyWidth)
-})
 
 const featuredEvents = computed(() => featuredEventsStore.events)
 const uiStore = useUIStore()
@@ -312,6 +442,15 @@ const handleGuestLoginClick = () => {
 
 const handleGuestSignupClick = () => {
   closeMobileSidebarOverlay()
+}
+
+const handleGuestGetIdClick = () => {
+  closeMobileSidebarOverlay()
+  if (whatsappLink.value) {
+    window.open(whatsappLink.value, '_blank', 'noopener,noreferrer')
+    return
+  }
+  router.push({ name: 'signup' })
 }
 
 const isBetPage = computed(() => route.name === 'sport-bet' || route.name === 'races-bet')
@@ -744,12 +883,16 @@ const handleUserMenuItemClick = (item) => {
 
 onMounted(() => {
   uiStore.setFeaturedSliderVisible(false)
+  headerClockTimer = setInterval(() => {
+    currentDateTime.value = new Date()
+  }, 1000)
   if (isMobile.value && isBetPage.value) {
     nextTick(_attachScrollListener)
   }
 })
 
 onUnmounted(() => {
+  if (headerClockTimer) clearInterval(headerClockTimer)
   _detachScrollListener()
   if (searchDebounceTimer) clearTimeout(searchDebounceTimer)
   if (typeof document !== 'undefined') {
@@ -832,16 +975,26 @@ onUnmounted(() => {
   }
 }
 
-/* Force Vuetify components to use black header shell (logged-in + guest) */
-:deep(.v-toolbar.v-app-bar),
-:deep(.v-toolbar__content),
-.header-shell,
-.header-toolbar-row {
-  background-color: var(--color-header-bg) !important;
-  background: var(--color-header-bg) !important;
-  background-image: none !important;
-  box-shadow: none !important;
-  border: none !important;
+/* Desktop: WazirWin header gradient shell */
+@media (min-width: 768px) {
+  :deep(.v-toolbar.v-app-bar),
+  :deep(.v-toolbar__content),
+  .header-shell,
+  .header-toolbar-row {
+    background-color: var(--color-header-bg) !important;
+    background: var(--color-header-bg-gradient, var(--color-header-bg)) !important;
+    background-image: var(--color-header-bg-gradient, none) !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+}
+
+@media (max-width: 767.98px) {
+  :deep(.v-toolbar.v-app-bar),
+  :deep(.v-toolbar__content) {
+    box-shadow: none !important;
+    border: none !important;
+  }
 }
 
 /* Ensure nav icon uses proper theme colors */
@@ -1624,18 +1777,226 @@ button.header-announce-search.search-icon-btn:hover {
   cursor: pointer;
 }
 
+/* Desktop reference header (WazirWin) */
+.header-desktop-search {
+  height: 36px;
+  border-radius: 9999px;
+  border: 1px solid var(--color-search-input-border, #545454);
+  background: var(--color-search-input-bg, #333333);
+  padding: 0 12px 0 36px;
+}
+
+.header-desktop-search__icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ffffff !important;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+.header-desktop-search__input {
+  color: #ffffff !important;
+  font-size: 12px;
+  line-height: 1.25;
+  width: 100%;
+  height: 100%;
+}
+
+.header-desktop-search__input::placeholder {
+  color: #9ca3af;
+}
+
+.header-search-dropdown--desktop {
+  left: 0;
+  right: 0;
+  top: calc(100% + 8px);
+}
+
+.header-desktop-datetime {
+  display: flex;
+  flex-direction: column;
+  padding: 0 8px;
+  flex-shrink: 0;
+}
+
+.header-desktop-datetime__date {
+  font-size: 12px;
+  line-height: 1.25;
+  color: var(--color-header-date-text, #eed1d5);
+  white-space: nowrap;
+}
+
+.header-desktop-datetime__time {
+  font-size: 14px;
+  line-height: 1.25;
+  font-weight: 600;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.header-desktop-wallet {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.header-desktop-wallet__lines {
+  display: flex;
+  flex-direction: column;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #ffffff;
+}
+
+.header-desktop-wallet__label {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 700;
+}
+
+.header-desktop-wallet__exp {
+  cursor: pointer;
+}
+
+.header-desktop-wallet__info {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+}
+
+.header-desktop-pay-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.header-ref-pay-btn {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  height: 44px;
+  padding: 0 12px;
+  border-radius: 6px;
+  border: 1px solid #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: filter 0.15s ease;
+}
+
+.header-ref-pay-btn:hover {
+  filter: brightness(1.08);
+}
+
+.header-ref-pay-btn--deposit {
+  background: var(--color-header-deposit-btn);
+}
+
+.header-ref-pay-btn--withdraw {
+  background: var(--color-header-withdraw-btn);
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.header-ref-pay-btn__icon {
+  display: block;
+  width: 21px;
+  height: 19px;
+  object-fit: contain;
+}
+
+.header-ref-account-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 35px;
+  padding: 4px 16px;
+  border: none;
+  border-radius: 9999px;
+  background: var(--color-wazir-green, #49915e);
+  color: #000000;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: filter 0.15s ease;
+}
+
+.header-ref-account-btn:hover {
+  filter: brightness(1.06);
+}
+
+.header-ref-account-btn :deep(.v-icon) {
+  color: #000000 !important;
+}
+
+.balance-info-popup {
+  background: rgba(20, 20, 20, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: 10px 14px;
+  min-width: 11rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+.balance-info-popup__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  line-height: 1.4;
+}
+
+.balance-info-popup__row + .balance-info-popup__row {
+  margin-top: 4px;
+}
+
+.balance-info-popup__label {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+}
+
+.balance-info-popup__value {
+  font-size: 12px;
+  font-weight: 800;
+  color: #ffffff;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
 @media (min-width: 768px) {
   .header-bar :deep(.v-toolbar.v-app-bar),
   .header-bar :deep(.v-toolbar__content) {
-    background: var(--color-header-bg) !important;
+    background: var(--color-header-bg-gradient, var(--color-header-bg)) !important;
     background-color: var(--color-header-bg) !important;
   }
 
   .header-toolbar-row {
     border: none !important;
-    border-bottom: 1px solid #ffffff !important;
-    padding: 12px 40px;
+    border-bottom: none !important;
+    padding: 0 16px;
     box-sizing: border-box;
+    gap: 8px;
   }
 
   .header-logo-area {
@@ -1649,17 +2010,11 @@ button.header-announce-search.search-icon-btn:hover {
   .header-toolbar-right {
     margin-right: 0 !important;
     gap: 8px !important;
+    flex-shrink: 0;
   }
 
-  .header-wallet-cluster {
-    gap: 24px;
-    padding: 0 8px;
-    align-items: flex-start;
-  }
-
-  .header-wallet-cluster .header-inline-search {
-    align-self: flex-start;
-    margin-top: 0;
+  .header-desktop-auth-cluster {
+    gap: 8px;
   }
 
   .header-desktop-icon-btn {
@@ -1780,63 +2135,26 @@ button.header-announce-search.search-icon-btn:hover {
     -moz-osx-font-smoothing: auto;
   }
 
-  .header-inline-search {
-    width: 169px !important;
-    min-width: 169px !important;
-    max-width: 169px !important;
-    height: 28px !important;
-    border-radius: 6px !important;
-    border: 1px solid rgb(209, 213, 219) !important;
-    background: #ffffff !important;
-    padding: 0 !important;
-  }
-
-  .header-inline-search__input {
-    font-size: 12px !important;
-    line-height: 18px !important;
-    color: #000000 !important;
-    padding: 8px 16px !important;
-    height: 28px !important;
-  }
-
-  .header-wallet-action-btn {
-    height: 30px;
-    border-radius: 14px !important;
-    padding: 0 12px !important;
-    font-size: 10px !important;
-    letter-spacing: 0.04em !important;
-    font-weight: 800 !important;
-  }
-
-  .header-wallet-action-btn--deposit,
-  .header-wallet-action-btn--withdraw {
-    background: var(--theme-orange) !important;
-    color: #ffffff !important;
-  }
-
-  .header-user-trigger {
-    padding-left: 10px !important;
-    margin-left: 4px !important;
-    border-left: 1px solid rgba(255, 255, 255, 0.18) !important;
-  }
-
-  .header-user-trigger span {
-    font-size: 11px !important;
-    font-weight: 700 !important;
-    color: #ffffff !important;
-    text-transform: uppercase;
-  }
-
-  .chevron-icon {
-    color: rgba(255, 255, 255, 0.86) !important;
-  }
-
   .header-logo-slot {
     width: var(--header-logo-slot);
     min-width: var(--header-logo-slot);
-    padding-top: 6px;
+    padding-top: 0;
   }
 
+  .header-brand-link :deep(.header-brand-img) {
+    height: 45px;
+    width: auto;
+    max-width: 240px;
+    object-fit: contain;
+  }
+
+}
+
+@media (min-width: 1280px) {
+  .header-toolbar-row {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
 }
 
 .header-ticker-wrap--strip {
@@ -2148,19 +2466,12 @@ button.header-announce-search.search-icon-btn:hover {
     color: #5a6a72;
   }
 
-  /* Mobile default: black toolbar (reference layout) */
-  .header-bar :deep(.v-toolbar.v-app-bar),
-  .header-bar :deep(.v-toolbar__content) {
-    background: var(--color-header-bg) !important;
-    background-color: var(--color-header-bg) !important;
-  }
-
-  /* Mobile search open: keep header shell */
+  /* Mobile search open: keep loginInputBg shell (mobile-header.css owns default layering) */
   .header-bar--search-open :deep(.v-toolbar.v-app-bar),
   .header-bar--search-open :deep(.v-toolbar__content),
   .header-bar--search-open .mobile-inline-search-wrap {
-    background: var(--color-header-bg) !important;
-    background-color: var(--color-header-bg) !important;
+    background: var(--color-login-input-bg, #23201f) !important;
+    background-color: var(--color-login-input-bg, #23201f) !important;
     background-image: none !important;
   }
 

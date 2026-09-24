@@ -1,5 +1,33 @@
-/* Mobile header toolbar — fairplaypro.com logo pattern: a.logo > img.img-fluid + tagline */
+/* Mobile header toolbar — reference Header.tsx layout */
 @media (max-width: 767.98px) {
+  /*
+   * Reference mobile header bg layers:
+   * - App bar shell + subheader zone: loginInputBg (#23201f)
+   * - Toolbar row only: wazirWinHeaderBgGradient (green → charcoal)
+   * - Subheader scroll: loginInputBg (full width inside px-2 wrap)
+   */
+  .v-toolbar.v-app-bar.header-bar,
+  .v-toolbar.v-app-bar.guest-app-bar,
+  .header-bar .v-toolbar__content,
+  .guest-app-bar .v-toolbar__content,
+  .header-shell,
+  .guest-app-bar-inner {
+    background: var(--color-login-input-bg, #23201f) !important;
+    background-color: var(--color-login-input-bg, #23201f) !important;
+    background-image: none !important;
+  }
+
+  .header-toolbar-row,
+  .guest-toolbar-row {
+    background: var(--color-header-bg-gradient) !important;
+    background-color: transparent !important;
+    background-image: var(--color-header-bg-gradient) !important;
+  }
+
+  .header-subheader-wrap {
+    background: var(--color-login-input-bg, #23201f) !important;
+  }
+
   /*
    * WebView / iOS: reserve status-bar inset on the fixed app bar so toolbar content
    * does not sit under the system status bar. Content below uses --app-header-inset
@@ -19,28 +47,21 @@
     align-items: stretch;
   }
 
-  .header-toolbar-row {
-    padding: 12px 8px;
-    min-height: 65.5px !important;
-    height: 65.5px !important;
-    box-sizing: border-box;
-    align-items: center !important;
-    border-bottom: 1px solid #ffffff;
-  }
-
+  .header-toolbar-row,
   .guest-toolbar-row {
-    padding: 12px 8px;
-    min-height: 57px !important;
-    height: 57px !important;
+    padding: 0 8px;
+    min-height: 54px !important;
+    height: 54px !important;
     box-sizing: border-box;
     align-items: center !important;
-    border-bottom: 1px solid #ffffff;
+    border-bottom: none;
   }
 
   .header-toolbar-left,
   .guest-toolbar-left {
     flex-shrink: 0;
     min-width: 0;
+    gap: 0 !important;
   }
 
   .header-logo-area {
@@ -61,13 +82,20 @@
     align-self: center;
   }
 
-  .header-brand-img.img-fluid {
+  .header-brand-img.img-fluid,
+  .guest-header-brand .header-brand-img {
     display: block;
-    height: 22px;
+    height: auto;
+    max-height: 45px;
     width: auto;
     max-width: 130px;
     object-fit: contain;
     object-position: left center;
+  }
+
+  .guest-header-brand.logo.header-brand-link,
+  .header-logo-area .logo.header-brand-link {
+    padding-left: 8px;
   }
 
   .header-mobile-menu-btn,
@@ -91,9 +119,10 @@
   .header-mobile-menu-btn__icon,
   .guest-mobile-menu-btn__icon {
     display: block;
-    width: auto;
-    height: 15px;
-    max-width: 21px;
+    width: 12px !important;
+    height: 14px !important;
+    max-width: 12px !important;
+    max-height: 14px !important;
     object-fit: contain;
   }
 
@@ -114,11 +143,65 @@
 
   .guest-auth-pair {
     gap: 4px !important;
-    margin: -2px;
+    margin: 0;
     flex-shrink: 0;
   }
 
-  /* Reference loginSmall: 76×25, 10.02px/700, radius 3.12px */
+  /* Reference Header.tsx guest-ref-auth-btn (shared GuestLayout + Header) */
+  .guest-ref-auth-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    height: 35px;
+    padding: 4px 16px;
+    border: none;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-decoration: none !important;
+    white-space: nowrap;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: filter 0.15s ease, background-color 0.15s ease;
+  }
+
+  .guest-ref-auth-btn__icon {
+    color: #000000 !important;
+    flex-shrink: 0;
+  }
+
+  .guest-ref-auth-btn--login,
+  .guest-ref-auth-btn--get-id {
+    background: var(--color-wazir-green, #49915e);
+    color: #000000;
+  }
+
+  .guest-ref-auth-btn--register {
+    background: var(--color-signup-btn-bg, #48494b);
+    color: var(--color-wazir-green, #49915e);
+  }
+
+  .guest-ref-auth-btn--mobile {
+    height: 27px;
+    min-height: 27px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .guest-ref-auth-btn--mobile.guest-ref-auth-btn--register {
+    color: var(--color-wazir-green, #49915e);
+  }
+
+  .guest-ref-auth-btn--mobile .guest-ref-auth-btn__icon {
+    display: none;
+  }
+
+  /* Legacy signup/login aliases */
   .header-guest-signup-btn,
   .header-guest-login-btn,
   .signup-btn,
@@ -126,17 +209,17 @@
     display: inline-flex !important;
     align-items: center;
     justify-content: center;
-    width: 76px;
-    height: 25px;
-    min-width: 76px;
-    min-height: 25px;
-    padding: 0 !important;
+    width: auto;
+    height: 27px;
+    min-width: 0;
+    min-height: 27px;
+    padding: 4px 8px !important;
     box-sizing: border-box;
-    border-radius: 3.12px !important;
-    font-size: 10.02px !important;
-    font-weight: 700 !important;
-    letter-spacing: normal !important;
-    line-height: 1.5 !important;
+    border-radius: 6px !important;
+    font-size: 10px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.06em !important;
+    line-height: 1 !important;
     text-transform: uppercase;
     white-space: nowrap;
     flex-shrink: 0;
@@ -146,16 +229,16 @@
 
   .header-guest-signup-btn,
   .signup-btn {
-    color: #ffffff !important;
+    color: var(--color-wazir-green, #49915e) !important;
     border: none !important;
-    background: linear-gradient(to left top, #40135c, #a31bf5, #ca86f3) !important;
+    background: var(--color-signup-btn-bg, #48494b) !important;
   }
 
   .header-guest-login-btn,
   .login-btn {
-    color: #ffffff !important;
-    border: 1px solid #ffffff !important;
-    background: transparent !important;
+    color: #000000 !important;
+    border: none !important;
+    background: var(--color-wazir-green, #49915e) !important;
   }
 
   .signup-text,
@@ -167,89 +250,100 @@
     text-transform: uppercase;
   }
 
-  .header-mobile-icon-btn {
+  /* Reference HeaderSearchInput mobile: green magnify icon, no orange circle */
+  .header-mobile-search-btn,
+  .search-icon-btn.header-announce-search,
+  .search-icon-btn.header-search-btn {
     flex-shrink: 0;
     display: inline-flex !important;
     align-items: center;
     justify-content: center;
-    width: 26px !important;
-    height: 26px !important;
-    min-width: 26px !important;
-    min-height: 26px !important;
+    width: auto !important;
+    height: auto !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
     padding: 0 !important;
     border: none !important;
-    border-radius: 50% !important;
-    background: var(--theme-orange) !important;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28);
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: var(--color-wazir-green, #49915e);
+    cursor: pointer;
+  }
+
+  .header-mobile-search-btn__icon,
+  .search-icon-btn.header-announce-search .search-magnify-icon,
+  .search-icon-btn.header-search-btn .search-magnify-icon {
+    display: block;
+    width: 25px;
+    height: 25px;
+    color: var(--color-wazir-green, #49915e);
+  }
+
+  /* Reference logged-in mobile: bg-signupBtnBg wallet pill + user icon */
+  .header-mobile-auth-cluster {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+    min-width: 0;
+  }
+
+  .header-mobile-wallet-pill {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    padding: 4px 6px;
+    border-radius: 6px;
+    background: var(--color-signup-btn-bg, #48494b);
+  }
+
+  .header-mobile-wallet-pill__lines {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    justify-content: center;
+  }
+
+  .header-mobile-wallet-pill__row {
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+    color: #ffffff;
+    white-space: nowrap;
+  }
+
+  .header-mobile-wallet-pill__row span {
     color: #ffffff;
   }
 
-  .header-mobile-icon-btn .v-icon {
-    color: #ffffff !important;
-    font-size: 15px !important;
+  .header-mobile-wallet-pill__row--exp {
+    cursor: pointer;
   }
 
-  /* Mobile search — fairplay ref: bolder stroke, icon ~55% of circle, even outer inset */
-  .search-icon-btn.header-announce-search,
-  .search-icon-btn.header-search-btn.header-mobile-icon-btn {
-    flex-shrink: 0;
-    display: inline-flex !important;
+  .header-mobile-user-btn {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 26px !important;
-    height: 26px !important;
-    min-width: 26px !important;
-    min-height: 26px !important;
-    padding: 5px !important;
-    border: none !important;
-    border-radius: 50% !important;
-    background: var(--theme-orange) !important;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28);
-    color: #ffffff;
-    box-sizing: border-box;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: var(--color-wazir-green, #49915e);
+    cursor: pointer;
+    flex-shrink: 0;
   }
 
-  .search-icon-btn.header-announce-search .search-magnify-icon,
-  .search-icon-btn.header-search-btn.header-mobile-icon-btn .search-magnify-icon {
+  .header-mobile-user-btn .v-icon {
+    color: var(--color-wazir-green, #49915e) !important;
+  }
+
+  .header-mobile-user-btn__img {
     display: block;
-    width: 16px;
-    height: 16px;
-    color: #ffffff;
-  }
-
-  /* Logged-in mobile: Deposit / Withdraw + BAL / EXP (reference #navbar row) */
-  .header-wallet-cluster {
-    gap: 8px !important;
-    align-items: flex-start !important;
-    padding: 0 8px !important;
-  }
-
-  .header-action-col {
-    gap: 0 !important;
-  }
-
-  .header-action-btn {
-    width: 80px !important;
-    height: 24px !important;
-    min-width: 80px !important;
-    min-height: 24px !important;
-    font-size: 10.02px !important;
-    font-weight: 700 !important;
-    letter-spacing: normal !important;
-    line-height: 15.03px !important;
-    border-radius: 3.12px !important;
-  }
-
-  .header-bal-exp__row {
-    font-size: 11px !important;
-    font-weight: 400 !important;
-    line-height: 16.5px !important;
-    text-transform: none !important;
-  }
-
-  .header-bal-exp__row .tw-font-semibold {
-    font-weight: 600 !important;
-    color: rgb(202, 134, 243) !important;
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
   }
 }
 

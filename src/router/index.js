@@ -62,6 +62,14 @@ const routes = [
     redirect: "/responsible-gaming",
   },
   {
+    path: "/exclusion-policy",
+    redirect: "/responsible-gaming",
+  },
+  {
+    path: "/terms-and-policy",
+    redirect: "/terms-and-conditions",
+  },
+  {
     path: "/sitemap",
     name: "sitemap",
     component: () => import("../views/Sitemap.vue"),

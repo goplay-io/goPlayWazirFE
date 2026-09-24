@@ -13,9 +13,12 @@ import useDevices from '@/composables/useDevices.js';
 import { useMobileSportsShellChrome } from '@/composables/useMobileSportsShellChrome.js';
 
 const { isMobile } = useDevices();
-const { showSportsShellGifRow } = useMobileSportsShellChrome();
+const { showSportsShellGifRow, showHomeExchangeSection } = useMobileSportsShellChrome();
 
-const showMobileGifRow = computed(() => isMobile.value && showSportsShellGifRow.value);
+/** Reference home has no Hot Games strip under the banner (see GamesTabLayout). */
+const showMobileGifRow = computed(
+  () => isMobile.value && showSportsShellGifRow.value && !showHomeExchangeSection.value,
+);
 </script>
 
 <style scoped>

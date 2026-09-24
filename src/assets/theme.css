@@ -127,6 +127,15 @@
   --layout-guest-middle-width: 860px;
   --layout-guest-rail-width: 350px;
   --layout-guest-rail-gap: 6px;
+  /* WazirWin reference AppLayout — lg:px-12 / xl:px-20 page gutters */
+  --layout-page-pad-lg: 48px;
+  --layout-page-pad-xl: 80px;
+  --layout-sidebar-column-width: 20%;
+  --layout-home-center-width: 54%;
+  --layout-home-rail-width: 26%;
+  --layout-sidebar-wrap-pad-x: 8px;
+  --layout-main-inner-pad-x: 4px;
+  --layout-shell-section-gap: 6px;
   /* Desktop sports/footer pages — reference gap before full-width footer @ scroll end */
   --layout-footer-doc-gap: 32px;
 
@@ -185,6 +194,20 @@
   --color-sport-tab-rail-divider: #333333;
   --color-nav-accent: #3a3a3a;
   --color-nav-accent-strong: #000000;
+  /* WazirWin reference header tokens */
+  --color-header-bg-gradient: linear-gradient(90deg, #1e9146 -13.95%, #2c2c2c 83.91%);
+  --color-wazir-green: #49915e;
+  --color-header-deposit-btn: linear-gradient(90deg, #17c964, #2e924b);
+  --color-header-withdraw-btn: linear-gradient(90deg, #bd3726, #f9b134);
+  --color-header-date-text: #eed1d5;
+  --color-search-input-bg: #333333;
+  --color-search-input-border: #545454;
+  --color-login-input-bg: #23201f;
+  /* WazirWin reference eventNameColor — cards/sidebar on home */
+  --color-event-name: #333333;
+  --color-signup-btn-bg: #48494b;
+  --color-get-id-border: #4ec9ee;
+
   --color-header-bar: #000000;
   --color-navbar-main: #212121;
 
@@ -194,13 +217,172 @@
   --color-header-text: #ffffff;
 
   /* Mobile snackbar — overlays sport-tab row (directly below app bar) */
-  --mobile-header-toolbar-px: 57px;
-  --mobile-header-announce-px: 28px;
+  --mobile-header-toolbar-px: 54px;
+  --mobile-header-announce-px: 32px;
   --mobile-sport-tabs-top-gap: 6px;
   --mobile-sport-tabs-px: 48px;
   --mobile-snackbar-top: calc(
     env(safe-area-inset-top, 0px) + var(--mobile-header-toolbar-px) + var(--mobile-header-announce-px)
   );
+}
+
+@media (max-width: 767.98px) {
+  /*
+   * Reference GamesTabLayout mobile — gap-[6px] bg-loginInputBg, px-1 section inset.
+   */
+  .layout-home-shell-bg .guest-sports-shell__content--reference-home,
+  .layout-home-shell-bg .sports-layout-shell__content--reference-home,
+  .layout-home-shell-bg .guest-sports-shell__content--home-pad,
+  .layout-home-shell-bg .sports-layout-shell__content--home-pad {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 0 4px 8px;
+    box-sizing: border-box;
+  }
+
+  .layout-home-shell-bg .home-reference-middle {
+    gap: 6px;
+  }
+
+  .layout-home-shell-bg .sports-main-banner {
+    margin-bottom: 0;
+    gap: 6px;
+  }
+
+  .layout-home-shell-bg .live-page-container .events-table-section--reference {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Reference GamesTableHeader.tsx mobile */
+  .layout-home-shell-bg .events-table-section--reference .sport-section-header {
+    display: flex;
+    align-items: center;
+    min-height: 34px;
+    height: auto;
+    padding: 0 8px;
+    border: 1px solid rgba(84, 84, 84, 0.6);
+    border-radius: 0;
+    grid-template-columns: unset;
+  }
+
+  .layout-home-shell-bg .events-table-section--reference .sport-section-header__left {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-width: 0;
+    gap: 8px;
+  }
+
+  .layout-home-shell-bg .events-table-section--reference .sport-section-header__brand {
+    gap: 6px;
+    flex: 0 1 auto;
+  }
+
+  .layout-home-shell-bg .events-table-section--reference .sport-section-header__icon-wrap {
+    margin-left: 0;
+  }
+
+  .layout-home-shell-bg .events-table-section--reference .sport-section-header__icon,
+  .layout-home-shell-bg .events-table-section--reference .sport-section-header__icon-wrap img {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  .layout-home-shell-bg .events-table-section--reference .sport-section-header__title {
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+  }
+
+  .layout-home-shell-bg .events-table-section--reference .sport-section-header__filters {
+    display: inline-flex !important;
+    margin-left: auto;
+    margin-right: 0;
+    transform: none;
+    gap: 2px;
+    flex-shrink: 0;
+  }
+
+  .layout-home-shell-bg .events-table-section--reference .sport-section-header__filters .feed-mode-pills {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 2px;
+    flex-shrink: 0;
+  }
+
+  .layout-home-shell-bg .events-table-section--reference .feed-mode-pill {
+    padding: 1px 7px !important;
+    min-height: 0 !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    line-height: 1.5 !important;
+    border-radius: 25px !important;
+    letter-spacing: normal !important;
+    text-transform: uppercase !important;
+  }
+
+  .layout-home-shell-bg .events-table-section--reference .feed-mode-pill--active {
+    background: var(--color-live-virtual-filter-active, #00b181) !important;
+    border-color: var(--color-live-virtual-filter-active, #00b181) !important;
+  }
+
+  /* Reference home mobile table body — monkeydon teams | odds split row */
+  .layout-home-shell-bg .events-table-section--reference .event-row-reference-mobile {
+    height: 48px !important;
+    min-height: 48px !important;
+  }
+
+  .layout-home-shell-bg .events-table-section--reference .event-row-ref-mobile-name {
+    color: rgba(255, 255, 255, 0.95) !important;
+  }
+
+  .layout-home-shell-bg .events-table-section--reference .event-row-ref-mobile-btn,
+  .layout-home-shell-bg .events-table-section--reference .event-row-ref-mobile-btn__price,
+  .layout-home-shell-bg .events-table-section--reference .event-row-ref-mobile-btn__stake {
+    font-family: inherit !important;
+    border-radius: 2px !important;
+    color: #000 !important;
+  }
+
+  .layout-home-shell-bg .events-table-section--reference .event-row-ref-mobile-btn__price {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    line-height: 20px !important;
+  }
+
+  .layout-home-shell-bg .events-table-section--reference .event-row-ref-mobile-btn__stake {
+    font-size: 10px !important;
+    font-weight: 400 !important;
+    line-height: 12px !important;
+  }
+
+  .layout-home-shell-bg .events-table-section--reference .event-row-ref-mobile-btn--back {
+    background: #a7d8fd !important;
+  }
+
+  .layout-home-shell-bg .events-table-section--reference .event-row-ref-mobile-btn--lay {
+    background: #f9c9d4 !important;
+  }
+
+  .layout-home-shell-bg .events-table-section--reference .event-row-ref-mobile-btn--empty {
+    background: #a3a3a3 !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023.98px) {
+  .layout-home-shell-bg .home-game-providers,
+  .layout-home-shell-bg .home-games-section,
+  .layout-home-shell-bg .home-originals-section,
+  .layout-home-shell-bg .home-promotion-actions,
+  .layout-home-shell-bg .live-showcase--reference-home {
+    padding-left: 6px;
+    padding-right: 6px;
+    box-sizing: border-box;
+  }
 }
 
 @media (max-width: 767px) {
@@ -842,6 +1024,488 @@ marquee.tw-text-marquee {
     max-width: var(--bet-slip-rail-width-max);
     margin-left: var(--bet-slip-rail-offset, 6px);
     flex: 0 0 var(--bet-slip-rail-width);
+    box-sizing: border-box;
+  }
+}
+
+/*
+ * WazirWin reference sports shell (AppLayout.tsx):
+ * lg:px-12 xl:px-20 page gutters, 20% sidebar + px-2 wrap, flex-1 main + px-1.
+ */
+/*
+ * WazirWin home shell — AppLayout / GamesTabLayout use bg-loginInputBg (#23201f).
+ * Cards / sidebar desktop use eventNameColor (#333333). !important beats scoped SFC + tw-bg-white.
+ */
+.layout-home-shell-bg {
+  background-color: var(--color-login-input-bg) !important;
+}
+
+.layout-home-shell-bg .layout-header-flow-spacer,
+.layout-home-shell-bg .layout-content-row,
+.layout-home-shell-bg .guest-layout-body,
+.layout-home-shell-bg .guest-layout-body-stack,
+.layout-home-shell-bg .layout-body-stack,
+.layout-home-shell-bg .guest-layout-main,
+.layout-home-shell-bg .layout-v-main.sports-layout-main,
+.layout-home-shell-bg .layout-v-main.sports-layout-main .v-main__wrap,
+.layout-home-shell-bg .layout-app-main-scroll,
+.layout-home-shell-bg #guest-main-scroll,
+.layout-home-shell-bg .layout-page-content,
+.layout-home-shell-bg .sports-layout-shell,
+.layout-home-shell-bg .sports-layout-shell__content,
+.layout-home-shell-bg .guest-sports-shell,
+.layout-home-shell-bg .guest-sports-shell__content,
+.layout-home-shell-bg .live-page-container,
+.layout-home-shell-bg .live-showcase {
+  background-color: var(--color-login-input-bg) !important;
+}
+
+/* Reference Sidebar.tsx: lg:bg-eventNameColor rounded-lg */
+@media (min-width: 1024px) {
+  .layout-sidebar-column .sidebar-desktop {
+    background-color: var(--color-event-name, #333333);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+}
+
+.layout-home-shell-bg .layout-sidebar-column .sidebar-desktop {
+  background-color: var(--color-event-name) !important;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.layout-home-shell-bg .sidebar-content,
+.layout-home-shell-bg .sidebar-tree-wrap,
+.layout-home-shell-bg .sidebar-menu,
+.layout-home-shell-bg .sidebar-menu-body,
+.layout-home-shell-bg .sidebar-menu-scroll,
+.layout-home-shell-bg .sidebar-menu-row,
+.layout-home-shell-bg .sidebar-menu-row:hover:not(.sidebar-menu-row--active):not(.sidebar-menu-row--demo-disabled):not(.sidebar-menu-row--fantasy),
+.layout-home-shell-bg .sidebar-menu-row--active,
+.layout-home-shell-bg .sidebar-casino-submenu,
+.layout-home-shell-bg .sidebar-casino-subrow,
+.layout-home-shell-bg .sidebar-casino-subrow:hover,
+.layout-home-shell-bg .sidebar-casino-subrow--active,
+.layout-home-shell-bg .sidebar-menu-empty {
+  background-color: var(--color-event-name) !important;
+}
+
+.layout-home-shell-bg .sidebar-menu-label,
+.layout-home-shell-bg .sidebar-menu-row--active .sidebar-menu-label,
+.layout-home-shell-bg .sidebar-casino-subrow__label,
+.layout-home-shell-bg .sidebar-casino-subrow--active .sidebar-casino-subrow__label {
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+.layout-home-shell-bg .sidebar-menu-divider {
+  border-top-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+.layout-home-shell-bg .sidebar-casino-subrow {
+  border-bottom-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+/* Reference GamesContainer / GamesTableHeader: bg-eventNameColor card on dark shell */
+.layout-home-shell-bg .live-page-container .events-table-section,
+.layout-home-shell-bg .live-page-container .upcoming-match {
+  background: transparent !important;
+  border-radius: 0;
+  overflow: visible;
+  box-shadow: none;
+}
+
+.layout-home-shell-bg .live-page-container .events-table-section--reference {
+  background: transparent !important;
+  box-shadow: none;
+}
+
+.layout-home-shell-bg .live-page-container .events-table-section__body {
+  background: var(--color-event-name) !important;
+  border: 1px solid rgba(84, 84, 84, 0.6);
+  border-top: 0;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* Reference home: In Play / Upcoming sport row headers (GamesTableHeader style) */
+.layout-home-shell-bg .events-table-section--reference .sport-section-header {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  align-items: center;
+  background: var(--color-event-name, #333333) !important;
+  border: 0;
+  border-top: 1px solid rgba(84, 84, 84, 0.45);
+  border-radius: 0;
+  min-height: 42px;
+  height: auto;
+  padding: 0 12px 0 8px;
+}
+
+.layout-home-shell-bg .events-table-section--reference .sport-section-header__left {
+  grid-column: 1;
+  min-width: 0;
+}
+
+.layout-home-shell-bg .events-table-section--reference .sport-section-header__right {
+  grid-column: 2;
+  width: 100%;
+  justify-content: center;
+}
+
+.layout-home-shell-bg .events-table-section--reference .sport-section-block--first .sport-section-header {
+  border-top: 0;
+}
+
+.layout-home-shell-bg .events-table-section--reference .sport-section-header__icon-wrap {
+  margin-left: 0;
+}
+
+.layout-home-shell-bg .events-table-section--reference .sport-section-header__icon,
+.layout-home-shell-bg .events-table-section--reference .sport-section-header__icon-wrap img {
+  width: 18px !important;
+  height: 18px !important;
+  object-fit: contain;
+}
+
+.layout-home-shell-bg .events-table-section--reference .sport-section-header__title {
+  color: rgba(255, 255, 255, 0.95) !important;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: capitalize;
+}
+
+.layout-home-shell-bg .events-table-section--reference .sport-section-header__filters {
+  transform: none;
+  margin-left: 12px;
+  gap: 4px;
+}
+
+@media (max-width: 1024px) {
+  .layout-home-shell-bg .events-table-section--reference .sport-section-header {
+    display: flex !important;
+    align-items: center;
+    min-height: 34px;
+    height: auto;
+    padding: 0 8px;
+    grid-template-columns: unset !important;
+  }
+
+  .layout-home-shell-bg .events-table-section--reference .sport-section-header__left {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-width: 0;
+    gap: 8px;
+    grid-column: auto;
+  }
+
+  .layout-home-shell-bg .events-table-section--reference .sport-section-header__right {
+    display: none !important;
+  }
+
+  .layout-home-shell-bg .events-table-section--reference .sport-section-header__filters,
+  .layout-home-shell-bg .events-table-section--reference .sport-section-header__filters .feed-mode-pills {
+    display: inline-flex !important;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .layout-home-shell-bg .events-table-section--reference .sport-section-header__filters {
+    margin-left: auto;
+    margin-right: 0;
+    transform: none;
+    gap: 2px;
+  }
+
+  .layout-home-shell-bg .events-table-section--reference .sport-section-header__icon,
+  .layout-home-shell-bg .events-table-section--reference .sport-section-header__icon-wrap img {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  .layout-home-shell-bg .events-table-section--reference .sport-section-header__title {
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    text-transform: none !important;
+  }
+}
+
+.layout-home-shell-bg .events-table-section--reference .sport-section-header .feed-mode-pill {
+  min-height: 20px;
+  padding: 1px 7px;
+  border-color: rgba(255, 255, 255, 0.95);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.layout-home-shell-bg .events-table-section--reference .sport-section-header .feed-mode-pill--active {
+  background: #00b181;
+  border-color: #00b181;
+}
+
+.layout-home-shell-bg .events-table-section--reference .sport-section-header__market-cols {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: normal;
+}
+
+.layout-home-shell-bg .events-table-section--reference .sport-section-header__market-cols span,
+.layout-home-shell-bg .events-table-section--reference .sport-section-header__market-cols span:nth-child(2),
+.layout-home-shell-bg .events-table-section--reference .sport-section-header__market-cols span:nth-child(3) {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.layout-home-shell-bg .recent-wins-section__panel {
+  background: var(--color-event-name) !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+.layout-home-shell-bg .recent-wins-section__row {
+  color: rgba(255, 255, 255, 0.92) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+.layout-home-shell-bg .casino-games-providers__title {
+  color: #ffffff !important;
+}
+
+.layout-home-shell-bg .home-bottom-text {
+  background: var(--color-event-name);
+  border: 1px solid rgba(84, 84, 84, 0.4);
+  border-radius: 10px;
+  padding: 12px 16px;
+  box-sizing: border-box;
+}
+
+.layout-home-shell-bg .home-bottom-text__content,
+.layout-home-shell-bg .home-bottom-text__content p,
+.layout-home-shell-bg .sport-seo-text__content,
+.layout-home-shell-bg .sport-seo-text__content p {
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+.layout-home-shell-bg .home-bottom-text__toggle,
+.layout-home-shell-bg .sport-seo-text__toggle {
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+}
+
+/* Document shell — avoid white html/body/v-app gutters on home */
+body:has(.layout-home-shell-bg),
+.v-application:has(.layout-home-shell-bg) {
+  background-color: var(--color-login-input-bg) !important;
+}
+
+/* Event rows — reference GamesTableData bg-eventNameColor + white text */
+.layout-home-shell-bg .event-row-card {
+  background: var(--color-event-name) !important;
+  border-color: rgba(84, 84, 84, 0.6) !important;
+}
+
+.layout-home-shell-bg .event-row-card:hover {
+  background: #3a3a3a !important;
+}
+
+.layout-home-shell-bg .event-row-name,
+.layout-home-shell-bg .event-row-mobile-name,
+.layout-home-shell-bg .event-row-competition-pill,
+.layout-home-shell-bg .event-row-desktop__date-primary,
+.layout-home-shell-bg .event-row-desktop__date-secondary,
+.layout-home-shell-bg .event-row-time-pill {
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+/* Reference home table body — GamesTableData row layout */
+.layout-home-shell-bg .events-table-section--reference .event-row-card {
+  min-height: 48px !important;
+  height: 48px !important;
+  border-top: 1px solid rgba(103, 103, 103, 0.6) !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-bottom: none !important;
+}
+
+.layout-home-shell-bg .events-table-section--reference .event-row-card:last-child {
+  border-radius: 0;
+}
+
+.layout-home-shell-bg .events-table-section--reference .event-row-reference-desktop,
+.layout-home-shell-bg .events-table-section--reference .event-row-reference-body {
+  height: 48px !important;
+  min-height: 48px !important;
+}
+
+.layout-home-shell-bg .events-table-section--reference .event-row-reference-name {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.layout-home-shell-bg .events-table-section--reference .event-row-reference-score-line {
+  color: #4cae50 !important;
+}
+
+.layout-home-shell-bg .events-table-section--reference .sport-section-block :deep(.event-row-card + .event-row-card) {
+  margin-top: 0 !important;
+}
+
+.layout-home-shell-bg .events-table-section--reference .sport-section-header__meta-spacer {
+  display: none;
+}
+
+.layout-home-shell-bg .events-table-section--reference .sport-section-header__market-cols {
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  flex: 1 1 0 !important;
+}
+
+@media (max-width: 1023px) {
+  .layout-sidebar-column {
+    display: contents;
+  }
+}
+
+@media (min-width: 1024px) {
+  .layout-content-row--reference-pad,
+  .guest-layout-body--reference-pad {
+    padding-left: var(--layout-page-pad-lg);
+    padding-right: var(--layout-page-pad-lg);
+    box-sizing: border-box;
+  }
+
+  .layout-sidebar-column {
+    display: flex;
+    flex: 0 0 var(--layout-sidebar-column-width);
+    width: var(--layout-sidebar-column-width);
+    min-width: 0;
+    padding-left: var(--layout-sidebar-wrap-pad-x);
+    padding-right: var(--layout-sidebar-wrap-pad-x);
+    margin-top: 8px;
+    margin-bottom: 8px;
+    align-self: flex-start;
+    box-sizing: border-box;
+    /* Reference: lg:h-[calc(100dvh-124px)] — parent must have height or tw-h-full children collapse to 0 */
+    height: calc(100dvh - var(--app-header-bar-height, 132px) - 16px);
+    max-height: calc(100dvh - var(--app-header-bar-height, 132px) - 16px);
+    min-height: 0;
+  }
+
+  .layout-sidebar-column .sidebar-desktop {
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    margin-right: 0 !important;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .layout-content-row--reference-pad > .layout-v-main.layout-v-main--desktop,
+  .layout-content-row--reference-pad > .layout-v-main.layout-v-main--footer-doc,
+  .guest-layout-body--reference-pad > .guest-layout-main {
+    flex: 1 1 auto !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+  }
+
+  .layout-content-row--reference-pad .layout-page-content,
+  .guest-layout-body--reference-pad .layout-page-content {
+    padding-left: var(--layout-main-inner-pad-x);
+    padding-right: var(--layout-main-inner-pad-x);
+    box-sizing: border-box;
+  }
+
+  .layout-content-row--reference-pad .sports-layout-shell,
+  .layout-content-row--reference-pad .guest-sports-shell,
+  .guest-layout-body--reference-pad .guest-sports-shell {
+    gap: var(--layout-shell-section-gap);
+  }
+
+  .layout-body-stack--footer-doc .layout-sidebar-column,
+  .guest-layout-body-stack--footer-doc .layout-sidebar-column {
+    position: sticky;
+    top: var(--layout-sticky-top, 0px);
+    height: var(--layout-sticky-pane-h, calc(100vh - var(--layout-sticky-top, 0px)));
+    max-height: var(--layout-sticky-pane-h, calc(100vh - var(--layout-sticky-top, 0px)));
+    z-index: 2;
+    overflow: hidden;
+  }
+}
+
+@media (min-width: 1280px) {
+  .layout-content-row--reference-pad,
+  .guest-layout-body--reference-pad {
+    padding-left: var(--layout-page-pad-xl);
+    padding-right: var(--layout-page-pad-xl);
+  }
+}
+
+/* monkeydon.com home — 20% sidebar + 54% center + 26% bet slip rail */
+@media (min-width: 960px) {
+  .layout-home-shell-bg .layout-content-row--with-right-rail > .layout-v-main.layout-v-main--desktop,
+  .layout-home-shell-bg .layout-content-row--with-right-rail > .layout-v-main.layout-v-main--footer-doc,
+  .layout-home-shell-bg .guest-layout-body--with-right-rail > .guest-layout-main,
+  .layout-home-shell-bg .guest-layout-body--with-right-rail > .guest-layout-main.guest-layout-main--footer-doc {
+    flex: 0 0 var(--layout-home-center-width) !important;
+    width: var(--layout-home-center-width) !important;
+    min-width: 0 !important;
+    max-width: var(--layout-home-center-width) !important;
+  }
+
+  .layout-home-shell-bg .layout-right-rail {
+    flex: 0 0 var(--layout-home-rail-width) !important;
+    width: var(--layout-home-rail-width) !important;
+    min-width: 0 !important;
+    max-width: var(--layout-home-rail-width) !important;
+    margin-left: 0;
+    padding: 8px;
+    box-sizing: border-box;
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+    height: calc(100vh - 110px);
+    max-height: calc(100vh - 110px);
+    gap: 0;
+  }
+
+  .layout-home-shell-bg .layout-right-rail__slip,
+  .layout-home-shell-bg .layout-right-rail__slip--home-ref,
+  .layout-home-shell-bg .layout-right-rail__img,
+  .layout-home-shell-bg .layout-right-rail__whatsapp {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .layout-home-shell-bg .layout-right-rail__slip--home-ref .sports-bet-slip-root {
+    width: 100%;
+    min-width: 0;
+    padding: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    background: #333333;
+    box-sizing: border-box;
+  }
+
+  .layout-home-shell-bg .layout-right-rail__slip--home-ref .bet-slip-tabs__group,
+  .layout-home-shell-bg .layout-right-rail__slip--home-ref .bet-slip-empty-state,
+  .layout-home-shell-bg .layout-right-rail__slip--home-ref .slip-body-card--desktop-selection {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+
+  .layout-home-shell-bg .sports-layout-shell__content--reference-home,
+  .layout-home-shell-bg .guest-sports-shell__content--reference-home {
+    display: flex;
+    flex-direction: column;
+    gap: var(--layout-shell-section-gap);
+    padding-top: 0;
+    padding-bottom: 8px;
     box-sizing: border-box;
   }
 }
@@ -2717,14 +3381,17 @@ code::-webkit-scrollbar-track,
   touch-action: pan-y;
 }
 
-/* App header shell — black primary for logged-in and guest toolbars */
-.v-toolbar.v-app-bar.header-bar,
-.v-toolbar.v-app-bar.guest-app-bar,
-.header-bar .v-toolbar__content,
-.guest-app-bar .v-toolbar__content,
-.header-shell,
-.header-toolbar-row {
-  background: var(--color-header-bg) !important;
-  background-color: var(--color-header-bg) !important;
-  background-image: none !important;
+/* App header shell — desktop uses purple fallback; mobile layering in mobile-header.css */
+@media (min-width: 768px) {
+  .v-toolbar.v-app-bar.header-bar,
+  .v-toolbar.v-app-bar.guest-app-bar,
+  .header-bar .v-toolbar__content,
+  .guest-app-bar .v-toolbar__content,
+  .header-shell,
+  .header-toolbar-row,
+  .guest-toolbar-row {
+    background: var(--color-header-bg-gradient, var(--color-header-bg)) !important;
+    background-color: var(--color-header-bg) !important;
+    background-image: var(--color-header-bg-gradient, none) !important;
+  }
 }

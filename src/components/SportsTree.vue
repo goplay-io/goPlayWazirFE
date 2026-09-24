@@ -1,6 +1,7 @@
 <script setup>
-import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import {
   useEventTypes,
   includeInSportNavMenu,
@@ -17,19 +18,19 @@ import {
 } from '@/composables/useQuickGameTabs.js'
 import { useAuthStore } from '@/stores/auth'
 import { useEventsStore } from '@/stores/events/events'
-import { useFeaturedEventsStore } from '@/stores/events/featuredEvents'
 import useDevices from '@/composables/useDevices.js'
 import { prefetchBetEvent } from '@/composables/useBetEventPrefetch'
 import { compareEventsByOpenDate } from '@/utils/eventStarSort'
+import { AVAILABLE_LOCALES } from '@/constants/locales.js'
 import defaultAvatar from '@/assets/default-avatar.svg'
 import sidebarLanguagesIcon from '@/assets/img/icon/sidebar/languages-sidebar-icon.svg'
 
 const route = useRoute()
 const router = useRouter()
+const { locale } = useI18n()
 const { eventTypes } = useEventTypes()
 const authStore = useAuthStore()
 const eventsStore = useEventsStore()
-const featuredEventsStore = useFeaturedEventsStore()
 const { isMobile } = useDevices()
 
 const props = defineProps({
@@ -82,20 +83,15 @@ const SIDEBAR_UTILITY_ITEMS = [
 ]
 
 const allEvents = computed(() => eventsStore.allEvents)
-const featuredEvents = computed(() => featuredEventsStore.events || [])
-const featuredIndex = ref(0)
-const featuredProgress = ref(0)
-const FEATURED_SLIDE_MS = 5000
-const FEATURED_TICK_MS = 100
-let featuredAutoplayTimer = null
-const featuredGamesCountLabel = computed(() => {
-  if (!featuredEvents.value.length) return '0 / 0'
-  return `${featuredIndex.value + 1} / ${featuredEvents.value.length}`
+
+const selectedLanguageLabel = computed(() => {
+  const match = AVAILABLE_LOCALES.find((entry) => entry.code === locale.value)
+  return match?.value || 'English'
 })
-const currentFeaturedEvent = computed(() => {
-  if (!featuredEvents.value.length) return null
-  return featuredEvents.value[featuredIndex.value] || featuredEvents.value[0]
-})
+
+function usesMobileSidebarIcons() {
+  return props.mobileDrawer
+}
 
 function competitionGroupKey(ev) {
   const n = ev?.competition_name
@@ -161,11 +157,11 @@ const sidebarMenuItems = computed(() => {
     }))
 
   const sportItems = insertCasinoTabAfterQuickGames(insertQuickGameTabsAfterTennis(sorted), CASINO_MENU_ITEM)
-  const items = [...SIDEBAR_HOME_LINKS, ...sportItems]
   if (props.mobileDrawer) {
-    return [SIDEBAR_HOME_ITEM, ...items]
+    return [SIDEBAR_HOME_ITEM, ...SIDEBAR_HOME_LINKS, ...sportItems]
   }
-  return items
+  // Reference desktop Sidebar.tsx — flat sports/casino list (no Inplay/Upcoming header links).
+  return sportItems
 })
 
 const visibleSidebarMenuItems = computed(() => sidebarMenuItems.value)
@@ -444,92 +440,6 @@ function eventDisplayName(ev) {
   return ev.name ? String(ev.name) : ''
 }
 
-function featuredGameTitle(ev) {
-  const sport = String(ev?.event_type_name || '').trim()
-  const comp = String(ev?.competition_name || '').trim()
-  if (sport && comp) return `${sport} : ${comp}`
-  if (comp) return comp
-  if (sport) return sport
-  return eventDisplayName(ev)
-}
-
-function featuredTeamNames(ev) {
-  const home = ev?.home_team || ev?.team_home
-  const away = ev?.away_team || ev?.team_away
-  if (home || away) {
-    return { teamA: String(home || 'TBD'), teamB: String(away || '') }
-  }
-  const name = String(ev?.event_name || ev?.name || '')
-  const parts = name.split(/\s+v(?:s)?\.?\s+/i)
-  if (parts.length >= 2) {
-    return { teamA: parts[0].trim(), teamB: parts.slice(1).join(' v ').trim() }
-  }
-  return { teamA: name || eventDisplayName(ev) || 'TBD', teamB: '' }
-}
-
-function isFeaturedInPlay(ev) {
-  return ev?.in_play === true || ev?.in_play === 1 || ev?.in_play === '1'
-}
-
-function featuredStatusLabel(ev) {
-  return isFeaturedInPlay(ev) ? 'Inplay' : 'Upcoming'
-}
-
-function featuredGameStatusBadges(ev) {
-  const badges = []
-  if (ev?.fancy_active === true || ev?.fancy_active === 1) badges.push('F')
-  if (ev?.bm_active === true || ev?.bm_active === 1) badges.push('B')
-  return badges
-}
-
-function goToPrevFeaturedGame() {
-  if (!featuredEvents.value.length) return
-  featuredIndex.value = (featuredIndex.value - 1 + featuredEvents.value.length) % featuredEvents.value.length
-  restartFeaturedAutoplay()
-}
-
-function goToNextFeaturedGame() {
-  if (!featuredEvents.value.length) return
-  featuredIndex.value = (featuredIndex.value + 1) % featuredEvents.value.length
-  restartFeaturedAutoplay()
-}
-
-function openFeaturedGame(ev) {
-  if (!ev) return
-  navigateToEvent(ev.event_id ?? ev.id)
-}
-
-function stopFeaturedAutoplay() {
-  if (featuredAutoplayTimer) {
-    clearInterval(featuredAutoplayTimer)
-    featuredAutoplayTimer = null
-  }
-}
-
-function startFeaturedAutoplay() {
-  stopFeaturedAutoplay()
-  if (featuredEvents.value.length <= 1) {
-    featuredProgress.value = featuredEvents.value.length ? 100 : 0
-    return
-  }
-
-  featuredProgress.value = 0
-  const step = (FEATURED_TICK_MS / FEATURED_SLIDE_MS) * 100
-  featuredAutoplayTimer = setInterval(() => {
-    const next = featuredProgress.value + step
-    if (next >= 100) {
-      featuredProgress.value = 0
-      featuredIndex.value = (featuredIndex.value + 1) % featuredEvents.value.length
-      return
-    }
-    featuredProgress.value = next
-  }, FEATURED_TICK_MS)
-}
-
-function restartFeaturedAutoplay() {
-  startFeaturedAutoplay()
-}
-
 function onSportRowClick(item) {
   if (isSidebarHomeItem(item)) {
     navigateSidebarHome()
@@ -542,7 +452,12 @@ function onSportRowClick(item) {
   }
 
   if (isCasinoMenuItem(item)) {
-    casinoExpanded.value = !casinoExpanded.value
+    if (props.mobileDrawer) {
+      casinoExpanded.value = !casinoExpanded.value
+      return
+    }
+    if (route.path !== '/casino') router.push('/casino')
+    emit('navigate')
     return
   }
 
@@ -622,9 +537,6 @@ async function loadData() {
   try {
     isLoading.value = true
     await eventsStore.waitForEvents()
-    if (!featuredEventsStore.events?.length) {
-      featuredEventsStore.setFromAllEvents(eventsStore.allEvents)
-    }
     dataLoaded.value = true
   } catch (e) {
     console.error('SportsTree: failed to load events', e)
@@ -662,17 +574,6 @@ function openLanguagesMenu() {
 }
 
 onMounted(loadData)
-watch(
-  () => featuredEvents.value.length,
-  () => {
-    if (featuredIndex.value >= featuredEvents.value.length) {
-      featuredIndex.value = 0
-    }
-    startFeaturedAutoplay()
-  },
-  { immediate: true }
-)
-onUnmounted(stopFeaturedAutoplay)
 </script>
 
 <template>
@@ -685,63 +586,6 @@ onUnmounted(stopFeaturedAutoplay)
     </div>
 
     <div v-else class="sidebar-menu-body tw-flex tw-flex-col tw-flex-1 tw-min-h-0">
-      <section v-if="currentFeaturedEvent && !props.mobileDrawer" class="sidebar-featured">
-        <div class="sidebar-featured__header">
-          <span class="sidebar-featured__title">Featured games</span>
-          <div class="sidebar-featured__controls">
-            <button type="button" class="sidebar-featured__nav-btn" @click="goToPrevFeaturedGame" aria-label="Previous featured game">
-              <img src="/svg/featured-arrow.svg?v=2" alt="" class="sidebar-featured__nav-icon sidebar-featured__nav-icon--prev" />
-            </button>
-            <span class="sidebar-featured__count">{{ featuredGamesCountLabel }}</span>
-            <button type="button" class="sidebar-featured__nav-btn sidebar-featured__nav-btn--next" @click="goToNextFeaturedGame" aria-label="Next featured game">
-              <img src="/svg/featured-arrow.svg?v=2" alt="" class="sidebar-featured__nav-icon sidebar-featured__nav-icon--next" />
-            </button>
-          </div>
-        </div>
-
-        <div
-          class="sidebar-featured__viewport"
-          @click="openFeaturedGame(currentFeaturedEvent)"
-        >
-          <div
-            class="sidebar-featured__track"
-            :style="{ transform: `translateX(-${featuredIndex * 100}%)` }"
-          >
-            <div
-              v-for="ev in featuredEvents"
-              :key="ev.event_id ?? ev.id"
-              class="sidebar-featured__slide"
-            >
-              <div class="sidebar-featured__top">
-                <div class="sidebar-featured__match-title">{{ featuredGameTitle(ev) }}</div>
-                <div class="sidebar-featured__status-col">
-                  <span
-                    class="sidebar-featured__status"
-                    :class="isFeaturedInPlay(ev) ? 'sidebar-featured__status--inplay' : 'sidebar-featured__status--upcoming'"
-                  >{{ featuredStatusLabel(ev) }}</span>
-                  <div v-if="featuredGameStatusBadges(ev).length" class="sidebar-featured__badges">
-                    <span
-                      v-for="badge in featuredGameStatusBadges(ev)"
-                      :key="badge"
-                      class="sidebar-featured__badge"
-                    >{{ badge }}</span>
-                  </div>
-                </div>
-              </div>
-              <div class="sidebar-featured__teams">
-                <template v-for="evTeams in [featuredTeamNames(ev)]" :key="`${ev.event_id ?? ev.id}-teams`">
-                  <div class="sidebar-featured__team">{{ evTeams.teamA }}</div>
-                  <div v-if="evTeams.teamB" class="sidebar-featured__team">{{ evTeams.teamB }}</div>
-                </template>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="sidebar-featured__accent">
-          <div class="sidebar-featured__accent-bar" :style="{ width: `${featuredProgress}%` }" />
-        </div>
-      </section>
-
       <div v-if="props.mobileDrawer && showLoggedUserBar" class="sidebar-mobile-chrome">
         <div class="sidebar-mobile-search">
           <input
@@ -782,6 +626,7 @@ onUnmounted(stopFeaturedAutoplay)
 
     <div class="sidebar-menu-scroll tw-flex-1 tw-overflow-y-auto">
       <template v-for="item in visibleSidebarMenuItems" :key="item.id">
+        <div class="sidebar-menu-row-wrap">
         <div
           class="sidebar-menu-row"
           :class="{
@@ -791,34 +636,35 @@ onUnmounted(stopFeaturedAutoplay)
           @click="onSportRowClick(item)"
         >
           <img
-            v-if="getSidebarIconSrc(item, isMobile || props.mobileDrawer)"
-            :src="getSidebarIconSrc(item, isMobile || props.mobileDrawer)"
+            v-if="getSidebarIconSrc(item, usesMobileSidebarIcons())"
+            :src="getSidebarIconSrc(item, usesMobileSidebarIcons())"
             alt=""
             class="sidebar-menu-icon sidebar-menu-icon--sport sidebar-menu-icon--img"
             :class="{
               'sidebar-menu-icon--invert': shouldInvertMobileSidebarIcon(item),
-              'sidebar-menu-icon--wide': isWideSidebarIcon(item)
+              'sidebar-menu-icon--wide': usesMobileSidebarIcons() && isWideSidebarIcon(item)
             }"
           />
           <component
             :is="item.icon"
             v-else-if="item.icon"
             class="sidebar-menu-icon sidebar-menu-icon--sport"
-            :class="{ 'sidebar-menu-icon--wide': isWideSidebarIcon(item) }"
+            :class="{ 'sidebar-menu-icon--wide': usesMobileSidebarIcons() && isWideSidebarIcon(item) }"
           />
           <div v-else class="sidebar-menu-icon-placeholder" aria-hidden="true" />
           <span class="sidebar-menu-label">{{ item.name }}</span>
           <span v-if="item.isNew && !isMenuItemActive(item)" class="sidebar-new-badge">NEW</span>
           <v-icon
-            v-if="isCasinoMenuItem(item)"
+            v-if="isCasinoMenuItem(item) && props.mobileDrawer"
             size="16"
             class="sidebar-menu-chevron sidebar-menu-chevron--accordion"
             :class="{ 'sidebar-menu-chevron--open': casinoExpanded }"
           >mdi-chevron-down</v-icon>
         </div>
+        </div>
 
         <div
-          v-if="isCasinoMenuItem(item) && casinoExpanded"
+          v-if="isCasinoMenuItem(item) && casinoExpanded && props.mobileDrawer"
           class="sidebar-casino-submenu"
           :class="{ 'sidebar-casino-submenu--mobile': props.mobileDrawer }"
         >
@@ -837,58 +683,70 @@ onUnmounted(stopFeaturedAutoplay)
           </div>
         </div>
 
-        <hr v-if="!props.mobileDrawer" class="sidebar-menu-divider" />
       </template>
 
       <div v-if="!visibleSidebarMenuItems.length && !showLoggedUserBar" class="sidebar-menu-empty">
         No sports available
       </div>
 
-      <template v-for="item in SIDEBAR_UTILITY_ITEMS" :key="item.id">
+      <template v-if="props.mobileDrawer">
+        <template v-for="item in SIDEBAR_UTILITY_ITEMS" :key="item.id">
+          <div class="sidebar-menu-row-wrap">
+            <div
+              class="sidebar-menu-row"
+              :class="{ 'sidebar-menu-row--active': isSidebarUtilityActive(item) }"
+              @click="navigateSidebarUtilityItem(item)"
+            >
+              <img
+                v-if="getSidebarIconSrc(item, true)"
+                :src="getSidebarIconSrc(item, true)"
+                alt=""
+                class="sidebar-menu-icon sidebar-menu-icon--sport sidebar-menu-icon--img"
+              />
+              <div v-else class="sidebar-menu-icon-placeholder" aria-hidden="true" />
+              <span class="sidebar-menu-label">{{ item.name }}</span>
+            </div>
+          </div>
+        </template>
+      </template>
+
+      <div class="sidebar-menu-row-wrap">
         <div
           class="sidebar-menu-row"
-          :class="{ 'sidebar-menu-row--active': isSidebarUtilityActive(item) }"
-          @click="navigateSidebarUtilityItem(item)"
+          :class="{ 'sidebar-menu-row--active': props.languagesActive }"
+          @click="openLanguagesMenu"
+        >
+          <v-icon
+            v-if="!props.mobileDrawer"
+            size="20"
+            class="sidebar-menu-icon sidebar-menu-icon--globe"
+          >mdi-web</v-icon>
+          <img
+            v-else
+            :src="sidebarLanguagesIcon"
+            alt=""
+            class="sidebar-menu-icon sidebar-menu-icon--sport sidebar-menu-icon--img sidebar-menu-icon--languages"
+          />
+          <span class="sidebar-menu-label">{{ props.mobileDrawer ? 'Languages' : selectedLanguageLabel }}</span>
+        </div>
+      </div>
+
+      <div
+        v-if="props.mobileDrawer"
+        class="sidebar-menu-row-wrap"
+      >
+        <div
+          class="sidebar-menu-row sidebar-menu-row--affiliate"
+          :class="{ 'sidebar-menu-row--active': isAffiliateActive() }"
+          @click="navigateToAffiliate"
         >
           <img
-            v-if="getSidebarIconSrc(item, isMobile || props.mobileDrawer)"
-            :src="getSidebarIconSrc(item, isMobile || props.mobileDrawer)"
+            :src="getSidebarIconSrc({ id: 'sidebar-affiliate' }, true)"
             alt=""
             class="sidebar-menu-icon sidebar-menu-icon--sport sidebar-menu-icon--img"
           />
-          <div v-else class="sidebar-menu-icon-placeholder" aria-hidden="true" />
-          <span class="sidebar-menu-label">{{ item.name }}</span>
+          <span class="sidebar-menu-label">Become an Affiliate</span>
         </div>
-        <hr v-if="!props.mobileDrawer" class="sidebar-menu-divider" />
-      </template>
-
-      <div
-        v-if="!props.mobileDrawer"
-        class="sidebar-menu-row"
-        :class="{ 'sidebar-menu-row--active': props.languagesActive }"
-        @click="openLanguagesMenu"
-      >
-        <img
-          :src="sidebarLanguagesIcon"
-          alt=""
-          class="sidebar-menu-icon sidebar-menu-icon--sport sidebar-menu-icon--img sidebar-menu-icon--languages"
-        />
-        <span class="sidebar-menu-label">Languages</span>
-        <v-icon size="16" class="sidebar-menu-chevron">mdi-chevron-right</v-icon>
-      </div>
-      <hr v-if="!props.mobileDrawer" class="sidebar-menu-divider" />
-
-      <div
-        class="sidebar-menu-row sidebar-menu-row--affiliate"
-        :class="{ 'sidebar-menu-row--active': isAffiliateActive() }"
-        @click="navigateToAffiliate"
-      >
-        <img
-          :src="getSidebarIconSrc({ id: 'sidebar-affiliate' }, isMobile || props.mobileDrawer)"
-          alt=""
-          class="sidebar-menu-icon sidebar-menu-icon--sport sidebar-menu-icon--img"
-        />
-        <span class="sidebar-menu-label">Become an Affiliate</span>
       </div>
     </div>
     </div>
@@ -943,13 +801,18 @@ onUnmounted(stopFeaturedAutoplay)
 }
 
 .sidebar-menu-scroll {
-  --sidebar-pad-x: 20px;
+  --sidebar-pad-x: 24px;
   --sidebar-pad-y: 16px;
   --sidebar-icon-w: 20px;
-  --sidebar-row-gap: 16px;
+  --sidebar-row-gap: 12px;
   --sidebar-text-step: 18px;
   --sidebar-label-inset: calc(var(--sidebar-pad-x) + var(--sidebar-icon-w) + var(--sidebar-row-gap));
-  background-color: #f3f4f6;
+  background-color: var(--color-event-name, #333333);
+}
+
+/* Reference Sidebar.tsx: border-white border-b-[0.2px] wrapper per row */
+.sidebar-menu-row-wrap {
+  border-bottom: 0.2px solid rgba(255, 255, 255, 0.35);
 }
 
 /* Desktop sidebar: hide scrollbar while keeping scroll */
@@ -983,41 +846,40 @@ onUnmounted(stopFeaturedAutoplay)
   gap: var(--sidebar-row-gap);
   padding: var(--sidebar-pad-y) var(--sidebar-pad-x);
   height: auto;
-  min-height: 54.5px;
+  min-height: 0;
   box-sizing: border-box;
   border-bottom: none;
-  background-color: #f3f4f6;
+  background-color: var(--color-event-name, #333333);
   cursor: pointer;
   user-select: none;
 }
 
-/* Match reference: <hr class="mx-4"> → 1px #e5e7eb inset 16px */
+/* Reference Sidebar.tsx uses border-white border-b-[0.2px] per row — hr hidden on desktop */
 .sidebar-menu-divider {
-  display: block;
+  display: none;
   width: auto;
   height: 0;
-  margin: 0 16px;
+  margin: 0;
   padding: 0;
   border: 0;
-  border-top: 1px solid #e5e7eb;
   background: transparent;
 }
 
 .sidebar-menu-row:hover:not(.sidebar-menu-row--active):not(.sidebar-menu-row--demo-disabled):not(.sidebar-menu-row--fantasy) {
-  background-color: #f3f4f6;
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 .sidebar-menu-row:hover:not(.sidebar-menu-row--active):not(.sidebar-menu-row--demo-disabled):not(.sidebar-menu-row--fantasy) .sidebar-menu-label {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .sidebar-menu-row--active {
-  background-color: #f3f4f6;
+  background-color: var(--color-event-name, #333333);
 }
 
 .sidebar-menu-row--active .sidebar-menu-label {
-  color: #374151;
-  font-weight: 400;
+  color: var(--color-wazir-green, #49915e);
+  font-weight: 600;
 }
 
 .sidebar-menu-row--affiliate {
@@ -1140,6 +1002,13 @@ onUnmounted(stopFeaturedAutoplay)
   height: 20px;
 }
 
+.sidebar-menu-icon--globe {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: #ffffff !important;
+}
+
 .sidebar-menu-icon-placeholder {
   flex-shrink: 0;
   width: 20px;
@@ -1149,12 +1018,12 @@ onUnmounted(stopFeaturedAutoplay)
 .sidebar-menu-label {
   flex: 1;
   min-width: 0;
-  font-size: 15px;
-  line-height: 22.5px;
-  color: #374151;
-  font-weight: 400;
-  letter-spacing: 0.025em;
-  transition: font-size 0.15s ease;
+  font-size: 14px;
+  line-height: 1;
+  color: #ffffff;
+  font-weight: 600;
+  letter-spacing: normal;
+  transition: font-size 0.15s ease, color 0.15s ease;
 }
 
 .sidebar-submenu-label {
@@ -1176,7 +1045,7 @@ onUnmounted(stopFeaturedAutoplay)
 .sidebar-menu-chevron {
   margin-left: auto;
   flex-shrink: 0;
-  color: #5b2a7d !important;
+  color: rgba(255, 255, 255, 0.55) !important;
 }
 
 .sidebar-menu-chevron--accordion {
@@ -1190,47 +1059,47 @@ onUnmounted(stopFeaturedAutoplay)
 .sidebar-casino-submenu {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   width: 100%;
-  padding: 0 32px;
+  padding: 0;
   box-sizing: border-box;
-  background-color: #f3f4f6;
-  color: #374151;
+  background-color: var(--color-event-name, #333333);
+  color: #ffffff;
 }
 
 .sidebar-casino-subrow {
   display: flex;
   align-items: center;
   width: 100%;
-  gap: 16px;
-  padding: 12px 20px;
+  gap: 12px;
+  padding: 12px 24px 12px 56px;
   box-sizing: border-box;
-  background-color: #f3f4f6;
-  color: #374151;
-  border-bottom: 1px solid #e5e7eb;
+  background-color: var(--color-event-name, #333333);
+  color: #ffffff;
+  border-bottom: 0.2px solid rgba(255, 255, 255, 0.2);
   cursor: pointer;
   user-select: none;
 }
 
 .sidebar-casino-subrow--last {
-  border-bottom: none;
+  border-bottom: 0.2px solid rgba(255, 255, 255, 0.2);
 }
 
 .sidebar-casino-subrow:hover {
-  background-color: #f3f4f6;
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 .sidebar-casino-subrow:hover .sidebar-casino-subrow__label {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .sidebar-casino-subrow--active {
-  background-color: #f3f4f6;
+  background-color: var(--color-event-name, #333333);
 }
 
 .sidebar-casino-subrow--active .sidebar-casino-subrow__label {
-  color: #374151;
-  font-weight: 400;
+  color: var(--color-wazir-green, #49915e);
+  font-weight: 600;
 }
 
 .sidebar-casino-subrow__icon {
@@ -1242,11 +1111,11 @@ onUnmounted(stopFeaturedAutoplay)
 
 .sidebar-casino-subrow__label {
   flex: 0 1 auto;
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 22.5px;
-  letter-spacing: 0.025em;
-  color: #374151;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: normal;
+  color: #ffffff;
   text-align: left;
   transition: font-size 0.15s ease;
 }
@@ -1266,228 +1135,11 @@ onUnmounted(stopFeaturedAutoplay)
 }
 
 .sidebar-menu-empty {
-  padding: 12px 16px;
+  padding: 12px 24px;
   text-align: center;
   font-size: 12px;
-  color: #6b7280;
-  background: #ffffff;
-}
-
-.sidebar-featured {
-  flex-shrink: 0;
-  background: #ffffff;
-}
-
-.sidebar-featured__header {
-  display: flex;
-  align-items: stretch;
-  width: 100%;
-  height: 33px;
-  padding: 0;
-  box-sizing: border-box;
-  background: #360952;
-  color: #ffffff;
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 19.5px;
-  text-transform: uppercase;
-  border-radius: 4px 4px 0 0;
-}
-
-.sidebar-featured__title {
-  margin: auto 12px;
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 19.5px;
-  letter-spacing: normal;
-  color: #ffffff;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.sidebar-featured__controls {
-  display: flex;
-  align-items: stretch;
-  margin-left: auto;
-}
-
-.sidebar-featured__nav-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 12px;
-  height: 33px;
-  padding: 0;
-  border: none;
-  background: transparent;
-  color: #ffffff;
-  cursor: pointer;
-  transition: transform 0.15s ease;
-}
-
-.sidebar-featured__nav-btn:hover {
-  transform: scale(1.25);
-}
-
-.sidebar-featured__nav-btn--next {
-  margin-right: 4px;
-}
-
-.sidebar-featured__nav-icon {
-  display: block;
-  width: 12px;
-  height: 8px;
-}
-
-.sidebar-featured__nav-icon--prev {
-  transform: rotate(-90deg);
-}
-
-.sidebar-featured__nav-icon--next {
-  transform: rotate(90deg);
-}
-
-.sidebar-featured__count {
-  margin: auto 8px;
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 19.5px;
-  letter-spacing: normal;
-  color: #ffffff;
-  text-transform: uppercase;
-  white-space: nowrap;
-  text-align: center;
-}
-
-.sidebar-featured__viewport {
-  position: relative;
-  width: 100%;
-  height: 142px;
-  overflow: hidden;
-  cursor: pointer;
-  background: #111111 center / cover no-repeat url('/featured-games-bg.png');
-}
-
-.sidebar-featured__track {
-  display: flex;
-  height: 100%;
-  width: 100%;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform;
-}
-
-.sidebar-featured__slide {
-  flex: 0 0 100%;
-  width: 100%;
-  min-width: 100%;
-  height: 141px;
-  margin-top: 1px;
-  box-sizing: border-box;
-  border-radius: 0 0 4px 4px;
-  display: flex;
-  flex-direction: column;
-  color: #ffffff;
-}
-
-.sidebar-featured__top {
-  display: inline-flex;
-  width: 100%;
-  padding: 12px;
-  box-sizing: border-box;
-  gap: 8px;
-}
-
-.sidebar-featured__match-title {
-  flex: 1;
-  min-width: 0;
-  margin: 8px 4px 0;
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 1.25;
-  color: #ffffff;
-}
-
-.sidebar-featured__status-col {
-  flex-shrink: 0;
-  margin-left: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.sidebar-featured__status {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 24px;
-  box-sizing: border-box;
-  border-radius: 2.83px;
-  font-size: 10px;
-  font-weight: 700;
-  line-height: 1;
-  white-space: nowrap;
-}
-
-.sidebar-featured__status--inplay {
-  padding: 6px 17px 6px 16px;
-  background: #360952;
-  color: #ffffff;
-}
-
-.sidebar-featured__status--upcoming {
-  padding: 6px 8px;
-  background: #ebecef;
-  color: #360952;
-}
-
-.sidebar-featured__badges {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  margin: 0 2px;
-}
-
-.sidebar-featured__badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 15.56px;
-  height: 14.15px;
-  margin-top: 4px;
-  border-radius: 2px;
-  background: #ffffff;
-  color: #000000;
-  font-size: 8px;
-  font-weight: 700;
-  line-height: 1;
-}
-
-.sidebar-featured__teams {
-  width: 100%;
-  padding: 0 16px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.sidebar-featured__team {
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 18px;
-  color: #d4d4d4;
-}
-
-.sidebar-featured__accent {
-  width: 100%;
-  height: 2px;
-  background: #dddddd;
-}
-
-.sidebar-featured__accent-bar {
-  height: 100%;
-  background: #f3b20e;
-  transition: width 0.1s linear;
+  color: rgba(255, 255, 255, 0.7);
+  background: var(--color-event-name, #333333);
 }
 
 .sidebar-menu-empty--nested {
@@ -1499,6 +1151,40 @@ onUnmounted(stopFeaturedAutoplay)
   .sidebar-submenu-label--event {
     font-size: 11px;
   }
+}
+
+/* Desktop — WazirWin reference Sidebar.tsx: lg:bg-eventNameColor rounded-lg */
+.sidebar-menu:not(.sidebar-menu--mobile-drawer) {
+  background: var(--color-event-name, #333333);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.sidebar-menu:not(.sidebar-menu--mobile-drawer) .sidebar-menu-body {
+  background: var(--color-event-name, #333333);
+}
+
+.sidebar-menu:not(.sidebar-menu--mobile-drawer) .sidebar-menu-row {
+  padding: 16px 24px;
+  gap: 12px;
+}
+
+.sidebar-menu:not(.sidebar-menu--mobile-drawer) .sidebar-menu-label {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: normal;
+}
+
+.sidebar-menu:not(.sidebar-menu--mobile-drawer) .sidebar-menu-icon,
+.sidebar-menu:not(.sidebar-menu--mobile-drawer) .sidebar-menu-icon--img,
+.sidebar-menu:not(.sidebar-menu--mobile-drawer) .sidebar-menu-icon-placeholder {
+  width: 20px;
+  height: 20px;
+}
+
+.sidebar-menu:not(.sidebar-menu--mobile-drawer) .sidebar-menu-row:hover:not(.sidebar-menu-row--active):not(.sidebar-menu-row--demo-disabled):not(.sidebar-menu-row--fantasy) .sidebar-menu-label {
+  font-size: 14px;
 }
 
 /* Mobile purple drawer (ZU AppLayout / SideMenu) */
@@ -1627,6 +1313,11 @@ onUnmounted(stopFeaturedAutoplay)
   line-height: 22.5px;
   letter-spacing: 0.375px;
   text-transform: capitalize;
+}
+
+.sidebar-menu--mobile-drawer .sidebar-menu-row--active .sidebar-menu-label {
+  color: #ffffff;
+  font-weight: 400;
 }
 
 .sidebar-menu--mobile-drawer .sidebar-menu-row--affiliate .sidebar-menu-label {

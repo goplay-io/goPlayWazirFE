@@ -160,7 +160,7 @@ function isSportItemActive(item) {
   width: 100%;
   margin-bottom: 6px;
   margin-top: 10px;
-  background: #ffffff;
+  background: transparent;
   border-radius: 4px;
   overflow: hidden;
 }
@@ -172,7 +172,7 @@ function isSportItemActive(item) {
   margin: 0;
   padding: 4px 0px 0;
   list-style: none;
-  background: #ffffff;
+  background: transparent;
 }
 
 .home-exchange-tabs__item {

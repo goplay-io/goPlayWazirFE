@@ -6,9 +6,12 @@
   -->
   <div
     class="tw-bg-theme-background tw-flex tw-flex-col"
-    :class="(useMobileBodyScroll || showSiteFooter)
-      ? 'tw-min-h-screen'
-      : 'tw-h-full tw-max-h-full tw-overflow-hidden'"
+    :class="[
+      (useMobileBodyScroll || showSiteFooter)
+        ? 'tw-min-h-screen'
+        : 'tw-h-full tw-max-h-full tw-overflow-hidden',
+      { 'layout-home-shell-bg': showHomeExchangeSection },
+    ]"
   >
     <!-- Full Width Header (mobile casino game uses in-page bar only — reference has no app header) -->
     <Header
@@ -37,19 +40,29 @@
       } : undefined"
     >
       <div
-        class="layout-content-row tw-flex tw-min-w-0 tw-gap-0 tw-bg-white"
+        class="layout-content-row tw-flex tw-min-w-0 tw-gap-0"
         :class="[
+          showHomeExchangeSection ? '' : 'tw-bg-white',
           useMobileBodyScroll ? 'layout-content-row--mobile-bet' : '',
           showSiteFooter
             ? 'layout-content-row--footer-doc'
             : 'tw-flex-1 tw-min-h-0 tw-overflow-hidden',
+          useReferenceSportsLayout ? 'layout-content-row--reference-pad' : '',
           showLayoutRightRail ? 'layout-content-row--with-right-rail' : '',
           isFullWidthPage ? 'layout-content-row--full-width' : '',
         ]"
       >
-      <!-- Sidebar: desktop = in-flow column; mobile = overlay drawer -->
-      <Sidebar v-if="props.sidebar && !isClearScreenPage && !isCasinoListingPage && !isFullWidthPage" v-model="sidebarOpen" :compact="false"
-        :top-offset="mobileSidebarTopOffsetPx" />
+      <!-- Sidebar: reference 20% column (lg+) + mobile overlay drawer -->
+      <div
+        v-if="props.sidebar && !isClearScreenPage && !isCasinoListingPage && !isFullWidthPage"
+        class="layout-sidebar-column"
+      >
+        <Sidebar
+          v-model="sidebarOpen"
+          :compact="false"
+          :top-offset="mobileSidebarTopOffsetPx"
+        />
+      </div>
 
       <!-- Main Content Area -->
       <!-- Desktop: header spacer already reserves space for fixed v-app-bar; Vuetify --v-layout-top on v-main
@@ -101,13 +114,16 @@
               :class="{ 'sports-layout-shell--single-col': !isMobile && (isBetPage || isMultiMarketPage || !showDesktopSportsShellRail) }">
               <div
                 class="sports-layout-shell__content"
-                :class="{ 'sports-layout-shell__content--home-pad': showHomeExchangeSection }"
+                :class="{
+                  'sports-layout-shell__content--home-pad': showHomeExchangeSection,
+                  'sports-layout-shell__content--reference-home': showHomeExchangeSection,
+                }"
               >
                 <SportsMainBanner v-if="isSportsShellPage && showSportsShellMainBanner && !isMultiMarketPage" />
+                <HomeReferenceMiddleSections v-if="showHomeExchangeSection && !isMultiMarketPage" />
                 <SportsSharedGifRow
-                  v-if="isSportsShellPage && showSportsShellGifRow && !isMultiMarketPage && !isMobile"
+                  v-if="isSportsShellPage && showSportsShellGifRow && !isMultiMarketPage && !isMobile && !showHomeExchangeSection"
                 />
-                <HomeExchangeSection v-if="showHomeExchangeSection && !isMultiMarketPage" />
                 <div v-if="isSportsShellPage && isMobile && showMobileNewLaunchInShell"
                   class="layout-mobile-new-launch-wrap md:tw-hidden">
                   <NewLaunchGames />
@@ -138,6 +154,8 @@
       <LayoutRightRail
         v-if="showLayoutRightRail"
         :sticky-footer-doc="showSiteFooter"
+        :open-bets-use-unsettled="showHomeExchangeSection"
+        :home-reference-layout="showHomeExchangeSection"
       />
       </div>
 
@@ -161,7 +179,6 @@
 <script setup>
 import Header from './Header.vue'
 import Sidebar from './Sidebar.vue'
-import TopNavigation from './TopNavigation.vue'
 import FloatingBonusButton from '../components/FloatingBonusButton.vue'
 import { useWalletRefresh } from '@/composables/useWalletRefresh.js'
 import { useUIStore } from '@/stores/ui.js'
@@ -173,9 +190,9 @@ import Footer from '@/components/Footer.vue'
 import DesktopCustomerSupportFloat from '@/components/DesktopCustomerSupportFloat.vue'
 import HomeMobileEndSections from '@/components/home/HomeMobileEndSections.vue'
 import MobileBottomNav from '@/components/MobileBottomNav.vue'
+import HomeReferenceMiddleSections from '@/components/home/HomeReferenceMiddleSections.vue'
 import SportsMainBanner from '@/components/sports/SportsMainBanner.vue'
 import SportsSharedGifRow from '@/components/sports/SportsSharedGifRow.vue'
-import HomeExchangeSection from '@/components/sports/HomeExchangeSection.vue'
 import SportsSharedRail from '@/components/sports/SportsSharedRail.vue'
 import LayoutRightRail from '@/components/layout/LayoutRightRail.vue'
 // import LayoutMobileSportsTabStrip from '@/components/sports/LayoutMobileSportsTabStrip.vue'
@@ -218,6 +235,10 @@ const isClearScreenPage = computed(() =>
 /** Info/doc pages that span the full content width (no sidebar or right rail). */
 const isFullWidthPage = computed(() => route.meta?.layoutProps?.fullWidth === true)
 
+const isSportsBookPage = computed(
+  () => route.path === '/sports-book' || route.path.startsWith('/sports-book/'),
+)
+
 // Hide footer / bottom nav on bet pages (they manage their own layout/scroll)
 const isBetPage = computed(() => route.name === 'sport-bet' || route.name === 'races-bet')
 
@@ -243,6 +264,16 @@ const {
   isCasinoListingPage,
   isHorseGreyhoundRacingPage,
 } = useMobileSportsShellChrome()
+
+/** WazirWin AppLayout gutters + 20%/80% split (not casino / sportsbook / full-width). */
+const useReferenceSportsLayout = computed(
+  () =>
+    !isMobile.value &&
+    !isClearScreenPage.value &&
+    !isCasinoListingPage.value &&
+    !isSportsBookPage.value &&
+    !isFullWidthPage.value,
+)
 
 const showMobileBottomNav = computed(
   () => isMobile.value && !isClearScreenPage.value,
@@ -405,9 +436,13 @@ useWalletRefresh(2)
 </script>
 
 <style scoped>
-/* White band under fixed header/announcement — matches reference md:mt-[100px] gap */
+/* White band under fixed header/announcement — home uses .layout-home-shell-bg override */
 .layout-header-flow-spacer {
   background: #ffffff;
+}
+
+.layout-home-shell-bg .layout-header-flow-spacer {
+  background: var(--color-login-input-bg) !important;
 }
 
 .casino-layout-main {
@@ -545,18 +580,9 @@ useWalletRefresh(2)
  * align-self:flex-start + viewport height are required — stretch would make the
  * pane as tall as the event list and sticky would have nowhere to pin.
  */
-.layout-body-stack--footer-doc :deep(.sidebar-desktop) {
-  position: sticky !important;
-  top: var(--layout-sticky-top, 0px);
-  align-self: flex-start !important;
-  flex: 0 0 290px !important;
-  width: 290px !important;
-  min-width: 290px !important;
-  max-width: 290px !important;
-  height: var(--layout-sticky-pane-h, 100vh) !important;
-  max-height: var(--layout-sticky-pane-h, 100vh) !important;
-  z-index: 2;
-  overflow: hidden;
+.layout-body-stack--footer-doc .layout-sidebar-column :deep(.sidebar-desktop) {
+  height: 100% !important;
+  max-height: 100% !important;
 }
 
 .layout-right-rail--footer-doc {
@@ -672,7 +698,7 @@ useWalletRefresh(2)
 
 @media (max-width: 767px) {
   .sports-layout-shell__content--home-pad {
-    padding: 4px 0 4px 4px;
+    padding: 0 4px 4px;
     box-sizing: border-box;
   }
 }
@@ -681,7 +707,7 @@ useWalletRefresh(2)
   .sports-layout-shell {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: var(--layout-shell-section-gap, 6px);
   }
 
   .sports-layout-shell__rail {

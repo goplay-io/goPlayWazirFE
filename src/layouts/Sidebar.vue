@@ -107,8 +107,8 @@ function setLocale(lang) {
     </div>
   </v-navigation-drawer>
 
-  <!-- Desktop: persistent left column in layout flow (below top nav, not over it) -->
-  <aside v-else-if="drawerModel" class="sidebar-desktop">
+  <!-- Desktop: persistent left column — always visible (drawerModel is mobile-only) -->
+  <aside v-else class="sidebar-desktop">
     <div class="sidebar-content">
       <div class="sidebar-tree-wrap">
         <SportsTree
@@ -151,12 +151,14 @@ function setLocale(lang) {
   display: flex;
   flex-direction: column;
   height: 100%;
+  min-height: 0;
   overflow: hidden;
 }
 
 .sidebar-tree-wrap {
   flex: 1 1 0;
   min-height: 0;
+  height: 100%;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -171,11 +173,22 @@ function setLocale(lang) {
   min-height: 0;
   display: flex;
   flex-direction: column;
-  background-color: #ffffff;
+  background-color: var(--color-event-name, #333333);
+  border-radius: 8px;
   overflow: hidden;
   border-right: none;
   margin-right: 6px;
   z-index: 1;
+}
+
+@media (min-width: 1024px) {
+  .layout-sidebar-column .sidebar-desktop {
+    flex: 1 1 auto;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    margin-right: 0;
+  }
 }
 
 /* Mobile purple drawer — do not override width/transform; Vuetify owns close slide. */

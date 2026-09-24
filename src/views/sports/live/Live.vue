@@ -6,11 +6,16 @@ import Loading from '@/components/Loading.vue';
 import EventRow from '@/components/EventRow.vue';
 import FeedModePillPrefix from '@/components/sports/FeedModePillPrefix.vue';
 import LiveShowcaseSections from '@/views/sports/live/LiveShowcaseSections.vue';
+import HomeEventsSectionHeader from '@/components/home/HomeEventsSectionHeader.vue';
+import HomeGameProvidersSection from '@/components/home/HomeGameProvidersSection.vue';
+import HomeHorizontalGamesSection from '@/components/home/HomeHorizontalGamesSection.vue';
+import PopularGamesSection from '@/views/sports/live/PopularGamesSection.vue';
+import HomeSeoFaqAccordion from '@/components/home/HomeSeoFaqAccordion.vue';
 import { useEventsStore } from '@/stores/events/events';
 import { useAuthStore } from '@/stores/auth';
 import { loadPrefetchEventDetails } from '@/composables/useBetEventPrefetch';
 import { useEventTypes, HOME_INPLAY_UPCOMING_SPORT_IDS } from '@/composables/useEventTypes';
-import { getHomeMenuIconSrc } from '@/composables/useHomeMenuIcons';
+import { sportTableHeaderIconSrc } from '@/constants/subHeaderIcons.js';
 import { useOddsWebSocket } from '@/composables/useOddsWebSocket';
 import { useCompetitionGrouping } from '@/composables/useCompetitionGrouping';
 import { compareEventsByOpenDate, sortEventsWithStarPriority } from '@/utils/eventStarSort';
@@ -20,7 +25,7 @@ import { isLiveFeedEvent } from '@/utils/liveStatus';
 import { isPremiumEvent } from '@/utils/premiumStatus';
 import { isVirtualEvent } from '@/utils/virtualStatus';
 
-const { getEventTypeName, getEventTypeIcon } = useEventTypes();
+const { getEventTypeName, getEventTypeIcon, getEventTypeById } = useEventTypes();
 const { t } = useI18n();
 const route = useRoute();
 const eventsStore = useEventsStore();
@@ -240,6 +245,10 @@ const groupEventsByCompetition = (eventsList = []) => {
 /** Marketing chrome does not depend on events/list — show immediately. */
 const showMarketingSections = true;
 
+const isReferenceHome = computed(
+    () => route.name === 'live' || route.name === 'e-sports',
+);
+
 const inplayTabData = computed(() => [{
     events: isFeedFilterActive.value
         ? inplaySportSections.value.flatMap((section) => section.events || [])
@@ -399,7 +408,7 @@ const buildSportSections = (flatEvents) => {
             return {
                 id: Number(group.event_type_id),
                 name: String(group.event_type_name || getEventTypeName(group.event_type_id) || ''),
-                iconSrc: getHomeMenuIconSrc(Number(group.event_type_id)),
+                iconSrc: sportTableHeaderIconSrc(getEventTypeById(Number(group.event_type_id))?.key),
                 icon: getEventTypeIcon(Number(group.event_type_id)),
                 events: starSortedEvents,
                 competitionGroups: groupEventsByCompetition(starSortedEvents)
@@ -426,6 +435,52 @@ const upcomingFlatEvents = computed(() =>
 const inplaySportSections = computed(() => buildSportSections(inplayFlatEvents.value));
 
 const upcomingSportSections = computed(() => buildSportSections(upcomingFlatEvents.value));
+
+const referenceInplaySections = computed(() =>
+    inplaySportSections.value
+        .map((section) => ({
+            id: section.id,
+            name: section.name,
+            iconSrc: section.iconSrc,
+            icon: section.icon,
+            inplayEvents: section.events ?? [],
+            upcomingEvents: [],
+        }))
+        .filter((section) => {
+            if (section.inplayEvents.length > 0) return true;
+            if (!isMobile.value) return false;
+            const flags = getFeedFlagsForSport(section.id);
+            return flags.live || flags.premium || flags.virtual;
+        }),
+);
+
+const referenceUpcomingSections = computed(() =>
+    upcomingSportSections.value
+        .map((section) => ({
+            id: section.id,
+            name: section.name,
+            iconSrc: section.iconSrc,
+            icon: section.icon,
+            inplayEvents: [],
+            upcomingEvents: section.events ?? [],
+        }))
+        .filter((section) => section.upcomingEvents.length > 0),
+);
+
+const activeEventSections = computed(() =>
+    isReferenceHome.value ? referenceInplaySections.value : combinedSportSections.value,
+);
+
+const showReferenceInplayContent = computed(() => {
+    if (!isReferenceHome.value) return false;
+    if (loading.value || error.value) return false;
+    if (showFilterEmptyState.value) return true;
+    return referenceInplaySections.value.some((section) => section.inplayEvents.length > 0);
+});
+
+const showReferenceUpcomingContent = computed(
+    () => isReferenceHome.value && referenceUpcomingSections.value.length > 0,
+);
 
 // Fetch live events — delegates to the events store so the request is shared with
 // the sidebar (SportsTree) via the store's in-flight deduplication.
@@ -495,71 +550,306 @@ onUnmounted(() => {
                 <div class="inplay-main tw-text-textLight1 tw-text-sm tw-min-w-0">
                     <div class="tw-p-0">
                         <div class="tw-pb-0 lg:tw-pb-0">
-                            <!-- Events list waits on /events/list; chrome below does not. -->
-                            <div class="events-table-section">
-                                <Loading v-if="loading" min-height="240px" />
+                            <!-- Reference home: In Play → image sections → Upcoming events -->
+                            <template v-if="isReferenceHome">
+                                <div class="home-events-stack">
+                                    <div class="events-table-section events-table-section--reference">
+                                        <Loading v-if="loading" min-height="240px" />
 
-                                <div v-else-if="error" class="tw-mt-5 tw-px-4 tw-pb-4">
-                                    <v-alert type="error" variant="tonal" class="tw-text-center">
-                                        {{ error }}
-                                    </v-alert>
-                                </div>
+                                        <div v-else-if="error" class="tw-mt-5 tw-px-4 tw-pb-4">
+                                            <v-alert type="error" variant="tonal" class="tw-text-center">
+                                                {{ error }}
+                                            </v-alert>
+                                        </div>
 
-                                <div v-else-if="showFilterEmptyState" class="sports-no-markets-empty">
-                                    {{ t('sports.home.noMarketsAvailable') }}
-                                </div>
-
-                                <template v-else-if="showCombinedEventList">
-                                    <div v-for="(sportGroup, sportIndex) in combinedSportSections"
-                                        :key="sportGroup.id" class="sport-section-block"
-                                        :class="{
-                                            'sport-section-block--first': sportIndex === 0,
-                                            'sport-section-block--empty': !sportGroup.inplayEvents.length && !sportGroup.upcomingEvents.length
-                                        }">
-                                        <div class="sport-section-header">
-                                            <div class="sport-section-header__left">
-                                                <div class="sport-section-header__brand">
-                                                    <span v-if="sportGroup.iconSrc || sportGroup.icon"
-                                                        class="sport-section-header__icon-wrap">
-                                                        <img v-if="sportGroup.iconSrc"
-                                                            :src="sportGroup.iconSrc" alt=""
-                                                            class="sport-section-header__icon" />
-                                                        <component v-else :is="sportGroup.icon" :width="15.37"
-                                                            :height="16.63" class="sport-section-header__icon" />
-                                                    </span>
-                                                    <h2 class="sport-section-header__title">
-                                                        {{ sportGroup.name }}
-                                                    </h2>
+                                        <template v-else>
+                                            <HomeEventsSectionHeader
+                                                mode="inplay"
+                                                :title="t('components.homeEvents.inplayTitle')"
+                                            />
+                                            <div class="events-table-section__body">
+                                                <div v-if="showFilterEmptyState" class="sports-no-markets-empty">
+                                                    {{ t('sports.home.noMarketsAvailable') }}
+                                                </div>
+                                                <template v-else-if="showReferenceInplayContent">
+                                                    <div
+                                                        v-for="(sportGroup, sportIndex) in referenceInplaySections"
+                                                        :key="`inplay-${sportGroup.id}`"
+                                                        class="sport-section-block"
+                                                        :class="{ 'sport-section-block--first': sportIndex === 0 }"
+                                                    >
+                                                        <div class="sport-section-header">
+                                                            <div class="sport-section-header__left">
+                                                                <div class="sport-section-header__brand">
+                                                                    <span
+                                                                        v-if="sportGroup.iconSrc || sportGroup.icon"
+                                                                        class="sport-section-header__icon-wrap"
+                                                                    >
+                                                                        <img
+                                                                            v-if="sportGroup.iconSrc"
+                                                                            :src="sportGroup.iconSrc"
+                                                                            alt=""
+                                                                            class="sport-section-header__icon"
+                                                                            width="18"
+                                                                            height="18"
+                                                                        />
+                                                                        <component
+                                                                            v-else
+                                                                            :is="sportGroup.icon"
+                                                                            :width="15.37"
+                                                                            :height="16.63"
+                                                                            class="sport-section-header__icon"
+                                                                        />
+                                                                    </span>
+                                                                    <h3 class="sport-section-header__title">
+                                                                        {{ sportGroup.name }}
+                                                                    </h3>
+                                                                </div>
+                                                                <div class="sport-section-header__filters">
+                                                                    <div class="feed-mode-pills">
+                                                                        <button
+                                                                            type="button"
+                                                                            class="feed-mode-pill"
+                                                                            :class="{ 'feed-mode-pill--active': isSportFeedLiveActive(sportGroup.id) }"
+                                                                            @click="toggleSectionFeedLive(sportGroup.id)"
+                                                                        >
+                                                                            <FeedModePillPrefix :active="isSportFeedLiveActive(sportGroup.id)" />
+                                                                            LIVE
+                                                                        </button>
+                                                                        <button
+                                                                            type="button"
+                                                                            class="feed-mode-pill feed-mode-pill--virtual"
+                                                                            :class="{ 'feed-mode-pill--active': isSportFeedVirtualActive(sportGroup.id) }"
+                                                                            @click="toggleSectionFeedVirtual(sportGroup.id)"
+                                                                        >
+                                                                            <FeedModePillPrefix :active="isSportFeedVirtualActive(sportGroup.id)" />
+                                                                            VIRTUAL
+                                                                        </button>
+                                                                        <button
+                                                                            type="button"
+                                                                            class="feed-mode-pill feed-mode-pill--premium"
+                                                                            :class="{ 'feed-mode-pill--active': isSportFeedPremiumActive(sportGroup.id) }"
+                                                                            @click="toggleSectionFeedPremium(sportGroup.id)"
+                                                                        >
+                                                                            <FeedModePillPrefix :active="isSportFeedPremiumActive(sportGroup.id)" />
+                                                                            PREMIUM
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div v-if="!isMobile" class="sport-section-header__right">
+                                                                <span class="sport-section-header__meta-spacer" aria-hidden="true" />
+                                                                <div class="sport-section-header__market-cols">
+                                                                    <span>1</span>
+                                                                    <span>x</span>
+                                                                    <span>2</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            v-if="!sportGroup.inplayEvents.length"
+                                                            class="sports-no-markets-empty sports-no-markets-empty--section"
+                                                        >
+                                                            {{ t('sports.home.noMarketsAvailable') }}
+                                                        </div>
+                                                        <EventRow
+                                                            v-for="(event, eventIndex) in sportGroup.inplayEvents"
+                                                            :key="`ref-in-${event.id}`"
+                                                            :event="event"
+                                                            reference-layout
+                                                            reference-play-mode="inplay"
+                                                            :show-competition="false"
+                                                            :animation-delay="Math.min((sportIndex * 100 + eventIndex) * 0.02, 0.5)"
+                                                        />
+                                                    </div>
+                                                </template>
+                                                <div v-else class="sports-no-markets-empty">
+                                                    {{ t('sports.home.noMarketsAvailable') }}
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div v-if="!sportGroup.inplayEvents.length && !sportGroup.upcomingEvents.length"
-                                            class="sports-no-markets-empty sports-no-markets-empty--section">
-                                            {{ t('sports.home.noMarketsAvailable') }}
-                                        </div>
-                                        <template v-else>
-                                            <EventRow v-for="(event, eventIndex) in sportGroup.inplayEvents"
-                                                :key="`in-${event.id}`" :event="event"
-                                                :show-competition="!isMobile"
-                                                :animation-delay="Math.min((sportIndex * 100 + eventIndex) * 0.02, 0.5)" />
-                                            <EventRow v-for="(event, eventIndex) in sportGroup.upcomingEvents"
-                                                :key="`up-${event.id}`" :event="event"
-                                                :show-competition="!isMobile"
-                                                :show-upcoming-odds-overlay="stripFeedMode === 'upcoming' || stripFeedMode === 'combined'"
-                                                :animation-delay="Math.min((sportIndex * 100 + sportGroup.inplayEvents.length + eventIndex) * 0.02, 0.5)" />
                                         </template>
                                     </div>
-                                </template>
 
-                                <div v-else-if="!showCombinedEventList" class="sports-no-markets-empty">
-                                    {{ t('sports.home.noMarketsAvailable') }}
+                                    <template v-if="showMarketingSections">
+                                        <HomeGameProvidersSection />
+                                        <HomeHorizontalGamesSection
+                                            title="Indian Card Games"
+                                            use-reference-images
+                                            :see-all-query="{ provider: 'MAC88' }"
+                                        />
+                                    </template>
+
+                                    <div
+                                        v-if="showReferenceUpcomingContent"
+                                        class="events-table-section events-table-section--reference events-table-section--upcoming"
+                                    >
+                                        <HomeEventsSectionHeader
+                                            mode="upcoming"
+                                            :title="t('components.homeEvents.upcomingTitle')"
+                                        />
+                                        <div class="events-table-section__body">
+                                            <div
+                                                v-for="(sportGroup, sportIndex) in referenceUpcomingSections"
+                                                :key="`upcoming-${sportGroup.id}`"
+                                                class="sport-section-block sport-section-block--upcoming"
+                                                :class="{ 'sport-section-block--first': sportIndex === 0 }"
+                                            >
+                                                <div class="sport-section-header">
+                                                    <div class="sport-section-header__left">
+                                                        <div class="sport-section-header__brand">
+                                                            <span
+                                                                v-if="sportGroup.iconSrc || sportGroup.icon"
+                                                                class="sport-section-header__icon-wrap"
+                                                            >
+                                                                <img
+                                                                    v-if="sportGroup.iconSrc"
+                                                                    :src="sportGroup.iconSrc"
+                                                                    alt=""
+                                                                    class="sport-section-header__icon"
+                                                                    width="18"
+                                                                    height="18"
+                                                                />
+                                                                <component
+                                                                    v-else
+                                                                    :is="sportGroup.icon"
+                                                                    :width="15.37"
+                                                                    :height="16.63"
+                                                                    class="sport-section-header__icon"
+                                                                />
+                                                            </span>
+                                                            <h3 class="sport-section-header__title">
+                                                                {{ sportGroup.name }}
+                                                            </h3>
+                                                        </div>
+                                                        <div class="sport-section-header__filters">
+                                                            <div class="feed-mode-pills">
+                                                                <button
+                                                                    type="button"
+                                                                    class="feed-mode-pill"
+                                                                    :class="{ 'feed-mode-pill--active': isSportFeedLiveActive(sportGroup.id) }"
+                                                                    @click="toggleSectionFeedLive(sportGroup.id)"
+                                                                >
+                                                                    <FeedModePillPrefix :active="isSportFeedLiveActive(sportGroup.id)" />
+                                                                    LIVE
+                                                                </button>
+                                                                <button
+                                                                    type="button"
+                                                                    class="feed-mode-pill feed-mode-pill--virtual"
+                                                                    :class="{ 'feed-mode-pill--active': isSportFeedVirtualActive(sportGroup.id) }"
+                                                                    @click="toggleSectionFeedVirtual(sportGroup.id)"
+                                                                >
+                                                                    <FeedModePillPrefix :active="isSportFeedVirtualActive(sportGroup.id)" />
+                                                                    VIRTUAL
+                                                                </button>
+                                                                <button
+                                                                    type="button"
+                                                                    class="feed-mode-pill feed-mode-pill--premium"
+                                                                    :class="{ 'feed-mode-pill--active': isSportFeedPremiumActive(sportGroup.id) }"
+                                                                    @click="toggleSectionFeedPremium(sportGroup.id)"
+                                                                >
+                                                                    <FeedModePillPrefix :active="isSportFeedPremiumActive(sportGroup.id)" />
+                                                                    PREMIUM
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div v-if="!isMobile" class="sport-section-header__right">
+                                                        <span class="sport-section-header__meta-spacer" aria-hidden="true" />
+                                                        <div class="sport-section-header__market-cols">
+                                                            <span>1</span>
+                                                            <span>x</span>
+                                                            <span>2</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <EventRow
+                                                    v-for="(event, eventIndex) in sportGroup.upcomingEvents"
+                                                    :key="`ref-up-${event.id}`"
+                                                    :event="event"
+                                                    reference-layout
+                                                    reference-play-mode="upcoming"
+                                                    :show-competition="false"
+                                                    :show-upcoming-odds-overlay="true"
+                                                    :animation-delay="Math.min((sportIndex * 100 + eventIndex) * 0.02, 0.5)"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div v-if="showMarketingSections" class="live-showcase live-showcase--reference-home">
+                                        <PopularGamesSection reference-layout />
+                                        <HomeSeoFaqAccordion />
+                                    </div>
                                 </div>
-                            </div>
+                            </template>
 
-                            <LiveShowcaseSections
-                                v-if="showMarketingSections"
-                                :class="{ 'live-mobile-showcase': isMobile }"
-                            />
+                            <!-- Default live page layout -->
+                            <template v-else>
+                                <div class="events-table-section">
+                                    <Loading v-if="loading" min-height="240px" />
+
+                                    <div v-else-if="error" class="tw-mt-5 tw-px-4 tw-pb-4">
+                                        <v-alert type="error" variant="tonal" class="tw-text-center">
+                                            {{ error }}
+                                        </v-alert>
+                                    </div>
+
+                                    <div v-else-if="showFilterEmptyState" class="sports-no-markets-empty">
+                                        {{ t('sports.home.noMarketsAvailable') }}
+                                    </div>
+
+                                    <template v-else-if="showCombinedEventList">
+                                        <div v-for="(sportGroup, sportIndex) in activeEventSections"
+                                            :key="sportGroup.id" class="sport-section-block"
+                                            :class="{
+                                                'sport-section-block--first': sportIndex === 0,
+                                                'sport-section-block--empty': !sportGroup.inplayEvents.length && !sportGroup.upcomingEvents.length
+                                            }">
+                                            <div class="sport-section-header">
+                                                <div class="sport-section-header__left">
+                                                    <div class="sport-section-header__brand">
+                                                        <span v-if="sportGroup.iconSrc || sportGroup.icon"
+                                                            class="sport-section-header__icon-wrap">
+                                                            <img v-if="sportGroup.iconSrc"
+                                                                :src="sportGroup.iconSrc" alt=""
+                                                                class="sport-section-header__icon" />
+                                                            <component v-else :is="sportGroup.icon" :width="15.37"
+                                                                :height="16.63" class="sport-section-header__icon" />
+                                                        </span>
+                                                        <h2 class="sport-section-header__title">
+                                                            {{ sportGroup.name }}
+                                                        </h2>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div v-if="!sportGroup.inplayEvents.length && !sportGroup.upcomingEvents.length"
+                                                class="sports-no-markets-empty sports-no-markets-empty--section">
+                                                {{ t('sports.home.noMarketsAvailable') }}
+                                            </div>
+                                            <template v-else>
+                                                <EventRow v-for="(event, eventIndex) in sportGroup.inplayEvents"
+                                                    :key="`in-${event.id}`" :event="event"
+                                                    :show-competition="!isMobile"
+                                                    :animation-delay="Math.min((sportIndex * 100 + eventIndex) * 0.02, 0.5)" />
+                                                <EventRow v-for="(event, eventIndex) in sportGroup.upcomingEvents"
+                                                    :key="`up-${event.id}`" :event="event"
+                                                    :show-competition="!isMobile"
+                                                    :show-upcoming-odds-overlay="stripFeedMode === 'upcoming' || stripFeedMode === 'combined'"
+                                                    :animation-delay="Math.min((sportIndex * 100 + sportGroup.inplayEvents.length + eventIndex) * 0.02, 0.5)" />
+                                            </template>
+                                        </div>
+                                    </template>
+
+                                    <div v-else-if="!showCombinedEventList" class="sports-no-markets-empty">
+                                        {{ t('sports.home.noMarketsAvailable') }}
+                                    </div>
+                                </div>
+
+                                <LiveShowcaseSections
+                                    v-if="showMarketingSections"
+                                    :class="{ 'live-mobile-showcase': isMobile }"
+                                />
+                            </template>
 
                         </div>
                     </div>
@@ -774,10 +1064,39 @@ onUnmounted(() => {
     width: 100%;
 }
 
+.home-events-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+}
+
+.events-table-section--reference {
+    padding: 0 6px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 767.98px) {
+    .events-table-section--reference {
+        padding: 0;
+    }
+}
+
+.events-table-section__body {
+    border: 1px solid rgba(84, 84, 84, 0.6);
+    border-top: 0;
+    border-radius: 0 0 10px 10px;
+    overflow: hidden;
+    background: var(--color-event-name, #333333);
+}
+
 @media (min-width: 1025px) {
     .live-page-container .events-table-section,
     .live-page-container .upcoming-match {
-        background: #ffffff;
+        background: var(--color-event-name, #333333);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
     }
 }
 
@@ -891,7 +1210,7 @@ onUnmounted(() => {
         padding: 0 0px;
     }
 
-    .live-page-container .sport-section-block {
+    .live-page-container .events-table-section:not(.events-table-section--reference) .sport-section-block {
         margin: 0 0 10px;
         border: none;
         border-radius: 0;
@@ -900,11 +1219,11 @@ onUnmounted(() => {
         isolation: isolate;
     }
 
-    .live-page-container .sport-section-block--first {
+    .live-page-container .events-table-section:not(.events-table-section--reference) .sport-section-block--first {
         margin-top: 0;
     }
 
-    .live-page-container .sport-section-block :deep(.event-row-card) {
+    .live-page-container .events-table-section:not(.events-table-section--reference) .sport-section-block :deep(.event-row-card) {
         border-left: 1px solid #d1d5db;
         border-right: 1px solid #d1d5db;
         border-top: none;
@@ -912,26 +1231,26 @@ onUnmounted(() => {
         margin-top: 0;
     }
 
-    .live-page-container .sport-section-block :deep(.sport-section-header + .event-row-card) {
+    .live-page-container .events-table-section:not(.events-table-section--reference) .sport-section-block :deep(.sport-section-header + .event-row-card) {
         margin-top: 0 !important;
     }
 
-    .live-page-container .sport-section-block :deep(.event-row-card + .event-row-card) {
+    .live-page-container .events-table-section:not(.events-table-section--reference) .sport-section-block :deep(.event-row-card + .event-row-card) {
         margin-top: 1px;
     }
 
-    .live-page-container .sport-section-block :deep(.event-row-card:last-child) {
+    .live-page-container .events-table-section:not(.events-table-section--reference) .sport-section-block :deep(.event-row-card:last-child) {
         border-bottom: 1px solid #d1d5db;
     }
 
-    .live-page-container .sport-section-header {
+    .live-page-container .events-table-section:not(.events-table-section--reference) .sport-section-header {
         height: 37px;
         min-height: 37px;
         border-radius: 4px 4px 0 0;
         overflow: hidden;
     }
 
-    .live-page-container .sport-section-header__left {
+    .live-page-container .events-table-section:not(.events-table-section--reference) .sport-section-header__left {
         display: flex;
         align-items: center;
         justify-content: flex-start;
@@ -943,7 +1262,7 @@ onUnmounted(() => {
         padding: 0;
     }
 
-    .live-page-container .sport-section-header__brand {
+    .live-page-container .events-table-section:not(.events-table-section--reference) .sport-section-header__brand {
         display: inline-flex;
         align-items: center;
         gap: 4px;
@@ -952,7 +1271,7 @@ onUnmounted(() => {
         overflow: hidden;
     }
 
-    .live-page-container .sport-section-header__icon-wrap {
+    .live-page-container .events-table-section:not(.events-table-section--reference) .sport-section-header__icon-wrap {
         flex-shrink: 0;
         display: inline-flex;
         align-items: center;
@@ -960,22 +1279,22 @@ onUnmounted(() => {
         margin-left: 12px;
     }
 
-    .live-page-container .sport-section-header__icon-wrap :deep(img),
-    .live-page-container .sport-section-header__icon-wrap :deep(.sport-nav-icon),
-    .live-page-container .sport-section-header__icon {
+    .live-page-container .events-table-section:not(.events-table-section--reference) .sport-section-header__icon-wrap :deep(img),
+    .live-page-container .events-table-section:not(.events-table-section--reference) .sport-section-header__icon-wrap :deep(.sport-nav-icon),
+    .live-page-container .events-table-section:not(.events-table-section--reference) .sport-section-header__icon {
         width: 15.37px;
         height: 16.63px;
         object-fit: contain;
     }
 
-    .live-page-container .sport-section-header__title {
+    .live-page-container .events-table-section:not(.events-table-section--reference) .sport-section-header__title {
         font-size: 13px;
         font-weight: 700;
         letter-spacing: normal;
         text-transform: uppercase;
     }
 
-    .live-page-container .sport-section-header__filters {
+    .live-page-container .events-table-section:not(.events-table-section--reference) .sport-section-header__filters {
         margin-left: auto;
         margin-right: 0;
         transform: translateX(4px);
@@ -983,7 +1302,7 @@ onUnmounted(() => {
         flex-shrink: 0;
     }
 
-    .live-page-container .sport-section-header__filters .feed-mode-pill {
+    .live-page-container .events-table-section:not(.events-table-section--reference) .sport-section-header__filters .feed-mode-pill {
         padding: 3px 8px;
         min-height: 18px;
         font-size: 12px;
@@ -1291,5 +1610,20 @@ onUnmounted(() => {
     }
 }
 
+.live-showcase {
+    width: 100%;
+    margin-top: 0;
+    background: transparent;
+}
+
+.live-showcase--reference-home {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.live-showcase__bottom-text {
+    margin-top: 8px;
+}
 
 </style>
