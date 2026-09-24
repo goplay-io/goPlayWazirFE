@@ -1,0 +1,32 @@
+{
+  "cards": [
+    { "id": "lc-card-01", "file": "17627627386635388.webp", "alt": "Mac88 Virtuals", "url": "/casino?provider=MAC88+VIRTUALS" },
+    { "id": "lc-card-02", "file": "17627627488552291.webp", "alt": "Casino", "url": "/casino?provider=all" },
+    { "id": "lc-card-03", "file": "17627627542110548.webp", "alt": "Mac Excite", "url": "/casino?provider=MAC+EXCITE" },
+    { "id": "lc-card-04", "file": "17627627607591683.webp", "alt": "Creed", "url": "/casino?provider=all" },
+    { "id": "lc-card-05", "file": "17627627687141835.webp", "alt": "Ezugi", "url": "/casino?provider=Ezugi" },
+    { "id": "lc-card-06", "file": "17627627753719811.webp", "alt": "Smartsoft Gaming", "url": "/casino?provider=all" },
+    { "id": "lc-card-07", "file": "17627627823197904.webp", "alt": "Turbo Games", "url": "/casino?provider=all&gamename=roulette" },
+    { "id": "lc-card-08", "file": "17627627896399105.webp", "alt": "Spribe", "url": "/casino?provider=all" },
+    { "id": "lc-card-09", "file": "17627627965140226.webp", "alt": "Vivo Gaming", "url": "/casino?provider=all" },
+    { "id": "lc-card-10", "file": "17627628028278639.webp", "alt": "Evolution", "url": "/casino?provider=Evolution" },
+    { "id": "lc-card-11", "file": "17627628139424267.webp", "alt": "Jili", "url": "/casino?provider=JILI" },
+    { "id": "lc-card-12", "file": "17627628221040631.webp", "alt": "Bombay Gaming", "url": "/casino?provider=all" },
+    { "id": "lc-card-13", "file": "17627628325753436.webp", "alt": "Gamzix", "url": "/casino?provider=MAC+SEXY" },
+    { "id": "lc-card-14", "file": "17627628395703375.webp", "alt": "Kingmaker", "url": "/casino?provider=all" },
+    { "id": "lc-card-15", "file": "17816909562292091.png", "alt": "AE sexy", "url": "/casino?provider=MAC+SEXY" },
+    { "id": "lc-card-16", "file": "17627628548191596.webp", "alt": "Betgames", "url": "/casino?provider=all" },
+    { "id": "lc-card-17", "file": "17627628625150691.webp", "alt": "Popok", "url": "/casino?provider=al" },
+    { "id": "lc-card-18", "file": "17627628721665893.webp", "alt": "Bikini Games", "url": "/casino?provider=ezugi" }
+  ],
+  "casino": [
+    { "id": "lc-andar-bahar", "file": "andarbahar.webp", "alt": "Andar Bahar", "gameId": "150007", "url": "/casino/game/150007" },
+    { "id": "lc-automatic-roulette", "file": "automaticroulette.webp", "alt": "Automatic Roulette", "gameId": "150004", "url": "/casino/game/150004" },
+    { "id": "lc-blackjack", "file": "blackjack.webp", "alt": "Blackjack", "gameId": "MC8_imlive90524", "url": "/casino/game/MC8_imlive90524" },
+    { "id": "lc-dragon-tiger", "file": "dragontiger.webp", "alt": "Dragon Tiger", "gameId": "150001", "url": "/casino/game/150001" },
+    { "id": "lc-lightning-blackjack", "file": "lightningblackjack.webp", "alt": "Lightning Blackjack", "gameId": "MC8_imlive90524", "url": "/casino/game/MC8_imlive90524" },
+    { "id": "lc-no-commission-baccarat", "file": "nocommissionbaccarat.webp", "alt": "No Commission Baccarat", "gameId": "150002", "url": "/casino/game/150002" },
+    { "id": "lc-speed-roulette", "file": "speedroulette.webp", "alt": "Speed Roulette", "gameId": "150004", "url": "/casino/game/150004" },
+    { "id": "lc-teen-patti", "file": "teenpatti.webp", "alt": "Teen Patti", "gameId": "150009", "url": "/casino/game/150009" }
+  ]
+}

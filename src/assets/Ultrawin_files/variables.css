@@ -1,0 +1,10 @@
+:root {
+    --primary: #212E44;
+    --secondary: #071123;
+    --faveventbg: #008c95;
+    --titlewidth: 110px;
+    --titleMobWidth: 74px;
+    --titleMobHeight: 53px;
+    --cashoutbt: #fab418;
+    --gradiantStyle: linear-gradient(180deg, var(--secondary) 0%, var(--primary) 100%);
+}

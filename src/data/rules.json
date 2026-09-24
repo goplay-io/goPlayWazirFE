@@ -1,0 +1,2547 @@
+{
+  "sports": [
+    {
+      "id": 1,
+      "sport_name": "big Bash League",
+      "rules": [
+        {
+          "id": 1,
+          "name": "Total match 1st over run:- Average 6 runs will be given if total 20 overs is not played, only 1st innings will be considered as valid",
+          "color": ""
+        },
+        {
+          "id": 2,
+          "name": "Highest innings run - Only first innings is valid",
+          "color": ""
+        },
+        {
+          "id": 3,
+          "name": "Lowest innings run - Only first innings is valid",
+          "color": ""
+        },
+        {
+          "id": 4,
+          "name": "Total 1st 6 over run:- Average 46 runs will be given if total 20 overs is not played, This event is valid only for the 1st innings",
+          "color": ""
+        },
+        {
+          "id": 5,
+          "name": "Total Fours - Average 25 fours will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 6,
+          "name": "Total Sixes - Average 10 sixes will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 7,
+          "name": "Total Wickets - Average will 12 Wickets be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 8,
+          "name": "Total Wides - Average 8 wides will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 9,
+          "name": "Total Extras - Average 14 extras will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 10,
+          "name": "Total Fifties - Average 2 fifties will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 11,
+          "name": "Total Caught out - Average 8 catch out will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 12,
+          "name": "Total Bowled out - Average 2 bowled out will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 13,
+          "name": "Highest 6 over run: Both innings are valid",
+          "color": ""
+        },
+        {
+          "id": 14,
+          "name": "Highest run in individual match: Both innings are valid",
+          "color": ""
+        },
+        {
+          "id": 15,
+          "name": "Highest Fours in individual match: Both innings are valid",
+          "color": ""
+        },
+        {
+          "id": 16,
+          "name": "Highest Sixes in individual match: Both innings are valid",
+          "color": ""
+        },
+        {
+          "id": 17,
+          "name": "Total LBW:- Average 1 LBW will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 18,
+          "name": "Highest Wickets in individual match: Both innings are valid",
+          "color": ""
+        },
+        {
+          "id": 19,
+          "name": "Highest extras in individual match: Both innings are valid",
+          "color": ""
+        },
+        {
+          "id": 20,
+          "name": "Highest match 1st over run in individual match: Only 1st inning will be considered as valid valid",
+          "color": ""
+        },
+        {
+          "id": 21,
+          "name": "All events related to bowler are valid only for the league stages, both the innings will be considered as valid.  A minimum of 32 overs has to be bowled else the same will be voided.  If the mentioned bowler has bowled one legal delivery then it will be considered as 1 over even if the over is not completed",
+          "color": "text-red-500"
+        },
+        {
+          "id": 22,
+          "name": "All events based on ground are decided based on the initial fixture, in case of any changes in the venue between the series.  Then average will be given based on the initial fixture for the number of games reduced, Similarly if any match is added newly to the venue will not be considered",
+          "color": "text-red-500"
+        },
+        {
+          "id": 23,
+          "name": "Average for wickets taken will be given in case match abandoned or over reduced or the player has not bowled single legal delivery before the over got reduced",
+          "color": "text-red-500"
+        },
+        {
+          "id": 24,
+          "name": "Fancy based on all individual teams/players/ground are valid only for league stage",
+          "color": "text-red-500"
+        },
+        {
+          "id": 25,
+          "name": "Management decision will be final",
+          "color": "text-red-500"
+        },
+        {
+          "id": 26,
+          "name": "Bellerive Oval:- Hobart",
+          "color": "text-red-500"
+        },
+        {
+          "id": 27,
+          "name": "Total 1st over run:- Average 6 runs will be given if total 20 overs is not played, only 1st innings will be considered as valid",
+          "color": ""
+        },
+        {
+          "id": 28,
+          "name": "Total 6 over run:- Average 46 runs will be given if total 20 overs is not played, only 1st innings will be considered as valid",
+          "color": ""
+        },
+        {
+          "id": 29,
+          "name": "Total Fours - Average 28 fours will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 30,
+          "name": "Total Sixes - Average 11 Sixes will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 31,
+          "name": "Total Wide – Average 8 Wide will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 32,
+          "name": "Total Extras - Average 14 Extras will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 33,
+          "name": "Total Run- Average 330 runs will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 34,
+          "name": "Manuka Oval:- Canberra",
+          "color": "text-red-500"
+        },
+        {
+          "id": 35,
+          "name": "Total 1st over run:- Average 5 runs will be given if total 20 overs is not played, only 1st innings will be considered as valid",
+          "color": ""
+        },
+        {
+          "id": 36,
+          "name": "Total 6 over run:- Average 44 runs will be given if total 20 overs is not played, only 1st innings will be considered as valid",
+          "color": ""
+        },
+        {
+          "id": 37,
+          "name": "Total Fours - Average 24 fours will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 38,
+          "name": "Total Sixes - Average 10 Sixes will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 39,
+          "name": "Total Wickets - Average 12 wickets will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 40,
+          "name": "Total Wide – Average 8 Wide will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 41,
+          "name": "Total Extras - Average 13 Extras will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 42,
+          "name": "Total Run- Average 318 runs will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 43,
+          "name": "Bellerive Oval:- Hobart",
+          "color": "text-red-500"
+        },
+        {
+          "id": 44,
+          "name": "Total Wickets - Average 12 wickets will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 45,
+          "name": "Aurora stadium:- Launceston",
+          "color": "text-red-500"
+        },
+        {
+          "id": 46,
+          "name": "Total 1st over run:- Average 6 runs will be given if total 20 overs is not played, only 1st innings will be considered as valid",
+          "color": ""
+        },
+        {
+          "id": 47,
+          "name": "Total 6 over run:- Average 45 runs will be given if total 20 overs is not played, only 1st innings will be considered as valid",
+          "color": ""
+        },
+        {
+          "id": 48,
+          "name": "Total Fours - Average 25 fours will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 49,
+          "name": "Total Sixes - Average 10 Sixes will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 50,
+          "name": "Total Wickets - Average 12 wickets will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 51,
+          "name": "Total Wide – Average 8 Wide will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 52,
+          "name": "Total Extras - Average 14 Extras will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 53,
+          "name": "Total Run- Average 320 runs will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 54,
+          "name": "The Gabba:- Brisbane",
+          "color": "text-red-500"
+        },
+        {
+          "id": 55,
+          "name": "Total 1st over run:- Average 6 runs will be given if total 20 overs is not played, only 1st innings will be considered as valid",
+          "color": ""
+        },
+        {
+          "id": 56,
+          "name": "Total 6 over run:- Average 44 runs will be given if total 20 overs is not played, only 1st innings will be considered as valid",
+          "color": ""
+        },
+        {
+          "id": 57,
+          "name": "Total Fours - Average 24 fours will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 58,
+          "name": "Total Sixes - Average 9 Sixes will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 59,
+          "name": "Total Wickets - Average 12 wickets will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 60,
+          "name": "Total Wide – Average 8 Wide will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 61,
+          "name": "Total Extras - Average 13 Extras will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 62,
+          "name": "Total Run- Average 310 runs will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 63,
+          "name": "QUEENSLAND",
+          "color": "text-red-500"
+        },
+        {
+          "id": 64,
+          "name": "Total 1st over run:- Average 6 runs will be given if total 20 overs is not played, only 1st innings will be considered as valid",
+          "color": ""
+        },
+        {
+          "id": 65,
+          "name": "Total 6 over run:- Average 44 runs will be given if total 20 overs is not played, only 1st innings will be considered as valid",
+          "color": ""
+        },
+        {
+          "id": 66,
+          "name": "Total Fours - Average 24 fours will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 67,
+          "name": "Total Sixes - Average 10 Sixes will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 68,
+          "name": "Total Wickets - Average 12 wickets will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 69,
+          "name": "Total Wide – Average 8 Wide will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 70,
+          "name": "Total Extras - Average 14 Extras will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 71,
+          "name": "Total Run- Average 315 runs will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 72,
+          "name": "Adelaide Oval",
+          "color": "text-red-500"
+        },
+        {
+          "id": 73,
+          "name": "Total 1st over run:- Average 6 runs will be given if total 20 overs is not played, only 1st innings will be considered as valid",
+          "color": ""
+        },
+        {
+          "id": 74,
+          "name": "Total 6 over run:- Average 46 runs will be given if total 20 overs is not played, only 1st innings will be considered as valid",
+          "color": ""
+        },
+        {
+          "id": 75,
+          "name": "Total Fours - Average 27 fours will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 78,
+          "name": "Total Sixes - Average 10 Sixes will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 79,
+          "name": "Total Wickets - Average 12 wickets will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 80,
+          "name": "Total Wide – Average 8 Wide will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 81,
+          "name": "Total Extras - Average 14 Extras will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 82,
+          "name": "Total Run- Average 320 runs will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 83,
+          "name": "Perth Stadium",
+          "color": "text-red-500"
+        },
+        {
+          "id": 84,
+          "name": "Total 1st over run:- Average 6 runs will be given if total 20 overs is not played, only 1st innings will be considered as valid",
+          "color": ""
+        },
+        {
+          "id": 85,
+          "name": "Total 6 over run:- Average 46 runs will be given if total 20 overs is not played, only 1st innings will be considered as valid",
+          "color": ""
+        },
+        {
+          "id": 86,
+          "name": "Total Fours - Average 26 fours will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 87,
+          "name": "Total Sixes - Average 12 Sixes will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 88,
+          "name": "Total Wickets - Average 12 wickets will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 89,
+          "name": "Total Wide – Average 9 Wide will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 90,
+          "name": "Total Extras - Average 16 Extras will be given in case match abandoned or over reducedTotal Extras - Average 16 Extras will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 91,
+          "name": "Total Run- Average 340 runs will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 92,
+          "name": "Showground Stadium",
+          "color": "text-red-500"
+        },
+        {
+          "id": 93,
+          "name": "Total 1st over run:- Average 6 runs will be given if total 20 overs is not played, only 1st innings will be considered as valid",
+          "color": ""
+        },
+        {
+          "id": 94,
+          "name": "Total 6 over run:- Average 44 runs will be given if total 20 overs is not played, only 1st innings will be considered as valid",
+          "color": ""
+        },
+        {
+          "id": 95,
+          "name": "Total Fours - Average 25 fours will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 96,
+          "name": "Total Sixes - Average 9 Sixes will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 97,
+          "name": "Total Wickets - Average 12 wickets will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 98,
+          "name": "Total Wide – Average 8 Wide will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 99,
+          "name": "Total Extras - Average 14 Extras will be given in case match abandoned or over reduced ",
+          "color": ""
+        },
+        {
+          "id": 100,
+          "name": "Total Run- Average 315 runs will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 101,
+          "name": "Docklands Stadium",
+          "color": "text-bg-500"
+        },
+        {
+          "id": 102,
+          "name": "Total 1st over run:- Average 6 runs will be given if total 20 overs is not played, only 1st innings will be considered as valid",
+          "color": ""
+        },
+        {
+          "id": 103,
+          "name": "Total 6 over run:- Average 46 runs will be given if total 20 overs is not played, only 1st innings will be considered as valid",
+          "color": ""
+        },
+        {
+          "id": 104,
+          "name": "Total Fours - Average 25 fours will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 105,
+          "name": "Total Sixes - Average 11 Sixes will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 106,
+          "name": "Total Wickets - Average 12 wickets will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 107,
+          "name": "Total Wide – Average 8 Wide will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 108,
+          "name": "Total Extras - Average 14 Extras will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 109,
+          "name": "Total Run- Average 320 runs will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 110,
+          "name": "Melbourne Ground",
+          "color": "text-red-500"
+        },
+        {
+          "id": 111,
+          "name": "Total 1st over run:- Average 6 runs will be given if total 20 overs is not played, only 1st innings will be considered as valid",
+          "color": ""
+        },
+        {
+          "id": 112,
+          "name": "Total 6 over run:- Average 45 runs will be given if total 20 overs is not played, only 1st innings will be considered as valid",
+          "color": ""
+        },
+        {
+          "id": 113,
+          "name": "Total Fours - Average 26 fours will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 114,
+          "name": "Total Sixes - Average 10 Sixes will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 115,
+          "name": "Total Wickets - Average 12 wickets will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 116,
+          "name": "Total Wide – Average 8 Wide will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 117,
+          "name": "Total Extras - Average 15 Extras will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 118,
+          "name": "Total Run- Average 330 runs will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 119,
+          "name": "Sydney Ground",
+          "color": "text-red-500"
+        },
+        {
+          "id": 120,
+          "name": "Total 1st over run:- Average 6 runs will be given if total 20 overs is not played, only 1st innings will be considered as valid",
+          "color": ""
+        },
+        {
+          "id": 121,
+          "name": "Total 6 over run:- Average 46 runs will be given if total 20 overs is not played, only 1st innings will be considered as valid",
+          "color": ""
+        },
+        {
+          "id": 122,
+          "name": "Total Fours - Average 26 fours will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 123,
+          "name": "Total Sixes - Average 12 Sixes will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 124,
+          "name": "Total Wickets - Average 12 wickets will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 125,
+          "name": "Total Wide – Average 8 Wide will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 126,
+          "name": "Total Extras - Average 15 Extras will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 127,
+          "name": "Total Run- Average 335 runs will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 128,
+          "name": "Average will be given for player if the mentioned player is not included in the playing 11",
+          "color": "text-red-500"
+        },
+        {
+          "id": 129,
+          "name": "If the mentioned player is not included in playing 11 for 3 consecutive matches and the mentioned player will be deleted",
+          "color": "text-red-500"
+        },
+        {
+          "id": 130,
+          "name": "Super over will not be included",
+          "color": "text-red-500"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "sport_name": "binary",
+      "rules": [
+        {
+          "id": 1,
+          "name": "1.  All session's bets will be confirmed at market rate only. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 2,
+          "name": "2.  All session's settlement price means result can be checked from exchange's official sites. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 3,
+          "name": "3.  All session's result will be settlement price provided by exchange after market close. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 4,
+          "name": "4.  Every product has two types of prices SPOT and FUTURE.  We provide only near month's FUTURE price in Binary Session.  You can check it from the official website of that product. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 5,
+          "name": "5.  Session's timings: NFY, B-NFY, AXS, ICI, RIL, SBI, TT STL - Monday to Friday 10:00 a. m.  to 2:30 p. m.  GOLD, SILVER, CRUDE - Monday to Friday 11:30 a. m.  to 10:30 p. m.  CMX CRUDE, DOWJONES, NASDAQ, SNP - Monday to Friday 7:30 p. m.  to 12:00 a. m. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 6,
+          "name": "Same bets same time from multiple IDs not allowed. ",
+          "color": ""
+        },
+        {
+          "id": 7,
+          "name": "Operating and market making bets (cheating/line/chamka bets) are not allowed. ",
+          "color": ""
+        },
+        {
+          "id": 8,
+          "name": "If any case wrong rate has been given in fancy that particular bets will be cancelled. ",
+          "color": ""
+        },
+        {
+          "id": 9,
+          "name": "Deleted bets will remove under 24 hours and clients will be notified. ",
+          "color": ""
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "sport_name": "bookmaker",
+      "rules": [
+        {
+          "id": 1,
+          "name": "Company reserves the right to suspend/void any ID/bets if the same is found to be illegitimate.  For example, in case of VPN, robot use, multiple entry from the same IP, multiple bets at the same time (punching), and others.  Note: only winning bets will be voided. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 2,
+          "name": "Due to any reason any team will be getting advantage or disadvantage we are not concerned. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 3,
+          "name": "Company reserves the right to suspend/void any id/bets if the same is found to be illegitimate.  For example incase of vpn/robot-use/multiple entry from same IP/ multiple bets at the same time (Punching) and others.  Note : only winning bets will be voided. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 4,
+          "name": "We will simply compare both teams' scores after 25 overs; the higher score team will be declared the winner in ODI (25-over comparison). ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 5,
+          "name": "We will simply compare both teams' scores after 10 overs; the higher score team will be declared the winner in T20 matches (10-over comparison). ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 6,
+          "name": "Any query about the result or rates should be contacted within 7 days of the specific event; it will not be considered valid post 7 days from the event. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 7,
+          "name": "If two teams end up with equal points, then the result will be given based on the official point table. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 8,
+          "name": "Tennis - Advance fancy market",
+          "color": "text-red-500"
+        },
+        {
+          "id": 9,
+          "name": "If the second set is not completed, all bets regarding this market will be voided. ",
+          "color": ""
+        },
+        {
+          "id": 10,
+          "name": "If a player retires after the completion of the second set, then the market will be settled as three sets. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 11,
+          "name": "Virtual Cricket",
+          "color": "text-red-500"
+        },
+        {
+          "id": 12,
+          "name": "At any situation, if the video gets interrupted/stopped, then the same cannot be continued due to any technical issues, and the bookmaker market will be voided. ",
+          "color": ""
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "sport_name": "casino Payout Restrictions",
+      "rules": [
+        {
+          "id": 1,
+          "name": "Restriction of payout is applicable for all Crash games (include Aviator). ",
+          "color": ""
+        },
+        {
+          "id": 2,
+          "name": "In Single round, User is eligible for a max payout of 500 times his bet amount, example if the bet is 100 then max payout shall be 100 X 500= 50000, any winning above this multiplier shall not be paid out by the company. ",
+          "color": ""
+        },
+        {
+          "id": 3,
+          "name": "Another restriction is max payout amount is capped at 2,00,00,000 (2 Crore points), if net winning amount is beyond this amount then user shall be paid only this amount as max winning in Casino games. ",
+          "color": ""
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "sport_name": "election",
+      "rules": [
+        {
+          "id": 1,
+          "name": "1.  The final result declared by election commission of India for Loksabha election 2019 will be valid in our exchange. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 2,
+          "name": "2.  Accidental issues during Loksabha election 2019 will not be counted in our exchange. ",
+          "color": "text-red-500"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "sport_name": "fancy Markets",
+      "rules": [
+        {
+          "id": 1,
+          "name": "All fancy bets will be validated when match has been tied.",
+          "color": "text-red-500"
+        },
+        {
+          "id": 2,
+          "name": "All advance fancy will be suspended before toss or weather condition.",
+          "color": "text-red-500"
+        },
+        {
+          "id": 3,
+          "name": "In case technical error or any circumstances any fancy is suspended and does not resume result will be given all previous bets will be valid (based on haar/jeet).",
+          "color": "text-red-500"
+        },
+        {
+          "id": 4,
+          "name": "If any case wrong rate has been given in fancy that particular bets will be cancelled.",
+          "color": "text-red-500"
+        },
+        {
+          "id": 5,
+          "name": "In any circumstances management decision will be final related to all exchange items. Our scorecard will be considered as valid if there is any mismatch in online portal.",
+          "color": "text-red-500"
+        },
+        {
+          "id": 6,
+          "name": "In case customer make bets in wrong fancy we are not liable to delete, no changes will be made and bets will be consider as confirm bet.",
+          "color": "text-red-500"
+        },
+        {
+          "id": 7,
+          "name": "Due to any technical error market is open and result has came all bets after result will be deleted.",
+          "color": "text-red-500"
+        },
+        {
+          "id": 8,
+          "name": "Manual bets are not accepted in our exchange.",
+          "color": "text-red-500"
+        },
+        {
+          "id": 9,
+          "name": "Our exchange will provide 5 second delay in our tv.",
+          "color": "text-red-500"
+        },
+        {
+          "id": 10,
+          "name": "Company reserves the right to suspend/void any id/bets if the same is found to be illegitimate. For example incase of vpn/robot-use/multiple entry from same IP/ multiple bets at same time (Punching) and others. Note: only winning bets will be voided.",
+          "color": "text-red-500"
+        },
+        {
+          "id": 11,
+          "name": "Company reserves the right to void any bets (only winning bets) of any event at any point of the match if the company believes there is any cheating/wrong doing in that particular event by the players (either batsman/bowler).",
+          "color": "text-red-500"
+        },
+        {
+          "id": 12,
+          "name": "Once our exchange give username and password it is your responsibility to change a password.",
+          "color": "text-red-500"
+        },
+        {
+          "id": 13,
+          "name": "Penalty runs will be counted in all fancy. (This rule applicable from 20th March 2024).",
+          "color": "text-red-500"
+        },
+        {
+          "id": 14,
+          "name": "Warning: live scores and other data on this site is sourced from third party feeds and may be subject to time delays and/or be inaccurate. If you rely on this data to place bets, you do so at your own risk. Our exchange does not accept responsibility for loss suffered as a result of reliance on this data.",
+          "color": "text-red-500"
+        },
+        {
+          "id": 15,
+          "name": "Traders will be block the user ID if find any misinterpret activities, No queries accept regarding.",
+          "color": "text-red-500"
+        },
+        {
+          "id": 16,
+          "name": "Our exchange is not responsible for misuse of client id.",
+          "color": "text-red-500"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "sport_name": "football Fancy",
+      "rules": [
+        {
+          "id": 1,
+          "name": "Company reserves the right to suspend/void any id/bets if the same is found to be illegitimate.  For example in case of vpn/robot-use/multiple entry from same IP/multiple bets at same time (Punching) and others.  Note: only winning bets will be voided. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 2,
+          "name": "Tournament Total Goals: Team Total Goals goals scored in 90 minutes or in extra-time will count.  Goals scored in penalty shootouts do not count. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 3,
+          "name": "Tournament Corners: Only corners taken in 90 minutes count. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 4,
+          "name": "Tournament Penalties Missed/Converted: Penalties taken in 90 minutes, extra-time, and penalty shootouts all count.  If a penalty has to be re-taken, the previous disallowed penalty(ies) do not count. ",
+          "color": "text-red-500"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "sport_name": "horse Race",
+      "rules": [
+        {
+          "id": 1,
+          "name": "General",
+          "color": "text-red-500"
+        },
+        {
+          "id": 2,
+          "name": "All individual race markets will be determined according to the official result at the time of the 'weigh-in' announcement (or equivalent).  Subsequent disqualifications, appeals or amendments to the result will be disregarded. ",
+          "color": ""
+        },
+        {
+          "id": 3,
+          "name": "If a race is abandoned or otherwise declared void, or in the event of a walkover, all bets on that race will be void. ",
+          "color": ""
+        },
+        {
+          "id": 4,
+          "name": "If the scheduled venue is changed after the market has been loaded by us, all bets will be void.  Where a race does not take part on its scheduled day, all bets will be void. ",
+          "color": ""
+        },
+        {
+          "id": 5,
+          "name": "If a scheduled surface type is changed (e. g. , turf to dirt) all bets will stand. ",
+          "color": ""
+        },
+        {
+          "id": 6,
+          "name": "Non-Runner Rule",
+          "color": "text-red-500"
+        },
+        {
+          "id": 7,
+          "name": "Our non-runner rule relates to the adjustment of odds-on bets already matched when a horse in a race is declared a non-runner.  To adjust, we apply a reduction factor to the remaining runners. ",
+          "color": ""
+        },
+        {
+          "id": 8,
+          "name": "When the market is loaded, each horse is given a 'reduction factor' based on a forecast price, which is expressed as a percentage. ",
+          "color": ""
+        },
+        {
+          "id": 9,
+          "name": "Accurate reduction factors will only be applied to selections in the event of a non-runner. ",
+          "color": ""
+        },
+        {
+          "id": 10,
+          "name": "For Australian racing, reduction factors may be updated periodically at the discretion of us based on trading in the market, but after approximately five minutes from the scheduled off time of a given race, they will be updated only in exceptional circumstances. ",
+          "color": ""
+        },
+        {
+          "id": 11,
+          "name": "Reductions will be made to both win and place markets but applied differently, and horses will have a different reduction factor for each market. ",
+          "color": ""
+        },
+        {
+          "id": 12,
+          "name": "As soon as we become aware that a horse is an official non-runner or a highly likely non-runner, all matched bets on that horse will be void and the horse will be removed from the market. ",
+          "color": ""
+        },
+        {
+          "id": 13,
+          "name": "In the place market, the reduction factor of all non-runners will be applied and the potential winnings about matched bets on the remaining horses will be reduced. ",
+          "color": ""
+        },
+        {
+          "id": 14,
+          "name": "All the reduction factors on the remaining horses will be adjusted to reflect their improved chance of winning. ",
+          "color": ""
+        },
+        {
+          "id": 15,
+          "name": "Reduction factors are not applied to bets which are struck in play. ",
+          "color": ""
+        },
+        {
+          "id": 16,
+          "name": "In the event of a non-runner being removed from a race in error or following incorrect information regarding a runner’s participation, we will reinstate both the runner and all previously matched bets associated with that runner. ",
+          "color": ""
+        },
+        {
+          "id": 17,
+          "name": "Any non-runners will be removed from the relevant markets in the order in which they are brought to our attention. ",
+          "color": ""
+        },
+        {
+          "id": 18,
+          "name": "If a runner is not included in a market because of an error or incorrect information regarding a runner’s participation, we reserve the right to introduce the missing runner into the market at any time before settlement. ",
+          "color": ""
+        },
+        {
+          "id": 19,
+          "name": "In the win market, reductions will be made on the traded price. ",
+          "color": ""
+        },
+        {
+          "id": 20,
+          "name": "In the EW Market, reductions will be made on the traded win price. ",
+          "color": ""
+        },
+        {
+          "id": 21,
+          "name": "The traded price may be further reduced if any other horse(s) is subsequently declared a non-runner, however, odds cannot be reduced below 1. 01. ",
+          "color": ""
+        },
+        {
+          "id": 22,
+          "name": "A reserve runner may appear in the relevant markets but will have a non-applicable reduction factor until we receive confirmation that it is a confirmed runner. ",
+          "color": ""
+        },
+        {
+          "id": 23,
+          "name": "For the avoidance of doubt, any reduction factor applicable to a non-runner replaced by a reserve will be applied to all bets struck on the relevant markets. ",
+          "color": ""
+        },
+        {
+          "id": 24,
+          "name": "Card numbers are posted as a guide only: bets are placed on a named horse.  Horses will not be coupled.  Where any horse(s) runs for purse money only, it is deemed a non-runner for betting purposes. ",
+          "color": ""
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "sport_name": "ipl",
+      "rules": [
+        {
+          "id": 1,
+          "name": "IPL Special 2024 Valid Only For First 21 Matches.  If IPL fixture of 21 matches gets reduced due to any reason, then all the special fancies will be voided (Match abandoned due to rain/bad light will not be considered in this)",
+          "color": "text-red-500"
+        },
+        {
+          "id": 2,
+          "name": "Management decision will be final",
+          "color": "text-red-500"
+        },
+        {
+          "id": 3,
+          "name": "Total 1st over runs: Average 6 runs will be given in case match abandoned or over reduced (only 1st innings valid)",
+          "color": ""
+        },
+        {
+          "id": 4,
+          "name": "Total 1st 6 over run:- Average 48 runs will be given in case match abandoned or over reduced (Only 1st Innings valid)",
+          "color": ""
+        },
+        {
+          "id": 5,
+          "name": "Total fours: Average 28 fours will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 6,
+          "name": "Total sixes: Average 14 sixes will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 7,
+          "name": "Total Wickets - Average will 12 Wickets be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 8,
+          "name": "Total Wides - Average 10 wides will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 9,
+          "name": "Total Extras - Average 17 extras will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 10,
+          "name": "Total No ball :- Average 1 No ball will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 11,
+          "name": "Total Fifties - Average 2 fifties will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 12,
+          "name": "Total Caught outs: Average 8 caught out will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 13,
+          "name": "Total Bowled:- Average 2 Bowled out will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 14,
+          "name": "Total LBW:- Average 1 LBW will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 15,
+          "name": "Total Run out:- Average 1 Run out will be given in case match abandoned or over reduced",
+          "color": ""
+        },
+        {
+          "id": 16,
+          "name": "At any situation if result is given for any particular event based on the rates given for the same, then the particular result will be considered valid, similarly if the tournament gets canceled due to any reason the previously given result will be considered valid",
+          "color": "text-red-500"
+        },
+        {
+          "id": 17,
+          "name": "How many matches win by a team : Only valid for league stage matches.  Ex.  For CSK, How many matches CSK win during league stages only considered.  Playoffs matches not considered in this. ",
+          "color": ""
+        },
+        {
+          "id": 18,
+          "name": "Most 4's by individual batsman of IPL : Maximum Number of Fours Hit By A Batsman in full Tournament.  Ex.  Last Season (2021) R Gaikwad Hit 64 Fours in 16 Matches.  So, 64 was the Result for last season. ",
+          "color": ""
+        },
+        {
+          "id": 19,
+          "name": "Most 4's by an individual batsman in an Inning of IPL : Maximum Number of Fours Hit By A Batsman in one Innings.  Ex.  Last Season (2021) S Yadav Hit 13 Fours in 55th league Match.  So, 13 was the Result for last season. ",
+          "color": ""
+        },
+        {
+          "id": 20,
+          "name": "Most 6's by individual batsman of IPL : Maximum Number of Sixes Hit By A Batsman in full Tournament.  Ex.  Last Season (2021) KL Rahul Hit 30 Sixes in 13 Matches.  So, 30 was the Result for last season. ",
+          "color": ""
+        },
+        {
+          "id": 21,
+          "name": "Most 6's by individual batsman in an Inning of IPL : Maximum Number of Sixes Hit By A Batsman in one Innings.  Ex.  Last Season (2021) K Pollard Hit 8 Sixes in 27th league Match.  So, 8 was the Result for last season. ",
+          "color": ""
+        },
+        {
+          "id": 22,
+          "name": "Most runs given by Bowler in an Inning of IPL : Maximum How much Runs conceded by a individual Bowler in an Innings.  Ex : Last Season (2021) L Ngidi concede 62 runs in 4 overs of 27th Match.  So, 62 was the Result for last season. ",
+          "color": ""
+        },
+        {
+          "id": 23,
+          "name": "Most wickets by Bowler in an inning of IPL : Maximum How much Wickets taken by a individual Bowler in an Innings.  Ex : Last Season (2021) H Patel taken 5 wickets in 1st Match.  So, 5 was the Result for last season. ",
+          "color": ""
+        },
+        {
+          "id": 24,
+          "name": "Most 50's by individual batsman of IPL : Maximum Number of Fifties Hit By A Batsman in full Tournament.  Ex.  Last Season (2021) Faf duPlessis Hit 6 fifties in 16 Matches.  So, 6 was the Result for last season. ",
+          "color": ""
+        },
+        {
+          "id": 25,
+          "name": "Highest total runs in individual match of IPL : Maximum total runs of both Teams in individual match.  Ex .  Last Season (2021) RR vs PBKS match both teams Total runs 438 (4th League Match) .  So, 438 was the Result for Last Season. ",
+          "color": ""
+        },
+        {
+          "id": 26,
+          "name": "Highest Innings run - Only first Innings is valid",
+          "color": ""
+        },
+        {
+          "id": 27,
+          "name": "Lowest innings run - Only first innings is valid",
+          "color": ""
+        },
+        {
+          "id": 28,
+          "name": "Highest over run: Both innings are valid",
+          "color": ""
+        },
+        {
+          "id": 29,
+          "name": "Highest Match 1st over run in individual match: Only first innings is valid",
+          "color": ""
+        },
+        {
+          "id": 30,
+          "name": "Highest Fours in individual match: Both innings are valid",
+          "color": ""
+        },
+        {
+          "id": 31,
+          "name": "Highest Sixes in individual match: Both innings are valid",
+          "color": ""
+        },
+        {
+          "id": 32,
+          "name": "Highest Extras in individual match: Both innings are valid",
+          "color": ""
+        },
+        {
+          "id": 33,
+          "name": "Highest Wicket in individual match: Both innings are valid",
+          "color": ""
+        },
+        {
+          "id": 34,
+          "name": "Highest 6 over run: - Both innings are valid",
+          "color": ""
+        },
+        {
+          "id": 35,
+          "name": "Super over will not be included",
+          "color": "text-red-500"
+        },
+        {
+          "id": 36,
+          "name": "In fastest fifty always the first 50 runs will be considered, for example of R Sharma scores 1st fifty in 17 balls and scores 100 in next 14 balls, fastest 50 will be given based on the balls for the 1st fifty runs",
+          "color": ""
+        },
+        {
+          "id": 37,
+          "name": "Total No ball :- Average 1 No ball",
+          "color": ""
+        },
+        {
+          "id": 38,
+          "name": "Total 30s: Average 2 Thirties",
+          "color": ""
+        },
+        {
+          "id": 39,
+          "name": "Highest Match 1st 6 over run: Only first Innings is valid",
+          "color": ""
+        },
+        {
+          "id": 40,
+          "name": "Highest Partnership Runs in IPL: Both Innings are valid",
+          "color": ""
+        },
+        {
+          "id": 41,
+          "name": "Most Balls Faced By a Batsman of IPL : Maximum balls Faced by an Individual Batsman in the Single M",
+          "color": ""
+        },
+        {
+          "id": 42,
+          "name": "Most Dot balls By a Bowler in an Innings of IPL : Maximum Dot balls Bowled by a Bowler in his Quota.  Wickets, Leg byes and Byes Considered as Dot ball",
+          "color": ""
+        },
+        {
+          "id": 43,
+          "name": "Highest Match 1st over run: Only first Innings is valid",
+          "color": ""
+        },
+        {
+          "id": 44,
+          "name": "Highest Partnership Runs in IPL: Both Innings are valid",
+          "color": ""
+        },
+        {
+          "id": 45,
+          "name": "Total Impact over’s: Number of over’s scored 10 runs or above.  Team wise only 1st inning are valid and Match wise both innings are valid. ",
+          "color": ""
+        },
+        {
+          "id": 46,
+          "name": "Bowler Event :- 2 Over Wkts , Dotballs , Boundaries , Runs bets valid in 1st Two Overs (1st inning Vaild ) The mention Bowler has to Run(Start over) the defined number of Overs , else the bets related to that particular event will get void.  For example if the mentioned bowler has bowled 3 Overs , then 2 Over of that particular bowler will be considered as valid and the 4 Over will get void.  If team get all out in the mentioned bowler Running Over then result considered as valid. .  For example mentioned bowler 1. 4 Over bowled & team all out in 19. 4 then bowler 2nd over result is valid and 4th over fancy is voided Or Bowler bowled 3. 3 over & team all out on 19. 3 then Both 2 & 4 over is valid. ",
+          "color": ""
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "sport_name": "kabaddi",
+      "rules": [
+        {
+          "id": 1,
+          "name": "In any circumstances management decision will be final related to all Fancy of kabaddi of our exchange. ",
+          "color": ""
+        },
+        {
+          "id": 2,
+          "name": "All fancy bets will be validated when match has been tied. ",
+          "color": ""
+        },
+        {
+          "id": 3,
+          "name": "Result of individual player of fancy will be validated only when player play that match. ",
+          "color": ""
+        },
+        {
+          "id": 4,
+          "name": "In any case wrong rate has been given in fancy that particular bets will be deleted. ",
+          "color": ""
+        },
+        {
+          "id": 5,
+          "name": "For Playoffs Final Result Of 40 Minutes Of Two Halves Will Be Valid In Our Exchange. ",
+          "color": ""
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "sport_name": "khado",
+      "rules": [
+        {
+          "id": 1,
+          "name": "Only First inning valid for T20 and one day matches. ",
+          "color": ""
+        },
+        {
+          "id": 2,
+          "name": "Same will be work like Lambi.  If match abandoned or over reduced, all bets will be deleted. ",
+          "color": ""
+        },
+        {
+          "id": 3,
+          "name": "You can choose your own value in this event. ",
+          "color": ""
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "sport_name": "lunch Favourite",
+      "rules": [
+        {
+          "id": 1,
+          "name": "1.  The team which is favourite at lunch will be considered as lunch favourite or the team which is favourite after first inning last ball will be considered as lunch favourite in our exchange. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 2,
+          "name": "2.  In any circumstances management decision will be final. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 3,
+          "name": "3.  In case of tie in T20 or one day in lunch favourite game, all bets will be deleted in our exchange. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 4,
+          "name": "4.  In case overs are reduced in a match, the team which favourite at lunch will be considered as lunch favourite. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 4,
+          "name": "4. 1.  For example: if match is reduced to 18 overs per side in T20 or One Day then after 18 overs the team which is favourite at lunch will be considered as lunch favourite. ",
+          "color": ""
+        },
+        {
+          "id": 5,
+          "name": "5.  In case of weather, if 1st innings match overs are reduced and direct target is given to the team which will bat in 2nd inning then lunch favourite will be considered after the target is given at lunch. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 5,
+          "name": "5. 1 For example :- in T20 match rain comes at 14 over and match is interrupted due to rain and direct target is given to 2nd batting team, then team which is favourite in match odds after target is given in match, will be considered as lunch favourite. ",
+          "color": ""
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "sport_name": "match",
+      "rules": [
+        {
+          "id": 1,
+          "name": "Company reserves the right to suspend/void any id/bets if the same is found to be illegitimate.  For example incase of vpn/robot-use/multiple entry from same IP/ multiple bets at same time (Punching) and others.  Note : only winning bets will be voided, For example: If we find such entries (above mentioned) from any id and their bets are (200000 lay in a 6 over session for the rate 40 and 200000 back for the rate of 48) and the actual score is 38, bets of 40 lay will be voided and the bets for 48 back will be considered valid. ",
+          "color": ""
+        },
+        {
+          "id": 2,
+          "name": "TENNIS Match Odds :- If 1st set has been not completed at the time of the retirement or disqualification, then all bets relating to that individual match will be void",
+          "color": ""
+        },
+        {
+          "id": 3,
+          "name": "FOOTBALL Match Odds :- All bets apply to the relevant full 'regular time' period including stoppage time.  Any extra-time and/or penalty shoot-out is not included.  Forthe cancellation of a goal, due to VAR, bets matched between the time of the goal being scored and the time at which the video assistant referee finishes the review will be voided.  For the cancellation of a red card, due to VAR, bets matched after the time at which the video assistant referee commences the review will be voided. ",
+          "color": ""
+        },
+        {
+          "id": 4,
+          "name": "FOOTBALL Under_Over Goals :- In the event of a match starting but not being completed, all bets will be void, unless the specific market outcome is already determined",
+          "color": ""
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "sport_name": "politics",
+      "rules": [
+        {
+          "id": 1,
+          "name": "Indian state legislative assembly elections. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 2,
+          "name": "1.  This event is to decide the winner of various legislative assemblies of India. ",
+          "color": ""
+        },
+        {
+          "id": 3,
+          "name": "2.  The final result declared by the Election Commission of India for assembly elections of various states of India for a particular year will be valid in our exchange.  The customers are entirely responsible for their bets at all times. ",
+          "color": ""
+        },
+        {
+          "id": 4,
+          "name": "3.  All bets will be voided if the election doesn’t take place in the given time by the Election Commission or as per our exchange management decision. ",
+          "color": ""
+        },
+        {
+          "id": 5,
+          "name": "4.  Company reserves the right to suspend/void any bets on this event at any time if we find the same not to be legitimate with the certainty of the outcome. ",
+          "color": ""
+        },
+        {
+          "id": 6,
+          "name": "5.  Accidental issues during assembly elections will not be counted in our exchange.  If required, additional candidates may be added on request. ",
+          "color": ""
+        },
+        {
+          "id": 7,
+          "name": "6.  Kindly be informed no candidates will be partially settled and will remain in the market until it is fully settled.  This is to ensure that all customers can continue trading for the candidates that they have positions on, since each candidate is still a valid runner in this market. ",
+          "color": ""
+        },
+        {
+          "id": 8,
+          "name": "7.  Please be informed that the transmissions described as 'live' by few broadcasters may actually be delayed due to multiple scenarios. ",
+          "color": ""
+        },
+        {
+          "id": 9,
+          "name": "8.  If any candidate withdraws for any reason, including death, all bets on the market will be valid and be settled as per the defined rules. ",
+          "color": ""
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "sport_name": "psl",
+      "rules": [
+        {
+          "id": 1,
+          "name": "1.  If PSL fixture of 34 matches gets reduced due to any reason, then all the special fancies will be voided (Match abandoned due to rain/bad light will not be considered in this). ",
+          "color": ""
+        },
+        {
+          "id": 2,
+          "name": "2.  Total Matches 1st over runs : Average 6 runs will be given in case match abandoned or over reduced (only 1st innings valid). ",
+          "color": ""
+        },
+        {
+          "id": 3,
+          "name": "3.  Total Matches 1st 6 over runs : Average 50 runs will be given in case match abandoned or over reduced (Only 1st Innings valid). ",
+          "color": ""
+        },
+        {
+          "id": 4,
+          "name": "4.  Total fours: Average 32 fours will be given in case match abandoned or over reduced. ",
+          "color": ""
+        },
+        {
+          "id": 5,
+          "name": "5.  Total sixes: Average 13 sixes will be given in case match abandoned or over reduced. ",
+          "color": ""
+        },
+        {
+          "id": 6,
+          "name": "6.  Total 30's: Average 2 Thirties will be given in case match abandoned or over reduced. ",
+          "color": ""
+        },
+        {
+          "id": 7,
+          "name": "7.  Total Fifties - Average 2 Fifties will be given in case match abandoned or over reduced. ",
+          "color": ""
+        },
+        {
+          "id": 8,
+          "name": "8.  Total Wickets - Average 13 Wickets will be given in case match abandoned or over reduced. ",
+          "color": ""
+        },
+        {
+          "id": 9,
+          "name": "9.  Total Wides - Average 11 Wides will be given in case match abandoned or over reduced. ",
+          "color": ""
+        },
+        {
+          "id": 10,
+          "name": "10.  Total Extras - Average 18 Extras will be given in case match abandoned or over reduced. ",
+          "color": ""
+        },
+        {
+          "id": 11,
+          "name": "11.  Total Caught outs: Average 8 Caught out will be given in case match abandoned or over reduced. ",
+          "color": ""
+        },
+        {
+          "id": 12,
+          "name": "12.  Total Bowled:- Average 2 Bowled out will be given in case match abandoned or over reduced. ",
+          "color": ""
+        },
+        {
+          "id": 13,
+          "name": "13.  Total LBW:- Average 1 LBW will be given in case match abandoned or over reduced. ",
+          "color": ""
+        },
+        {
+          "id": 14,
+          "name": "14.  Total Run out:- Average 1 Run out will be given in case match abandoned or over reduced.  At any situation if result is given for any particular event based on the rates given for the same, then the particular result will be considered valid, similarly if the tournament gets canceled due to any reason the previously given result will be considered valid. ",
+          "color": ""
+        },
+        {
+          "id": 15,
+          "name": "15.  Highest innings run - Both innings are valid. ",
+          "color": ""
+        },
+        {
+          "id": 16,
+          "name": "16.  Lowest innings run - Only first innings is valid. ",
+          "color": ""
+        },
+        {
+          "id": 17,
+          "name": "17.  Highest Match 1st over runs in the match: Only first innings is valid. ",
+          "color": ""
+        },
+        {
+          "id": 18,
+          "name": "18.  Highest 1st 6 over runs: - Only first innings is valid. ",
+          "color": ""
+        },
+        {
+          "id": 19,
+          "name": "19.  Highest 4's in individual match: Both innings are valid. ",
+          "color": ""
+        },
+        {
+          "id": 20,
+          "name": "20.  Highest 6's in individual match: Both innings are valid. ",
+          "color": ""
+        },
+        {
+          "id": 21,
+          "name": "21.  Highest Wickets in individual match: Both innings are valid. ",
+          "color": ""
+        },
+        {
+          "id": 22,
+          "name": "22.  Highest Extras in individual match: Both innings are valid. ",
+          "color": ""
+        },
+        {
+          "id": 23,
+          "name": "23.  Highest over runs: Both innings are valid. ",
+          "color": ""
+        },
+        {
+          "id": 24,
+          "name": "24.  Most Balls Faced By a Batsman : Maximum Balls Faced by a batsman in one Innings. ",
+          "color": ""
+        },
+        {
+          "id": 25,
+          "name": "25.  Most 4's by individual batsman in an Inning : Maximum Number of Fours Hit By A Batsman in one Innings. ",
+          "color": ""
+        },
+        {
+          "id": 26,
+          "name": "26.  Most 6's by individual batsman in an Inning : Maximum Number of Sixes Hit By A Batsman in one Innings. ",
+          "color": ""
+        },
+        {
+          "id": 27,
+          "name": "27.  Most Dot balls By a Bowler in an Inning : Maximum Dot balls Bowled by a Bowler in his Quota of Innings. ",
+          "color": ""
+        },
+        {
+          "id": 28,
+          "name": "28.  Most runs given by Bowler in an Inning : Maximum Runs conceded by a individual Bowler in an Innings. ",
+          "color": ""
+        },
+        {
+          "id": 29,
+          "name": "29.  Most wickets by Bowler in an inning : Maximum Wickets taken by a individual Bowler in an Innings. ",
+          "color": ""
+        },
+        {
+          "id": 30,
+          "name": "30.  Total 50 Plus Partnership runs - 50 and above 50 runs partnership will be counted in this event. ",
+          "color": ""
+        },
+        {
+          "id": 31,
+          "name": "31.  In fastest fifty always the first 50 runs will be considered, for example of R Sharma scores 1st fifty in 17 balls and scores 100 in next 14 balls, fastest 50 will be given based on the balls for the 1st fifty runs.  Super over will not be included. ",
+          "color": ""
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "sport_name": "virtual Tennis",
+      "rules": [
+        {
+          "id": 1,
+          "name": "If streaming stops or some technical issue occurs, the match will be abandoned. ",
+          "color": ""
+        },
+        {
+          "id": 2,
+          "name": "If there is any technical interference in the match then also the match will be abandoned. ",
+          "color": ""
+        },
+        {
+          "id": 3,
+          "name": "*There will be 3 sets in the match.  There are 3 games in 1 set",
+          "color": ""
+        },
+        {
+          "id": 5,
+          "name": "*In the match, within any set, there are 3-3 games between the two players (level game) till a tie break of 5 points is played, according to which the one who gets 2 points more than the difference of points will win the set. ",
+          "color": ""
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "sport_name": "world Cup",
+      "rules": [
+        {
+          "id": 1,
+          "name": "Company reserves the right to suspend/void any id/bets if the same is found to be illegitimate.  For example, in case of VPN/robot-use/multiple entry from the same IP/multiple bets at the same time (Punching) and others.  Note: only winning bets will be voided. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 2,
+          "name": "In case of any circumstances, management decision will be final for all the fancies under World Cup. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 3,
+          "name": "WC: WORLD CUP. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 4,
+          "name": "MOM: MAN OF THE MATCH. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 5,
+          "name": "Match 1st over run: This fancy is valid only for the first innings of the match.  Average 4 runs will be given in case of match abandoned or the entire 50 over is not played. ",
+          "color": ""
+        },
+        {
+          "id": 6,
+          "name": "Highest inning run: This fancy is valid only for the first innings of the match. ",
+          "color": ""
+        },
+        {
+          "id": 7,
+          "name": "Lowest innings run: This fancy is valid only for the first innings of the match. ",
+          "color": ""
+        },
+        {
+          "id": 8,
+          "name": "Total Fours: Average 48 Fours will be given if the match is abandoned or over reduced. ",
+          "color": ""
+        },
+        {
+          "id": 9,
+          "name": "Total Sixes: Average 10 Sixes will be given if the match is abandoned or over reduced. ",
+          "color": ""
+        },
+        {
+          "id": 10,
+          "name": "Total Wickets: Average 15 Wickets will be given if the match is abandoned or over reduced. ",
+          "color": ""
+        },
+        {
+          "id": 11,
+          "name": "Total Wide: Average 14 Wide will be given if the match is abandoned or over reduced. ",
+          "color": ""
+        },
+        {
+          "id": 12,
+          "name": "Total Extras: Average 25 Extras will be given if the match is abandoned or over reduced. ",
+          "color": ""
+        },
+        {
+          "id": 13,
+          "name": "Total No ball: Average 2 No balls will be given if the match is abandoned or over reduced. ",
+          "color": ""
+        },
+        {
+          "id": 14,
+          "name": "Total Fifties: Average 3 Fifties will be given if the match is abandoned or over reduced. ",
+          "color": ""
+        },
+        {
+          "id": 15,
+          "name": "Total Centuries: Average 1 Century will be given if the match is abandoned or over reduced. ",
+          "color": ""
+        },
+        {
+          "id": 16,
+          "name": "Total Run outs: Average 1 Run out will be given if the match is abandoned or over reduced. ",
+          "color": ""
+        },
+        {
+          "id": 17,
+          "name": "Total Ducks: Average 1 Duck out will be given if the match is abandoned or over reduced.  If the player is not out in the score of zero, the same will not be considered as Duck out. ",
+          "color": ""
+        },
+        {
+          "id": 18,
+          "name": "Total Caught Out: Average 10 Caught Out will be given if the match is abandoned or over reduced. ",
+          "color": ""
+        },
+        {
+          "id": 19,
+          "name": "All fancy related to Individual teams are valid only for league matches (9 matches played by the teams in league stages). ",
+          "color": ""
+        },
+        {
+          "id": 20,
+          "name": "In case any player mentioned in our World Cup fancy doesn’t play for the first three consecutive matches, all the bets will be deleted. ",
+          "color": ""
+        },
+        {
+          "id": 21,
+          "name": "1.  In case any player mentioned in our World Cup fancy got ruled out or doesn’t play post few matches, the bets after the last match played by the above mentioned player will be deleted. ",
+          "color": ""
+        },
+        {
+          "id": 22,
+          "name": "2.  First 10 over runs is valid for both innings for all the teams. ",
+          "color": ""
+        },
+        {
+          "id": 23,
+          "name": "3.  Total runs by team: Average will be given if the match is abandoned or over reduced. ",
+          "color": ""
+        },
+        {
+          "id": 24,
+          "name": "4.  First 10 over runs by team: Average will be given if the match is abandoned or over reduced. ",
+          "color": ""
+        },
+        {
+          "id": 25,
+          "name": "5.  Fours by team: Average will be given if the match is abandoned or over reduced. ",
+          "color": ""
+        },
+        {
+          "id": 26,
+          "name": "6.  Sixes by team: Average will be given if the match is abandoned or over reduced. ",
+          "color": ""
+        },
+        {
+          "id": 27,
+          "name": "7.  Opening wicket partnership: Average will be given if the match is abandoned or over reduced. ",
+          "color": ""
+        },
+        {
+          "id": 28,
+          "name": "8.  Runs by player: Average will be given if the match is abandoned or over reduced, unless one ball is being played after the player enters the crease. ",
+          "color": ""
+        },
+        {
+          "id": 29,
+          "name": "9.  Wickets by player: Average will be given if the match is abandoned or over reduced, unless one legal delivery has been bowled by the mentioned player. ",
+          "color": ""
+        },
+        {
+          "id": 30,
+          "name": "10.  Sixes by player: Average will be given if the match is abandoned or over reduced, unless one ball is being played after the player enters the crease. ",
+          "color": ""
+        },
+        {
+          "id": 31,
+          "name": "Average of every fancy follows:",
+          "color": "text-red-500"
+        },
+        {
+          "id": 31,
+          "name": "Total runs by ENG: 295 runs per game. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 32,
+          "name": "First 10 over runs of ENG: 56 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 33,
+          "name": "Total Fours by ENG: 25 fours per game. ",
+          "color": ""
+        },
+        {
+          "id": 34,
+          "name": "Total Sixes by ENG: 7 sixes per game. ",
+          "color": ""
+        },
+        {
+          "id": 35,
+          "name": "Opening wicket partnership runs of ENG: 44 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 36,
+          "name": "J Roy runs: 38 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 37,
+          "name": "J Bairstow runs: 43 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 38,
+          "name": "J Root runs: 43 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 39,
+          "name": "J Archer wickets: 2 wickets per game. ",
+          "color": ""
+        },
+        {
+          "id": 40,
+          "name": "C Woakes wickets: 2 wickets per game. ",
+          "color": ""
+        },
+        {
+          "id": 41,
+          "name": "A Rashid wickets: 2 wickets per game. ",
+          "color": ""
+        },
+        {
+          "id": 42,
+          "name": "J Bairstow Sixes: 2 sixes per game. ",
+          "color": ""
+        },
+        {
+          "id": 43,
+          "name": "J Buttler Sixes: 2 sixes per game. ",
+          "color": ""
+        },
+        {
+          "id": 44,
+          "name": "Total runs by IND: 285 runs per game. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 45,
+          "name": "First 10 over runs of IND: 53 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 46,
+          "name": "Total Fours by IND: 26 fours per game. ",
+          "color": ""
+        },
+        {
+          "id": 47,
+          "name": "Total Sixes by IND: 6 sixes per game. ",
+          "color": ""
+        },
+        {
+          "id": 48,
+          "name": "Opening wicket partnership runs of IND: 41 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 49,
+          "name": "S Dhawan runs: 38 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 50,
+          "name": "R Sharma runs: 43 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 51,
+          "name": "V Kohli runs: 48 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 52,
+          "name": "J Bumrah wickets: 2 wickets per game. ",
+          "color": ""
+        },
+        {
+          "id": 53,
+          "name": "M Shami wickets: 2 wickets per game. ",
+          "color": ""
+        },
+        {
+          "id": 54,
+          "name": "K Yadav wickets: 2 wickets per game. ",
+          "color": ""
+        },
+        {
+          "id": 55,
+          "name": "R Sharma Sixes: 2 sixes per game. ",
+          "color": ""
+        },
+        {
+          "id": 56,
+          "name": "H Pandya Sixes: 1 sixes per game. ",
+          "color": ""
+        },
+        {
+          "id": 57,
+          "name": "Total runs by AUS: 280 runs per game. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 58,
+          "name": "First 10 over runs of AUS: 52 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 59,
+          "name": "Total Fours by AUS: 26 fours per game. ",
+          "color": ""
+        },
+        {
+          "id": 60,
+          "name": "Total Sixes by AUS: 6 sixes per game. ",
+          "color": ""
+        },
+        {
+          "id": 61,
+          "name": "Opening wicket partnership runs of AUS: 40 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 62,
+          "name": "D Warner runs: 43 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 63,
+          "name": "A Finch runs: 38 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 64,
+          "name": "S Smith runs: 42 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 65,
+          "name": "M Starc wickets: 2 wickets per game. ",
+          "color": ""
+        },
+        {
+          "id": 66,
+          "name": "P Cummins wickets: 2 wickets per game. ",
+          "color": ""
+        },
+        {
+          "id": 67,
+          "name": "A Zampa wickets: 2 wickets per game. ",
+          "color": ""
+        },
+        {
+          "id": 68,
+          "name": "D Warner Sixes: 2 sixes per game. ",
+          "color": ""
+        },
+        {
+          "id": 69,
+          "name": "Total runs by SA: 270 runs per game. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 70,
+          "name": "First 10 over runs of SA: 51 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 71,
+          "name": "Total Fours by SA: 24 fours per game. ",
+          "color": ""
+        },
+        {
+          "id": 72,
+          "name": "Total Sixes by SA: 5 sixes per game. ",
+          "color": ""
+        },
+        {
+          "id": 73,
+          "name": "Opening wicket partnership runs of SA: 37 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 74,
+          "name": "H Amla runs: 38 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 75,
+          "name": "F Du Plessis runs: 39 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 76,
+          "name": "V Der Dussen runs: Runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 77,
+          "name": "Q De Kock runs: 36 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 78,
+          "name": "I Tahir wickets: 2 wickets per game. ",
+          "color": ""
+        },
+        {
+          "id": 79,
+          "name": "K Rabada wickets: 2 wickets per game. ",
+          "color": ""
+        },
+        {
+          "id": 80,
+          "name": "D Steyn wickets: 2 wickets per game. ",
+          "color": ""
+        },
+        {
+          "id": 81,
+          "name": "Q De Kock Sixes: 1 sixes per game. ",
+          "color": ""
+        },
+        {
+          "id": 82,
+          "name": "Total runs by NZ: 275 runs per game. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 83,
+          "name": "First 10 over runs of NZ: 50 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 84,
+          "name": "Total Fours by NZ: 25 fours per game. ",
+          "color": ""
+        },
+        {
+          "id": 85,
+          "name": "Total Sixes by NZ: 5 sixes per game. ",
+          "color": ""
+        },
+        {
+          "id": 86,
+          "name": "Opening wicket partnership runs of NZ: 37 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 87,
+          "name": "C Munro runs: 32 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 88,
+          "name": "M Guptill runs: 38 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 89,
+          "name": "K Williamson runs: 45 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 90,
+          "name": "H Nicholls runs: Runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 91,
+          "name": "T Boult wickets: 2 wickets per game. ",
+          "color": ""
+        },
+        {
+          "id": 92,
+          "name": "T Southee wickets: 1 wicket per game. ",
+          "color": ""
+        },
+        {
+          "id": 93,
+          "name": "M Santner wickets: 1 wicket per game. ",
+          "color": ""
+        },
+        {
+          "id": 94,
+          "name": "M Guptill Sixes: 2 sixes per game. ",
+          "color": ""
+        },
+        {
+          "id": 95,
+          "name": "Total runs by WI: 270 runs per game. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 96,
+          "name": "First 10 over runs of WI: 49 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 97,
+          "name": "Total Fours by WI: 23 fours per game. ",
+          "color": ""
+        },
+        {
+          "id": 98,
+          "name": "Total Sixes by WI: 7 sixes per game. ",
+          "color": ""
+        },
+        {
+          "id": 99,
+          "name": "Opening wicket partnership runs of WI: 35 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 100,
+          "name": "C Gayle runs: 37 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 101,
+          "name": "E Lewis runs: 32 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 102,
+          "name": "DM Bravo runs: 32 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 103,
+          "name": "S Hope runs: 37 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 104,
+          "name": "K Roach wickets: 1 wicket per game. ",
+          "color": ""
+        },
+        {
+          "id": 105,
+          "name": "S Cottrell wickets: 1 wicket per game. ",
+          "color": ""
+        },
+        {
+          "id": 106,
+          "name": "J Holder wickets: 1 wicket per game. ",
+          "color": ""
+        },
+        {
+          "id": 107,
+          "name": "A Nurse wickets: 1 wicket per game. ",
+          "color": ""
+        },
+        {
+          "id": 108,
+          "name": "Total runs by PAK: 270 runs per game. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 109,
+          "name": "First 10 over runs of PAK: 50 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 110,
+          "name": "Total Fours by PAK: 24 fours per game. ",
+          "color": ""
+        },
+        {
+          "id": 111,
+          "name": "Total Sixes by PAK: 5 sixes per game. ",
+          "color": ""
+        },
+        {
+          "id": 112,
+          "name": "Opening wicket partnership runs of PAK: 36 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 113,
+          "name": "Imam Ul Haq runs: 36 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 114,
+          "name": "B Azam runs: 44 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 115,
+          "name": "F Zaman runs: 34 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 116,
+          "name": "H Ali wickets: 2 wickets per game. ",
+          "color": ""
+        },
+        {
+          "id": 117,
+          "name": "Shadab Khan wickets: 2 wickets per game. ",
+          "color": ""
+        },
+        {
+          "id": 118,
+          "name": "Shaheen Afridi wickets: 2 wickets per game. ",
+          "color": ""
+        },
+        {
+          "id": 119,
+          "name": "F Zaman Sixes: 1 sixes per game. ",
+          "color": ""
+        },
+        {
+          "id": 120,
+          "name": "C Gayle Sixes: 2 sixes per game. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 121,
+          "name": "A Russell Sixes: 2 sixes per game. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 122,
+          "name": "Total runs by SL: 250 runs per game. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 123,
+          "name": "First 10 over runs of SL: 48 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 124,
+          "name": "Total Fours by SL: 22 fours per game. ",
+          "color": ""
+        },
+        {
+          "id": 125,
+          "name": "Total Sixes by SL: 4 sixes per game. ",
+          "color": ""
+        },
+        {
+          "id": 126,
+          "name": "Opening wicket partnership runs of SL: 32 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 127,
+          "name": "D Karunaratne runs: 31 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 128,
+          "name": "L Thirimanne runs: 29 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 129,
+          "name": "K Mendis runs: 33 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 130,
+          "name": "L Malinga wickets: 1 wicket per game. ",
+          "color": ""
+        },
+        {
+          "id": 131,
+          "name": "S Lakmal wickets: 1 wicket per game. ",
+          "color": ""
+        },
+        {
+          "id": 132,
+          "name": "J Vandersay wickets: 1 wicket per game. ",
+          "color": ""
+        },
+        {
+          "id": 133,
+          "name": "T Perera Sixes: 1 sixes per game. ",
+          "color": ""
+        },
+        {
+          "id": 134,
+          "name": "Total runs by BAN: 245 runs per game. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 135,
+          "name": "First 10 over runs of BAN: 48 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 136,
+          "name": "Total Fours by BAN: 22 fours per game. ",
+          "color": ""
+        },
+        {
+          "id": 137,
+          "name": "Total Sixes by BAN: 4 sixes per game. ",
+          "color": ""
+        },
+        {
+          "id": 138,
+          "name": "Opening wicket partnership runs of BAN: 32 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 139,
+          "name": "T Iqbal runs: 34 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 140,
+          "name": "S Sarkar runs: 29 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 141,
+          "name": "M Rahim runs: 31 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 142,
+          "name": "M Hasan wickets: 1 wicket per game. ",
+          "color": ""
+        },
+        {
+          "id": 143,
+          "name": "M Rahman wickets: 1 wicket per game. ",
+          "color": ""
+        },
+        {
+          "id": 144,
+          "name": "M Mortaza wickets: 1 wicket per game. ",
+          "color": ""
+        },
+        {
+          "id": 145,
+          "name": "T Iqbal Sixes: 1 sixes per game. ",
+          "color": ""
+        },
+        {
+          "id": 146,
+          "name": "Total runs by AFG: 235 runs per game. ",
+          "color": "text-red-500"
+        },
+        {
+          "id": 147,
+          "name": "First 10 over runs of AFG: 46 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 148,
+          "name": "Total Fours by AFG: 20 fours per game. ",
+          "color": ""
+        },
+        {
+          "id": 149,
+          "name": "Total Sixes by AFG: 4 sixes per game. ",
+          "color": ""
+        },
+        {
+          "id": 150,
+          "name": "Opening wicket partnership runs of AFG: 28 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 151,
+          "name": "R Shah runs: 27 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 152,
+          "name": "H Zazai runs: 26 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 153,
+          "name": "A Afghan runs: Runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 154,
+          "name": "M Shahzad runs: 27 runs per game. ",
+          "color": ""
+        },
+        {
+          "id": 155,
+          "name": "D Zadran wickets: 1 wicket per game. ",
+          "color": ""
+        },
+        {
+          "id": 156,
+          "name": "Rashid Khan wickets: 2 wickets per game. ",
+          "color": ""
+        },
+        {
+          "id": 157,
+          "name": "Mujeeb Ur Rahman wickets: 1 wicket per game. ",
+          "color": ""
+        },
+        {
+          "id": 158,
+          "name": "H Zazai Sixes: 1 sixes per game. ",
+          "color": ""
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "sport_name": "wpl",
+      "rules": [
+        {
+          "id": 1,
+          "name": "1.  If WPL fixture of 22 matches gets reduced due to any reason, then all the special fancies will be voided (Match abandoned due to rain/bad light will not be considered in this). ",
+          "color": ""
+        },
+        {
+          "id": 2,
+          "name": "2.  Total matches 1st over runs : Average 5 runs will be given in case match abandoned or over reduced (only 1st innings valid). ",
+          "color": ""
+        },
+        {
+          "id": 3,
+          "name": "3.  Total matches 1st 6 over runs:- Average 40 runs will be given in case match abandoned or over reduced (Only 1st Innings valid). ",
+          "color": ""
+        },
+        {
+          "id": 4,
+          "name": "4.  Total 4's : Average 32 fours will be given in case match abandoned or over reduced. ",
+          "color": ""
+        },
+        {
+          "id": 5,
+          "name": "5.  Total 30's: Average 2 sixes will be given in case match abandoned or over reduced. ",
+          "color": ""
+        },
+        {
+          "id": 6,
+          "name": "6.  Total 50's - Average 1 fifties will be given in case match abandoned or over reduced. ",
+          "color": ""
+        },
+        {
+          "id": 7,
+          "name": "7.  Total Wickets - Average will 12 Wickets be given in case match abandoned or over reduced. ",
+          "color": ""
+        },
+        {
+          "id": 8,
+          "name": "8.  At any situation if result is given for any particular event based on the rates given for the same, then the particular result will be considered valid, similarly if the tournament gets canceled due to any reason the previously given result will be considered valid. ",
+          "color": ""
+        },
+        {
+          "id": 9,
+          "name": "9.  Highest innings run - Both innings are valid. ",
+          "color": ""
+        },
+        {
+          "id": 10,
+          "name": "10.  Lowest innings run - Only first innings is valid. ",
+          "color": ""
+        },
+        {
+          "id": 11,
+          "name": "11.  Highest Match 1st over runs in the match: Only first innings is valid. ",
+          "color": ""
+        },
+        {
+          "id": 12,
+          "name": "12.  Highest 1st 6 over runs: - Only first innings is valid. ",
+          "color": ""
+        },
+        {
+          "id": 13,
+          "name": "13.  Highest 4's in individual match: Both innings are valid. ",
+          "color": ""
+        },
+        {
+          "id": 14,
+          "name": "14.  Highest Wickets in individual match: Both innings are valid. ",
+          "color": ""
+        },
+        {
+          "id": 15,
+          "name": "15.  Highest over runs: Both innings are valid. ",
+          "color": ""
+        },
+        {
+          "id": 16,
+          "name": "16.  Most Balls Faced By a Batsman : Maximum Balls Faced by a batsman in one Innings. ",
+          "color": ""
+        },
+        {
+          "id": 17,
+          "name": "17.  Most 4's by individual batsman in an Inning : Maximum Number of Fours Hit By A Batsman in one Innings. ",
+          "color": ""
+        },
+        {
+          "id": 18,
+          "name": "18.  Most Dot balls By a Bowler in an Inning : Maximum Dot balls Bowled by a Bowler in his Quota of Innings. ",
+          "color": ""
+        },
+        {
+          "id": 19,
+          "name": "19.  Most runs given by Bowler in an Inning : Maximum Runs conceded by a individual Bowler in an Innings. ",
+          "color": ""
+        },
+        {
+          "id": 20,
+          "name": "20.  Most wickets by Bowler in an inning : Maximum Wickets taken by a individual Bowler in an Innings. ",
+          "color": ""
+        },
+        {
+          "id": 21,
+          "name": "21.  In fastest fifty always the first 50 runs will be considered, for example of S Mandhana scores 1st fifty in 17 balls and scores 100 in next 14 balls, fastest 50 will be given based on the balls for the 1st fifty runs Super over will not be included. ",
+          "color": ""
+        }
+      ]
+    }
+  ]
+}

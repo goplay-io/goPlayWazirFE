@@ -1,0 +1,1605 @@
+{
+  "category": {
+    "default": "ਸ਼੍ਰੇਣੀ"
+  },
+  "gameType": {
+    "default": "ਖੇਡ ਦੀ ਕਿਸਮ"
+  },
+  "game": {
+    "idRequired": "ਗੇਮ ਆਈ.ਡੀ. ਦੀ ਲੋੜ ਹੈ",
+    "invalidResponse": "ਸਰਵਰ ਤੋਂ ਅਵੈਧ ਜਵਾਬ ਫਾਰਮੈਟ"
+  },
+  "common": {
+    "number": "ਨੰ",
+    "date": "ਮਿਤੀ",
+    "or": "ਜਾਂ",
+    "optional": "ਵਿਕਲਪਿਕ",
+    "cancel": "ਰੱਦ ਕਰੋ",
+    "create": "ਬਣਾਓ",
+    "update": "ਅੱਪਡੇਟ ਕਰੋ",
+    "delete": "ਮਿਟਾਓ",
+    "save": "ਸੇਵ ਕਰੋ",
+    "confirm": "ਪੁਸ਼ਟੀ ਕਰੋ",
+    "submit": "ਜਮ੍ਹਾਂ ਕਰੋ",
+    "search": "ਖੋਜ",
+    "filter": "ਫਿਲਟਰ",
+    "reset": "ਰੀਸੈਟ ਕਰੋ",
+    "loading": "ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
+    "error": "ਗਲਤੀ",
+    "success": "ਸਫਲਤਾ",
+    "warning": "ਚੇਤਾਵਨੀ",
+    "info": "ਜਾਣਕਾਰੀ",
+    "fromDate": "ਮਿਤੀ ਤੋਂ",
+    "toDate": "ਮਿਤੀ ਤੱਕ",
+    "joinOurChannels": "ਅੱਪਡੇਟ ਅਤੇ ਸਹਾਇਤਾ ਲਈ ਸਾਡੇ ਚੈਨਲਾਂ ਵਿੱਚ ਸ਼ਾਮਲ ਹੋਵੋ",
+    "disclaimer": "ਬੇਦਾਅਵਾ: ਕਿਰਪਾ ਕਰਕੇ ਨੋਟ ਕਰੋ ਕਿ ਜੂਏ ਵਿੱਚ ਵਿੱਤੀ ਜੋਖਮ ਸ਼ਾਮਲ ਹੁੰਦਾ ਹੈ ਅਤੇ ਸਮੇਂ ਦੇ ਨਾਲ ਆਦੀ ਹੋ ਸਕਦਾ ਹੈ ਜੇਕਰ ਸੀਮਾਵਾਂ ਦੇ ਅੰਦਰ ਅਭਿਆਸ ਨਾ ਕੀਤਾ ਜਾਵੇ। ਸਿਰਫ਼ 18+ ਲੋਕਾਂ ਨੂੰ ਸੇਵਾਵਾਂ ਦੀ ਵਰਤੋਂ ਕਰਨੀ ਚਾਹੀਦੀ ਹੈ ਅਤੇ ਇਸਨੂੰ ਜ਼ਿੰਮੇਵਾਰੀ ਨਾਲ ਵਰਤਣਾ ਚਾਹੀਦਾ ਹੈ। ਖਿਡਾਰੀਆਂ ਨੂੰ ਕਿਸੇ ਵੀ ਵਿੱਤੀ ਜੋਖਮ ਤੋਂ ਸੁਚੇਤ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ ਅਤੇ ਉਸ ਅਨੁਸਾਰ ਆਪਣੇ ਆਪ ਨੂੰ ਚਲਾਉਣਾ ਚਾਹੀਦਾ ਹੈ।",
+    "dash": "-",
+    "betHistoryDescription": "ਮਿਤੀ, ਇਵੈਂਟ ਅਤੇ ਸਥਿਤੀ ਦੁਆਰਾ ਆਪਣਾ ਬਾਜ਼ੀ ਇਤਿਹਾਸ ਦੇਖੋ ਅਤੇ ਫਿਲਟਰ ਕਰੋ।",
+    "multiMarket": {
+      "title": "ਮਲਟੀ ਮਾਰਕੀਟ",
+      "loadingTitle": "ਮਲਟੀ ਬਜ਼ਾਰਾਂ ਨੂੰ ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
+      "loadingSubtitle": "ਕਿਰਪਾ ਕਰਕੇ ਉਡੀਕ ਕਰੋ ਜਦੋਂ ਤੱਕ ਅਸੀਂ ਨਵੀਨਤਮ ਸੰਭਾਵਨਾਵਾਂ ਪ੍ਰਾਪਤ ਕਰਦੇ ਹਾਂ",
+      "noMarketsFound": "ਕੋਈ ਮਲਟੀ ਮਾਰਕੀਟ ਨਹੀਂ ਮਿਲਿਆ!",
+      "betSlip": "ਬੇਟ ਸਲਿੱਪ",
+      "betHistory": "ਸੱਟਾ ਇਤਿਹਾਸ",
+      "noPinnedMarkets": "ਇਸ ਇਵੈਂਟ ਲਈ ਕੋਈ ਪਿੰਨ ਕੀਤੇ ਬਾਜ਼ਾਰ ਨਹੀਂ ਹਨ"
+    },
+    "betHistoryEmpty": "ਕੋਈ ਸੱਟਾ ਇਤਿਹਾਸ ਉਪਲਬਧ ਨਹੀਂ ਹੈ",
+    "back": "ਵਾਪਸ",
+    "next": "ਅਗਲਾ",
+    "lay": "ਲੇਅ",
+    "components": {
+      "multiMarket": {
+        "eventFallback": "ਘਟਨਾ",
+        "live": "ਲਾਈਵ",
+        "market_singular": "ਬਾਜ਼ਾਰ",
+        "market_plural": "ਬਾਜ਼ਾਰ"
+      }
+    },
+    "copiedToClipboard": "{label} ਨੂੰ ਕਲਿੱਪਬੋਰਡ 'ਤੇ ਕਾਪੀ ਕੀਤਾ ਗਿਆ",
+    "copyFailed": "{label} ਨੂੰ ਕਾਪੀ ਕਰਨਾ ਅਸਫਲ ਰਿਹਾ",
+    "gotIt": "ਮਿਲ ਗਿਆ"
+  },
+  "landing": {
+    "loading": {
+      "preparingDemo": "ਤੁਹਾਡੇ ਡੈਮੋ ਅਨੁਭਵ ਨੂੰ ਤਿਆਰ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
+      "loadingData": "ਲਾਈਵ ਸਪੋਰਟਸ ਅਤੇ ਕੈਸੀਨੋ ਡਾਟਾ ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ।"
+    },
+    "hero": {
+      "loginSubtitle": "ਲਾਈਵ ਈਵੈਂਟਾਂ, ਰੀਅਲ-ਟਾਈਮ ਬਾਜ਼ਾਰਾਂ ਦੀ ਪੜਚੋਲ ਕਰਨ ਲਈ ਸਾਈਨ ਇਨ ਕਰੋ ਅਤੇ ਖੇਡਾਂ, ਰੇਸਿੰਗ ਅਤੇ ਕੈਸੀਨੋ ਵਿਚਕਾਰ ਸਹਿਜੇ ਹੀ ਸਵਿਚ ਕਰੋ — ਸਭ ਇੱਕ ਆਧੁਨਿਕ ਇੰਟਰਫੇਸ ਵਿੱਚ।",
+      "badgeLiveOdds": "ਲਾਈਵ ਔਡਜ਼ ਇੰਜਣ",
+      "badgeSecureWallet": "ਸੁਰੱਖਿਅਤ ਬਟੂਆ",
+      "slideSportsTitle": "ਲਾਈਵ ਸਪੋਰਟਸ ਅਤੇ ਇਨ-ਪਲੇ ਬਾਜ਼ਾਰ",
+      "slideSportsBody": "ਫੀਚਰਡ ਇਵੈਂਟਸ, ਚੋਟੀ ਦੇ ਮੁਕਾਬਲੇ ਅਤੇ ਲਾਈਵ ਸੰਭਾਵਨਾਵਾਂ ਨੂੰ ਇੱਕ ਥਾਂ 'ਤੇ ਖੋਜੋ।",
+      "slideCasinoTitle": "ਪ੍ਰੀਮੀਅਮ ਕੈਸੀਨੋ ਲਾਇਬ੍ਰੇਰੀ",
+      "slideCasinoBody": "ਕਈ ਪ੍ਰਦਾਤਾਵਾਂ ਤੋਂ ਪ੍ਰਸਿੱਧ ਲਾਈਵ ਟੇਬਲ, ਸਲਾਟ ਅਤੇ ਮਜ਼ੇਦਾਰ ਗੇਮਾਂ ਨੂੰ ਬ੍ਰਾਊਜ਼ ਕਰੋ।",
+      "slideRacingTitle": "ਰੇਸਿੰਗ ਅਤੇ ਵਰਚੁਅਲ",
+      "slideRacingBody": "ਘੋੜੇ ਅਤੇ ਗ੍ਰੇਹਾਊਂਡ ਰੇਸਿੰਗ ਦਾ ਅਨੁਸਰਣ ਕਰੋ ਜਾਂ ਤੇਜ਼-ਰਫ਼ਤਾਰ ਵਰਚੁਅਲ ਇਵੈਂਟਾਂ 'ਤੇ ਸਵਿਚ ਕਰੋ।"
+    },
+    "casinoSection": {
+      "title": "ਕੈਸੀਨੋ ਹਾਈਲਾਈਟਸ",
+      "description": "ਤੁਹਾਡੇ ਕੈਸੀਨੋ ਘਰ ਦੀ ਤਤਕਾਲ ਝਲਕ - ਪ੍ਰਦਾਤਾਵਾਂ ਵਿੱਚ ਹਾਈਲਾਈਟ ਕੀਤੀਆਂ ਗੇਮਾਂ ਨੂੰ ਬ੍ਰਾਊਜ਼ ਕਰੋ।",
+      "ctaCasino": "ਕੈਸੀਨੋ",
+      "noData": "ਇਸ ਸਮੇਂ ਡੈਮੋ ਵਿੱਚ ਕੈਸੀਨੋ ਡੇਟਾ ਉਪਲਬਧ ਨਹੀਂ ਹੈ।"
+    }
+  },
+  "validation": {
+    "required": "ਇਸ ਫੀਲਡ ਦੀ ਲੋੜ ਹੈ"
+  },
+  "header": {
+    "bonuses": "ਬੋਨਸ",
+    "wallet": "ਵਾਲਿਟ",
+    "siteSwitcher": {
+      "ariaLabel": "ਸਾਈਟ ਬਦਲੋ",
+      "goplay": "ਗੋਪਲੇ",
+      "diamond": "ਹੀਰਾ",
+      "winbuzz": "ਵਿਨਬਜ਼",
+      "fairplay": "ਇਮਾਨਦਾਰੀ",
+      "reddy": "ਰੈਡੀ ਬੁੱਕ"
+    },
+    "tabs": {
+      "sports": "ਖੇਡਾਂ",
+      "casino": "ਕੈਸੀਨੋ"
+    },
+    "user": {
+      "fallbackName": "ਹੱਵਾਹ ਫੋਸਟਰ",
+      "roles": {
+        "superMaster": "ਸੁਪਰ ਮਾਸਟਰ",
+        "master": "ਮਾਸਟਰ",
+        "client": "ਕਲਾਇੰਟ"
+      },
+      "menu": {
+        "accountStatement": "ਖਾਤਾ ਸਟੇਟਮੈਂਟ",
+        "depositTurnover": "ਡਿਪਾਜ਼ਿਟ ਟਰਨਓਵਰ",
+        "turnoverHistory": "ਟਰਨਓਵਰ ਇਤਿਹਾਸ",
+        "bonusStatement": "ਬੋਨਸ ਸਟੇਟਮੈਂਟ",
+        "profitLoss": "ਲਾਭ ਅਤੇ ਨੁਕਸਾਨ",
+        "betHistory": "ਸੱਟਾ ਇਤਿਹਾਸ",
+        "unsettledBets": "ਅਸਥਿਰ ਸੱਟਾ",
+        "paymentMethods": "ਭੁਗਤਾਨ ਵਿਧੀਆਂ",
+        "changeButtons": "ਬਟਨ ਬਦਲੋ",
+        "changePassword": "ਪਾਸਵਰਡ ਬਦਲੋ",
+        "rules": "????",
+        "favourite": "ਮਨਪਸੰਦ"
+      },
+      "walletSummary": {
+        "balance": "ਸੰਤੁਲਨ",
+        "exposure": "ਸੰਪਰਕ",
+        "bonus": "ਬੋਨਸ",
+        "cashable": "ਕੈਸ਼ਯੋਗ"
+      },
+      "drawer": {
+        "greeting": "HI,",
+        "awaitingBonus": "ਬੋਨਸ ਦੀ ਉਡੀਕ ਕਰ ਰਿਹਾ ਹੈ",
+        "referAndEarn": "ਵੇਖੋ ਅਤੇ ਕਮਾਓ",
+        "openBets": "ਬੇਟਸ ਖੋਲ੍ਹੋ",
+        "bonusRules": "ਬੋਨਸ ਨਿਯਮ",
+        "resetPassword": "ਪਾਸਵਰਡ ਰੀਸੈਟ ਕਰੋ",
+        "settings": "ਸੈਟਿੰਗਾਂ",
+        "myBets": "ਮੇਰੀ ਸੱਟਾ",
+        "favorites": "ਮਨਪਸੰਦ",
+        "rules": "ਨਿਯਮ ਅਤੇ ਨਿਯਮ",
+        "logout": "ਲੌਗਆਊਟ ਕਰੋ"
+      },
+      "logout": "ਲੌਗ ਆਉਟ ਕਰੋ"
+    }
+  },
+  "footer": {
+    "security": {
+      "badgeTitle": "ਸੁਰੱਖਿਅਤ",
+      "badgeSubtitle": "SSL ਐਨਕ੍ਰਿਪਸ਼ਨ",
+      "safeLabel": "100% ਸੁਰੱਖਿਅਤ",
+      "safeDescription": "ਸੁਰੱਖਿਅਤ ਕਨੈਕਸ਼ਨ ਅਤੇ ਐਨਕ੍ਰਿਪਟਡ ਡੇਟਾ।",
+      "safeDescriptionShort": "SSL ਇਨਕ੍ਰਿਪਟਡ",
+      "safeTitle": "100% ਸੁਰੱਖਿਅਤ ਅਤੇ ਸੁਰੱਖਿਅਤ",
+      "safeSubtitle": "ਪੂਰੀ ਤਰ੍ਹਾਂ ਏਨਕ੍ਰਿਪਟਡ ਕਨੈਕਸ਼ਨ"
+    },
+    "badges": {
+      "ageOnly": "ਸਿਰਫ਼ 18+",
+      "ageOnlyShort": "18+",
+      "responsibleGaming": "ਜ਼ਿੰਮੇਵਾਰ ਗੇਮਿੰਗ - ਗੇਮਕੇਅਰ",
+      "responsibleGamingShort": "ਆਰ.ਜੀ",
+      "gamingTrust": "ਗੇਮਿੰਗ ਟਰੱਸਟ",
+      "gtLabel": "gt",
+      "gamblingTherapy": "ਜੂਏ ਦੀ ਥੈਰੇਪੀ"
+    },
+    "supportRibbon": "24×7 ਗਾਹਕ ਸਹਾਇਤਾ - ਅਸੀਂ ਕਿਸੇ ਵੀ ਸਮੇਂ, ਕਿਤੇ ਵੀ ਤੁਹਾਡੀ ਮਦਦ ਕਰਨ ਲਈ ਇੱਥੇ ਹਾਂ",
+    "about": {
+      "title": "ਸਾਡੇ ਬਾਰੇ",
+      "description": "ਉੱਨਤ SSL ਐਨਕ੍ਰਿਪਸ਼ਨ, ਉਦਯੋਗ ਦੀ ਪਾਲਣਾ, ਅਤੇ ਚੌਵੀ ਘੰਟੇ ਸਹਾਇਤਾ ਨਾਲ ਬਣੇ ਇੱਕ ਸੁਰੱਖਿਅਤ ਅਤੇ ਜ਼ਿੰਮੇਵਾਰ ਪਲੇਟਫਾਰਮ ਦਾ ਅਨੁਭਵ ਕਰੋ। ਤੁਹਾਡੀ ਸੁਰੱਖਿਆ, ਗੋਪਨੀਯਤਾ ਅਤੇ ਆਨੰਦ ਹਮੇਸ਼ਾ ਸਾਡੀਆਂ ਪ੍ਰਮੁੱਖ ਤਰਜੀਹਾਂ ਹਨ।"
+    },
+    "paymentMethods": {
+      "title": "ਅਸੀਂ ਸਵੀਕਾਰ ਕਰਦੇ ਹਾਂ",
+      "crypto": "ਕ੍ਰਿਪਟੋ",
+      "bankTransfer": "ਬੈਂਕ ਟ੍ਰਾਂਸਫਰ"
+    },
+    "quickLinks": {
+      "title": "ਤੇਜ਼ ਲਿੰਕ"
+    },
+    "links": {
+      "aboutUs": "ਸਾਡੇ ਬਾਰੇ",
+      "contact": "ਸੰਪਰਕ ਕਰੋ",
+      "privacyPolicy": "ਪਰਾਈਵੇਟ ਨੀਤੀ",
+      "terms": "ਨਿਯਮ ਅਤੇ ਸ਼ਰਤਾਂ",
+      "responsibleGaming": "ਜ਼ਿੰਮੇਵਾਰ ਗੇਮਿੰਗ"
+    },
+    "copyright": {
+      "simple": "© {year}। ਸਾਰੇ ਹੱਕ ਰਾਖਵੇਂ ਹਨ.",
+      "text": "© ਕਾਪੀਰਾਈਟ {ਸਾਲ}। ਸਾਰੇ ਹੱਕ ਰਾਖਵੇਂ ਹਨ."
+    }
+  },
+  "casino": {
+    "home": {
+      "title": "ਕੈਸੀਨੋ",
+      "titleDesktop": "ਕੈਸੀਨੋ ਘਰ",
+      "heading": "ਕੈਸੀਨੋ",
+      "loading": "ਕੈਸੀਨੋ ਗੇਮਾਂ ਨੂੰ ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
+      "loadingDescription": "ਕਿਰਪਾ ਕਰਕੇ ਉਡੀਕ ਕਰੋ ਜਦੋਂ ਤੱਕ ਅਸੀਂ ਨਵੀਨਤਮ ਕੈਸੀਨੋ ਗੇਮਾਂ ਪ੍ਰਾਪਤ ਕਰਦੇ ਹਾਂ",
+      "allGames": "ਸਾਰੀਆਂ ਖੇਡਾਂ",
+      "allProviders": "ਸਾਰੇ",
+      "allTypes": "ਸਾਰੀਆਂ ਕਿਸਮਾਂ",
+      "noGamesFound": "ਕੋਈ ਗੇਮ ਨਹੀਂ ਮਿਲੀ",
+      "noGamesSearchDescription": "ਆਪਣੇ ਖੋਜ ਮਾਪਦੰਡ ਨੂੰ ਵਿਵਸਥਿਤ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ",
+      "noGamesFilterDescription": "ਚੁਣੇ ਗਏ ਫਿਲਟਰਾਂ ਲਈ ਕੋਈ ਗੇਮ ਉਪਲਬਧ ਨਹੀਂ ਹੈ",
+      "clearFilters": "ਫਿਲਟਰ ਸਾਫ਼ ਕਰੋ",
+      "playNow": "ਹੁਣੇ ਚਲਾਓ"
+    },
+    "gameType": {
+      "default": "ਖੇਡ ਦੀ ਕਿਸਮ"
+    },
+    "category": {
+      "default": "ਸ਼੍ਰੇਣੀ"
+    },
+    "search": {
+      "placeholder": "ਖੋਜ...",
+      "mobileTitle": "ਖੋਜ ਕੈਸੀਨੋ",
+      "inputPlaceholder": "ਗੇਮਾਂ ਖੋਜੋ...",
+      "startTyping": "ਕੈਸੀਨੋ ਗੇਮਾਂ ਦੀ ਖੋਜ ਕਰਨ ਲਈ ਟਾਈਪ ਕਰਨਾ ਸ਼ੁਰੂ ਕਰੋ",
+      "noResults": "ਕੋਈ ਨਤੀਜੇ ਨਹੀਂ ਮਿਲੇ",
+      "tryDifferentSearch": "ਇੱਕ ਵੱਖਰਾ ਖੋਜ ਸ਼ਬਦ ਅਜ਼ਮਾਓ"
+    },
+    "favorites": {
+      "title": "ਮਨਪਸੰਦ ਕੈਸੀਨੋ ਗੇਮਜ਼",
+      "loading": "ਮਨਪਸੰਦ ਗੇਮਾਂ ਨੂੰ ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
+      "noFavorites": "ਅਜੇ ਤੱਕ ਕੋਈ ਮਨਪਸੰਦ ਗੇਮ ਨਹੀਂ ਹੈ",
+      "visitCasino": "ਕੈਸੀਨੋ ਗੇਮਾਂ ਨੂੰ ਆਪਣੇ ਮਨਪਸੰਦ ਵਿੱਚ ਸ਼ਾਮਲ ਕਰਨ ਲਈ ਉਹਨਾਂ 'ਤੇ ਜਾਓ",
+      "notFound": "ਮਨਪਸੰਦ ਗੇਮਾਂ ਨਹੀਂ ਮਿਲੀਆਂ",
+      "noLongerAvailable": "ਤੁਹਾਡੀਆਂ ਕੁਝ ਮਨਪਸੰਦ ਗੇਮਾਂ ਹੁਣ ਉਪਲਬਧ ਨਹੀਂ ਹੋ ਸਕਦੀਆਂ ਹਨ"
+    },
+    "game": {
+      "loading": "ਗੇਮ ਲੋਡ ਹੋ ਰਹੀ ਹੈ...",
+      "loadError": "ਗੇਮ ਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਫਲ",
+      "idRequired": "ਗੇਮ ਆਈ.ਡੀ. ਦੀ ਲੋੜ ਹੈ",
+      "invalidResponse": "ਸਰਵਰ ਤੋਂ ਅਵੈਧ ਜਵਾਬ ਫਾਰਮੈਟ",
+      "retry": "ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ",
+      "notAvailable": "ਗੇਮ ਉਪਲਬਧ ਨਹੀਂ ਹੈ।",
+      "temporarilyUnavailable": "ਇਹ ਗੇਮ ਅਸਥਾਈ ਤੌਰ 'ਤੇ ਉਪਲਬਧ ਨਹੀਂ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਕੁਝ ਪਲਾਂ ਵਿੱਚ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+      "goBack": "ਵਾਪਸ ਜਾਓ"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "ਆਪਣੇ ਖਾਤੇ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਲਈ ਸਾਈਨ ਇਨ ਕਰੋ",
+      "username": "ਯੂਜ਼ਰਨੇਮ",
+      "password": "ਪਾਸਵਰਡ",
+      "enterUsername": "ਆਪਣਾ ਉਪਭੋਗਤਾ ਨਾਮ ਦਰਜ ਕਰੋ",
+      "enterPassword": "ਆਪਣਾ ਪਾਸਵਰਡ ਦਰਜ ਕਰੋ",
+      "loginButton": "ਸਾਈਨ - ਇਨ",
+      "demoButton": "ਡੈਮੋ ਮੋਡ ਅਜ਼ਮਾਓ",
+      "tagline": "ਵਧੇਰੇ ਔਕੜਾਂ। ਵੱਡੀਆਂ ਜਿੱਤਾਂ",
+      "whatsappIdPrompt": "Whatsapp ਤੋਂ ਆਪਣੀ ਰੈਡੀਮੇਡ ਆਈਡੀ ਪ੍ਰਾਪਤ ਕਰੋ",
+      "diamondUpgrade": "ਡਾਇਮੰਡ ਅੱਪਗਰੇਡ",
+      "oneToOneSupport": "1 ਤੋਂ 1 ਗਾਹਕ ਸਹਾਇਤਾ",
+      "instantWithdrawal": "24/7 ਤੁਰੰਤ ਵਾਪਸੀ",
+      "whitelabelEnquiry": "ਵ੍ਹਾਈਟਲੇਬਲ ਪੁੱਛਗਿੱਛ ਲਈ, ਕਿਰਪਾ ਕਰਕੇ ਸੰਪਰਕ ਕਰੋ",
+      "tryDemoMode": "ਡੈਮੋ ਮੋਡ ਅਜ਼ਮਾਓ",
+      "downloadApk": "ਏਪੀਕੇ ਡਾਊਨਲੋਡ ਕਰੋ",
+      "forgotCredentials": "ਪਾਸਵਰਡ/ਉਪਭੋਗਤਾ ਨਾਮ ਭੁੱਲ ਗਏ ਹੋ?",
+      "joinWhatsappBonus": "ਵਟਸਐਪ ਚੈਨਲ ਨਾਲ ਜੁੜੋ (ਬੋਨਸ ਲਈ)",
+      "apkUnavailable": "ਏਪੀਕੇ ਡਾਊਨਲੋਡ ਇਸ ਸਮੇਂ ਉਪਲਬਧ ਨਹੀਂ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਸਹਾਇਤਾ ਨਾਲ ਸੰਪਰਕ ਕਰੋ।",
+      "logoAlt": "ਰਾਇਲ ਔਡਸ ਲੋਗੋ",
+      "footerNote": "ਸਾਨੂੰ ਸੰਪਰਕ ਕਰੋ",
+      "sessionExpired": "ਸੈਸ਼ਨ ਦੀ ਮਿਆਦ ਪੁੱਗ ਗਈ।",
+      "fillFields": "ਕਿਰਪਾ ਕਰਕੇ ਸਾਰੇ ਲੋੜੀਂਦੇ ਖੇਤਰਾਂ ਨੂੰ ਸਹੀ ਢੰਗ ਨਾਲ ਭਰੋ",
+      "loginFailed": "ਲਾਗਿਨ ਅਸਫਲ ਰਿਹਾ",
+      "authCheckFailed": "ਪ੍ਰਮਾਣਿਕਤਾ ਸਥਾਪਤ ਨਹੀਂ ਕੀਤੀ ਗਈ",
+      "securedByRecaptcha": "reCAPTCHA ਦੁਆਰਾ ਸੁਰੱਖਿਅਤ",
+      "success": "ਲੌਗਇਨ ਸਫਲ!",
+      "demoSuccess": "ਡੈਮੋ ਲੌਗਇਨ ਸਫਲ! ਪਲੇਟਫਾਰਮ ਦੀ ਪੜਚੋਲ ਕਰਨ ਲਈ ਤੁਹਾਡੇ ਕੋਲ ਸੀਮਤ ਪਹੁੰਚ ਹੈ।",
+      "demoFailed": "ਡੈਮੋ ਲੌਗਇਨ ਅਸਫਲ ਰਿਹਾ",
+      "signupPrompt": "ਕੀ ਤੁਹਾਡੇ ਕੋਲ ਖਾਤਾ ਨਹੀਂ ਹੈ?",
+      "signupCta": "ਸਾਇਨ ਅਪ",
+      "forgotPasswordLink": "ਪਾਸਵਰਡ ਭੁੱਲ ਗਏ?",
+      "showPassword": "ਪਾਸਵਰਡ ਦਿਖਾਓ",
+      "hidePassword": "ਪਾਸਵਰਡ ਲੁਕਾਓ"
+    },
+    "signup": {
+      "title": "ਆਪਣਾ ਖਾਤਾ ਬਣਾਓ",
+      "step1Title": "ਖਾਤੇ ਦੇ ਵੇਰਵੇ",
+      "step2Title": "ਨਾਮ",
+      "step3Title": "ਪਾਸਵਰਡ",
+      "firstName": "ਪਹਿਲਾ ਨਾਂ",
+      "lastName": "ਆਖਰੀ ਨਾਂਮ",
+      "enterFirstName": "ਪਹਿਲਾ ਨਾਂ",
+      "enterLastName": "ਆਖਰੀ ਨਾਂਮ",
+      "nameLength": "ਨਾਮ 1-220 ਅੱਖਰਾਂ ਦਾ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
+      "heroSubtitle": "ਲਾਈਵ ਇਵੈਂਟਾਂ, ਰੀਅਲ-ਟਾਈਮ ਬਾਜ਼ਾਰਾਂ ਦੀ ਪੜਚੋਲ ਕਰਨ ਲਈ ਸ਼ਾਮਲ ਹੋਵੋ ਅਤੇ ਖੇਡਾਂ, ਰੇਸਿੰਗ ਅਤੇ ਕੈਸੀਨੋ ਵਿਚਕਾਰ ਸਹਿਜੇ ਹੀ ਸਵਿਚ ਕਰੋ।",
+      "username": "ਯੂਜ਼ਰਨੇਮ",
+      "enterUsername": "ਯੂਜ਼ਰਨੇਮ",
+      "usernameLength": "ਉਪਭੋਗਤਾ ਨਾਮ 3-220 ਅੱਖਰਾਂ ਦਾ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
+      "usernameNoSpaces": "ਵਰਤੋਂਕਾਰ ਨਾਮ ਵਿੱਚ ਖਾਲੀ ਥਾਂ ਨਹੀਂ ਹੋ ਸਕਦੀ",
+      "phoneNumber": "ਵਟਸਐਪ ਨੰਬਰ",
+      "enterPhone": "ਤੁਹਾਡਾ ਨੰਬਰ",
+      "phoneInvalid": "ਇੱਕ ਵੈਧ WhatsApp ਨੰਬਰ ਦਾਖਲ ਕਰੋ",
+      "sendOtp": "OTP ਭੇਜੋ",
+      "otp": "OTP",
+      "otpLabelWithVerify": "OTP ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ",
+      "enterOtp": "OTP ਦਾਖਲ ਕਰੋ",
+      "otpInvalid": "ਇੱਕ ਵੈਧ 4-8 ਅੰਕਾਂ ਦਾ OTP ਦਾਖਲ ਕਰੋ",
+      "otpSent": "ਤੁਹਾਡੇ WhatsApp 'ਤੇ OTP ਭੇਜਿਆ ਗਿਆ",
+      "otpSendFailed": "OTP ਭੇਜਣਾ ਅਸਫਲ ਰਿਹਾ",
+      "otpAlreadySentUseOrResend": "OTP ਪਹਿਲਾਂ ਹੀ ਭੇਜਿਆ ਗਿਆ ਹੈ। ਇਸਨੂੰ ਹੇਠਾਂ ਦਾਖਲ ਕਰੋ ਜਾਂ ਟਾਈਮਰ ਖਤਮ ਹੋਣ 'ਤੇ ਦੁਬਾਰਾ ਭੇਜੋ।",
+      "sendOtpFirst": "ਕਿਰਪਾ ਕਰਕੇ ਪਹਿਲਾਂ OTP ਭੇਜੋ",
+      "resendOtp": "OTP ਦੁਬਾਰਾ ਭੇਜੋ",
+      "changePhoneNumber": "ਫ਼ੋਨ ਨੰਬਰ ਬਦਲੋ",
+      "verify": "ਪੁਸ਼ਟੀ ਕਰੋ",
+      "verifyOtp": "OTP ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ",
+      "verifyOtpFirst": "ਕਿਰਪਾ ਕਰਕੇ ਪਹਿਲਾਂ OTP ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ",
+      "otpVerified": "OTP ਦੀ ਪੁਸ਼ਟੀ ਕੀਤੀ ਗਈ",
+      "otpVerifyFailed": "ਅਵੈਧ ਜਾਂ ਮਿਆਦ ਪੁੱਗਿਆ OTP",
+      "otpValidFor": "{time} ਲਈ ਵੈਧ",
+      "otpRequestAgainIn": "{time} ਵਿੱਚ ਦੁਬਾਰਾ ਬੇਨਤੀ ਕਰੋ",
+      "loginPasswordSection": "ਲਾਗਇਨ ਪਾਸਵਰਡ",
+      "withdrawalPasswordSection": "ਕਢਵਾਉਣ ਦਾ ਪਾਸਵਰਡ",
+      "password": "ਲਾਗਇਨ ਪਾਸਵਰਡ",
+      "enterPassword": "ਪਾਸਵਰਡ",
+      "passwordConfirm": "ਲਾਗਇਨ ਪਾਸਵਰਡ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ",
+      "enterPasswordConfirm": "ਪੁਸ਼ਟੀ ਕਰੋ",
+      "passwordMismatch": "ਲਾਗਇਨ ਪਾਸਵਰਡ ਮੇਲ ਨਹੀਂ ਖਾਂਦੇ",
+      "withdrawalPassword": "ਵਾਲਿਟ ਪਾਸਵਰਡ",
+      "enterWithdrawalPassword": "ਵਾਲਿਟ ਪਾਸਵਰਡ",
+      "withdrawalPasswordConfirm": "ਵਾਲਿਟ ਪਾਸਵਰਡ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ",
+      "enterWithdrawalPasswordConfirm": "ਪੁਸ਼ਟੀ ਕਰੋ",
+      "withdrawalPasswordMismatch": "ਵਾਲਿਟ ਪਾਸਵਰਡ ਮੇਲ ਨਹੀਂ ਖਾਂਦੇ",
+      "passwordMin": "ਪਾਸਵਰਡ ਘੱਟੋ-ਘੱਟ 8 ਅੱਖਰਾਂ ਦਾ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
+      "passwordLetters": "ਪਾਸਵਰਡ ਵਿੱਚ ਅੱਖਰ ਹੋਣੇ ਚਾਹੀਦੇ ਹਨ",
+      "passwordNumbers": "ਪਾਸਵਰਡ ਵਿੱਚ ਨੰਬਰ ਹੋਣੇ ਚਾਹੀਦੇ ਹਨ",
+      "signupButton": "ਸਾਇਨ ਅਪ",
+      "loginLink": "ਕੀ ਪਹਿਲਾਂ ਤੋਂ ਹੀ ਖਾਤਾ ਹੈ? ਸਾਈਨ - ਇਨ",
+      "success": "ਖਾਤਾ ਬਣਾਇਆ ਗਿਆ! ਤੁਸੀਂ ਹੁਣ ਸਾਈਨ ਇਨ ਕਰ ਸਕਦੇ ਹੋ।",
+      "failed": "ਸਾਈਨਅੱਪ ਅਸਫਲ ਰਿਹਾ",
+      "campaignIdLabel": "ਮੁਹਿੰਮ ਕੋਡ:"
+    }
+  },
+  "bonus": {
+    "statement": {
+      "title": "ਬੋਨਸ ਸਟੇਟਮੈਂਟ",
+      "managementNote": "ਆਪਣੇ ਬੋਨਸ ਅਵਾਰਡ, ਟਰਨਓਵਰ ਦੀ ਤਰੱਕੀ, ਅਤੇ ਰੀਡੈਮਪਸ਼ਨ ਇਤਿਹਾਸ ਦੇਖੋ",
+      "bonusCategory": "ਸ਼੍ਰੇਣੀ",
+      "bonusName": "ਬੋਨਸ ਦਾ ਨਾਮ",
+      "status": "ਸਥਿਤੀ",
+      "approvalRequired": "ਮਨਜ਼ੂਰੀ ਦੀ ਲੋੜ ਹੈ",
+      "awardAmount": "ਅਵਾਰਡ ਦੀ ਰਕਮ",
+      "awardDate": "ਅਵਾਰਡ ਦੀ ਮਿਤੀ",
+      "turnoverRequired": "ਟਰਨਓਵਰ ਦੀ ਲੋੜ ਹੈ",
+      "turnoverMet": "ਟਰਨਓਵਰ ਮਿਲੇ",
+      "turnoverLeft": "ਟਰਨਓਵਰ ਖੱਬੇ",
+      "redeemedAmount": "ਰੀਡੀਮ ਕੀਤੀ ਰਕਮ",
+      "redeemDate": "ਰੀਡੀਮ ਮਿਤੀ",
+      "expiryDate": "ਅੰਤ ਦੀ ਤਾਰੀਖ",
+      "today": "ਅੱਜ",
+      "daysLeft": "{count} ਦਿਨ ਬਾਕੀ | {count} ਦਿਨ ਬਾਕੀ",
+      "expired": "ਮਿਆਦ ਪੁੱਗ ਗਈ",
+      "noBonuses": "ਕੋਈ ਬੋਨਸ ਰਿਕਾਰਡ ਨਹੀਂ ਮਿਲਿਆ",
+      "statusPending": "ਬਕਾਇਆ",
+      "statusActive": "ਕਿਰਿਆਸ਼ੀਲ",
+      "statusInactive": "ਅਕਿਰਿਆਸ਼ੀਲ",
+      "statusRedeemed": "ਛੁਡਾਇਆ",
+      "statusExpired": "ਮਿਆਦ ਪੁੱਗ ਗਈ",
+      "statusRedeemFailed": "ਰੀਡੀਮ ਕਰਨਾ ਅਸਫਲ ਰਿਹਾ",
+      "statusPendingApproval": "ਬਕਾਇਆ",
+      "redeemHelpTitle": "ਬੋਨਸ ਨੂੰ ਕਿਵੇਂ ਛੁਡਾਉਣਾ ਹੈ",
+      "redeemHelpIntro": "ਆਪਣਾ ਬੋਨਸ ਤੁਹਾਡੇ ਗੈਰ-ਨਕਦਯੋਗ ਬਕਾਇਆ ਵਿੱਚ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ, ਤੁਹਾਨੂੰ ਲੋੜੀਂਦੇ ਟਰਨਓਵਰ ਨੂੰ ਪੂਰਾ ਕਰਨ ਦੀ ਲੋੜ ਹੈ। ਇਸ ਤਰ੍ਹਾਂ ਹੈ:",
+      "redeemHelpStep1": "ਸੱਟਾ ਲਗਾਓ। ਤੁਹਾਡੇ ਦੁਆਰਾ ਲਗਾਈ ਗਈ ਰਕਮ ਤੁਹਾਡੇ ਟਰਨਓਵਰ ਵਿੱਚ ਗਿਣੀ ਜਾਂਦੀ ਹੈ।",
+      "redeemHelpStep2": "ਉਪਰੋਕਤ ਸਾਰਣੀ ਦੀ ਜਾਂਚ ਕਰੋ। ਟਰਨਓਵਰ ਮੈਟ ਤੁਹਾਡੀ ਤਰੱਕੀ ਨੂੰ ਦਰਸਾਉਂਦਾ ਹੈ; ਟਰਨਓਵਰ ਖੱਬੇ ਦਰਸਾਉਂਦਾ ਹੈ ਕਿ ਤੁਹਾਨੂੰ ਅਜੇ ਵੀ ਕੀ ਚਾਹੀਦਾ ਹੈ।",
+      "redeemHelpStep3": "ਜਦੋਂ ਤੁਸੀਂ ਲੋੜ ਪੂਰੀ ਕਰ ਲੈਂਦੇ ਹੋ, ਤਾਂ ਤੁਹਾਡੀ ਬੋਨਸ ਸਥਿਤੀ ਰੀਡੀਮ ਵਿੱਚ ਬਦਲ ਜਾਵੇਗੀ।",
+      "redeemHelpStep4": "ਬੋਨਸ ਤੁਹਾਡੇ ਗੈਰ-ਨਕਦਯੋਗ ਬਕਾਇਆ ਵਿੱਚ ਆਪਣੇ ਆਪ ਜੋੜਿਆ ਜਾਵੇਗਾ।",
+      "redeemHelpNote": "ਜੇਕਰ ਲੋੜ ਸਮੇਂ ਸਿਰ ਪੂਰੀ ਨਹੀਂ ਹੁੰਦੀ ਹੈ ਤਾਂ ਬੋਨਸ ਦੀ ਮਿਆਦ ਖਤਮ ਹੋ ਸਕਦੀ ਹੈ। ਹਰੇਕ ਬੋਨਸ ਲਈ ਮਿਆਦ ਪੁੱਗਣ ਦੀ ਮਿਤੀ ਦੀ ਜਾਂਚ ਕਰੋ।"
+    },
+    "redeemable": {
+      "title": "ਬੋਨਸ ਰੀਡੀਮ ਕਰੋ",
+      "subtitle": "ਦਾਅਵਾ ਕਰਨ ਲਈ ਇੱਕ ਕੂਪਨ ਕੋਡ ਦਾਖਲ ਕਰੋ, ਫਿਰ ਆਪਣੇ ਬਕਾਇਆ ਬੋਨਸ ਰੀਡੀਮ ਕਰੋ",
+      "noBonuses": "ਇਸ ਸਮੇਂ ਕੋਈ ਰੀਡੀਮ ਕਰਨ ਯੋਗ ਬੋਨਸ ਨਹੀਂ ਹਨ",
+      "couponCode": "ਕੂਪਨ ਕੋਡ",
+      "claim": "ਦਾਅਵਾ",
+      "claimSuccess": "ਬੋਨਸ ਦਾ ਦਾਅਵਾ ਸਫਲਤਾਪੂਰਵਕ ਕੀਤਾ ਗਿਆ",
+      "claimError": "ਬੋਨਸ ਦਾ ਦਾਅਵਾ ਕਰਨ ਵਿੱਚ ਅਸਫਲ",
+      "redeem": "ਰੀਡੀਮ ਕਰੋ",
+      "redeemSuccess": "ਬੋਨਸ ਸਫਲਤਾਪੂਰਵਕ ਰੀਡੀਮ ਕੀਤਾ ਗਿਆ",
+      "redeemError": "ਬੋਨਸ ਰੀਡੀਮ ਕਰਨ ਵਿੱਚ ਅਸਫਲ",
+      "awardAmount": "ਅਵਾਰਡ: {amount}",
+      "bonus": "ਬੋਨਸ",
+      "helpTitle": "ਬੋਨਸ ਦਾ ਦਾਅਵਾ ਅਤੇ ਰੀਡੀਮ ਕਿਵੇਂ ਕਰੀਏ",
+      "helpIntro": "ਕੂਪਨ ਕੋਡ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਆਪਣੀ ਬੋਨਸ ਯੋਗਤਾ ਦੀ ਜਾਂਚ ਕਰੋ। ਜੇਕਰ ਤੁਸੀਂ ਯੋਗ ਹੋ, ਤਾਂ ਬੋਨਸ ਹੇਠਾਂ ਦਿਖਾਈ ਦੇਵੇਗਾ ਅਤੇ ਤੁਸੀਂ ਇਸਨੂੰ ਰੀਡੀਮ ਕਰ ਸਕਦੇ ਹੋ।",
+      "helpStep1": "ਉੱਪਰ ਦਿੱਤੇ ਖੇਤਰ ਵਿੱਚ ਆਪਣਾ ਕੂਪਨ ਕੋਡ ਦਰਜ ਕਰੋ।",
+      "helpStep2": "ਇਹ ਦੇਖਣ ਲਈ ਦਾਅਵਾ ਕਰੋ ਕਿ ਕੀ ਤੁਸੀਂ ਬੋਨਸ ਲਈ ਯੋਗ ਹੋ 'ਤੇ ਕਲਿੱਕ ਕਰੋ।",
+      "helpStep3": "ਜੇਕਰ ਯੋਗ ਹੈ, ਤਾਂ ਬੋਨਸ ਅਵਾਰਡ ਰਾਸ਼ੀ ਦੇ ਨਾਲ ਹੇਠਾਂ ਦਿੱਤੀ ਸੂਚੀ ਵਿੱਚ ਦਿਖਾਈ ਦੇਵੇਗਾ।",
+      "helpStep4": "ਆਪਣੇ ਬਕਾਇਆ ਵਿੱਚ ਬੋਨਸ ਜੋੜਨ ਲਈ ਰੀਡੀਮ 'ਤੇ ਕਲਿੱਕ ਕਰੋ।",
+      "helpNote": "ਜੇਕਰ ਕੂਪਨ ਅਵੈਧ ਹੈ ਜਾਂ ਤੁਸੀਂ ਯੋਗ ਨਹੀਂ ਹੋ, ਤਾਂ ਤੁਸੀਂ ਇੱਕ ਗਲਤੀ ਸੁਨੇਹਾ ਦੇਖੋਗੇ। ਯਕੀਨੀ ਬਣਾਓ ਕਿ ਤੁਸੀਂ ਬੋਨਸ ਲਈ ਕਿਸੇ ਵੀ ਡਿਪਾਜ਼ਿਟ ਜਾਂ ਹੋਰ ਲੋੜਾਂ ਨੂੰ ਪੂਰਾ ਕਰਦੇ ਹੋ।"
+    },
+    "rules": {
+      "title": "ਬੋਨਸ ਨਿਯਮ",
+      "intro": "ਕਿਸੇ ਵੀ ਬੋਨਸ ਦਾ ਦਾਅਵਾ ਕਰਨ ਜਾਂ ਰੀਡੀਮ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਕਿਰਪਾ ਕਰਕੇ ਹੇਠਾਂ ਦਿੱਤੇ ਨਿਯਮਾਂ ਨੂੰ ਪੜ੍ਹੋ:",
+      "items": {
+        "0": "ਬੋਨਸ ਟਰਨਓਵਰ ਲੋੜਾਂ ਦੇ ਅਧੀਨ ਹੁੰਦੇ ਹਨ ਇਸ ਤੋਂ ਪਹਿਲਾਂ ਕਿ ਉਹਨਾਂ ਨੂੰ ਵਾਪਸ ਲਿਆ ਜਾ ਸਕੇ ਜਾਂ ਤੁਹਾਡੇ ਕੈਸ਼ਯੋਗ ਬੈਲੇਂਸ ਵਿੱਚ ਟ੍ਰਾਂਸਫਰ ਕੀਤਾ ਜਾ ਸਕੇ।",
+        "1": "ਹਰੇਕ ਬੋਨਸ ਦੀ ਆਪਣੀ ਮਿਆਦ ਪੁੱਗਣ ਦੀ ਮਿਤੀ ਹੋ ਸਕਦੀ ਹੈ। ਜੇਕਰ ਟਰਨਓਵਰ ਦੀਆਂ ਜ਼ਰੂਰਤਾਂ ਨੂੰ ਸਮੇਂ ਸਿਰ ਪੂਰਾ ਨਹੀਂ ਕੀਤਾ ਜਾਂਦਾ ਹੈ ਤਾਂ ਅਣ-ਰਿਡੀਮ ਕੀਤੇ ਬੋਨਸ ਦੀ ਮਿਆਦ ਖਤਮ ਹੋ ਸਕਦੀ ਹੈ।",
+        "2": "ਬੋਨਸ ਦਾ ਦਾਅਵਾ ਕਰਨ ਲਈ ਸਿਰਫ਼ ਵੈਧ ਕੂਪਨ ਕੋਡ ਹੀ ਵਰਤੇ ਜਾ ਸਕਦੇ ਹਨ। ਅਵੈਧ ਜਾਂ ਮਿਆਦ ਪੁੱਗ ਚੁੱਕੇ ਕੋਡਾਂ ਨੂੰ ਰੱਦ ਕਰ ਦਿੱਤਾ ਜਾਵੇਗਾ।",
+        "3": "ਪ੍ਰੋਮੋਸ਼ਨ ਵਿੱਚ ਪਰਿਭਾਸ਼ਿਤ ਕੀਤੇ ਅਨੁਸਾਰ ਬੋਨਸ ਖਾਸ ਖੇਡਾਂ, ਕੈਸੀਨੋ ਗੇਮਾਂ, ਜਾਂ ਸੱਟੇ ਦੀਆਂ ਕਿਸਮਾਂ ਤੱਕ ਸੀਮਤ ਹੋ ਸਕਦੇ ਹਨ।",
+        "4": "ਕੰਪਨੀ ਆਪਣੀ ਮਰਜ਼ੀ ਅਨੁਸਾਰ ਕਿਸੇ ਵੀ ਬੋਨਸ ਪੇਸ਼ਕਸ਼ ਨੂੰ ਸੋਧਣ, ਮੁਅੱਤਲ ਕਰਨ ਜਾਂ ਰੱਦ ਕਰਨ ਦਾ ਅਧਿਕਾਰ ਰਾਖਵਾਂ ਰੱਖਦੀ ਹੈ।"
+      },
+      "note": "ਕਿਸੇ ਖਾਸ ਪ੍ਰੋਮੋਸ਼ਨ 'ਤੇ ਪੂਰੇ ਵੇਰਵਿਆਂ ਲਈ, ਜਦੋਂ ਤੁਸੀਂ ਦਾਅਵਾ ਕਰਦੇ ਹੋ ਜਾਂ ਰੀਡੀਮ ਕਰਦੇ ਹੋ ਤਾਂ ਦਿਖਾਏ ਗਏ ਬੋਨਸ ਨਿਯਮਾਂ ਦੀ ਜਾਂਚ ਕਰੋ।"
+    }
+  },
+  "account": {
+    "statement": {
+      "title": "ਖਾਤਾ ਸਟੇਟਮੈਂਟ",
+      "managementNote": "ਆਪਣੇ ਪੂਰੇ ਲੈਣ-ਦੇਣ ਇਤਿਹਾਸ ਦਾ ਪ੍ਰਬੰਧਨ ਅਤੇ ਸਮੀਖਿਆ ਕਰੋ",
+      "sport": "ਖੇਡ",
+      "sports": "ਖੇਡਾਂ",
+      "remark": "ਟਿੱਪਣੀ",
+      "selectGamesLabel": "ਖੇਡਾਂ ਦੀ ਚੋਣ ਕਰੋ",
+      "allSports": "ਸਾਰੀਆਂ ਖੇਡਾਂ",
+      "fromLabel": "ਤੋਂ",
+      "typesLabel": "ਕਿਸਮਾਂ",
+      "acTypeLabel": "AC ਦੀ ਕਿਸਮ",
+      "allTypes": "ਸਾਰੇ",
+      "apply": "ਅਪਲਾਈ ਕਰੋ",
+      "credit": "ਕ੍ਰੈਡਿਟ",
+      "debit": "ਡੈਬਿਟ",
+      "type": "ਟਾਈਪ ਕਰੋ",
+      "description": "ਵਰਣਨ",
+      "transactionType": {
+        "credit": "ਕ੍ਰੈਡਿਟ",
+        "debit": "ਡੈਬਿਟ"
+      },
+      "noTransactions": "ਕੋਈ ਲੈਣ-ਦੇਣ ਨਹੀਂ ਮਿਲਿਆ",
+      "loadingTransactions": "ਲੈਣ-ਦੇਣ ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
+      "dateRange": "ਮਿਤੀ ਰੇਂਜ",
+      "amount": "ਰਕਮ",
+      "balance": "ਸੰਤੁਲਨ",
+      "status": "ਸਥਿਤੀ",
+      "viewDetails": "ਵੇਰਵੇ ਵੇਖੋ",
+      "betDetails": "ਬੇਟ ਵੇਰਵੇ",
+      "noBetDetails": "ਕੋਈ ਬਾਜ਼ੀ ਵੇਰਵੇ ਨਹੀਂ ਮਿਲੇ",
+      "tableHeaders": {
+        "srNo": "ਲੜੀ ਨੰ",
+        "nation": "ਕੌਮ",
+        "side": "ਪਾਸੇ",
+        "rate": "ਦਰ",
+        "amount": "ਰਕਮ",
+        "winLoss": "ਜਿੱਤ/ਹਾਰ",
+        "placeDate": "ਸਥਾਨ ਦੀ ਮਿਤੀ",
+        "matchDate": "ਮੈਚ ਦੀ ਮਿਤੀ",
+        "roundId": "ਗੋਲ ਆਈ.ਡੀ",
+        "gameId": "ਗੇਮ ਆਈ.ਡੀ",
+        "gameCode": "ਗੇਮ ਕੋਡ"
+      },
+      "betTypes": {
+        "back": "ਪਿੱਛੇ",
+        "lay": "ਲੇਅ"
+      }
+    }
+  },
+  "betHistory": {
+    "title": "ਸੱਟਾ ਇਤਿਹਾਸ",
+    "loadingHistory": "ਸੱਟੇਬਾਜ਼ੀ ਇਤਿਹਾਸ ਨੂੰ ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
+    "noBetsFound": "ਕੋਈ {status} ਸੱਟਾ ਨਹੀਂ ਮਿਲਿਆ",
+    "sport": "ਖੇਡ",
+    "selection": "ਚੋਣ",
+    "betStatus": "ਬੇਟ ਸਥਿਤੀ",
+    "dateTime": "ਮਿਤੀ ਅਤੇ ਸਮਾਂ",
+    "event": "ਘਟਨਾ",
+    "market": "ਬਜ਼ਾਰ",
+    "odds": "ਔਕੜਾਂ",
+    "stake": "ਦਾਅ",
+    "returns": "ਵਾਪਸੀ",
+    "profit": "ਲਾਭ/ਨੁਕਸਾਨ"
+  },
+  "bet": {
+    "slipTitle": "ਬੇਟ ਸਲਿੱਪ"
+  },
+  "unsettledBets": {
+    "title": "ਅਸਥਿਰ ਸੱਟਾ",
+    "description": "ਆਪਣੇ ਬਕਾਇਆ ਸੱਟੇ ਨੂੰ ਟ੍ਰੈਕ ਕਰੋ ਜਿਨ੍ਹਾਂ ਦਾ ਅਜੇ ਨਿਪਟਾਰਾ ਹੋਣਾ ਬਾਕੀ ਹੈ",
+    "noBets": "ਕੋਈ ਅਸਥਿਰ ਸੱਟਾ ਨਹੀਂ ਮਿਲਿਆ",
+    "noDataDescription": "ਸੈਟਲਮੈਂਟ ਦੀ ਉਡੀਕ ਵਿੱਚ ਤੁਹਾਡੇ ਸਰਗਰਮ ਸੱਟੇ ਇੱਥੇ ਦਿਖਾਈ ਦੇਣਗੇ",
+    "loadingBets": "ਅਸਥਿਰ ਸੱਟਾ ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
+    "columns": {
+      "no": "ਨੰ",
+      "event": "ਇਵੈਂਟ ਦਾ ਨਾਮ",
+      "nation": "ਕੌਮ",
+      "eventType": "ਘਟਨਾ ਦੀ ਕਿਸਮ",
+      "marketName": "ਮਾਰਕੀਟ ਦਾ ਨਾਮ",
+      "side": "ਪਾਸੇ",
+      "rate": "ਦਰ",
+      "amount": "ਰਕਮ",
+      "placeDate": "ਸਥਾਨ ਦੀ ਮਿਤੀ"
+    },
+    "marketTypes": {
+      "MO": "ਮੈਚ ਔਡਸ",
+      "BM": "ਬੁੱਕਮੇਕਰ",
+      "FC": "ਫੈਂਸੀ",
+      "OP": "ਔਡਸ/ਈਵਨ"
+    }
+  },
+  "buttons": {
+    "updateStake": "ਸਟੇਕ ਬਟਨ ਅੱਪਡੇਟ ਕਰੋ",
+    "buttonLabel": "ਬਟਨ ਲੇਬਲ",
+    "stakeAmount": "ਹਿੱਸੇਦਾਰੀ ਦੀ ਰਕਮ",
+    "buttonPlaceholder": "ਬਟਨ {n} ਲੇਬਲ",
+    "amountPlaceholder": "ਰਕਮ {n}",
+    "reset": "ਰੀਸੈਟ ਕਰੋ",
+    "update": "ਅੱਪਡੇਟ ਕਰੋ",
+    "updating": "ਅੱਪਡੇਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
+    "errorLoading": "ਬਟਨ ਡਾਟਾ ਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+    "errorUpdating": "ਬਟਨ ਮੁੱਲ ਅੱਪਡੇਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+    "successUpdate": "ਬਟਨ ਮੁੱਲ ਸਫਲਤਾਪੂਰਵਕ ਅੱਪਡੇਟ ਕੀਤੇ ਗਏ!"
+  },
+  "changePassword": {
+    "title": "ਸੁਰੱਖਿਆ ਸੈਟਿੰਗਾਂ",
+    "subtitle": "ਆਪਣੇ ਖਾਤੇ ਦੇ ਪਾਸਵਰਡ ਅਤੇ ਸੁਰੱਖਿਆ ਤਰਜੀਹਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ",
+    "passwordChangeRequired": "ਪਾਸਵਰਡ ਬਦਲਣ ਦੀ ਲੋੜ ਹੈ",
+    "mustChangeBeforeAccess": "ਐਪਲੀਕੇਸ਼ਨ ਦੇ ਹੋਰ ਹਿੱਸਿਆਂ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਤੁਹਾਨੂੰ ਆਪਣਾ ਪਾਸਵਰਡ ਬਦਲਣਾ ਚਾਹੀਦਾ ਹੈ।",
+    "loginPassword": "ਲਾਗਇਨ ਪਾਸਵਰਡ",
+    "loginPasswordDesc": "ਤੁਹਾਡੇ ਖਾਤੇ ਵਿੱਚ ਲੌਗਇਨ ਕਰਨ ਲਈ ਵਰਤਿਆ ਜਾਂਦਾ ਹੈ",
+    "currentPassword": "ਵਰਤਮਾਨ ਪਾਸਵਰਡ",
+    "newPassword": "ਨਵਾਂ ਪਾਸਵਰਡ",
+    "confirmPassword": "ਨਵੇਂ ਪਾਸਵਰਡ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ",
+    "passwordRequirements": "ਪਾਸਵਰਡ ਲੋੜਾਂ",
+    "requirementsDesc": "ਮਜ਼ਬੂਤ ​​ਪਾਸਵਰਡਾਂ ਨਾਲ ਆਪਣੇ ਖਾਤੇ ਨੂੰ ਸੁਰੱਖਿਅਤ ਰੱਖੋ",
+    "minCharacters": "ਘੱਟੋ-ਘੱਟ 8 ਅੱਖਰ",
+    "lettersNumbers": "ਅੱਖਰ ਅਤੇ ਸੰਖਿਆਵਾਂ ਸ਼ਾਮਲ ਹਨ",
+    "differentFromCurrent": "ਮੌਜੂਦਾ ਤੋਂ ਵੱਖਰਾ",
+    "change": "ਪਾਸਵਰਡ ਬਦਲੋ",
+    "changing": "ਬਦਲ ਰਿਹਾ ਹੈ...",
+    "update": "ਅੱਪਡੇਟ ਕਰੋ",
+    "updating": "ਅੱਪਡੇਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
+    "set": "ਸੈੱਟ ਕਰੋ",
+    "setting": "ਸੈਟਿੰਗ...",
+    "passwordUpdated": "ਪਾਸਵਰਡ ਸਫਲਤਾਪੂਰਵਕ ਅੱਪਡੇਟ ਕੀਤਾ ਗਿਆ",
+    "loginPasswordUpdated": "ਲੌਗਇਨ ਪਾਸਵਰਡ ਸਫਲਤਾਪੂਰਵਕ ਅੱਪਡੇਟ ਕੀਤਾ ਗਿਆ",
+    "walletPasswordUpdated": "ਵਾਲਿਟ ਪਾਸਵਰਡ ਸਫਲਤਾਪੂਰਵਕ ਅੱਪਡੇਟ ਕੀਤਾ ਗਿਆ",
+    "walletPasswordSet": "ਵਾਲਿਟ ਪਾਸਵਰਡ ਸਫਲਤਾਪੂਰਵਕ ਸੈੱਟ ਕੀਤਾ ਗਿਆ",
+    "bothPasswordsUpdated": "ਲੌਗਇਨ ਅਤੇ ਵਾਲਿਟ ਪਾਸਵਰਡ ਸਫਲਤਾਪੂਰਵਕ ਅੱਪਡੇਟ ਕੀਤੇ ਗਏ",
+    "passwordError": "ਪਾਸਵਰਡ ਅੱਪਡੇਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ",
+    "passwordMismatch": "ਪਾਸਵਰਡ ਮੇਲ ਨਹੀਂ ਖਾਂਦੇ",
+    "passwordTooShort": "ਪਾਸਵਰਡ ਘੱਟੋ-ਘੱਟ 8 ਅੱਖਰਾਂ ਦਾ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
+    "passwordNeedsLettersNumbers": "ਪਾਸਵਰਡ ਵਿੱਚ ਅੱਖਰ ਅਤੇ ਨੰਬਰ ਦੋਵੇਂ ਹੋਣੇ ਚਾਹੀਦੇ ਹਨ",
+    "passwordDifferent": "ਨਵਾਂ ਪਾਸਵਰਡ ਮੌਜੂਦਾ ਪਾਸਵਰਡ ਤੋਂ ਵੱਖਰਾ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
+    "walletPassword": "ਵਾਲਿਟ ਪਾਸਵਰਡ",
+    "walletPasswordDesc": "ਵਾਲਿਟ ਲੈਣ-ਦੇਣ ਲਈ ਵਰਤਿਆ ਜਾਂਦਾ ਹੈ",
+    "setWalletPassword": "ਵਾਲਿਟ ਪਾਸਵਰਡ ਸੈੱਟ ਕਰੋ",
+    "setWalletPasswordDesc": "ਸੁਰੱਖਿਅਤ ਵਾਲਿਟ ਲੈਣ-ਦੇਣ ਲਈ ਲੋੜੀਂਦਾ ਹੈ",
+    "currentWalletPassword": "ਮੌਜੂਦਾ ਵਾਲਿਟ ਪਾਸਵਰਡ"
+  },
+  "wallet": {
+    "title": "ਵਾਲਿਟ",
+    "recent": {
+      "title": "ਹਾਲੀਆ ਗਤੀਵਿਧੀ",
+      "subtitle": "ਪਿਛਲੇ 5 ਲੈਣ-ਦੇਣ"
+    },
+    "buttons": {
+      "depositSubtitle": "ਫੰਡ ਸ਼ਾਮਲ ਕਰੋ",
+      "withdrawSubtitle": "ਨਕਦ ਬਾਹਰ",
+      "statementSubtitle": "ਰਿਪੋਰਟਾਂ ਦੇਖੋ",
+      "pnlSubtitle": "ਲਾਭ ਨੁਕਸਾਨ",
+      "bonusSubtitle": "ਮੇਰੇ ਬੋਨਸ"
+    },
+    "charts": {
+      "depositVsWithdrawals": "ਡਿਪਾਜ਼ਿਟ ਬਨਾਮ ਕਢਵਾਉਣਾ",
+      "deposits": "ਜਮਾਂ",
+      "withdrawals": "ਕਢਵਾਉਣਾ",
+      "profitLossAnnually": "ਸਾਲਾਨਾ ਲਾਭ ਅਤੇ ਘਾਟਾ",
+      "profit": "ਲਾਭ",
+      "loss": "ਨੁਕਸਾਨ"
+    },
+    "bonus": {
+      "title": "ਬੋਨਸ",
+      "subtitle": "ਆਪਣੇ ਬੋਨਸ ਇਨਾਮ, ਟਰਨਓਵਰ ਪ੍ਰਗਤੀ ਅਤੇ ਰਿਡੀਮਪਸ਼ਨ ਇਤਿਹਾਸ ਦੇਖੋ"
+    },
+    "blocked": {
+      "contactSupport": "ਸਹਾਇਤਾ ਨਾਲ ਸੰਪਰਕ ਕਰੋ"
+    },
+    "deposit": {
+      "title": "ਜਮ੍ਹਾ",
+      "blockedTitle": "ਡਿਪਾਜ਼ਿਟ ਬਲਾਕ ਹਨ",
+      "blockedMessage": "ਤੁਹਾਡੇ ਖਾਤੇ ਲਈ ਜਮ੍ਹਾਂ ਰਕਮਾਂ ਨੂੰ ਬਲੌਕ ਕੀਤਾ ਗਿਆ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਸਹਾਇਤਾ ਨਾਲ ਸੰਪਰਕ ਕਰੋ।",
+      "pending": "ਬਕਾਇਆ ਰਕਮ",
+      "selectAmount": "ਚੁਣੋ ਜਾਂ ਰਕਮ ਦਾਖਲ ਕਰੋ",
+      "quick": "ਤਤਕਾਲ ਰਕਮ",
+      "depositTo": "ਨੂੰ ਜਮ੍ਹਾ ਕਰੋ",
+      "enterAmount": "ਰਕਮ ਦਾਖਲ ਕਰੋ",
+      "bank": "ਬੈਂਕ",
+      "upi": "UPI",
+      "crypto": "ਕ੍ਰਿਪਟੋ",
+      "next": "ਅਗਲਾ",
+      "back": "ਵਾਪਸ",
+      "confirm": "ਪੁਸ਼ਟੀ ਕਰੋ",
+      "cancel": "ਰੱਦ ਕਰੋ",
+      "bankDeposit": "ਬੈਂਕ ਡਿਪਾਜ਼ਿਟ",
+      "step": "{total} ਦਾ ਕਦਮ {current}",
+      "loadingOptions": "ਵਿਕਲਪ ਲੋਡ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ...",
+      "noBankAccounts": "ਕੋਈ ਬੈਂਕ ਖਾਤੇ ਉਪਲਬਧ ਨਹੀਂ ਹਨ।",
+      "receiptPreview": "ਰਸੀਦ ਦੀ ਝਲਕ",
+      "uploadReceipt": "ਅਪਲੋਡ ਰਸੀਦ (ਸਿਰਫ਼ ਤਸਵੀਰਾਂ)",
+      "amountToPay": "ਭੁਗਤਾਨ ਕਰਨ ਲਈ ਰਕਮ: {currency} {amount}",
+      "accountHolder": "ਖਾਤਾ ਧਾਰਕ ਦਾ ਨਾਮ",
+      "accountNumber": "ਅਕਾਊਂਟ ਨੰਬਰ",
+      "ifscCode": "IFSC ਕੋਡ",
+      "bankName": "ਬੈਂਕ ਦਾ ਨਾਮ",
+      "history": "ਜਮ੍ਹਾ ਇਤਿਹਾਸ",
+      "loadingHistory": "ਜਮ੍ਹਾ ਇਤਿਹਾਸ ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
+      "noHistory": "ਕੋਈ ਡਿਪਾਜ਼ਿਟ ਨਹੀਂ ਮਿਲੇ",
+      "status": "ਸਥਿਤੀ",
+      "date": "ਮਿਤੀ",
+      "amount": "ਰਕਮ",
+      "viewDetails": "ਵੇਰਵੇ ਵੇਖੋ",
+      "payment": "ਭੁਗਤਾਨ",
+      "paymentOptions": {
+        "all": "ਸਾਰੇ",
+        "bank": "ਬੈਂਕ",
+        "upi": "UPI",
+        "crypto": "ਕ੍ਰਿਪਟੋ"
+      },
+      "statusOptions": {
+        "pending": "ਬਕਾਇਆ",
+        "approved": "ਨੂੰ ਮਨਜ਼ੂਰੀ ਦਿੱਤੀ",
+        "rejected": "ਰੱਦ ਕਰ ਦਿੱਤਾ",
+        "cancelled": "ਰੱਦ ਕਰ ਦਿੱਤਾ"
+      },
+      "dateRequired": "ਸਥਿਤੀ ਲੰਬਿਤ ਨਾ ਹੋਣ 'ਤੇ ਸ਼ੁਰੂਆਤੀ ਮਿਤੀ ਅਤੇ ਸਮਾਪਤੀ ਮਿਤੀ ਦੀ ਲੋੜ ਹੁੰਦੀ ਹੈ",
+      "dateInvalidRange": "ਸ਼ੁਰੂਆਤੀ ਮਿਤੀ ਸਮਾਪਤੀ ਮਿਤੀ ਤੋਂ ਬਾਅਦ ਦੀ ਨਹੀਂ ਹੋ ਸਕਦੀ",
+      "option": "ਵਿਕਲਪ {n}",
+      "whatsapp": "ਵਟਸਐਪ",
+      "chooseBankAccount": "ਬੈਂਕ ਖਾਤਾ ਚੁਣੋ",
+      "chooseUpiAccount": "UPI ਖਾਤਾ ਚੁਣੋ",
+      "chooseCurrencyType": "ਮੁਦਰਾ ਦੀ ਕਿਸਮ ਚੁਣੋ",
+      "noUpiAccounts": "ਕੋਈ UPI ਖਾਤੇ ਉਪਲਬਧ ਨਹੀਂ ਹਨ।",
+      "noCryptoAccounts": "ਕੋਈ ਕ੍ਰਿਪਟੋ ਖਾਤੇ ਉਪਲਬਧ ਨਹੀਂ ਹਨ।",
+      "paymentCompleted": "ਮੈਂ ਭੁਗਤਾਨ ਪੂਰਾ ਕਰ ਲਿਆ ਹੈ",
+      "onlyImages": "ਰਸੀਦ ਲਈ ਸਿਰਫ਼ ਤਸਵੀਰਾਂ ਹੀ ਸਵੀਕਾਰ ਕੀਤੀਆਂ ਜਾਂਦੀਆਂ ਹਨ",
+      "receiptRequired": "ਰਸੀਦ ਦੀ ਲੋੜ ਹੈ",
+      "transactionId": "ਲੈਣ-ਦੇਣ ਆਈ.ਡੀ",
+      "transactionIdPlaceholder": "ਆਪਣੀ ਲੈਣ-ਦੇਣ ਆਈ.ਡੀ. ਦਾਖਲ ਕਰੋ",
+      "transactionIdRequired": "ਲੈਣ-ਦੇਣ ਆਈ.ਡੀ. ਦੀ ਲੋੜ ਹੈ",
+      "transactionIdMinLength": "ਲੈਣ-ਦੇਣ ID ਘੱਟੋ-ਘੱਟ {count} ਅੱਖਰਾਂ ਦੀ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ",
+      "amountRequired": "ਰਕਮ ਦੀ ਲੋੜ ਹੈ",
+      "amountInvalid": "ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਵੈਧ ਰਕਮ ਦਾਖਲ ਕਰੋ",
+      "amountGreaterThanZero": "ਰਕਮ 0 ਤੋਂ ਵੱਧ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ",
+      "loadOptionsFailed": "ਡਿਪਾਜ਼ਿਟ ਵਿਕਲਪ ਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਫਲ",
+      "requestSubmitted": "ਡਿਪਾਜ਼ਿਟ ਬੇਨਤੀ ਸਫਲਤਾਪੂਰਵਕ ਸਪੁਰਦ ਕੀਤੀ ਗਈ",
+      "requestFailed": "ਡਿਪਾਜ਼ਿਟ ਬੇਨਤੀ ਸਪੁਰਦ ਕਰਨ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+      "upiDeposit": "UPI ਡਿਪਾਜ਼ਿਟ",
+      "cryptoDeposit": "ਕ੍ਰਿਪਟੋ ਡਿਪਾਜ਼ਿਟ",
+      "scanToPay": "ਭੁਗਤਾਨ ਕਰਨ ਲਈ ਸਕੈਨ ਕਰੋ ({type})",
+      "chooseImageOptional": "ਚਿੱਤਰ ਚੁਣੋ (ਵਿਕਲਪਿਕ)",
+      "upiId": "UPI ਆਈ.ਡੀ",
+      "walletAddress": "ਵਾਲਿਟ ਪਤਾ",
+      "stepper": {
+        "upiAccount": "UPI ਖਾਤਾ",
+        "amount": "ਰਕਮ",
+        "payConfirm": "ਭੁਗਤਾਨ ਕਰੋ ਅਤੇ ਪੁਸ਼ਟੀ ਕਰੋ",
+        "currencyType": "ਮੁਦਰਾ ਦੀ ਕਿਸਮ",
+        "bankAccount": "ਬੈਂਕ ਖਾਤਾ"
+      },
+      "noRequests": "ਕੋਈ ਜਮ੍ਹਾਂ ਬੇਨਤੀਆਂ ਨਹੀਂ ਮਿਲੀਆਂ",
+      "historyWillAppear": "ਤੁਹਾਡਾ ਜਮ੍ਹਾ ਇਤਿਹਾਸ ਇੱਥੇ ਦਿਖਾਈ ਦੇਵੇਗਾ"
+    },
+    "withdrawal": {
+      "title": "ਕਢਵਾਉਣਾ",
+      "blockedTitle": "ਕਢਵਾਉਣ 'ਤੇ ਰੋਕ ਹੈ",
+      "blockedMessage": "ਤੁਹਾਡੇ ਖਾਤੇ ਲਈ ਕਢਵਾਉਣਾ ਬਲੌਕ ਕੀਤਾ ਗਿਆ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਸਹਾਇਤਾ ਨਾਲ ਸੰਪਰਕ ਕਰੋ।",
+      "selectMethod": "ਕਢਵਾਉਣ ਦਾ ਤਰੀਕਾ ਚੁਣੋ",
+      "bank": "ਬੈਂਕ",
+      "upi": "UPI",
+      "crypto": "ਕ੍ਰਿਪਟੋ",
+      "requestForm": "ਵਾਪਸੀ ਲਈ ਬੇਨਤੀ ਫਾਰਮ",
+      "enterAmount": "ਰਕਮ ਦਾਖਲ ਕਰੋ",
+      "withdrawalPassword": "ਕਢਵਾਉਣ ਦਾ ਪਾਸਵਰਡ",
+      "enterWithdrawalPassword": "ਆਪਣਾ ਨਿਕਾਸੀ ਪਾਸਵਰਡ ਦਰਜ ਕਰੋ",
+      "request": "ਵਾਪਸ ਲੈਣ ਦੀ ਬੇਨਤੀ ਕਰੋ",
+      "requesting": "ਬੇਨਤੀ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ...",
+      "success": "ਵਾਪਸੀ ਦੀ ਬੇਨਤੀ ਸਫਲਤਾਪੂਰਵਕ ਸਪੁਰਦ ਕੀਤੀ ਗਈ",
+      "error": "ਵਾਪਸੀ ਦੀ ਬੇਨਤੀ ਅਸਫਲ ਰਹੀ",
+      "history": "ਵਾਪਸੀ ਦਾ ਇਤਿਹਾਸ",
+      "loadingHistory": "ਕਢਵਾਉਣ ਦਾ ਇਤਿਹਾਸ ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
+      "noHistory": "ਕੋਈ ਕਢਵਾਉਣ ਦੀ ਬੇਨਤੀ ਨਹੀਂ ਮਿਲੀ",
+      "pending": "ਬਕਾਇਆ ਰਕਮ",
+      "bankWithdrawal": "ਬੈਂਕ ਕਢਵਾਉਣਾ",
+      "cryptoWithdrawal": "ਕ੍ਰਿਪਟੋ ਕਢਵਾਉਣਾ",
+      "chooseBankAccount": "ਬੈਂਕ ਖਾਤਾ ਚੁਣੋ",
+      "noBankAccounts": "ਕੋਈ ਬੈਂਕ ਖਾਤੇ ਨਹੀਂ ਹਨ। ਭੁਗਤਾਨ ਵਿਧੀਆਂ ਵਿੱਚ ਇੱਕ ਸ਼ਾਮਲ ਕਰੋ।",
+      "chooseCryptoAccount": "ਕ੍ਰਿਪਟੋ ਖਾਤਾ ਚੁਣੋ",
+      "noCryptoAccounts": "ਕੋਈ ਕ੍ਰਿਪਟੋ ਖਾਤੇ ਨਹੀਂ ਹਨ। ਭੁਗਤਾਨ ਵਿਧੀਆਂ ਵਿੱਚ ਇੱਕ ਸ਼ਾਮਲ ਕਰੋ।",
+      "holder": "ਧਾਰਕ",
+      "to": "ਨੂੰ",
+      "processingTime": "ਪ੍ਰੋਸੈਸਿੰਗ ਸਮਾਂ ਵੱਖ-ਵੱਖ ਹੋ ਸਕਦਾ ਹੈ।",
+      "wallet": "ਵਾਲਿਟ",
+      "payment": "ਭੁਗਤਾਨ",
+      "actions": "ਕਾਰਵਾਈਆਂ",
+      "statusOptions": {
+        "pending": "ਬਕਾਇਆ",
+        "approved": "ਨੂੰ ਮਨਜ਼ੂਰੀ ਦਿੱਤੀ",
+        "rejected": "ਰੱਦ ਕਰ ਦਿੱਤਾ"
+      },
+      "actionCompleted": "ਪੂਰਾ ਹੋਇਆ",
+      "actionRejected": "ਰੱਦ ਕਰ ਦਿੱਤਾ",
+      "actionCancelled": "ਰੱਦ ਕਰ ਦਿੱਤਾ",
+      "actionPending": "ਬਕਾਇਆ",
+      "status": "ਸਥਿਤੀ",
+      "date": "ਮਿਤੀ",
+      "amount": "ਰਕਮ",
+      "viewDetails": "ਵੇਰਵੇ ਵੇਖੋ"
+    },
+    "balance": {
+      "availableBalance": "ਉਪਲਬਧ ਬਕਾਇਆ",
+      "exposure": "ਸੰਪਰਕ",
+      "deposit": "ਜਮ੍ਹਾ",
+      "withdraw": "ਵਾਪਸ ਲੈ ਲਓ"
+    },
+    "paymentMethods": {
+      "title": "ਭੁਗਤਾਨ ਵਿਧੀਆਂ",
+      "subtitle": "ਆਪਣੇ ਬੈਂਕ, UPI, ਅਤੇ ਕ੍ਰਿਪਟੋ ਖਾਤਿਆਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ",
+      "tabs": {
+        "bank": "ਬੈਂਕ",
+        "upi": "UPI",
+        "crypto": "ਕ੍ਰਿਪਟੋ"
+      },
+      "empty": {
+        "bank": "ਕੋਈ ਬੈਂਕ ਖਾਤੇ ਨਹੀਂ",
+        "upi": "ਕੋਈ UPI ਖਾਤੇ ਨਹੀਂ ਹਨ",
+        "crypto": "ਕੋਈ ਕ੍ਰਿਪਟੋ ਖਾਤੇ ਨਹੀਂ ਹਨ"
+      },
+      "emptyDescription": {
+        "bank": "ਡਿਪਾਜ਼ਿਟ ਅਤੇ ਕਢਵਾਉਣ ਦੀ ਸ਼ੁਰੂਆਤ ਕਰਨ ਲਈ ਆਪਣਾ ਪਹਿਲਾ ਬੈਂਕ ਖਾਤਾ ਸ਼ਾਮਲ ਕਰੋ।",
+        "upi": "ਤੁਰੰਤ ਭੁਗਤਾਨ ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਆਪਣੀ ਪਹਿਲੀ UPI ਆਈਡੀ ਸ਼ਾਮਲ ਕਰੋ।",
+        "crypto": "ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਆਪਣਾ ਪਹਿਲਾ ਕ੍ਰਿਪਟੋ ਵਾਲਿਟ ਸ਼ਾਮਲ ਕਰੋ।"
+      },
+      "addBank": "ਬੈਂਕ ਖਾਤਾ ਸ਼ਾਮਲ ਕਰੋ",
+      "editBank": "ਬੈਂਕ ਖਾਤੇ ਦਾ ਸੰਪਾਦਨ ਕਰੋ",
+      "addUpi": "UPI ਖਾਤਾ ਸ਼ਾਮਲ ਕਰੋ",
+      "editUpi": "UPI ਖਾਤੇ ਦਾ ਸੰਪਾਦਨ ਕਰੋ",
+      "addCrypto": "ਕ੍ਰਿਪਟੋ ਖਾਤਾ ਸ਼ਾਮਲ ਕਰੋ",
+      "editCrypto": "ਕ੍ਰਿਪਟੋ ਖਾਤੇ ਦਾ ਸੰਪਾਦਨ ਕਰੋ",
+      "form": {
+        "bankName": "ਬੈਂਕ ਦਾ ਨਾਮ",
+        "holderName": "ਧਾਰਕ ਦਾ ਨਾਮ",
+        "accountNumber": "ਅਕਾਊਂਟ ਨੰਬਰ",
+        "ifsc": "IFSC",
+        "status": "ਸਥਿਤੀ",
+        "upiId": "UPI ਆਈ.ਡੀ",
+        "currency": "ਮੁਦਰਾ",
+        "address": "ਪਤਾ"
+      },
+      "status": {
+        "active": "ਕਿਰਿਆਸ਼ੀਲ",
+        "suspended": "ਮੁਅੱਤਲ ਕਰ ਦਿੱਤਾ",
+        "pendingVerification": "ਬਕਾਇਆ ਪੁਸ਼ਟੀਕਰਨ"
+      },
+      "add": "{type} ਸ਼ਾਮਲ ਕਰੋ",
+      "edit": "ਸੰਪਾਦਿਤ ਕਰੋ {type}",
+      "delete": "ਮਿਟਾਓ",
+      "confirmDelete": "ਕੀ ਤੁਸੀਂ ਯਕੀਨੀ ਤੌਰ 'ਤੇ ਇਸ {type} ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?",
+      "deleteSuccess": "{type} ਨੂੰ ਸਫਲਤਾਪੂਰਵਕ ਮਿਟਾਇਆ ਗਿਆ",
+      "deleteFailed": "ਮਿਟਾਉਣਾ ਅਸਫਲ ਰਿਹਾ",
+      "fillRequired": "ਕਿਰਪਾ ਕਰਕੇ ਲੋੜੀਂਦੇ ਖੇਤਰ ਭਰੋ",
+      "bankUpdated": "ਬੈਂਕ ਖਾਤਾ ਅੱਪਡੇਟ ਕੀਤਾ ਗਿਆ",
+      "bankCreated": "ਬੈਂਕ ਖਾਤਾ ਬਣਾਇਆ ਗਿਆ",
+      "upiUpdated": "UPI ਖਾਤਾ ਅੱਪਡੇਟ ਕੀਤਾ ਗਿਆ",
+      "upiCreated": "UPI ਖਾਤਾ ਬਣਾਇਆ ਗਿਆ",
+      "cryptoUpdated": "ਕ੍ਰਿਪਟੋ ਖਾਤਾ ਅੱਪਡੇਟ ਕੀਤਾ ਗਿਆ",
+      "cryptoCreated": "ਕ੍ਰਿਪਟੋ ਖਾਤਾ ਬਣਾਇਆ ਗਿਆ",
+      "selectCurrencyAndAddress": "ਮੁਦਰਾ ਚੁਣੋ ਅਤੇ ਪਤਾ ਦਰਜ ਕਰੋ",
+      "requestFailed": "ਬੇਨਤੀ ਅਸਫਲ ਰਹੀ",
+      "deleteTitle": "ਕੀ ਭੁਗਤਾਨ ਵਿਧੀ ਨੂੰ ਮਿਟਾਉਣਾ ਹੈ?",
+      "deleteText": "ਕੀ \"{label}\" ਨੂੰ ਮਿਟਾਉਣਾ ਹੈ? ਇਸ ਨੂੰ ਅਣਕੀਤਾ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ।",
+      "deleteSuccessGeneric": "ਮਿਟਾਇਆ ਗਿਆ"
+    }
+  },
+  "depositTurnover": {
+    "title": "ਡਿਪਾਜ਼ਿਟ ਟਰਨਓਵਰ",
+    "subtitle": "ਆਪਣੇ ਡਿਪਾਜ਼ਿਟ ਟਰਨਓਵਰ ਰਿਕਾਰਡ, ਸਥਿਤੀ ਅਤੇ ਰੀਡੀਮ ਕੀਤਾ ਇਤਿਹਾਸ ਦੇਖੋ।",
+    "transactionType": "ਲੈਣ-ਦੇਣ ਦੀ ਕਿਸਮ",
+    "fromDate": "ਮਿਤੀ ਤੋਂ",
+    "toDate": "ਮਿਤੀ ਤੱਕ",
+    "statusOptions": {
+      "all": "ਸਾਰੇ",
+      "awarded": "ਨਾਲ ਸਨਮਾਨਿਤ ਕੀਤਾ ਗਿਆ",
+      "inprogress": "ਤਰੱਕੀ ਹੋ ਰਹੀ ਹੈ",
+      "redeemed": "ਛੁਡਾਇਆ"
+    },
+    "tableHeaders": {
+      "transactionTime": "ਲੈਣ-ਦੇਣ ਦਾ ਸਮਾਂ",
+      "amount": "ਰਕਮ",
+      "cashable": "ਨਕਦੀਯੋਗ ਰਕਮ",
+      "turnover": "ਟਰਨਓਵਰ",
+      "status": "ਸਥਿਤੀ",
+      "redeemedDate": "ਰੀਡੀਮ ਕੀਤੀ ਮਿਤੀ",
+      "updateTime": "ਅੱਪਡੇਟ ਸਮਾਂ"
+    },
+    "noData": "ਕੋਈ ਡਿਪਾਜ਼ਿਟ ਟਰਨਓਵਰ ਨਹੀਂ ਮਿਲਿਆ",
+    "noDataDescription": "ਤੁਹਾਡੇ ਡਿਪਾਜ਼ਿਟ ਟਰਨਓਵਰ ਰਿਕਾਰਡ ਇੱਥੇ ਦਿਖਾਈ ਦੇਣਗੇ।"
+  },
+  "turnoverHistory": {
+    "title": "ਟਰਨਓਵਰ ਇਤਿਹਾਸ",
+    "subtitle": "ਫਿਲਟਰਾਂ ਨਾਲ ਆਪਣਾ ਗੇਮ ਟਰਨਓਵਰ ਇਤਿਹਾਸ ਦੇਖੋ।",
+    "transactionType": "ਲੈਣ-ਦੇਣ ਦੀ ਕਿਸਮ",
+    "fromDate": "ਮਿਤੀ ਤੋਂ",
+    "toDate": "ਮਿਤੀ ਤੱਕ",
+    "transactionTypeOptions": {
+      "all": "ਸਾਰੀਆਂ ਕਿਸਮਾਂ",
+      "betPlacement": "ਬੇਟ ਪਲੇਸਮੈਂਟ",
+      "betSettlement": "ਬੇਟ ਸੈਟਲਮੈਂਟ",
+      "betRollback": "ਬੇਟ ਰੋਲਬੈਕ",
+      "betVoid": "ਬੇਟ ਵਾਇਡ"
+    },
+    "tableHeaders": {
+      "eventDate": "ਇਵੈਂਟ ਦੀ ਮਿਤੀ",
+      "transactionType": "ਲੈਣ-ਦੇਣ ਦੀ ਕਿਸਮ",
+      "eventName": "ਇਵੈਂਟ ਦਾ ਨਾਮ",
+      "market": "ਬਜ਼ਾਰ",
+      "marketType": "ਮਾਰਕੀਟ ਦੀ ਕਿਸਮ",
+      "amount": "ਰਕਮ",
+      "turnoverBalance": "ਟਰਨਓਵਰ ਬੈਲੇਂਸ"
+    },
+    "noData": "ਚੁਣੇ ਗਏ ਫਿਲਟਰਾਂ ਲਈ ਕੋਈ ਟਰਨਓਵਰ ਇਤਿਹਾਸ ਨਹੀਂ ਮਿਲਿਆ।",
+    "validation": {
+      "bothDatesRequired": "ਕਿਰਪਾ ਕਰਕੇ ਹੁਣ ਤੱਕ ਅਤੇ ਮਿਤੀਆਂ ਦੋਵਾਂ ਦੀ ਚੋਣ ਕਰੋ।",
+      "invalidDateRange": "ਮਿਤੀ ਤੋਂ ਮਿਤੀ ਤੋਂ ਬਾਅਦ ਦੀ ਮਿਤੀ ਨਹੀਂ ਹੋ ਸਕਦੀ।"
+    }
+  },
+  "profitLoss": {
+    "title": "ਲਾਭ ਅਤੇ ਨੁਕਸਾਨ",
+    "subtitle": "ਵੱਖ-ਵੱਖ ਇਵੈਂਟਾਂ ਅਤੇ ਸਮਾਂ ਮਿਆਦਾਂ ਵਿੱਚ ਆਪਣੇ ਲਾਭ ਅਤੇ ਨੁਕਸਾਨ ਦੇ ਰਿਕਾਰਡ ਵੇਖੋ",
+    "totalProfit": "ਕੁੱਲ ਲਾਭ",
+    "netPnL": "ਨੈੱਟ P&L",
+    "noData": "ਕੋਈ ਲਾਭ/ਨੁਕਸਾਨ ਡੇਟਾ ਨਹੀਂ ਮਿਲਿਆ",
+    "noDataDescription": "ਤੁਹਾਡਾ P&L ਇਤਿਹਾਸ ਇੱਥੇ ਦਿਖਾਈ ਦੇਵੇਗਾ",
+    "columns": {
+      "no": "ਨੰ",
+      "date": "ਮਿਤੀ",
+      "sport": "ਖੇਡ",
+      "event": "ਘਟਨਾ",
+      "selection": "ਚੋਣ",
+      "pnl": "P&L"
+    }
+  },
+  "sports": {
+    "home": {
+      "title": "ਖੇਡਾਂ",
+      "featured": "ਫੀਚਰਡ ਇਵੈਂਟਸ",
+      "loadingEvents": "ਇਵੈਂਟਾਂ ਨੂੰ ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
+      "noEvents": "ਕੋਈ ਇਵੈਂਟ ਉਪਲਬਧ ਨਹੀਂ ਹਨ",
+      "loadingDescription": "ਕਿਰਪਾ ਕਰਕੇ ਉਡੀਕ ਕਰੋ ਜਦੋਂ ਤੱਕ ਅਸੀਂ ਨਵੀਨਤਮ ਇਵੈਂਟਾਂ ਨੂੰ ਪ੍ਰਾਪਤ ਕਰਦੇ ਹਾਂ",
+      "all": "ਸਾਰੇ",
+      "live": "ਲਾਈਵ",
+      "premium": "ਪ੍ਰੀਮੀਅਮ",
+      "noEventsFor": "{type} ਲਈ ਕੋਈ ਇਵੈਂਟ ਨਹੀਂ ਮਿਲੇ।",
+      "noEventsWinbuzz": "ਕੋਈ ਇਵੈਂਟ ਨਹੀਂ ਮਿਲੇ",
+      "eventNotFound": "ਇਵੈਂਟ ਨਹੀਂ ਮਿਲਿਆ",
+      "betslip": "ਬੇਟ ਸਲਿੱਪ",
+      "placeBet": "ਪਲੇਸ ਬੇਟ",
+      "betslipClear": "ਸਾਫ਼",
+      "selectOddsHint": "ਜਾਰੀ ਰੱਖਣ ਲਈ ਮਾਰਕੀਟ ਤੋਂ ਔਕੜਾਂ ਦੀ ਚੋਣ ਕਰੋ।",
+      "odds": "ਔਕੜਾਂ",
+      "market": "ਬਜ਼ਾਰ",
+      "viewBy": "ਦੁਆਰਾ ਵੇਖੋ",
+      "stake": "ਦਾਅ",
+      "returns": "ਵਾਪਸੀ",
+      "min": "ਘੱਟੋ-ਘੱਟ",
+      "max": "ਅਧਿਕਤਮ",
+      "minStake": "ਘੱਟੋ-ਘੱਟ ਹਿੱਸੇਦਾਰੀ",
+      "maxStake": "ਅਧਿਕਤਮ ਹਿੱਸੇਦਾਰੀ",
+      "editStake": "ਹਿੱਸੇਦਾਰੀ ਨੂੰ ਸੋਧੋ",
+      "betslipCancel": "ਰੱਦ ਕਰੋ",
+      "betslipCancelOrder": "ਆਰਡਰ ਰੱਦ ਕਰੋ",
+      "betslipPlaceOrder": "ਆਰਡਰ ਦਿਓ",
+      "quickStakes": "ਤੇਜ਼ ਸਟੇਕਸ",
+      "customStake": "ਕਸਟਮ ਸਟੇਕ",
+      "actions": "ਕਾਰਵਾਈਆਂ",
+      "edit": "ਸੰਪਾਦਿਤ ਕਰੋ",
+      "processing": "ਪ੍ਰਕਿਰਿਆ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ...",
+      "stakePlaceholder": "ਹਿੱਸੇਦਾਰੀ ਦੀ ਰਕਮ",
+      "betPlaced": "ਬਾਜ਼ੀ ਸਫਲਤਾਪੂਰਵਕ ਰੱਖੀ ਗਈ ਹੈ",
+      "betFailed": "ਬਾਜ਼ੀ ਪਲੇਸਮੈਂਟ ਅਸਫਲ ਰਹੀ",
+      "bettingBlocked": "ਸੱਟੇਬਾਜ਼ੀ ਨੂੰ ਬਲੌਕ ਕੀਤਾ ਗਿਆ - ਕਿਰਪਾ ਕਰਕੇ ਸੱਟੇਬਾਜ਼ੀ ਨੂੰ ਸਮਰੱਥ ਬਣਾਉਣ ਲਈ ਆਪਣੀ ਅਪਲਾਈਨ ਨਾਲ ਸੰਪਰਕ ਕਰੋ।"
+    },
+    "racing": {
+      "noRaces": "ਇਸ ਸਮੇਂ ਕੋਈ ਦੌੜ ਉਪਲਬਧ ਨਹੀਂ ਹੈ।",
+      "loading": "ਰੇਸ ਲੋਡ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ...",
+      "loadingDescription": "ਕਿਰਪਾ ਕਰਕੇ ਉਡੀਕ ਕਰੋ ਜਦੋਂ ਤੱਕ ਅਸੀਂ ਨਵੀਨਤਮ ਰੇਸ ਜਾਣਕਾਰੀ ਪ੍ਰਾਪਤ ਕਰਦੇ ਹਾਂ",
+      "unknownRace": "ਅਗਿਆਤ ਰੇਸ",
+      "races": "{count} ਨਸਲਾਂ",
+      "title": "ਰੇਸਿੰਗ",
+      "eventsSubtitle": "ਰੇਸਿੰਗ ਇਵੈਂਟਸ",
+      "stats": {
+        "nowRunning": "ਹੁਣ ਚੱਲ ਰਿਹਾ ਹੈ",
+        "startingSoon": "ਜਲਦੀ ਹੀ ਸ਼ੁਰੂ ਹੋ ਰਿਹਾ ਹੈ",
+        "nextHour": "ਅਗਲਾ ਘੰਟਾ",
+        "next2Hours": "ਅਗਲੇ 2 ਘੰਟੇ",
+        "totalToday": "ਕੁੱਲ ਅੱਜ"
+      }
+    }
+  },
+  "components": {
+    "balanceCard": {
+      "availableBalance": "ਉਪਲਬਧ ਬਕਾਇਆ",
+      "cashable": "ਤਰਲ ਬਕਾਇਆ"
+    },
+    "bettingLimits": {
+      "min": "ਘੱਟੋ-ਘੱਟ",
+      "max": "ਅਧਿਕਤਮ",
+      "minAlt": "ਘੱਟੋ-ਘੱਟ ਬਾਜ਼ੀ",
+      "maxAlt": "ਅਧਿਕਤਮ ਬਾਜ਼ੀ"
+    },
+    "bankCard": {
+      "bankNameFallback": "ਬੈਂਕ ਦਾ ਨਾਮ",
+      "cardHolderLabel": "ਕਾਰਡ ਧਾਰਕ",
+      "holderNameFallback": "ਤੁਹਾਡਾ ਨਾਮ",
+      "ifscLabel": "IFSC"
+    },
+    "betHeader": {
+      "live": "ਲਾਈਵ",
+      "unknownTime": "ਅਗਿਆਤ ਸਮਾਂ",
+      "oddsTab": "ਔਕੜਾਂ",
+      "matchedBetTab": "ਮੇਲ ਖਾਂਦਾ ਬਾਜ਼ੀ",
+      "scorecard": "ਸਕੋਰਕਾਰਡ",
+      "liveTv": "ਲਾਈਵ ਟੀ.ਵੀ",
+      "watch": "ਦੇਖੋ",
+      "hide": "ਓਹਲੇ"
+    },
+    "betMarketsToolbar": {
+      "markets": "ਬਾਜ਼ਾਰ",
+      "score": "ਸਕੋਰ",
+      "openBets": "ਬੇਟਸ ਖੋਲ੍ਹੋ"
+    },
+    "betSlipToolbar": {
+      "betslip": "ਬੈਟਸਲਿਪ",
+      "openBet": "ਓਪਨ ਬੇਟ",
+      "emptyMessage": "ਬੇਟਸਲਿਪ ਵਿੱਚ ਚੋਣ ਜੋੜਨ ਲਈ ਔਕੜਾਂ 'ਤੇ ਕਲਿੱਕ ਕਰੋ।"
+    },
+    "betHistory": {
+      "back": "back",
+      "lay": "lay",
+      "columnOdd": "ਅਜੀਬ",
+      "pending": "ਬਕਾਇਆ",
+      "won": "ਜਿੱਤਿਆ",
+      "lost": "ਗੁਆਚ ਗਿਆ",
+      "unknownEvent": "ਅਗਿਆਤ ਇਵੈਂਟ",
+      "noBets": "ਕੋਈ {status} ਸੱਟਾ ਨਹੀਂ ਮਿਲਿਆ"
+    },
+    "globalSnackbar": {
+      "close": "ਬੰਦ ਕਰੋ"
+    },
+    "allEventsDropdown": {
+      "activator": "ਸਾਰੇ ਸਮਾਗਮ",
+      "cardTitle": "ਸਾਰੇ ਸਮਾਗਮ",
+      "loading": "ਇਵੈਂਟਾਂ ਨੂੰ ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
+      "errorLoadingEventTypes": "ਇਵੈਂਟ ਕਿਸਮਾਂ ਨੂੰ ਲੋਡ ਕਰਨ ਵਿੱਚ ਤਰੁੱਟੀ: {error}",
+      "noEvents": "ਇਸ ਸਮੇਂ ਕੋਈ ਇਵੈਂਟ ਉਪਲਬਧ ਨਹੀਂ ਹਨ",
+      "all": "ਸਾਰੇ"
+    },
+    "casinoSearch": {
+      "resultSingle": "ਨਤੀਜਾ ਮਿਲਿਆ",
+      "resultPlural": "ਨਤੀਜੇ ਮਿਲੇ ਹਨ",
+      "showing": "Showing {shown} of {total} results"
+    },
+    "competitionCard": {
+      "viewGames": "ਗੇਮਾਂ ਦੇਖੋ"
+    },
+    "multiMarket": {
+      "eventFallback": "ਘਟਨਾ",
+      "live": "ਲਾਈਵ",
+      "market_singular": "ਬਾਜ਼ਾਰ",
+      "market_plural": "ਬਾਜ਼ਾਰ",
+      "openEventDetails": "ਪੂਰਾ ਇਵੈਂਟ ਪੰਨਾ ਖੋਲ੍ਹੋ"
+    },
+    "cryptoCard": {
+      "wallet": "ਵਾਲਿਟ",
+      "addressTitle": "{ਮੁਦਰਾ} – ਪਤਾ"
+    },
+    "searchResults": {
+      "searching": "ਖੋਜ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ...",
+      "errorTitle": "ਕੁਝ ਗਲਤ ਹੋ ਗਿਆ",
+      "searchTitle": "ਇਵੈਂਟਸ ਅਤੇ ਗੇਮਾਂ ਦੀ ਖੋਜ ਕਰੋ",
+      "searchSubtitle": "ਸਪੋਰਟਸ ਇਵੈਂਟਸ ਅਤੇ ਕੈਸੀਨੋ ਗੇਮਾਂ ਨੂੰ ਨਾਮ ਦੁਆਰਾ ਲੱਭੋ",
+      "noResults": "ਕੋਈ ਨਤੀਜੇ ਨਹੀਂ ਮਿਲੇ",
+      "tryDifferent": "ਵੱਖ-ਵੱਖ ਕੀਵਰਡਸ ਨਾਲ ਖੋਜ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ",
+      "sportsEvents": "ਖੇਡ ਸਮਾਗਮ",
+      "casinoGames": "ਕੈਸੀਨੋ ਗੇਮਜ਼",
+      "showMore": "ਹੋਰ ਨਤੀਜੇ ਦਿਖਾਓ",
+      "filter": {
+        "all": "ਸਾਰੇ",
+        "events": "ਸਮਾਗਮ",
+        "games": "ਖੇਡਾਂ"
+      },
+      "live": "ਲਾਈਵ"
+    },
+    "upcomingEvent": {
+      "upcoming": "ਆਗਾਮੀ ਇਵੈਂਟ"
+    },
+    "fancy": {
+      "min": "ਘੱਟੋ-ਘੱਟ:",
+      "max": "ਅਧਿਕਤਮ:",
+      "positionsTitle": "ਅਹੁਦੇ",
+      "noPositions": "ਕੋਈ ਅਹੁਦੇ ਨਹੀਂ",
+      "run": "ਚਲਾਓ",
+      "position": "ਸਥਿਤੀ",
+      "amount": "ਰਕਮ",
+      "close": "ਬੰਦ ਕਰੋ",
+      "rulesSportName": "ਫੈਂਸੀ ਬਾਜ਼ਾਰ"
+    },
+    "buttonUpdate": {
+      "title": "ਸਟੇਕ ਬਟਨ ਅੱਪਡੇਟ ਕਰੋ",
+      "columnLabel": "ਬਟਨ ਲੇਬਲ",
+      "columnAmount": "ਹਿੱਸੇਦਾਰੀ ਦੀ ਰਕਮ",
+      "buttonLabel": "ਬਟਨ {n} ਲੇਬਲ",
+      "amountLabel": "ਰਕਮ {n}",
+      "updateButtons": "ਅੱਪਡੇਟ ਬਟਨ",
+      "successUpdate": "ਬਟਨ ਸਫਲਤਾਪੂਰਵਕ ਅੱਪਡੇਟ ਕੀਤੇ ਗਏ।",
+      "errorUpdating": "ਬਟਨ ਮੁੱਲ ਅੱਪਡੇਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+    },
+    "searchDialog": {
+      "searchTitle": "ਇਵੈਂਟਸ ਅਤੇ ਗੇਮਾਂ ਦੀ ਖੋਜ ਕਰੋ",
+      "mobilePlaceholder": "ਇਵੈਂਟਸ ਅਤੇ ਗੇਮਾਂ ਖੋਜੋ...",
+      "desktopPlaceholder": "ਨਾਮ, ਖੇਡ, ਜਾਂ ਸ਼੍ਰੇਣੀ ਦੁਆਰਾ ਇਵੈਂਟਸ ਅਤੇ ਕੈਸੀਨੋ ਗੇਮਾਂ ਦੀ ਖੋਜ ਕਰੋ...",
+      "noMatches": "ਕੋਈ ਮੇਲ ਨਹੀਂ ਮਿਲਿਆ",
+      "oneMatch": "1 ਮਿਲਾਨ ਮਿਲਿਆ",
+      "matches": "{n} ਮੇਲ ਮਿਲੇ",
+      "pressEsc": "ਬੰਦ ਕਰਨ ਲਈ ESC ਦਬਾਓ",
+      "tapToView": "ਦੇਖਣ ਲਈ ਕਿਸੇ ਵੀ ਘਟਨਾ 'ਤੇ ਟੈਪ ਕਰੋ",
+      "events": "ਘਟਨਾਵਾਂ",
+      "games": "ਖੇਡਾਂ",
+      "loadFailed": "ਡਾਟਾ ਲੋਡ ਕਰਨਾ ਅਸਫਲ ਰਿਹਾ",
+      "loadFailedForSearch": "ਖੋਜ ਲਈ ਡਾਟਾ ਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਫਲ",
+      "opening": "{name} ਨੂੰ ਖੋਲ੍ਹਿਆ ਜਾ ਰਿਹਾ ਹੈ"
+    },
+    "upiCard": {
+      "payTo": "ਨੂੰ ਭੁਗਤਾਨ ਕਰੋ",
+      "qrTitle": "UPI - ਭੁਗਤਾਨ ਕਰਨ ਲਈ ਸਕੈਨ ਕਰੋ"
+    },
+    "walletInfo": {
+      "manageWallet": "ਆਪਣੇ ਬਟੂਏ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ",
+      "viewExposure": "ਐਕਸਪੋਜਰ ਵੇਰਵੇ ਦੇਖਣ ਲਈ ਕਲਿੱਕ ਕਰੋ",
+      "balanceBreakdown": "ਕੈਸ਼ਯੋਗ ਅਤੇ ਗੈਰ-ਨਕਦਯੋਗ ਬੈਲੇਂਸ ਬ੍ਰੇਕਡਾਊਨ",
+      "balance": "ਸੰਤੁਲਨ",
+      "balanceShort": "ਬੱਲ",
+      "bonusShort": "ਬੋਨ",
+      "exposureShort": "ਐਕਸਪ",
+      "exposure": "ਸੰਪਰਕ",
+      "cashable": "ਕੈਸ਼ਯੋਗ",
+      "non-cashable": "ਗੈਰ-ਕੈਸ਼ਯੋਗ",
+      "bonus": "ਬੋਨਸ"
+    },
+    "walletLink": {
+      "comingSoon": "ਆਨ ਵਾਲੀ"
+    },
+    "mobileBottomNav": {
+      "sports": "ਖੇਡਾਂ",
+      "racing": "ਰੇਸਿੰਗ",
+      "wallet": "ਵਾਲਿਟ",
+      "casino": "ਕੈਸੀਨੋ",
+      "offers": "Offers",
+      "home": "Home",
+      "helpline": "Helpline",
+      "account": "Account",
+      "login": "Login",
+      "more": "ਹੋਰ",
+      "options": "ਵਿਕਲਪ",
+      "moreToDo": "ਕਰਨ ਲਈ ਹੋਰ",
+      "search": "ਖੋਜ",
+      "affiliate": "ਐਫੀਲੀਏਟ",
+      "live": "ਲਾਈਵ",
+      "multiMarket": "ਮਲਟੀ ਮਾਰਕੀਟ",
+      "rules": "ਨਿਯਮ",
+      "light": "ਚਾਨਣ",
+      "dark": "ਹਨੇਰਾ",
+      "logout": "ਲਾਗਆਉਟ",
+      "featured": "ਫੀਚਰਡ",
+      "liveEvents": "ਲਾਈਵ ਇਵੈਂਟਸ",
+      "sportsBook": "ਸਪੋਰਟਸ ਬੁੱਕ",
+      "casinoHome": "ਕੈਸੀਨੋ ਘਰ",
+      "mac88": "MAC88",
+      "macExcite": "ਮੈਕ ਐਕਸਾਈਟ",
+      "virtuals": "ਵਰਚੁਅਲਸ",
+      "color": "ਰੰਗ",
+      "funGames": "ਮਜ਼ੇਦਾਰ ਗੇਮਾਂ"
+    },
+    "sidebar": {
+      "titles": {
+        "casinoHome": "ਕੈਸੀਨੋ ਘਰ",
+        "favoriteGames": "ਮਨਪਸੰਦ ਗੇਮਾਂ",
+        "newLaunch": "ਨਵਾਂ ਲਾਂਚ",
+        "mac88": "MAC88",
+        "macExcite": "ਮੈਕ ਐਕਸਾਈਟ",
+        "mac88Virtuals": "MAC88 ਵਰਚੁਅਲਸ",
+        "colorPrediction": "ਰੰਗ ਦੀ ਭਵਿੱਖਬਾਣੀ",
+        "funGames": "ਮਜ਼ੇਦਾਰ ਗੇਮਾਂ",
+        "featured": "ਫੀਚਰਡ",
+        "sports": "ਖੇਡਾਂ",
+        "liveEvents": "ਲਾਈਵ ਇਵੈਂਟਸ",
+        "multiMarket": "ਮਲਟੀ ਮਾਰਕੀਟ",
+        "racing": "ਰੇਸਿੰਗ",
+        "sportsBook": "ਸਪੋਰਟਸ ਬੁੱਕ",
+        "paymentMethods": "ਭੁਗਤਾਨ ਵਿਧੀਆਂ",
+        "affiliateProgram": "ਐਫੀਲੀਏਟ ਪ੍ਰੋਗਰਾਮ"
+      },
+      "tooltips": {
+        "featured": "ਫੀਚਰਡ ਇਵੈਂਟ ਦੇਖੋ",
+        "sports": "ਸਾਰੇ ਖੇਡ ਸਮਾਗਮ ਵੇਖੋ",
+        "liveEvents": "ਲਾਈਵ ਸਪੋਰਟਸ ਇਵੈਂਟਸ ਦੇਖੋ",
+        "multiMarket": "ਮਲਟੀ ਮਾਰਕੀਟ ਸੱਟੇਬਾਜ਼ੀ ਵੇਖੋ",
+        "racing": "ਰੇਸਿੰਗ ਇਵੈਂਟ ਦੇਖੋ",
+        "sportsBook": "ਸਪੋਰਟਸ ਸੱਟੇਬਾਜ਼ੀ ਦੇ ਵਿਕਲਪ ਦੇਖੋ",
+        "favoriteGames": "ਆਪਣੀਆਂ ਮਨਪਸੰਦ ਕੈਸੀਨੋ ਗੇਮਾਂ ਵੇਖੋ",
+        "newLaunch": "ਨਵੀਆਂ ਲਾਂਚ ਕੀਤੀਆਂ ਗਈਆਂ ਕੈਸੀਨੋ ਗੇਮਾਂ ਦੀ ਪੜਚੋਲ ਕਰੋ",
+        "casinoHome": "ਕੈਸੀਨੋ ਹੋਮ 'ਤੇ ਜਾਓ",
+        "mac88": "MAC88 ਚਲਾਓ",
+        "macExcite": "MAC EXCITE ਚਲਾਓ",
+        "mac88Virtuals": "MAC88 ਵਰਚੁਅਲ ਚਲਾਓ",
+        "colorPrediction": "ਰੰਗ ਦੀ ਭਵਿੱਖਬਾਣੀ ਚਲਾਓ",
+        "funGames": "ਮਜ਼ੇਦਾਰ ਗੇਮਾਂ ਖੇਡੋ",
+        "paymentMethods": "ਬੈਂਕ, UPI ਅਤੇ ਕ੍ਰਿਪਟੋ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ",
+        "affiliateProgram": "ਆਪਣੇ ਐਫੀਲੀਏਟ ਪ੍ਰੋਗਰਾਮ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ"
+      },
+      "selectlanguage": "ਭਾਸ਼ਾ ਚੁਣੋ",
+      "managePaymentMethods": "ਬੈਂਕ, UPI ਅਤੇ ਕ੍ਰਿਪਟੋ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ",
+      "affiliateProgram": "ਐਫੀਲੀਏਟ ਪ੍ਰੋਗਰਾਮ"
+    },
+    "exposureDialog": {
+      "title": "ਮੇਰੇ ਬਾਜ਼ਾਰ",
+      "eventType": "ਘਟਨਾ ਦੀ ਕਿਸਮ",
+      "eventName": "ਇਵੈਂਟ ਦਾ ਨਾਮ",
+      "expose": "ਬੇਨਕਾਬ",
+      "fetchError": "ਐਕਸਪੋਜ਼ਰ ਡੇਟਾ ਪ੍ਰਾਪਤ ਕਰਨ ਵਿੱਚ ਅਸਫਲ",
+      "noData": "ਕੋਈ ਸਰਗਰਮ ਇਵੈਂਟ ਨਹੀਂ ਹਨ",
+      "events": "ਘਟਨਾਵਾਂ",
+      "totalExposure": "ਕੁੱਲ ਐਕਸਪੋਜ਼ਰ"
+    },
+    "guestLayout": {
+      "logoAlt": "ਲੋਗੋ"
+    },
+    "header": {
+      "logoAlt": "ਲੋਗੋ",
+      "language": "ਭਾਸ਼ਾ",
+      "refreshPage": "ਪੰਨਾ ਤਾਜ਼ਾ ਕਰੋ"
+    },
+    "demoSignup": {
+      "title": "ਪੂਰੀ ਪਹੁੰਚ ਨੂੰ ਅਨਲੌਕ ਕਰਨ ਲਈ ਲੌਗ ਇਨ ਕਰੋ",
+      "subtitle": "ਤੁਸੀਂ ਇਸ ਸਮੇਂ ਡੈਮੋ ਮੋਡ ਵਿੱਚ ਹੋ। ਸਾਰੀਆਂ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਲਈ ਲੌਗ ਇਨ ਕਰੋ।",
+      "benefits": {
+        "depositWithdraw": {
+          "title": "ਜਮ੍ਹਾ ਅਤੇ ਕਢਵਾਉਣਾ",
+          "description": "ਆਪਣੇ ਖਾਤੇ ਵਿੱਚ ਫੰਡ ਸ਼ਾਮਲ ਕਰੋ ਅਤੇ ਕਿਸੇ ਵੀ ਸਮੇਂ ਆਪਣੀਆਂ ਜਿੱਤਾਂ ਨੂੰ ਵਾਪਸ ਲਓ"
+        },
+        "secureSafe": {
+          "title": "ਸੁਰੱਖਿਅਤ ਅਤੇ ਸੁਰੱਖਿਅਤ",
+          "description": "ਤੁਹਾਡੇ ਫੰਡ ਅਤੇ ਨਿੱਜੀ ਜਾਣਕਾਰੀ ਸੁਰੱਖਿਅਤ ਹਨ"
+        },
+        "fullAccess": {
+          "title": "ਪੂਰੀ ਪਹੁੰਚ",
+          "description": "ਸਾਰੀਆਂ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਅਤੇ ਮਾਰਕੀਟ ਵਿਕਲਪਾਂ ਤੱਕ ਪਹੁੰਚ ਕਰੋ"
+        },
+        "expertSupport": {
+          "title": "ਮਾਹਰ ਸਹਾਇਤਾ",
+          "description": "ਸਾਡੀ 24/7 ਗਾਹਕ ਸਹਾਇਤਾ ਟੀਮ ਤੋਂ ਮਦਦ ਪ੍ਰਾਪਤ ਕਰੋ"
+        }
+      },
+      "offer": {
+        "title": "ਸੁਆਗਤ ਹੈ ਬੋਨਸ ਉਪਲਬਧ!",
+        "subtitle": "ਨਵੇਂ ਮੈਂਬਰਾਂ ਨੂੰ ਵਿਸ਼ੇਸ਼ ਬੋਨਸ ਅਤੇ ਤਰੱਕੀ ਮਿਲਦੀ ਹੈ"
+      },
+      "cta": {
+        "login": "ਲਾਗਿਨ",
+        "continueDemo": "ਡੈਮੋ ਮੋਡ ਵਿੱਚ ਜਾਰੀ ਰੱਖੋ"
+      }
+    },
+    "eventRow": {
+      "justNow": "ਹੁਣੇ",
+      "minutesAgo": "{n} ਮਿੰਟ ਪਹਿਲਾਂ",
+      "hoursAgo": "{n} ਘੰਟੇ ਪਹਿਲਾਂ",
+      "daysAgo": "{n} ਦਿਨ ਪਹਿਲਾਂ",
+      "vs": "ਬਨਾਮ",
+      "bm": "ਬੀ.ਐਮ",
+      "f": "ਐੱਫ"
+    },
+    "rulesDialog": {
+      "rules": "ਨਿਯਮ",
+      "noRules": "ਇਸ ਖੇਡ ਲਈ ਕੋਈ ਨਿਯਮ ਉਪਲਬਧ ਨਹੀਂ ਹਨ।"
+    },
+    "bigWins": {
+      "title": "ਤਾਜ਼ਾ ਵੱਡੀਆਂ ਜਿੱਤਾਂ",
+      "fetchError": "ਵੱਡੀਆਂ ਜਿੱਤਾਂ ਪ੍ਰਾਪਤ ਕਰਨ ਵਿੱਚ ਅਸਫਲ:"
+    },
+    "competitionSlider": {
+      "title": "ਪ੍ਰਸਿੱਧ ਮੁਕਾਬਲੇ"
+    },
+    "eventSlider": {
+      "title": "ਫੀਚਰਡ ਇਵੈਂਟਸ",
+      "justNow": "ਹੁਣੇ",
+      "minsAgo": "{n} ਮਿੰਟ ਪਹਿਲਾਂ",
+      "hoursAgo": "{n} ਘੰਟੇ ਪਹਿਲਾਂ",
+      "daysAgo": "{n} ਦਿਨ ਪਹਿਲਾਂ",
+      "fancyShort": "ਐੱਫ",
+      "bmShort": "ਬੀ.ਐਮ",
+      "colon": ":"
+    },
+    "newLaunchGames": {
+      "title": "ਨਵਾਂ ਲਾਂਚ",
+      "loading": "ਨਵੀਆਂ ਲਾਂਚ ਗੇਮਾਂ ਨੂੰ ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
+      "noGames": "ਕੋਈ ਨਵੀਂ ਲਾਂਚ ਗੇਮ ਉਪਲਬਧ ਨਹੀਂ ਹੈ",
+      "checkBack": "ਨਵੀਆਂ ਲਾਂਚ ਕੀਤੀਆਂ ਗੇਮਾਂ ਲਈ ਜਲਦੀ ਹੀ ਵਾਪਸ ਜਾਂਚ ਕਰੋ",
+      "errorLoading": "ਨਵੀਆਂ ਲਾਂਚ ਗੇਮਾਂ ਨੂੰ ਲੋਡ ਕਰਨ ਵਿੱਚ ਤਰੁੱਟੀ:"
+    }
+  },
+  "pages": {
+    "aboutUs": {
+      "title": "ਸਾਡੇ ਬਾਰੇ",
+      "whatWeOffer": "ਅਸੀਂ ਕੀ ਪੇਸ਼ਕਸ਼ ਕਰਦੇ ਹਾਂ",
+      "sports": "ਖੇਡਾਂ",
+      "sportsDesc": "ਰੀਅਲ-ਟਾਈਮ ਔਡਸ ਅਪਡੇਟਾਂ ਦੇ ਨਾਲ ਪ੍ਰਮੁੱਖ ਖੇਡਾਂ ਵਿੱਚ ਲਾਈਵ ਅਤੇ ਪ੍ਰੀ-ਮੈਚ ਬਾਜ਼ਾਰ।",
+      "racing": "ਰੇਸਿੰਗ",
+      "racingDesc": "ਦੁਨੀਆ ਭਰ ਦੇ ਪ੍ਰਮੁੱਖ ਟਰੈਕਾਂ ਤੋਂ ਘੋੜਾ ਅਤੇ ਗ੍ਰੇਹਾਊਂਡ ਰੇਸਿੰਗ।",
+      "casino": "ਕੈਸੀਨੋ",
+      "casinoDesc": "ਸਲੋਟਾਂ, ਟੇਬਲ ਗੇਮਾਂ, ਅਤੇ ਲਾਈਵ ਡੀਲਰ ਅਨੁਭਵਾਂ ਦੀ ਵਿਆਪਕ ਲਾਇਬ੍ਰੇਰੀ।",
+      "ourValues": "ਸਾਡੇ ਮੁੱਲ",
+      "security": "ਸੁਰੱਖਿਆ",
+      "securityDesc": "ਐਡਵਾਂਸਡ SSL ਐਨਕ੍ਰਿਪਸ਼ਨ ਅਤੇ ਉਦਯੋਗ-ਪ੍ਰਮੁੱਖ ਸੁਰੱਖਿਆ ਉਪਾਅ ਤੁਹਾਡੇ ਡੇਟਾ ਅਤੇ ਲੈਣ-ਦੇਣ ਦੀ ਰੱਖਿਆ ਕਰਦੇ ਹਨ।",
+      "innovation": "ਨਵੀਨਤਾ",
+      "innovationDesc": "ਅਤਿ-ਆਧੁਨਿਕ ਤਕਨਾਲੋਜੀ ਸਾਡੇ ਪਲੇਟਫਾਰਮ ਨੂੰ ਸ਼ਕਤੀ ਪ੍ਰਦਾਨ ਕਰਦੀ ਹੈ, ਨਿਰਵਿਘਨ ਪ੍ਰਦਰਸ਼ਨ ਅਤੇ ਦਿਲਚਸਪ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਨੂੰ ਯਕੀਨੀ ਬਣਾਉਂਦੀ ਹੈ।",
+      "customerFirst": "ਗਾਹਕ ਪਹਿਲਾਂ",
+      "customerFirstDesc": "24/7 ਸਹਾਇਤਾ ਟੀਮ ਬੇਮਿਸਾਲ ਸੇਵਾ ਪ੍ਰਦਾਨ ਕਰਨ ਅਤੇ ਤੁਹਾਡੇ ਸਵਾਲਾਂ ਨੂੰ ਤੁਰੰਤ ਹੱਲ ਕਰਨ ਲਈ ਸਮਰਪਿਤ ਹੈ।",
+      "responsibility": "ਜ਼ਿੰਮੇਵਾਰੀ",
+      "responsibilityDesc": "ਕੰਟਰੋਲ ਵਿੱਚ ਰਹਿਣ ਵਿੱਚ ਤੁਹਾਡੀ ਮਦਦ ਕਰਨ ਲਈ ਔਜ਼ਾਰਾਂ ਅਤੇ ਸਰੋਤਾਂ ਨਾਲ ਜ਼ਿੰਮੇਵਾਰ ਗੇਮਿੰਗ ਨੂੰ ਉਤਸ਼ਾਹਿਤ ਕਰਨ ਲਈ ਵਚਨਬੱਧ।",
+      "whyChooseTitle": "ਸਾਨੂੰ ਕਿਉਂ ਚੁਣੋ",
+      "wideSelectionTitle": "ਵਿਆਪਕ ਚੋਣ",
+      "wideSelectionDesc": "ਇੱਕ ਪਲੇਟਫਾਰਮ ਤੋਂ ਹਜ਼ਾਰਾਂ ਬਾਜ਼ਾਰਾਂ ਅਤੇ ਗੇਮਾਂ ਤੱਕ ਪਹੁੰਚ ਕਰੋ। ਪ੍ਰਮੁੱਖ ਸਪੋਰਟਸ ਲੀਗਾਂ ਤੋਂ ਲੈ ਕੇ ਕਲਾਸਿਕ ਕੈਸੀਨੋ ਮਨਪਸੰਦ ਤੱਕ, ਸਾਡੇ ਕੋਲ ਇਹ ਸਭ ਹੈ।",
+      "fastReliableTitle": "ਤੇਜ਼ ਅਤੇ ਭਰੋਸੇਮੰਦ",
+      "fastReliableDesc": "99.9% ਅਪਟਾਈਮ ਦੇ ਨਾਲ ਬਿਜਲੀ-ਤੇਜ਼ ਪਲੇਟਫਾਰਮ। ਤਤਕਾਲ ਡਿਪਾਜ਼ਿਟ, ਤਤਕਾਲ ਨਿਕਾਸੀ, ਅਤੇ ਰੀਅਲ-ਟਾਈਮ ਅੱਪਡੇਟ ਤੁਹਾਨੂੰ ਕਾਰਵਾਈ ਵਿੱਚ ਰੱਖਦੇ ਹਨ।",
+      "mobileOptimizedTitle": "ਮੋਬਾਈਲ ਅਨੁਕੂਲਿਤ",
+      "mobileOptimizedDesc": "ਡੈਸਕਟੌਪ, ਟੈਬਲੇਟ, ਅਤੇ ਮੋਬਾਈਲ ਲਈ ਜਵਾਬਦੇਹ ਡਿਜ਼ਾਈਨ ਦੇ ਨਾਲ ਕਿਸੇ ਵੀ ਡਿਵਾਈਸ 'ਤੇ ਪੂਰੇ ਅਨੁਭਵ ਦਾ ਆਨੰਦ ਲਓ।",
+      "competitiveOddsTitle": "ਮੁਕਾਬਲੇ ਦੀਆਂ ਸੰਭਾਵਨਾਵਾਂ",
+      "competitiveOddsDesc": "ਸਾਰੇ ਬਾਜ਼ਾਰਾਂ ਵਿੱਚ ਪ੍ਰਤੀਯੋਗੀ ਔਕੜਾਂ ਦੇ ਨਾਲ ਵਧੀਆ ਮੁੱਲ ਪ੍ਰਾਪਤ ਕਰੋ। ਸਾਡਾ ਲਾਈਵ ਔਡਜ਼ ਇੰਜਣ ਇਹ ਯਕੀਨੀ ਬਣਾਉਂਦਾ ਹੈ ਕਿ ਤੁਹਾਡੀ ਹਮੇਸ਼ਾ ਨਵੀਨਤਮ ਕੀਮਤਾਂ ਤੱਕ ਪਹੁੰਚ ਹੋਵੇ।",
+      "securePaymentsTitle": "ਸੁਰੱਖਿਅਤ ਭੁਗਤਾਨ",
+      "securePaymentsDesc": "ਕ੍ਰਿਪਟੋਕਰੰਸੀ ਅਤੇ ਬੈਂਕ ਟ੍ਰਾਂਸਫਰ ਸਮੇਤ ਕਈ ਭੁਗਤਾਨ ਵਿਕਲਪ। ਸਾਰੇ ਲੈਣ-ਦੇਣ ਏਨਕ੍ਰਿਪਟਡ ਅਤੇ ਸੁਰੱਖਿਅਤ ਢੰਗ ਨਾਲ ਪ੍ਰੋਸੈਸ ਕੀਤੇ ਜਾਂਦੇ ਹਨ।",
+      "fairPlayTitle": "ਇਮਾਨਦਾਰੀ",
+      "fairPlayDesc": "ਸਾਡੀਆਂ ਸਾਰੀਆਂ ਗੇਮਾਂ ਅਤੇ ਬਾਜ਼ਾਰਾਂ ਵਿੱਚ ਪ੍ਰਮਾਣਿਤ ਬੇਤਰਤੀਬ ਨੰਬਰ ਜਨਰੇਟਰਾਂ ਅਤੇ ਨਿਰਪੱਖ ਖੇਡ ਦੀ ਗਾਰੰਟੀ ਦੇ ਨਾਲ ਪਾਰਦਰਸ਼ੀ ਓਪਰੇਸ਼ਨ।",
+      "cta": {
+        "title": "ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਤਿਆਰ ਹੋ?",
+        "body": "ਉਨ੍ਹਾਂ ਹਜ਼ਾਰਾਂ ਸੰਤੁਸ਼ਟ ਉਪਭੋਗਤਾਵਾਂ ਵਿੱਚ ਸ਼ਾਮਲ ਹੋਵੋ ਜੋ ਆਪਣੀਆਂ ਮਨੋਰੰਜਨ ਲੋੜਾਂ ਲਈ ਸਾਡੇ 'ਤੇ ਭਰੋਸਾ ਕਰਦੇ ਹਨ। ਅੱਜ ਫਰਕ ਦਾ ਅਨੁਭਵ ਕਰੋ।",
+        "getStarted": "ਸ਼ੁਰੂ ਕਰੋ",
+        "explorePlatform": "ਪਲੇਟਫਾਰਮ ਦੀ ਪੜਚੋਲ ਕਰੋ"
+      },
+      "heroIntro": "ਖੇਡਾਂ, ਰੇਸਿੰਗ ਅਤੇ ਕੈਸੀਨੋ ਮਨੋਰੰਜਨ ਲਈ ਤੁਹਾਡੀ ਪ੍ਰਮੁੱਖ ਮੰਜ਼ਿਲ। ਅਤਿ-ਆਧੁਨਿਕ ਤਕਨਾਲੋਜੀ ਅਤੇ ਬੇਮਿਸਾਲ ਸੇਵਾ ਨਾਲ ਉੱਤਮਤਾ ਦਾ ਅਨੁਭਵ ਕਰੋ।"
+    },
+    "live": {
+      "title": "ਲਾਈਵ ਇਵੈਂਟਸ",
+      "loadingTitle": "ਲਾਈਵ ਇਵੈਂਟਾਂ ਨੂੰ ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
+      "loadingSubtitle": "ਕਿਰਪਾ ਕਰਕੇ ਉਡੀਕ ਕਰੋ ਜਦੋਂ ਤੱਕ ਅਸੀਂ ਨਵੀਨਤਮ ਲਾਈਵ ਸਪੋਰਟਸ ਡੇਟਾ ਪ੍ਰਾਪਤ ਕਰਦੇ ਹਾਂ",
+      "game": "ਖੇਡ",
+      "col1": "1",
+      "colX": "ਐਕਸ",
+      "col2": "2",
+      "noEvents": "ਇਸ ਸਮੇਂ ਕੋਈ ਲਾਈਵ ਇਵੈਂਟ ਉਪਲਬਧ ਨਹੀਂ ਹਨ।",
+      "fetchError": "ਲਾਈਵ ਇਵੈਂਟਾਂ ਨੂੰ ਪ੍ਰਾਪਤ ਕਰਨ ਵਿੱਚ ਤਰੁੱਟੀ:",
+      "failedToLoad": "ਲਾਈਵ ਇਵੈਂਟਸ ਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਫਲ",
+      "eventTypeFallback": "ਘਟਨਾ ਦੀ ਕਿਸਮ {id}",
+      "loadedLog": "ਲਾਈਵ ਇਵੈਂਟ ਲੋਡ ਕੀਤੇ ਗਏ:"
+    },
+    "multiMarket": {
+      "title": "ਮਲਟੀ ਮਾਰਕੀਟ",
+      "loadingTitle": "ਮਲਟੀ ਬਜ਼ਾਰਾਂ ਨੂੰ ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
+      "loadingSubtitle": "ਕਿਰਪਾ ਕਰਕੇ ਉਡੀਕ ਕਰੋ ਜਦੋਂ ਤੱਕ ਅਸੀਂ ਨਵੀਨਤਮ ਸੰਭਾਵਨਾਵਾਂ ਪ੍ਰਾਪਤ ਕਰਦੇ ਹਾਂ",
+      "noMarketsFound": "ਕੋਈ ਮਲਟੀ ਮਾਰਕੀਟ ਨਹੀਂ ਮਿਲਿਆ!",
+      "betSlip": "ਬੇਟ ਸਲਿੱਪ",
+      "betHistory": "ਸੱਟਾ ਇਤਿਹਾਸ",
+      "noPinnedMarkets": "ਇਸ ਇਵੈਂਟ ਲਈ ਕੋਈ ਪਿੰਨ ਕੀਤੇ ਬਾਜ਼ਾਰ ਨਹੀਂ ਹਨ"
+    },
+    "esports": {
+      "title": "ਈ-ਸਪੋਰਟਸ",
+      "game": "ਖੇਡ",
+      "col1": "1",
+      "colX": "ਐਕਸ",
+      "col2": "2",
+      "loadingTitle": "ਸਪੋਰਟਸ ਡੇਟਾ ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
+      "loadingSubtitle": "ਕਿਰਪਾ ਕਰਕੇ ਉਡੀਕ ਕਰੋ ਜਦੋਂ ਤੱਕ ਅਸੀਂ ਨਵੀਨਤਮ ਗੇਮਿੰਗ ਇਵੈਂਟਾਂ ਨੂੰ ਪ੍ਰਾਪਤ ਕਰਦੇ ਹਾਂ",
+      "noEvents": "{type} ਲਈ ਕੋਈ ਇਵੈਂਟ ਨਹੀਂ ਮਿਲੇ।"
+    },
+    "contact": {
+      "title": "ਸਾਡੇ ਨਾਲ ਸੰਪਰਕ ਕਰੋ",
+      "heroIntro": "ਸਾਡੇ ਨਾਲ ਸੰਪਰਕ ਵਿੱਚ ਰਹੋ. ਅਸੀਂ ਤੁਹਾਨੂੰ ਲੋੜੀਂਦੇ ਸਵਾਲਾਂ ਜਾਂ ਸਹਾਇਤਾ ਲਈ 24/7 ਤੁਹਾਡੀ ਮਦਦ ਕਰਨ ਲਈ ਇੱਥੇ ਹਾਂ।",
+      "whatsapp": "ਵਟਸਐਪ",
+      "whatsappDesc": "ਤੁਰੰਤ ਸਹਾਇਤਾ ਅਤੇ ਸਹਾਇਤਾ ਲਈ WhatsApp 'ਤੇ ਸਾਡੇ ਨਾਲ ਤੁਰੰਤ ਚੈਟ ਕਰੋ।",
+      "openWhatsapp": "WhatsApp ਖੋਲ੍ਹੋ",
+      "email": "ਈਮੇਲ",
+      "emailDesc": "ਸਾਨੂੰ ਇੱਕ ਈਮੇਲ ਭੇਜੋ ਅਤੇ ਅਸੀਂ ਜਿੰਨੀ ਜਲਦੀ ਹੋ ਸਕੇ ਤੁਹਾਡੇ ਕੋਲ ਵਾਪਸ ਆਵਾਂਗੇ।",
+      "supportHoursTitle": "ਸਹਾਇਤਾ ਘੰਟੇ",
+      "supportBadge": "24/7 ਸਹਾਇਤਾ",
+      "supportDescription": "24×7 ਗਾਹਕ ਸਹਾਇਤਾ - ਅਸੀਂ ਕਿਸੇ ਵੀ ਸਮੇਂ, ਕਿਤੇ ਵੀ ਤੁਹਾਡੀ ਮਦਦ ਕਰਨ ਲਈ ਇੱਥੇ ਹਾਂ",
+      "additionalTitle": "ਅਸੀਂ ਮਦਦ ਲਈ ਇੱਥੇ ਹਾਂ",
+      "quickResponseTitle": "ਤੇਜ਼ ਜਵਾਬ",
+      "quickResponseDesc": "ਤੁਹਾਡੇ ਸਾਰੇ ਸਵਾਲਾਂ ਲਈ ਤੇਜ਼ ਅਤੇ ਕੁਸ਼ਲ ਸਮਰਥਨ",
+      "secureCommTitle": "ਸੁਰੱਖਿਅਤ ਸੰਚਾਰ",
+      "secureCommDesc": "ਤੁਹਾਡੀ ਗੋਪਨੀਯਤਾ ਅਤੇ ਸੁਰੱਖਿਆ ਸਾਡੀਆਂ ਪ੍ਰਮੁੱਖ ਤਰਜੀਹਾਂ ਹਨ",
+      "expertTeamTitle": "ਮਾਹਿਰ ਟੀਮ",
+      "expertTeamDesc": "ਤਜਰਬੇਕਾਰ ਪੇਸ਼ੇਵਰ ਤੁਹਾਡੀ ਮਦਦ ਕਰਨ ਲਈ ਤਿਆਰ ਹਨ"
+    },
+    "termsAndConditions": {
+      "title": "ਨਿਬੰਧਨ ਅਤੇ ਸ਼ਰਤਾਂ",
+      "lastUpdated": "ਪਿਛਲੀ ਵਾਰ ਅੱਪਡੇਟ ਕੀਤਾ ਗਿਆ: {date}",
+      "introduction": "ਕਿਰਪਾ ਕਰਕੇ ਇਹਨਾਂ ਸ਼ਰਤਾਂ ਨੂੰ ਧਿਆਨ ਨਾਲ ਪੜ੍ਹੋ। ਸਾਡੇ ਪਲੇਟਫਾਰਮ ਦੀ ਵਰਤੋਂ ਕਰਕੇ, ਤੁਸੀਂ ਇਹਨਾਂ ਨਿਯਮਾਂ ਅਤੇ ਸ਼ਰਤਾਂ ਦੁਆਰਾ ਪਾਬੰਦ ਹੋਣ ਲਈ ਸਹਿਮਤ ਹੁੰਦੇ ਹੋ।",
+      "acceptanceOfTerms": "ਸ਼ਰਤਾਂ ਦੀ ਸਵੀਕ੍ਰਿਤੀ",
+      "eligibility": "ਯੋਗਤਾ ਅਤੇ ਉਮਰ ਦੀਆਂ ਲੋੜਾਂ",
+      "mustBe18": "ਸਾਡੀਆਂ ਸੇਵਾਵਾਂ ਦੀ ਵਰਤੋਂ ਕਰਨ ਲਈ ਤੁਹਾਡੀ ਉਮਰ ਘੱਟੋ-ਘੱਟ 18 ਸਾਲ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ",
+      "legalCapacity": "ਤੁਹਾਡੇ ਕੋਲ ਲਾਜ਼ਮੀ ਸਮਝੌਤਿਆਂ ਵਿੱਚ ਦਾਖਲ ਹੋਣ ਦੀ ਕਾਨੂੰਨੀ ਸਮਰੱਥਾ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ",
+      "complyLaws": "ਤੁਹਾਨੂੰ ਆਪਣੇ ਅਧਿਕਾਰ ਖੇਤਰ ਵਿੱਚ ਸਾਰੇ ਲਾਗੂ ਕਾਨੂੰਨਾਂ ਦੀ ਪਾਲਣਾ ਕਰਨੀ ਚਾਹੀਦੀ ਹੈ",
+      "accountRegistration": "ਖਾਤਾ ਰਜਿਸਟ੍ਰੇਸ਼ਨ ਅਤੇ ਸੁਰੱਖਿਆ",
+      "accountCreation": "ਖਾਤਾ ਬਣਾਉਣਾ",
+      "accountSecurity": "ਖਾਤਾ ਸੁਰੱਖਿਆ",
+      "oneAccountPerPerson": "ਪ੍ਰਤੀ ਵਿਅਕਤੀ ਇੱਕ ਖਾਤਾ",
+      "acceptableUse": "ਸੇਵਾਵਾਂ ਦੀ ਸਵੀਕਾਰਯੋਗ ਵਰਤੋਂ",
+      "notAllowed": "ਤੁਸੀਂ ਸਾਡੀਆਂ ਸੇਵਾਵਾਂ ਨੂੰ ਸਿਰਫ਼ ਕਨੂੰਨੀ ਉਦੇਸ਼ਾਂ ਲਈ ਅਤੇ ਇਹਨਾਂ ਨਿਯਮਾਂ ਦੇ ਅਨੁਸਾਰ ਵਰਤਣ ਲਈ ਸਹਿਮਤ ਹੋ। ਤੁਸੀਂ ਸਹਿਮਤ ਨਹੀਂ ਹੋ:",
+      "illegalUse": "ਕਿਸੇ ਵੀ ਗੈਰ-ਕਾਨੂੰਨੀ ਜਾਂ ਅਣਅਧਿਕਾਰਤ ਉਦੇਸ਼ ਲਈ ਸਾਡੀਆਂ ਸੇਵਾਵਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ",
+      "unauthorized": "ਸਾਡੇ ਸਿਸਟਮਾਂ ਜਾਂ ਨੈੱਟਵਰਕਾਂ ਤੱਕ ਅਣਅਧਿਕਾਰਤ ਪਹੁੰਚ ਪ੍ਰਾਪਤ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼",
+      "disrupt": "ਸਾਡੀਆਂ ਸੇਵਾਵਾਂ ਦੀ ਇਕਸਾਰਤਾ ਜਾਂ ਪ੍ਰਦਰਸ਼ਨ ਵਿੱਚ ਦਖ਼ਲਅੰਦਾਜ਼ੀ ਜਾਂ ਵਿਘਨ ਪਾਓ",
+      "bots": "ਬਿਨਾਂ ਇਜਾਜ਼ਤ ਸਾਡੀਆਂ ਸੇਵਾਵਾਂ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਲਈ ਸਵੈਚਲਿਤ ਪ੍ਰਣਾਲੀਆਂ ਜਾਂ ਬੋਟਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ",
+      "responsibleForLegalUse": "ਤੁਸੀਂ ਇਹ ਯਕੀਨੀ ਬਣਾਉਣ ਲਈ ਜ਼ਿੰਮੇਵਾਰ ਹੋ ਕਿ ਤੁਹਾਡੀਆਂ ਸੇਵਾਵਾਂ ਦੀ ਵਰਤੋਂ ਤੁਹਾਡੇ ਸਥਾਨ 'ਤੇ ਕਾਨੂੰਨੀ ਹੈ",
+      "governUse": "ਇਹ ਨਿਯਮ ਅਤੇ ਸ਼ਰਤਾਂ ਸਾਡੇ ਪਲੇਟਫਾਰਮ ਦੀ ਤੁਹਾਡੀ ਵਰਤੋਂ ਨੂੰ ਨਿਯੰਤ੍ਰਿਤ ਕਰਦੀਆਂ ਹਨ। ਸਾਡੀਆਂ ਸੇਵਾਵਾਂ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਜਾਂ ਵਰਤ ਕੇ, ਤੁਸੀਂ ਇਹਨਾਂ ਸ਼ਰਤਾਂ ਦੀ ਪਾਲਣਾ ਕਰਨ ਅਤੇ ਉਹਨਾਂ ਦੁਆਰਾ ਬੰਨ੍ਹੇ ਜਾਣ ਲਈ ਸਹਿਮਤ ਹੁੰਦੇ ਹੋ। ਜੇਕਰ ਤੁਸੀਂ ਇਹਨਾਂ ਸ਼ਰਤਾਂ ਦੇ ਕਿਸੇ ਵੀ ਹਿੱਸੇ ਨਾਲ ਸਹਿਮਤ ਨਹੀਂ ਹੋ, ਤਾਂ ਤੁਸੀਂ ਸਾਡੀਆਂ ਸੇਵਾਵਾਂ ਦੀ ਵਰਤੋਂ ਨਹੀਂ ਕਰ ਸਕਦੇ ਹੋ।",
+      "acceptanceParagraph": "ਇੱਕ ਖਾਤਾ ਬਣਾਉਣ, ਐਕਸੈਸ ਕਰਨ, ਜਾਂ ਸਾਡੇ ਪਲੇਟਫਾਰਮ ਦੀ ਵਰਤੋਂ ਕਰਕੇ, ਤੁਸੀਂ ਸਵੀਕਾਰ ਕਰਦੇ ਹੋ ਕਿ ਤੁਸੀਂ ਇਹਨਾਂ ਨਿਯਮਾਂ ਅਤੇ ਸ਼ਰਤਾਂ, ਸਾਡੀ ਗੋਪਨੀਯਤਾ ਨੀਤੀ, ਅਤੇ ਸਾਰੇ ਲਾਗੂ ਕਾਨੂੰਨਾਂ ਅਤੇ ਨਿਯਮਾਂ ਨੂੰ ਪੜ੍ਹਿਆ ਹੈ, ਸਮਝ ਲਿਆ ਹੈ ਅਤੇ ਉਹਨਾਂ ਦੁਆਰਾ ਬੰਨ੍ਹੇ ਜਾਣ ਲਈ ਸਹਿਮਤ ਹੋ।",
+      "accountCreationDesc": "ਤੁਸੀਂ ਆਪਣਾ ਖਾਤਾ ਬਣਾਉਂਦੇ ਸਮੇਂ ਸਹੀ ਅਤੇ ਪੂਰੀ ਜਾਣਕਾਰੀ ਪ੍ਰਦਾਨ ਕਰਨ ਲਈ ਜ਼ਿੰਮੇਵਾਰ ਹੋ। ਤੁਹਾਨੂੰ ਆਪਣੀ ਖਾਤਾ ਜਾਣਕਾਰੀ ਨੂੰ ਚਾਲੂ ਰੱਖਣ ਲਈ ਇਸਨੂੰ ਕਾਇਮ ਰੱਖਣਾ ਅਤੇ ਅਪਡੇਟ ਕਰਨਾ ਚਾਹੀਦਾ ਹੈ।",
+      "accountSecurityDesc": "ਤੁਸੀਂ ਆਪਣੇ ਖਾਤੇ ਦੇ ਪ੍ਰਮਾਣ ਪੱਤਰਾਂ ਦੀ ਗੁਪਤਤਾ ਨੂੰ ਬਣਾਈ ਰੱਖਣ ਅਤੇ ਤੁਹਾਡੇ ਖਾਤੇ ਦੇ ਅਧੀਨ ਹੋਣ ਵਾਲੀਆਂ ਸਾਰੀਆਂ ਗਤੀਵਿਧੀਆਂ ਲਈ ਜ਼ਿੰਮੇਵਾਰ ਹੋ। ਤੁਹਾਨੂੰ ਆਪਣੇ ਖਾਤੇ ਦੀ ਕਿਸੇ ਵੀ ਅਣਅਧਿਕਾਰਤ ਵਰਤੋਂ ਬਾਰੇ ਸਾਨੂੰ ਤੁਰੰਤ ਸੂਚਿਤ ਕਰਨਾ ਚਾਹੀਦਾ ਹੈ।",
+      "oneAccountPerPersonDesc": "ਹਰੇਕ ਉਪਭੋਗਤਾ ਨੂੰ ਸਿਰਫ਼ ਇੱਕ ਖਾਤਾ ਰੱਖਣ ਦੀ ਇਜਾਜ਼ਤ ਹੈ। ਕਈ ਖਾਤੇ ਜਾਂ ਡੁਪਲੀਕੇਟ ਖਾਤੇ ਬਣਾਉਣ ਦੀਆਂ ਕੋਸ਼ਿਸ਼ਾਂ ਦੇ ਨਤੀਜੇ ਵਜੋਂ ਸਾਰੇ ਸਬੰਧਿਤ ਖਾਤਿਆਂ ਨੂੰ ਮੁਅੱਤਲ ਜਾਂ ਸਮਾਪਤ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ।",
+      "shareSellTransfer": "ਆਪਣੇ ਖਾਤੇ ਨੂੰ ਕਿਸੇ ਹੋਰ ਵਿਅਕਤੀ ਨੂੰ ਸਾਂਝਾ ਕਰੋ, ਵੇਚੋ ਜਾਂ ਟ੍ਰਾਂਸਫਰ ਕਰੋ",
+      "financialTerms": "ਵਿੱਤੀ ਸ਼ਰਤਾਂ",
+      "depositsWithdrawalsTitle": "ਡਿਪਾਜ਼ਿਟ ਅਤੇ ਕਢਵਾਉਣਾ",
+      "depositsWithdrawalsDesc": "ਸਾਰੀਆਂ ਜਮ੍ਹਾਂ ਰਕਮਾਂ ਅਤੇ ਨਿਕਾਸੀ ਸਾਡੀਆਂ ਭੁਗਤਾਨ ਪ੍ਰਕਿਰਿਆ ਨੀਤੀਆਂ ਦੇ ਅਧੀਨ ਹਨ। ਘੱਟੋ-ਘੱਟ ਅਤੇ ਵੱਧ ਤੋਂ ਵੱਧ ਸੀਮਾਵਾਂ ਲਾਗੂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਚੁਣੀ ਗਈ ਭੁਗਤਾਨ ਵਿਧੀ ਦੇ ਆਧਾਰ 'ਤੇ ਪ੍ਰਕਿਰਿਆ ਕਰਨ ਦਾ ਸਮਾਂ ਵੱਖ-ਵੱਖ ਹੋ ਸਕਦਾ ਹੈ।",
+      "accountBalanceTitle": "ਖਾਤਾ ਬਕਾਇਆ",
+      "accountBalanceDesc": "ਤੁਹਾਡਾ ਖਾਤਾ ਬਕਾਇਆ ਸਾਡੇ ਪਲੇਟਫਾਰਮ 'ਤੇ ਵਰਤੋਂ ਲਈ ਉਪਲਬਧ ਫੰਡਾਂ ਨੂੰ ਦਰਸਾਉਂਦਾ ਹੈ। ਸਾਰੇ ਲੈਣ-ਦੇਣ ਇੱਕ ਵਾਰ ਪ੍ਰਕਿਰਿਆ ਹੋਣ ਤੋਂ ਬਾਅਦ ਅੰਤਿਮ ਹੁੰਦੇ ਹਨ, ਸਾਡੇ ਵਿਵਾਦ ਨਿਪਟਾਰਾ ਪ੍ਰਕਿਰਿਆਵਾਂ ਦੇ ਅਧੀਨ।",
+      "feesChargesTitle": "ਫੀਸ ਅਤੇ ਖਰਚੇ",
+      "feesChargesDesc": "ਅਸੀਂ ਕੁਝ ਸੇਵਾਵਾਂ ਲਈ ਫੀਸ ਵਸੂਲਣ ਦਾ ਅਧਿਕਾਰ ਰਾਖਵਾਂ ਰੱਖਦੇ ਹਾਂ। ਤੁਹਾਡੇ ਦੁਆਰਾ ਕੋਈ ਵੀ ਲੈਣ-ਦੇਣ ਪੂਰਾ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਸਾਰੀਆਂ ਫੀਸਾਂ ਦਾ ਸਪਸ਼ਟ ਤੌਰ 'ਤੇ ਖੁਲਾਸਾ ਕੀਤਾ ਜਾਵੇਗਾ। ਤੁਸੀਂ ਕਿਸੇ ਵੀ ਲਾਗੂ ਟੈਕਸਾਂ ਲਈ ਜ਼ਿੰਮੇਵਾਰ ਹੋ।",
+      "responsibleGaming": "ਜ਼ਿੰਮੇਵਾਰ ਗੇਮਿੰਗ",
+      "responsibleGamingIntro": "ਅਸੀਂ ਜ਼ਿੰਮੇਵਾਰ ਗੇਮਿੰਗ ਨੂੰ ਉਤਸ਼ਾਹਿਤ ਕਰਨ ਲਈ ਵਚਨਬੱਧ ਹਾਂ। ਅਸੀਂ ਤੁਹਾਡੀ ਗਤੀਵਿਧੀ ਦੇ ਪ੍ਰਬੰਧਨ ਵਿੱਚ ਤੁਹਾਡੀ ਮਦਦ ਕਰਨ ਲਈ ਟੂਲ ਅਤੇ ਸਰੋਤ ਪ੍ਰਦਾਨ ਕਰਦੇ ਹਾਂ, ਜਿਸ ਵਿੱਚ ਸ਼ਾਮਲ ਹਨ:",
+      "depositLimits": "ਜਮ੍ਹਾਂ ਸੀਮਾਵਾਂ ਅਤੇ ਖਰਚ ਨਿਯੰਤਰਣ",
+      "selfExclusion": "ਸਵੈ-ਬੇਦਖਲੀ ਵਿਕਲਪ",
+      "realityChecks": "ਅਸਲੀਅਤ ਜਾਂਚ ਅਤੇ ਸੈਸ਼ਨ ਟਾਈਮਰ",
+      "accessSupport": "ਸਹਾਇਤਾ ਸਰੋਤਾਂ ਤੱਕ ਪਹੁੰਚ",
+      "seekHelp": "ਜੇਕਰ ਤੁਹਾਨੂੰ ਲੱਗਦਾ ਹੈ ਕਿ ਤੁਹਾਨੂੰ ਗੇਮਿੰਗ ਸਮੱਸਿਆ ਹੋ ਸਕਦੀ ਹੈ, ਤਾਂ ਕਿਰਪਾ ਕਰਕੇ ਪੇਸ਼ੇਵਰ ਸਹਾਇਤਾ ਸੇਵਾਵਾਂ ਤੋਂ ਮਦਦ ਲਓ।",
+      "intellectualProperty": "ਬੌਧਿਕ ਸੰਪੱਤੀ",
+      "intellectualPropertyDesc": "ਸਾਡੇ ਪਲੇਟਫਾਰਮ ਦੀ ਸਾਰੀ ਸਮੱਗਰੀ, ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ, ਅਤੇ ਕਾਰਜਕੁਸ਼ਲਤਾ, ਜਿਸ ਵਿੱਚ ਟੈਕਸਟ, ਗ੍ਰਾਫਿਕਸ, ਲੋਗੋ, ਆਈਕਨ, ਚਿੱਤਰ ਅਤੇ ਸੌਫਟਵੇਅਰ ਸ਼ਾਮਲ ਹਨ ਪਰ ਇਹਨਾਂ ਤੱਕ ਸੀਮਿਤ ਨਹੀਂ ਹਨ, ਸਾਡੀ ਕੰਪਨੀ ਦੀ ਵਿਸ਼ੇਸ਼ ਸੰਪਤੀ ਹਨ ਅਤੇ ਕਾਪੀਰਾਈਟ, ਟ੍ਰੇਡਮਾਰਕ ਅਤੇ ਹੋਰ ਬੌਧਿਕ ਸੰਪੱਤੀ ਕਾਨੂੰਨਾਂ ਦੁਆਰਾ ਸੁਰੱਖਿਅਤ ਹਨ।",
+      "cannotReproduceDesc": "ਤੁਸੀਂ ਸਾਡੀ ਪੂਰਵ ਲਿਖਤੀ ਇਜਾਜ਼ਤ ਤੋਂ ਬਿਨਾਂ ਸਾਡੀ ਸਮਗਰੀ ਨੂੰ ਦੁਬਾਰਾ ਪੈਦਾ ਨਹੀਂ ਕਰ ਸਕਦੇ, ਵੰਡ ਸਕਦੇ ਹੋ, ਸੋਧ ਸਕਦੇ ਹੋ, ਡੈਰੀਵੇਟਿਵ ਕੰਮ ਨਹੀਂ ਬਣਾ ਸਕਦੇ ਹੋ, ਜਨਤਕ ਤੌਰ 'ਤੇ ਪ੍ਰਦਰਸ਼ਿਤ ਨਹੀਂ ਕਰ ਸਕਦੇ ਹੋ ਜਾਂ ਸਾਡੀ ਸਮੱਗਰੀ ਦੀ ਵਰਤੋਂ ਨਹੀਂ ਕਰ ਸਕਦੇ ਹੋ।",
+      "limitationOfLiability": "ਦੇਣਦਾਰੀ ਦੀ ਸੀਮਾ",
+      "limitationDesc": "ਕਨੂੰਨ ਦੁਆਰਾ ਇਜਾਜ਼ਤ ਦਿੱਤੀ ਗਈ ਅਧਿਕਤਮ ਹੱਦ ਤੱਕ, ਸਾਡਾ ਪਲੇਟਫਾਰਮ \"ਜਿਵੇਂ ਹੈ\" ਕਿਸੇ ਵੀ ਕਿਸਮ ਦੀ ਵਾਰੰਟੀ ਤੋਂ ਬਿਨਾਂ ਪ੍ਰਦਾਨ ਕੀਤਾ ਜਾਂਦਾ ਹੈ। ਅਸੀਂ ਤੁਹਾਡੀਆਂ ਸੇਵਾਵਾਂ ਦੀ ਵਰਤੋਂ ਤੋਂ ਹੋਣ ਵਾਲੇ ਕਿਸੇ ਵੀ ਅਸਿੱਧੇ, ਇਤਫਾਕਨ, ਵਿਸ਼ੇਸ਼, ਨਤੀਜੇ ਵਜੋਂ, ਜਾਂ ਦੰਡਕਾਰੀ ਨੁਕਸਾਨ ਲਈ ਜਵਾਬਦੇਹ ਨਹੀਂ ਹੋਵਾਂਗੇ।",
+      "accountTermination": "ਖਾਤਾ ਸਮਾਪਤੀ",
+      "terminationIntro": "ਅਸੀਂ ਤੁਹਾਡੇ ਖਾਤੇ ਨੂੰ ਕਿਸੇ ਵੀ ਸਮੇਂ, ਨੋਟਿਸ ਦੇ ਨਾਲ ਜਾਂ ਬਿਨਾਂ, ਕਿਸੇ ਵੀ ਕਾਰਨ ਕਰਕੇ ਮੁਅੱਤਲ ਜਾਂ ਸਮਾਪਤ ਕਰਨ ਦਾ ਅਧਿਕਾਰ ਰਾਖਵਾਂ ਰੱਖਦੇ ਹਾਂ, ਜਿਸ ਵਿੱਚ ਸ਼ਾਮਲ ਹਨ ਪਰ ਇਹਨਾਂ ਤੱਕ ਸੀਮਿਤ ਨਹੀਂ:",
+      "terminationViolation": "ਇਹਨਾਂ ਨਿਯਮਾਂ ਅਤੇ ਸ਼ਰਤਾਂ ਦੀ ਉਲੰਘਣਾ",
+      "terminationFraud": "ਧੋਖਾਧੜੀ ਜਾਂ ਗੈਰ-ਕਾਨੂੰਨੀ ਗਤੀਵਿਧੀ",
+      "terminationInactivity": "ਇੱਕ ਵਿਸਤ੍ਰਿਤ ਮਿਆਦ ਲਈ ਅਕਿਰਿਆਸ਼ੀਲਤਾ",
+      "terminationAtYourRequest": "ਤੁਹਾਡੀ ਬੇਨਤੀ 'ਤੇ",
+      "changesToTerms": "ਸ਼ਰਤਾਂ ਵਿੱਚ ਬਦਲਾਅ",
+      "changesToTermsDesc": "ਅਸੀਂ ਕਿਸੇ ਵੀ ਸਮੇਂ ਇਹਨਾਂ ਨਿਯਮਾਂ ਅਤੇ ਸ਼ਰਤਾਂ ਨੂੰ ਸੋਧਣ ਦਾ ਅਧਿਕਾਰ ਰਾਖਵਾਂ ਰੱਖਦੇ ਹਾਂ। ਅਸੀਂ ਇਸ ਪੰਨੇ 'ਤੇ ਅੱਪਡੇਟ ਕੀਤੀਆਂ ਸ਼ਰਤਾਂ ਨੂੰ ਪੋਸਟ ਕਰਕੇ ਅਤੇ \"ਆਖਰੀ ਅੱਪਡੇਟ ਕੀਤੀ\" ਮਿਤੀ ਨੂੰ ਅੱਪਡੇਟ ਕਰਕੇ ਕਿਸੇ ਵੀ ਸਮੱਗਰੀ ਤਬਦੀਲੀ ਬਾਰੇ ਤੁਹਾਨੂੰ ਸੂਚਿਤ ਕਰਾਂਗੇ। ਅਜਿਹੀਆਂ ਤਬਦੀਲੀਆਂ ਤੋਂ ਬਾਅਦ ਤੁਹਾਡੀਆਂ ਸਾਡੀਆਂ ਸੇਵਾਵਾਂ ਦੀ ਨਿਰੰਤਰ ਵਰਤੋਂ ਸੋਧੀਆਂ ਸ਼ਰਤਾਂ ਨੂੰ ਸਵੀਕਾਰ ਕਰਦੀ ਹੈ।",
+      "contactTitle": "ਸਾਡੇ ਨਾਲ ਸੰਪਰਕ ਕਰੋ",
+      "contactIntro": "ਜੇਕਰ ਇਹਨਾਂ ਨਿਯਮਾਂ ਅਤੇ ਸ਼ਰਤਾਂ ਬਾਰੇ ਤੁਹਾਡੇ ਕੋਈ ਸਵਾਲ ਹਨ, ਤਾਂ ਕਿਰਪਾ ਕਰਕੇ ਸਾਡੇ ਨਾਲ ਸੰਪਰਕ ਕਰੋ:",
+      "contactEmailLabel": "ਈਮੇਲ:"
+    },
+    "privacyPolicy": {
+      "title": "ਪਰਾਈਵੇਟ ਨੀਤੀ",
+      "heroIntro": "ਤੁਹਾਡੀ ਗੋਪਨੀਯਤਾ ਸਾਡੇ ਲਈ ਮਹੱਤਵਪੂਰਨ ਹੈ। ਇਹ ਨੀਤੀ ਦੱਸਦੀ ਹੈ ਕਿ ਅਸੀਂ ਤੁਹਾਡੀ ਜਾਣਕਾਰੀ ਨੂੰ ਕਿਵੇਂ ਇਕੱਠਾ ਕਰਦੇ ਹਾਂ, ਵਰਤਦੇ ਹਾਂ ਅਤੇ ਸੁਰੱਖਿਅਤ ਕਰਦੇ ਹਾਂ।",
+      "lastUpdated": "ਪਿਛਲੀ ਵਾਰ ਅੱਪਡੇਟ ਕੀਤਾ ਗਿਆ: {date}",
+      "policyDescription": "ਅਸੀਂ ਤੁਹਾਡੀ ਗੋਪਨੀਯਤਾ ਦੀ ਰੱਖਿਆ ਕਰਨ ਅਤੇ ਤੁਹਾਡੀ ਨਿੱਜੀ ਜਾਣਕਾਰੀ ਦੀ ਸੁਰੱਖਿਆ ਨੂੰ ਯਕੀਨੀ ਬਣਾਉਣ ਲਈ ਵਚਨਬੱਧ ਹਾਂ। ਇਹ ਗੋਪਨੀਯਤਾ ਨੀਤੀ ਦੱਸਦੀ ਹੈ ਕਿ ਜਦੋਂ ਤੁਸੀਂ ਸਾਡੇ ਪਲੇਟਫਾਰਮ ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹੋ ਤਾਂ ਅਸੀਂ ਤੁਹਾਡੀ ਜਾਣਕਾਰੀ ਨੂੰ ਕਿਵੇਂ ਇਕੱਠਾ ਕਰਦੇ ਹਾਂ, ਵਰਤਦੇ ਹਾਂ, ਪ੍ਰਗਟ ਕਰਦੇ ਹਾਂ ਅਤੇ ਸੁਰੱਖਿਅਤ ਕਰਦੇ ਹਾਂ।",
+      "informationWeCollect": "ਜਾਣਕਾਰੀ ਅਸੀਂ ਇਕੱਠੀ ਕਰਦੇ ਹਾਂ",
+      "personalInformationTitle": "ਵਿਅਕਤੀਗਤ ਜਾਣਕਾਰੀ",
+      "personalInformationDesc": "ਜਦੋਂ ਤੁਸੀਂ ਖਾਤਾ ਬਣਾਉਂਦੇ ਹੋ ਜਾਂ ਲੈਣ-ਦੇਣ ਕਰਦੇ ਹੋ, ਤਾਂ ਅਸੀਂ ਉਹ ਜਾਣਕਾਰੀ ਇਕੱਠੀ ਕਰਦੇ ਹਾਂ ਜੋ ਤੁਸੀਂ ਸਾਨੂੰ ਸਿੱਧੇ ਪ੍ਰਦਾਨ ਕਰਦੇ ਹੋ, ਜਿਸ ਵਿੱਚ ਤੁਹਾਡਾ ਨਾਮ, ਈਮੇਲ ਪਤਾ, ਫ਼ੋਨ ਨੰਬਰ, ਜਨਮ ਮਿਤੀ, ਅਤੇ ਭੁਗਤਾਨ ਜਾਣਕਾਰੀ ਸ਼ਾਮਲ ਹੈ।",
+      "usageInformationTitle": "ਵਰਤੋਂ ਦੀ ਜਾਣਕਾਰੀ",
+      "usageInformationDesc": "ਅਸੀਂ ਸਵੈਚਲਿਤ ਤੌਰ 'ਤੇ ਇਸ ਬਾਰੇ ਜਾਣਕਾਰੀ ਇਕੱਠੀ ਕਰਦੇ ਹਾਂ ਕਿ ਤੁਸੀਂ ਸਾਡੇ ਪਲੇਟਫਾਰਮ ਨਾਲ ਕਿਵੇਂ ਇੰਟਰੈਕਟ ਕਰਦੇ ਹੋ, ਜਿਸ ਵਿੱਚ ਤੁਹਾਡਾ IP ਪਤਾ, ਬ੍ਰਾਊਜ਼ਰ ਦੀ ਕਿਸਮ, ਡਿਵਾਈਸ ਦੀ ਜਾਣਕਾਰੀ, ਵਿਜ਼ਿਟ ਕੀਤੇ ਪੰਨਿਆਂ ਅਤੇ ਸਾਡੀਆਂ ਸੇਵਾਵਾਂ 'ਤੇ ਬਿਤਾਏ ਗਏ ਸਮੇਂ ਸਮੇਤ।",
+      "cookiesTitle": "ਕੂਕੀਜ਼ ਅਤੇ ਟਰੈਕਿੰਗ",
+      "cookiesDesc": "ਅਸੀਂ ਤੁਹਾਡੇ ਅਨੁਭਵ ਨੂੰ ਵਧਾਉਣ, ਵਰਤੋਂ ਦੇ ਪੈਟਰਨਾਂ ਦਾ ਵਿਸ਼ਲੇਸ਼ਣ ਕਰਨ, ਅਤੇ ਸਮੱਗਰੀ ਨੂੰ ਵਿਅਕਤੀਗਤ ਬਣਾਉਣ ਲਈ ਕੂਕੀਜ਼ ਅਤੇ ਸਮਾਨ ਟਰੈਕਿੰਗ ਤਕਨੀਕਾਂ ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹਾਂ। ਤੁਸੀਂ ਆਪਣੀਆਂ ਬ੍ਰਾਊਜ਼ਰ ਸੈਟਿੰਗਾਂ ਰਾਹੀਂ ਕੂਕੀ ਤਰਜੀਹਾਂ ਨੂੰ ਕੰਟਰੋਲ ਕਰ ਸਕਦੇ ਹੋ।",
+      "howWeUseTitle": "ਅਸੀਂ ਤੁਹਾਡੀ ਜਾਣਕਾਰੀ ਦੀ ਵਰਤੋਂ ਕਿਵੇਂ ਕਰਦੇ ਹਾਂ",
+      "useItem1": "ਸਾਡੀਆਂ ਸੇਵਾਵਾਂ ਪ੍ਰਦਾਨ ਕਰਨ, ਕਾਇਮ ਰੱਖਣ ਅਤੇ ਬਿਹਤਰ ਬਣਾਉਣ ਲਈ",
+      "useItem2": "ਲੈਣ-ਦੇਣ ਦੀ ਪ੍ਰਕਿਰਿਆ ਕਰਨ ਅਤੇ ਆਪਣੇ ਖਾਤੇ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰਨ ਲਈ",
+      "useItem3": "ਤੁਹਾਡੇ ਖਾਤੇ ਅਤੇ ਸਾਡੀਆਂ ਸੇਵਾਵਾਂ ਬਾਰੇ ਤੁਹਾਡੇ ਨਾਲ ਸੰਚਾਰ ਕਰਨ ਲਈ",
+      "useItem4": "ਤਕਨੀਕੀ ਮੁੱਦਿਆਂ ਅਤੇ ਸੁਰੱਖਿਆ ਖਤਰਿਆਂ ਦਾ ਪਤਾ ਲਗਾਉਣ, ਰੋਕਣ ਅਤੇ ਹੱਲ ਕਰਨ ਲਈ",
+      "useItem5": "ਕਾਨੂੰਨੀ ਜ਼ਿੰਮੇਵਾਰੀਆਂ ਦੀ ਪਾਲਣਾ ਕਰਨ ਅਤੇ ਸਾਡੀਆਂ ਸ਼ਰਤਾਂ ਨੂੰ ਲਾਗੂ ਕਰਨ ਲਈ",
+      "infoSharingTitle": "ਜਾਣਕਾਰੀ ਸ਼ੇਅਰਿੰਗ ਅਤੇ ਖੁਲਾਸਾ",
+      "infoSharingIntro": "ਅਸੀਂ ਤੁਹਾਡੀ ਨਿੱਜੀ ਜਾਣਕਾਰੀ ਨਹੀਂ ਵੇਚਦੇ। ਅਸੀਂ ਤੁਹਾਡੀ ਜਾਣਕਾਰੀ ਨੂੰ ਸਿਰਫ਼ ਹੇਠ ਲਿਖੀਆਂ ਸਥਿਤੀਆਂ ਵਿੱਚ ਹੀ ਸਾਂਝਾ ਕਰ ਸਕਦੇ ਹਾਂ:",
+      "serviceProvidersTitle": "ਸੇਵਾ ਪ੍ਰਦਾਤਾ",
+      "serviceProvidersDesc": "ਅਸੀਂ ਭਰੋਸੇਯੋਗ ਤੀਜੀ-ਧਿਰ ਦੇ ਸੇਵਾ ਪ੍ਰਦਾਤਾਵਾਂ ਨਾਲ ਜਾਣਕਾਰੀ ਸਾਂਝੀ ਕਰ ਸਕਦੇ ਹਾਂ ਜੋ ਸਾਡੇ ਪਲੇਟਫਾਰਮ ਨੂੰ ਚਲਾਉਣ, ਭੁਗਤਾਨਾਂ ਦੀ ਪ੍ਰਕਿਰਿਆ ਕਰਨ, ਜਾਂ ਵਪਾਰਕ ਸੰਚਾਲਨ ਕਰਨ ਵਿੱਚ ਸਾਡੀ ਸਹਾਇਤਾ ਕਰਦੇ ਹਨ।",
+      "legalRequirementsTitle": "ਕਾਨੂੰਨੀ ਲੋੜਾਂ",
+      "legalRequirementsDesc": "ਅਸੀਂ ਜਾਣਕਾਰੀ ਦਾ ਖੁਲਾਸਾ ਕਰ ਸਕਦੇ ਹਾਂ ਜੇਕਰ ਕਾਨੂੰਨ, ਅਦਾਲਤ ਦੇ ਆਦੇਸ਼, ਜਾਂ ਸਰਕਾਰੀ ਨਿਯਮਾਂ ਦੁਆਰਾ, ਜਾਂ ਸਾਡੇ ਅਧਿਕਾਰਾਂ, ਸੰਪਤੀ, ਜਾਂ ਸੁਰੱਖਿਆ, ਜਾਂ ਸਾਡੇ ਉਪਭੋਗਤਾਵਾਂ ਦੀ ਸੁਰੱਖਿਆ ਲਈ ਲੋੜ ਹੋਵੇ।",
+      "businessTransfersTitle": "ਕਾਰੋਬਾਰੀ ਤਬਾਦਲੇ",
+      "businessTransfersDesc": "ਸੰਪਤੀਆਂ ਦੀ ਵਿਲੀਨਤਾ, ਪ੍ਰਾਪਤੀ ਜਾਂ ਵਿਕਰੀ ਦੀ ਸਥਿਤੀ ਵਿੱਚ, ਤੁਹਾਡੀ ਜਾਣਕਾਰੀ ਪ੍ਰਾਪਤ ਕਰਨ ਵਾਲੀ ਸੰਸਥਾ ਨੂੰ ਟ੍ਰਾਂਸਫਰ ਕੀਤੀ ਜਾ ਸਕਦੀ ਹੈ।",
+      "dataSecurityTitle": "ਡਾਟਾ ਸੁਰੱਖਿਆ",
+      "dataSecurityIntro": "ਅਸੀਂ ਤੁਹਾਡੀ ਨਿੱਜੀ ਜਾਣਕਾਰੀ ਦੀ ਸੁਰੱਖਿਆ ਲਈ ਉਦਯੋਗ-ਮਿਆਰੀ ਸੁਰੱਖਿਆ ਉਪਾਅ ਲਾਗੂ ਕਰਦੇ ਹਾਂ, ਜਿਸ ਵਿੱਚ ਸ਼ਾਮਲ ਹਨ:",
+      "sslTitle": "SSL ਇਨਕ੍ਰਿਪਸ਼ਨ",
+      "sslDesc": "ਸਾਰੇ ਡੇਟਾ ਪ੍ਰਸਾਰਣ SSL/TLS ਪ੍ਰੋਟੋਕੋਲ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਐਨਕ੍ਰਿਪਟ ਕੀਤੇ ਗਏ ਹਨ",
+      "secureStorageTitle": "ਸੁਰੱਖਿਅਤ ਸਟੋਰੇਜ",
+      "secureStorageDesc": "ਤੁਹਾਡੀ ਜਾਣਕਾਰੀ ਨੂੰ ਸੀਮਤ ਪਹੁੰਚ ਵਾਲੇ ਸੁਰੱਖਿਅਤ ਸਰਵਰਾਂ 'ਤੇ ਸਟੋਰ ਕੀਤਾ ਜਾਂਦਾ ਹੈ",
+      "accessControlsTitle": "ਪਹੁੰਚ ਨਿਯੰਤਰਣ",
+      "accessControlsDesc": "ਸਖਤ ਪਹੁੰਚ ਨਿਯੰਤਰਣ ਅਤੇ ਪ੍ਰਮਾਣਿਕਤਾ ਉਪਾਅ ਤੁਹਾਡੇ ਡੇਟਾ ਦੀ ਰੱਖਿਆ ਕਰਦੇ ਹਨ",
+      "regularAuditsTitle": "ਨਿਯਮਤ ਆਡਿਟ",
+      "regularAuditsDesc": "ਅਸੀਂ ਸੁਰੱਖਿਆ ਬਣਾਈ ਰੱਖਣ ਲਈ ਨਿਯਮਤ ਸੁਰੱਖਿਆ ਆਡਿਟ ਅਤੇ ਅੱਪਡੇਟ ਕਰਦੇ ਹਾਂ",
+      "yourRightsTitle": "ਤੁਹਾਡੇ ਅਧਿਕਾਰ ਅਤੇ ਵਿਕਲਪ",
+      "yourRightsIntro": "ਤੁਹਾਨੂੰ ਇਹ ਕਰਨ ਦਾ ਅਧਿਕਾਰ ਹੈ:",
+      "right1": "ਆਪਣੀ ਨਿੱਜੀ ਜਾਣਕਾਰੀ ਤੱਕ ਪਹੁੰਚ ਅਤੇ ਸਮੀਖਿਆ ਕਰੋ",
+      "right2": "ਗਲਤ ਜਾਣਕਾਰੀ ਨੂੰ ਠੀਕ ਕਰਨ ਦੀ ਬੇਨਤੀ ਕਰੋ",
+      "right3": "ਆਪਣੇ ਖਾਤੇ ਅਤੇ ਡੇਟਾ ਨੂੰ ਮਿਟਾਉਣ ਦੀ ਬੇਨਤੀ ਕਰੋ",
+      "right4": "ਮਾਰਕੀਟਿੰਗ ਸੰਚਾਰਾਂ ਤੋਂ ਹਟਣ ਦੀ ਚੋਣ ਕਰੋ",
+      "right5": "ਆਪਣੇ ਬ੍ਰਾਊਜ਼ਰ ਰਾਹੀਂ ਕੂਕੀ ਤਰਜੀਹਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ",
+      "contactTitle": "ਸਾਡੇ ਨਾਲ ਸੰਪਰਕ ਕਰੋ",
+      "contactIntro": "ਜੇਕਰ ਤੁਹਾਡੇ ਕੋਲ ਇਸ ਗੋਪਨੀਯਤਾ ਨੀਤੀ ਬਾਰੇ ਕੋਈ ਸਵਾਲ ਹਨ ਜਾਂ ਤੁਸੀਂ ਆਪਣੇ ਅਧਿਕਾਰਾਂ ਦੀ ਵਰਤੋਂ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ, ਤਾਂ ਕਿਰਪਾ ਕਰਕੇ ਸਾਡੇ ਨਾਲ ਸੰਪਰਕ ਕਰੋ:",
+      "contactEmailLabel": "ਈਮੇਲ:",
+      "policyUpdatesTitle": "ਨੀਤੀ ਅੱਪਡੇਟ",
+      "policyUpdatesDesc": "ਅਸੀਂ ਸਮੇਂ-ਸਮੇਂ 'ਤੇ ਇਸ ਗੋਪਨੀਯਤਾ ਨੀਤੀ ਨੂੰ ਅਪਡੇਟ ਕਰ ਸਕਦੇ ਹਾਂ। ਅਸੀਂ ਇਸ ਪੰਨੇ 'ਤੇ ਨਵੀਂ ਨੀਤੀ ਪੋਸਟ ਕਰਕੇ ਅਤੇ \"ਆਖਰੀ ਅੱਪਡੇਟ ਕੀਤੀ\" ਮਿਤੀ ਨੂੰ ਅੱਪਡੇਟ ਕਰਕੇ ਕਿਸੇ ਵੀ ਸਮੱਗਰੀ ਤਬਦੀਲੀ ਬਾਰੇ ਤੁਹਾਨੂੰ ਸੂਚਿਤ ਕਰਾਂਗੇ। ਅਸੀਂ ਤੁਹਾਨੂੰ ਸਮੇਂ-ਸਮੇਂ 'ਤੇ ਇਸ ਨੀਤੀ ਦੀ ਸਮੀਖਿਆ ਕਰਨ ਲਈ ਉਤਸ਼ਾਹਿਤ ਕਰਦੇ ਹਾਂ।"
+    },
+    "responsibleGaming": {
+      "title": "ਜ਼ਿੰਮੇਵਾਰ ਗੇਮਿੰਗ",
+      "subtitle": "ਅਸੀਂ ਸੁਰੱਖਿਅਤ ਅਤੇ ਜ਼ਿੰਮੇਵਾਰ ਗੇਮਿੰਗ ਅਭਿਆਸਾਂ ਨੂੰ ਉਤਸ਼ਾਹਿਤ ਕਰਨ ਵਿੱਚ ਵਿਸ਼ਵਾਸ ਰੱਖਦੇ ਹਾਂ।",
+      "signsSelf": "ਸਮੱਸਿਆ ਜੂਏ ਦੇ ਚਿੰਨ੍ਹ",
+      "spendMoreThanIntended": "ਕੀ ਤੁਸੀਂ ਆਪਣੇ ਇਰਾਦੇ ਨਾਲੋਂ ਜ਼ਿਆਦਾ ਸਮਾਂ ਜਾਂ ਪੈਸਾ ਖਰਚ ਕਰਦੇ ਹੋ?",
+      "restless": "ਕੀ ਤੁਸੀਂ ਰੋਕਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰਦੇ ਸਮੇਂ ਬੇਚੈਨ ਜਾਂ ਚਿੜਚਿੜੇ ਮਹਿਸੂਸ ਕਰਦੇ ਹੋ?",
+      "tryToQuit": "ਕੀ ਤੁਸੀਂ ਵਾਪਸ ਕੱਟਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕੀਤੀ ਪਰ ਇਹ ਮੁਸ਼ਕਲ ਹੈ?",
+      "gameAffectsRelationships": "ਕੀ ਤੁਹਾਡੇ ਜੂਏ ਨੇ ਤੁਹਾਡੇ ਰਿਸ਼ਤੇ ਜਾਂ ਕੰਮ ਨੂੰ ਪ੍ਰਭਾਵਿਤ ਕੀਤਾ ਹੈ?",
+      "borrowedMoney": "ਕੀ ਤੁਸੀਂ ਜੂਆ ਖੇਡਣ ਲਈ ਪੈਸੇ ਉਧਾਰ ਲਏ ਹਨ?",
+      "resources": "ਮਦਦਗਾਰ ਸਰੋਤ",
+      "gamcare": "ਗੇਮਕੇਅਰ",
+      "gamcareDesc": "ਸਮੱਸਿਆ ਵਾਲੇ ਜੂਏਬਾਜ਼ਾਂ ਲਈ ਮੁਫ਼ਤ, ਗੁਪਤ ਸਹਾਇਤਾ ਅਤੇ ਸਲਾਹ।",
+      "contact": "ਸਹਾਇਤਾ ਲਈ support@platform.com 'ਤੇ ਸਾਡੇ ਨਾਲ ਸੰਪਰਕ ਕਰੋ।",
+      "heroIntro": "ਅਸੀਂ ਜ਼ਿੰਮੇਵਾਰ ਗੇਮਿੰਗ ਨੂੰ ਉਤਸ਼ਾਹਿਤ ਕਰਨ ਅਤੇ ਕੰਟਰੋਲ ਵਿੱਚ ਰਹਿਣ ਵਿੱਚ ਤੁਹਾਡੀ ਮਦਦ ਕਰਨ ਲਈ ਟੂਲ ਪ੍ਰਦਾਨ ਕਰਨ ਲਈ ਵਚਨਬੱਧ ਹਾਂ।",
+      "ourCommitmentTitle": "ਸਾਡੀ ਵਚਨਬੱਧਤਾ",
+      "commitment": {
+        "playerProtectionTitle": "ਪਲੇਅਰ ਪ੍ਰੋਟੈਕਸ਼ਨ",
+        "playerProtectionDesc": "ਅਸੀਂ ਕਮਜ਼ੋਰ ਖਿਡਾਰੀਆਂ ਦੀ ਸੁਰੱਖਿਆ ਅਤੇ ਨਾਬਾਲਗ ਪਹੁੰਚ ਨੂੰ ਰੋਕਣ ਲਈ ਉਪਾਅ ਲਾਗੂ ਕਰਦੇ ਹਾਂ",
+        "controlToolsTitle": "ਕੰਟਰੋਲ ਟੂਲ",
+        "controlToolsDesc": "ਤੁਹਾਡੀ ਗਤੀਵਿਧੀ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰਨ ਅਤੇ ਸੀਮਾਵਾਂ ਸੈੱਟ ਕਰਨ ਵਿੱਚ ਤੁਹਾਡੀ ਮਦਦ ਕਰਨ ਲਈ ਵਰਤੋਂ ਵਿੱਚ ਆਸਾਨ ਟੂਲ",
+        "educationTitle": "ਸਿੱਖਿਆ ਅਤੇ ਜਾਗਰੂਕਤਾ",
+        "educationDesc": "ਜ਼ਿੰਮੇਵਾਰ ਗੇਮਿੰਗ ਨੂੰ ਸਮਝਣ ਵਿੱਚ ਤੁਹਾਡੀ ਮਦਦ ਕਰਨ ਲਈ ਸਰੋਤ ਅਤੇ ਜਾਣਕਾਰੀ",
+        "supportResourcesTitle": "ਸਹਾਇਤਾ ਸਰੋਤ",
+        "supportResourcesDesc": "ਪੇਸ਼ੇਵਰ ਸਹਾਇਤਾ ਸੇਵਾਵਾਂ ਅਤੇ ਹੈਲਪਲਾਈਨਾਂ ਤੱਕ ਪਹੁੰਚ"
+      },
+      "selfAssessmentTitle": "ਸਵੈ-ਮੁਲਾਂਕਣ",
+      "selfAssessmentIntro": "ਆਪਣੀਆਂ ਗੇਮਿੰਗ ਆਦਤਾਂ ਦਾ ਮੁਲਾਂਕਣ ਕਰਨ ਲਈ ਆਪਣੇ ਆਪ ਨੂੰ ਇਹ ਸਵਾਲ ਪੁੱਛੋ:",
+      "question4": "ਕੀ ਗੇਮਿੰਗ ਨੇ ਤੁਹਾਡੇ ਰਿਸ਼ਤੇ ਜਾਂ ਕੰਮ ਵਿੱਚ ਸਮੱਸਿਆਵਾਂ ਪੈਦਾ ਕੀਤੀਆਂ ਹਨ?",
+      "question5": "ਕੀ ਤੁਸੀਂ ਸਮੱਸਿਆਵਾਂ ਤੋਂ ਬਚਣ ਜਾਂ ਚਿੰਤਾ ਦੀਆਂ ਭਾਵਨਾਵਾਂ ਤੋਂ ਛੁਟਕਾਰਾ ਪਾਉਣ ਲਈ ਗੇਮਿੰਗ ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹੋ?",
+      "selfAssessmentAdvice": "ਜੇਕਰ ਤੁਸੀਂ ਇਹਨਾਂ ਵਿੱਚੋਂ ਕਿਸੇ ਵੀ ਸਵਾਲ ਦਾ ਜਵਾਬ \"ਹਾਂ\" ਵਿੱਚ ਦਿੱਤਾ ਹੈ, ਤਾਂ ਤੁਸੀਂ ਸਾਡੇ ਨਿਯੰਤਰਣ ਸਾਧਨਾਂ ਦੀ ਵਰਤੋਂ ਕਰਨ ਜਾਂ ਪੇਸ਼ੇਵਰ ਮਦਦ ਲੈਣ ਬਾਰੇ ਵਿਚਾਰ ਕਰ ਸਕਦੇ ਹੋ।",
+      "controlToolsTitle": "ਕੰਟਰੋਲ ਟੂਲ ਉਪਲਬਧ ਹਨ",
+      "depositLimitsTitle": "ਜਮ੍ਹਾਂ ਸੀਮਾਵਾਂ",
+      "depositLimitsDesc": "ਰੋਜ਼ਾਨਾ, ਹਫ਼ਤਾਵਾਰੀ, ਜਾਂ ਮਹੀਨਾਵਾਰ ਸੀਮਾਵਾਂ ਸੈੱਟ ਕਰੋ ਕਿ ਤੁਸੀਂ ਆਪਣੇ ਖਾਤੇ ਵਿੱਚ ਕਿੰਨੀ ਰਕਮ ਜਮ੍ਹਾਂ ਕਰ ਸਕਦੇ ਹੋ। ਇਹ ਸੀਮਾਵਾਂ ਤੁਹਾਡੇ ਬਜਟ ਦੇ ਅੰਦਰ ਰਹਿਣ ਵਿੱਚ ਤੁਹਾਡੀ ਮਦਦ ਕਰਦੀਆਂ ਹਨ।",
+      "sessionTimeLimitsTitle": "ਸੈਸ਼ਨ ਸਮਾਂ ਸੀਮਾਵਾਂ",
+      "sessionTimeLimitsDesc": "ਆਪਣੇ ਗੇਮਿੰਗ ਸੈਸ਼ਨਾਂ ਲਈ ਸਮਾਂ ਸੀਮਾਵਾਂ ਸੈੱਟ ਕਰੋ। ਤੁਹਾਡੀ ਸਮਾਂ ਸੀਮਾ ਨੇੜੇ ਆਉਣ 'ਤੇ ਤੁਹਾਨੂੰ ਰੀਮਾਈਂਡਰ ਪ੍ਰਾਪਤ ਹੋਣਗੇ।",
+      "realityChecksTitle": "ਅਸਲੀਅਤ ਜਾਂਚਾਂ",
+      "realityChecksDesc": "ਸਮੇਂ-ਸਮੇਂ 'ਤੇ ਰੀਮਾਈਂਡਰ ਪ੍ਰਾਪਤ ਕਰੋ ਕਿ ਤੁਸੀਂ ਕਿੰਨੇ ਸਮੇਂ ਤੋਂ ਖੇਡ ਰਹੇ ਹੋ ਅਤੇ ਤੁਸੀਂ ਆਪਣੇ ਸੈਸ਼ਨ ਦੌਰਾਨ ਕਿੰਨਾ ਖਰਚ ਕੀਤਾ ਹੈ।",
+      "selfExclusionTitle": "ਸਵੈ-ਬੇਦਖਲੀ",
+      "selfExclusionDesc": "ਆਪਣੇ ਖਾਤੇ ਨੂੰ ਐਕਸੈਸ ਕਰਨ ਤੋਂ ਅਸਥਾਈ ਤੌਰ 'ਤੇ ਜਾਂ ਸਥਾਈ ਤੌਰ 'ਤੇ ਆਪਣੇ ਆਪ ਨੂੰ ਬਾਹਰ ਰੱਖੋ। ਇਹ ਇੱਕ ਗੰਭੀਰ ਫੈਸਲਾ ਹੈ ਅਤੇ ਇਸਨੂੰ 24 ਘੰਟਿਆਂ ਤੋਂ ਲੈ ਕੇ ਸਥਾਈ ਬੇਦਖਲੀ ਤੱਕ ਦੇ ਸਮੇਂ ਲਈ ਸੈੱਟ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ।",
+      "accountClosureTitle": "ਖਾਤਾ ਬੰਦ ਕਰਨਾ",
+      "accountClosureDesc": "ਆਪਣੇ ਖਾਤੇ ਨੂੰ ਪੱਕੇ ਤੌਰ 'ਤੇ ਬੰਦ ਕਰਨ ਲਈ ਬੇਨਤੀ ਕਰੋ। ਇਹ ਕਾਰਵਾਈ ਵਾਪਸੀਯੋਗ ਨਹੀਂ ਹੈ ਅਤੇ ਭਵਿੱਖ ਵਿੱਚ ਤੁਹਾਨੂੰ ਸਾਡੀਆਂ ਸੇਵਾਵਾਂ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਤੋਂ ਰੋਕੇਗੀ।",
+      "tipsTitle": "ਜ਼ਿੰਮੇਵਾਰ ਗੇਮਿੰਗ ਲਈ ਸੁਝਾਅ",
+      "tip1": "ਸ਼ੁਰੂ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਇੱਕ ਬਜਟ ਸੈੱਟ ਕਰੋ ਅਤੇ ਇਸ 'ਤੇ ਬਣੇ ਰਹੋ",
+      "tip2": "ਕਦੇ ਵੀ ਨੁਕਸਾਨ ਦਾ ਪਿੱਛਾ ਨਾ ਕਰੋ - ਸਵੀਕਾਰ ਕਰੋ ਕਿ ਨੁਕਸਾਨ ਗੇਮਿੰਗ ਦਾ ਹਿੱਸਾ ਹਨ",
+      "tip3": "ਸਿਰਫ ਪੈਸੇ ਨਾਲ ਖੇਡੋ ਜੋ ਤੁਸੀਂ ਗੁਆ ਸਕਦੇ ਹੋ",
+      "tip4": "ਨਿਯਮਤ ਬ੍ਰੇਕ ਲਓ ਅਤੇ ਭਾਵਨਾਤਮਕ ਹੋਣ 'ਤੇ ਨਾ ਖੇਡੋ",
+      "tip5": "ਖਰਚੇ ਗਏ ਸਮੇਂ ਅਤੇ ਪੈਸੇ ਦਾ ਧਿਆਨ ਰੱਖੋ",
+      "tip6": "ਸ਼ਰਾਬ ਜਾਂ ਨਸ਼ਿਆਂ ਦੇ ਪ੍ਰਭਾਵ ਹੇਠ ਨਾ ਖੇਡੋ",
+      "tip7": "ਯਾਦ ਰੱਖੋ ਕਿ ਗੇਮਿੰਗ ਮਨੋਰੰਜਨ ਹੈ, ਪੈਸਾ ਕਮਾਉਣ ਦਾ ਤਰੀਕਾ ਨਹੀਂ",
+      "gettingHelpTitle": "ਮਦਦ ਪ੍ਰਾਪਤ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ",
+      "gettingHelpIntro": "ਜੇਕਰ ਤੁਹਾਨੂੰ ਜਾਂ ਤੁਹਾਡੇ ਕਿਸੇ ਜਾਣਕਾਰ ਨੂੰ ਸਮੱਸਿਆ ਵਾਲੀ ਗੇਮਿੰਗ ਵਿੱਚ ਮਦਦ ਦੀ ਲੋੜ ਹੈ, ਤਾਂ ਇੱਥੇ ਪੇਸ਼ੇਵਰ ਸਰੋਤ ਉਪਲਬਧ ਹਨ:",
+      "gamcareLink": "GamCare → 'ਤੇ ਜਾਓ",
+      "gamblingTherapyTitle": "ਜੂਏ ਦੀ ਥੈਰੇਪੀ",
+      "gamblingTherapyDesc": "ਸਮੱਸਿਆ ਗੇਮਿੰਗ ਦੁਆਰਾ ਪ੍ਰਭਾਵਿਤ ਕਿਸੇ ਵੀ ਵਿਅਕਤੀ ਨੂੰ ਸਹਾਇਤਾ ਅਤੇ ਸਲਾਹ ਦੀ ਪੇਸ਼ਕਸ਼ ਕਰਨ ਵਾਲੀ ਗਲੋਬਲ ਸੇਵਾ।",
+      "gamblingTherapyLink": "ਗੈਂਬਲਿੰਗ ਥੈਰੇਪੀ → 'ਤੇ ਜਾਓ",
+      "contactSupportTitle": "ਸਾਡੀ ਸਹਾਇਤਾ ਟੀਮ ਨਾਲ ਸੰਪਰਕ ਕਰੋ",
+      "contactSupportDesc": "ਸਾਡੀ ਗਾਹਕ ਸਹਾਇਤਾ ਟੀਮ ਸੀਮਾ ਨਿਰਧਾਰਤ ਕਰਨ, ਸਵੈ-ਬਦਲਾਅ, ਜਾਂ ਜ਼ਿੰਮੇਵਾਰ ਗੇਮਿੰਗ ਬਾਰੇ ਕਿਸੇ ਵੀ ਸਵਾਲ ਵਿੱਚ ਤੁਹਾਡੀ ਮਦਦ ਕਰਨ ਲਈ 24/7 ਉਪਲਬਧ ਹੈ।",
+      "underageTitle": "ਨਾਬਾਲਗ ਗੇਮਿੰਗ ਰੋਕਥਾਮ",
+      "underageDesc": "ਸਾਡੀਆਂ ਸੇਵਾਵਾਂ 18 ਸਾਲ ਅਤੇ ਇਸ ਤੋਂ ਵੱਧ ਉਮਰ ਦੇ ਉਪਭੋਗਤਾਵਾਂ ਲਈ ਸਖਤੀ ਨਾਲ ਹਨ। ਸਾਡੇ ਕੋਲ ਸਖਤ ਉਮਰ ਪੁਸ਼ਟੀਕਰਨ ਪ੍ਰਕਿਰਿਆਵਾਂ ਹਨ ਅਤੇ ਨਾਬਾਲਗ ਪਹੁੰਚ ਨੂੰ ਰੋਕਣ ਲਈ ਸਾਰੇ ਲੋੜੀਂਦੇ ਉਪਾਅ ਕਰਦੇ ਹਨ। ਜੇਕਰ ਤੁਹਾਨੂੰ ਸ਼ੱਕ ਹੈ ਕਿ 18 ਤੋਂ ਘੱਟ ਉਮਰ ਦਾ ਕੋਈ ਵਿਅਕਤੀ ਸਾਡੀਆਂ ਸੇਵਾਵਾਂ ਦੀ ਵਰਤੋਂ ਕਰ ਰਿਹਾ ਹੈ, ਤਾਂ ਕਿਰਪਾ ਕਰਕੇ ਤੁਰੰਤ ਸਾਡੇ ਨਾਲ ਸੰਪਰਕ ਕਰੋ।",
+      "needMoreTitle": "ਹੋਰ ਜਾਣਕਾਰੀ ਦੀ ਲੋੜ ਹੈ?",
+      "needMoreIntro": "ਜੇਕਰ ਤੁਹਾਡੇ ਕੋਲ ਜ਼ਿੰਮੇਵਾਰ ਗੇਮਿੰਗ ਬਾਰੇ ਕੋਈ ਸਵਾਲ ਹਨ ਜਾਂ ਸਾਡੇ ਨਿਯੰਤਰਣ ਸਾਧਨਾਂ ਨਾਲ ਸਹਾਇਤਾ ਦੀ ਲੋੜ ਹੈ, ਤਾਂ ਕਿਰਪਾ ਕਰਕੇ ਸਾਡੇ ਨਾਲ ਸੰਪਰਕ ਕਰਨ ਵਿੱਚ ਸੰਕੋਚ ਨਾ ਕਰੋ:",
+      "needMoreEmailLabel": "ਈਮੇਲ:"
+    },
+    "rules": {
+      "title": "ਨਿਯਮ ਅਤੇ ਨਿਯਮ",
+      "description": "ਸਾਡੇ ਪੂਰੇ ਨਿਯਮਾਂ ਅਤੇ ਨਿਯਮਾਂ ਨੂੰ ਪੜ੍ਹੋ",
+      "general": "ਆਮ ਨਿਯਮ",
+      "betting": "ਸੱਟੇਬਾਜ਼ੀ ਨਿਯਮ",
+      "settlement": "ਬੰਦੋਬਸਤ ਨਿਯਮ",
+      "pageTitle": "ਨਿਯਮ",
+      "collapseAll": "ਸਭ ਨੂੰ ਸੰਕੁਚਿਤ ਕਰੋ",
+      "expandAll": "ਸਭ ਦਾ ਵਿਸਤਾਰ ਕਰੋ",
+      "noRulesForSport": "ਇਸ ਖੇਡ ਲਈ ਕੋਈ ਨਿਯਮ ਉਪਲਬਧ ਨਹੀਂ ਹਨ।"
+    }
+  },
+  "affiliateProgram": {
+    "title": "ਐਫੀਲੀਏਟ ਪ੍ਰੋਗਰਾਮ",
+    "tabs": {
+      "campaigns": "ਮੁਹਿੰਮਾਂ",
+      "funds": "ਫੰਡ",
+      "withdrawalHistory": "ਵਾਪਸੀ ਦਾ ਇਤਿਹਾਸ"
+    },
+    "actions": {
+      "createCampaign": "ਮੁਹਿੰਮ ਬਣਾਓ"
+    },
+    "cards": {
+      "commission": {
+        "label": "ਕਮਿਸ਼ਨ",
+        "available": "ਉਪਲਬਧ ਕਮਿਸ਼ਨ",
+        "total": "ਕੁੱਲ ਕਮਿਸ਼ਨ"
+      },
+      "activity": {
+        "label": "ਗਤੀਵਿਧੀ",
+        "lifetimeFtdAmount": "ਲਾਈਫਟਾਈਮ FTD ਰਕਮ",
+        "lifetimeFirstDeposits": "ਲਾਈਫਟਾਈਮ ਪਹਿਲੀ ਡਿਪਾਜ਼ਿਟ"
+      },
+      "signUps": {
+        "label": "ਸਾਈਨ ਅੱਪ ਕਰੋ",
+        "lifetimeSignups": "ਲਾਈਫਟਾਈਮ ਸਾਈਨ ਅੱਪ"
+      }
+    },
+    "campaigns": {
+      "heading": "ਮੁਹਿੰਮਾਂ",
+      "subtitle": "ਤੁਹਾਡੀਆਂ ਰੈਫਰਲ ਮੁਹਿੰਮਾਂ ਅਤੇ ਪ੍ਰਦਰਸ਼ਨ",
+      "noCampaigns": "ਅਜੇ ਕੋਈ ਮੁਹਿੰਮ ਨਹੀਂ। ਆਪਣੀ ਪਹਿਲੀ ਮੁਹਿੰਮ ਬਣਾਓ।",
+      "quickStats": {
+        "signUps": "ਸਾਈਨ ਅੱਪ ਕਰੋ",
+        "ftd": "FTD",
+        "commission": "ਕਮਿਸ਼ਨ"
+      },
+      "detailDialog": {
+        "stats": {
+          "signUps": "ਸਾਈਨ ਅੱਪ ਕਰੋ",
+          "firstTimeDeposits": "ਪਹਿਲੀ ਵਾਰ ਡਿਪਾਜ਼ਿਟ",
+          "ftdAmount": "FTD ਰਕਮ",
+          "availableCommission": "ਉਪਲਬਧ ਕਮਿਸ਼ਨ"
+        },
+        "referralLink": "ਰੈਫਰਲ ਲਿੰਕ",
+        "close": "ਬੰਦ ਕਰੋ"
+      },
+      "createDialog": {
+        "title": "ਨਵੀਂ ਮੁਹਿੰਮ ਬਣਾਓ",
+        "nameLabel": "ਮੁਹਿੰਮ ਦਾ ਨਾਮ",
+        "campaignIdLabel": "ਮੁਹਿੰਮ ਆਈ.ਡੀ",
+        "campaignIdHint": "ਰੈਫਰਲ ਲਿੰਕਾਂ ਵਿੱਚ ਵਰਤਿਆ ਗਿਆ ਵਿਲੱਖਣ ਪਛਾਣਕਰਤਾ",
+        "cancel": "ਰੱਦ ਕਰੋ",
+        "create": "ਬਣਾਓ"
+      }
+    },
+    "funds": {
+      "topCard": {
+        "label": "ਫੰਡ",
+        "total": "ਕੁੱਲ",
+        "withdrawn": "ਵਾਪਸ ਲੈ ਲਿਆ"
+      },
+      "availableCard": {
+        "label": "ਉਪਲਬਧ ਹੈ",
+        "available": "ਉਪਲਬਧ ਹੈ",
+        "withdrawalButton": "ਕਢਵਾਉਣਾ"
+      }
+    },
+    "withdrawalHistory": {
+      "heading": "ਵਾਪਸੀ ਦਾ ਇਤਿਹਾਸ",
+      "subtitle": "ਆਪਣੇ ਸਾਰੇ ਕਮਿਸ਼ਨ ਕਢਵਾਉਣ ਦੇ ਰਿਕਾਰਡ ਦੇਖੋ",
+      "noData": {
+        "title": "ਇਸ ਮਿਤੀ 'ਤੇ ਕੋਈ ਕਢਵਾਉਣਾ ਨਹੀਂ ਹੈ",
+        "description": "ਕਢਵਾਉਣ ਦੇ ਰਿਕਾਰਡ ਦੇਖਣ ਲਈ ਇੱਕ ਵੱਖਰੀ ਤਾਰੀਖ ਚੁਣੋ"
+      },
+      "tableHeaders": {
+        "transactionId": "ਲੈਣ-ਦੇਣ ਆਈ.ਡੀ",
+        "amount": "ਰਕਮ",
+        "dateTime": "ਮਿਤੀ ਅਤੇ ਸਮਾਂ"
+      }
+    },
+    "withdrawalConfirmation": {
+      "title": "ਕਢਵਾਉਣ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ",
+      "subtitle": "ਸਾਰੇ ਉਪਲਬਧ ਕਮਿਸ਼ਨ ਵਾਪਸ ਲਓ",
+      "summary": {
+        "availableToWithdraw": "ਵਾਪਿਸ ਲੈਣ ਲਈ ਉਪਲਬਧ ਹੈ",
+        "alreadyWithdrawn": "ਪਹਿਲਾਂ ਹੀ ਵਾਪਸ ਲੈ ਲਿਆ ਗਿਆ ਹੈ"
+      },
+      "info": "ਇਹ ਤੁਹਾਡੇ ਮੌਜੂਦਾ ਉਪਲਬਧ ਕਮਿਸ਼ਨ ਨੂੰ ਤੁਹਾਡੇ ਵਾਪਸ ਲਏ ਬਕਾਏ ਵਿੱਚ ਭੇਜ ਦੇਵੇਗਾ। ਇਸ ਕਾਰਵਾਈ ਨੂੰ ਅਣਕੀਤਾ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ।",
+      "cancel": "ਰੱਦ ਕਰੋ",
+      "confirm": "ਕਢਵਾਉਣ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ"
+    },
+    "snackbar": {
+      "loadCampaignsFailed": "ਮੁਹਿੰਮਾਂ ਨੂੰ ਲੋਡ ਕਰਨਾ ਅਸਫਲ ਰਿਹਾ",
+      "loadFundsSummaryFailed": "ਫੰਡ ਸਾਰਾਂਸ਼ ਨੂੰ ਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਫਲ",
+      "referralCopied": "ਰੈਫਰਲ ਲਿੰਕ ਕਾਪੀ ਕੀਤਾ ਗਿਆ!",
+      "pleaseSelectDate": "ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਮਿਤੀ ਚੁਣੋ",
+      "loadWithdrawalHistoryFailed": "ਕਢਵਾਉਣ ਦਾ ਇਤਿਹਾਸ ਲੋਡ ਕਰਨਾ ਅਸਫਲ ਰਿਹਾ",
+      "campaignCreated": "ਮੁਹਿੰਮ ਸਫਲਤਾਪੂਰਵਕ ਬਣਾਈ ਗਈ!",
+      "createCampaignFailed": "ਮੁਹਿੰਮ ਬਣਾਉਣ ਵਿੱਚ ਅਸਫਲ",
+      "commissionWithdrawn": "ਕਮਿਸ਼ਨ ਸਫਲਤਾਪੂਰਵਕ ਵਾਪਸ ਲਿਆ ਗਿਆ!",
+      "withdrawCommissionFailed": "ਕਮਿਸ਼ਨ ਵਾਪਸ ਲੈਣ ਵਿੱਚ ਅਸਫਲ"
+    }
+  },
+  "eventTypes": {
+    "football": "ਫੁੱਟਬਾਲ",
+    "tennis": "ਟੈਨਿਸ",
+    "cricket": "ਕ੍ਰਿਕਟ",
+    "rugby": "ਰਗਬੀ",
+    "horseRacing": "ਘੋੜ ਦੌੜ",
+    "tableTennis": "ਟੇਬਲ ਟੈਨਿਸ",
+    "futsal": "ਫੁਟਸਲ",
+    "darts": "ਡਾਰਟਸ",
+    "greyhoundRacing": "ਗ੍ਰੇਹਾਊਂਡ ਰੇਸਿੰਗ",
+    "baseball": "ਬੇਸਬਾਲ",
+    "basketball": "ਬਾਸਕਟਬਾਲ",
+    "iceHockey": "ਆਈਸ ਹਾਕੀ",
+    "binary": "ਬਾਈਨਰੀ",
+    "sportsBook": "ਖੇਡਾਂ ਦੀ ਕਿਤਾਬ",
+    "kabaddi": "ਕਬੱਡੀ",
+    "casino": "ਕੈਸੀਨੋ",
+    "volleyball": "ਵਾਲੀਬਾਲ",
+    "politics": "ਰਾਜਨੀਤੀ",
+    "mixedMartialArts": "ਮਿਕਸਡ ਮਾਰਸ਼ਲ ਆਰਟਸ",
+    "other": "ਹੋਰ"
+  },
+  "navigation": {
+    "live": "ਲਾਈਵ"
+  }
+}

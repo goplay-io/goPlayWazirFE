@@ -1,0 +1,1719 @@
+{
+  "category": {
+    "default": "Category"
+  },
+  "gameType": {
+    "default": "Game Type"
+  },
+  "game": {
+    "idRequired": "Game ID is required",
+    "invalidResponse": "Invalid response format from server"
+  },
+  "common": {
+    "number": "No",
+    "date": "Date",
+    "or": "or",
+    "optional": "Optional",
+    "cancel": "Cancel",
+    "create": "Create",
+    "update": "Update",
+    "delete": "Delete",
+    "save": "Save",
+    "confirm": "Confirm",
+    "submit": "SUBMIT",
+    "search": "Search",
+    "filter": "Filter",
+    "reset": "Reset",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Info",
+    "fromDate": "From Date",
+    "toDate": "To Date",
+    "home": "Home",
+    "joinOurChannels": "Join our channels for updates and support",
+    "disclaimer": "Disclaimer: Please note that Gambling involves a financial risk and could be addictive over time if not practised within limits. Only 18+ people should use the services and should use it responsibly. Players should be aware of any financial risk and govern themselves accordingly.",
+    "dash": "-",
+    "betHistoryDescription": "View and filter your bet history by date, event, and status.",
+    "multiMarket": {
+      "title": "Multi Markets",
+      "loadingTitle": "Loading multi markets...",
+      "loadingSubtitle": "Please wait while we fetch the latest odds",
+      "noMarketsFound": "No Multi Markets found!",
+      "betSlip": "Bet Slip",
+      "betHistory": "Bet History",
+      "noPinnedMarkets": "No pinned markets for this event"
+    },
+    "betHistoryEmpty": "No bet history available",
+    "back": "Back",
+    "next": "Next",
+    "lay": "Lay",
+    "components": {
+      "multiMarket": {
+        "eventFallback": "Event",
+        "live": "LIVE",
+        "market_singular": "market",
+        "market_plural": "markets"
+      }
+    },
+    "copiedToClipboard": "{label} copied to clipboard",
+    "copyFailed": "Failed to copy {label}",
+    "gotIt": "Got it"
+  },
+  "landing": {
+    "loading": {
+      "preparingDemo": "Preparing your demo experience...",
+      "loadingData": "Loading live sports & casino data."
+    },
+    "hero": {
+      "loginSubtitle": "Sign in to explore live events, real-time markets and switch seamlessly between sports, racing and casino — all in one modern interface.",
+      "badgeLiveOdds": "Live odds engine",
+      "badgeSecureWallet": "Secure wallet",
+      "slideSportsTitle": "Live Sports & In-Play Markets",
+      "slideSportsBody": "Discover featured events, top competitions and live odds in one place.",
+      "slideCasinoTitle": "Premium Casino Library",
+      "slideCasinoBody": "Browse popular live tables, slots and fun games from multiple providers.",
+      "slideRacingTitle": "Racing & Virtuals",
+      "slideRacingBody": "Follow horse & greyhound racing or switch to fast-paced virtual events."
+    },
+    "casinoSection": {
+      "title": "Casino Highlights",
+      "description": "Quick preview of your casino home – browse highlighted games across providers.",
+      "ctaCasino": "Casino",
+      "noData": "Casino data not available in demo right now."
+    }
+  },
+  "validation": {
+    "required": "This field is required"
+  },
+  "header": {
+    "bonuses": "Bonuses",
+    "wallet": "Wallet",
+    "siteSwitcher": {
+      "ariaLabel": "Switch site",
+      "showDock": "Show skin switcher",
+      "hideDock": "Hide skin switcher",
+      "goplay": "Goplay",
+      "diamond": "Diamond",
+      "winbuzz": "Win Buzz",
+      "fairplay": "Fair Play",
+      "reddy": "Reddy Book",
+      "zuplay": "Zuplay"
+    },
+    "tabs": {
+      "sports": "Sports",
+      "casino": "Casino"
+    },
+    "user": {
+      "fallbackName": "Eve Foster",
+      "roles": {
+        "superMaster": "Super Master",
+        "master": "Master",
+        "client": "Client"
+      },
+      "menu": {
+        "accountStatement": "Account Statement",
+        "depositTurnover": "Deposit Turnover",
+        "turnoverHistory": "Turnover History",
+        "bonusStatement": "Bonus Statement",
+        "profitLoss": "Betting Profit & Loss",
+        "betHistory": "Bet History",
+        "unsettledBets": "Unsettled Bets",
+        "paymentMethods": "Payment Methods",
+        "changeButtons": "Change Buttons",
+        "changePassword": "Change Password",
+        "rules": "Rules",
+        "favourite": "Favourite"
+      },
+      "walletSummary": {
+        "balance": "Balance",
+        "exposure": "Net Exposure",
+        "bonus": "Bonus",
+        "cashable": "Available Withdrawal"
+      },
+      "drawer": {
+        "greeting": "HI,",
+        "balanceInformation": "Balance Information",
+        "deposit": "Deposit",
+        "withdraw": "Withdraw",
+        "claimBonuses": "Claim Bonuses",
+        "awaitingBonus": "Awaiting Bonus",
+        "referAndEarn": "Refer and Earn",
+        "openBets": "Open Bets",
+        "bonusRules": "Bonus rules",
+        "resetPassword": "Change Password",
+        "settings": "Settings",
+        "myBets": "Bets History",
+        "favorites": "Favorites",
+        "rules": "Rules and Regulation",
+        "logout": "LOGOUT"
+      },
+      "logout": "Log Out"
+    }
+  },
+  "footer": {
+    "followUs": "Follow us on",
+    "help": {
+      "title": "Help"
+    },
+    "info": {
+      "title": "Information"
+    },
+    "social": {
+      "whatsapp": "WhatsApp"
+    },
+    "security": {
+      "badgeTitle": "SECURE",
+      "badgeSubtitle": "SSL ENCRYPTION",
+      "safeLabel": "100% SAFE",
+      "safeDescription": "Protected connection and encrypted data.",
+      "safeDescriptionShort": "SSL Encrypted",
+      "safeTitle": "100% Safe & Secure",
+      "safeSubtitle": "Fully encrypted connections"
+    },
+    "badges": {
+      "ageOnly": "18+ Only",
+      "ageOnlyShort": "18+",
+      "responsibleGaming": "Responsible Gaming - GamCare",
+      "responsibleGamingShort": "RG",
+      "gamingTrust": "Gaming Trust",
+      "gtLabel": "gt",
+      "gamblingTherapy": "Gambling Therapy"
+    },
+    "supportRibbon": "24×7 Customer Support — We're here to help you anytime, anywhere",
+    "about": {
+      "title": "About Us",
+      "description": "Experience a secure and responsible platform built with advanced SSL encryption, industry compliance, and round-the-clock support. Your safety, privacy, and enjoyment are always our top priorities."
+    },
+    "aboutSection": {
+      "title": "About"
+    },
+    "paymentMethods": {
+      "title": "We Accept",
+      "crypto": "Crypto",
+      "bankTransfer": "Bank Transfer"
+    },
+    "quickLinks": {
+      "title": "Quick Links"
+    },
+    "links": {
+      "aboutUs": "About us",
+      "contact": "Contact",
+      "contactUs": "Contact Us",
+      "privacyPolicy": "Privacy Policy",
+      "terms": "Terms and Conditions",
+      "responsibleGaming": "Responsible Gambling",
+      "downloadApp": "Download App",
+      "downloadAppNote": "[For Android Users]",
+      "promotions": "Promotions",
+      "rules": "Rules",
+      "joinAffiliate": "Join as Affiliate",
+      "sitemap": "Sitemap"
+    },
+    "copyright": {
+      "simple": "© {year}. All Rights Reserved.",
+      "text": "© Copyright {year}. All Rights Reserved."
+    }
+  },
+  "casino": {
+    "home": {
+      "title": "Casino",
+      "titleDesktop": "Casino Home",
+      "heading": "CASINO",
+      "loading": "Loading casino games...",
+      "loadingDescription": "Please wait while we fetch the latest casino games",
+      "allGames": "All Games",
+      "allProviders": "ALL",
+      "allTypes": "All Types",
+      "noGamesFound": "No games found",
+      "noGamesSearchDescription": "Try adjusting your search criteria",
+      "noGamesFilterDescription": "No games available for the selected filters",
+      "clearFilters": "Clear Filters",
+      "playNow": "Play now",
+      "searchPlaceholder": "Search Games"
+    },
+    "gameType": {
+      "default": "Game Type"
+    },
+    "category": {
+      "default": "Category"
+    },
+    "search": {
+      "placeholder": "Search Game...",
+      "mobileTitle": "Search Casino",
+      "inputPlaceholder": "Search Game...",
+      "startTyping": "Start typing to search for casino games",
+      "noResults": "No results found",
+      "tryDifferentSearch": "Try a different search term"
+    },
+    "favorites": {
+      "title": "Favorite Casino Games",
+      "loading": "Loading favorite games...",
+      "noFavorites": "No favorite games yet",
+      "visitCasino": "Visit casino games to add them to your favorites",
+      "notFound": "Favorite games not found",
+      "noLongerAvailable": "Some of your favorite games may no longer be available"
+    },
+    "game": {
+      "loading": "Loading game...",
+      "loadError": "Failed to load game",
+      "idRequired": "Game ID is required",
+      "invalidResponse": "Invalid response format from server",
+      "retry": "Retry",
+      "notAvailable": "Game Not Available.",
+      "temporarilyUnavailable": "This game is temporarily unavailable. Please try again in a few moments.",
+      "goBack": "Go Back"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Sign in to access your account",
+      "username": "Username",
+      "password": "Password",
+      "enterUsername": "Username",
+      "enterPassword": "Password",
+      "loginButton": "LOGIN",
+      "loginHeading": "Login to your account",
+      "forgotUsername": "Forgot username?",
+      "downloadAppBannerAlt": "Download the app now",
+      "demoButton": "DEMO LOGIN",
+      "tagline": "GREATER ODDS. GREATER WINNINGS",
+      "whatsappIdPrompt": "Get Your Ready-Made ID From Whatsapp",
+      "diamondUpgrade": "Diamond Upgrade",
+      "oneToOneSupport": "1 To 1 Customer Support",
+      "instantWithdrawal": "24/7 Instant Withdrawal",
+      "whitelabelEnquiry": "For whitelabel enquiry, please contact",
+      "tryDemoMode": "Try Demo Mode",
+      "downloadApk": "Download .Apk",
+      "forgotCredentials": "Forgot Password/Username?",
+      "joinWhatsappBonus": "Join WhatsApp Channel ( For Bonus )",
+      "apkUnavailable": "APK download is not available right now. Please contact support.",
+      "logoAlt": "Goplay Logo",
+      "footerNote": "Contact us",
+      "sessionExpired": "Session expired.",
+      "fillFields": "Please fill in all required fields correctly",
+      "loginFailed": "Login failed",
+      "authCheckFailed": "Authentication not established",
+      "securedByRecaptcha": "Secured by reCAPTCHA",
+      "success": "Login successful!",
+      "demoSuccess": "Demo login successful! You have limited access to explore the platform.",
+      "demoFailed": "Demo login failed",
+      "signupPrompt": "New here ?",
+      "signupCta": "Sign Up",
+      "forgotPasswordLink": "Forgot password?",
+      "showPassword": "Show password",
+      "hidePassword": "Hide password"
+    },
+    "forgotPassword": {
+      "title": "Forgot Password",
+      "resetTitle": "Reset Password",
+      "mobileLabel": "Mobile No",
+      "verifyOtp": "VERIFY OTP",
+      "getOtpWhatsapp": "GET OTP ON WHATSAPP",
+      "loginPasswordSection": "Login Password",
+      "confirmPassword": "Confirm Password",
+      "passwordHint": "(Must contain letters and numbers, minimum 8 characters)",
+      "walletPasswordSection": "Wallet Password",
+      "sameAsPassword": "Same as Password",
+      "confirmWalletPassword": "Confirm Wallet Password",
+      "updatePassword": "UPDATE PASSWORD",
+      "backToLogin": "Remember your password?",
+      "loginLink": "Login",
+      "usernameRequired": "Username is required",
+      "phoneInvalid": "Enter a valid 10 digit mobile number",
+      "fieldRequired": "{field} is required",
+      "minLength": "{field} must be at least 8 characters",
+      "maxLength": "{field} must not exceed 255 characters",
+      "mustContainLetters": "{field} must contain letters",
+      "mustContainNumbers": "{field} must contain numbers",
+      "passwordMismatch": "Passwords do not match",
+      "walletPasswordMismatch": "Wallet passwords do not match",
+      "otpSentSuccess": "OTP sent success !",
+      "otpSentWhatsapp": "OTP sent on WhatsApp",
+      "otpAlreadySent": "OTP already sent. Please enter the code from WhatsApp.",
+      "otpSendFailed": "Failed to send OTP",
+      "otpInvalid": "Enter the 6 digit OTP",
+      "otpVerified": "OTP verified. Set your new password.",
+      "otpVerifyFailed": "Invalid or expired OTP",
+      "verifyOtpFirst": "Please verify OTP first",
+      "resetSuccess": "Password reset successfully. You can login now.",
+      "resetFailed": "Password reset failed"
+    },
+    "signup": {
+      "title": "Create your account",
+      "createAccountTitle": "Create Account",
+      "alreadyHaveAccount": "Already have account?",
+      "loginLink": "Login",
+      "marketingCopy": "Zuplay is a fun and safe platform where you can join real-time challenges and test your skills against other players. Enjoy the thrill of competition in a fair and secure environment. Whether you're here to relax or take on a challenge, Zuplay offers a smooth and exciting experience. Join thousands of players exploring dynamic games and events. Log in and start your journey today.",
+      "step1Title": "Account Details",
+      "stepOtpTitle": "Verify OTP",
+      "step2Title": "Name",
+      "step3Title": "Passwords",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "enterFirstName": "First name",
+      "enterLastName": "Last name",
+      "nameLength": "Name must be 1-220 characters",
+      "heroSubtitle": "Join to explore live events, real-time markets and switch seamlessly between sports, racing and casino.",
+      "username": "Username",
+      "enterUsername": "Username",
+      "referralIdPlaceholder": "Enter Referral Id (Optional)",
+      "agreeTermsPrefix": "By Signing up, I agree to the",
+      "agreeTermsLink": "Terms and Conditions",
+      "otpStepHint": "Please enter the OTP recieved",
+      "goBack": "Go Back",
+      "usernameLength": "Username must be 3-220 characters",
+      "usernameNoSpaces": "Username cannot contain spaces",
+      "phoneNumber": "WhatsApp Number",
+      "enterPhone": "Phone Number",
+      "phoneInvalid": "Enter a valid WhatsApp number",
+      "sendOtp": "Send OTP",
+      "otp": "OTP",
+      "otpLabelWithVerify": "Verify OTP",
+      "enterOtp": "Enter OTP",
+      "otpInvalid": "Enter a valid 6 digit OTP",
+      "otpSent": "OTP sent to your WhatsApp",
+      "otpSendFailed": "Failed to send OTP",
+      "otpAlreadySentUseOrResend": "OTP already sent. Enter it below or resend when the timer ends.",
+      "sendOtpFirst": "Please send OTP first",
+      "resendOtp": "Resend OTP",
+      "changePhoneNumber": "Change phone number",
+      "verify": "Verify",
+      "verifyOtp": "Verify OTP",
+      "verifyOtpFirst": "Please verify OTP first",
+      "otpVerified": "OTP verified",
+      "otpVerifyFailed": "Invalid or expired OTP",
+      "otpValidFor": "Valid for {time}",
+      "otpRequestAgainIn": "Request again in {time}",
+      "loginPasswordSection": "Login Password",
+      "withdrawalPasswordSection": "Withdrawal Password",
+      "password": "Login password",
+      "enterPassword": "Password",
+      "passwordConfirm": "Confirm login password",
+      "enterPasswordConfirm": "Confirm Password",
+      "passwordMismatch": "Login passwords do not match",
+      "withdrawalPassword": "Wallet password",
+      "enterWithdrawalPassword": "Wallet password",
+      "withdrawalPasswordConfirm": "Confirm wallet password",
+      "enterWithdrawalPasswordConfirm": "Confirm Wallet Password",
+      "withdrawalPasswordMismatch": "Wallet passwords do not match",
+      "passwordMin": "Password must be at least 8 characters",
+      "passwordLetters": "Password must contain letters",
+      "passwordNumbers": "Password must contain numbers",
+      "signupButton": "Sign Up",
+      "success": "Account created! You can now sign in.",
+      "failed": "Signup failed",
+      "campaignIdLabel": "Campaign Code:"
+    }
+  },
+  "bonus": {
+    "statement": {
+      "title": "Bonus Statement",
+      "managementNote": "View your bonus awards, turnover progress, and redemption history",
+      "bonusCategory": "Category",
+      "bonusName": "Bonus Name",
+      "status": "Status",
+      "approvalRequired": "Approval Required",
+      "awardAmount": "Award Amount",
+      "awardDate": "Award Date",
+      "turnoverRequired": "Turnover Required",
+      "turnoverMet": "Turnover Met",
+      "turnoverLeft": "Turnover Left",
+      "redeemedAmount": "Redeemed Amount",
+      "redeemDate": "Redeem Date",
+      "expiryDate": "Expiry Date",
+      "today": "today",
+      "daysLeft": "{count} day left | {count} days left",
+      "expired": "Expired",
+      "noBonuses": "No bonus records found",
+      "statusPending": "Pending",
+      "statusActive": "Active",
+      "statusInactive": "Inactive",
+      "statusRedeemed": "Redeemed",
+      "statusExpired": "Expired",
+      "statusRedeemFailed": "Redeem Failed",
+      "statusPendingApproval": "Pending",
+      "redeemHelpTitle": "How to Redeem Bonuses",
+      "redeemHelpIntro": "To get your bonus into your non-cashable balance, you need to meet the turnover required. Here's how:",
+      "redeemHelpStep1": "Place bets. The amount you bet counts toward your turnover.",
+      "redeemHelpStep2": "Check the table above. Turnover Met shows your progress; Turnover Left shows what you still need.",
+      "redeemHelpStep3": "When you've met the requirement, your bonus status will change to Redeemed.",
+      "redeemHelpStep4": "The bonus will be added to your non-cashable balance automatically.",
+      "redeemHelpNote": "Bonuses can expire if the requirement isn't met in time. Check the expiry date for each bonus."
+    },
+    "redeemable": {
+      "title": "Redeem Bonuses",
+      "subtitle": "Enter a coupon code to claim, then redeem your pending bonuses",
+      "noBonuses": "No redeemable bonuses at the moment",
+      "couponCode": "Coupon Code",
+      "claim": "Claim",
+      "claimSuccess": "Bonus claimed successfully",
+      "claimError": "Failed to claim bonus",
+      "redeem": "Redeem",
+      "redeemSuccess": "Bonus redeemed successfully",
+      "redeemError": "Failed to redeem bonus",
+      "awardAmount": "Award: {amount}",
+      "bonus": "Bonus",
+      "helpTitle": "How to Claim & Redeem Bonuses",
+      "helpIntro": "Check your bonus eligibility using a coupon code. If you're eligible, the bonus will appear below and you can redeem it.",
+      "helpStep1": "Enter your coupon code in the field above.",
+      "helpStep2": "Click Claim to check if you're eligible for the bonus.",
+      "helpStep3": "If eligible, the bonus will show up in the list below with the award amount.",
+      "helpStep4": "Click Redeem to add the bonus to your balance.",
+      "helpNote": "If the coupon is invalid or you're not eligible, you'll see an error message. Make sure you meet any deposit or other requirements for the bonus."
+    },
+    "rules": {
+      "title": "Bonus Rules",
+      "intro": "Please read the following rules before claiming or redeeming any bonus:",
+      "items": [
+        "Bonuses are subject to turnover requirements before they can be withdrawn or transferred to your cashable balance.",
+        "Each bonus may have its own expiry date. Unredeemed bonuses may expire if turnover requirements are not met in time.",
+        "Only valid coupon codes can be used to claim a bonus. Invalid or expired codes will be rejected.",
+        "Bonuses may be restricted to specific sports, casino games, or bet types as defined in the promotion.",
+        "The company reserves the right to amend, suspend, or cancel any bonus offer at its discretion."
+      ],
+      "note": "For full details on a specific promotion, check the bonus terms shown when you claim or redeem."
+    }
+  },
+  "account": {
+    "statement": {
+      "title": "Account Statement",
+      "managementNote": "Manage and review your complete transaction history",
+      "sport": "Sport",
+      "sports": "Sports",
+      "remark": "Remark",
+      "selectGamesLabel": "Select Games",
+      "allSports": "All Sports",
+      "fromLabel": "From",
+      "typesLabel": "Types",
+      "acTypeLabel": "AC Type",
+      "allTypes": "All",
+      "apply": "APPLY",
+      "credit": "Credit",
+      "debit": "Debit",
+      "type": "Type",
+      "description": "Description",
+      "transactionType": {
+        "credit": "Credit",
+        "debit": "Debit"
+      },
+      "noTransactions": "No data available",
+      "loadingTransactions": "Loading transactions...",
+      "dateRange": "Date Range",
+      "amount": "Amount",
+      "balance": "Balance",
+      "status": "Status",
+      "viewDetails": "View Details",
+      "betDetails": "Bet Details",
+      "noBetDetails": "No bet details found",
+      "tableHeaders": {
+        "srNo": "Sr No",
+        "nation": "Nation",
+        "side": "Side",
+        "rate": "Rate",
+        "amount": "Amount",
+        "winLoss": "Win/Loss",
+        "placeDate": "Place Date",
+        "matchDate": "Match Date",
+        "roundId": "Round Id",
+        "gameId": "Game Id",
+        "gameCode": "Game Code"
+      },
+      "betTypes": {
+        "back": "Back",
+        "lay": "Lay"
+      }
+    }
+  },
+  "betHistory": {
+    "title": "Bet History",
+    "loadingHistory": "Loading bet history...",
+    "noBetsFound": "No {status} bets found",
+    "sport": "Sport",
+    "selection": "Selection",
+    "betStatus": "Bet Status",
+    "dateTime": "Date & Time",
+    "event": "Event",
+    "market": "Market",
+    "odds": "Odds",
+    "stake": "Stake",
+    "returns": "Returns",
+    "profit": "Profit/Loss"
+  },
+  "bet": {
+    "slipTitle": "Bet Slip"
+  },
+  "unsettledBets": {
+    "title": "Unsettled Bets",
+    "description": "Track your pending bets that are yet to be settled",
+    "noBets": "No unsettled bets found",
+    "noDataDescription": "Your active bets awaiting settlement will appear here",
+    "loadingBets": "Loading unsettled bets...",
+    "columns": {
+      "no": "No",
+      "event": "Event Name",
+      "nation": "Nation",
+      "eventType": "Event Type",
+      "marketName": "Market Name",
+      "side": "Side",
+      "rate": "Rate",
+      "amount": "Amount",
+      "placeDate": "Place Date"
+    },
+    "marketTypes": {
+      "MO": "Match Odds",
+      "BM": "Bookmaker",
+      "FC": "Fancy",
+      "OP": "Odds/Even"
+    }
+  },
+  "buttons": {
+    "updateStake": "Update Stake Buttons",
+    "buttonLabel": "Button Label",
+    "stakeAmount": "Stake Amount",
+    "buttonPlaceholder": "Button {n} Label",
+    "amountPlaceholder": "Amount {n}",
+    "reset": "Reset",
+    "update": "Update",
+    "updating": "Updating...",
+    "errorLoading": "Failed to load button data. Please try again.",
+    "errorUpdating": "Failed to update button values. Please try again.",
+    "successUpdate": "Button values updated successfully!"
+  },
+  "changePassword": {
+    "title": "Change Password",
+    "subtitle": "Manage your account passwords and security preferences",
+    "passwordChangeRequired": "Password Change Required",
+    "mustChangeBeforeAccess": "You must change your password before accessing other parts of the application.",
+    "loginPassword": "Login Password",
+    "loginPasswordDesc": "Used for logging into your account",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm New Password",
+    "passwordRequirements": "Password Requirements",
+    "requirementsDesc": "Keep your account secure with strong passwords",
+    "minCharacters": "At least 8 characters",
+    "lettersNumbers": "Contains letters & numbers",
+    "differentFromCurrent": "Different from current",
+    "change": "Change Password",
+    "changing": "Changing...",
+    "update": "Update",
+    "updating": "Updating...",
+    "set": "Set",
+    "setting": "Setting...",
+    "passwordUpdated": "Password updated successfully",
+    "loginPasswordUpdated": "Login password updated successfully",
+    "walletPasswordUpdated": "Wallet password updated successfully",
+    "walletPasswordSet": "Wallet password set successfully",
+    "bothPasswordsUpdated": "Login and wallet passwords updated successfully",
+    "passwordError": "Failed to update password",
+    "passwordMismatch": "Passwords do not match",
+    "passwordTooShort": "Password must be at least 8 characters long",
+    "passwordNeedsLettersNumbers": "Password must contain both letters and numbers",
+    "passwordDifferent": "New password must be different from current password",
+    "walletPassword": "Wallet Password",
+    "walletPasswordDesc": "Used for wallet transactions",
+    "setWalletPassword": "Set Wallet Password",
+    "setWalletPasswordDesc": "Required for secure wallet transactions",
+    "currentWalletPassword": "Current Wallet Password"
+  },
+  "wallet": {
+    "title": "Wallet",
+    "recent": {
+      "title": "Recent Activity",
+      "subtitle": "Last 5 Transactions"
+    },
+    "buttons": {
+      "depositSubtitle": "Add Funds",
+      "withdrawSubtitle": "Cash out",
+      "statementSubtitle": "View reports",
+      "pnlSubtitle": "Profit Loss",
+      "bonusSubtitle": "My Bonuses"
+    },
+    "charts": {
+      "depositVsWithdrawals": "Deposit vs Withdrawals",
+      "deposits": "Deposits",
+      "withdrawals": "Withdrawals",
+      "profitLossAnnually": "Profit & Loss Annually",
+      "profit": "Profit",
+      "loss": "Loss"
+    },
+    "bonus": {
+      "title": "Bonus",
+      "subtitle": "View your bonus awards, turnover progress, and redemption history"
+    },
+    "blocked": {
+      "contactSupport": "Contact Support"
+    },
+    "deposit": {
+      "title": "Deposit",
+      "blockedTitle": "Deposits are blocked",
+      "blockedMessage": "Deposits are blocked for your account. Please contact support.",
+      "pending": "Pending Amount",
+      "selectAmount": "Select or Enter Amount",
+      "quick": "Quick Amount",
+      "depositTo": "Deposit to ",
+      "enterAmount": "Enter amount",
+      "bank": "Bank",
+      "upi": "UPI",
+      "crypto": "Crypto",
+      "next": "Next",
+      "back": "Back",
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "bankDeposit": "Bank Deposit",
+      "step": "Step {current} of {total}",
+      "loadingOptions": "Loading options...",
+      "noBankAccounts": "No bank accounts available.",
+      "receiptPreview": "Receipt preview",
+      "uploadReceipt": "Upload receipt (images only)",
+      "amountToPay": "Amount to pay: {currency} {amount}",
+      "accountHolder": "Account Holder Name",
+      "accountNumber": "Account Number",
+      "ifscCode": "IFSC Code",
+      "bankName": "Bank Name",
+      "history": "Deposit History",
+      "loadingHistory": "Loading deposit history...",
+      "noHistory": "No deposits found",
+      "status": "Status",
+      "date": "Date",
+      "amount": "Amount",
+      "viewDetails": "View Details",
+      "payment": "Payment",
+      "paymentOptions": {
+        "all": "All",
+        "bank": "Bank",
+        "upi": "UPI",
+        "crypto": "Crypto"
+      },
+      "statusOptions": {
+        "pending": "Pending",
+        "approved": "Approved",
+        "rejected": "Rejected",
+        "cancelled": "Cancelled"
+      },
+      "dateRequired": "Start date and end date are required when status is not pending",
+      "dateInvalidRange": "Start date cannot be later than end date",
+      "option": "Option {n}",
+      "whatsapp": "WhatsApp",
+      "chooseBankAccount": "Choose bank account",
+      "chooseUpiAccount": "Choose UPI account",
+      "chooseCurrencyType": "Choose currency type",
+      "noUpiAccounts": "No UPI accounts available.",
+      "noCryptoAccounts": "No crypto accounts available.",
+      "paymentCompleted": "I have completed the payment",
+      "onlyImages": "Only images are accepted for the receipt",
+      "receiptRequired": "Receipt is required",
+      "transactionId": "Transaction ID",
+      "transactionIdPlaceholder": "Enter your transaction ID",
+      "transactionIdRequired": "Transaction ID is required",
+      "transactionIdMinLength": "Transaction ID must be at least {count} characters",
+      "amountRequired": "Amount is required",
+      "amountInvalid": "Please enter a valid amount",
+      "amountGreaterThanZero": "Amount must be greater than 0",
+      "loadOptionsFailed": "Failed to load deposit options",
+      "requestSubmitted": "Deposit request submitted successfully",
+      "requestFailed": "Failed to submit deposit request. Please try again.",
+      "upiDeposit": "UPI Deposit",
+      "cryptoDeposit": "Crypto Deposit",
+      "scanToPay": "Scan to Pay ({type})",
+      "chooseImageOptional": "Choose image (optional)",
+      "upiId": "UPI ID",
+      "walletAddress": "Wallet Address",
+      "stepper": {
+        "upiAccount": "UPI Account",
+        "amount": "Amount",
+        "payConfirm": "Pay & Confirm",
+        "currencyType": "Currency type",
+        "bankAccount": "Bank Account"
+      },
+      "noRequests": "No deposit requests found",
+      "historyWillAppear": "Your deposit history will appear here"
+    },
+    "withdrawal": {
+      "title": "Withdrawal",
+      "blockedTitle": "Withdrawals are blocked",
+      "blockedMessage": "Withdrawals are blocked for your account. Please contact support.",
+      "setWalletPasswordTitle": "Set Wallet Password",
+      "setWalletPasswordMessage": "Set a wallet password before making a withdrawal request.",
+      "selectMethod": "Select Withdrawal Method",
+      "bank": "Bank",
+      "upi": "UPI",
+      "crypto": "Crypto",
+      "requestForm": "Withdrawal Request Form",
+      "enterAmount": "Enter amount",
+      "withdrawalPassword": "Withdrawal Password",
+      "enterWithdrawalPassword": "Enter your withdrawal password",
+      "request": "Request Withdrawal",
+      "requesting": "Requesting...",
+      "success": "Withdrawal request submitted successfully",
+      "error": "Withdrawal request failed",
+      "history": "Withdrawal History",
+      "loadingHistory": "Loading withdrawal history...",
+      "noHistory": "No withdrawal requests found",
+      "pending": "Pending Amount",
+      "bankWithdrawal": "Bank Withdrawal",
+      "cryptoWithdrawal": "Crypto Withdrawal",
+      "chooseBankAccount": "Choose bank account",
+      "noBankAccounts": "No bank accounts. Add one in Payment Methods.",
+      "chooseCryptoAccount": "Choose crypto account",
+      "noCryptoAccounts": "No crypto accounts. Add one in Payment Methods.",
+      "holder": "Holder",
+      "to": "To",
+      "processingTime": "Processing time may vary.",
+      "wallet": "Wallet",
+      "payment": "Payment",
+      "actions": "Actions",
+      "statusOptions": {
+        "pending": "Pending",
+        "approved": "Approved",
+        "rejected": "Rejected"
+      },
+      "actionCompleted": "Completed",
+      "actionRejected": "Rejected",
+      "actionCancelled": "Cancelled",
+      "actionPending": "Pending",
+      "status": "Status",
+      "date": "Date",
+      "amount": "Amount",
+      "viewDetails": "View Details"
+    },
+    "balance": {
+      "availableBalance": "Available Balance",
+      "exposure": "Exposure",
+      "deposit": "Deposit",
+      "withdraw": "Withdraw"
+    },
+    "paymentMethods": {
+      "title": "Payment Methods",
+      "subtitle": "Manage your bank, UPI, and crypto accounts",
+      "tabs": {
+        "bank": "Bank",
+        "upi": "UPI",
+        "crypto": "Crypto"
+      },
+      "empty": {
+        "bank": "No Bank Accounts",
+        "upi": "No UPI Accounts",
+        "crypto": "No Crypto Accounts"
+      },
+      "emptyDescription": {
+        "bank": "Add your first bank account to get started with deposits and withdrawals.",
+        "upi": "Add your first UPI ID to get started with quick payments.",
+        "crypto": "Add your first crypto wallet to get started."
+      },
+      "addBank": "Add Bank Account",
+      "editBank": "Edit Bank Account",
+      "addUpi": "Add UPI Account",
+      "editUpi": "Edit UPI Account",
+      "addCrypto": "Add Crypto Account",
+      "editCrypto": "Edit Crypto Account",
+      "form": {
+        "bankName": "Bank Name",
+        "holderName": "Holder Name",
+        "accountNumber": "Account Number",
+        "ifsc": "IFSC",
+        "status": "Status",
+        "upiId": "UPI ID",
+        "currency": "Currency",
+        "address": "Address"
+      },
+      "status": {
+        "active": "Active",
+        "suspended": "Suspended",
+        "pendingVerification": "Pending Verification"
+      },
+      "add": "Add {type}",
+      "edit": "Edit {type}",
+      "delete": "Delete",
+      "confirmDelete": "Are you sure you want to delete this {type}?",
+      "deleteSuccess": "{type} deleted successfully",
+      "deleteFailed": "Delete failed",
+      "fillRequired": "Please fill required fields",
+      "bankUpdated": "Bank account updated",
+      "bankCreated": "Bank account created",
+      "upiUpdated": "UPI account updated",
+      "upiCreated": "UPI account created",
+      "cryptoUpdated": "Crypto account updated",
+      "cryptoCreated": "Crypto account created",
+      "selectCurrencyAndAddress": "Select currency and enter address",
+      "requestFailed": "Request failed",
+      "deleteTitle": "Delete payment method?",
+      "deleteText": "Delete \"{label}\"? This cannot be undone.",
+      "deleteSuccessGeneric": "Deleted"
+    }
+  },
+  "depositTurnover": {
+    "title": "Deposit Turnover",
+    "subtitle": "View your deposit turnover records, status and redeemed history.",
+    "transactionType": "Transaction Type",
+    "fromDate": "From Date",
+    "toDate": "To Date",
+    "statusOptions": {
+      "all": "All",
+      "awarded": "Awarded",
+      "inprogress": "In Progress",
+      "redeemed": "Redeemed"
+    },
+    "tableHeaders": {
+      "transactionTime": "Transaction Time",
+      "amount": "Amount",
+      "cashable": "Cashable Amount",
+      "turnover": "Turnover",
+      "status": "Status",
+      "redeemedDate": "Redeemed Date",
+      "updateTime": "Update Time"
+    },
+    "noData": "No deposit turnovers found",
+    "noDataDescription": "Your deposit turnover records will appear here."
+  },
+  "turnoverHistory": {
+    "title": "Turnover History",
+    "subtitle": "View your game turnover history with filters.",
+    "transactionType": "Transaction Type",
+    "fromDate": "From Date",
+    "toDate": "To Date",
+    "transactionTypeOptions": {
+      "all": "All Types",
+      "betPlacement": "Bet Placement",
+      "betSettlement": "Bet Settlement",
+      "betRollback": "Bet Rollback",
+      "betVoid": "Bet Void"
+    },
+    "tableHeaders": {
+      "eventDate": "Event Date",
+      "transactionType": "Transaction Type",
+      "eventName": "Event Name",
+      "market": "Market",
+      "marketType": "Market Type",
+      "amount": "Amount",
+      "turnoverBalance": "Turnover Balance"
+    },
+    "noData": "No turnover history found for the selected filters.",
+    "validation": {
+      "bothDatesRequired": "Please select both From and To dates.",
+      "invalidDateRange": "From date cannot be after To date."
+    }
+  },
+  "profitLoss": {
+    "title": "Profit & Loss",
+    "subtitle": "View your profit and loss records across different events and time periods",
+    "totalProfit": "Total Profit",
+    "netPnL": "Net P&L",
+    "noData": "No profit/loss data found",
+    "noDataDescription": "Your P&L history will appear here",
+    "columns": {
+      "no": "No",
+      "date": "Date",
+      "sport": "Sport",
+      "event": "Event",
+      "selection": "Selection",
+      "pnl": "P&L"
+    }
+  },
+  "sports": {
+    "home": {
+      "title": "Sports",
+      "featured": "Featured Events",
+      "loadingEvents": "Loading events...",
+      "noEvents": "No events available",
+      "loadingDescription": "Please wait while we fetch the latest events",
+      "all": "All",
+      "live": "Live",
+      "premium": "Premium",
+      "noEventsFor": "No events found for {type}.",
+      "noEventsWinbuzz": "No events found",
+      "noMarketsAvailable": "No Markets Available",
+      "eventNotFound": "Event not found",
+      "betslip": "Bet Slip",
+      "placeBet": "Place Bet",
+      "offPlayMarketBetNotAllowed": "Bet is not allowed on off-play market !",
+      "betslipClear": "Clear",
+      "selectOddsHint": "Select odds from the market to continue.",
+      "odds": "Odds",
+      "market": "Market",
+      "viewBy": "View by",
+      "stake": "Stake",
+      "returns": "Returns",
+      "min": "Min",
+      "max": "Max",
+      "minStake": "Min stake",
+      "maxStake": "Max stake",
+      "maxBet": "Max Bet",
+      "editStake": "Edit stake",
+      "editStakes": "Edit Stakes",
+      "profit": "Profit",
+      "betslipCancel": "Cancel",
+      "allIn": "All In",
+      "cancelBet": "Cancel Bet",
+      "betslipCancelOrder": "Cancel Order",
+      "betslipPlaceOrder": "Place Order",
+      "quickStakes": "Quick Stakes",
+      "customStake": "Custom Stake",
+      "actions": "Actions",
+      "edit": "Edit",
+      "processing": "Processing...",
+      "placingIn": "Placing in {seconds}",
+      "placing": "Placing...",
+      "stakePlaceholder": "Stake Amount",
+      "betPlaced": "Bet has been placed successfully",
+      "betFailed": "Bet placement failed",
+      "bettingBlocked": "Betting Blocked - Please contact your upline to enable betting."
+    },
+    "racing": {
+      "noRaces": "No races available at this time.",
+      "loading": "Loading races...",
+      "loadingDescription": "Please wait while we fetch the latest race information",
+      "unknownRace": "Unknown Race",
+      "races": "{count} races",
+      "title": "Racing",
+      "eventsSubtitle": "Racing Events",
+      "stats": {
+        "nowRunning": "Now Running",
+        "startingSoon": "Starting Soon",
+        "nextHour": "Next Hour",
+        "next2Hours": "Next 2 Hours",
+        "totalToday": "Total Today"
+      }
+    }
+  },
+  "components": {
+    "balanceCard": {
+      "availableBalance": "Available Balance",
+      "cashable": "Cashable Balance"
+    },
+    "bettingLimits": {
+      "min": "Min",
+      "max": "Max",
+      "minAlt": "Minimum bet",
+      "maxAlt": "Maximum bet"
+    },
+    "bankCard": {
+      "bankNameFallback": "Bank Name",
+      "cardHolderLabel": "Card Holder",
+      "holderNameFallback": "Your Name",
+      "ifscLabel": "IFSC"
+    },
+    "betHeader": {
+      "live": "LIVE",
+      "upcoming": "UPCOMING",
+      "liveScore": "Live score",
+      "unknownTime": "Unknown time",
+      "oddsTab": "Odds",
+      "matchedBetTab": "Matched Bets",
+      "scorecard": "Scorecard",
+      "liveTv": "Live TV",
+      "watch": "Watch",
+      "hide": "Hide"
+    },
+    "betMarketsToolbar": {
+      "markets": "Markets",
+      "score": "Score",
+      "openBets": "Open Bets",
+      "myBets": "My Bets",
+      "noDataAvailable": "No Data Available"
+    },
+    "betSlipToolbar": {
+      "betslip": "Betslip",
+      "openBet": "Open Bets",
+      "emptyMessage": "Click on the odds to add selections to the betslip.",
+      "emptyStateTitle": "Your Bet Slip is Empty"
+    },
+    "betHistory": {
+      "back": "back",
+      "lay": "lay",
+      "columnOdd": "Odd",
+      "pending": "Pending",
+      "won": "Won",
+      "lost": "Lost",
+      "unknownEvent": "Unknown Event",
+      "noBets": "No {status} bets found"
+    },
+    "globalSnackbar": {
+      "close": "Close"
+    },
+    "allEventsDropdown": {
+      "activator": "All Events",
+      "cardTitle": "All Events",
+      "loading": "Loading events...",
+      "errorLoadingEventTypes": "Error loading event types: {error}",
+      "noEvents": "No events available at the moment",
+      "all": "all"
+    },
+    "casinoSearch": {
+      "resultSingle": "result found",
+      "resultPlural": "results found",
+      "showing": "Showing {shown} of {total} — type more to narrow results"
+    },
+    "competitionCard": {
+      "viewGames": "View Games"
+    },
+    "multiMarket": {
+      "eventFallback": "Event",
+      "live": "LIVE",
+      "market_singular": "market",
+      "market_plural": "markets",
+      "openEventDetails": "Open full event page"
+    },
+    "cryptoCard": {
+      "wallet": "Wallet",
+      "addressTitle": "{currency} – Address"
+    },
+    "searchResults": {
+      "searching": "Searching...",
+      "errorTitle": "Something went wrong",
+      "searchTitle": "Search Events & Games",
+      "searchSubtitle": "Find sports events and casino games by name",
+      "noResults": "No results found",
+      "tryDifferent": "Try searching with different keywords",
+      "sportsEvents": "Sports Events",
+      "casinoGames": "Casino Games",
+      "showMore": "Show More Results",
+      "filter": {
+        "all": "All",
+        "events": "Events",
+        "games": "Games"
+      },
+      "live": "LIVE"
+    },
+    "upcomingEvent": {
+      "upcoming": "Upcoming Event"
+    },
+    "fancy": {
+      "min": "Min:",
+      "max": "Max:",
+      "positionsTitle": "Positions",
+      "noPositions": "No positions",
+      "run": "Runs",
+      "position": "P&L",
+      "amount": "Amount",
+      "close": "Close",
+      "rulesSportName": "Fancy Markets"
+    },
+    "buttonUpdate": {
+      "title": "Update Stake Buttons",
+      "columnLabel": "Button Label",
+      "columnAmount": "Stake Amount",
+      "buttonLabel": "Button {n} Label",
+      "amountLabel": "Amount {n}",
+      "updateButtons": "Update Buttons",
+      "successUpdate": "Buttons updated successfully.",
+      "errorUpdating": "Failed to update button values. Please try again."
+    },
+    "searchDialog": {
+      "searchTitle": "Search Events & Games",
+      "mobilePlaceholder": "Search for a Sport, Game or Team",
+      "desktopPlaceholder": "Search for a Sport, Game or Team",
+      "noMatches": "No matches found",
+      "oneMatch": "1 match found",
+      "matches": "{n} matches found",
+      "pressEsc": "Press ESC to close",
+      "tapToView": "Tap on any event to view",
+      "events": "events",
+      "games": "games",
+      "loadFailed": "Failed to load data",
+      "loadFailedForSearch": "Failed to load data for search",
+      "opening": "Opening {name}"
+    },
+    "upiCard": {
+      "payTo": "Pay to",
+      "qrTitle": "UPI – Scan to pay"
+    },
+    "walletInfo": {
+      "manageWallet": "Click to manage your wallet",
+      "viewExposure": "Click to view exposure details",
+      "balanceBreakdown": "Cashable and non-cashable balance breakdown",
+      "balance": "Balance",
+      "balanceShort": "Bal",
+      "bonusShort": "Bon",
+      "exposureShort": "Exp",
+      "exposure": "Exposure",
+      "cashable": "Cashable",
+      "non-cashable": "Non-cashable",
+      "bonus": "Bonus"
+    },
+    "walletLink": {
+      "comingSoon": "Coming Soon"
+    },
+    "desktopCustomerSupport": {
+      "label": "24x7 Customer Support",
+      "close": "Close customer support"
+    },
+    "mobileBottomNav": {
+      "sports": "Sports",
+      "racing": "Racing",
+      "wallet": "Wallet",
+      "inplay": "Inplay",
+      "casino": "Casino",
+      "offers": "Offers",
+      "home": "Home",
+      "helpline": "Helpline",
+      "account": "Account",
+      "login": "Login",
+      "more": "More",
+      "options": "Options",
+      "moreToDo": "More to Do",
+      "search": "Search",
+      "affiliate": "Affiliate",
+      "live": "Live",
+      "multiMarket": "Multi Market",
+      "hideBottomNav": "Hide bottom navigation",
+      "showBottomNav": "Show bottom navigation",
+      "rules": "Rules",
+      "light": "Light",
+      "dark": "Dark",
+      "logout": "Logout",
+      "featured": "Featured",
+      "liveEvents": "Live Events",
+      "sportsBook": "Sports Book",
+      "casinoHome": "Casino Home",
+      "mac88": "MAC88",
+      "macExcite": "MAC EXCITE",
+      "virtuals": "VIRTUALS",
+      "color": "COLOR",
+      "funGames": "FUN GAMES"
+    },
+    "sidebar": {
+      "titles": {
+        "casinoHome": "Casino Home",
+        "favoriteGames": "Favorite Games",
+        "newLaunch": "New Launch",
+        "mac88": "MAC88",
+        "macExcite": "MAC EXCITE",
+        "mac88Virtuals": "MAC88 VIRTUALS",
+        "colorPrediction": "COLOR PREDICTION",
+        "funGames": "FUN GAMES",
+        "featured": "Featured",
+        "sports": "Sports",
+        "liveEvents": "Live Events",
+        "multiMarket": "Multi Market",
+        "racing": "Racing",
+        "sportsBook": "Sports Book",
+        "paymentMethods": "Payment Methods",
+        "affiliateProgram": "Affiliate Program"
+      },
+      "tooltips": {
+        "featured": "View featured events",
+        "sports": "View all sports events",
+        "liveEvents": "View live sports events",
+        "multiMarket": "View multi market betting",
+        "racing": "View racing events",
+        "sportsBook": "View sports betting options",
+        "favoriteGames": "View your favorite casino games",
+        "newLaunch": "Explore newly launched casino games",
+        "casinoHome": "Go to Casino Home",
+        "mac88": "Play MAC88",
+        "macExcite": "Play MAC EXCITE",
+        "mac88Virtuals": "Play MAC88 Virtuals",
+        "colorPrediction": "Play Color Prediction",
+        "funGames": "Play Fun Games",
+        "paymentMethods": "Manage bank, UPI & crypto",
+        "affiliateProgram": "Manage your affiliate program"
+      },
+      "selectlanguage": "Select Language",
+      "managePaymentMethods": "Manage bank, UPI & crypto",
+      "affiliateProgram": "Affiliate Program",
+      "becomeAffiliate": "Become an Affiliate"
+    },
+    "exposureDialog": {
+      "title": "My Markets",
+      "eventType": "Event Type",
+      "eventName": "Event Name",
+      "expose": "Expose",
+      "fetchError": "Failed to fetch exposure data",
+      "noData": "No active events",
+      "events": "events",
+      "totalExposure": "Total Exposure"
+    },
+    "guestLayout": {
+      "logoAlt": "Goplay Logo"
+    },
+    "header": {
+      "logoAlt": "Goplay Logo",
+      "language": "Language",
+      "refreshPage": "Refresh page"
+    },
+    "demoSignup": {
+      "title": "Log in to unlock full access",
+      "subtitle": "You're currently in demo mode. Log in to access all features.",
+      "benefits": {
+        "depositWithdraw": {
+          "title": "Deposit & Withdraw",
+          "description": "Add funds to your account and withdraw your winnings anytime"
+        },
+        "secureSafe": {
+          "title": "Secure & Safe",
+          "description": "Your funds and personal information are protected"
+        },
+        "fullAccess": {
+          "title": "Full Access",
+          "description": "Access all features and market options"
+        },
+        "expertSupport": {
+          "title": "Expert Support",
+          "description": "Get help from our 24/7 customer support team"
+        }
+      },
+      "offer": {
+        "title": "Welcome Bonus Available!",
+        "subtitle": "New members get exclusive bonuses and promotions"
+      },
+      "cta": {
+        "login": "Login",
+        "continueDemo": "Continue in Demo Mode"
+      }
+    },
+    "eventRow": {
+      "justNow": "Just now",
+      "minutesAgo": "{n}m ago",
+      "hoursAgo": "{n}h ago",
+      "daysAgo": "{n}d ago",
+      "vs": "vs",
+      "bm": "BM",
+      "f": "F"
+    },
+    "rulesDialog": {
+      "rules": "Rules",
+      "noRules": "No rules available for this sport."
+    },
+    "bigWins": {
+      "title": "Recent Wins",
+      "winner": "Winner",
+      "winnings": "Winnings",
+      "fetchError": "Failed to fetch recent wins:"
+    },
+    "competitionSlider": {
+      "title": "Popular Competitions"
+    },
+    "eventSlider": {
+      "title": "Featured Events",
+      "justNow": "Just now",
+      "minsAgo": "{n}m ago",
+      "hoursAgo": "{n}h ago",
+      "daysAgo": "{n}d ago",
+      "fancyShort": "F",
+      "bmShort": "BM",
+      "colon": ":"
+    },
+    "newLaunchGames": {
+      "title": "New Launch",
+      "loading": "Loading new launch games...",
+      "noGames": "No new launch games available",
+      "checkBack": "Check back soon for newly launched games",
+      "errorLoading": "Error loading new launch games:"
+    }
+  },
+  "pages": {
+    "aboutUs": {
+      "title": "About Us",
+      "whatWeOffer": "What We Offer",
+      "sports": "Sports",
+      "sportsDesc": "Live and pre-match markets across major sports with real-time odds updates.",
+      "racing": "Racing",
+      "racingDesc": "Horse and greyhound racing from premier tracks worldwide.",
+      "casino": "Casino",
+      "casinoDesc": "Extensive library of slots, table games, and live dealer experiences.",
+      "ourValues": "Our Values",
+      "security": "Security",
+      "securityDesc": "Advanced SSL encryption and industry-leading security measures protect your data and transactions.",
+      "innovation": "Innovation",
+      "innovationDesc": "Cutting-edge technology powers our platform, ensuring smooth performance and exciting features.",
+      "customerFirst": "Customer First",
+      "customerFirstDesc": "24/7 support team dedicated to providing exceptional service and resolving your queries promptly.",
+      "responsibility": "Responsibility",
+      "responsibilityDesc": "Committed to promoting responsible gaming with tools and resources to help you stay in control.",
+      "whyChooseTitle": "Why Choose Us",
+      "wideSelectionTitle": "Wide Selection",
+      "wideSelectionDesc": "Access thousands of markets and games from a single platform. From major sports leagues to classic casino favorites, we have it all.",
+      "fastReliableTitle": "Fast & Reliable",
+      "fastReliableDesc": "Lightning-fast platform with 99.9% uptime. Quick deposits, instant withdrawals, and real-time updates keep you in the action.",
+      "mobileOptimizedTitle": "Mobile Optimized",
+      "mobileOptimizedDesc": "Enjoy the full experience on any device with responsive design for desktop, tablet, and mobile.",
+      "competitiveOddsTitle": "Competitive Odds",
+      "competitiveOddsDesc": "Get the best value with competitive odds across all markets. Our live odds engine ensures you always have access to the latest prices.",
+      "securePaymentsTitle": "Secure Payments",
+      "securePaymentsDesc": "Multiple payment options including cryptocurrency and bank transfers. All transactions are encrypted and processed securely.",
+      "fairPlayTitle": "Fair Play",
+      "fairPlayDesc": "Transparent operations with certified random number generators and fair play guarantees across all our games and markets.",
+      "cta": {
+        "title": "Ready to Get Started?",
+        "body": "Join thousands of satisfied users who trust us for their entertainment needs. Experience the difference today.",
+        "getStarted": "Get Started",
+        "explorePlatform": "Explore Platform"
+      },
+      "heroIntro": "Your premier destination for sports, racing, and casino entertainment. Experience excellence with cutting-edge technology and unparalleled service."
+    },
+    "whyChooseUs": {
+      "stripPrefix": "Why ",
+      "stripSuffix": "zuplay?",
+      "title": "Why Choose Us",
+      "intro": "Welcome to zuplay, where your gaming experience is our top priority! You might be wondering, “What makes zuplay stand out in the crowded world of online sports betting and casinos?” Well, let us show you why we’re the ultimate choice for thrill-seekers and winners alike. Here’s why choosing zuplay is a no-brainer!"
+    },
+    "live": {
+      "title": "Live Events",
+      "loadingTitle": "Loading live events...",
+      "loadingSubtitle": "Please wait while we fetch the latest live sports data",
+      "game": "Game",
+      "col1": "1",
+      "colX": "X",
+      "col2": "2",
+      "noEvents": "No events found",
+      "fetchError": "Error fetching live events:",
+      "failedToLoad": "Failed to load live events",
+      "eventTypeFallback": "Event Type {id}",
+      "loadedLog": "Live events loaded:"
+    },
+    "multiMarket": {
+      "title": "Multi Markets",
+      "loadingTitle": "Loading multi markets...",
+      "loadingSubtitle": "Please wait while we fetch the latest odds",
+      "noMarketsFound": "No Multi Markets found!",
+      "betSlip": "Bet Slip",
+      "betHistory": "Bet History",
+      "noPinnedMarkets": "No pinned markets for this event"
+    },
+    "esports": {
+      "title": "E-Sports",
+      "game": "Game",
+      "col1": "1",
+      "colX": "X",
+      "col2": "2",
+      "loadingTitle": "Loading esports data...",
+      "loadingSubtitle": "Please wait while we fetch the latest gaming events",
+      "noEvents": "No events found for {type}."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "heroIntro": "Get in touch with us. We're here to help you 24/7 with any questions or support you need.",
+      "whatsapp": "WhatsApp",
+      "whatsappDesc": "Chat with us instantly on WhatsApp for quick support and assistance.",
+      "openWhatsapp": "Open WhatsApp",
+      "email": "Email",
+      "emailDesc": "Send us an email and we'll get back to you as soon as possible.",
+      "supportHoursTitle": "Support Hours",
+      "supportBadge": "24/7 Support",
+      "supportDescription": "24×7 Customer Support — We're here to help you anytime, anywhere",
+      "additionalTitle": "We're Here to Help",
+      "quickResponseTitle": "Quick Response",
+      "quickResponseDesc": "Fast and efficient support for all your queries",
+      "secureCommTitle": "Secure Communication",
+      "secureCommDesc": "Your privacy and security are our top priorities",
+      "expertTeamTitle": "Expert Team",
+      "expertTeamDesc": "Experienced professionals ready to assist you"
+    },
+    "termsAndConditions": {
+      "title": "Terms and Conditions",
+      "lastUpdated": "Last updated: {date}",
+      "introduction": "Please read these terms carefully. By using our platform, you agree to be bound by these terms and conditions.",
+      "acceptanceOfTerms": "Acceptance of Terms",
+      "eligibility": "Eligibility and Age Requirements",
+      "mustBe18": "You must be at least 18 years of age to use our services",
+      "legalCapacity": "You must have the legal capacity to enter into binding agreements",
+      "complyLaws": "You must comply with all applicable laws in your jurisdiction",
+      "accountRegistration": "Account Registration and Security",
+      "accountCreation": "Account Creation",
+      "accountSecurity": "Account Security",
+      "oneAccountPerPerson": "One Account Per Person",
+      "acceptableUse": "Acceptable Use of Services",
+      "notAllowed": "You agree to use our services only for lawful purposes and in accordance with these Terms. You agree not to:",
+      "illegalUse": "Use our services for any illegal or unauthorized purpose",
+      "unauthorized": "Attempt to gain unauthorized access to our systems or networks",
+      "disrupt": "Interfere with or disrupt the integrity or performance of our services",
+      "bots": "Use automated systems or bots to access our services without permission",
+      "responsibleForLegalUse": "You are responsible for ensuring that your use of our services is legal in your location",
+      "governUse": "These Terms and Conditions govern your use of our platform. By accessing or using our services, you agree to comply with and be bound by these terms. If you do not agree with any part of these terms, you may not use our services.",
+      "acceptanceParagraph": "By creating an account, accessing, or using our platform, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions, our Privacy Policy, and all applicable laws and regulations.",
+      "accountCreationDesc": "You are responsible for providing accurate and complete information when creating your account. You must maintain and update your account information to keep it current.",
+      "accountSecurityDesc": "You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. You must immediately notify us of any unauthorized use of your account.",
+      "oneAccountPerPersonDesc": "Each user is permitted to maintain only one account. Multiple accounts or attempts to create duplicate accounts may result in suspension or termination of all associated accounts.",
+      "shareSellTransfer": "Share, sell, or transfer your account to another person",
+      "financialTerms": "Financial Terms",
+      "depositsWithdrawalsTitle": "Deposits and Withdrawals",
+      "depositsWithdrawalsDesc": "All deposits and withdrawals are subject to our payment processing policies. Minimum and maximum limits may apply. Processing times may vary depending on the payment method selected.",
+      "accountBalanceTitle": "Account Balance",
+      "accountBalanceDesc": "Your account balance represents funds available for use on our platform. All transactions are final once processed, subject to our dispute resolution procedures.",
+      "feesChargesTitle": "Fees and Charges",
+      "feesChargesDesc": "We reserve the right to charge fees for certain services. All fees will be clearly disclosed before you complete any transaction. You are responsible for any applicable taxes.",
+      "responsibleGaming": "Responsible Gaming",
+      "responsibleGamingIntro": "We are committed to promoting responsible gaming. We provide tools and resources to help you manage your activity, including:",
+      "depositLimits": "Deposit limits and spending controls",
+      "selfExclusion": "Self-exclusion options",
+      "realityChecks": "Reality checks and session timers",
+      "accessSupport": "Access to support resources",
+      "seekHelp": "If you believe you may have a gaming problem, please seek help from professional support services.",
+      "intellectualProperty": "Intellectual Property",
+      "intellectualPropertyDesc": "All content, features, and functionality of our platform, including but not limited to text, graphics, logos, icons, images, and software, are the exclusive property of our company and are protected by copyright, trademark, and other intellectual property laws.",
+      "cannotReproduceDesc": "You may not reproduce, distribute, modify, create derivative works of, publicly display, or otherwise use our content without our prior written permission.",
+      "limitationOfLiability": "Limitation of Liability",
+      "limitationDesc": "To the maximum extent permitted by law, our platform is provided \"as is\" without warranties of any kind. We shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of our services.",
+      "accountTermination": "Account Termination",
+      "terminationIntro": "We reserve the right to suspend or terminate your account at any time, with or without notice, for any reason, including but not limited to:",
+      "terminationViolation": "Violation of these Terms and Conditions",
+      "terminationFraud": "Fraudulent or illegal activity",
+      "terminationInactivity": "Inactivity for an extended period",
+      "terminationAtYourRequest": "At your request",
+      "changesToTerms": "Changes to Terms",
+      "changesToTermsDesc": "We reserve the right to modify these Terms and Conditions at any time. We will notify you of any material changes by posting the updated terms on this page and updating the \"Last updated\" date. Your continued use of our services after such changes constitutes acceptance of the modified terms.",
+      "contactTitle": "Contact Us",
+      "contactIntro": "If you have questions about these Terms and Conditions, please contact us:",
+      "contactEmailLabel": "Email:"
+    },
+    "privacyPolicy": {
+      "title": "Privacy Policy",
+      "heroIntro": "Your privacy is important to us. This policy explains how we collect, use, and protect your information.",
+      "lastUpdated": "Last updated: {date}",
+      "policyDescription": "We are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy describes how we collect, use, disclose, and safeguard your information when you use our platform.",
+      "informationWeCollect": "Information We Collect",
+      "personalInformationTitle": "Personal Information",
+      "personalInformationDesc": "We collect information that you provide directly to us, including your name, email address, phone number, date of birth, and payment information when you create an account or make transactions.",
+      "usageInformationTitle": "Usage Information",
+      "usageInformationDesc": "We automatically collect information about how you interact with our platform, including your IP address, browser type, device information, pages visited, and time spent on our services.",
+      "cookiesTitle": "Cookies and Tracking",
+      "cookiesDesc": "We use cookies and similar tracking technologies to enhance your experience, analyze usage patterns, and personalize content. You can control cookie preferences through your browser settings.",
+      "howWeUseTitle": "How We Use Your Information",
+      "useItem1": "To provide, maintain, and improve our services",
+      "useItem2": "To process transactions and manage your account",
+      "useItem3": "To communicate with you about your account and our services",
+      "useItem4": "To detect, prevent, and address technical issues and security threats",
+      "useItem5": "To comply with legal obligations and enforce our terms",
+      "infoSharingTitle": "Information Sharing and Disclosure",
+      "infoSharingIntro": "We do not sell your personal information. We may share your information only in the following circumstances:",
+      "serviceProvidersTitle": "Service Providers",
+      "serviceProvidersDesc": "We may share information with trusted third-party service providers who assist us in operating our platform, processing payments, or conducting business operations.",
+      "legalRequirementsTitle": "Legal Requirements",
+      "legalRequirementsDesc": "We may disclose information if required by law, court order, or government regulation, or to protect our rights, property, or safety, or that of our users.",
+      "businessTransfersTitle": "Business Transfers",
+      "businessTransfersDesc": "In the event of a merger, acquisition, or sale of assets, your information may be transferred to the acquiring entity.",
+      "dataSecurityTitle": "Data Security",
+      "dataSecurityIntro": "We implement industry-standard security measures to protect your personal information, including:",
+      "sslTitle": "SSL Encryption",
+      "sslDesc": "All data transmissions are encrypted using SSL/TLS protocols",
+      "secureStorageTitle": "Secure Storage",
+      "secureStorageDesc": "Your information is stored on secure servers with restricted access",
+      "accessControlsTitle": "Access Controls",
+      "accessControlsDesc": "Strict access controls and authentication measures protect your data",
+      "regularAuditsTitle": "Regular Audits",
+      "regularAuditsDesc": "We conduct regular security audits and updates to maintain protection",
+      "yourRightsTitle": "Your Rights and Choices",
+      "yourRightsIntro": "You have the right to:",
+      "right1": "Access and review your personal information",
+      "right2": "Request correction of inaccurate information",
+      "right3": "Request deletion of your account and data",
+      "right4": "Opt-out of marketing communications",
+      "right5": "Manage cookie preferences through your browser",
+      "contactTitle": "Contact Us",
+      "contactIntro": "If you have questions about this Privacy Policy or wish to exercise your rights, please contact us:",
+      "contactEmailLabel": "Email:",
+      "policyUpdatesTitle": "Policy Updates",
+      "policyUpdatesDesc": "We may update this Privacy Policy from time to time. We will notify you of any material changes by posting the new policy on this page and updating the \"Last updated\" date. We encourage you to review this policy periodically."
+    },
+    "responsibleGaming": {
+      "title": "Responsible Gaming",
+      "subtitle": "We believe in promoting safe and responsible gaming practices.",
+      "signsSelf": "Signs of Problem Gambling",
+      "spendMoreThanIntended": "Do you spend more time or money than you intended?",
+      "restless": "Do you feel restless or irritable when trying to stop?",
+      "tryToQuit": "Have you tried to cut back but found it difficult?",
+      "gameAffectsRelationships": "Has your gambling affected your relationships or work?",
+      "borrowedMoney": "Have you borrowed money to gamble?",
+      "resources": "Helpful Resources",
+      "gamcare": "GamCare",
+      "gamcareDesc": "Free, confidential support and advice for problem gamblers.",
+      "contact": "Contact us at support@platform.com for assistance.",
+      "heroIntro": "We are committed to promoting responsible gaming and providing tools to help you stay in control.",
+      "ourCommitmentTitle": "Our Commitment",
+      "commitment": {
+        "playerProtectionTitle": "Player Protection",
+        "playerProtectionDesc": "We implement measures to protect vulnerable players and prevent underage access",
+        "controlToolsTitle": "Control Tools",
+        "controlToolsDesc": "Easy-to-use tools to help you manage your activity and set limits",
+        "educationTitle": "Education & Awareness",
+        "educationDesc": "Resources and information to help you understand responsible gaming",
+        "supportResourcesTitle": "Support Resources",
+        "supportResourcesDesc": "Access to professional support services and helplines"
+      },
+      "selfAssessmentTitle": "Self-Assessment",
+      "selfAssessmentIntro": "Ask yourself these questions to assess your gaming habits:",
+      "question4": "Has gaming caused problems in your relationships or work?",
+      "question5": "Do you use gaming to escape problems or relieve feelings of anxiety?",
+      "selfAssessmentAdvice": "If you answered \"yes\" to any of these questions, you may want to consider using our control tools or seeking professional help.",
+      "controlToolsTitle": "Control Tools Available",
+      "depositLimitsTitle": "Deposit Limits",
+      "depositLimitsDesc": "Set daily, weekly, or monthly limits on how much you can deposit into your account. These limits help you stay within your budget.",
+      "sessionTimeLimitsTitle": "Session Time Limits",
+      "sessionTimeLimitsDesc": "Set time limits for your gaming sessions. You'll receive reminders when your time limit is approaching.",
+      "realityChecksTitle": "Reality Checks",
+      "realityChecksDesc": "Receive periodic reminders about how long you've been playing and how much you've spent during your session.",
+      "selfExclusionTitle": "Self-Exclusion",
+      "selfExclusionDesc": "Temporarily or permanently exclude yourself from accessing your account. This is a serious decision and can be set for periods ranging from 24 hours to permanent exclusion.",
+      "accountClosureTitle": "Account Closure",
+      "accountClosureDesc": "Request to permanently close your account. This action is irreversible and will prevent you from accessing our services in the future.",
+      "tipsTitle": "Tips for Responsible Gaming",
+      "tip1": "Set a budget before you start and stick to it",
+      "tip2": "Never chase losses - accept that losses are part of gaming",
+      "tip3": "Only play with money you can afford to lose",
+      "tip4": "Take regular breaks and don't play when emotional",
+      "tip5": "Keep track of time and money spent",
+      "tip6": "Don't play under the influence of alcohol or drugs",
+      "tip7": "Remember that gaming is entertainment, not a way to make money",
+      "gettingHelpTitle": "Getting Help",
+      "gettingHelpIntro": "If you or someone you know needs help with problem gaming, there are professional resources available:",
+      "gamcareLink": "Visit GamCare →",
+      "gamblingTherapyTitle": "Gambling Therapy",
+      "gamblingTherapyDesc": "Global service offering support and advice to anyone affected by problem gaming.",
+      "gamblingTherapyLink": "Visit Gambling Therapy →",
+      "contactSupportTitle": "Contact Our Support Team",
+      "contactSupportDesc": "Our customer support team is available 24/7 to assist you with setting limits, self-exclusion, or any questions about responsible gaming.",
+      "underageTitle": "Underage Gaming Prevention",
+      "underageDesc": "Our services are strictly for users aged 18 and over. We have strict age verification procedures in place and take all necessary measures to prevent underage access. If you suspect that someone under 18 is using our services, please contact us immediately.",
+      "needMoreTitle": "Need More Information?",
+      "needMoreIntro": "If you have questions about responsible gaming or need assistance with our control tools, please don't hesitate to contact us:",
+      "needMoreEmailLabel": "Email:"
+    },
+    "faqs": {
+      "title": "FAQS"
+    },
+    "referFriend": {
+      "title": "Refer a Friend"
+    },
+    "rules": {
+      "title": "Rules & Regulations",
+      "description": "Read our complete rules and regulations",
+      "general": "General Rules",
+      "betting": "Betting Rules",
+      "settlement": "Settlement Rules",
+      "pageTitle": "Rules",
+      "collapseAll": "Collapse all",
+      "expandAll": "Expand all",
+      "noRulesForSport": "No rules available for this sport."
+    }
+  },
+  "affiliateProgram": {
+    "title": "Affiliate Program",
+    "tabs": {
+      "campaigns": "Campaigns",
+      "funds": "Funds",
+      "withdrawalHistory": "Withdrawal History"
+    },
+    "actions": {
+      "createCampaign": "Create Campaign"
+    },
+    "cards": {
+      "commission": {
+        "label": "Commission",
+        "available": "Available Commission",
+        "total": "Total Commission"
+      },
+      "activity": {
+        "label": "Activity",
+        "lifetimeFtdAmount": "Lifetime FTD Amount",
+        "lifetimeFirstDeposits": "Lifetime First Deposits"
+      },
+      "signUps": {
+        "label": "Sign Ups",
+        "lifetimeSignups": "Lifetime Sign ups"
+      }
+    },
+    "campaigns": {
+      "heading": "Campaigns",
+      "subtitle": "Your referral campaigns and performance",
+      "noCampaigns": "No campaigns yet. Create your first campaign.",
+      "quickStats": {
+        "signUps": "Sign Ups",
+        "ftd": "FTD",
+        "commission": "Commission"
+      },
+      "detailDialog": {
+        "stats": {
+          "signUps": "Sign Ups",
+          "firstTimeDeposits": "First Time Deposits",
+          "ftdAmount": "FTD Amount",
+          "availableCommission": "Available Commission"
+        },
+        "referralLink": "Referral Link",
+        "close": "Close"
+      },
+      "createDialog": {
+        "title": "Create New Campaign",
+        "nameLabel": "Campaign Name",
+        "campaignIdLabel": "Campaign ID",
+        "campaignIdHint": "Unique identifier used in referral links",
+        "cancel": "Cancel",
+        "create": "Create"
+      }
+    },
+    "funds": {
+      "topCard": {
+        "label": "Funds",
+        "total": "Total",
+        "withdrawn": "Withdrawn"
+      },
+      "availableCard": {
+        "label": "Available",
+        "available": "Available",
+        "withdrawalButton": "Withdrawal"
+      }
+    },
+    "withdrawalHistory": {
+      "heading": "Withdrawal History",
+      "subtitle": "View all your commission withdrawal records",
+      "noData": {
+        "title": "No withdrawals on this date",
+        "description": "Select a different date to view withdrawal records"
+      },
+      "tableHeaders": {
+        "transactionId": "Transaction ID",
+        "amount": "Amount",
+        "dateTime": "Date & Time"
+      }
+    },
+    "withdrawalConfirmation": {
+      "title": "Confirm Withdrawal",
+      "subtitle": "Withdraw all available commission",
+      "summary": {
+        "availableToWithdraw": "Available to Withdraw",
+        "alreadyWithdrawn": "Already Withdrawn"
+      },
+      "info": "This will move your current available commission to your withdrawn balance. This action cannot be undone.",
+      "cancel": "Cancel",
+      "confirm": "Confirm Withdrawal"
+    },
+    "snackbar": {
+      "loadCampaignsFailed": "Failed to load campaigns",
+      "loadFundsSummaryFailed": "Failed to load funds summary",
+      "referralCopied": "Referral link copied!",
+      "pleaseSelectDate": "Please select a date",
+      "loadWithdrawalHistoryFailed": "Failed to load withdrawal history",
+      "campaignCreated": "Campaign created successfully!",
+      "createCampaignFailed": "Failed to create campaign",
+      "commissionWithdrawn": "Commission withdrawn successfully!",
+      "withdrawCommissionFailed": "Failed to withdraw commission"
+    }
+  },
+  "eventTypes": {
+    "football": "Football",
+    "tennis": "Tennis",
+    "cricket": "Cricket",
+    "rugby": "Rugby",
+    "horseRacing": "Horse Racing",
+    "tableTennis": "Table Tennis",
+    "futsal": "Futsal",
+    "darts": "Darts",
+    "greyhoundRacing": "Greyhound Racing",
+    "baseball": "Baseball",
+    "basketball": "Basketball",
+    "iceHockey": "Ice Hockey",
+    "binary": "Binary",
+    "sportsBook": "Sports book",
+    "kabaddi": "Kabaddi",
+    "casino": "Casino",
+    "volleyball": "Volleyball",
+    "politics": "Politics",
+    "mixedMartialArts": "Mixed Martial Arts",
+    "other": "Other"
+  },
+  "navigation": {
+    "live": "live"
+  }
+}

@@ -1,0 +1,532 @@
+/**
+ * Shared sport events table header — purple bar with filter pills + 1/X/2 columns.
+ * Used by Live.vue (.sport-section-header), Sport.vue (.sport-page-toolbar),
+ * and SportEventsTableHeader.vue (.sport-events-table-header).
+ */
+
+.sport-section-header,
+.sport-page-toolbar,
+.sport-events-table-header {
+  background: var(--color-header-bg, #360952);
+  border: none;
+  border-radius: 4px 4px 0 0;
+  overflow: hidden;
+}
+
+.sport-section-header::before,
+.sport-page-toolbar__inner::before,
+.sport-events-table-header__inner::before {
+  display: none !important;
+}
+
+.sport-page-toolbar__inner,
+.sport-events-table-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 34px;
+  padding: 4px 10px;
+  position: relative;
+  overflow: hidden;
+  background: var(--color-header-bg, #360952);
+}
+
+.sport-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 37px;
+  min-height: 37px;
+  padding: 0 10px 0 0;
+  position: relative;
+}
+
+.sport-section-header__left,
+.sport-page-toolbar__left,
+.sport-events-table-header__left {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  flex: 1 1 auto;
+  position: relative;
+  z-index: 1;
+  color: #ffffff;
+}
+
+.sport-section-header__brand,
+.sport-page-toolbar__left > .sport-page-toolbar__icon-wrap,
+.sport-events-table-header__icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.sport-section-header__title,
+.sport-page-toolbar__title,
+.sport-events-table-header__title {
+  margin: 0;
+  padding: 0;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-shadow: none;
+}
+
+.sport-section-header__icon-wrap,
+.sport-page-toolbar__icon-wrap,
+.sport-events-table-header__icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sport-section-header__icon-wrap {
+  margin-left: 12px;
+}
+
+.sport-section-header__icon,
+.sport-page-toolbar__icon,
+.sport-events-table-header__icon,
+.sport-events-table-header__icon-img {
+  display: block;
+  width: 15.37px;
+  height: 16.63px;
+  object-fit: contain;
+  color: #ffffff;
+}
+
+.sport-section-header__filters,
+.sport-page-toolbar .feed-mode-pills,
+.sport-events-table-header .feed-mode-pills {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 6px;
+  margin-left: auto;
+  margin-right: 0;
+  transform: translateX(16px);
+}
+
+.sport-section-header .feed-mode-pill,
+.sport-page-toolbar .feed-mode-pill,
+.sport-events-table-header .feed-mode-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  margin: 0;
+  padding: 3px 10px;
+  min-height: 22px;
+  box-sizing: border-box;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  background: transparent;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.sport-section-header .feed-mode-pill--active,
+.sport-page-toolbar .feed-mode-pill--active,
+.sport-events-table-header .feed-mode-pill--active {
+  background: #00ad6f;
+  border-color: transparent;
+  color: #ffffff;
+}
+
+.sport-section-header .feed-mode-pill :deep(.feed-mode-pill__prefix),
+.sport-page-toolbar .feed-mode-pill :deep(.feed-mode-pill__prefix),
+.sport-events-table-header .feed-mode-pill :deep(.feed-mode-pill__prefix) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  margin-right: 0.15em;
+}
+
+.sport-section-header__right,
+.sport-page-toolbar__right,
+.sport-events-table-header__right {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.sport-section-header__meta-spacer,
+.sport-page-toolbar__meta-spacer,
+.sport-events-table-header__meta-spacer {
+  width: 72px;
+  min-width: 72px;
+  flex-shrink: 0;
+}
+
+.sport-section-header__market-cols,
+.sport-page-toolbar__market-cols,
+.sport-events-table-header__market-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 56px);
+  align-items: center;
+  justify-items: center;
+  height: 100%;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+.sport-section-header__market-cols span,
+.sport-page-toolbar__market-cols span,
+.sport-events-table-header__market-cols span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.sport-section-header__market-cols span:nth-child(1),
+.sport-page-toolbar__market-cols span:nth-child(1),
+.sport-events-table-header__market-cols span:nth-child(1) {
+  color: #ffffff;
+}
+
+.sport-section-header__market-cols span:nth-child(2),
+.sport-section-header__market-cols span:nth-child(3),
+.sport-page-toolbar__market-cols span:nth-child(2),
+.sport-page-toolbar__market-cols span:nth-child(3),
+.sport-events-table-header__market-cols span:nth-child(2),
+.sport-events-table-header__market-cols span:nth-child(3) {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.sport-page-toolbar .view-by-group,
+.sport-events-table-header .view-by-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: 8px;
+  line-height: 1;
+}
+
+.sport-page-toolbar .view-by-label,
+.sport-events-table-header .view-by-label {
+  margin: 0;
+  padding: 0;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.sport-page-toolbar .sport-filter-select.sport-filter-select--view-by :deep(.v-field),
+.sport-events-table-header .sport-filter-select.sport-filter-select--view-by :deep(.v-field) {
+  min-height: 22px !important;
+  border-radius: 9999px !important;
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.95) !important;
+  box-shadow: none !important;
+}
+
+.sport-page-toolbar .sport-filter-select.sport-filter-select--view-by :deep(.v-field__input),
+.sport-page-toolbar .sport-filter-select.sport-filter-select--view-by :deep(.v-select__selection-text),
+.sport-events-table-header .sport-filter-select.sport-filter-select--view-by :deep(.v-field__input),
+.sport-events-table-header .sport-filter-select.sport-filter-select--view-by :deep(.v-select__selection-text) {
+  min-height: 22px !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+}
+
+.sport-page-toolbar .sport-filter-select.sport-filter-select--view-by :deep(.v-icon),
+.sport-events-table-header .sport-filter-select.sport-filter-select--view-by :deep(.v-icon) {
+  font-size: 10px !important;
+  color: #ffffff !important;
+}
+
+@media (min-width: 1025px) {
+  .sport-section-block .sport-section-header {
+    height: 37px;
+    min-height: 37px;
+    padding: 0 12px 0 0;
+    background: var(--color-header-bg, #360952);
+    border: none;
+    border-radius: 4px 4px 0 0;
+    box-shadow: none;
+  }
+
+  .sport-section-block .sport-section-header__left {
+    flex: 1 1 auto;
+    width: auto;
+    max-width: none;
+    padding: 0;
+    clip-path: none;
+    gap: 4px;
+  }
+
+  .sport-section-block .sport-section-header__filters,
+  .sport-page-toolbar .feed-mode-pills {
+    transform: translateX(clamp(20px, 3vw, 40px));
+  }
+
+  .sport-section-block .sport-section-header__market-cols {
+    width: 328px;
+    min-width: 328px;
+    max-width: 328px;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 2px;
+    margin-right: 8px;
+  }
+
+  .sport-section-block .sport-section-header__market-cols span:nth-child(1) {
+    grid-column: 1 / span 2;
+  }
+
+  .sport-section-block .sport-section-header__market-cols span:nth-child(2) {
+    grid-column: 3 / span 2;
+  }
+
+  .sport-section-block .sport-section-header__market-cols span:nth-child(3) {
+    grid-column: 5 / span 2;
+  }
+
+  .sport-section-block {
+    border-radius: 0;
+  }
+
+  .sport-page-exchange-card .sport-page-exchange-wrap,
+  .sport-page-events {
+    border-radius: 0 !important;
+  }
+
+  .sport-section-block :deep(.event-row-card),
+  .sport-page-exchange-card :deep(.event-row-card) {
+    border-radius: 0 !important;
+  }
+
+  .sport-page-toolbar__inner {
+    min-height: 36px;
+    padding: 4px 12px;
+  }
+
+  .sport-page-toolbar__right {
+    display: none;
+  }
+
+  .sport-page-toolbar__market-cols,
+  .sport-events-table-header__market-cols {
+    width: 328px;
+    min-width: 328px;
+    max-width: 328px;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 2px;
+  }
+
+  .sport-page-toolbar__market-cols span:nth-child(1),
+  .sport-events-table-header__market-cols span:nth-child(1) {
+    grid-column: 1 / span 2;
+  }
+
+  .sport-page-toolbar__market-cols span:nth-child(2),
+  .sport-events-table-header__market-cols span:nth-child(2) {
+    grid-column: 3 / span 2;
+  }
+
+  .sport-page-toolbar__market-cols span:nth-child(3),
+  .sport-events-table-header__market-cols span:nth-child(3) {
+    grid-column: 5 / span 2;
+  }
+
+  .sport-page-exchange-card .sport-page-events > div + div,
+  .sport-page-exchange-card :deep(.event-row-card + .event-row-card) {
+    margin-top: 0 !important;
+  }
+
+  .sport-page-exchange-card .event-row-card {
+    border-bottom: 1px solid #d1d5db;
+  }
+
+  .sport-page-events > div:last-child .event-row-card {
+    border-bottom: none;
+  }
+}
+
+.sport-page-toolbar + .sport-page-events > div:first-child .event-row-card,
+.sport-section-header + .event-row-card {
+  margin-top: 0 !important;
+}
+
+.sport-page-events > div + div,
+.sport-page-exchange-card :deep(.event-row-card + .event-row-card),
+.sport-section-block :deep(.event-row-card + .event-row-card) {
+  margin-top: 1px;
+}
+
+.sport-page-exchange-card :deep(.event-row-card),
+.sport-section-block :deep(.event-row-card) {
+  border-top: none;
+}
+
+@media (max-width: 1024px) {
+  /* Mobile: show 1/X/2 over odds columns (aligned to EventRow mobile odds width) */
+  .sport-section-header__market-cols,
+  .sport-page-toolbar__market-cols,
+  .sport-events-table-header__market-cols {
+    display: grid;
+    width: 151px;
+    min-width: 151px;
+    max-width: 151px;
+    grid-template-columns: repeat(3, 53px);
+    gap: 0.5px;
+    font-size: 10px;
+    letter-spacing: 0.02em;
+  }
+
+  .sport-section-header__market-cols span:nth-child(1),
+  .sport-section-header__market-cols span:nth-child(2),
+  .sport-section-header__market-cols span:nth-child(3),
+  .sport-page-toolbar__market-cols span:nth-child(1),
+  .sport-page-toolbar__market-cols span:nth-child(2),
+  .sport-page-toolbar__market-cols span:nth-child(3),
+  .sport-events-table-header__market-cols span:nth-child(1),
+  .sport-events-table-header__market-cols span:nth-child(2),
+  .sport-events-table-header__market-cols span:nth-child(3) {
+    grid-column: auto;
+    color: #ffffff;
+  }
+
+  .sport-section-header__meta-spacer,
+  .sport-page-toolbar__meta-spacer,
+  .sport-events-table-header__meta-spacer {
+    display: none;
+  }
+
+  .sport-section-header__filters,
+  .sport-page-toolbar .feed-mode-pills,
+  .sport-events-table-header .feed-mode-pills {
+    display: none;
+  }
+
+  .sport-section-header,
+  .sport-events-table-header,
+  .sport-events-table-header__inner {
+    height: 37px;
+    min-height: 37px;
+    padding: 0 8px 0 0;
+    border-radius: 4px 4px 0 0;
+  }
+
+  .sport-page-toolbar {
+    height: 37px;
+    min-height: 37px;
+    padding: 0;
+    border-radius: 4px 4px 0 0;
+    margin-top: 4px;
+    margin-bottom: 0 !important;
+  }
+
+  .sport-page-toolbar__inner {
+    height: 37px;
+    min-height: 37px;
+    padding: 0;
+    justify-content: flex-start;
+  }
+
+  .sport-page-toolbar__right {
+    display: none;
+  }
+
+  .sport-page-toolbar__left {
+    gap: 0;
+    padding-right: 0;
+    width: auto;
+    flex: 0 1 auto;
+  }
+
+  .sport-page-toolbar__icon-wrap {
+    margin-left: 12px;
+  }
+
+  .sport-page-toolbar__title {
+    margin-left: 4px;
+    line-height: 19.5px;
+    letter-spacing: normal;
+    text-align: center;
+  }
+
+  .sport-section-header__title,
+  .sport-page-toolbar__title,
+  .sport-events-table-header__title {
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .sport-section-header .feed-mode-pill,
+  .sport-page-toolbar .feed-mode-pill,
+  .sport-events-table-header .feed-mode-pill {
+    padding: 1px 8px;
+    min-height: 18px;
+    font-size: 12px;
+    text-transform: none;
+  }
+
+  .sport-page-events :deep(.event-row-content),
+  .sport-section-block :deep(.event-row-content) {
+    padding: 0 !important;
+  }
+}
+
+.sports-no-markets-empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  padding: 32px 16px;
+  text-align: center;
+  font-size: 1.375rem;
+  font-weight: 500;
+  line-height: 1.3;
+  color: #9ca3af;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.sports-no-markets-empty--section {
+  min-height: 120px;
+  padding: 24px 16px;
+  font-size: 1.25rem;
+}
+
+.sport-section-block--empty {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  margin-bottom: 0 !important;
+}
+
+.sport-page-exchange-card--empty {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.sport-page-exchange-card--empty .sport-page-events {
+  background: transparent !important;
+}

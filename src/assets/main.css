@@ -1,0 +1,211 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Montserrat:wght@400;600;700;800&family=Roboto+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,700&display=swap");
+@import "./typography.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Mobile tab bar (MobileBottomNav.vue); keep FloatingBonusButton BOTTOM_NAV_HEIGHT in sync */
+  --mobile-bottom-nav-height: 60px;
+  --mobile-bottom-nav-inset: calc(
+    var(--mobile-bottom-nav-height) + env(safe-area-inset-bottom, 0px)
+  );
+}
+
+html.mobile-bottom-nav-collapsed {
+  --mobile-bottom-nav-inset: env(safe-area-inset-bottom, 0px);
+}
+
+html.mobile-bottom-nav-collapsed .layout-mobile-bottom-nav-spacer {
+  /* Collapsed: only safe-area + room for the show-nav toggle */
+  height: calc(env(safe-area-inset-bottom, 0px) + 16px);
+}
+
+/* In-flow reserve for fixed MobileBottomNav — sibling of the scrollport so content never paints under the nav */
+.layout-mobile-bottom-nav-spacer {
+  flex-shrink: 0;
+  width: 100%;
+  height: var(--mobile-bottom-nav-inset);
+}
+
+/* Desktop / locked shell: app fills viewport; inner panes scroll */
+html,
+body,
+#app {
+  height: 100%;
+}
+
+html:not(:has(body.mobile-page-scroll)):not(:has(body.site-footer-page-scroll)),
+body:not(.mobile-page-scroll):not(.site-footer-page-scroll) {
+  overscroll-behavior-y: none;
+}
+
+/* Ensure every element inherits the app font — prevents browser defaults and third-party
+   component libraries (Vuetify, etc.) from resetting to their own font stacks. */
+*,
+*::before,
+*::after {
+  font-family: inherit;
+}
+
+body {
+  margin: 0;
+  overflow: hidden; /* Prevent whole-page scrolling; content areas handle their own scroll */
+  font-family: var(--font-family-primary);
+}
+
+/*
+ * Mobile app pages: document scroll on html (pull-to-refresh, natural page scroll).
+ * Replaces nested #app-main-scroll overflow on phones/tablets ≤767px.
+ */
+html:has(body.mobile-page-scroll) {
+  height: auto !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: auto;
+}
+
+body.mobile-page-scroll {
+  height: auto !important;
+  min-height: 100%;
+  max-height: none !important;
+  overflow: visible !important;
+  overscroll-behavior-y: auto;
+}
+
+body.mobile-page-scroll .v-application,
+body.mobile-page-scroll .v-application__wrap,
+body.mobile-page-scroll .app-scale-wrapper,
+body.mobile-page-scroll .app-root,
+body.mobile-page-scroll #app {
+  height: auto !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden;
+  overflow-y: visible !important;
+}
+
+body.mobile-page-scroll .sports-layout-shell,
+body.mobile-page-scroll .sports-layout-shell__content,
+body.mobile-page-scroll .guest-sports-shell,
+body.mobile-page-scroll .guest-sports-shell__content,
+body.mobile-page-scroll .layout-page-content {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box;
+}
+
+/* Legacy alias — bet pages and inline slip host still reference this class name */
+body.bet-page-scroll {
+  height: auto !important;
+  min-height: 100%;
+  max-height: none !important;
+  overflow: visible !important;
+  overscroll-behavior-y: auto;
+}
+
+body.bet-page-scroll .v-application,
+body.bet-page-scroll .v-application__wrap {
+  height: auto !important;
+  min-height: 100vh !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden;
+}
+
+body.bet-page-scroll .sports-layout-shell,
+body.bet-page-scroll .sports-layout-shell__content,
+body.bet-page-scroll .layout-page-content {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box;
+}
+
+/*
+ * Desktop home / listing pages with site footer: unlock document scroll so the full
+ * event list + right rail + footer are reachable (body is otherwise overflow:hidden).
+ *
+ * Scroll on html only. Use overflow-x: clip (not hidden) so position:sticky on the
+ * sidebar still works — overflow-x:hidden on an ancestor breaks sticky in browsers.
+ */
+html:has(body.site-footer-page-scroll) {
+  height: auto !important;
+  overflow-x: clip !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: auto;
+}
+
+body.site-footer-page-scroll {
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+body.site-footer-page-scroll .v-application,
+body.site-footer-page-scroll .v-application__wrap,
+body.site-footer-page-scroll .app-scale-wrapper,
+body.site-footer-page-scroll .app-root,
+body.site-footer-page-scroll #app {
+  height: auto !important;
+  min-height: 100% !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+.v-application {
+  height: 100%;
+  font-family: var(--font-family-primary);
+}
+
+/* Vuetify wrapper sometimes doesn't fully fill the viewport on very short/narrow devices */
+.v-application__wrap {
+  min-height: 100vh !important;
+  height: 100% !important;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Note: App scaling is now handled via transform in App.vue */
+
+/* Bottom nav is now teleported outside scaled container, so no counter-scaling needed */
+
+/* Vuetify renders .v-main__wrap as display:block by default, so tw-flex-1 on v-container has no effect
+   and overflow-y-auto never creates a scroll box. Making it a flex column with min-height:0 fixes this
+   globally — v-container then gets a bounded height and can scroll. */
+.v-main__wrap {
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 0 !important;
+}
+
+/* Guest layout: body scroll unlock on mobile */
+@media (max-width: 767px) {
+  body.mobile-page-scroll .layout-body-stack,
+  body.mobile-page-scroll .layout-content-row--mobile-bet {
+    overflow: visible !important;
+    flex: 0 0 auto !important;
+    min-height: 0;
+  }
+
+  .guest-layout-body--mobile-body {
+    overflow: visible !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .guest-layout-main--mobile-body {
+    overflow: visible !important;
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+}

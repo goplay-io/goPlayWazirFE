@@ -1,0 +1,799 @@
+/* Shared betslip form — desktop SportsBetSlip + mobile FloatingBetSlip.
+   Layout mirrors the Zuplay reference slip: tinted panel, purple odds stepper,
+   outlined white chips, outlined CANCEL BET beside a solid PLACE BET. */
+
+.slip-form-root .slip-body-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  border: 0;
+  border-radius: 6px;
+  background: #dbeafe;
+  overflow: hidden;
+  min-width: 400px;
+  box-sizing: border-box;
+}
+
+.floating-bet-slip.slip-form-root,
+.slip-form-root--mobile-inline {
+  position: relative;
+}
+
+.slip-form-root .slip-body-card--lay {
+  background: #ffe4e6;
+}
+
+/* Desktop rail — reference #betSlip panel shell */
+.slip-form-root .slip-body-card--desktop-selection {
+  padding: 0;
+  border-radius: 0 0 4px 4px;
+}
+
+.slip-form-root .slip-selection-dark {
+  background: #404040;
+  color: #ffffff;
+  margin: 1px 8px;
+  padding: 5px 12px 5px;
+  border-radius: 4px;
+}
+
+.slip-form-root .slip-selection-dark__meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.slip-form-root .slip-selection-dark__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  color: #ffffff;
+}
+
+.slip-form-root .slip-selection-dark__icon :deep(svg) {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+.slip-form-root .slip-selection-dark__meta-text {
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.slip-form-root .slip-selection-dark__event {
+  margin: 4px 0 0;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #ffffff;
+  word-break: break-word;
+}
+
+.slip-form-root .slip-selection-dark__pick {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.slip-form-root .slip-selection-dark__pick-main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.slip-form-root .slip-selection-dark__odd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  min-width: 36px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #0c0a09;
+  background: var(--color-back-bg-1, #8dd9ff);
+}
+
+.slip-form-root .slip-selection-dark__odd--lay {
+  background: var(--color-lay-bg-1, #ffafb2);
+}
+
+.slip-form-root .slip-selection-dark__runner {
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #ffffff;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.slip-form-root .slip-selection-dark__limits {
+  flex-shrink: 0;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.slip-form-root .slip-body-card__fields {
+  padding: 0 8px 8px;
+}
+
+.slip-form-root .slip-stake-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 8px;
+  padding-top: 0;
+}
+
+.slip-form-root .slip-stake-head__label {
+  font-size: 10.02px;
+  font-weight: 400;
+  line-height: 15.03px;
+  color: #000000;
+}
+
+.slip-form-root .slip-stake-head__limit {
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 13.5px;
+  color: #000000;
+  text-align: right;
+}
+
+/* --------------------------------------------------- odds stepper + stake */
+
+.slip-form-root .slip-odds-stake-row {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 4px;
+  margin-top: 4px;
+  padding-top: 0;
+}
+
+.slip-form-root .slip-odds-step {
+  grid-column: span 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 28px;
+  min-height: 28px;
+  padding: 0;
+  border: 1px solid #ca86f3;
+  border-radius: 5px;
+  background: #ca86f3;
+  color: #000000;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  box-sizing: border-box;
+}
+
+.slip-form-root .slip-odds-step:not(:disabled):hover {
+  background: #bb6cef;
+}
+
+.slip-form-root .slip-odds-step:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.slip-form-root .slip-odds-input {
+  grid-column: span 3;
+  width: 100%;
+  height: 26px;
+  min-height: 26px;
+  padding: 4px;
+  margin: 0 4px;
+  border: 0;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #000000;
+  font-size: 10px !important;
+  font-weight: 400;
+  text-align: center;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+.slip-form-root .slip-stake-input {
+  grid-column: span 7;
+  width: 100%;
+  height: 27px;
+  min-height: 27px;
+  padding: 0 8px;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  background: #ffffff;
+  color: #000000;
+  font-size: 10px !important;
+  font-weight: 500;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.slip-form-root .slip-body-card--lay .slip-stake-input {
+  border-color: #be185d;
+}
+
+.slip-form-root .slip-stake-input::placeholder {
+  color: #94a3b8;
+  opacity: 1;
+}
+
+/* Spinners would push the centred value off-axis in a 7-column cell. */
+.slip-form-root .slip-stake-input {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.slip-form-root .slip-stake-input::-webkit-outer-spin-button,
+.slip-form-root .slip-stake-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.slip-form-root .slip-stake-input:focus {
+  outline: none;
+  border-width: 2px;
+}
+
+.slip-form-root .slip-stake-input:disabled {
+  opacity: 0.55;
+}
+
+/* ------------------------------------------------------- preset stake grid */
+
+.slip-form-root .slip-quick-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.slip-form-root .slip-quick-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  height: 34px;
+  padding: 5px 4px;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  background: #ffffff;
+  color: #0c0a09;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  box-sizing: border-box;
+}
+
+.slip-form-root .slip-body-card--lay .slip-quick-cell {
+  border-color: #be185d;
+}
+
+.slip-form-root .slip-quick-cell:hover:not(:disabled) {
+  background: #f4ecfd;
+}
+
+.slip-form-root .slip-quick-cell--active {
+  background: #ca86f3;
+  border-color: #ca86f3;
+  color: #ffffff;
+}
+
+.slip-form-root .slip-quick-cell:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ------------------------------------------- min / max / edit / clear row */
+
+.slip-form-root .slip-util-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px;
+  margin-top: 4px;
+  padding-top: 0;
+}
+
+.slip-form-root .slip-util.v-btn {
+  box-shadow: none !important;
+  min-width: 0 !important;
+  min-height: 27px !important;
+  height: 27px !important;
+  padding: 0 4px !important;
+  border: 1px solid #000000 !important;
+  border-radius: 5px !important;
+  background: #ffffff !important;
+  color: #111827 !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+.slip-form-root .slip-util.v-btn .v-btn__content {
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  line-height: 1.5 !important;
+}
+
+.slip-form-root .slip-body-card--lay .slip-util.v-btn {
+  border-color: #be185d !important;
+}
+
+.slip-form-root .slip-util.v-btn.v-btn--disabled,
+.slip-form-root .slip-util.v-btn[disabled] {
+  opacity: 0.45 !important;
+}
+
+/* ----------------------------------------------- inline success/error banner */
+
+.slip-form-root .slip-feedback-banner-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 6px 0 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.slip-form-root .slip-feedback-banner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: fit-content;
+  max-width: calc(100% - 16px);
+  min-height: 26px;
+  margin: 0 auto;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  box-sizing: border-box;
+}
+
+.slip-form-root .slip-feedback-banner--error {
+  background: #e53935;
+  color: #ffffff;
+}
+
+.slip-form-root .slip-feedback-banner--success {
+  background: #16a34a;
+  color: #ffffff;
+}
+
+.slip-form-root .slip-feedback-banner__icon {
+  flex-shrink: 0;
+  color: #ffffff !important;
+}
+
+.slip-form-root .slip-feedback-banner__text {
+  min-width: 0;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.slip-feedback-fade-enter-active,
+.slip-feedback-fade-leave-active {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.slip-feedback-fade-enter-from,
+.slip-feedback-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+
+/* --------------------------------------------------- cancel bet / place bet */
+
+.slip-form-root .slip-action-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+  padding-top: 0;
+}
+
+.slip-form-root .slip-action-row .slip-reset-btn,
+.slip-form-root .slip-action-row .slip-place-btn {
+  flex: 1 1 0;
+}
+
+.slip-form-root .slip-reset-btn.v-btn,
+.slip-form-root .slip-place-btn.v-btn {
+  box-shadow: none !important;
+  min-width: 0 !important;
+  min-height: 32px !important;
+  height: 32px !important;
+  padding: 0 12px !important;
+  border-radius: 3px !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.025em !important;
+  text-transform: uppercase !important;
+}
+
+.slip-form-root .slip-reset-btn.v-btn {
+  background: transparent !important;
+  color: #111827 !important;
+  border: 1px solid #111827 !important;
+}
+
+.slip-form-root .slip-body-card--lay .slip-reset-btn.v-btn {
+  color: #be185d !important;
+  border-color: #be185d !important;
+}
+
+.slip-form-root .slip-reset-btn.v-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.55) !important;
+}
+
+.slip-form-root .slip-place-btn.v-btn {
+  background: var(--color-header-bg, #360952) !important;
+  color: #ffffff !important;
+  border: 0 !important;
+}
+
+/* Vuetify lays the content out as an inline-grid; stack the two lines instead. */
+.slip-form-root .slip-place-btn.v-btn .v-btn__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  line-height: 1.25;
+  white-space: normal;
+}
+
+.slip-form-root .slip-place-btn__label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+}
+
+.slip-form-root .slip-place-btn__profit {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: none;
+}
+
+.slip-form-root .slip-place-btn.v-btn--disabled,
+.slip-form-root .slip-place-btn.v-btn[disabled] {
+  background: var(--color-header-bg, #360952) !important;
+  color: #ffffff !important;
+  opacity: 0.5 !important;
+}
+
+/* ---------------------------------------------------------------- mobile */
+
+@media (max-width: 768px) {
+  .slip-form-root .slip-body-card:not(.slip-body-card--desktop-selection):not(.slip-body-card--mobile) {
+    padding: 10px;
+  }
+
+  .slip-form-root .slip-body-card--desktop-selection {
+    border-radius: 4px;
+  }
+
+  .floating-bet-slip.slip-form-root,
+  .inline-bet-slip-embed.slip-form-root,
+  .slip-form-root--mobile-inline {
+    padding: 0;
+  }
+
+  .floating-bet-slip.slip-form-root .slip-body-card--desktop-selection,
+  .inline-bet-slip-embed.slip-form-root .slip-body-card--desktop-selection {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    border-radius: 4px;
+  }
+}
+
+/* Mobile inline slip — reference zuplay.com lg:hidden betslip */
+.slip-form-root--mobile-inline,
+.inline-bet-slip-embed.slip-form-root--mobile-inline {
+  background: #ffffff;
+  box-sizing: border-box;
+  padding-top: 8px;
+}
+
+.inline-bet-slip-host {
+  background: #ffffff;
+}
+
+.slip-form-root--mobile-inline .slip-mobile-header {
+  display: flex;
+  align-items: center;
+  height: 32px;
+  margin: 0 0 4px;
+  padding: 0 8px;
+  background: #262626;
+  color: #ffffff;
+  box-sizing: border-box;
+}
+
+.slip-form-root--mobile-inline .slip-mobile-header__runner {
+  font-size: 13.02px;
+  font-weight: 600;
+  line-height: 19.53px;
+  color: #ffffff;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.slip-form-root--mobile-inline .slip-mobile-header__limits {
+  margin-left: auto;
+  margin-right: 12px;
+  font-size: 8px;
+  font-weight: 600;
+  line-height: 12px;
+  color: #ffffff;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.slip-form-root--mobile-inline .slip-body-card--mobile {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  padding: 8px 0;
+  border: 0;
+  border-radius: 0;
+  box-sizing: border-box;
+}
+
+.slip-form-root--mobile-inline .slip-body-card--mobile.slip-body-card--back {
+  background: #bae6fd;
+}
+
+.slip-form-root--mobile-inline .slip-body-card--mobile.slip-body-card--lay {
+  background: #fecdd3;
+}
+
+.slip-form-root--mobile-inline .slip-body-card__fields {
+  padding: 0;
+}
+
+.slip-form-root--mobile-inline .slip-odds-stake-row--mobile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 8px;
+  padding: 0;
+  grid-template-columns: none;
+}
+
+.slip-form-root--mobile-inline .slip-odds-stepper {
+  display: inline-flex;
+  align-items: center;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.slip-form-root--mobile-inline .slip-odds-stepper .slip-odds-step {
+  flex-shrink: 0;
+  width: 32px;
+  height: 35px;
+  min-height: 35px;
+  border-color: #ca86f3;
+  font-size: 16px;
+}
+
+.slip-form-root--mobile-inline .slip-odds-stepper .slip-odds-step--plus {
+  width: 40px;
+}
+
+.slip-form-root--mobile-inline .slip-odds-stepper .slip-odds-input {
+  flex: 1 1 auto;
+  grid-column: auto;
+  width: auto;
+  min-width: 0;
+  height: 36px;
+  min-height: 36px;
+  margin: 0 4px;
+  border: 0;
+  border-radius: 8px;
+  font-size: 14px !important;
+  font-weight: 700;
+}
+
+.slip-form-root--mobile-inline .slip-odds-stake-row--mobile .slip-stake-input {
+  flex: 1 1 0;
+  grid-column: auto;
+  width: 100%;
+  height: 36px;
+  min-height: 36px;
+  border: 1px solid #475569;
+  border-radius: 5px;
+  font-size: 14px !important;
+  font-weight: 700;
+}
+
+.slip-form-root--mobile-inline .slip-body-card--lay .slip-stake-input {
+  border-color: #475569;
+}
+
+.slip-form-root--mobile-inline .slip-quick-grid {
+  gap: 4px;
+  margin: 4px 8px 0;
+}
+
+.slip-form-root--mobile-inline .slip-quick-cell {
+  min-height: 32px;
+  height: 32px;
+  padding: 0 4px;
+  border: 1px solid #475569;
+  border-radius: 5px;
+  background: #e5e7eb;
+  color: #0c0a09;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 22.5px;
+}
+
+.slip-form-root--mobile-inline .slip-body-card--lay .slip-quick-cell {
+  border-color: #475569;
+}
+
+.slip-form-root--mobile-inline .slip-quick-cell--active {
+  background: #ca86f3;
+  border-color: #ca86f3;
+  color: #000000;
+}
+
+.slip-form-root--mobile-inline .slip-util-row--mobile {
+  display: flex;
+  gap: 8px;
+  margin: 4px 8px 0;
+  grid-template-columns: none;
+}
+
+.slip-form-root--mobile-inline .slip-util-row--mobile .slip-util.v-btn {
+  flex: 1 1 0;
+  min-height: 27px !important;
+  height: 27px !important;
+  padding: 0 14px !important;
+  border: 1px solid #475569 !important;
+  border-radius: 5px !important;
+  background: #ffffff !important;
+  color: #0c0a09 !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+}
+
+.slip-form-root--mobile-inline .slip-util-row--mobile .slip-util.v-btn .v-btn__content {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+}
+
+.slip-form-root--mobile-inline .slip-feedback-banner-wrap,
+.sports-bet-slip-stack .slip-feedback-banner-wrap,
+.inline-bet-slip-embed .slip-feedback-banner-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 6px 0 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.slip-form-root--mobile-inline .slip-feedback-banner,
+.sports-bet-slip-stack .slip-feedback-banner,
+.inline-bet-slip-embed .slip-feedback-banner {
+  max-width: calc(100% - 16px);
+  min-height: 28px;
+  margin: 0 auto;
+  padding: 5px 12px;
+}
+
+.slip-form-root--mobile-inline .slip-feedback-banner__text {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.slip-form-root--mobile-inline .slip-action-row--mobile {
+  gap: 8px;
+  margin: 4px 4px 8px;
+  padding-top: 4px;
+}
+
+.slip-form-root--mobile-inline .slip-action-row--mobile .slip-reset-btn.v-btn,
+.slip-form-root--mobile-inline .slip-action-row--mobile .slip-place-btn.v-btn {
+  min-height: 40px !important;
+  height: 40px !important;
+  border-radius: 3.12px !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+  text-transform: uppercase !important;
+}
+
+.slip-form-root--mobile-inline .slip-action-row--mobile .slip-reset-btn.v-btn {
+  background: transparent !important;
+  color: #000000 !important;
+  border: 1px solid #475569 !important;
+}
+
+.slip-form-root--mobile-inline .slip-action-row--mobile .slip-place-btn.v-btn {
+  background: var(--color-header-bg, #360952) !important;
+  color: #ffffff !important;
+  border: 0 !important;
+}
+
+.slip-form-root--mobile-inline .slip-action-row--mobile .slip-place-btn.v-btn .v-btn__content {
+  flex-direction: row;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+}
+
+/* --------------------------------------------------------- host variants */
+
+.floating-bet-slip.slip-form-root {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 0.5rem;
+}
+
+.inline-bet-slip-embed.slip-form-root:not(.slip-form-root--mobile-inline) {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+  max-height: none;
+  overflow-y: visible;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.inline-bet-slip-embed.slip-form-root--mobile-inline {
+  border: 0;
+  box-shadow: none;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  max-height: none;
+  overflow-y: visible;
+  width: 100%;
+  max-width: 100%;
+}

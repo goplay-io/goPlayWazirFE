@@ -1,0 +1,275 @@
+/* Mobile header toolbar — fairplaypro.com logo pattern: a.logo > img.img-fluid + tagline */
+@media (max-width: 767.98px) {
+  /*
+   * WebView / iOS: reserve status-bar inset on the fixed app bar so toolbar content
+   * does not sit under the system status bar. Content below uses --app-header-inset
+   * (safe-area + toolbar) — header must grow by the same safe-area amount or a gap appears.
+   */
+  .header-bar.v-app-bar,
+  .guest-app-bar.v-app-bar {
+    padding-top: env(safe-area-inset-top, 0px);
+    height: auto !important;
+    max-height: none !important;
+  }
+
+  .header-bar .v-toolbar__content,
+  .guest-app-bar .v-toolbar__content {
+    height: auto !important;
+    min-height: 39px;
+    align-items: stretch;
+  }
+
+  .header-toolbar-row {
+    padding: 12px 8px;
+    min-height: 65.5px !important;
+    height: 65.5px !important;
+    box-sizing: border-box;
+    align-items: center !important;
+    border-bottom: 1px solid #ffffff;
+  }
+
+  .guest-toolbar-row {
+    padding: 12px 8px;
+    min-height: 57px !important;
+    height: 57px !important;
+    box-sizing: border-box;
+    align-items: center !important;
+    border-bottom: 1px solid #ffffff;
+  }
+
+  .header-toolbar-left,
+  .guest-toolbar-left {
+    flex-shrink: 0;
+    min-width: 0;
+  }
+
+  .header-logo-area {
+    margin-left: 0 !important;
+    flex-shrink: 0;
+    min-width: 0;
+  }
+
+  /* Logo: reference mobile h-5 (~20px tall) */
+  .logo.header-brand-link {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    width: max-content;
+    height: auto;
+    overflow: visible;
+    text-decoration: none;
+    align-self: center;
+  }
+
+  .header-brand-img.img-fluid {
+    display: block;
+    height: 22px;
+    width: auto;
+    max-width: 130px;
+    object-fit: contain;
+    object-position: left center;
+  }
+
+  .header-mobile-menu-btn,
+  .guest-mobile-menu-btn {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px !important;
+    height: 28px !important;
+    margin-top: 4px;
+    margin-left: 0 !important;
+    margin-right: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: #ffffff;
+  }
+
+  .header-mobile-menu-btn__icon,
+  .guest-mobile-menu-btn__icon {
+    display: block;
+    width: auto;
+    height: 15px;
+    max-width: 21px;
+    object-fit: contain;
+  }
+
+  .header-mobile-menu-btn .v-icon,
+  .guest-mobile-menu-btn .v-icon {
+    color: #ffffff !important;
+    font-size: 22px !important;
+  }
+
+  .header-toolbar-right,
+  .guest-toolbar-right {
+    gap: 4px !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    flex-shrink: 0;
+    align-items: center !important;
+  }
+
+  .guest-auth-pair {
+    gap: 4px !important;
+    margin: -2px;
+    flex-shrink: 0;
+  }
+
+  /* Reference loginSmall: 76×25, 10.02px/700, radius 3.12px */
+  .header-guest-signup-btn,
+  .header-guest-login-btn,
+  .signup-btn,
+  .login-btn {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 76px;
+    height: 25px;
+    min-width: 76px;
+    min-height: 25px;
+    padding: 0 !important;
+    box-sizing: border-box;
+    border-radius: 3.12px !important;
+    font-size: 10.02px !important;
+    font-weight: 700 !important;
+    letter-spacing: normal !important;
+    line-height: 1.5 !important;
+    text-transform: uppercase;
+    white-space: nowrap;
+    flex-shrink: 0;
+    text-decoration: none;
+    box-shadow: none !important;
+  }
+
+  .header-guest-signup-btn,
+  .signup-btn {
+    color: #ffffff !important;
+    border: none !important;
+    background: linear-gradient(to left top, #40135c, #a31bf5, #ca86f3) !important;
+  }
+
+  .header-guest-login-btn,
+  .login-btn {
+    color: #ffffff !important;
+    border: 1px solid #ffffff !important;
+    background: transparent !important;
+  }
+
+  .signup-text,
+  .login-text {
+    font-size: inherit;
+    font-weight: 700;
+    letter-spacing: normal;
+    line-height: inherit;
+    text-transform: uppercase;
+  }
+
+  .header-mobile-icon-btn {
+    flex-shrink: 0;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 26px !important;
+    height: 26px !important;
+    min-width: 26px !important;
+    min-height: 26px !important;
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 50% !important;
+    background: var(--theme-orange) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28);
+    color: #ffffff;
+  }
+
+  .header-mobile-icon-btn .v-icon {
+    color: #ffffff !important;
+    font-size: 15px !important;
+  }
+
+  /* Mobile search — fairplay ref: bolder stroke, icon ~55% of circle, even outer inset */
+  .search-icon-btn.header-announce-search,
+  .search-icon-btn.header-search-btn.header-mobile-icon-btn {
+    flex-shrink: 0;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 26px !important;
+    height: 26px !important;
+    min-width: 26px !important;
+    min-height: 26px !important;
+    padding: 5px !important;
+    border: none !important;
+    border-radius: 50% !important;
+    background: var(--theme-orange) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28);
+    color: #ffffff;
+    box-sizing: border-box;
+  }
+
+  .search-icon-btn.header-announce-search .search-magnify-icon,
+  .search-icon-btn.header-search-btn.header-mobile-icon-btn .search-magnify-icon {
+    display: block;
+    width: 16px;
+    height: 16px;
+    color: #ffffff;
+  }
+
+  /* Logged-in mobile: Deposit / Withdraw + BAL / EXP (reference #navbar row) */
+  .header-wallet-cluster {
+    gap: 8px !important;
+    align-items: flex-start !important;
+    padding: 0 8px !important;
+  }
+
+  .header-action-col {
+    gap: 0 !important;
+  }
+
+  .header-action-btn {
+    width: 80px !important;
+    height: 24px !important;
+    min-width: 80px !important;
+    min-height: 24px !important;
+    font-size: 10.02px !important;
+    font-weight: 700 !important;
+    letter-spacing: normal !important;
+    line-height: 15.03px !important;
+    border-radius: 3.12px !important;
+  }
+
+  .header-bal-exp__row {
+    font-size: 11px !important;
+    font-weight: 400 !important;
+    line-height: 16.5px !important;
+    text-transform: none !important;
+  }
+
+  .header-bal-exp__row .tw-font-semibold {
+    font-weight: 600 !important;
+    color: rgb(202, 134, 243) !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .logo.header-brand-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .header-brand-img.img-fluid {
+    display: block;
+    height: 30px;
+    width: auto;
+    max-width: none;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+  }
+
+  .logo.header-brand-link:hover .header-brand-img {
+    transform: scale(1.05);
+  }
+}

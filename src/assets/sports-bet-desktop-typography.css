@@ -1,0 +1,1081 @@
+/**
+
+ * Desktop typography — Match Odds + Bookmaker + Other Markets (768px+).
+
+ * Header labels (titles, MIN/MAX, runner names) match BACK/LAY column size (11px).
+
+ */
+
+/* Odds button typography — market pages: price 15px/700, size 9px/700 (matches mobile) */
+.match-odds-root .match-odds-price-cell .mo-price,
+.other-markets-root .match-odds-price-cell .mo-price,
+.bookmaker-bl-root .match-odds-price-cell .mo-price,
+.bookmaker-bo-root .match-odds-price-cell .mo-price,
+.line-markets-root .match-odds-price-cell .mo-price,
+.bookmaker-ginnie-root .ginnie-odds-box .mo-price,
+.who-win-root .match-odds-price-cell .mo-price,
+.fancy-markets-root .fancy-odds-price,
+.fancy-markets-root .mo-price,
+.fancy-markets-root .khadda-odds-line--price,
+.fancy-markets-root .fancy-row-cols .mo-price,
+.fancy-markets-root .fancy-row-cols .fancy-odds-price {
+  font-size: var(--sports-bet-mobile-market-odds-price-size) !important;
+  font-weight: 700 !important;
+  line-height: var(--sports-bet-mobile-odds-price-line-height) !important;
+  color: #000 !important;
+}
+
+.match-odds-root .match-odds-price-cell .mo-size,
+.other-markets-root .match-odds-price-cell .mo-size,
+.bookmaker-bl-root .match-odds-price-cell .mo-size,
+.bookmaker-bo-root .match-odds-price-cell .mo-size,
+.line-markets-root .match-odds-price-cell .mo-size,
+.bookmaker-ginnie-root .ginnie-odds-box .mo-size,
+.who-win-root .match-odds-price-cell .mo-size,
+.fancy-markets-root .fancy-odds-size,
+.fancy-markets-root .mo-size,
+.fancy-markets-root .khadda-odds-line--size,
+.fancy-markets-root .fancy-row-cols .mo-size,
+.fancy-markets-root .fancy-row-cols .fancy-odds-size {
+  font-size: var(--sports-bet-mobile-odds-size-size) !important;
+  font-weight: var(--sports-bet-mobile-market-odds-size-weight) !important;
+  line-height: var(--sports-bet-mobile-odds-size-line-height) !important;
+  color: #000 !important;
+  opacity: 1 !important;
+}
+
+/* Keep empty/disabled odds text fully black (0 / 0.0), not dimmed */
+.match-odds-root .match-odds-price-cell.v-btn--disabled,
+.match-odds-root .match-odds-price-cell.v-btn[disabled],
+.other-markets-root .match-odds-price-cell.v-btn--disabled,
+.other-markets-root .match-odds-price-cell.v-btn[disabled],
+.bookmaker-bl-root .match-odds-price-cell.v-btn--disabled,
+.bookmaker-bl-root .match-odds-price-cell.v-btn[disabled],
+.bookmaker-bo-root .match-odds-price-cell.v-btn--disabled,
+.bookmaker-bo-root .match-odds-price-cell.v-btn[disabled],
+.line-markets-root .match-odds-price-cell.v-btn--disabled,
+.line-markets-root .match-odds-price-cell.v-btn[disabled],
+.bookmaker-ginnie-root .ginnie-odds-box.v-btn--disabled,
+.bookmaker-ginnie-root .ginnie-odds-box.v-btn[disabled],
+.who-win-root .match-odds-price-cell.v-btn--disabled,
+.who-win-root .match-odds-price-cell.v-btn[disabled],
+.fancy-markets-root .fancy-odds-btn.v-btn--disabled,
+.fancy-markets-root .fancy-odds-btn.v-btn[disabled],
+.fancy-markets-root .odd-even-box.v-btn--disabled,
+.fancy-markets-root .odd-even-box.v-btn[disabled],
+.fancy-markets-root .khadda-odds-vbtn.v-btn--disabled,
+.fancy-markets-root .khadda-odds-vbtn.v-btn[disabled] {
+  opacity: 1 !important;
+  color: #000 !important;
+  --v-disabled-opacity: 1;
+}
+
+.match-odds-root .match-odds-price-cell.v-btn--disabled .mo-price,
+.match-odds-root .match-odds-price-cell.v-btn--disabled .mo-size,
+.match-odds-root .match-odds-price-cell.v-btn[disabled] .mo-price,
+.match-odds-root .match-odds-price-cell.v-btn[disabled] .mo-size,
+.match-odds-root .match-odds-price-cell.v-btn--disabled .v-btn__content,
+.match-odds-root .match-odds-price-cell.v-btn--disabled .v-btn__content *,
+.match-odds-root .match-odds-price-cell.v-btn[disabled] .v-btn__content,
+.match-odds-root .match-odds-price-cell.v-btn[disabled] .v-btn__content *,
+.other-markets-root .match-odds-price-cell.v-btn--disabled .mo-price,
+.other-markets-root .match-odds-price-cell.v-btn--disabled .mo-size,
+.other-markets-root .match-odds-price-cell.v-btn[disabled] .mo-price,
+.other-markets-root .match-odds-price-cell.v-btn[disabled] .mo-size,
+.other-markets-root .match-odds-price-cell.v-btn--disabled .v-btn__content,
+.other-markets-root .match-odds-price-cell.v-btn--disabled .v-btn__content *,
+.other-markets-root .match-odds-price-cell.v-btn[disabled] .v-btn__content,
+.other-markets-root .match-odds-price-cell.v-btn[disabled] .v-btn__content *,
+.bookmaker-bl-root .match-odds-price-cell.v-btn--disabled .mo-price,
+.bookmaker-bl-root .match-odds-price-cell.v-btn--disabled .mo-size,
+.bookmaker-bl-root .match-odds-price-cell.v-btn[disabled] .mo-price,
+.bookmaker-bl-root .match-odds-price-cell.v-btn[disabled] .mo-size,
+.bookmaker-bl-root .match-odds-price-cell.v-btn--disabled .v-btn__content,
+.bookmaker-bl-root .match-odds-price-cell.v-btn--disabled .v-btn__content *,
+.bookmaker-bl-root .match-odds-price-cell.v-btn[disabled] .v-btn__content,
+.bookmaker-bl-root .match-odds-price-cell.v-btn[disabled] .v-btn__content *,
+.bookmaker-bo-root .match-odds-price-cell.v-btn--disabled .mo-price,
+.bookmaker-bo-root .match-odds-price-cell.v-btn--disabled .mo-size,
+.bookmaker-bo-root .match-odds-price-cell.v-btn[disabled] .mo-price,
+.bookmaker-bo-root .match-odds-price-cell.v-btn[disabled] .mo-size,
+.bookmaker-bo-root .match-odds-price-cell.v-btn--disabled .v-btn__content,
+.bookmaker-bo-root .match-odds-price-cell.v-btn--disabled .v-btn__content *,
+.bookmaker-bo-root .match-odds-price-cell.v-btn[disabled] .v-btn__content,
+.bookmaker-bo-root .match-odds-price-cell.v-btn[disabled] .v-btn__content *,
+.line-markets-root .match-odds-price-cell.v-btn--disabled .mo-price,
+.line-markets-root .match-odds-price-cell.v-btn--disabled .mo-size,
+.line-markets-root .match-odds-price-cell.v-btn[disabled] .mo-price,
+.line-markets-root .match-odds-price-cell.v-btn[disabled] .mo-size,
+.line-markets-root .match-odds-price-cell.v-btn--disabled .v-btn__content,
+.line-markets-root .match-odds-price-cell.v-btn--disabled .v-btn__content *,
+.line-markets-root .match-odds-price-cell.v-btn[disabled] .v-btn__content,
+.line-markets-root .match-odds-price-cell.v-btn[disabled] .v-btn__content *,
+.bookmaker-ginnie-root .ginnie-odds-box.v-btn--disabled .mo-price,
+.bookmaker-ginnie-root .ginnie-odds-box.v-btn--disabled .mo-size,
+.bookmaker-ginnie-root .ginnie-odds-box.v-btn[disabled] .mo-price,
+.bookmaker-ginnie-root .ginnie-odds-box.v-btn[disabled] .mo-size,
+.bookmaker-ginnie-root .ginnie-odds-box.v-btn--disabled .v-btn__content,
+.bookmaker-ginnie-root .ginnie-odds-box.v-btn--disabled .v-btn__content *,
+.bookmaker-ginnie-root .ginnie-odds-box.v-btn[disabled] .v-btn__content,
+.bookmaker-ginnie-root .ginnie-odds-box.v-btn[disabled] .v-btn__content *,
+.who-win-root .match-odds-price-cell.v-btn--disabled .v-btn__content,
+.who-win-root .match-odds-price-cell.v-btn--disabled .v-btn__content *,
+.who-win-root .match-odds-price-cell.v-btn[disabled] .v-btn__content,
+.who-win-root .match-odds-price-cell.v-btn[disabled] .v-btn__content *,
+.fancy-markets-root .fancy-odds-btn.v-btn--disabled .mo-price,
+.fancy-markets-root .fancy-odds-btn.v-btn--disabled .mo-size,
+.fancy-markets-root .fancy-odds-btn.v-btn--disabled .fancy-odds-price,
+.fancy-markets-root .fancy-odds-btn.v-btn--disabled .fancy-odds-size,
+.fancy-markets-root .fancy-odds-btn.v-btn[disabled] .mo-price,
+.fancy-markets-root .fancy-odds-btn.v-btn[disabled] .mo-size,
+.fancy-markets-root .fancy-odds-btn.v-btn[disabled] .fancy-odds-price,
+.fancy-markets-root .fancy-odds-btn.v-btn[disabled] .fancy-odds-size,
+.fancy-markets-root .fancy-odds-btn.v-btn--disabled .v-btn__content,
+.fancy-markets-root .fancy-odds-btn.v-btn--disabled .v-btn__content *,
+.fancy-markets-root .fancy-odds-btn.v-btn[disabled] .v-btn__content,
+.fancy-markets-root .fancy-odds-btn.v-btn[disabled] .v-btn__content *,
+.fancy-markets-root .odd-even-box.v-btn--disabled .v-btn__content,
+.fancy-markets-root .odd-even-box.v-btn--disabled .v-btn__content *,
+.fancy-markets-root .odd-even-box.v-btn[disabled] .v-btn__content,
+.fancy-markets-root .odd-even-box.v-btn[disabled] .v-btn__content *,
+.fancy-markets-root .khadda-odds-vbtn.v-btn--disabled .v-btn__content,
+.fancy-markets-root .khadda-odds-vbtn.v-btn--disabled .v-btn__content *,
+.fancy-markets-root .khadda-odds-vbtn.v-btn[disabled] .v-btn__content,
+.fancy-markets-root .khadda-odds-vbtn.v-btn[disabled] .v-btn__content * {
+  color: #000 !important;
+  opacity: 1 !important;
+}
+
+/* Runner exposure — reference: 13px bold green-700 / red-500, >> separator 12px semibold black */
+.runner-payouts {
+  display: inline-block;
+  margin-left: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #000;
+}
+
+.runner-payouts__value {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 19.5px;
+}
+
+.runner-payouts__value--positive {
+  color: rgb(21, 128, 61);
+}
+
+.runner-payouts__value--negative {
+  color: rgb(239, 68, 68);
+}
+
+.runner-payouts__sep {
+  margin: 0 0.2em;
+}
+
+.runner-payouts--ginnie {
+  margin-left: 24px;
+}
+
+/* Min / Max — 12px / 500 all markets, all breakpoints */
+.sports-bet-header-limits,
+.sports-bet-header-limits span,
+.sports-bet-header-limits .match-odds-header-limit-text,
+.match-odds-header-limit-text,
+.fancy-market-limits,
+.fancy-market-limit-line,
+.market-minmax-col-row,
+.market-minmax-col-row > div {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+}
+
+/* Sub-row BACK/LAY — mobile only; desktop uses main header columns */
+@media (min-width: 768px) {
+  .odds-header-groups-mobile,
+  .other-market-header-groups-mobile,
+  .bookmaker-backonly-header-back {
+    display: none !important;
+  }
+}
+
+.match-odds-root,
+.line-markets-root,
+.bookmaker-bl-root,
+.bookmaker-bo-root,
+.bookmaker-ginnie-root,
+.who-win-root,
+.other-markets-root,
+.fancy-market-block {
+  border-radius: 0 !important;
+  overflow: hidden;
+}
+
+.match-odds-root,
+.line-markets-root {
+  background-color: #000;
+}
+
+.match-odds-orange-header,
+.bookmaker-bl-orange-header,
+.bookmaker-bo-orange-header,
+.ginnie-orange-header,
+.who-win-orange-header,
+.other-markets-orange-header,
+.fancy-sessions-orange-header,
+.fancy-oe-orange-header,
+.fancy-khadda-header-orange {
+  border-top-left-radius: 1rem;
+}
+
+/* Straight orange headers — no diagonal cut facet */
+.match-odds-orange-header,
+.bookmaker-bl-orange-header,
+.bookmaker-bo-orange-header,
+.ginnie-orange-header,
+.who-win-orange-header,
+.line-markets-orange-header,
+.other-markets-orange-header,
+.fancy-sessions-orange-header,
+.fancy-oe-orange-header,
+.fancy-khadda-header-orange {
+  clip-path: none !important;
+  padding-right: 10px !important;
+  background: var(--theme-orange) !important;
+  background-image: none !important;
+  min-width: 0 !important;
+  box-sizing: border-box;
+  overflow: visible;
+  height: auto;
+  min-height: 34px;
+  align-items: center;
+}
+
+/* Market section titles — wrap when longer than orange strip width */
+:is(
+  .match-odds-orange-header,
+  .bookmaker-bl-orange-header,
+  .bookmaker-bo-orange-header,
+  .ginnie-orange-header,
+  .who-win-orange-header,
+  .line-markets-orange-header,
+  .other-markets-orange-header,
+  .fancy-sessions-orange-header,
+  .fancy-oe-orange-header,
+  .fancy-khadda-header-orange
+) :is(
+  .match-odds-section-title,
+  .bookmaker-bl-section-title,
+  .bookmaker-bo-section-title,
+  .bookmaker-ginnie-section-title,
+  .who-win-section-title,
+  .line-markets-section-title,
+  .other-markets-section-title,
+  .fancy-section-title
+) {
+  white-space: normal !important;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  text-overflow: unset !important;
+  overflow: visible !important;
+  flex-shrink: 1 !important;
+  min-width: 0;
+}
+
+.bookmaker-bl-orange-header__labels,
+.bookmaker-bo-orange-header__labels {
+  flex-wrap: wrap !important;
+}
+
+@media (min-width: 768px) {
+  .match-odds-orange-header,
+  .bookmaker-bl-orange-header,
+  .bookmaker-bo-orange-header,
+  .ginnie-orange-header,
+  .who-win-orange-header,
+  .line-markets-orange-header,
+  .other-markets-orange-header,
+  .fancy-sessions-orange-header,
+  .fancy-oe-orange-header,
+  .fancy-khadda-header-orange {
+    flex: 0 0 var(--sports-bet-orange-header-width-desktop) !important;
+    width: var(--sports-bet-orange-header-width-desktop) !important;
+    max-width: var(--sports-bet-orange-header-width-desktop) !important;
+  }
+}
+
+/* Header row — single continuous gradient across MIN/MAX + BACK/LAY (all markets) */
+.match-odds-root .match-odds-header-bar,
+.match-odds-root .mo-bl-header-bar,
+.line-markets-root .match-odds-header-bar,
+.line-markets-root .mo-bl-header-bar,
+.other-markets-root .other-markets-header-bar,
+.other-markets-root .mo-bl-header-bar,
+.bookmaker-bl-root .bookmaker-bl-header-bar,
+.bookmaker-bl-root .bookmaker-header-bar,
+.bookmaker-bo-root .bookmaker-bo-header-bar,
+.who-win-root .who-win-header-bar,
+.bookmaker-ginnie-root > div:has(.ginnie-orange-header),
+.fancy-khadda-header-bar,
+.fancy-market-block > div:has(.fancy-sessions-orange-header),
+.fancy-market-block > div:has(.fancy-oe-orange-header),
+.fancy-market-block > div:has(.fancy-khadda-header-orange),
+.match-odds-header-bar,
+.mo-bl-header-bar,
+.bookmaker-bl-header-bar,
+.bookmaker-bo-header-bar,
+.bookmaker-header-bar,
+.other-markets-header-bar,
+.who-win-header-bar {
+  background: var(--exchMarketHeaderBgGradient) !important;
+}
+
+.match-odds-header-grey,
+.bookmaker-bl-header-grey,
+.bookmaker-bo-header-grey,
+.ginnie-header-grey,
+.who-win-header-grey,
+.other-markets-header-grey,
+.fancy-khadda-header-grey,
+.line-markets-header-grey,
+.fancy-sessions-orange-header + div,
+.fancy-oe-orange-header + div,
+.match-odds-root .match-odds-header-grey,
+.bookmaker-bl-root .bookmaker-bl-header-grey,
+.bookmaker-bo-root .bookmaker-bo-header-grey,
+.bookmaker-ginnie-root .ginnie-header-grey,
+.who-win-root .who-win-header-grey,
+.other-markets-root .other-markets-header-grey,
+.line-markets-root .match-odds-header-grey {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  width: auto !important;
+  max-width: none !important;
+  background: transparent !important;
+}
+
+.match-odds-header-backlay-col,
+.bookmaker-bl-header-backlay-col,
+.bookmaker-bo-header-back-col,
+.ginnie-header-back-col,
+.other-markets-header-backlay-col,
+.match-odds-root .match-odds-header-backlay-col,
+.bookmaker-bl-root .bookmaker-bl-header-backlay-col,
+.bookmaker-bo-root .bookmaker-bo-header-back-col,
+.bookmaker-ginnie-root .ginnie-header-back-col,
+.other-markets-root .other-markets-header-backlay-col {
+  background: transparent !important;
+}
+
+.match-odds-mobile-meta-row,
+.bookmaker-bl-mobile-meta-row,
+.bookmaker-bo-mobile-meta-row,
+.other-markets-mobile-meta-row,
+.ginnie-mobile-meta-row,
+.line-markets-root .match-odds-mobile-meta-row,
+.match-odds-root .match-odds-mobile-meta-row,
+.bookmaker-bl-root .bookmaker-bl-mobile-meta-row,
+.bookmaker-bo-root .bookmaker-bo-mobile-meta-row,
+.other-markets-root .other-markets-mobile-meta-row,
+.bookmaker-ginnie-root .ginnie-mobile-meta-row {
+  background: #ffffff !important;
+  border-bottom: 1px solid #d8d8d8 !important;
+}
+
+.match-odds-root .match-odds-header-grey .match-odds-header-limit-text,
+.match-odds-root .match-odds-header-grey .sports-bet-header-limits,
+.bookmaker-bl-root .bookmaker-bl-header-grey .sports-bet-header-limits,
+.bookmaker-bl-root .bookmaker-bl-header-grey .match-odds-header-limit-text,
+.bookmaker-bo-root .bookmaker-bo-header-grey .sports-bet-header-limits,
+.bookmaker-bo-root .bookmaker-bo-header-grey .match-odds-header-limit-text,
+.bookmaker-ginnie-root .ginnie-header-grey .sports-bet-header-limits,
+.bookmaker-ginnie-root .ginnie-header-grey .match-odds-header-limit-text,
+.who-win-root .who-win-header-grey .sports-bet-header-limits,
+.who-win-root .who-win-header-grey .match-odds-header-limit-text,
+.other-markets-root .other-markets-header-grey .sports-bet-header-limits,
+.other-markets-root .other-markets-header-grey .match-odds-header-limit-text,
+.line-markets-root .match-odds-header-grey .sports-bet-header-limits,
+.line-markets-root .match-odds-header-grey .match-odds-header-limit-text,
+.fancy-markets-root .fancy-khadda-header-grey .sports-bet-header-limits,
+.fancy-markets-root .fancy-khadda-header-grey .match-odds-header-limit-text {
+  color: #1f2937 !important;
+}
+
+.match-odds-header-cut,
+.match-odds-header-cut-fold,
+.bookmaker-bl-header-cut,
+.bookmaker-bl-header-cut-fold,
+.bookmaker-bo-header-cut,
+.ginnie-header-cut,
+.ginnie-header-cut-fold,
+.who-win-header-cut,
+.who-win-header-cut-fold,
+.line-markets-header-cut,
+.line-markets-header-cut-fold,
+.other-markets-header-cut,
+.other-markets-header-cut-fold,
+.fancy-sessions-header-cut,
+.fancy-sessions-header-cut-fold,
+.fancy-oe-header-cut,
+.fancy-oe-header-cut-fold,
+.fancy-khadda-header-cut,
+.fancy-khadda-header-cut-fold {
+  display: none !important;
+}
+
+/* Gap between market tables — margin (not flex) so scroll containers keep working */
+.bet-markets-scrollable > * + * {
+  margin-top: var(--sports-bet-market-gap);
+}
+
+.bet-markets-scrollable .fancy-grid-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sports-bet-market-gap);
+}
+
+.bet-markets-scrollable > .tw-shadow-sm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sports-bet-market-gap);
+}
+
+.bet-markets-scrollable .v-card:has(.other-markets-root) {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sports-bet-market-gap);
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.bet-markets-scrollable :is(
+  .match-odds-root,
+  .line-markets-root,
+  .bookmaker-bl-root,
+  .bookmaker-bo-root,
+  .bookmaker-ginnie-root,
+  .who-win-root,
+  .other-markets-root,
+  .fancy-market-block
+) {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  border: 1px solid #d9d9d9 !important;
+  box-sizing: border-box !important;
+}
+
+.bet-markets-scrollable .bet-market-match-odds {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.bet-markets-scrollable .bet-market-line,
+.bet-markets-scrollable .fancy-premium-vcard {
+  margin-bottom: 0 !important;
+}
+
+/* Gap between bet header and scorecard; gap below scorecard/TV before market tables */
+.bet-markets-scrollable > .bet-scorecard-slot,
+.bet-markets-scrollable > .scorecard-tv-mobile-wrap {
+  margin-top: 5px !important;
+  margin-bottom: var(--sports-bet-market-gap) !important;
+}
+
+.bet-markets-scrollable > .bet-scorecard-slot + *,
+.bet-markets-scrollable > .scorecard-tv-mobile-wrap + * {
+  margin-top: 0 !important;
+}
+
+@media (min-width: 768px) {
+  .match-odds-root,
+  .line-markets-root.match-odds-root,
+  .bookmaker-bl-root,
+  .bookmaker-bo-root,
+  .bookmaker-ginnie-root,
+  .who-win-root,
+  .line-markets-root,
+  .other-markets-root,
+  .fancy-markets-root,
+  .sports-bet-slip-root {
+    font-family: var(--sports-bet-desktop-font-family);
+  }
+
+  /* Section titles — MATCH ODDS, BOOKMAKER, TOSS, etc. */
+
+  .match-odds-root .match-odds-section-title,
+  .bookmaker-bl-root .bookmaker-bl-section-title,
+  .bookmaker-bo-root .bookmaker-bo-section-title,
+  .bookmaker-ginnie-root .bookmaker-ginnie-section-title,
+  .who-win-root .who-win-section-title,
+  .line-markets-root .line-markets-section-title,
+  .other-markets-root .other-markets-section-title,
+  .fancy-markets-root .fancy-section-title,
+  .fancy-markets-root .match-odds-section-title {
+    font-family: var(--sports-bet-desktop-font-family) !important;
+
+    font-size: 13px !important;
+
+    font-weight: var(--sports-bet-desktop-section-title-weight) !important;
+
+    line-height: var(--sports-bet-desktop-section-title-line-height) !important;
+
+    letter-spacing: 0 !important;
+
+    color: #ffffff !important;
+
+    text-transform: uppercase;
+  }
+
+  .sports-bet-slip-root .bet-slip-header-title,
+  .sports-bet-slip-root .bet-slip-tabs__tab {
+    font-family: var(--sports-bet-desktop-font-family) !important;
+
+    font-size: 10px !important;
+
+    font-weight: 700 !important;
+
+    line-height: 15px !important;
+
+    letter-spacing: 0 !important;
+
+    text-transform: uppercase;
+  }
+
+  .sports-bet-slip-root .bet-slip-header-title {
+    color: #fff !important;
+  }
+
+  .sports-bet-slip-root .bet-slip-tabs__tab {
+    color: #000000 !important;
+    background: #ca86f3 !important;
+  }
+
+  .sports-bet-slip-root .bet-slip-tabs__tab--active {
+    color: #ffffff !important;
+    background: transparent !important;
+  }
+
+  .sports-bet-slip-root .bet-slip-tabs__group {
+    min-width: 400px !important;
+    height: 33px !important;
+    min-height: 33px !important;
+    background: var(--color-header-bg, #360952) !important;
+    border-radius: 5px 5px 0 0 !important;
+  }
+
+  .sports-bet-slip-root .slip-body-card--desktop-selection {
+    min-width: 400px !important;
+    padding: 0 !important;
+    border-radius: 0 0 4px 4px !important;
+  }
+
+  .sports-bet-slip-root .slip-selection-dark {
+    margin: 1px 8px !important;
+    border-radius: 4px !important;
+  }
+
+  .sports-bet-slip-root .slip-body-card__fields {
+    padding: 0 8px 8px !important;
+  }
+
+  .sports-bet-slip-root .bet-slip-empty-state,
+  .sports-bet-slip-root .bet-slip-vcard--empty {
+    min-width: 400px !important;
+    border-radius: 0 0 4px 4px !important;
+  }
+
+  .sports-bet-slip-root .bet-slip-open-bet-pane:has(.bet-history-embedded-events) {
+    min-height: 314px !important;
+    background: #ffffff !important;
+  }
+
+  .sports-bet-slip-root .bet-slip-open-bet-pane :deep(.bet-history-event-header__label) {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    line-height: 16.5px !important;
+    color: #18181b !important;
+  }
+
+  .sports-bet-slip-root .bet-slip-open-bet-pane :deep(.bet-history-event-header-wrap) {
+    min-height: 34px !important;
+    background: #f3f4f6 !important;
+    border-radius: 4px !important;
+  }
+
+  .sports-bet-slip-root .bet-slip-open-bet-pane :deep(.bet-history-event-header-wrap--expanded) {
+    min-height: 32px !important;
+    background: #b08ede !important;
+  }
+
+  .sports-bet-slip-root .bet-slip-open-bet-pane :deep(.bet-history-event-header-wrap--expanded .bet-history-event-header),
+  .sports-bet-slip-root .bet-slip-open-bet-pane :deep(.bet-history-event-header-wrap--expanded .bet-history-event-header__label) {
+    color: #000000 !important;
+  }
+
+  .sports-bet-slip-root .bet-slip-open-bet-pane :deep(.bet-history-event-header) {
+    font-size: 10px !important;
+    font-weight: 500 !important;
+    line-height: 15px !important;
+    color: #18181b !important;
+  }
+
+  .sports-bet-slip-root .bet-slip-open-bet-pane :deep(.bet-history-event-header-wrap--expanded .bet-history-event-header) {
+    font-weight: 700 !important;
+  }
+
+  .sports-bet-slip-root .bet-slip-open-bet-pane :deep(.bet-history-embedded-table) {
+    width: 100% !important;
+    padding: 0 4px !important;
+    margin-top: 2px !important;
+    border-radius: 2px !important;
+  }
+
+  .sports-bet-slip-root .bet-slip-open-bet-pane :deep(.bet-history-embedded-table thead) {
+    background: var(--color-header-bg, #360952) !important;
+  }
+
+  .sports-bet-slip-root .bet-slip-open-bet-pane :deep(.bet-history-embedded-table th) {
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    line-height: 18px !important;
+    color: #ffffff !important;
+    padding: 1px !important;
+  }
+
+  .sports-bet-slip-root .bet-slip-open-bet-pane :deep(.bet-history-embedded-table tbody) {
+    border: 1px solid #e5e7eb !important;
+  }
+
+  .sports-bet-slip-root .bet-slip-open-bet-pane :deep(.bet-history-embedded-table tbody tr) {
+    height: 27.5px !important;
+    border: 1px solid #e5e7eb !important;
+  }
+
+  .sports-bet-slip-root .bet-slip-open-bet-pane :deep(.bet-history-embedded-table td) {
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    line-height: 18px !important;
+    color: #000000 !important;
+    padding: 1px !important;
+  }
+
+  .sports-bet-slip-root .bet-slip-open-bet-pane :deep(.bet-history-cell-bl) {
+    padding: 4px 1px !important;
+  }
+
+  .sports-bet-slip-root .bet-slip-open-bet-pane :deep(.bet-history-cell-stake) {
+    padding: 1px 4px 1px 1px !important;
+    text-align: right !important;
+  }
+
+  .sports-bet-slip-root .bet-slip-open-bet-pane :deep(.bet-history-cell-pl) {
+    padding: 1px 8px 1px 1px !important;
+    text-align: right !important;
+  }
+
+  .sports-bet-slip-root .bet-slip-open-bet-pane :deep(.bet-history-bl-chip) {
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    line-height: 15px !important;
+    padding: 1px 8px !important;
+    border-radius: 5px !important;
+  }
+
+  .sports-bet-slip-root .bet-slip-open-bet-pane :deep(.bet-history-bl-chip--back) {
+    background: #8dd9ff !important;
+  }
+
+  .sports-bet-slip-root .bet-slip-open-bet-pane :deep(.bet-history-bl-chip--lay) {
+    background: #ff94bc !important;
+  }
+
+  .sports-bet-slip-root .bet-slip-open-bet-pane :deep(.bet-history-table-header--embedded-slip) {
+    background: var(--color-header-bg, #360952) !important;
+  }
+
+  .sports-bet-slip-root .bet-slip-open-bet-pane :deep(.bet-history-table-header--embedded-slip),
+  .sports-bet-slip-root .bet-slip-open-bet-pane :deep(.bet-history-table-header--embedded-slip span) {
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    line-height: 18px !important;
+    color: #ffffff !important;
+  }
+
+  .sports-bet-slip-root .bet-slip-open-bet-pane :deep(.bet-history-market-cell),
+  .sports-bet-slip-root .bet-slip-open-bet-pane :deep(.bet-history-odd-cell),
+  .sports-bet-slip-root .bet-slip-open-bet-pane :deep(.bet-history-stake-cell) {
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    line-height: 18px !important;
+    color: #000000 !important;
+  }
+
+  .sports-bet-slip-root .bet-slip-open-bet-pane :deep(.bet-history-yn-chip) {
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    line-height: 15px !important;
+  }
+
+  .sports-bet-slip-root .bet-slip-empty-state__text {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    line-height: 18px !important;
+    color: #000000 !important;
+    text-transform: uppercase !important;
+  }
+
+  /* MIN / MAX — lighter gray, centered (same alignment all sections) */
+  .match-odds-root .sports-bet-header-limits,
+  .bookmaker-bl-root .sports-bet-header-limits,
+  .bookmaker-bo-root .sports-bet-header-limits,
+  .bookmaker-ginnie-root .sports-bet-header-limits,
+  .who-win-root .sports-bet-header-limits,
+  .line-markets-root .sports-bet-header-limits,
+  .other-markets-root .sports-bet-header-limits,
+  .fancy-markets-root .fancy-market-limits {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 2px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    margin-left: 0 !important;
+    text-align: center !important;
+  }
+
+  /* MIN/MAX — slightly softer than section title (not heavy black) */
+  .match-odds-root .sports-bet-header-limits,
+  .match-odds-root .sports-bet-header-limits .match-odds-header-limit-text,
+  .bookmaker-bl-root .sports-bet-header-limits,
+  .bookmaker-bl-root .sports-bet-header-limits span,
+  .bookmaker-bo-root .sports-bet-header-limits,
+  .bookmaker-bo-root .sports-bet-header-limits span,
+  .bookmaker-ginnie-root .sports-bet-header-limits,
+  .bookmaker-ginnie-root .sports-bet-header-limits span,
+  .who-win-root .sports-bet-header-limits,
+  .who-win-root .sports-bet-header-limits span,
+  .line-markets-root .sports-bet-header-limits,
+  .line-markets-root .sports-bet-header-limits span,
+  .other-markets-root .sports-bet-header-limits,
+  .other-markets-root .sports-bet-header-limits span,
+  .fancy-markets-root .fancy-market-limits,
+  .fancy-markets-root .fancy-market-limit-line {
+    font-family: var(--sports-bet-desktop-font-family) !important;
+    font-size: var(--sports-bet-desktop-header-limit-size) !important;
+    font-weight: var(--sports-bet-desktop-header-limit-weight) !important;
+    line-height: var(--sports-bet-desktop-header-limit-line-height) !important;
+    color: var(--sports-bet-desktop-header-limit-color) !important;
+    text-transform: none;
+    letter-spacing: 0 !important;
+  }
+
+  /* MIN/MAX on the light limits strip — all market panels */
+  .match-odds-root .match-odds-header-grey .sports-bet-header-limits,
+  .match-odds-root .match-odds-header-grey .match-odds-header-limit-text,
+  .bookmaker-bl-root .bookmaker-bl-header-grey .sports-bet-header-limits,
+  .bookmaker-bl-root .bookmaker-bl-header-grey .match-odds-header-limit-text,
+  .bookmaker-bo-root .bookmaker-bo-header-grey .sports-bet-header-limits,
+  .bookmaker-bo-root .bookmaker-bo-header-grey .match-odds-header-limit-text,
+  .bookmaker-ginnie-root .ginnie-header-grey .sports-bet-header-limits,
+  .bookmaker-ginnie-root .ginnie-header-grey .ginnie-header-limits,
+  .who-win-root .who-win-header-grey .sports-bet-header-limits,
+  .who-win-root .who-win-header-grey .who-win-header-limits,
+  .line-markets-root .match-odds-header-grey .sports-bet-header-limits,
+  .line-markets-root .match-odds-header-grey .match-odds-header-limit-text,
+  .other-markets-root .other-markets-header-grey .sports-bet-header-limits,
+  .other-markets-root .other-markets-header-grey .match-odds-header-limit-text {
+    color: #1f2937 !important;
+  }
+
+  /* BACK / LAY column labels */
+
+  .match-odds-root .sports-bet-back-label,
+  .match-odds-root .sports-bet-lay-label,
+  .match-odds-root .match-odds-header-col-label,
+  .bookmaker-bl-root .sports-bet-back-label,
+  .bookmaker-bl-root .sports-bet-lay-label,
+  .bookmaker-bo-root .sports-bet-back-label,
+  .bookmaker-ginnie-root .sports-bet-back-label,
+  .other-markets-root .sports-bet-back-label,
+  .other-markets-root .sports-bet-lay-label,
+  .line-markets-root .sports-bet-back-label,
+  .line-markets-root .sports-bet-lay-label,
+  .who-win-root .sports-bet-back-label,
+  .fancy-markets-root .sports-bet-back-label {
+    font-family: var(--sports-bet-desktop-font-family) !important;
+    font-size: var(--sports-bet-desktop-col-label-size) !important;
+    font-weight: var(--sports-bet-desktop-col-label-weight) !important;
+    line-height: var(--sports-bet-desktop-col-label-line-height) !important;
+    color: #111827 !important;
+    text-transform: none;
+    letter-spacing: 0 !important;
+  }
+
+  .match-odds-root .sports-bet-lay-label,
+  .bookmaker-bl-root .sports-bet-lay-label,
+  .other-markets-root .sports-bet-lay-label,
+  .line-markets-root .sports-bet-lay-label,
+  .fancy-markets-root .sports-bet-lay-label {
+    font-family: var(--sports-bet-desktop-font-family) !important;
+    font-size: var(--sports-bet-desktop-col-label-size) !important;
+    font-weight: var(--sports-bet-desktop-col-label-weight) !important;
+    line-height: var(--sports-bet-desktop-col-label-line-height) !important;
+    color: #111827 !important;
+    text-transform: none;
+    letter-spacing: 0 !important;
+  }
+
+  /* Fancy — ODD / EVEN column labels */
+  .fancy-markets-root .fancy-header-col-label {
+    font-family: var(--sports-bet-desktop-font-family) !important;
+    font-size: var(--sports-bet-desktop-col-label-size) !important;
+    font-weight: var(--sports-bet-desktop-col-label-weight) !important;
+    line-height: var(--sports-bet-desktop-col-label-line-height) !important;
+    color: var(--sports-bet-desktop-back-label-color) !important;
+    text-transform: uppercase;
+    letter-spacing: 0 !important;
+  }
+
+  /* Runner / team names */
+
+  .match-odds-root .match-odds-runner-name,
+  .bookmaker-bl-root .bookmaker-runner-name,
+  .bookmaker-bo-root .bookmaker-bo-runner-name,
+  .bookmaker-ginnie-root .ginnie-runner-name,
+  .who-win-root .who-win-runner-name,
+  .other-markets-root .other-markets-runner-name,
+  .fancy-markets-root .fancy-runner-name {
+    font-family: var(--sports-bet-desktop-font-family) !important;
+
+    font-size: 12px !important;
+
+    font-weight: 700 !important;
+
+    line-height: var(--sports-bet-desktop-runner-name-line-height) !important;
+
+    letter-spacing: 0 !important;
+
+    color: #000 !important;
+
+    text-align: left;
+
+    text-transform: none;
+  }
+
+  .bookmaker-ginnie-root .ginnie-runner-name {
+    text-align: left;
+  }
+
+  .who-win-root .who-win-runner-name {
+    text-align: center;
+
+    font-weight: 800 !important;
+
+    color: #414141 !important;
+  }
+
+  /* Odds cells — main price */
+
+  .match-odds-root .match-odds-price-cell .mo-price,
+  .other-markets-root .match-odds-price-cell .mo-price,
+  .bookmaker-bl-root .match-odds-price-cell .mo-price,
+  .bookmaker-bo-root .match-odds-price-cell .mo-price,
+  .line-markets-root .match-odds-price-cell .mo-price,
+  .bookmaker-ginnie-root .ginnie-odds-box .mo-price,
+  .who-win-root .match-odds-price-cell .mo-price,
+  .fancy-markets-root .fancy-odds-price,
+  .fancy-markets-root .mo-price,
+  .fancy-markets-root .khadda-odds-line--price {
+    font-size: var(--sports-bet-mobile-market-odds-price-size) !important;
+    font-weight: 700 !important;
+    line-height: var(--sports-bet-mobile-odds-price-line-height) !important;
+    color: #000 !important;
+    text-align: center;
+  }
+
+  .match-odds-root .match-odds-price-cell .mo-size,
+  .other-markets-root .match-odds-price-cell .mo-size,
+  .bookmaker-bl-root .match-odds-price-cell .mo-size,
+  .bookmaker-bo-root .match-odds-price-cell .mo-size,
+  .line-markets-root .match-odds-price-cell .mo-size,
+  .bookmaker-ginnie-root .ginnie-odds-box .mo-size,
+  .who-win-root .match-odds-price-cell .mo-size,
+  .fancy-markets-root .fancy-odds-size,
+  .fancy-markets-root .mo-size,
+  .fancy-markets-root .khadda-odds-line--size {
+    font-size: var(--sports-bet-mobile-odds-size-size) !important;
+
+    font-weight: var(--sports-bet-mobile-market-odds-size-weight) !important;
+
+    line-height: var(--sports-bet-mobile-odds-size-line-height) !important;
+
+    color: #000 !important;
+
+    text-align: center;
+  }
+
+  /* Orange header — Match Odds reference theme color (all market panels) */
+  .match-odds-orange-header,
+  .bookmaker-bl-orange-header,
+  .bookmaker-bo-orange-header,
+  .ginnie-orange-header,
+  .who-win-orange-header,
+  .line-markets-orange-header,
+  .other-markets-orange-header,
+  .fancy-sessions-orange-header,
+  .fancy-oe-orange-header,
+  .fancy-khadda-header-orange {
+    background: var(--theme-orange) !important;
+    background-image: none !important;
+    min-height: 34px !important;
+    align-items: center;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .match-odds-header-grey,
+  .bookmaker-bl-header-grey,
+  .who-win-header-grey,
+  .line-markets-header-grey,
+  .ginnie-header-grey,
+  .other-markets-header-grey {
+    margin-left: -1px;
+  }
+
+  /* Legacy .suspended-status styles removed — market status uses gray-500 strip + white label overlay. */
+
+  /* Event list odds — desktop row (640px+ layout, 768px+ typography) */
+  .event-row-desktop .event-odd-btn {
+    width: 53px !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    font-family: var(--sports-bet-desktop-font-family) !important;
+    font-size: var(--sports-bet-desktop-event-odds-price-size) !important;
+    font-weight: var(--sports-bet-desktop-event-odds-price-weight) !important;
+    line-height: var(--sports-bet-desktop-event-odds-price-line-height) !important;
+    color: var(--sports-bet-desktop-event-odds-price-color) !important;
+  }
+
+  .event-row-desktop .event-odd-btn__price {
+    font-family: inherit !important;
+    font-size: var(--sports-bet-desktop-event-odds-price-size) !important;
+    font-weight: var(--sports-bet-desktop-event-odds-price-weight) !important;
+    line-height: var(--sports-bet-desktop-event-odds-price-line-height) !important;
+    color: var(--sports-bet-desktop-event-odds-price-color) !important;
+  }
+
+  .event-row-desktop .event-odd-btn__stake {
+    font-family: inherit !important;
+    font-size: var(--sports-bet-desktop-event-odds-size-size) !important;
+    font-weight: var(--sports-bet-desktop-event-odds-size-weight) !important;
+    line-height: var(--sports-bet-desktop-event-odds-size-line-height) !important;
+    color: var(--sports-bet-desktop-event-odds-size-color) !important;
+  }
+}
+
+/* Fancy — all viewports (tokens from typography.css) */
+.fancy-markets-root .fancy-section-title,
+.fancy-markets-root .match-odds-section-title {
+  font-family: var(--font-family-sports);
+  font-size: 13px;
+  font-weight: var(--sports-bet-desktop-section-title-weight);
+  line-height: var(--sports-bet-desktop-section-title-line-height);
+  letter-spacing: 0;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.fancy-markets-root .fancy-runner-name {
+  font-family: var(--font-family-sports);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: var(--sports-bet-desktop-runner-name-line-height);
+  letter-spacing: 0;
+  color: #000;
+}
+
+.fancy-markets-root .sports-bet-back-label {
+  font-family: var(--font-family-sports);
+  font-size: var(--sports-bet-desktop-col-label-size);
+  font-weight: var(--sports-bet-desktop-col-label-weight);
+  line-height: var(--sports-bet-desktop-col-label-line-height);
+  color: var(--sports-bet-desktop-back-label-color);
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.fancy-markets-root .sports-bet-lay-label {
+  font-family: var(--font-family-sports);
+  font-size: var(--sports-bet-desktop-col-label-size);
+  font-weight: var(--sports-bet-desktop-col-label-weight);
+  line-height: var(--sports-bet-desktop-col-label-line-height);
+  color: var(--sports-bet-desktop-lay-label-color);
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.fancy-markets-root .fancy-header-col-label {
+  font-family: var(--font-family-sports);
+  font-size: var(--sports-bet-desktop-col-label-size);
+  font-weight: var(--sports-bet-desktop-col-label-weight);
+  line-height: var(--sports-bet-desktop-col-label-line-height);
+  color: var(--sports-bet-desktop-back-label-color);
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.fancy-markets-root .fancy-odds-price,
+.fancy-markets-root .mo-price,
+.fancy-markets-root .khadda-odds-line--price {
+  font-size: var(--sports-bet-mobile-market-odds-price-size);
+  font-weight: 700;
+  line-height: var(--sports-bet-mobile-odds-price-line-height);
+  color: #000 !important;
+  opacity: 1 !important;
+}
+
+.fancy-markets-root .fancy-odds-size,
+.fancy-markets-root .mo-size,
+.fancy-markets-root .khadda-odds-line--size {
+  font-size: var(--sports-bet-mobile-odds-size-size);
+  font-weight: var(--sports-bet-mobile-market-odds-size-weight);
+  line-height: var(--sports-bet-mobile-odds-size-line-height);
+  color: #000 !important;
+  opacity: 1 !important;
+}
+
+/* Mobile odds sizing — see sports-bet-mobile-typography.css */
+
+/* Desktop wide — orange column width in aligned 3-column headers */
+@media (min-width: 1025px) {
+  .match-odds-header-bar--aligned,
+  .bookmaker-bl-header-bar--aligned,
+  .bookmaker-bo-header-bar--aligned,
+  .other-markets-header-bar--aligned {
+    grid-template-columns: var(--sports-bet-orange-header-width-desktop) minmax(0, 1fr) var(--sports-bet-odds-six-width) !important;
+  }
+
+  .match-odds-header-bar--aligned .match-odds-orange-header,
+  .bookmaker-bl-header-bar--aligned .bookmaker-bl-orange-header,
+  .bookmaker-bo-header-bar--aligned .bookmaker-bo-orange-header,
+  .other-markets-header-bar--aligned .other-markets-orange-header {
+    flex: unset !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .match-odds-header-backlay-inline,
+  .bookmaker-bl-header-backlay-inline,
+  .other-markets-header-backlay-inline,
+  .bookmaker-bo-header-back-inline,
+  .ginnie-header-back-inline {
+    display: none !important;
+  }
+}

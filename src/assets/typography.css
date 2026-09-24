@@ -1,0 +1,202 @@
+/**
+ * Global typography — match zuplay.com / ZU-Userfrontend.
+ * Primary UI face is system UI sans (ZU `font-uiSansSerif`).
+ */
+:root {
+  /* Font families — ZU/zuplay.com default: ui-sans-serif, system-ui, sans-serif */
+  --font-family-primary: ui-sans-serif, system-ui, sans-serif;
+  --font-family-mobile: ui-sans-serif, system-ui, sans-serif;
+  --font-family-display: ui-sans-serif, system-ui, sans-serif;
+  --font-family-sports: ui-sans-serif, system-ui, sans-serif;
+  --font-family-sports-header: ui-sans-serif, system-ui, sans-serif;
+  --font-family-secondary: ui-sans-serif, system-ui, sans-serif;
+  --font-family-sidebar: "Montserrat", sans-serif;
+
+  --app-body-font-size: 16px;
+  --app-body-font-weight: 400;
+  --app-body-line-height: 1.5;
+
+  /* Market header — orange title strip (reference mobile h-[34px]) */
+  --sports-bet-orange-header-width-mobile: 42%;
+  --sports-bet-orange-header-width-desktop: 32%;
+  --sports-bet-mobile-header-height: 34px;
+  --sports-bet-market-gap: 0.625rem;
+
+  --sports-bet-odds-btn-width: 69px;
+  --sports-bet-odds-btn-height: 40px;
+  --sports-bet-odds-btn-height-md: 34px;
+  --sports-bet-odds-btn-radius: 4px;
+  /* Gap between each BACK / LAY odds button */
+  --sports-bet-odds-btn-gap: 8px;
+  --sports-bet-odds-pair-width: calc(
+    (var(--sports-bet-odds-btn-width) * 2) + var(--sports-bet-odds-btn-gap)
+  );
+  --sports-bet-odds-six-gap: 8px;
+  --sports-bet-odds-six-width: calc(
+    (var(--sports-bet-odds-btn-width) * 6) + (var(--sports-bet-odds-six-gap) * 5)
+  );
+  --sports-bet-ginnie-odds-btn-width: 120px;
+
+  --sports-bet-mobile-font-family: var(--font-family-mobile);
+  --sports-bet-mobile-font-style: normal;
+
+  /* Event list names — reference game-list / inplay rows */
+  --sports-bet-mobile-event-name-size: 10px;
+  --sports-bet-mobile-event-name-weight: 700; 
+  --sports-bet-mobile-event-name-line-height: 1.25;
+  --sports-bet-mobile-event-name-color: #000000;
+
+  /* Market runner names */
+  --sports-bet-mobile-runner-name-size: 11px;
+  --sports-bet-mobile-runner-name-weight: 700;
+  --sports-bet-mobile-runner-name-line-height: 1.25;
+  --sports-bet-mobile-runner-name-color: #333;
+
+  /* Event open date */
+  --sports-bet-mobile-date-size: 8px;
+  --sports-bet-mobile-date-weight: 400;
+  --sports-bet-mobile-date-line-height: 1.1;
+  --sports-bet-mobile-date-color: #ff5733;
+
+  /* Market section titles — MATCH ODDS, BOOKMAKER */
+  --sports-bet-mobile-section-title-size: 10px;
+  --sports-bet-mobile-section-title-weight: 700;
+  --sports-bet-mobile-section-title-line-height: 1.2;
+  --sports-bet-mobile-section-title-letter-spacing: 0;
+
+  /* MIN / MAX — detail_min_max */
+  --sports-bet-mobile-header-limit-size: 10px;
+  --sports-bet-mobile-header-limit-weight: 500;
+  --sports-bet-mobile-header-limit-line-height: 1.2;
+  --sports-bet-mobile-header-limit-color: #ffffff;
+
+  /* Column labels — BACK / LAY */
+  --sports-bet-mobile-col-label-size: 12px;
+  --sports-bet-mobile-col-label-weight: 700;
+  --sports-bet-mobile-col-label-line-height: 1.25;
+  --sports-bet-mobile-col-label-letter-spacing: 0.0333333333em;
+  --sports-bet-mobile-back-label-color: var(--color-primary);
+  --sports-bet-mobile-lay-label-color: #f44336;
+
+  /* Odds cells — odd-button__price / odd-button__volume */
+  --sports-bet-mobile-odds-price-size: 12px;
+  --sports-bet-mobile-market-odds-price-size: 15px;
+  --sports-bet-mobile-odds-price-weight: 700;
+  --sports-bet-mobile-odds-price-line-height: 1.17;
+  --sports-bet-mobile-odds-price-color: #444444;
+
+  --sports-bet-mobile-odds-size-size: 9px;
+  --sports-bet-mobile-odds-size-weight: 600;
+  --sports-bet-mobile-market-odds-size-weight: 700;
+  --sports-bet-mobile-odds-size-line-height: 1.22;
+  --sports-bet-mobile-odds-size-color: #444444;
+
+  /* Status badges */
+  --sports-bet-mobile-badge-size: 7px;
+  --sports-bet-mobile-badge-weight: 800;
+  --sports-bet-mobile-badge-line-height: 1;
+  --sports-bet-mobile-badge-letter-spacing: 0.02em;
+
+  /* Market message marquee */
+  --sports-bet-mobile-message-size: 12px;
+  --sports-bet-mobile-message-weight: 800;
+  --sports-bet-mobile-message-line-height: 1.2;
+  --sports-bet-mobile-message-letter-spacing: 0;
+
+  /* Sport page competition heading */
+  --sports-competition-title-size: 15px;
+  --sports-competition-title-weight: 800;
+  --sports-competition-title-line-height: 1.2;
+
+  /* Mobile sport toolbar — navbar-content .nav-link */
+  --sports-toolbar-title-size-mobile: 13px;
+  --sports-toolbar-title-weight-mobile: 700;
+  --sports-toolbar-title-line-height-mobile: 1.5;
+
+  /* ── Desktop sports bet (768px+) ── */
+  --sports-bet-desktop-font-family: var(--font-family-sports);
+  --sports-bet-desktop-section-title-size: 13px;
+  --sports-bet-desktop-section-title-weight: 700;
+  --sports-bet-desktop-section-title-line-height: 1.2;
+
+  --sports-bet-desktop-header-limit-size: 12px;
+  --sports-bet-desktop-header-limit-weight: 500;
+  --sports-bet-desktop-header-limit-line-height: 1.2;
+  --sports-bet-desktop-header-limit-color: #ffffff;
+
+  --sports-bet-desktop-col-label-size: 12px;
+  --sports-bet-desktop-col-label-weight: 700;
+  --sports-bet-desktop-col-label-line-height: 1.25;
+
+  --sports-bet-desktop-runner-name-size: 12px;
+  --sports-bet-desktop-runner-name-weight: 700;
+  --sports-bet-desktop-runner-name-line-height: 1.25;
+
+  --sports-bet-desktop-odds-price-size: 15px;
+  --sports-bet-desktop-odds-price-weight: 700;
+  --sports-bet-desktop-odds-price-line-height: 1.17;
+
+  --sports-bet-desktop-odds-size-size: 9px;
+  --sports-bet-desktop-odds-size-weight: 700;
+  --sports-bet-desktop-odds-size-line-height: 1.22;
+  --sports-bet-desktop-odds-size-color: #333333;
+
+  /* Event list odds (desktop) */
+  --sports-bet-desktop-event-odds-price-size: 12px;
+  --sports-bet-desktop-event-odds-price-weight: 700;
+  --sports-bet-desktop-event-odds-price-line-height: 1.17;
+  --sports-bet-desktop-event-odds-price-color: #0c0a09;
+
+  --sports-bet-desktop-event-odds-size-size: 9px;
+  --sports-bet-desktop-event-odds-size-weight: 600;
+  --sports-bet-desktop-event-odds-size-line-height: 1.22;
+  --sports-bet-desktop-event-odds-size-color: #0c0a09;
+
+  --sports-bet-desktop-back-label-color: var(--color-primary);
+  --sports-bet-desktop-lay-label-color: #f44336;
+}
+
+/* App-wide base — fairplaypro body */
+html,
+body,
+#app,
+.v-application {
+  font-family: var(--font-family-primary);
+  font-size: var(--app-body-font-size);
+  font-weight: var(--app-body-font-weight);
+  line-height: var(--app-body-line-height);
+  font-style: normal;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-display);
+}
+
+.sport-page-toolbar__title,
+.competition-head h3,
+.competition-name-box {
+  font-family: var(--font-family-display);
+  font-size: var(--sports-competition-title-size);
+  font-weight: var(--sports-competition-title-weight);
+  line-height: var(--sports-competition-title-line-height);
+}
+
+/* Mobile: same Lato stack as desktop (reference uses Lato app-wide) */
+@media (max-width: 767.98px) {
+  :root {
+    --sports-bet-desktop-section-title-size: 10px;
+  }
+
+  html,
+  body,
+  #app,
+  .v-application {
+    font-family: var(--font-family-mobile);
+    font-size: var(--app-body-font-size);
+  }
+}

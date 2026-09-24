@@ -1,0 +1,31 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="20" cy="20" r="20" fill="#8B5A2B"/>
+  
+  <!-- Head -->
+  <circle cx="20" cy="18" r="8" fill="#F5DEB3"/>
+  
+  <!-- Hair -->
+  <path d="M12 18 Q20 10 28 18 Q28 22 26 24 Q24 26 20 26 Q16 26 14 24 Q12 22 12 18" fill="#8B4513"/>
+  
+  <!-- Face -->
+  <circle cx="20" cy="18" r="6" fill="#F5DEB3"/>
+  
+  <!-- Glasses frame -->
+  <circle cx="17" cy="17" r="2.5" fill="none" stroke="#2F4F4F" stroke-width="1"/>
+  <circle cx="23" cy="17" r="2.5" fill="none" stroke="#2F4F4F" stroke-width="1"/>
+  <line x1="19.5" y1="17" x2="20.5" y2="17" stroke="#2F4F4F" stroke-width="1"/>
+  
+  <!-- Eyes -->
+  <circle cx="17" cy="17" r="1" fill="#2F4F4F"/>
+  <circle cx="23" cy="17" r="1" fill="#2F4F4F"/>
+  
+  <!-- Nose -->
+  <path d="M20 18 Q20 19 19.5 19.5" stroke="#D2691E" stroke-width="0.5" fill="none"/>
+  
+  <!-- Mouth -->
+  <path d="M18 20 Q20 21 22 20" stroke="#D2691E" stroke-width="0.5" fill="none"/>
+  
+  <!-- Top/shirt -->
+  <path d="M12 26 Q20 30 28 26 L28 40 L12 40 Z" fill="#8B0000"/>
+</svg>

@@ -1,0 +1,313 @@
+/* Deposit & withdrawal dialogs — force light shell + black text + purple accents */
+
+:is(.deposit-dialog, .withdrawal-dialog) {
+  --color-text: #111111;
+  --color-text-secondary: #6b7280;
+  --color-text-muted: #9ca3af;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f9fafb;
+  --color-border: #e5e7eb;
+  --color-border-strong: #d1d5db;
+  --color-nav: #360952;
+  --v-theme-surface: 255, 255, 255;
+  --v-theme-on-surface: 17, 17, 17;
+  --v-theme-surface-bright: 255, 255, 255;
+  --v-theme-surface-light: 249, 250, 251;
+  --v-theme-background: 255, 255, 255;
+  --v-theme-on-background: 17, 17, 17;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-dialog-card.v-card,
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-dialog-card {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  border: 1px solid var(--color-header-bg, #360952) !important;
+  color: #111111 !important;
+  box-shadow: 0 18px 40px rgba(54, 9, 82, 0.28) !important;
+  overflow: hidden;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-dialog-body,
+:is(.deposit-dialog, .withdrawal-dialog) .v-card-text,
+:is(.deposit-dialog, .withdrawal-dialog) .v-stepper,
+:is(.deposit-dialog, .withdrawal-dialog) .v-stepper-window,
+:is(.deposit-dialog, .withdrawal-dialog) .v-stepper-window-item,
+:is(.deposit-dialog, .withdrawal-dialog) .v-window,
+:is(.deposit-dialog, .withdrawal-dialog) .v-window__container,
+:is(.deposit-dialog, .withdrawal-dialog) .v-window-item,
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-step-content {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  color: #111111 !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-dialog-title {
+  background: var(--color-header-bg, #360952) !important;
+  color: #ffffff !important;
+  border-bottom: none !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-dialog-title .v-btn,
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-dialog-title .v-icon,
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-dialog-title .dialog-title-icon {
+  color: #ffffff !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-dialog-title .v-btn:hover,
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-dialog-title .v-btn:hover .v-icon {
+  color: #e9d5ff !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog),
+:is(.deposit-dialog, .withdrawal-dialog) .tw-text-theme-text,
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-step-heading,
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-step-heading--muted,
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-step-label,
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-step-indicator__text,
+:is(.deposit-dialog, .withdrawal-dialog) .bank-info-field__label,
+:is(.deposit-dialog, .withdrawal-dialog) .bank-info-field__value,
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-summary-prefix,
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-summary-value,
+:is(.deposit-dialog, .withdrawal-dialog) .withdrawal-account-item__title,
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-bank-option__label {
+  color: #111111 !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-dialog-body p,
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-dialog-body span,
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-dialog-body label {
+  color: #111111 !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-dialog-title,
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-dialog-title span,
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-dialog-title .tw-truncate {
+  color: #ffffff !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .tw-text-theme-text-secondary,
+:is(.deposit-dialog, .withdrawal-dialog) .withdrawal-account-item__meta,
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-receipt-preview__label {
+  color: #6b7280 !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-summary-bar,
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-summary-box {
+  background: #f9fafb !important;
+  border-color: #e5e7eb !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .bank-info-field__value {
+  background: #f9fafb !important;
+  border-color: #e5e7eb !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .bank-info-field__value:hover {
+  border-color: var(--color-header-bg, #360952) !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-checkbox-wrap {
+  border-top-color: #e5e7eb !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-bank-option,
+:is(.deposit-dialog, .withdrawal-dialog) .withdrawal-account-item {
+  border: 1px solid #e5e7eb !important;
+  background: #f9fafb !important;
+  color: #111111 !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-bank-option:hover:not(:disabled),
+:is(.deposit-dialog, .withdrawal-dialog) .withdrawal-account-item:hover {
+  border-color: var(--color-header-bg, #360952) !important;
+  background: #f3e8ff !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-bank-option--selected,
+:is(.deposit-dialog, .withdrawal-dialog) .withdrawal-account-item--selected {
+  border-color: var(--color-header-bg, #360952) !important;
+  background: rgba(54, 9, 82, 0.1) !important;
+  box-shadow: 0 0 0 1px var(--color-header-bg, #360952) !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-bank-option--selected .deposit-bank-option__label {
+  color: var(--color-header-bg, #360952) !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-dialog-body .deposit-bank-option__check,
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-dialog-body .dialog-check-icon {
+  color: var(--color-header-bg, #360952) !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .withdrawal-account-item__icon {
+  background: rgba(54, 9, 82, 0.12) !important;
+  color: var(--color-header-bg, #360952) !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-receipt-preview {
+  background: #f9fafb !important;
+  border-color: #e5e7eb !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-receipt-preview__empty-icon,
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-receipt-preview__empty .v-icon {
+  color: #9ca3af !important;
+  opacity: 1 !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-qr-box {
+  background: #ffffff !important;
+  border-color: #dddddd !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .v-field,
+:is(.deposit-dialog, .withdrawal-dialog) .v-field__overlay,
+:is(.deposit-dialog, .withdrawal-dialog) .v-input__control {
+  background: #f9fafb !important;
+  background-color: #f9fafb !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .v-field .v-field__outline {
+  color: #d1d5db !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .v-field input:not([type="file"]),
+:is(.deposit-dialog, .withdrawal-dialog) .v-field__input,
+:is(.deposit-dialog, .withdrawal-dialog) .v-field__input input:not([type="file"]) {
+  color: #111111 !important;
+  -webkit-text-fill-color: #111111 !important;
+  opacity: 1 !important;
+  caret-color: #111111 !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .v-field .v-label,
+:is(.deposit-dialog, .withdrawal-dialog) .v-field .v-field-label {
+  color: #6b7280 !important;
+  opacity: 1 !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .v-field input:not([type="file"])::placeholder,
+:is(.deposit-dialog, .withdrawal-dialog) .v-field__input::placeholder {
+  color: #9ca3af !important;
+  opacity: 1 !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .v-field--focused .v-field__outline,
+:is(.deposit-dialog, .withdrawal-dialog) .v-selection-control--color-primary .v-selection-control__input > .v-icon {
+  color: var(--color-header-bg, #360952) !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .v-selection-control .v-label,
+:is(.deposit-dialog, .withdrawal-dialog) .v-selection-control__wrapper + .v-label {
+  color: #374151 !important;
+  opacity: 1 !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .v-stepper-header {
+  background: #ffffff !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .v-stepper-item__title {
+  color: #6b7280 !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .v-stepper-item--selected .v-stepper-item__title {
+  color: #374151 !important;
+  font-weight: 600;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .v-stepper-item__avatar,
+:is(.deposit-dialog, .withdrawal-dialog) .v-stepper-item .v-avatar {
+  background: #9ca3af !important;
+  background-color: #9ca3af !important;
+  color: #ffffff !important;
+  opacity: 0.45 !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .v-stepper-item--selected .v-stepper-item__avatar,
+:is(.deposit-dialog, .withdrawal-dialog) .v-stepper-item--selected .v-avatar,
+:is(.deposit-dialog, .withdrawal-dialog) .v-stepper-item--complete .v-stepper-item__avatar,
+:is(.deposit-dialog, .withdrawal-dialog) .v-stepper-item--complete .v-avatar {
+  background: #6b7280 !important;
+  background-color: #6b7280 !important;
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .v-stepper-item__avatar .v-icon,
+:is(.deposit-dialog, .withdrawal-dialog) .v-stepper-item .v-avatar .v-icon {
+  color: #ffffff !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-step-indicator__dot {
+  background: #9ca3af !important;
+  opacity: 0.45;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .deposit-step-indicator__dot--active {
+  background: #6b7280 !important;
+  opacity: 1;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .v-btn--variant-elevated,
+:is(.deposit-dialog, .withdrawal-dialog) .v-btn--color-primary {
+  background: linear-gradient(135deg, #921ada 0%, #8a19ce 50%, #471368 100%) !important;
+  border: none !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .v-btn--variant-elevated .v-btn__content,
+:is(.deposit-dialog, .withdrawal-dialog) .v-btn--variant-elevated .v-icon,
+:is(.deposit-dialog, .withdrawal-dialog) .v-btn--color-primary .v-btn__content,
+:is(.deposit-dialog, .withdrawal-dialog) .v-btn--color-primary .v-icon {
+  color: #ffffff !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .v-btn--variant-elevated.v-btn--disabled {
+  background: linear-gradient(135deg, #921ada 0%, #8a19ce 50%, #471368 100%) !important;
+  border: none !important;
+  opacity: 0.55 !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .v-btn--variant-elevated.v-btn--disabled .v-btn__content,
+:is(.deposit-dialog, .withdrawal-dialog) .v-btn--variant-elevated.v-btn--disabled .v-icon {
+  color: #ffffff !important;
+  text-shadow: none;
+  opacity: 1 !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .v-btn--variant-outlined {
+  background: transparent !important;
+  border: 1px solid var(--color-header-bg, #360952) !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .v-btn--variant-outlined .v-btn__content,
+:is(.deposit-dialog, .withdrawal-dialog) .v-btn--variant-outlined .v-icon {
+  color: var(--color-header-bg, #360952) !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .v-btn--variant-outlined:hover {
+  background: #f3e8ff !important;
+  border-color: #8a19ce !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .dialog-add-btn.v-btn--variant-tonal {
+  background: linear-gradient(135deg, #921ada 0%, #8a19ce 50%, #471368 100%) !important;
+  border: none !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .dialog-add-btn.v-btn--variant-tonal .v-btn__content,
+:is(.deposit-dialog, .withdrawal-dialog) .dialog-add-btn.v-btn--variant-tonal .v-icon {
+  color: #ffffff !important;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .v-btn {
+  border-radius: 8px;
+}
+
+:is(.deposit-dialog, .withdrawal-dialog) .v-file-input input[type="file"] {
+  opacity: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  pointer-events: none !important;
+}

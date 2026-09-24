@@ -1,0 +1,443 @@
+/**
+ * Market odds cells — ZU: w-[69px] h-[40px] md:h-[34px]
+ * BACK / LAY header labels share the same column width as the buttons beneath.
+ */
+
+.match-odds-root .match-odds-price-cell.v-btn,
+.match-odds-root .match-odds-price-cell,
+.other-markets-root .match-odds-price-cell.v-btn,
+.other-markets-root .match-odds-price-cell,
+.bookmaker-bl-root .match-odds-price-cell.v-btn,
+.bookmaker-bl-root .match-odds-price-cell,
+.bookmaker-bo-root .match-odds-price-cell.v-btn,
+.bookmaker-bo-root .match-odds-price-cell,
+.line-markets-root .match-odds-price-cell.v-btn,
+.line-markets-root .match-odds-price-cell,
+.fancy-markets-root .fancy-odds-btn.v-btn,
+.fancy-markets-root .odd-even-box.v-btn,
+.fancy-markets-root .khadda-odds-vbtn.v-btn:not(.khadda-odds-vbtn--full),
+.racing-bet-root .match-odds-price-cell.v-btn,
+.racing-bet-root .match-odds-price-cell {
+  width: var(--sports-bet-odds-btn-width) !important;
+  min-width: var(--sports-bet-odds-btn-width) !important;
+  max-width: var(--sports-bet-odds-btn-width) !important;
+  height: var(--sports-bet-odds-btn-height) !important;
+  min-height: var(--sports-bet-odds-btn-height) !important;
+  max-height: var(--sports-bet-odds-btn-height) !important;
+  flex-shrink: 0 !important;
+}
+
+/* Market odds buttons — 4px radius (mobile + desktop) */
+.match-odds-root .match-odds-price-cell.v-btn,
+.match-odds-root .match-odds-price-cell,
+.other-markets-root .match-odds-price-cell.v-btn,
+.other-markets-root .match-odds-price-cell,
+.bookmaker-bl-root .match-odds-price-cell.v-btn,
+.bookmaker-bl-root .match-odds-price-cell,
+.bookmaker-bo-root .match-odds-price-cell.v-btn,
+.bookmaker-bo-root .match-odds-price-cell,
+.line-markets-root .match-odds-price-cell.v-btn,
+.line-markets-root .match-odds-price-cell,
+.fancy-markets-root .fancy-odds-btn.v-btn,
+.fancy-markets-root .fancy-row-cols .v-btn,
+.fancy-markets-root .odd-even-box.v-btn,
+.fancy-markets-root .khadda-odds-vbtn.v-btn,
+.fancy-markets-root .khadda-odds-vbtn--full.v-btn,
+.bookmaker-ginnie-root .ginnie-odds-box.v-btn,
+.bookmaker-ginnie-root .ginnie-odds-box,
+.who-win-root .who-win-back-btn.v-btn,
+.who-win-root .who-win-back-btn,
+.racing-bet-root .match-odds-price-cell.v-btn,
+.racing-bet-root .match-odds-price-cell,
+.bet-markets-scrollable .match-odds-price-cell.v-btn,
+.bet-markets-scrollable .fancy-odds-btn.v-btn,
+.bet-markets-scrollable .odd-even-box.v-btn,
+.bet-markets-scrollable .khadda-odds-vbtn.v-btn,
+.bet-markets-scrollable .ginnie-odds-box.v-btn {
+  border-radius: var(--sports-bet-odds-btn-radius) !important;
+  overflow: hidden;
+}
+
+.match-odds-root .match-odds-price-cell .v-btn__overlay,
+.match-odds-root .match-odds-price-cell .v-btn__underlay,
+.other-markets-root .match-odds-price-cell .v-btn__overlay,
+.other-markets-root .match-odds-price-cell .v-btn__underlay,
+.bookmaker-bl-root .match-odds-price-cell .v-btn__overlay,
+.bookmaker-bl-root .match-odds-price-cell .v-btn__underlay,
+.bookmaker-bo-root .match-odds-price-cell .v-btn__overlay,
+.bookmaker-bo-root .match-odds-price-cell .v-btn__underlay,
+.line-markets-root .match-odds-price-cell .v-btn__overlay,
+.line-markets-root .match-odds-price-cell .v-btn__underlay,
+.fancy-markets-root .fancy-odds-btn .v-btn__overlay,
+.fancy-markets-root .fancy-odds-btn .v-btn__underlay,
+.fancy-markets-root .fancy-row-cols .v-btn .v-btn__overlay,
+.fancy-markets-root .fancy-row-cols .v-btn .v-btn__underlay,
+.fancy-markets-root .odd-even-box .v-btn__overlay,
+.fancy-markets-root .odd-even-box .v-btn__underlay,
+.fancy-markets-root .khadda-odds-vbtn .v-btn__overlay,
+.fancy-markets-root .khadda-odds-vbtn .v-btn__underlay,
+.bookmaker-ginnie-root .ginnie-odds-box .v-btn__overlay,
+.bookmaker-ginnie-root .ginnie-odds-box .v-btn__underlay,
+.who-win-root .who-win-back-btn .v-btn__overlay,
+.who-win-root .who-win-back-btn .v-btn__underlay,
+.racing-bet-root .match-odds-price-cell .v-btn__overlay,
+.racing-bet-root .match-odds-price-cell .v-btn__underlay {
+  border-radius: var(--sports-bet-odds-btn-radius) !important;
+}
+
+/* Khadda / back-only full-width cell spans two columns */
+.fancy-markets-root .khadda-odds-vbtn--full.v-btn {
+  width: var(--sports-bet-odds-pair-width) !important;
+  min-width: var(--sports-bet-odds-pair-width) !important;
+  max-width: var(--sports-bet-odds-pair-width) !important;
+  height: var(--sports-bet-odds-btn-height) !important;
+  min-height: var(--sports-bet-odds-btn-height) !important;
+  max-height: var(--sports-bet-odds-btn-height) !important;
+}
+
+/* Dual BACK/LAY (NO/YES) header — exact same footprint as two odds buttons */
+.odds-header-groups:not(.odds-header-groups--six):not(.odds-header-groups--six-backonly):not(.odds-header-groups--ginnie-backonly):not(.odds-header-groups--khadda-backonly),
+.odds-header-groups--dual,
+.odds-header-groups-mobile,
+.other-market-header-groups:not(.odds-header-groups--six) {
+  display: grid !important;
+  grid-template-columns: var(--sports-bet-odds-btn-width) var(--sports-bet-odds-btn-width) !important;
+  column-gap: var(--sports-bet-odds-btn-gap) !important;
+  width: var(--sports-bet-odds-pair-width) !important;
+  min-width: var(--sports-bet-odds-pair-width) !important;
+  max-width: var(--sports-bet-odds-pair-width) !important;
+  box-sizing: border-box !important;
+  align-items: center !important;
+  justify-items: center !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.odds-header-groups:not(.odds-header-groups--six):not(.odds-header-groups--ginnie-backonly):not(.odds-header-groups--khadda-backonly) .sports-bet-back-label,
+.odds-header-groups:not(.odds-header-groups--six):not(.odds-header-groups--ginnie-backonly):not(.odds-header-groups--khadda-backonly) .sports-bet-lay-label,
+.odds-header-groups--dual .sports-bet-back-label,
+.odds-header-groups--dual .sports-bet-lay-label,
+.odds-header-groups-mobile .sports-bet-back-label,
+.odds-header-groups-mobile .sports-bet-lay-label,
+.odds-header-groups:not(.odds-header-groups--six):not(.odds-header-groups--ginnie-backonly):not(.odds-header-groups--khadda-backonly) .match-odds-header-col-label,
+.odds-header-groups--dual .match-odds-header-col-label,
+.odds-header-groups-mobile .match-odds-header-col-label,
+.fancy-odds-block .sports-bet-back-label,
+.fancy-odds-block .sports-bet-lay-label,
+.odd-even-odds-block .sports-bet-back-label,
+.odd-even-odds-block .sports-bet-lay-label,
+.odd-even-odds-block .fancy-header-col-label {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* Fancy khadda back-only — full pair-width BACK over khadda-odds-vbtn--full */
+.odds-header-groups--khadda-backonly {
+  display: flex !important;
+  width: var(--sports-bet-odds-pair-width) !important;
+  min-width: var(--sports-bet-odds-pair-width) !important;
+  max-width: var(--sports-bet-odds-pair-width) !important;
+  box-sizing: border-box !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.odds-header-groups--khadda-backonly .sports-bet-back-label,
+.odds-header-groups--khadda-backonly .match-odds-header-col-label {
+  width: var(--sports-bet-odds-pair-width) !important;
+  min-width: var(--sports-bet-odds-pair-width) !important;
+  max-width: var(--sports-bet-odds-pair-width) !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* Genie combo — single wide BACK column (120px) */
+.odds-header-groups--ginnie-backonly {
+  display: grid !important;
+  grid-template-columns: var(--sports-bet-ginnie-odds-btn-width) !important;
+  column-gap: 0 !important;
+  width: var(--sports-bet-ginnie-odds-btn-width) !important;
+  min-width: var(--sports-bet-ginnie-odds-btn-width) !important;
+  max-width: var(--sports-bet-ginnie-odds-btn-width) !important;
+  box-sizing: border-box !important;
+  align-items: center !important;
+  justify-items: stretch !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.odds-header-groups--ginnie-backonly .sports-bet-back-label,
+.odds-header-groups--ginnie-backonly .match-odds-header-col-label {
+  width: var(--sports-bet-ginnie-odds-btn-width) !important;
+  min-width: var(--sports-bet-ginnie-odds-btn-width) !important;
+  max-width: var(--sports-bet-ginnie-odds-btn-width) !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.fancy-odds-block,
+.odd-even-odds-block {
+  width: var(--sports-bet-odds-pair-width) !important;
+  min-width: var(--sports-bet-odds-pair-width) !important;
+  max-width: var(--sports-bet-odds-pair-width) !important;
+  grid-template-columns: var(--sports-bet-odds-btn-width) var(--sports-bet-odds-btn-width) !important;
+  column-gap: var(--sports-bet-odds-btn-gap) !important;
+}
+
+/* Keep ladder strip gaps identical to header column-gap */
+.match-odds-root .match-odds-odds-strip,
+.match-odds-root .match-odds-odds-ladder,
+.bookmaker-bl-root .match-odds-odds-strip,
+.bookmaker-bl-root .match-odds-odds-ladder,
+.other-markets-root .match-odds-odds-strip,
+.other-markets-root .match-odds-odds-ladder,
+.line-markets-root .match-odds-odds-strip,
+.line-markets-root .match-odds-odds-ladder {
+  gap: var(--sports-bet-odds-btn-gap) !important;
+}
+
+.match-odds-root .match-odds-odds-strip > .back-group,
+.match-odds-root .match-odds-odds-strip > .lay-group,
+.bookmaker-bl-root .match-odds-odds-strip > .back-group,
+.bookmaker-bl-root .match-odds-odds-strip > .lay-group,
+.other-markets-root .match-odds-odds-strip > .back-group,
+.other-markets-root .match-odds-odds-strip > .lay-group {
+  gap: var(--sports-bet-odds-btn-gap) !important;
+}
+
+/*
+ * Reference market status (SUSPENDED / BALL_RUNNING): gray-500 strip shell,
+ * odds dimmed via brightness(0.2) + opacity 0.4, transparent text overlay on top.
+ */
+.match-odds-root .match-odds-odds-strip:has(.status-overlay),
+.bookmaker-bl-root .match-odds-odds-strip:has(.status-overlay),
+.other-markets-root .match-odds-odds-strip:has(.status-overlay),
+.line-markets-root .match-odds-odds-strip:has(.status-overlay),
+.racing-bet-root .match-odds-odds-strip:has(.status-overlay) {
+  background: rgb(107, 114, 128);
+  border-radius: var(--sports-bet-odds-btn-radius);
+}
+
+/* Back-only last-digit (desktop): gray shell only on the back cell, not the full 6-col strip */
+.bookmaker-bo-root .bookmaker-bo-odds-strip:has(.status-overlay) {
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+.bookmaker-bo-root .bookmaker-bo-odds-strip:has(.status-overlay) .bookmaker-bo-back-cell {
+  display: flex !important;
+  position: relative !important;
+  overflow: hidden !important;
+  background: rgb(107, 114, 128) !important;
+  border-radius: var(--sports-bet-odds-btn-radius) !important;
+}
+
+.bookmaker-bo-root .bookmaker-bo-odds-strip:has(.status-overlay) .bookmaker-bo-back-dim {
+  display: inline-flex !important;
+  filter: brightness(0.2);
+  opacity: 0.4;
+}
+
+@media (max-width: 767.98px) {
+  .bookmaker-bo-root .bookmaker-bo-odds-strip:has(.status-overlay) {
+    background: rgb(107, 114, 128) !important;
+    border-radius: var(--sports-bet-odds-btn-radius) !important;
+  }
+
+  .bookmaker-bo-root .bookmaker-bo-odds-strip:has(.status-overlay) .bookmaker-bo-back-cell {
+    background: transparent !important;
+    border-radius: 0 !important;
+  }
+}
+
+.match-odds-root .match-odds-odds-strip:has(.status-overlay) > .back-group,
+.match-odds-root .match-odds-odds-strip:has(.status-overlay) > .lay-group,
+.bookmaker-bl-root .match-odds-odds-strip:has(.status-overlay) > .back-group,
+.bookmaker-bl-root .match-odds-odds-strip:has(.status-overlay) > .lay-group,
+.bookmaker-bo-root .match-odds-odds-strip:has(.status-overlay) > .back-group,
+.bookmaker-bo-root .match-odds-odds-strip:has(.status-overlay) > .lay-group,
+.other-markets-root .match-odds-odds-strip:has(.status-overlay) > .back-group,
+.other-markets-root .match-odds-odds-strip:has(.status-overlay) > .lay-group,
+.line-markets-root .match-odds-odds-strip:has(.status-overlay) > .back-group,
+.line-markets-root .match-odds-odds-strip:has(.status-overlay) > .lay-group,
+.racing-bet-root .match-odds-odds-strip:has(.status-overlay) > .back-group,
+.racing-bet-root .match-odds-odds-strip:has(.status-overlay) > .lay-group {
+  filter: brightness(0.2);
+  opacity: 0.4;
+}
+
+/*
+ * Fancy status shell — reference Rectangle38.bg-gray-500:
+ * gray-500 strip, 4px radius, dimmed odds underneath transparent label.
+ * Preserve grid/gap layout — do not switch wrappers to inline-flex.
+ */
+.fancy-markets-root .fancy-odds-block--status-active:has(.fancy-market-status-overlay),
+.fancy-markets-root .odd-even-odds-block.fancy-odds-block--status-active:has(.fancy-market-status-overlay),
+.fancy-markets-root .khadda-odds-block.fancy-odds-block--status-active:has(.fancy-market-status-overlay) {
+  position: relative !important;
+  overflow: hidden !important;
+  background: rgb(107, 114, 128) !important;
+  border-radius: var(--sports-bet-odds-btn-radius) !important;
+}
+
+.fancy-markets-root .khadda-odds-block.fancy-odds-block--status-active:has(.fancy-market-status-overlay) {
+  width: var(--sports-bet-odds-pair-width) !important;
+  min-width: var(--sports-bet-odds-pair-width) !important;
+  max-width: var(--sports-bet-odds-pair-width) !important;
+}
+
+.fancy-markets-root .fancy-odds-block--status-active:has(.fancy-market-status-overlay) .fancy-odds-single {
+  display: contents !important;
+}
+
+.fancy-markets-root .fancy-odds-block--status-active:has(.fancy-market-status-overlay) .fancy-odds-level {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sports-bet-odds-btn-gap, 8px) !important;
+  filter: brightness(0.2);
+  opacity: 0.4;
+}
+
+.fancy-markets-root .fancy-odds-block--status-active:has(.fancy-market-status-overlay) .fancy-odds-single .fancy-odds-btn,
+.fancy-markets-root .fancy-odds-block--status-active:has(.fancy-market-status-overlay) > .fancy-odds-btn,
+.fancy-markets-root .odd-even-odds-block.fancy-odds-block--status-active:has(.fancy-market-status-overlay) .odd-even-box {
+  filter: brightness(0.2);
+  opacity: 0.4;
+}
+
+.fancy-markets-root .khadda-odds-block.fancy-odds-block--status-active:has(.fancy-market-status-overlay) .khadda-odds-status-dim {
+  display: flex !important;
+  width: 100% !important;
+  filter: brightness(0.2);
+  opacity: 0.4;
+}
+
+.fancy-markets-root .khadda-odds-block.fancy-odds-block--status-active:has(.fancy-market-status-overlay) .khadda-odds-vbtn--full {
+  filter: none;
+  opacity: 1;
+}
+
+@media (min-width: 768px) {
+  .match-odds-root .match-odds-price-cell.v-btn,
+  .match-odds-root .match-odds-price-cell,
+  .other-markets-root .match-odds-price-cell.v-btn,
+  .other-markets-root .match-odds-price-cell,
+  .bookmaker-bl-root .match-odds-price-cell.v-btn,
+  .bookmaker-bl-root .match-odds-price-cell,
+  .bookmaker-bo-root .match-odds-price-cell.v-btn,
+  .bookmaker-bo-root .match-odds-price-cell,
+  .line-markets-root .match-odds-price-cell.v-btn,
+  .line-markets-root .match-odds-price-cell,
+  .fancy-markets-root .fancy-odds-btn.v-btn,
+  .fancy-markets-root .odd-even-box.v-btn,
+  .fancy-markets-root .khadda-odds-vbtn.v-btn:not(.khadda-odds-vbtn--full),
+  .fancy-markets-root .khadda-odds-vbtn--full.v-btn,
+  .racing-bet-root .match-odds-price-cell.v-btn,
+  .racing-bet-root .match-odds-price-cell {
+    height: var(--sports-bet-odds-btn-height-md) !important;
+    min-height: var(--sports-bet-odds-btn-height-md) !important;
+    max-height: var(--sports-bet-odds-btn-height-md) !important;
+  }
+}
+
+/* Six-column ladder (desktop Match Odds / Bookmaker / Other) */
+@media (min-width: 1025px) {
+  .odds-header-groups--six {
+    display: grid !important;
+    grid-template-columns: repeat(6, var(--sports-bet-odds-btn-width)) !important;
+    column-gap: var(--sports-bet-odds-six-gap) !important;
+    width: var(--sports-bet-odds-six-width) !important;
+    min-width: var(--sports-bet-odds-six-width) !important;
+    max-width: var(--sports-bet-odds-six-width) !important;
+    align-items: center !important;
+    justify-items: center !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .odds-header-groups--six .sports-bet-back-label,
+  .odds-header-groups--six .sports-bet-lay-label,
+  .odds-header-groups--six .match-odds-header-col-label {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .match-odds-root .match-odds-odds-ladder,
+  .match-odds-root .match-odds-odds-strip,
+  .other-markets-root .match-odds-odds-ladder,
+  .other-markets-root .match-odds-odds-strip {
+    width: var(--sports-bet-odds-six-width) !important;
+    gap: var(--sports-bet-odds-six-gap) !important;
+  }
+
+  .match-odds-root .match-odds-odds-strip > .back-group,
+  .match-odds-root .match-odds-odds-strip > .lay-group,
+  .other-markets-root .match-odds-odds-strip > .back-group,
+  .other-markets-root .match-odds-odds-strip > .lay-group {
+    width: calc(
+      (var(--sports-bet-odds-btn-width) * 3) + (var(--sports-bet-odds-six-gap) * 2)
+    ) !important;
+    gap: var(--sports-bet-odds-six-gap) !important;
+  }
+
+  .match-odds-header-bar--aligned,
+  .other-markets-header-bar--aligned {
+    grid-template-columns:
+      var(--sports-bet-orange-header-width-desktop)
+      minmax(0, 1fr)
+      var(--sports-bet-odds-six-width) !important;
+  }
+
+  .match-odds-header-bar--aligned .match-odds-header-backlay-col,
+  .other-markets-header-bar--aligned .other-markets-header-backlay-col {
+    min-width: var(--sports-bet-odds-six-width) !important;
+    max-width: var(--sports-bet-odds-six-width) !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* Bookmaker: dual Back/Lay only (fancy-style) */
+  .bookmaker-bl-root .match-odds-odds-ladder,
+  .bookmaker-bl-root .match-odds-odds-strip,
+  .bookmaker-bl-root .bookmaker-bl-odds-ladder,
+  .bookmaker-bl-root .bookmaker-bl-odds-strip {
+    width: var(--sports-bet-odds-pair-width) !important;
+    min-width: var(--sports-bet-odds-pair-width) !important;
+    max-width: var(--sports-bet-odds-pair-width) !important;
+    gap: var(--sports-bet-odds-btn-gap) !important;
+  }
+
+  .bookmaker-bl-root .match-odds-odds-strip > .back-group,
+  .bookmaker-bl-root .match-odds-odds-strip > .lay-group {
+    width: var(--sports-bet-odds-btn-width) !important;
+    min-width: var(--sports-bet-odds-btn-width) !important;
+    gap: var(--sports-bet-odds-btn-gap) !important;
+  }
+
+  .line-markets-root .line-markets-odds-ladder,
+  .line-markets-root .match-odds-odds-ladder {
+    width: var(--sports-bet-odds-pair-width) !important;
+    min-width: var(--sports-bet-odds-pair-width) !important;
+    max-width: var(--sports-bet-odds-pair-width) !important;
+    gap: var(--sports-bet-odds-btn-gap) !important;
+  }
+}

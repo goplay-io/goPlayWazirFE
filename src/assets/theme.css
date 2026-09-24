@@ -1,0 +1,2730 @@
+/* Unified Theme Color System — black primary shell + orange action buttons */
+:root {
+  --theme-bg: #000000;
+  --theme-gradient: linear-gradient(180deg, #1a1a1a 0, #000000);
+  --exchMarketHeaderBgGradient: linear-gradient(90deg, #222 50%, #444);
+  --theme-primary-gradient: var(--theme-gradient);
+  --theme-color: var(--theme-bg);
+  --theme-primary: var(--theme-bg);
+  --theme-secondary: #0d3b6d;
+  --menu: #dedddd;
+  --theme-orange:#F26C20;
+  --theme-orange-gradient:  linear-gradient(180deg, #F26C20 0, #F26C20);
+  --authButtonShadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+
+  /* Primary blue scale */
+  --primary-50: #eef4fb;
+  --primary-100: #d5e4f5;
+  --primary-200: #b3cfe9;
+  --primary-300: #8eb5dc;
+  --primary-400: #76a4d3;
+  --primary-500: #6394c9;
+  --primary-600: #4a7db5;
+  --primary-700: #2f6298;
+  --primary-800: #0d3b6d;
+  --primary-900: #071f3a;
+
+  /* --secondary-50: #fff9eb;
+  --secondary-100: #fceec5;
+  --secondary-200: #f5de9b;
+  --secondary-300: #eccc73;
+  --secondary-400: #ddb24a;
+  --secondary-500: #c99733;
+  --secondary-600: #b88831;
+  --secondary-700: #9f7229;
+  --secondary-800: #855e21;
+  --secondary-900: #6b4a19; */
+
+  --neutral-50: #f9fafb;
+  --neutral-100: #f3f4f6;
+  --neutral-200: #e5e7eb;
+  --neutral-300: #d1d5db;
+  --neutral-400: #9ca3af;
+  --neutral-500: #6b7280;
+  --neutral-600: #4b5563;
+  --neutral-700: #374151;
+  --neutral-800: #1f2937;
+  --neutral-900: #111827;
+
+  --error-50: #fef2f2;
+  --error-100: #fee2e2;
+  --error-200: #fecaca;
+  --error-300: #fca5a5;
+  --error-400: #f87171;
+  --error-500: #ef4444;
+  --error-600: #dc2626;
+  --error-700: #b91c1c;
+  --error-800: #991b1b;
+  --error-900: #7f1d1d;
+
+  --warning-50: #fffbeb;
+  --warning-100: #fef3c7;
+  --warning-200: #fde68a;
+  --warning-300: #fcd34d;
+  --warning-400: #fbbf24;
+  --warning-500: #f59e0b;
+  --warning-600: #d97706;
+  --warning-700: #b45309;
+  --warning-800: #92400e;
+  --warning-900: #78350f;
+
+  --color-primary: #000000;
+  --color-primary-hover: #1a1a1a;
+  --color-primary-active: #000000;
+  --color-primary-darker: #000000;
+  --color-primary-light: #2b2b2b;
+
+  --color-secondary: var(--secondary-400);
+  --color-secondary-hover: var(--secondary-300);
+  --color-secondary-active: var(--secondary-200);
+  --color-secondary-light: var(--secondary-900);
+
+  /* Core app shell — reference body #121212 */
+  --color-background: #ffffff;
+  --color-background-alt: #1e1e1e;
+  --color-surface: #212121;
+  --color-surface-alt: #212529;
+
+  --color-text: #ffffff;
+  --color-text-secondary: rgba(255, 255, 255, 0.7);
+  --color-text-muted: #919191;
+  --color-text-inverse: #ffffff;
+  --color-text-body: #444444;
+
+  --color-border: #333333;
+  --color-gold: #daa520;
+  --color-border-light: #4c4c4c;
+  --color-border-strong: #70767c;
+  --color-link: #4154f1;
+  --color-link-hover: #717ff5;
+  --color-heading-accent: #012970;
+  --color-error: #dc2626;
+  --color-warning: #f59e0b;
+  --color-success: #16a34a;
+  /* Bet / market message marquees (tw-text-marquee); distinct from body text on light strips */
+  --color-marquee: #ffffff;
+
+  /* Button Background Colors */
+  --color-back-bg-1: #8dd9ff;
+  --color-back-bg-2: #8dd9ffbf;
+  --color-back-bg-3: #8dd9ff80;
+  --color-lay-bg-1: #ff94bc;
+  --color-lay-bg-2: #ff94bcbf;
+  --color-lay-bg-3: #ff94bc80;
+  --color-back-hover: #6ccdff;
+  --color-lay-hover: #ff77a9;
+
+  /* Bet slip sidebar — same tints as Match Odds BACK / LAY columns */
+  --color-slip-back: #8dd9ff;
+  --color-slip-lay: #ff94bc;
+  --bet-slip-empty-bg: #d1d5db;
+  --bet-slip-rail-width-min: 406px;
+  --bet-slip-rail-width-max: 406px;
+  --bet-slip-rail-width: 406px;
+  --bet-slip-rail-offset: 0px;
+  --layout-sports-middle-width: 810px;
+  /* Logged-out homepage — reference zuplay.com @ 1512px: 290 + 860 + 350 (+6px gaps) */
+  --layout-guest-middle-width: 860px;
+  --layout-guest-rail-width: 350px;
+  --layout-guest-rail-gap: 6px;
+  /* Desktop sports/footer pages — reference gap before full-width footer @ scroll end */
+  --layout-footer-doc-gap: 32px;
+
+  /* Light Theme Scrollbar Colors */
+  --scrollbar-track: var(--color-surface-alt);
+  --scrollbar-thumb: var(--color-border-strong);
+  --scrollbar-thumb-hover: var(--color-button-dark);
+  --scrollbar-thumb-active: var(--color-button-dark-hover);
+  --scrollbar-border: var(--color-border);
+
+  /* Sports page scrollbars — hidden via .sports-layout-main / .sport-page-layout rules below */
+
+  /* Bet Slip Button Colors */
+  --color-button-dark: #F26C20;/*#f59e0b;*/
+  --color-button-dark-hover: #d97706;
+  --color-button-dark-border: #b45309;
+  --color-button-dark-border-hover: #92400e;
+  --color-button-success: #28a745;
+  --color-button-success-hover: #218838;
+  --color-quick-stake: #212121;
+  --color-quick-stake-hover: #333333;
+
+  /* Legacy Variables (for backward compatibility) */
+  --bg-main: var(--color-background);
+  --bg-variant1: var(--color-background-alt);
+  --bg-variant2: var(--color-surface);
+  --text-light1: var(--color-text);
+  --button-light: var(--color-button-dark);
+  --button-light2: var(--color-button-dark);
+  --button-luminox-6: var(--color-button-dark-hover);
+  --jbgbuttonlight: var(--color-text-secondary);
+
+  /* Additional prototype colors */
+  --color-card-bg: #212121;
+  --color-card-dark: #1e1e1e;
+  --color-controls: #333333;
+  --color-text-muted: #919191;
+  --color-accent-red: #dc2626;
+  --color-accent-yellow: #f59e0b;
+  --color-accent-green: #16a34a;
+  --color-accent-blue: #3b82f6;
+  --color-light-blue: #a5d9fe;
+
+  /* Wallet card specific colors */
+  --color-wallet-bg: #1b4834;
+  --color-wallet-icon-bg: #2e6b5e;
+  --color-wallet-icon: #90ee90;
+
+  /* Nav / Header — fairplaypro blue theme */
+  --color-nav: #000000;
+  --color-nav-hover: #1a1a1a;
+  --color-nav-border: rgba(255, 255, 255, 0.28);
+  --color-nav-text: #ffffff;
+  --color-nav-deep: #000000;
+  --color-sport-tab-rail: #212121;
+  --color-sport-tab-rail-divider: #333333;
+  --color-nav-accent: #3a3a3a;
+  --color-nav-accent-strong: #000000;
+  --color-header-bar: #000000;
+  --color-navbar-main: #212121;
+
+  /* Header — deep purple shell */
+  --color-header-bg: #360952;
+  --color-header-marquee-bg: #ffffff;
+  --color-header-text: #ffffff;
+
+  /* Mobile snackbar — overlays sport-tab row (directly below app bar) */
+  --mobile-header-toolbar-px: 57px;
+  --mobile-header-announce-px: 28px;
+  --mobile-sport-tabs-top-gap: 6px;
+  --mobile-sport-tabs-px: 48px;
+  --mobile-snackbar-top: calc(
+    env(safe-area-inset-top, 0px) + var(--mobile-header-toolbar-px) + var(--mobile-header-announce-px)
+  );
+}
+
+@media (max-width: 767px) {
+  /*
+   * Mobile main column inset — driven by --app-header-inset from useHeaderLayoutMetrics
+   * (toolbar + marquee when visible). !important wins over Vuetify layout padding.
+   */
+  .layout-v-main--mobile {
+    --v-layout-top: 0px !important;
+    padding-top: var(--app-header-inset, calc(env(safe-area-inset-top, 0px) + 44px)) !important;
+  }
+
+  .layout-v-main--mobile .v-main__wrap {
+    padding-top: 0 !important;
+  }
+
+  .guest-layout-root {
+    padding-top: var(--app-header-inset, calc(env(safe-area-inset-top, 0px) + 44px)) !important;
+  }
+
+  .faqs-page.account-page,
+  .refer-friend-page.account-page {
+    padding: 8px 4px 0 !important;
+    box-sizing: border-box;
+  }
+}
+
+/* Native <marquee> can inherit light nav/surface text in dark mode */
+marquee.tw-text-marquee {
+  color: var(--color-marquee) !important;
+}
+
+/* Market announcement strip — white bg, black text (shared by Match Odds / Bookmaker / Fancy) */
+.market-message-banner {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 1px 10px;
+  color: #000000;
+}
+
+.market-message-banner marquee,
+.market-message-banner .tw-text-marquee {
+  color: #000000 !important;
+}
+
+/* Primary blue heading bar (Matched Bets, market ribbons, slip history) */
+.theme-heading-bar {
+  background: var(--theme-orange-gradient) !important;
+  color: #ffffff !important;
+}
+
+.theme-heading-bar__title {
+  color: #ffffff !important;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.theme-heading-bar .v-btn,
+.theme-heading-bar .v-icon {
+  color: #ffffff !important;
+}
+
+/* Mobile-only heading bar for authenticated user dropdown pages */
+@media (max-width: 959px) {
+  .user-menu-mobile-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    width: 100vw;
+    min-height: 2.75rem;
+    padding: 0.75rem 1rem !important;
+    margin: 0 !important;
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+    background: var(--theme-primary-gradient) !important;
+    color: #ffffff !important;
+    border-bottom: 1px solid rgba(13, 59, 109, 0.65);
+    border-radius: 0 !important;
+    box-sizing: border-box;
+  }
+
+  .user-menu-mobile-heading--spaced {
+    margin-bottom: 0.75rem !important;
+  }
+
+  .user-menu-mobile-heading--stack {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .user-menu-mobile-heading__copy {
+    min-width: 0;
+  }
+
+  .user-menu-mobile-heading.user-menu-mobile-heading .user-menu-mobile-heading__title,
+  .user-menu-mobile-heading.user-menu-mobile-heading__title.user-menu-mobile-heading__title {
+    margin: 0 !important;
+    color: #ffffff !important;
+    font-size: 1.4rem !important;
+    line-height: 1.25 !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.015em !important;
+    text-transform: none;
+  }
+
+  .user-menu-mobile-heading.user-menu-mobile-heading .user-menu-mobile-heading__subtitle {
+    margin: 0.2rem 0 0 !important;
+    color: rgba(17, 24, 39, 0.78) !important;
+    font-size: 0.75rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .user-menu-mobile-heading.user-menu-mobile-heading :is(.v-btn, .v-icon, .v-btn__content) {
+    color: #ffffff !important;
+  }
+
+  .user-menu-mobile-heading.user-menu-mobile-heading .v-btn {
+    border-color: rgba(17, 24, 39, 0.45) !important;
+  }
+
+  .bonuses-page,
+  .payment-methods-page,
+  .change-password-page,
+  .affiliate-program__body {
+    padding-top: 0 !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .bet-history-page,
+  .unsettled-bets-page,
+  .account-page,
+  .acct-stmt-page,
+  .dt-turnover-header--mobile {
+    padding: 0 !important;
+  }
+
+  .rules-page {
+    padding-top: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .rules-shell {
+    padding-top: 0 !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    border-radius: 0 !important;
+  }
+
+  .buttons-page {
+    padding: 0 0 1rem !important;
+  }
+
+  .buttons-page__card {
+    margin-left: 1rem !important;
+    margin-right: 1rem !important;
+  }
+
+  .buttons-page-heading.user-menu-mobile-heading {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .bonus-statement-page > .user-menu-mobile-heading,
+  .bonuses-page-heading.user-menu-mobile-heading {
+    min-height: 2.75rem !important;
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+  }
+
+  .bonus-statement-page > .user-menu-mobile-heading .v-btn--icon,
+  .bonuses-page-heading.user-menu-mobile-heading .v-btn--icon {
+    width: 1.8rem !important;
+    min-width: 1.8rem !important;
+    height: 1.8rem !important;
+    padding: 0 !important;
+  }
+}
+
+.theme-heading-tab--active {
+  background: var(--theme-primary-gradient) !important;
+  color: #ffffff !important;
+  border-color: #6394c9 !important;
+  box-shadow: none !important;
+}
+
+.theme-heading-tab--active:hover {
+  background: var(--theme-primary-gradient) !important;
+  color: #ffffff !important;
+}
+
+/* Additional utility classes for theme colors */
+.theme-primary {
+  color: var(--color-primary);
+}
+
+.theme-bg {
+  color: var(--theme-bg);
+}
+
+.theme-secondary {
+  color: var(--color-secondary);
+}
+
+.theme-text {
+  color: var(--color-text);
+}
+
+.theme-text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.theme-text-muted {
+  color: var(--color-text-muted);
+}
+
+.theme-bg-primary {
+  background-color: var(--color-primary);
+}
+
+.theme-orange {
+  background-color: var(--theme-orange);
+}
+
+.hover\:bg-gradient-primary:hover,
+.hover\:bg-gradient-primary:focus,
+.hover\:bg-gradient-primary:active {
+  background: linear-gradient(
+    135deg,
+    var(--color-button-dark) 0%,
+    var(--color-button-dark-hover) 100%
+  ) !important;
+  color: var(--color-nav-text) !important;
+  border-color: var(--color-nav-border) !important;
+}
+
+.theme-bg-secondary {
+  background-color: var(--color-secondary);
+}
+
+.theme-bg-surface {
+  background-color: var(--color-surface);
+}
+
+.theme-bg-background {
+  background-color: var(--color-background);
+}
+
+.theme-border {
+  border-color: var(--color-border);
+}
+
+.theme-border-strong {
+  border-color: var(--color-border-strong);
+}
+
+.theme-border-muted {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.theme-bg-updateDialog {
+  background-color: #121a40;
+}
+
+.theme-bg-count {
+  background-color: #19265c;
+}
+
+/* Primary Button Animation — orange action buttons on black shell */
+.btn-primary {
+  background-image: linear-gradient(
+    135deg,
+    var(--color-button-dark) 0%,
+    var(--color-button-dark-hover) 100%
+  );
+  background-size: 300% 240%;
+  transition:
+    background-position 0.4s ease-in-out,
+    box-shadow 0.3s ease;
+  color: var(--color-nav-text);
+}
+
+.btn-primary:hover {
+  background-position: 0 100%;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+}
+
+.bg-gradient-primary {
+  background: linear-gradient(
+    135deg,
+    var(--color-button-dark) 0%,
+    var(--color-button-dark-hover) 100%
+  );
+}
+
+/* Vuetify elevated primary buttons — orange accent on black shell */
+.v-btn.v-btn--color-primary.v-btn--variant-elevated:not(.v-btn--icon) {
+  background: linear-gradient(
+    135deg,
+    var(--color-button-dark) 0%,
+    var(--color-button-dark-hover) 100%
+  ) !important;
+  color: #ffffff !important;
+}
+
+.v-btn.v-btn--color-primary.v-btn--variant-elevated:not(.v-btn--icon):hover {
+  background: var(--color-button-dark-hover) !important;
+}
+
+/* Global theme surface styling */
+
+/* Global Vuetify theme integration */
+.v-field {
+  background-color: var(--color-surface) !important;
+  border-color: var(--color-border) !important;
+}
+
+.v-field--focused {
+  border-color: var(--color-primary) !important;
+}
+
+.v-field__input {
+  color: var(--color-text) !important;
+}
+
+.v-label {
+  color: var(--color-text-secondary) !important;
+}
+
+.v-field--error {
+  border-color: var(--color-error) !important;
+}
+
+.v-messages__message {
+  color: var(--color-error) !important;
+}
+
+.v-select__content {
+  background-color: var(--color-surface) !important;
+  border: 1px solid var(--color-border-strong) !important;
+}
+
+.v-list {
+  background-color: var(--color-surface) !important;
+}
+
+.v-list-item {
+  color: var(--color-text) !important;
+}
+
+.v-list-item-title {
+  color: var(--color-text) !important;
+}
+
+/* Teleported dropdown menus (select/date/data-table footer): keep readable on light surfaces */
+.v-overlay-container .v-list,
+.v-overlay-container .v-select__content,
+.v-overlay-container .v-menu__content {
+  background-color: #ffffff !important;
+}
+
+.v-overlay-container .v-list-item,
+.v-overlay-container .v-list-item-title,
+.v-overlay-container .v-list-item__content {
+  color: #111827 !important;
+  opacity: 1 !important;
+}
+
+.v-overlay-container .v-list-item--active {
+  background-color: #f8f0db !important;
+}
+
+.v-overlay-container .v-list-item:hover {
+  background-color: #f3f4f6 !important;
+}
+
+.v-overlay-container .v-list-item__overlay {
+  opacity: 0 !important;
+}
+
+.v-list-item:hover,
+.v-list-item--active {
+  background-color: var(--color-surface-alt) !important;
+}
+
+/* Bet history inside bet slip: global .v-list uses nav blue — force light panel + readable text */
+.v-card.bet-history-root .v-list,
+.v-card.bet-history-root .v-window,
+.v-card.bet-history-root .v-window__container,
+.v-card.bet-history-root .v-window-item {
+  background-color: var(--color-surface) !important;
+}
+
+.v-card.bet-history-root .v-expansion-panels,
+.v-card.bet-history-root .v-expansion-panel,
+.v-card.bet-history-root .v-expansion-panel__shadow,
+.v-card.bet-history-root .v-expansion-panel-text,
+.v-card.bet-history-root .v-expansion-panel-text__wrapper {
+  background-color: var(--color-surface) !important;
+}
+
+.v-card.bet-history-root .v-list-item {
+  color: #111827 !important;
+}
+
+.v-card.bet-history-root .v-list-item-title {
+  color: #6b7280 !important;
+}
+
+/* Utility tw-text-theme-text inside panel still resolves to global white — force readable copy */
+.v-card.bet-history-root .bet-history-table-header,
+.v-card.bet-history-root .bet-history-table-header * {
+  color: #111827 !important;
+}
+
+.v-card.bet-history-root .bet-history-row-band,
+.v-card.bet-history-root .bet-history-row-band * {
+  color: #111827 !important;
+}
+
+.v-card.bet-history-root .v-list-item:hover:not(.bet-history-row-item),
+.v-card.bet-history-root .v-list-item--active:not(.bet-history-row-item) {
+  background-color: var(--color-surface-alt) !important;
+}
+
+.v-card.bet-history-root .bet-history-row-item.v-list-item:hover,
+.v-card.bet-history-root .bet-history-row-item.v-list-item--active {
+  background-color: transparent !important;
+}
+
+/* Bet history row: full-width band + back=blue / lay=pink (scoped :deep(.bet-history-root …) cannot match when root is the scoped element) */
+.v-card.bet-history-root .bet-history-row-item.v-list-item {
+  display: flex !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  align-items: stretch !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  min-height: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.v-card.bet-history-root .bet-history-row-item .v-list-item__content {
+  display: flex !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  flex: 1 1 auto !important;
+  padding: 0 !important;
+  min-height: 0 !important;
+}
+
+/* Nav theme sets --color-text to white; force dark copy inside bet history (header + rows + Vuetify content wrapper) */
+.bet-history-root .v-list-item__content,
+.bet-history-root .v-list-item__content * {
+  color: #111827 !important;
+}
+
+/* Bet rows: white strip between colored bands (reference card-like list) */
+.v-card.bet-history-root .bet-history-rows-scroll {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0 !important;
+  padding: 0 3px 4px 3px !important;
+  background-color: var(--color-surface) !important;
+}
+
+/* Mobile Matched Bets fullscreen: colored rows flush to dialog edges */
+.v-card.bet-history-root.bet-history-root--full-bleed {
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  width: 100% !important;
+}
+
+.v-card.bet-history-root.bet-history-root--full-bleed .bet-history-rows-scroll {
+  padding: 0 !important;
+}
+
+.v-card.bet-history-root.bet-history-root--full-bleed .bet-history-rows-stack {
+  gap: 0 !important;
+}
+
+.v-card.bet-history-root.bet-history-root--full-bleed .bet-history-tabs-bar {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.v-card.bet-history-root.bet-history-root--full-bleed .bet-history-table-header {
+  padding-left: 0.375rem !important;
+  padding-right: 0.375rem !important;
+}
+
+.v-card.bet-history-root.bet-history-root--full-bleed .bet-history-row-band {
+  padding-left: 0.375rem !important;
+  padding-right: 0.375rem !important;
+}
+
+.v-card.bet-history-root.bet-history-root--full-bleed .bet-history-table-header {
+  column-gap: 0.375rem !important;
+}
+
+.v-card.bet-history-root.bet-history-root--full-bleed .bet-history-row-band > .tw-grid {
+  column-gap: 0.375rem !important;
+}
+
+.v-card.bet-history-root.bet-history-root--full-bleed .compact-expansion-text .bet-history-expansion-body {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.bet-matched-bets-dialog .v-card-text {
+  padding: 0 !important;
+}
+
+/* Mobile inline Matched Bets section (under Markets toolbar) */
+.v-card.bet-history-root.bet-history-root--mobile-section .v-list,
+.v-card.bet-history-root.bet-history-root--mobile-section .v-window,
+.v-card.bet-history-root.bet-history-root--mobile-section .v-window__container,
+.v-card.bet-history-root.bet-history-root--mobile-section .v-window-item {
+  background-color: #1f1f1f !important;
+}
+
+.v-card.bet-history-root.bet-history-root--mobile-section .bet-history-tabs-bar {
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+.v-card.bet-history-root.bet-history-root--mobile-section .bet-history-table-header--mobile-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 3.25rem 3.75rem;
+  align-items: center;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  min-height: 28px;
+  background: #3a3a3a !important;
+  border-bottom: 1px solid #4a4a4a;
+  color: #ffffff !important;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.v-card.bet-history-root.bet-history-root--mobile-section .bet-history-col-market,
+.v-card.bet-history-root.bet-history-root--mobile-section .bet-history-col-odds,
+.v-card.bet-history-root.bet-history-root--mobile-section .bet-history-col-stake {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  padding: 0 6px;
+  color: #ffffff !important;
+  border-right: 1px solid #5a5a5a;
+}
+
+.v-card.bet-history-root.bet-history-root--mobile-section .bet-history-col-market {
+  justify-content: flex-start;
+  padding-left: 10px;
+}
+
+.v-card.bet-history-root.bet-history-root--mobile-section .bet-history-col-stake {
+  border-right: none;
+}
+
+.v-card.bet-history-root.bet-history-root--mobile-section .bet-history-row-grid--mobile-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 3.25rem 3.75rem;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+}
+
+.v-card.bet-history-root.bet-history-root--mobile-section .bet-history-rows-scroll--mobile-section {
+  padding: 0 !important;
+  background: #1f1f1f !important;
+}
+
+.v-card.bet-history-root.bet-history-root--mobile-section .bet-history-rows-stack {
+  gap: 0 !important;
+}
+
+.v-card.bet-history-root.bet-history-root--mobile-section .bet-history-row-band {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  border-radius: 0 !important;
+}
+
+.v-card.bet-history-root.bet-history-root--mobile-section .bet-history-col-odds,
+.v-card.bet-history-root.bet-history-root--mobile-section .bet-history-col-stake,
+.v-card.bet-history-root.bet-history-root--mobile-section .bet-history-row-grid--mobile-section > :nth-child(2),
+.v-card.bet-history-root.bet-history-root--mobile-section .bet-history-row-grid--mobile-section > :nth-child(3) {
+  text-align: center;
+  justify-content: center;
+}
+
+.v-card.bet-history-root.bet-history-root--mobile-section .bet-history-market-line,
+.v-card.bet-history-root.bet-history-root--mobile-section .bet-history-row-grid--mobile-section > :nth-child(2),
+.v-card.bet-history-root.bet-history-root--mobile-section .bet-history-row-grid--mobile-section > :nth-child(3) {
+  color: #111827 !important;
+}
+
+.v-card.bet-history-root.bet-history-root--mobile-section .bet-history-row-grid--mobile-section > :first-child {
+  padding-left: 10px;
+  padding-right: 6px;
+}
+
+.v-card.bet-history-root.bet-history-root--mobile-section .bet-panel-empty-message--mobile-section {
+  color: rgba(255, 255, 255, 0.72) !important;
+  background: #1f1f1f !important;
+  border: none !important;
+  padding: 0.625rem 0.75rem;
+}
+
+/* Shared empty state — betslip + open bets panels */
+.bet-panel-empty-message {
+  margin: 0;
+  padding: 0.5rem 0.625rem;
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  font-weight: 800;
+  line-height: 1.4;
+  color: #4b5563;
+  background: #ffffff;
+  border: 1px solid #7ec8f3;
+}
+
+/* Bet slip right rail — shrinks with viewport on side-by-side layouts (>=769px, non-mobile) */
+@media (min-width: 769px) {
+  .bet-slip-fixed {
+    width: var(--bet-slip-rail-width);
+    min-width: var(--bet-slip-rail-width-min);
+    max-width: var(--bet-slip-rail-width-max);
+    margin-left: var(--bet-slip-rail-offset, 6px);
+    flex: 0 0 var(--bet-slip-rail-width);
+    box-sizing: border-box;
+  }
+}
+
+/* Homepage / sports shell — middle grows on large screens; rail stays fixed
+   (same fill pattern as market pages / logged-in footer-doc). Min widths keep
+   reference sizes at ~1512px: logged-in 810+406, logged-out 860+350. */
+@media (min-width: 960px) {
+  .layout-content-row--with-right-rail > .layout-v-main.layout-v-main--desktop,
+  .layout-content-row--with-right-rail > .layout-v-main.layout-v-main--footer-doc {
+    flex: 1 1 auto !important;
+    width: auto !important;
+    min-width: var(--layout-sports-middle-width) !important;
+    max-width: none !important;
+  }
+
+  .layout-content-row--with-right-rail .layout-right-rail {
+    width: var(--bet-slip-rail-width);
+    min-width: var(--bet-slip-rail-width-min);
+    max-width: var(--bet-slip-rail-width-max);
+    flex: 0 0 var(--bet-slip-rail-width);
+    margin-left: var(--bet-slip-rail-offset, 0px);
+    padding-left: 6px;
+    box-sizing: border-box;
+    gap: 6px;
+  }
+
+  .layout-content-row--with-right-rail .layout-right-rail__slip,
+  .layout-content-row--with-right-rail .layout-right-rail__img,
+  .layout-content-row--with-right-rail .layout-right-rail__whatsapp {
+    width: 400px;
+    max-width: 400px;
+  }
+
+  .guest-layout-body--with-right-rail > .guest-layout-main,
+  .guest-layout-body--with-right-rail > .guest-layout-main.guest-layout-main--footer-doc {
+    flex: 1 1 auto !important;
+    width: auto !important;
+    min-width: var(--layout-guest-middle-width) !important;
+    max-width: none !important;
+  }
+
+  .guest-layout-body--with-right-rail .layout-right-rail {
+    width: var(--layout-guest-rail-width);
+    min-width: var(--layout-guest-rail-width);
+    max-width: var(--layout-guest-rail-width);
+    flex: 0 0 var(--layout-guest-rail-width);
+    margin-left: var(--layout-guest-rail-gap);
+    padding-left: 0;
+    box-sizing: border-box;
+    gap: 6px;
+  }
+
+  .guest-layout-body--with-right-rail .layout-right-rail__img,
+  .guest-layout-body--with-right-rail .layout-right-rail__whatsapp {
+    width: var(--layout-guest-rail-width);
+    max-width: var(--layout-guest-rail-width);
+  }
+
+  /* Market/bet page: fill the main column (like homepage middle flex-grow).
+     Slip stays fixed; markets grow so large viewports have no empty band on the right.
+     Keep flex height auto/min-height 0 so .bet-markets-scrollable can scroll. */
+  .layout-page-content:has(.bet-page-container) {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+}
+
+/* Sports / racing tablet: slip stacks below markets — use full width */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .bet-content-columns .bet-slip-fixed {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+  }
+}
+
+.v-card.bet-history-root .bet-history-rows-stack {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 3px !important;
+  margin-top: 0 !important;
+}
+
+.v-card.bet-history-root .bet-history-bet-list.v-list {
+  padding: 0 !important;
+  gap: 0 !important;
+  row-gap: 0 !important;
+}
+
+/* Stack header + rows only. Do not target `.tw-w-full` globally — row/header grids also use
+   `tw-w-full` and `display:flex` here would override `display:grid` and collapse columns. */
+.v-card.bet-history-root .compact-expansion-text .bet-history-expansion-body {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0 !important;
+  width: 100% !important;
+}
+
+.v-card.bet-history-root .compact-expansion-text .bet-history-rows-stack {
+  padding: 0 !important;
+}
+
+.v-card.bet-history-root .bet-history-row-band--back {
+  background-color: var(--color-slip-back) !important;
+}
+
+.v-card.bet-history-root .bet-history-row-band--lay {
+  background-color: var(--color-slip-lay) !important;
+}
+
+.v-card.bet-history-root .bet-history-row-band--back:hover {
+  background-color: color-mix(in srgb, var(--color-slip-back) 92%, #111827) !important;
+}
+
+.v-card.bet-history-root .bet-history-row-band--lay:hover {
+  background-color: color-mix(in srgb, var(--color-slip-lay) 92%, #111827) !important;
+}
+
+/* Odds chip: more saturated than row (reference) */
+.v-card.bet-history-root .bet-history-type-chip--back {
+  background-color: var(--color-back-bg-1) !important;
+  color: #111827 !important;
+  border: 1px solid color-mix(in srgb, var(--color-back-bg-1) 55%, #111827) !important;
+}
+
+.v-card.bet-history-root .bet-history-type-chip--lay {
+  background-color: var(--color-lay-bg-1) !important;
+  color: #111827 !important;
+  border: 1px solid color-mix(in srgb, var(--color-lay-bg-1) 55%, #111827) !important;
+}
+
+.v-card.bet-history-root .bet-history-type-chip .v-chip__underlay {
+  opacity: 0 !important;
+}
+
+/* Wallet dialog colors — see wallet-dialog.css */
+
+/* Exposure dialog — top sheet below header (v-dialog defaults to vertical center) */
+.v-dialog:has(> .exposure-dialog-overlay) {
+  align-items: flex-start !important;
+  justify-content: center !important;
+}
+
+.exposure-dialog-overlay.v-overlay__content {
+  width: calc(100% - 24px) !important;
+  max-width: 720px !important;
+  margin: 0 auto !important;
+  align-self: flex-start !important;
+  bottom: auto !important;
+  left: 12px !important;
+  right: 12px !important;
+  transform: none !important;
+  overflow: visible !important;
+}
+
+@media (max-width: 768px) {
+  .exposure-dialog-overlay.v-overlay__content {
+    top: var(--mobile-snackbar-top) !important;
+    max-height: min(45vh, 16rem) !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .exposure-dialog-overlay.v-overlay__content {
+    top: 12px !important;
+    max-height: min(80vh, 36rem) !important;
+  }
+}
+
+/* Exposure dialog — white shell, purple header accents */
+.v-card.exposure-dialog {
+  color: #111111 !important;
+  background: #ffffff !important;
+}
+
+.v-card.exposure-dialog .exposure-dialog__body {
+  background: #ffffff !important;
+}
+
+.v-card.exposure-dialog .exposure-dialog__table-wrap,
+.v-card.exposure-dialog .exposure-dialog__td,
+.v-card.exposure-dialog .exposure-dialog__td--type,
+.v-card.exposure-dialog .exposure-dialog__td--expose {
+  background: #ffffff !important;
+  color: #111111 !important;
+  -webkit-text-fill-color: #111111 !important;
+}
+
+.v-card.exposure-dialog .exposure-dialog__empty,
+.v-card.exposure-dialog .exposure-dialog__empty p,
+.v-card.exposure-dialog .exposure-dialog__empty-icon,
+.v-card.exposure-dialog .exposure-dialog__empty-message {
+  color: #9ea3ae !important;
+  -webkit-text-fill-color: #9ea3ae !important;
+  background: #ffffff !important;
+}
+
+.v-card.exposure-dialog .exposure-dialog__th {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+.v-card.exposure-dialog .exposure-dialog__link {
+  color: var(--color-header-bg, #360952) !important;
+  -webkit-text-fill-color: var(--color-header-bg, #360952) !important;
+}
+
+.v-card.exposure-dialog .exposure-dialog__link:hover,
+.v-card.exposure-dialog .exposure-dialog__row:hover .exposure-dialog__link {
+  color: #8a19ce !important;
+  -webkit-text-fill-color: #8a19ce !important;
+}
+
+.v-card.exposure-dialog .exposure-dialog__close,
+.v-card.exposure-dialog .exposure-dialog__close .v-icon {
+  color: var(--color-header-bg, #360952) !important;
+  -webkit-text-fill-color: var(--color-header-bg, #360952) !important;
+}
+
+
+/* Data table footer items-per-page select visibility */
+.v-data-table-footer .v-select .v-select__selection-text,
+.v-data-table-footer .v-select .v-field__input,
+.v-data-table-footer .v-select .v-field__append-inner,
+.v-data-table-footer .v-select .v-icon {
+  color: #111827 !important;
+  opacity: 1 !important;
+}
+
+/* Cards stay white with dark text */
+.v-card {
+  background-color: var(--color-surface) !important;
+  color: var(--color-text) !important;
+}
+
+.v-card-title {
+  color: var(--color-text) !important;
+}
+
+.v-card-text {
+  color: var(--color-text) !important;
+}
+
+/* Global app — dark navy background, white text */
+html,
+body,
+#app,
+.v-application {
+  background-color: var(--color-background) !important;
+  color: var(--color-text) !important;
+}
+
+.v-data-table {
+   background-color: transparent !important;
+    color: var(--color-text) !important;
+}
+
+.v-data-table thead th {
+  background-color: var(--color-surface-alt) !important;
+  color: var(--color-text) !important;
+  border-bottom: 1px solid var(--color-border) !important;
+}
+
+.v-data-table tbody tr:hover {
+  background-color: var(--color-surface-alt) !important;
+}
+
+.v-data-table tbody td {
+  color: var(--color-text) !important;
+  border-bottom: 1px solid var(--color-border-light) !important;
+}
+
+.v-data-table tbody {
+  background-color: var(--color-background-alt) !important;
+}
+
+.v-alert {
+  background-color: var(--color-surface-alt) !important;
+  color: var(--color-text) !important;
+  border: 1px solid var(--color-border) !important;
+}
+
+.v-dialog .v-overlay__content {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* ========================================
+   CUSTOM SCROLLBARS - THEME INTEGRATED
+   ======================================== */
+
+/* Global Scrollbar Styles for WebKit browsers */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+/* WebKit Scrollbar Styling */
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+  border-radius: 4px;
+  border: 1px solid var(--scrollbar-border);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
+  border: 1px solid var(--scrollbar-border);
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+  box-shadow: 0 0 4px rgba(0, 180, 216, 0.4);
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background: var(--scrollbar-thumb-active);
+  box-shadow: 0 0 6px rgba(0, 153, 190, 0.5);
+}
+
+*::-webkit-scrollbar-corner {
+  background: var(--scrollbar-track);
+}
+
+/* Scrollbar Variants for Different Components */
+
+/* Thin scrollbars for tables and data views */
+.scrollbar-thin,
+.v-data-table,
+.table-container {
+  scrollbar-width: thin;
+}
+
+.scrollbar-thin::-webkit-scrollbar,
+.v-data-table::-webkit-scrollbar,
+.table-container::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb,
+.v-data-table::-webkit-scrollbar-thumb,
+.table-container::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+}
+
+/* Wide scrollbars for main content areas */
+.scrollbar-wide,
+.main-content,
+.content-area {
+  scrollbar-width: auto;
+}
+
+.scrollbar-wide::-webkit-scrollbar,
+.main-content::-webkit-scrollbar,
+.content-area::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+.scrollbar-wide::-webkit-scrollbar-thumb,
+.main-content::-webkit-scrollbar-thumb,
+.content-area::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+}
+
+/* Invisible scrollbars for clean UI areas */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Primary colored scrollbars for highlighted content */
+.scrollbar-primary::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+}
+
+.scrollbar-primary::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-hover);
+  box-shadow: 0 0 6px rgba(0, 180, 216, 0.5);
+}
+
+/* Sports pages — hide scrollbars while keeping scroll */
+.sports-layout-main.scrollbar-primary,
+.sports-layout-main .scrollbar-primary,
+.layout-right-rail.scrollbar-primary,
+.guest-layout-main:has(.guest-sports-shell),
+.sports-home-right-rail,
+.sports-home-layout__desktop-casino-inner,
+.sports-home-tab-strip,
+.sport-page-layout,
+.sports-home-layout,
+.live-page-container,
+.sports-home-layout .tw-overflow-x-auto,
+.sport-page-layout .tw-overflow-x-auto,
+.live-page-container .tw-overflow-x-auto,
+.compact-scroll-row,
+.home-sport-strip {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.sports-layout-main.scrollbar-primary::-webkit-scrollbar,
+.sports-layout-main .scrollbar-primary::-webkit-scrollbar,
+.layout-right-rail.scrollbar-primary::-webkit-scrollbar,
+.guest-layout-main:has(.guest-sports-shell)::-webkit-scrollbar,
+.sports-home-right-rail::-webkit-scrollbar,
+.sports-home-layout__desktop-casino-inner::-webkit-scrollbar,
+.sports-home-tab-strip::-webkit-scrollbar,
+.sports-home-layout .tw-overflow-x-auto::-webkit-scrollbar,
+.sport-page-layout .tw-overflow-x-auto::-webkit-scrollbar,
+.live-page-container .tw-overflow-x-auto::-webkit-scrollbar,
+.compact-scroll-row::-webkit-scrollbar,
+.home-sport-strip::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Desktop footer-doc pages: breathing room after last section before site footer */
+@media (min-width: 769px) {
+  .layout-body-stack--footer-doc > .layout-content-row--footer-doc,
+  .guest-layout-body-stack--footer-doc > .guest-layout-body--footer-doc {
+    margin-bottom: var(--layout-footer-doc-gap);
+  }
+}
+
+/* Secondary colored scrollbars */
+.scrollbar-secondary::-webkit-scrollbar-thumb {
+  background: var(--color-secondary);
+}
+
+.scrollbar-secondary::-webkit-scrollbar-thumb:hover {
+  background: var(--color-secondary-hover);
+  box-shadow: 0 0 6px rgba(0, 180, 216, 0.4);
+}
+
+/* Overlay scrollbars for floating elements */
+.scrollbar-overlay {
+  overflow: overlay;
+}
+
+.scrollbar-overlay::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.scrollbar-overlay::-webkit-scrollbar-track {
+  background: transparent;
+  border: none;
+}
+
+.scrollbar-overlay::-webkit-scrollbar-thumb {
+  background: rgba(107, 114, 128, 0.5);
+  border: none;
+  border-radius: 5px;
+}
+
+.scrollbar-overlay::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* Specific Component Scrollbar Overrides */
+
+/* Sidebar scrollbars */
+.sidebar,
+.v-navigation-drawer {
+  scrollbar-width: thin;
+}
+
+.sidebar::-webkit-scrollbar,
+.v-navigation-drawer::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar::-webkit-scrollbar-track,
+.v-navigation-drawer::-webkit-scrollbar-track {
+  background: transparent;
+  border: none;
+}
+
+.sidebar::-webkit-scrollbar-thumb,
+.v-navigation-drawer::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border: none;
+  border-radius: 2px;
+}
+
+/* Modal and dialog scrollbars */
+.v-dialog,
+.modal,
+.v-overlay__content {
+  scrollbar-width: thin;
+}
+
+.v-dialog::-webkit-scrollbar,
+.modal::-webkit-scrollbar,
+.v-overlay__content::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+/* Dropdown and select scrollbars */
+.v-select__content,
+.v-menu__content,
+.dropdown-content {
+  scrollbar-width: thin;
+}
+
+.v-select__content::-webkit-scrollbar,
+.v-menu__content::-webkit-scrollbar,
+.dropdown-content::-webkit-scrollbar {
+  width: 4px;
+}
+
+.v-select__content::-webkit-scrollbar-thumb,
+.v-menu__content::-webkit-scrollbar-thumb,
+.dropdown-content::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 2px;
+}
+
+/* Code blocks and pre elements */
+pre,
+code,
+.code-block {
+  scrollbar-width: thin;
+}
+
+pre::-webkit-scrollbar,
+code::-webkit-scrollbar,
+.code-block::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+pre::-webkit-scrollbar-track,
+code::-webkit-scrollbar-track,
+.code-block::-webkit-scrollbar-track {
+  background: var(--color-surface-alt);
+}
+
+/* Betting and casino specific scrollbars */
+.bet-slip,
+.casino-games,
+.odds-container {
+  scrollbar-width: thin;
+}
+
+.bet-slip::-webkit-scrollbar,
+.casino-games::-webkit-scrollbar,
+.odds-container::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.bet-slip::-webkit-scrollbar-thumb,
+.casino-games::-webkit-scrollbar-thumb,
+.odds-container::-webkit-scrollbar-thumb {
+  background: var(--color-back-bg-1);
+}
+
+.bet-slip::-webkit-scrollbar-thumb:hover,
+.casino-games::-webkit-scrollbar-thumb:hover,
+.odds-container::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+/* Racing specific scrollbars */
+.racing-container,
+.race-card {
+  scrollbar-width: thin;
+}
+
+.racing-container::-webkit-scrollbar,
+.race-card::-webkit-scrollbar {
+  width: 6px;
+}
+
+.racing-container::-webkit-scrollbar-thumb,
+.race-card::-webkit-scrollbar-thumb {
+  background: var(--color-warning);
+}
+
+/* Sports betting scrollbars */
+.sports-events,
+.match-list,
+.market-list {
+  scrollbar-width: thin;
+}
+
+.sports-events::-webkit-scrollbar,
+.match-list::-webkit-scrollbar,
+.market-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sports-events::-webkit-scrollbar-thumb,
+.match-list::-webkit-scrollbar-thumb,
+.market-list::-webkit-scrollbar-thumb {
+  background: var(--color-secondary);
+}
+
+/* Utility Classes for Manual Application */
+.scrollbar-styled {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+.scrollbar-styled::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scrollbar-styled::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+  border-radius: 4px;
+}
+
+.scrollbar-styled::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.scrollbar-styled::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* Firefox specific scrollbar styling */
+@supports (scrollbar-color: red blue) {
+  * {
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+    scrollbar-width: thin;
+  }
+
+  .scrollbar-wide {
+    scrollbar-width: auto;
+  }
+
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+}
+
+/* Bet Slip Button Color Utilities */
+.tw-bg-button-dark {
+  background-color: var(--color-button-dark);
+}
+
+.tw-bg-button-dark-hover {
+  background-color: var(--color-button-dark-hover);
+}
+
+.tw-border-button-dark {
+  border-color: var(--color-button-dark-border);
+}
+
+.tw-border-button-dark-hover {
+  border-color: var(--color-button-dark-border-hover);
+}
+
+.tw-bg-button-success {
+  background-color: var(--color-button-success);
+}
+
+.tw-bg-button-success-hover {
+  background-color: var(--color-button-success-hover);
+}
+
+.tw-bg-quick-stake {
+  background-color: var(--color-quick-stake);
+}
+
+.tw-bg-quick-stake-hover {
+  background-color: var(--color-quick-stake-hover);
+}
+
+.tw-bg-stake-button {
+  background-color: var(--color-quick-stake);
+}
+
+.tw-border-stake-button {
+  border-color: var(--color-border);
+}
+
+/* Bet Slip Specific Classes to match HTML prototype */
+.bg-controls {
+  background-color: var(--color-controls);
+}
+
+.bg-controls:hover {
+  background-color: var(--color-button-dark-hover);
+}
+
+.bg-card-dark {
+  background-color: var(--color-surface-alt);
+}
+
+.bet-slip-button {
+  background-color: var(--color-button-dark);
+  border: 1px solid var(--color-button-dark-border);
+  color: var(--color-text);
+  transition: all 0.3s ease;
+}
+
+.bet-slip-button:hover {
+  background-color: var(--color-button-dark-hover);
+  border-color: var(--color-button-dark-border-hover);
+}
+
+.bet-slip-button.selected {
+  background-color: var(--color-button-dark);
+  border-color: var(--color-button-dark);
+  color: white;
+}
+
+.bet-slip-button.selected:hover {
+  background-color: var(--color-button-dark-hover);
+  border-color: var(--color-button-dark-hover);
+}
+
+.stake-input-custom {
+  background-color: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  color: var(--color-text);
+  padding: 14px 20px;
+  height: 46px;
+  width: 100%;
+}
+
+.stake-input-custom:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+}
+
+.stake-input-custom::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* Additional utility classes for prototype colors */
+.bg-card-bg {
+  background-color: var(--color-card-bg);
+}
+
+.bg-card-dark {
+  background-color: var(--color-card-dark);
+}
+
+/* Wallet card specific utility classes */
+.tw-bg-wallet-card {
+  background-color: var(--color-wallet-bg);
+  background-image: url("lines.svg");
+  background-position: top;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.tw-bg-wallet-icon {
+  background-color: var(--color-wallet-icon-bg);
+}
+
+.tw-text-wallet-icon {
+  color: var(--color-wallet-icon);
+}
+
+.tw-text-text-muted {
+  color: var(--color-text-muted);
+}
+
+.text-text-muted {
+  color: var(--color-text-muted);
+}
+
+.tw-bg-accent-red\/20 {
+  background-color: rgba(191, 23, 66, 0.2);
+}
+
+.tw-fill-\[\#BF1742\] {
+  fill: #bf1742;
+}
+
+.group-hover\:tw-fill-white:hover {
+  fill: white;
+}
+
+.hover\:tw-bg-\[\#BF1742\]:hover {
+  background-color: #bf1742;
+}
+
+.tw-text-light-blue {
+  color: var(--color-light-blue);
+}
+
+.text-light-blue {
+  color: var(--color-light-blue);
+}
+
+.hover\:tw-bg-primary-light:hover {
+  background-color: var(--color-primary-light);
+}
+
+.hover\:tw-bg-\[\#F69E3F\]:hover {
+  background-color: #f69e3f;
+}
+
+/* Button Primary Class — orange action buttons on black shell */
+.btn-primary {
+  background: linear-gradient(
+    135deg,
+    var(--color-button-dark) 0%,
+    var(--color-button-dark-hover) 100%
+  );
+  background-size: 300% 240%;
+  color: var(--color-nav-text);
+  transition: all 0.4s ease-in-out;
+}
+
+.btn-primary:hover {
+  background-position: 0 100%;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+  transition: all 0.4s ease-in-out;
+}
+
+/* Back and Lay Color Utilities */
+.tw-bg-back-bg-1 {
+  background-color: var(--color-back-bg-1);
+}
+
+.tw-bg-back-bg-2 {
+  background-color: var(--color-back-bg-2);
+}
+
+.tw-bg-back-bg-3 {
+  background-color: var(--color-back-bg-3);
+}
+
+.tw-bg-lay-bg-1 {
+  background-color: var(--color-lay-bg-1);
+}
+
+.tw-bg-lay-bg-2 {
+  background-color: var(--color-lay-bg-2);
+}
+
+.tw-bg-lay-bg-3 {
+  background-color: var(--color-lay-bg-3);
+}
+
+.border-lightgreen {
+    border: 1px solid rgba(45, 82, 196, 0.35);
+}
+
+/* Rounded deposit dialog wrapper (content-class on v-dialog is teleported) */
+.deposit-dialog.deposit-dialog--rounded {
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+/* Blur dialog card – transparent with white frosted backdrop blur */
+.dialog-card-blur {
+  background: rgba(255, 255, 255, 0.25) !important;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--color-border) !important;
+  border-radius: 1rem;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Info displays and buttons inside blur dialogs – match frosted design */
+.dialog-card-blur .deposit-summary-bar,
+.dialog-card-blur .deposit-summary-box,
+.dialog-card-blur .bank-info-field__value {
+  background: rgba(255, 255, 255, 0.4) !important;
+  border-color: rgba(255, 255, 255, 0.55) !important;
+}
+
+.dialog-card-blur .deposit-bank-option {
+  background: rgba(255, 255, 255, 0.4) !important;
+  border-color: rgba(255, 255, 255, 0.55) !important;
+}
+
+.dialog-card-blur .deposit-bank-option:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.55) !important;
+  border-color: rgba(var(--v-theme-primary), 0.8) !important;
+}
+
+.dialog-card-blur .deposit-bank-option--selected {
+  background: rgba(var(--v-theme-primary), 0.2) !important;
+  border-color: rgb(var(--v-theme-primary)) !important;
+}
+
+.dialog-card-blur .v-btn--variant-outlined {
+  background: rgba(255, 255, 255, 0.35) !important;
+  border-color: rgba(255, 255, 255, 0.6) !important;
+  color: var(--color-text) !important;
+}
+
+.dialog-card-blur .v-btn--variant-outlined:hover {
+  background: rgba(255, 255, 255, 0.5) !important;
+  border-color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.dialog-card-blur .v-btn--variant-elevated.v-btn--color-primary {
+  background: rgb(var(--v-theme-primary)) !important;
+  color: rgb(var(--v-theme-on-primary)) !important;
+}
+
+.dialog-card-blur .v-card-title {
+  border-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.dialog-card-blur .v-card-actions {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.dialog-card-blur .deposit-checkbox-wrap {
+  border-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Casino listing — provider / category rails and tiles */
+.casino-page {
+  --casino-purple: var(--color-header-bg, #360952);
+  --casino-tab-border: var(--color-header-bg, #360952);
+  --casino-tab-track: #f3f4f6;
+  background: #ffffff !important;
+  color: #111111;
+}
+
+.casino-page-body {
+  background: #ffffff;
+}
+
+@media (min-width: 768px) {
+  .layout-body-stack--footer-doc .casino-page.v-container,
+  .guest-layout-body-stack--footer-doc .casino-page.v-container {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .layout-body-stack--footer-doc .casino-page-body,
+  .guest-layout-body-stack--footer-doc .casino-page-body {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.casino-listing-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 0.5rem;
+  background: #ffffff;
+  border-bottom: none;
+  box-shadow: none;
+}
+
+.casino-listing-top-bar__title {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 900 !important;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #111111;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.casino-listing-top-bar__title--category {
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.casino-listing-top-bar__search {
+  flex-shrink: 0;
+  width: auto;
+  max-width: 13rem;
+}
+
+.casino-tabs-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 0.5rem;
+}
+
+.casino-tabs-l1-search-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.casino-tabs-l1-wrap {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.casino-tabs-l1__track,
+.casino-tabs-l2__track {
+  background: #ffffff;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  align-items: stretch;
+}
+
+.casino-tabs-l1__track {
+  gap: 0;
+}
+
+.casino-tabs-l2__track {
+  gap: 0.25rem;
+  padding: 0.125rem 0;
+}
+
+.casino-tabs-l1__btn {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--casino-tab-border);
+  border-right: none;
+  border-radius: 0;
+  background: #ffffff;
+  color: #111111;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  padding: 0 0.65rem;
+  height: 2.25rem;
+  min-height: 2.25rem;
+  box-sizing: border-box;
+  cursor: pointer;
+  white-space: nowrap;
+  line-height: 1.15;
+  box-shadow: none;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.casino-tabs-l1__btn:first-child {
+  border-left: 1px solid var(--casino-tab-border);
+}
+
+.casino-tabs-l1__btn:last-child {
+  border-right: 1px solid var(--casino-tab-border);
+}
+
+.casino-tabs-l1__btn:hover:not(.casino-tabs-l1__btn--active) {
+  background: #f9fafb;
+  color: #111111;
+}
+
+.casino-tabs-l1__btn--active {
+  background: var(--casino-purple);
+  color: #ffffff;
+  box-shadow: none;
+}
+
+.casino-tabs-l2__btn {
+  flex: 0 0 auto;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 4.5rem;
+  max-width: 5.5rem;
+  min-height: 3.5rem;
+  padding: 0.35rem 0.35rem;
+  border: none;
+  border-radius: 0.375rem;
+  background: #f3f4f6;
+  color: #111111;
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.05;
+  text-transform: capitalize;
+  cursor: pointer;
+  box-shadow: none;
+  box-sizing: border-box;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.casino-tabs-l2__btn:hover:not(.casino-tabs-l2__btn--active) {
+  background: #e5e7eb;
+  color: #111111;
+}
+
+.casino-tabs-l2__btn--active {
+  background: var(--casino-purple);
+  color: #ffffff;
+  box-shadow: none;
+}
+
+.casino-tabs-l2__btn--active .casino-tabs-l2__glyph,
+.casino-tabs-l2__btn--active .v-icon {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+.casino-tabs-l2__label {
+  display: block;
+  white-space: normal;
+  text-align: center;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  max-width: 4.75rem;
+}
+
+.casino-tabs-l2__icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  flex-shrink: 0;
+  opacity: 1;
+}
+
+.casino-tabs-l2__btn--active .casino-tabs-l2__icon {
+  filter: brightness(0) invert(1);
+}
+
+.casino-tabs-l2__glyph {
+  color: var(--casino-purple) !important;
+  opacity: 1 !important;
+}
+
+@media (min-width: 768px) {
+  .casino-page.v-container {
+    width: 99vw;
+    max-width: 890px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .casino-listing-top-bar {
+    padding: 0.75rem 0;
+    margin-bottom: 0.35rem;
+  }
+
+  .casino-listing-top-bar__title {
+    font-size: 1.5rem;
+    font-weight: 900 !important;
+  }
+
+  .casino-page-body {
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .casino-tabs-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 0.75rem;
+  }
+
+  .casino-tabs-stack > .casino-tabs-l2-wrap {
+    flex: none;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+    border-bottom: none;
+  }
+
+  .casino-tabs-l1-search-row .casino-tabs-l2-wrap {
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
+    border-bottom: none;
+  }
+
+  .casino-tabs-l1-search-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    min-height: 2.25rem;
+    padding: 0.5rem 0 0;
+  }
+
+  .casino-tabs-l1-wrap {
+    flex: 3 1 0;
+    min-width: 0;
+    padding: 0;
+    overflow: hidden;
+    border-bottom: none;
+  }
+
+  .casino-tabs-l1__track,
+  .casino-tabs-l2__track {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .casino-tabs-l1__track {
+    gap: 2px;
+    padding: 0;
+    align-items: center;
+    min-height: 33px;
+    border-bottom: 1px solid #e5e7eb;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .casino-tabs-l2__track {
+    gap: 2px;
+    padding: 0;
+    align-items: center;
+    min-height: 33px;
+    border-bottom: 1px solid #e5e7eb;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .casino-tabs-search.casino-search-root--inline {
+    flex: 1 1 0;
+    width: auto;
+    max-width: none;
+    padding-top: 0px;
+    margin-left: auto;
+    display: flex !important;
+  }
+
+  .casino-tabs-search.casino-search-root--inline .casino-search-inner {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .casino-tabs-search.casino-search-root--inline .casino-search-bar {
+    min-height: 35px;
+    height: 35px;
+    border: none;
+    background: transparent;
+    overflow: visible;
+  }
+
+  .casino-tabs-search.casino-search-root--inline .casino-search-bar__input {
+    height: 35px;
+    min-height: 35px;
+    padding: 0 8px;
+    font-size: 14px;
+    line-height: 20px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #000000;
+  }
+
+  .casino-tabs-l1__track::-webkit-scrollbar,
+  .casino-tabs-l2__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .casino-tabs-l1__btn {
+    flex-direction: row;
+    min-width: auto;
+    max-width: none;
+    height: 32px;
+    min-height: 32px;
+    max-height: 32px;
+    padding: 0 20px;
+    border: none !important;
+    border-radius: 5px 5px 0 0;
+    background: transparent;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    text-transform: capitalize;
+    box-sizing: border-box;
+  }
+
+  .casino-tabs-l2__btn {
+    flex-direction: row;
+    min-width: auto;
+    max-width: none;
+    height: 32px;
+    min-height: 32px;
+    max-height: 32px;
+    padding: 0 16px;
+    border: none !important;
+    border-radius: 5px 5px 0 0;
+    background: transparent;
+    color: #111111;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    text-transform: none;
+    box-sizing: border-box;
+  }
+
+  .casino-tabs-l1__btn:first-child,
+  .casino-tabs-l1__btn:last-child {
+    border: none !important;
+  }
+
+  .casino-tabs-l1__btn:hover:not(.casino-tabs-l1__btn--active),
+  .casino-tabs-l2__btn:hover:not(.casino-tabs-l2__btn--active) {
+    background: transparent;
+    color: #111111;
+  }
+
+  .casino-tabs-l1__btn--active,
+  .casino-tabs-l2__btn--active {
+    background: var(--casino-purple);
+    color: #ffffff;
+  }
+
+  .casino-tabs-l1__btn--active {
+    padding: 0 20px;
+    font-weight: 600;
+  }
+
+  .casino-tabs-l2__btn--active {
+    padding: 0 20px;
+    font-weight: 600;
+  }
+
+  .casino-tabs-l1__label {
+    display: block;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 14px;
+    line-height: 21px;
+    font-weight: inherit;
+  }
+
+  .casino-tabs-l2__label {
+    max-width: none;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 14px;
+    line-height: 21px;
+    font-weight: inherit;
+  }
+
+  .casino-tabs-l2__icon,
+  .casino-tabs-l2__glyph {
+    display: none !important;
+  }
+}
+
+.casino-game-tile {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.375rem;
+  overflow: hidden;
+  cursor: pointer;
+  background: transparent;
+  transition: transform 0.2s ease;
+}
+
+.casino-game-tile:hover {
+  transform: scale(1.02);
+}
+
+.casino-game-tile__media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #f3f4f6;
+  overflow: hidden;
+  border-radius: 0.375rem;
+}
+
+.casino-game-tile__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  object-position: center;
+  display: block;
+}
+
+.casino-game-tile__caption {
+  display: none;
+}
+
+.casino-search-bar {
+  border: none;
+  background: transparent;
+  overflow: visible;
+}
+
+.casino-search-bar__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  outline: none;
+  padding: 0 8px;
+  height: 35px;
+  min-height: 35px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  background: #ffffff;
+  color: #000000;
+  box-sizing: border-box;
+}
+
+.casino-search-bar__input::placeholder {
+  color: #9ca3af;
+}
+
+.casino-search-bar__input:focus {
+  outline: none;
+  border-color: var(--casino-purple, #360952);
+}
+
+.casino-listing-top-bar .casino-search-root,
+.casino-listing-top-bar .casino-search-inner {
+  align-self: stretch;
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+.casino-listing-top-bar .casino-search-bar {
+  min-height: 35px;
+  height: auto;
+}
+
+.casino-listing-top-bar .casino-search-bar__input {
+  height: 35px;
+  min-height: 35px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+@media (max-width: 767.98px) {
+  .casino-page.v-container {
+    background: #ffffff !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .casino-listing-top-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 0.5rem 0.75rem 0.35rem;
+    margin-bottom: 0;
+    min-height: auto;
+    max-height: none;
+    height: auto;
+  }
+
+  .casino-listing-top-bar__title {
+    display: none;
+  }
+
+  .casino-listing-top-bar__search {
+    width: 100%;
+    max-width: 100% !important;
+  }
+
+  .casino-listing-top-bar .casino-search-root,
+  .casino-listing-top-bar .casino-search-inner {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .casino-listing-top-bar .casino-search-bar {
+    min-height: auto;
+    height: auto;
+    border-radius: 0;
+  }
+
+  .casino-listing-top-bar .casino-search-bar__input {
+    height: auto;
+    min-height: 0;
+    padding: 8px 10px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .casino-tabs-search-mobile {
+    width: 100%;
+    padding: 9.5px 8px;
+    box-sizing: border-box;
+  }
+
+  .casino-tabs-search-mobile .casino-search-bar {
+    min-height: auto;
+    height: auto;
+  }
+
+  .casino-tabs-search-mobile .casino-search-bar__input {
+    height: auto;
+    min-height: 0;
+    padding: 8px 10px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .casino-tabs-stack {
+    gap: 12px;
+    margin-bottom: 0.35rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .casino-tabs-stack > .casino-tabs-l1-search-row {
+    order: 1;
+  }
+
+  .casino-tabs-stack > .casino-tabs-l2-wrap {
+    order: 2;
+  }
+
+  .casino-tabs-l1-search-row {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    width: 100%;
+  }
+
+  .casino-tabs-l2-wrap {
+    width: 100%;
+    padding: 0 6px;
+  }
+
+  .casino-tabs-l1-wrap {
+    padding: 0 6px;
+  }
+
+  .casino-tabs-l1__track {
+    gap: 0.75rem;
+    padding: 0;
+    align-items: center;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .casino-tabs-l1__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .casino-tabs-l1__btn {
+    border: none !important;
+    min-width: auto;
+    height: 32px;
+    min-height: 32px;
+    max-height: 32px;
+    padding: 0 0.65rem;
+    font-size: 12px !important;
+    font-weight: 600;
+    line-height: 1;
+    background: transparent;
+    border-radius: 0.25rem 0.25rem 0 0;
+    text-transform: capitalize;
+    box-sizing: border-box;
+  }
+
+  .casino-tabs-l1__btn:first-child,
+  .casino-tabs-l1__btn:last-child {
+    border: none !important;
+  }
+
+  .casino-tabs-l1__btn:hover:not(.casino-tabs-l1__btn--active) {
+    background: transparent;
+    color: #111111;
+  }
+
+  .casino-tabs-l1__btn--active {
+    background: var(--casino-purple);
+    color: #ffffff;
+  }
+
+  .casino-tabs-l2__track {
+    gap: 0.75rem;
+    padding: 0;
+    align-items: center;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .casino-tabs-l2__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .casino-tabs-l2__btn {
+    flex-direction: row;
+    min-width: auto !important;
+    max-width: none !important;
+    height: 32px;
+    min-height: 32px !important;
+    max-height: 32px;
+    padding: 0 0.65rem;
+    font-size: 12px !important;
+    font-weight: 600;
+    line-height: 1;
+    background: transparent;
+    border-radius: 0.25rem 0.25rem 0 0;
+    box-sizing: border-box;
+  }
+
+  .casino-tabs-l2__btn:hover:not(.casino-tabs-l2__btn--active) {
+    background: transparent;
+  }
+
+  .casino-tabs-l2__btn--active {
+    background: var(--casino-purple);
+    color: #ffffff;
+  }
+
+  .casino-tabs-l2__label {
+    max-width: none;
+    white-space: nowrap;
+    text-align: left;
+    font-size: 12px;
+    line-height: 1;
+  }
+
+  .casino-tabs-l2__icon,
+  .casino-tabs-l2__glyph {
+    display: none !important;
+  }
+
+  .casino-games-grid {
+    gap: 0.25rem !important;
+    padding: 0.25rem 0 !important;
+    background: #ffffff !important;
+  }
+
+  .casino-game-tile {
+    border-radius: 0.25rem !important;
+  }
+
+  .casino-game-tile:hover {
+    transform: none;
+  }
+}
+
+.casino-tabs-l1-scroll-shell,
+.casino-tabs-l2-scroll-shell {
+  position: relative;
+  width: 100%;
+}
+
+.casino-tabs-l1__scroll,
+.casino-tabs-l2__scroll {
+  display: none;
+  position: absolute;
+  top: 0;
+  z-index: 40;
+  padding: 10px 4px;
+  border: none;
+  background: #e5e7eb;
+  opacity: 0.8;
+  cursor: pointer;
+  line-height: 0;
+  box-sizing: border-box;
+}
+
+.casino-tabs-l1__scroll:hover,
+.casino-tabs-l2__scroll:hover {
+  opacity: 1;
+}
+
+.casino-tabs-l1__scroll--prev,
+.casino-tabs-l2__scroll--prev {
+  left: 0px;
+  border-radius: 4px 0 0 4px;
+}
+
+.casino-tabs-l1__scroll--next,
+.casino-tabs-l2__scroll--next {
+  right: 0px;
+  border-radius: 0 4px 4px 0;
+}
+
+.casino-tabs-l1__scroll-icon,
+.casino-tabs-l2__scroll-icon {
+  display: block;
+  height: 12px;
+  width: auto;
+}
+
+.casino-tabs-l1__scroll-icon--prev,
+.casino-tabs-l2__scroll-icon--prev {
+  transform: rotate(-90deg);
+}
+
+.casino-tabs-l1__scroll-icon--next,
+.casino-tabs-l2__scroll-icon--next {
+  transform: rotate(90deg);
+}
+
+@media (min-width: 768px) {
+  .casino-tabs-l2-scroll-shell {
+    max-width: 890px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .casino-tabs-l1__scroll,
+  .casino-tabs-l2__scroll {
+    display: block;
+  }
+
+  .casino-tabs-l1__scroll--hidden,
+  .casino-tabs-l2__scroll--hidden {
+    display: none !important;
+  }
+
+  .casino-tabs-l1-scroll-shell .casino-tabs-l1__track.casino-scroll-x,
+  .casino-tabs-l2-scroll-shell .casino-tabs-l2__track.casino-scroll-x {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .casino-tabs-l1-scroll-shell .casino-tabs-l1__track.casino-scroll-x::-webkit-scrollbar,
+  .casino-tabs-l2-scroll-shell .casino-tabs-l2__track.casino-scroll-x::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.casino-scroll-x {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--color-nav) 45%, transparent) var(--casino-tab-track);
+  -webkit-overflow-scrolling: touch;
+}
+
+.casino-scroll-x::-webkit-scrollbar {
+  height: 4px;
+}
+
+.casino-scroll-x::-webkit-scrollbar-track {
+  background: var(--casino-tab-track);
+  border-radius: 3px;
+}
+
+.casino-scroll-x::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--color-nav) 50%, transparent);
+  border-radius: 3px;
+}
+
+@media (max-width: 767.98px) {
+  .casino-scroll-x {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .casino-scroll-x::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+}
+
+/* Home sports list alignment hard override (desktop) — match zuplay.com md:h-11 row */
+@media (min-width: 1024px) {
+  /* Badge strip: reference md:w-[68px] inner + md:px-5 (20px each side) */
+  .event-row-desktop__meta {
+    width: 108px !important;
+    min-width: 108px !important;
+    max-width: 108px !important;
+    padding: 0 20px !important;
+    box-sizing: border-box !important;
+  }
+
+  .event-row-desktop__odds {
+    width: 328px !important;
+    min-width: 328px !important;
+    max-width: 328px !important;
+    grid-template-columns: repeat(6, 53px) !important;
+    gap: 2px !important;
+  }
+
+  .feed-right-wrap {
+    gap: 6px !important;
+  }
+
+  .feed-col-heads {
+    width: 328px !important;
+    min-width: 328px !important;
+    max-width: 328px !important;
+    grid-template-columns: repeat(6, 53px) !important;
+    gap: 2px !important;
+  }
+
+  .feed-col-heads span {
+    grid-column: span 2 !important;
+  }
+}
+
+/* iOS Safari: prevent focus zoom on text inputs (minimum 16px; bet slip keeps 13px — see sports-bet-slip-form.css) */
+@media screen and (max-width: 767.98px) {
+  input:not([type='checkbox']):not([type='radio']):not([type='range']):not(.slip-stake-input):not(.slip-odds-input):not(.signup-plain-field__input):not(.auth-page-input):not(.signup-ref-otp-digit):not(.sidebar-mobile-search__input):not(.change-password-page__input),
+  textarea,
+  select,
+  .v-field input,
+  .v-field textarea,
+  .v-field .v-field__input {
+    font-size: 16px !important;
+  }
+}
+
+/* Utility: force black text color */
+.text-black-force {
+  color: #000 !important;
+}
+
+/* Authenticated header profile menu: outer shell does not scroll; inner .header-user-menu-card__scroll does */
+.header-user-menu-overlay-header {
+  overflow: visible !important;
+  max-height: none !important;
+}
+
+/* Header / guest profile dropdown: scroll inside menu on short viewports (mobile) */
+.header-user-menu-overlay {
+  max-height: min(85dvh, calc(100dvh - 3.5rem), 36rem) !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  touch-action: pan-y;
+}
+
+/* Authenticated header: overlay must not clip — scrolling is on .header-user-menu-card__scroll */
+.v-overlay__content:has(.header-user-menu-card) {
+  overflow: visible !important;
+  max-height: none !important;
+}
+
+/* Vuetify 3.9: ensure overlay content scrolls even if content-class is not forwarded */
+.v-overlay__content:has(.header-user-menu-panel) {
+  max-height: min(85dvh, calc(100dvh - 3.5rem), 36rem) !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  touch-action: pan-y;
+}
+
+/* App header shell — black primary for logged-in and guest toolbars */
+.v-toolbar.v-app-bar.header-bar,
+.v-toolbar.v-app-bar.guest-app-bar,
+.header-bar .v-toolbar__content,
+.guest-app-bar .v-toolbar__content,
+.header-shell,
+.header-toolbar-row {
+  background: var(--color-header-bg) !important;
+  background-color: var(--color-header-bg) !important;
+  background-image: none !important;
+}
