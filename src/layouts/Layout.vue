@@ -154,8 +154,8 @@
       <LayoutRightRail
         v-if="showLayoutRightRail"
         :sticky-footer-doc="showSiteFooter"
-        :open-bets-use-unsettled="showReferenceSportsShell"
-        :home-reference-layout="showReferenceSportsShell"
+        :open-bets-use-unsettled="useReferenceRightRail"
+        :home-reference-layout="useReferenceRightRail"
       />
       </div>
 
@@ -324,6 +324,24 @@ const showLayoutRightRail = computed(
     !isMultiMarketPage.value &&
     !isCasinoListingPage.value &&
     !isFullWidthPage.value,
+)
+
+/** Account / report views — monkeydon.com right rail (dark Bet Slip, no promo tiles). */
+const REPORT_PAGE_NAMES = new Set([
+  'account-statement',
+  'bet-history',
+  'profit-loss',
+  'unsettled-bets',
+  'bonus-statement',
+  'turnover-history',
+  'deposit-turnovers',
+])
+
+const isReportPage = computed(() => REPORT_PAGE_NAMES.has(String(route.name || '')))
+
+/** Home + report pages share the monkeydon reference bet-slip rail. */
+const useReferenceRightRail = computed(
+  () => showHomeExchangeSection.value || isReportPage.value,
 )
 
 // Active tab state management

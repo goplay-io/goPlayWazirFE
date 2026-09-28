@@ -269,17 +269,23 @@
     v-if="authStore.isUiAuthenticated"
     v-model="userMenuOpen"
     :user-name="userName"
-    :wallet-rows="walletSummaryRows"
-    :nav-items="userDrawerNavItems"
+    :phone="authStore.currentUser?.username || ''"
+    :balance="formattedBalance"
+    :free-cash="formattedCashableBreakdown"
+    :exposure="formattedExposure"
+    :nav-sections="userDrawerNavSections"
     :show-wallet-summary="true"
     :show-payment-actions="true"
-    :show-claim-bonus="true"
+    :show-claim-bonus="false"
+    :show-download-apk="apkDownloadEnabled"
     @logout="handleLogout"
     @navigate="handleUserMenuItemClick"
     @deposit="goToDeposit"
     @withdraw="goToWithdraw"
     @claim-bonus="goToBonuses"
     @exposure-click="openModal"
+    @customer-support="handleCustomerSupport"
+    @download-apk="handleDownloadApk"
   />
   <MobileSearchModal
     :open="isMobile && showInlineSearch"
@@ -332,7 +338,7 @@ import useDevices from '@/composables/useDevices.js'
 import { useFeaturedEventsStore } from '@/stores/events/featuredEvents'
 import { AVAILABLE_LOCALES } from '@/constants/locales.js'
 import appConstants from '../constants/appConstants.js'
-import { USER_DRAWER_NAV_ITEMS } from '@/constants/userDrawerNavItems.js'
+import { USER_DRAWER_NAV_SECTIONS } from '@/constants/userDrawerNavItems.js'
 
 import { useEventsStore } from '@/stores/events/events'
 import { getCasinoGames } from '@/api/event/casino'
@@ -352,12 +358,12 @@ import {
 } from '@/composables/useHeaderLayoutMetrics.js'
 import { useSettingsStore } from '@/stores/settings.js'
 import { buildWhatsAppSupportUrl } from '@/utils/whatsappSupportUrl.js'
+import { useMobileAppConfig } from '@/composables/useMobileAppConfig.js'
 
 const { t, locale } = useI18n()
 const {
   formattedBalance,
   formattedExposure,
-  formattedBonus,
   fetchWalletBalance,
   balance,
   cashable,
@@ -401,11 +407,6 @@ const formattedHeaderTime = computed(() =>
     .toLowerCase()
 )
 
-const walletSummaryRows = computed(() => [
-  { key: 'balance', labelKey: 'header.user.walletSummary.balance', value: formattedBalance.value },
-  { key: 'exposure', labelKey: 'header.user.walletSummary.exposure', value: formattedExposure.value },
-  { key: 'bonus', labelKey: 'header.user.walletSummary.bonus', value: `₹ ${formattedBonus.value}` },
-])
 const featuredEventsStore = useFeaturedEventsStore()
 const eventsStore = useEventsStore()
 const { isMobile } = useDevices()
@@ -415,6 +416,8 @@ const settingsStore = useSettingsStore()
 const whatsappLink = computed(() =>
   buildWhatsAppSupportUrl(settingsStore.whatsappChannel),
 )
+
+const { apkDownloadEnabled, requestApkDownload } = useMobileAppConfig()
 
 const {
   showAnnouncementStrip,
@@ -829,7 +832,7 @@ const userAvatar = computed(() => {
   return authStore.currentUser?.avatar || null
 })
 
-const userDrawerNavItems = computed(() => USER_DRAWER_NAV_ITEMS)
+const userDrawerNavSections = computed(() => USER_DRAWER_NAV_SECTIONS)
 
 function goToBonuses() {
   userMenuOpen.value = false
@@ -881,6 +884,22 @@ const handleUserMenuItemClick = (item) => {
     return
   }
   userMenuOpen.value = false
+}
+
+function handleCustomerSupport() {
+  userMenuOpen.value = false
+  if (whatsappLink.value) {
+    window.open(whatsappLink.value, '_blank', 'noopener,noreferrer')
+  }
+}
+
+async function handleDownloadApk() {
+  userMenuOpen.value = false
+  try {
+    await requestApkDownload()
+  } catch {
+    /* APK unavailable */
+  }
 }
 
 onMounted(() => {
