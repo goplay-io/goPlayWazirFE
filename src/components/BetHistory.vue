@@ -128,7 +128,7 @@ const betsByEvent = computed(() => {
 const activeTab = ref('P')
 const expandedEvents = ref([]) // Track which event accordions are expanded (array for v-expansion-panels)
 const embeddedExpandedEvents = ref(new Set())
-const matchedBetsExpanded = ref(true)
+const matchedBetsExpanded = ref(!props.homeRefChrome)
 
 const toggleMatchedBets = () => {
   matchedBetsExpanded.value = !matchedBetsExpanded.value

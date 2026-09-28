@@ -183,13 +183,14 @@ const slipSportCompetitionLabel = computed(() => {
 const slipSportIcon = computed(() => getEventTypeIcon(Number(props.bet?.event_type_id)));
 
 const showDesktopSelectionDark = computed(
-  () => !isMobile.value && hasSlipSelection.value,
+  () => !isMobile.value && hasSlipSelection.value && !useHomeRefChrome.value,
 );
 
 function formatQuickAmount(amount) {
   const n = Number(amount);
   if (Number.isNaN(n)) return String(amount);
-  return n.toLocaleString();
+  const formatted = n.toLocaleString();
+  return useHomeRefChrome.value ? `+ ${formatted}` : formatted;
 }
 
 function formatLimitShort(amount) {
@@ -320,13 +321,12 @@ watch(() => props.betAllow, (newValue, oldValue) => {
       useHomeRefChrome ? 'home-ref-bet-slip' : '',
     ]"
   >
-    <div
-      v-if="!isMobile"
-      :class="useHomeRefChrome ? 'home-ref-bet-slip__tabs' : 'bet-slip-tabs'"
-      role="tablist"
-      aria-label="Bet slip panels"
-    >
-      <template v-if="useHomeRefChrome">
+    <div v-if="!isMobile && useHomeRefChrome" class="home-ref-bet-slip__tab-row">
+      <div
+        class="home-ref-bet-slip__tabs"
+        role="tablist"
+        aria-label="Bet slip panels"
+      >
         <button
           type="button"
           role="tab"
@@ -345,10 +345,17 @@ watch(() => props.betAllow, (newValue, oldValue) => {
           :aria-selected="slipPanelTab === 'openBet'"
           @click="slipPanelTab = 'openBet'"
         >
-          {{ t('components.betSlipToolbar.openBet') }} ({{ openBetCount }})
+          {{ t('components.betSlipToolbar.openBet') }}
         </button>
-      </template>
-      <div v-else class="bet-slip-tabs__group">
+      </div>
+    </div>
+    <div
+      v-else-if="!isMobile"
+      class="bet-slip-tabs"
+      role="tablist"
+      aria-label="Bet slip panels"
+    >
+      <div class="bet-slip-tabs__group">
         <button
           type="button"
           class="bet-slip-tabs__tab"
@@ -414,6 +421,7 @@ watch(() => props.betAllow, (newValue, oldValue) => {
             'slip-body-card',
             slipIsBack ? 'slip-body-card--back' : 'slip-body-card--lay',
             showDesktopSelectionDark ? 'slip-body-card--desktop-selection' : '',
+            useHomeRefChrome ? 'slip-body-card--wazir-ref' : '',
           ]"
         >
           <BetPlacingOverlay />
@@ -445,9 +453,88 @@ watch(() => props.betAllow, (newValue, oldValue) => {
             </div>
           </div>
 
-          <div :class="showDesktopSelectionDark ? 'slip-body-card__fields' : undefined">
+          <div
+            :class="[
+              showDesktopSelectionDark || useHomeRefChrome ? 'slip-body-card__fields' : undefined,
+              useHomeRefChrome ? 'slip-body-card__fields--wazir-ref' : undefined,
+            ]"
+          >
+          <template v-if="bet.odd && useHomeRefChrome">
+            <div class="slip-wazir-odds-stake-grid">
+              <div class="slip-wazir-odds-col">
+                <label class="slip-wazir-field-label">{{ t('sports.home.odds') }}</label>
+                <div class="slip-wazir-odds-stepper">
+                  <button
+                    type="button"
+                    :disabled="!canAdjustOdds || !betAllow"
+                    class="slip-odds-step slip-odds-step--minus"
+                    :aria-label="t('sports.home.decreaseOdds')"
+                    @click="decreaseOdd"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="4" viewBox="0 0 18 4" fill="none" aria-hidden="true">
+                      <path d="M16.3363 3.1535H1.66367C1.02639 3.1535 0.51001 2.63713 0.51001 1.99985C0.51001 1.36257 1.02639 0.846191 1.66367 0.846191H16.3363C16.9736 0.846191 17.49 1.36257 17.49 1.99985C17.49 2.63713 16.9736 3.1535 16.3363 3.1535Z" fill="currentColor" />
+                    </svg>
+                  </button>
+                  <input
+                    :value="displayOdd"
+                    readonly
+                    tabindex="-1"
+                    class="slip-odds-input"
+                    :aria-label="t('sports.home.odds')"
+                  />
+                  <button
+                    type="button"
+                    :disabled="!canAdjustOdds || !betAllow"
+                    class="slip-odds-step slip-odds-step--plus"
+                    :aria-label="t('sports.home.increaseOdds')"
+                    @click="increaseOdd"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                      <path d="M8.99997 17.4897C8.36269 17.4897 7.84631 16.9734 7.84631 16.3361V1.66342C7.84631 1.02614 8.36269 0.509766 8.99997 0.509766C9.63725 0.509766 10.1536 1.02614 10.1536 1.66342V16.3361C10.1536 16.9734 9.63725 17.4897 8.99997 17.4897Z" fill="currentColor" />
+                      <path d="M16.3363 10.1535H1.66367C1.02639 10.1535 0.51001 9.63713 0.51001 8.99985C0.51001 8.36257 1.02639 7.84619 1.66367 7.84619H16.3363C16.9736 7.84619 17.49 8.36257 17.49 8.99985C17.49 9.63713 16.9736 10.1535 16.3363 10.1535Z" fill="currentColor" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="slip-wazir-stake-col">
+                <label class="slip-wazir-field-label" for="wazir-ref-stake-input">
+                  {{ t('sports.home.stake') }}
+                </label>
+                <input
+                  id="wazir-ref-stake-input"
+                  :value="bet.stake"
+                  @input="handleStakeInput"
+                  type="number"
+                  name="stake"
+                  inputmode="decimal"
+                  step="0.01"
+                  :placeholder="'0'"
+                  :disabled="!betAllow"
+                  class="slip-stake-input"
+                />
+              </div>
+            </div>
+
+            <div class="slip-wazir-quick-wrap">
+              <div class="slip-quick-grid slip-quick-grid--wazir-ref">
+                <button
+                  v-for="button in finalButtons.slice(0, 6)"
+                  :key="button.id"
+                  type="button"
+                  :disabled="isButtonDisabled()"
+                  class="slip-quick-cell"
+                  :class="{ 'slip-quick-cell--active': button.amount == bet.stake }"
+                  @click="changeAmount(button.amount, maxAmount, false)"
+                >
+                  {{ formatQuickAmount(button.amount) }}
+                </button>
+              </div>
+            </div>
+          </template>
+
+          <template v-else-if="bet.odd">
           <!-- Stake label + max bet -->
-          <div v-if="bet.odd" class="slip-stake-head">
+          <div class="slip-stake-head">
             <span class="slip-stake-head__label">{{ t('sports.home.stake') }}</span>
             <span class="slip-stake-head__limit">
               {{ t('sports.home.maxBet') }}: {{ formatLimitShort(maxAmount) }}
@@ -455,10 +542,7 @@ watch(() => props.betAllow, (newValue, oldValue) => {
           </div>
 
           <!-- Odds stepper + stake input -->
-          <div
-            v-if="bet.odd"
-            class="slip-odds-stake-row"
-          >
+          <div class="slip-odds-stake-row">
             <button
               type="button"
               :disabled="!canAdjustOdds || !betAllow"
@@ -498,7 +582,7 @@ watch(() => props.betAllow, (newValue, oldValue) => {
           </div>
 
           <!-- Quick stakes grid -->
-          <div v-if="bet.odd" class="slip-quick-grid">
+          <div class="slip-quick-grid">
             <button
               v-for="button in finalButtons"
               :key="button.id"
@@ -511,9 +595,10 @@ watch(() => props.betAllow, (newValue, oldValue) => {
               {{ formatQuickAmount(button.amount) }}
             </button>
           </div>
+          </template>
 
           <!-- Min | Max | Edit | Clear -->
-          <div v-if="bet.odd" class="slip-util-row">
+          <div v-if="bet.odd && !useHomeRefChrome" class="slip-util-row">
             <v-btn
               rounded="0"
               :density="slipDensity"
@@ -563,7 +648,11 @@ watch(() => props.betAllow, (newValue, oldValue) => {
           />
 
           <!-- Cancel bet | Place bet -->
-          <div v-if="bet.odd" class="slip-action-row">
+          <div
+            v-if="bet.odd"
+            class="slip-action-row"
+            :class="{ 'slip-action-row--wazir-ref': useHomeRefChrome }"
+          >
             <v-btn
               rounded="0"
               :density="slipDensity"
@@ -583,6 +672,12 @@ watch(() => props.betAllow, (newValue, oldValue) => {
               class="slip-place-btn"
             >
               <template v-if="bet_status == 'processing'">{{ t('sports.home.processing') }}</template>
+              <template v-else-if="useHomeRefChrome">
+                <span class="slip-place-btn__stack">
+                  <span class="slip-place-btn__label">{{ t('sports.home.placeBet') }}</span>
+                  <span class="slip-place-btn__profit">{{ t('sports.home.profit') }} : {{ slipProfit }}</span>
+                </span>
+              </template>
               <template v-else>
                 <span class="slip-place-btn__label">{{ t('sports.home.placeBet') }}</span>
                 <span class="slip-place-btn__profit">({{ t('sports.home.profit') }}: {{ slipProfit }})</span>

@@ -1505,7 +1505,7 @@ body:has(.layout-home-shell-bg),
     width: 100%;
     min-width: 0;
     padding: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid #545454;
     border-radius: 8px;
     background: #333333;
     box-sizing: border-box;
