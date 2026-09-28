@@ -130,10 +130,10 @@
                   <v-icon size="17" class="guest-ref-auth-btn__icon">mdi-login</v-icon>
                   <span>{{ t('components.mobileBottomNav.login') }}</span>
                 </button>
-                <router-link to="/signup" class="guest-ref-auth-btn guest-ref-auth-btn--register" @click="handleGuestSignupClick">
+                <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--register" @click="handleGuestSignupClick">
                   <v-icon size="16" class="guest-ref-auth-btn__icon">mdi-account-plus-outline</v-icon>
                   <span>{{ t('auth.login.registerCta') }}</span>
-                </router-link>
+                </button>
                 <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--get-id" @click="handleGuestGetIdClick">
                   <v-icon size="17" class="guest-ref-auth-btn__icon">mdi-login</v-icon>
                   <span>{{ t('auth.login.getIdCta') }}</span>
@@ -144,9 +144,9 @@
               <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--login guest-ref-auth-btn--mobile" @click="handleGuestLoginClick">
                 <span>{{ t('components.mobileBottomNav.login') }}</span>
               </button>
-              <router-link to="/signup" class="guest-ref-auth-btn guest-ref-auth-btn--register guest-ref-auth-btn--mobile" @click="handleGuestSignupClick">
+              <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--register guest-ref-auth-btn--mobile" @click="handleGuestSignupClick">
                 <span>{{ t('auth.login.signupCta') }}</span>
-              </router-link>
+              </button>
               <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--get-id guest-ref-auth-btn--mobile" @click="handleGuestGetIdClick">
                 <span>{{ t('auth.login.getIdCta') }}</span>
               </button>
@@ -202,7 +202,7 @@
       (useMobileBodyScroll || showSiteFooter)
         ? 'tw-min-h-screen'
         : 'tw-h-full tw-max-h-full tw-overflow-hidden',
-      { 'layout-home-shell-bg': showHomeExchangeSection },
+      { 'layout-home-shell-bg': showReferenceSportsShell },
     ]"
   >
     <!-- Reserve space for fixed v-app-bar (same pattern as Layout.vue) -->
@@ -224,7 +224,7 @@
     <div
       class="guest-layout-body tw-flex tw-min-w-0 tw-gap-0"
       :class="[
-        showHomeExchangeSection ? '' : 'tw-bg-white',
+        showReferenceSportsShell ? '' : 'tw-bg-white',
         useMobileBodyScroll ? 'guest-layout-body--mobile-body' : '',
         showSiteFooter
           ? 'guest-layout-body--footer-doc'
@@ -273,8 +273,8 @@
             <div
               class="guest-sports-shell__content"
               :class="{
-                'guest-sports-shell__content--home-pad': showHomeExchangeSection,
-                'guest-sports-shell__content--reference-home': showHomeExchangeSection,
+                'guest-sports-shell__content--home-pad': showReferenceSportsShell,
+                'guest-sports-shell__content--reference-home': showReferenceSportsShell,
               }"
             >
               <SportsMainBanner v-if="isSportsShellPage && showSportsShellMainBanner && !isMultiMarketPage" />
@@ -314,8 +314,8 @@
         :show-whatsapp="!showHomeExchangeSection"
         :whatsapp-url="guestWhatsappUrl"
         :sticky-footer-doc="showSiteFooter"
-        :open-bets-use-unsettled="showHomeExchangeSection"
-        :home-reference-layout="showHomeExchangeSection"
+        :open-bets-use-unsettled="showReferenceSportsShell"
+        :home-reference-layout="showReferenceSportsShell"
       />
     </div>
 
@@ -385,7 +385,7 @@ import HeaderAnnouncementBar from '@/components/HeaderAnnouncementBar.vue'
 import HeaderSubHeader from '@/components/HeaderSubHeader.vue'
 import { useExposureDialog } from '@/composables/useExposureDialog'
 import { useSettingsStore } from '@/stores/settings.js'
-import { openLoginModal } from '@/composables/useLoginModal.js'
+import { openLoginModal, openSignupModal } from '@/composables/useLoginModal.js'
 import { buildWhatsAppSupportUrl } from '@/utils/whatsappSupportUrl.js'
 
 const { t } = useI18n()
@@ -460,6 +460,7 @@ const {
   showMobileProvidersInLayoutRail,
   showDesktopSportsShellRail,
   showHomeExchangeSection,
+  showReferenceSportsShell,
   isExchangeSportDetailPage,
   isCasinoListingPage,
   isHorseGreyhoundRacingPage,
@@ -622,12 +623,12 @@ const whatsappLink = computed(() => {
 
 const handleGuestLoginClick = () => {
   closeMobileSidebarOverlay()
-  if (route.name === 'login') return
   openLoginModal()
 }
 
 const handleGuestSignupClick = () => {
   closeMobileSidebarOverlay()
+  openSignupModal()
 }
 
 const handleGuestGetIdClick = () => {
@@ -636,7 +637,7 @@ const handleGuestGetIdClick = () => {
     window.open(whatsappLink.value, '_blank', 'noopener,noreferrer')
     return
   }
-  router.push({ name: 'signup' })
+  openSignupModal()
 }
 
 const openInlineSearch = () => {

@@ -77,6 +77,11 @@
               {{ t('auth.signup.agreeTermsLink') }}
             </router-link>
           </p>
+
+          <p v-if="modal" class="auth-ref-footer">
+            {{ t('auth.signup.alreadyHaveAccount') }}
+            <button type="button" @click="emit('sign-in-click')">{{ t('auth.signup.loginLink') }}</button>
+          </p>
         </div>
 
         <!-- Step 2: OTP verification -->
@@ -158,6 +163,7 @@ import SignupPlainField from '@/components/auth/SignupPlainField.vue';
 const props = defineProps({
   initialCampaignId: { type: String, default: '' },
   initialReferralId: { type: String, default: '' },
+  modal: { type: Boolean, default: false },
 });
 
 const { t } = useI18n();
@@ -168,7 +174,7 @@ const { showSuccess, showError } = useSnackbar();
 const OTP_LENGTH = 6;
 const DEFAULT_LAST_NAME = 'user';
 
-const emit = defineEmits(['step-change']);
+const emit = defineEmits(['step-change', 'sign-in-click', 'success']);
 
 const step = ref(1);
 
@@ -390,7 +396,11 @@ async function handleSignup() {
     });
     showSuccess(t('auth.signup.success'));
     await new Promise((resolve) => setTimeout(resolve, 500));
-    router.replace('/login');
+    if (props.modal) {
+      emit('success');
+    } else {
+      router.replace('/login');
+    }
   } catch (error) {
     console.error('Signup error:', error);
     showError(getApiError(error, t('auth.signup.failed')));

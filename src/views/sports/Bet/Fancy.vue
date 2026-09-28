@@ -293,45 +293,126 @@ provide('openRules', showRules);
     <!-- Light content surface (markets table/cards) — matches reference -->
     <div class="fancy-markets-body">
       <div class="fancy-grid-container">
-      <template v-for="tab in orderedFancyTabsWithBinary" :key="tab.tabName">
-        <!-- Back/Lay Tabs -->
-        <FancyBackLay v-if="tab.componentType === 'others'" :fancyData="tab.markets"
-          :fancyTabs="{ [tab.tabName]: tab.sortPriorities }" :betHistory="betHistory" :betOutcomes="betOutcomes"
-          :eventTypeId="eventTypeId" :eventName="eventName" :betAllow="betAllow" :inPlay="inPlay" :eventId="eventId"
-          :activeCategory="activeCategory" />
+        <div
+          v-if="activeTabHasVisibleMarkets"
+          class="fancy-card-item fancy-market-block tw-bg-theme-surface tw-border tw-border-theme-border tw-overflow-hidden"
+        >
+          <div class="tw-flex tw-items-stretch tw-overflow-hidden tw-border-b tw-border-theme-border fancy-header-bar">
+            <div
+              class="fancy-sessions-orange-header tw-relative tw-z-0 tw-flex tw-min-w-0 tw-flex-nowrap tw-items-center tw-gap-x-1 tw-bg-gradient-to-r tw-from-[#b88f2f] tw-via-[#e7dc99] tw-to-[#ba9336] tw-pl-2 tw-pr-7 tw-py-1 md:tw-px-2.5 md:tw-py-1 tw-basis-[58%] tw-min-w-[220px] tw-max-w-[min(100%,320px)] md:tw-basis-auto md:tw-min-w-[360px] md:tw-max-w-none"
+            >
+              <h3
+                class="fancy-section-title match-odds-section-title tw-m-0 tw-min-w-0 tw-flex-1 tw-font-bold tw-text-black tw-uppercase tw-text-[10px] tw-leading-none sm:tw-text-[11px] md:tw-leading-tight"
+              >
+                Fancy
+              </h3>
+            </div>
+            <div class="fancy-header-backlay-col">
+              <div class="fancy-header-label-grid">
+                <span class="fancy-header-label-spacer" aria-hidden="true"></span>
+                <span class="fancy-header-no-label">No</span>
+                <span class="fancy-header-yes-label">Yes</span>
+                <span class="fancy-header-label-spacer fancy-header-label-spacer--tail" aria-hidden="true"></span>
+                <span class="fancy-header-label-spacer fancy-header-label-spacer--tail" aria-hidden="true"></span>
+              </div>
+            </div>
+          </div>
 
-        <!-- Odd/Even (Dedicated Layout) -->
-        <FancyOddEven v-else-if="tab.componentType === 'oddEven'" :fancyData="tab.markets"
-          :fancyTabs="{ [tab.tabName]: tab.sortPriorities }" :betHistory="betHistory" :betOutcomes="betOutcomes"
-          :eventTypeId="eventTypeId" :eventName="eventName" :betAllow="betAllow" :inPlay="inPlay" :eventId="eventId"
-          :activeCategory="activeCategory" />
+          <div class="fancy-unified-runner-shell tw-p-0">
+              <template v-for="tab in orderedFancyTabsWithBinary" :key="tab.tabName">
+                <FancyBackLay
+                  v-if="tab.componentType === 'others'"
+                  rows-only
+                  :fancyData="tab.markets"
+                  :fancyTabs="{ [tab.tabName]: tab.sortPriorities }"
+                  :betHistory="betHistory"
+                  :betOutcomes="betOutcomes"
+                  :eventTypeId="eventTypeId"
+                  :eventName="eventName"
+                  :betAllow="betAllow"
+                  :inPlay="inPlay"
+                  :eventId="eventId"
+                  :activeCategory="activeCategory"
+                />
 
-        <!-- Back Only Odds Tabs (Khadda) -->
-        <FancyBackOnlyOdds v-else-if="tab.componentType === 'khadda'" :fancyData="tab.markets"
-          :fancyTabs="{ [tab.tabName]: tab.sortPriorities }" :betHistory="betHistory" :betOutcomes="betOutcomes"
-          :eventTypeId="eventTypeId" :eventName="eventName" :betAllow="betAllow" :inPlay="inPlay" :eventId="eventId"
-          :activeCategory="activeCategory" />
-      </template>
+                <FancyOddEven
+                  v-else-if="tab.componentType === 'oddEven'"
+                  rows-only
+                  :fancyData="tab.markets"
+                  :fancyTabs="{ [tab.tabName]: tab.sortPriorities }"
+                  :betHistory="betHistory"
+                  :betOutcomes="betOutcomes"
+                  :eventTypeId="eventTypeId"
+                  :eventName="eventName"
+                  :betAllow="betAllow"
+                  :inPlay="inPlay"
+                  :eventId="eventId"
+                  :activeCategory="activeCategory"
+                />
 
-      <!-- Fallback when tabs metadata is missing -->
-      <template v-if="orderedFancyTabs.length === 0">
-        <FancyBackLay v-if="getFancyByType.others.length > 0" :fancyData="getFancyByType.others" :fancyTabs="null"
-          :betHistory="betHistory" :betOutcomes="betOutcomes" :eventTypeId="eventTypeId" :eventName="eventName"
-          :betAllow="betAllow" :eventId="eventId"
-          :activeCategory="activeCategory" />
-        <FancyOddEven v-if="getFancyByType.oddEven.length > 0" :fancyData="getFancyByType.oddEven"
-          :fancyTabs="null" :betHistory="betHistory" :betOutcomes="betOutcomes" :eventTypeId="eventTypeId"
-          :eventName="eventName" :betAllow="betAllow" :eventId="eventId"
-          :activeCategory="activeCategory" />
-        <FancyBackOnlyOdds v-if="getFancyByType.khadda.length > 0" :fancyData="getFancyByType.khadda"
-          :fancyTabs="null" :betHistory="betHistory" :betOutcomes="betOutcomes" :eventTypeId="eventTypeId"
-          :eventName="eventName" :betAllow="betAllow" :eventId="eventId"
-          :activeCategory="activeCategory" />
-      </template>
+                <FancyBackOnlyOdds
+                  v-else-if="tab.componentType === 'khadda'"
+                  rows-only
+                  :fancyData="tab.markets"
+                  :fancyTabs="{ [tab.tabName]: tab.sortPriorities }"
+                  :betHistory="betHistory"
+                  :betOutcomes="betOutcomes"
+                  :eventTypeId="eventTypeId"
+                  :eventName="eventName"
+                  :betAllow="betAllow"
+                  :inPlay="inPlay"
+                  :eventId="eventId"
+                  :activeCategory="activeCategory"
+                />
+              </template>
 
-      <div v-if="!activeTabHasVisibleMarkets" class="fancy-market fancy-empty-market">
-        <div class="fancy-message">No real-time records found</div>
-      </div>
+              <template v-if="orderedFancyTabs.length === 0">
+                <FancyBackLay
+                  v-if="getFancyByType.others.length > 0"
+                  rows-only
+                  :fancyData="getFancyByType.others"
+                  :fancyTabs="null"
+                  :betHistory="betHistory"
+                  :betOutcomes="betOutcomes"
+                  :eventTypeId="eventTypeId"
+                  :eventName="eventName"
+                  :betAllow="betAllow"
+                  :eventId="eventId"
+                  :activeCategory="activeCategory"
+                />
+                <FancyOddEven
+                  v-if="getFancyByType.oddEven.length > 0"
+                  rows-only
+                  :fancyData="getFancyByType.oddEven"
+                  :fancyTabs="null"
+                  :betHistory="betHistory"
+                  :betOutcomes="betOutcomes"
+                  :eventTypeId="eventTypeId"
+                  :eventName="eventName"
+                  :betAllow="betAllow"
+                  :eventId="eventId"
+                  :activeCategory="activeCategory"
+                />
+                <FancyBackOnlyOdds
+                  v-if="getFancyByType.khadda.length > 0"
+                  rows-only
+                  :fancyData="getFancyByType.khadda"
+                  :fancyTabs="null"
+                  :betHistory="betHistory"
+                  :betOutcomes="betOutcomes"
+                  :eventTypeId="eventTypeId"
+                  :eventName="eventName"
+                  :betAllow="betAllow"
+                  :eventId="eventId"
+                  :activeCategory="activeCategory"
+                />
+              </template>
+          </div>
+        </div>
+
+        <div v-else class="fancy-market fancy-empty-market">
+          <div class="fancy-message">No real-time records found</div>
+        </div>
       </div>
     </div>
   </div>

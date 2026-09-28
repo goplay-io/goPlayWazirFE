@@ -40,7 +40,12 @@ const props = defineProps({
   mobileSection: {
     type: Boolean,
     default: false
-  }
+  },
+  /** Layout right rail: reference open-bets shell (Matched Bets header + dark body) */
+  homeRefChrome: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const betStore = useBetStore()
@@ -123,6 +128,11 @@ const betsByEvent = computed(() => {
 const activeTab = ref('P')
 const expandedEvents = ref([]) // Track which event accordions are expanded (array for v-expansion-panels)
 const embeddedExpandedEvents = ref(new Set())
+const matchedBetsExpanded = ref(true)
+
+const toggleMatchedBets = () => {
+  matchedBetsExpanded.value = !matchedBetsExpanded.value
+}
 
 const embeddedOpenBets = computed(() => {
   if (!props.embedded) return []
@@ -288,14 +298,127 @@ onMounted(async () => {
       embedded ? '' : 'tw-overflow-hidden',
       mobileSection
         ? 'bet-history-root--mobile-section tw-bg-transparent tw-border-0'
-        : 'tw-bg-white tw-border tw-border-theme-border',
+        : embedded && homeRefChrome
+          ? 'bet-history-root--home-ref tw-bg-transparent tw-border-0'
+          : 'tw-bg-white tw-border tw-border-theme-border',
       embedded ? 'bet-history-root--embedded' : 'tw-flex tw-flex-col',
       fullBleed ? 'bet-history-root--full-bleed' : '',
     ]"
     elevation="0">
 
     <template v-if="embedded">
-      <div class="bet-history-embedded-slip">
+      <div v-if="homeRefChrome" class="home-ref-open-bets">
+        <div class="home-ref-matched-bets">
+          <div
+            class="home-ref-matched-bets__header-wrap"
+            :class="{ 'home-ref-matched-bets__header-wrap--expanded': matchedBetsExpanded }"
+          >
+            <button
+              type="button"
+              class="home-ref-matched-bets__header"
+              :aria-expanded="matchedBetsExpanded"
+              @click="toggleMatchedBets"
+            >
+              {{ t('components.betHeader.matchedBetTab') }}
+            </button>
+            <button
+              type="button"
+              class="home-ref-matched-bets__toggle"
+              :aria-expanded="matchedBetsExpanded"
+              :aria-label="matchedBetsExpanded ? 'Collapse' : 'Expand'"
+              @click="toggleMatchedBets"
+            >
+              <v-icon
+                size="14"
+                :class="{ 'home-ref-matched-bets__chevron--open': matchedBetsExpanded }"
+                class="home-ref-matched-bets__chevron"
+              >
+                mdi-chevron-down
+              </v-icon>
+            </button>
+          </div>
+          <div v-show="matchedBetsExpanded" class="home-ref-matched-bets__body">
+            <div
+              v-if="loading || embeddedOpenBets.length === 0"
+              class="home-ref-matched-bets__empty"
+              aria-hidden="true"
+            />
+            <div v-else class="bet-history-embedded-events home-ref-matched-bets__events">
+              <section
+                v-for="eventGroup in embeddedBetsByEvent"
+                :key="eventGroup.key"
+                class="bet-history-event-group"
+              >
+                <div
+                  class="bet-history-event-header-wrap"
+                  :class="{ 'bet-history-event-header-wrap--expanded': isEmbeddedEventExpanded(eventGroup.key) }"
+                >
+                  <button
+                    type="button"
+                    class="bet-history-event-header"
+                    :aria-expanded="isEmbeddedEventExpanded(eventGroup.key)"
+                    @click="toggleEmbeddedEvent(eventGroup.key)"
+                  >
+                    <span class="bet-history-event-header__label">
+                      <span class="bet-history-event-header__event-name">{{ eventGroup.eventName }}</span><template v-if="eventGroup.sportName"> ({{ eventGroup.sportName }})</template>
+                    </span>
+                  </button>
+                  <button
+                    type="button"
+                    class="bet-history-event-header__toggle"
+                    :aria-expanded="isEmbeddedEventExpanded(eventGroup.key)"
+                    :aria-label="isEmbeddedEventExpanded(eventGroup.key) ? 'Collapse' : 'Expand'"
+                    @click="toggleEmbeddedEvent(eventGroup.key)"
+                  >
+                    <v-icon
+                      size="12"
+                      :class="{ 'bet-history-event-header__chevron--open': isEmbeddedEventExpanded(eventGroup.key) }"
+                      class="bet-history-event-header__chevron"
+                    >
+                      mdi-chevron-down
+                    </v-icon>
+                  </button>
+                </div>
+                <div v-show="isEmbeddedEventExpanded(eventGroup.key)" class="bet-history-event-body">
+                  <div class="bet-history-embedded-table-scroll">
+                  <table class="bet-history-embedded-table">
+                    <thead>
+                      <tr>
+                        <th class="bet-history-col-bl">B/L</th>
+                        <th class="bet-history-col-team">Team</th>
+                        <th class="bet-history-col-odds">Odds</th>
+                        <th class="bet-history-col-stake">{{ t('betHistory.stake') }}</th>
+                        <th class="bet-history-col-pl">P/L</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        v-for="bet in eventGroup.bets"
+                        :key="bet.id"
+                      >
+                        <td class="bet-history-cell-bl">
+                          <span
+                            class="bet-history-bl-chip"
+                            :class="isBackBet(bet) ? 'bet-history-bl-chip--back' : 'bet-history-bl-chip--lay'"
+                          >
+                            {{ getBackLayLabel(bet) }}
+                          </span>
+                        </td>
+                        <td class="bet-history-cell-team">{{ formatEmbeddedTeam(bet) }}</td>
+                        <td class="bet-history-cell-odds">{{ formatEmbeddedOdds(bet) }}</td>
+                        <td class="bet-history-cell-stake">{{ formatEmbeddedStake(bet) }}</td>
+                        <td class="bet-history-cell-pl">{{ formatEmbeddedPl(bet) }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-else class="bet-history-embedded-slip">
         <p
           v-if="loading"
           class="bet-panel-empty-message bet-panel-empty-message--embedded-slip"

@@ -8,8 +8,7 @@
 
   <ApkDownloadModal />
 
-  <LoginModal />
-  <ForgotPasswordModal />
+  <AuthModal />
 
   <GlobalSnackbar />
 
@@ -32,8 +31,7 @@ import Layout from '@/layouts/Layout.vue'
 import GuestLayout from '@/layouts/GuestLayout.vue'
 import BannerPopup from '@/components/BannerPopup.vue'
 import ApkDownloadModal from '@/components/ApkDownloadModal.vue'
-import LoginModal from '@/components/auth/LoginModal.vue'
-import ForgotPasswordModal from '@/components/auth/ForgotPasswordModal.vue'
+import AuthModal from '@/components/auth/AuthModal.vue'
 import GlobalSnackbar from '@/components/GlobalSnackbar.vue'
 import ExposureDialog from '@/layouts/ExposureDialog.vue'
 import BonusRulesModal from '@/components/BonusRulesModal.vue'

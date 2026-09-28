@@ -4,14 +4,16 @@ import { useUIStore } from '@/stores/ui'
 export function useForgotPasswordModal() {
   const uiStore = useUIStore()
 
-  const isForgotPasswordModalOpen = computed(() => uiStore.forgotPasswordModalOpen)
+  const isForgotPasswordModalOpen = computed(
+    () => uiStore.loginModalOpen && uiStore.authModalView === 'forgot',
+  )
 
   function openForgotPasswordModal() {
-    uiStore.openForgotPasswordModal()
+    uiStore.openLoginModal({ view: 'forgot' })
   }
 
   function closeForgotPasswordModal() {
-    uiStore.closeForgotPasswordModal()
+    uiStore.setAuthModalView('login')
   }
 
   return {
@@ -23,10 +25,10 @@ export function useForgotPasswordModal() {
 
 export function openForgotPasswordModal() {
   const uiStore = useUIStore()
-  uiStore.openForgotPasswordModal()
+  uiStore.openLoginModal({ view: 'forgot' })
 }
 
 export function closeForgotPasswordModal() {
   const uiStore = useUIStore()
-  uiStore.closeForgotPasswordModal()
+  uiStore.setAuthModalView('login')
 }

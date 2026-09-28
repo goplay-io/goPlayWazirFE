@@ -61,6 +61,11 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  /** Layout right rail: Wazir reference shell (#333 tabs) instead of Zuplay purple chrome. */
+  homeRefChrome: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const betAllow = ref(props.betAllow || false);
@@ -151,6 +156,7 @@ const displayOdd = computed(() => props.bet?.odd ?? null);
 const { increaseOdd, decreaseOdd, canAdjustOdds, usesExchangeOddsLadder } = useOddsLadder(() => props.bet);
 
 const slipDensity = computed(() => isMobile.value ? 'comfortable' : 'compact');
+const useHomeRefChrome = computed(() => props.homeRefChrome && !isMobile.value);
 const hasSlipSelection = computed(() => !!props.bet?.odd);
 const slipPanelFillsRail = computed(
   () => !isMobile.value && slipPanelTab.value === 'betslip' && hasSlipSelection.value,
@@ -311,10 +317,38 @@ watch(() => props.betAllow, (newValue, oldValue) => {
       isMobile
         ? 'sports-bet-slip-stack tw-gap-2'
         : ['bet-slip-tabbed-panel', slipPanelFillsRail ? 'bet-slip-tabbed-panel--fill' : ''],
+      useHomeRefChrome ? 'home-ref-bet-slip' : '',
     ]"
   >
-    <div v-if="!isMobile" class="bet-slip-tabs">
-      <div class="bet-slip-tabs__group">
+    <div
+      v-if="!isMobile"
+      :class="useHomeRefChrome ? 'home-ref-bet-slip__tabs' : 'bet-slip-tabs'"
+      role="tablist"
+      aria-label="Bet slip panels"
+    >
+      <template v-if="useHomeRefChrome">
+        <button
+          type="button"
+          role="tab"
+          class="home-ref-bet-slip__tab"
+          :class="{ 'home-ref-bet-slip__tab--active': slipPanelTab === 'betslip' }"
+          :aria-selected="slipPanelTab === 'betslip'"
+          @click="slipPanelTab = 'betslip'"
+        >
+          {{ t('components.betSlipToolbar.betslip') }}
+        </button>
+        <button
+          type="button"
+          role="tab"
+          class="home-ref-bet-slip__tab"
+          :class="{ 'home-ref-bet-slip__tab--active': slipPanelTab === 'openBet' }"
+          :aria-selected="slipPanelTab === 'openBet'"
+          @click="slipPanelTab = 'openBet'"
+        >
+          {{ t('components.betSlipToolbar.openBet') }} ({{ openBetCount }})
+        </button>
+      </template>
+      <div v-else class="bet-slip-tabs__group">
         <button
           type="button"
           class="bet-slip-tabs__tab"
@@ -334,6 +368,7 @@ watch(() => props.betAllow, (newValue, oldValue) => {
       </div>
     </div>
 
+    <div :class="{ 'home-ref-bet-slip__body': useHomeRefChrome }">
   <v-card
     v-if="isMobile || slipOpen !== false"
     v-show="isMobile || slipPanelTab === 'betslip'"
@@ -352,16 +387,23 @@ watch(() => props.betAllow, (newValue, oldValue) => {
     <transition name="slide-fade">
       <div :class="hasSlipSelection ? 'tw-transition-colors tw-bg-transparent' : 'bet-slip-empty-state'">
         <template v-if="!hasSlipSelection">
-          <img
-            class="bet-slip-empty-state__icon"
-            :src="emptyBetslipTicketsIcon"
-            alt=""
-            width="75.33"
-            height="75.33"
+          <div
+            v-if="useHomeRefChrome"
+            class="home-ref-bet-slip__empty-panel home-ref-bet-slip__empty-panel--blank"
+            aria-hidden="true"
           />
-          <p class="bet-slip-empty-state__text">
-            {{ t('components.betSlipToolbar.emptyStateTitle') }}
-          </p>
+          <template v-else>
+            <img
+              class="bet-slip-empty-state__icon"
+              :src="emptyBetslipTicketsIcon"
+              alt=""
+              width="75.33"
+              height="75.33"
+            />
+            <p class="bet-slip-empty-state__text">
+              {{ t('components.betSlipToolbar.emptyStateTitle') }}
+            </p>
+          </template>
         </template>
 
         <div
@@ -561,6 +603,7 @@ watch(() => props.betAllow, (newValue, oldValue) => {
       <div class="tw-p-1">
         <BetHistory
           embedded
+          :home-ref-chrome="useHomeRefChrome"
           :bet-history="openBetsUseUnsettled ? null : betHistory"
           :event-groups="openBetsUseUnsettled ? unsettledEventGroups : null"
           :loading="openBetsUseUnsettled ? unsettledLoading : false"
@@ -593,6 +636,7 @@ watch(() => props.betAllow, (newValue, oldValue) => {
           ›
         </button>
       </div>
+    </div>
     </div>
 
     <!-- Update Stakes Modal -->

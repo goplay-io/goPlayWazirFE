@@ -10,7 +10,7 @@
       (useMobileBodyScroll || showSiteFooter)
         ? 'tw-min-h-screen'
         : 'tw-h-full tw-max-h-full tw-overflow-hidden',
-      { 'layout-home-shell-bg': showHomeExchangeSection },
+      { 'layout-home-shell-bg': showReferenceSportsShell },
     ]"
   >
     <!-- Full Width Header (mobile casino game uses in-page bar only — reference has no app header) -->
@@ -42,7 +42,7 @@
       <div
         class="layout-content-row tw-flex tw-min-w-0 tw-gap-0"
         :class="[
-          showHomeExchangeSection ? '' : 'tw-bg-white',
+          showReferenceSportsShell ? '' : 'tw-bg-white',
           useMobileBodyScroll ? 'layout-content-row--mobile-bet' : '',
           showSiteFooter
             ? 'layout-content-row--footer-doc'
@@ -115,8 +115,8 @@
               <div
                 class="sports-layout-shell__content"
                 :class="{
-                  'sports-layout-shell__content--home-pad': showHomeExchangeSection,
-                  'sports-layout-shell__content--reference-home': showHomeExchangeSection,
+                  'sports-layout-shell__content--home-pad': showReferenceSportsShell,
+                  'sports-layout-shell__content--reference-home': showReferenceSportsShell,
                 }"
               >
                 <SportsMainBanner v-if="isSportsShellPage && showSportsShellMainBanner && !isMultiMarketPage" />
@@ -154,8 +154,8 @@
       <LayoutRightRail
         v-if="showLayoutRightRail"
         :sticky-footer-doc="showSiteFooter"
-        :open-bets-use-unsettled="showHomeExchangeSection"
-        :home-reference-layout="showHomeExchangeSection"
+        :open-bets-use-unsettled="showReferenceSportsShell"
+        :home-reference-layout="showReferenceSportsShell"
       />
       </div>
 
@@ -260,6 +260,7 @@ const {
   showMobileProvidersInLayoutRail,
   showDesktopSportsShellRail,
   showHomeExchangeSection,
+  showReferenceSportsShell,
   isExchangeSportDetailPage,
   isCasinoListingPage,
   isHorseGreyhoundRacingPage,
@@ -673,12 +674,12 @@ useWalletRefresh(2)
 /* Bet page: match Bet.vue chrome; min-height must not be 100vh or flex cannot shrink and .bet-markets-scrollable never scrolls */
 @media (min-width: 769px) {
   .layout-v-main--bet-desktop {
-    background-color: #ececec !important;
+    background-color: #23201f !important;
     min-height: 0 !important;
   }
 
   .layout-v-main--bet-desktop :deep(.v-main__wrap) {
-    background-color: #ececec;
+    background-color: #23201f;
     min-height: 0 !important;
   }
 }
