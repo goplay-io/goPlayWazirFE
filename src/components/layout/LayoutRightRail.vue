@@ -23,7 +23,7 @@ defineProps({
     type: Boolean,
     default: false,
   },
-  /** monkeydon.com home: bet slip card only — no Why Choose Us / WhatsApp promos. */
+  /** monkeydon.com home / report rail: bet slip card only — no Why Choose Us / WhatsApp promos. */
   homeReferenceLayout: {
     type: Boolean,
     default: false,

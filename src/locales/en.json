@@ -135,19 +135,30 @@
       "drawer": {
         "greeting": "HI,",
         "balanceInformation": "Balance Information",
+        "freeCash": "Free Cash",
+        "exposure": "Exposure",
         "deposit": "Deposit",
         "withdraw": "Withdraw",
         "claimBonuses": "Claim Bonuses",
         "awaitingBonus": "Awaiting Bonus",
         "referAndEarn": "Refer and Earn",
+        "customerSupport": "Customer Support",
+        "downloadApk": "Download APK",
         "openBets": "Open Bets",
         "bonusRules": "Bonus rules",
         "resetPassword": "Change Password",
-        "settings": "Settings",
+        "settings": "Stake Settings",
         "myBets": "Bets History",
         "favorites": "Favorites",
         "rules": "Rules and Regulation",
-        "logout": "LOGOUT"
+        "logout": "Logout",
+        "sections": {
+          "help": "Help and Support",
+          "statements": "Statements",
+          "accountSettings": "Account Settings",
+          "legal": "Legal & Compliance",
+          "accountActions": "Account actions"
+        }
       },
       "logout": "Log Out"
     }
