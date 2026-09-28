@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { USER_DRAWER_NAV_SECTIONS } from '@/constants/userDrawerNavItems.js'
 
 const props = defineProps({
   modelValue: {
@@ -11,10 +12,32 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  phone: {
+    type: String,
+    default: '',
+  },
+  balance: {
+    type: String,
+    default: '0',
+  },
+  freeCash: {
+    type: String,
+    default: 'N/A',
+  },
+  exposure: {
+    type: String,
+    default: '0',
+  },
+  /** @deprecated Prefer balance / freeCash / exposure props. Still used as fallback. */
   walletRows: {
     type: Array,
     default: () => [],
   },
+  navSections: {
+    type: Array,
+    default: () => USER_DRAWER_NAV_SECTIONS,
+  },
+  /** Flat fallback if sections not provided by older callers. */
   navItems: {
     type: Array,
     default: () => [],
@@ -29,6 +52,10 @@ const props = defineProps({
   },
   showClaimBonus: {
     type: Boolean,
+    default: false,
+  },
+  showDownloadApk: {
+    type: Boolean,
     default: true,
   },
 })
@@ -41,6 +68,8 @@ const emit = defineEmits([
   'withdraw',
   'claim-bonus',
   'exposure-click',
+  'customer-support',
+  'download-apk',
 ])
 
 const { t } = useI18n()
@@ -50,22 +79,74 @@ const drawerOpen = computed({
   set: (value) => emit('update:modelValue', value),
 })
 
-const displayName = computed(() => (props.userName || '').toUpperCase())
+const displayPhone = computed(() => {
+  const phone = String(props.phone || '').trim()
+  if (phone) return phone
+  return props.userName || ''
+})
+
+const balanceValue = computed(() => {
+  if (props.balance) return props.balance
+  const row = props.walletRows.find((r) => r.key === 'balance')
+  return row?.value ?? '0'
+})
+
+const freeCashValue = computed(() => {
+  if (props.freeCash) return props.freeCash
+  const row = props.walletRows.find((r) => r.key === 'cashable' || r.key === 'freeCash')
+  return row?.value ?? 'N/A'
+})
+
+const exposureValue = computed(() => {
+  if (props.exposure) return props.exposure
+  const row = props.walletRows.find((r) => r.key === 'exposure')
+  return row?.value ?? '0'
+})
+
+const sections = computed(() => {
+  if (props.navSections?.length) {
+    return props.navSections
+      .map((section) => ({
+        ...section,
+        items: (section.items || []).filter((item) => {
+          if (item.action === 'download-apk' && !props.showDownloadApk) return false
+          return true
+        }),
+      }))
+      .filter((section) => section.items.length > 0)
+  }
+  if (props.navItems?.length) {
+    return [{ id: 'nav', titleKey: '', items: props.navItems }]
+  }
+  return []
+})
 
 function closeDrawer() {
   drawerOpen.value = false
 }
 
 function handleNavItem(item) {
-  emit('navigate', item)
-  closeDrawer()
-}
-
-function handleWalletRowClick(row) {
-  if (row?.key === 'exposure') {
+  if (item.action === 'logout') {
+    emit('logout')
+    return
+  }
+  if (item.action === 'customer-support') {
+    emit('customer-support')
+    closeDrawer()
+    return
+  }
+  if (item.action === 'download-apk') {
+    emit('download-apk')
+    closeDrawer()
+    return
+  }
+  if (item.action === 'exposure') {
     emit('exposure-click')
     closeDrawer()
+    return
   }
+  emit('navigate', item)
+  closeDrawer()
 }
 
 function handleDeposit() {
@@ -82,6 +163,11 @@ function handleClaimBonus() {
   emit('claim-bonus')
   closeDrawer()
 }
+
+function handleExposureClick() {
+  emit('exposure-click')
+  closeDrawer()
+}
 </script>
 
 <template>
@@ -90,127 +176,119 @@ function handleClaimBonus() {
       v-model="drawerOpen"
       location="right"
       temporary
-      :width="320"
+      :width="384"
       class="user-account-drawer"
       scrim="rgba(0, 0, 0, 0.55)"
       :style="{ top: '0px', height: '100dvh' }"
     >
       <div class="user-account-drawer__panel">
-        <div class="user-account-drawer__shell">
-          <header class="user-account-drawer__header">
-            <div class="user-account-drawer__identity-row">
-              <button
-                type="button"
-                class="user-account-drawer__close"
-                aria-label="Close"
-                @click="closeDrawer"
-              >
-                <svg
-                  class="user-account-drawer__close-icon"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-              </button>
+        <ul class="user-account-drawer__list">
+          <!-- Identity -->
+          <li class="user-account-drawer__identity">
+            <div class="user-account-drawer__identity-main">
+              <v-icon size="22" class="user-account-drawer__accent-icon">mdi-cellphone</v-icon>
+              <span class="user-account-drawer__phone">{{ displayPhone }}</span>
+            </div>
+            <button
+              type="button"
+              class="user-account-drawer__close"
+              aria-label="Close"
+              @click="closeDrawer"
+            >
+              <v-icon size="20">mdi-close</v-icon>
+            </button>
+          </li>
 
-              <div class="user-account-drawer__identity">
-                <img
-                  src="/svg/green circleman.webp"
-                  alt=""
-                  class="user-account-drawer__avatar"
-                  width="30"
-                  height="30"
-                />
-                <span class="user-account-drawer__name">{{ displayName }}</span>
-              </div>
+          <!-- Balance -->
+          <li v-if="showWalletSummary" class="user-account-drawer__balance-block">
+            <div class="user-account-drawer__balance-heading">
+              <v-icon size="20" class="user-account-drawer__accent-icon">mdi-bank-outline</v-icon>
+              <span>{{ t('header.user.drawer.balanceInformation') }}</span>
             </div>
 
-          <p v-if="showWalletSummary" class="user-account-drawer__section-title">
-            {{ t('header.user.drawer.balanceInformation') }}
-          </p>
-        </header>
+            <div class="user-account-drawer__balance-grid">
+              <div class="user-account-drawer__balance-card user-account-drawer__balance-card--full">
+                <span class="user-account-drawer__balance-label">
+                  {{ t('header.user.walletSummary.balance') }}
+                </span>
+                <span class="user-account-drawer__balance-value user-account-drawer__balance-value--success">
+                  ₹ {{ balanceValue }}
+                </span>
+              </div>
+              <div class="user-account-drawer__balance-card">
+                <span class="user-account-drawer__balance-label">
+                  {{ t('header.user.drawer.freeCash') }}
+                </span>
+                <span class="user-account-drawer__balance-value">
+                  ₹ {{ freeCashValue }}
+                </span>
+              </div>
+              <button
+                type="button"
+                class="user-account-drawer__balance-card user-account-drawer__balance-card--clickable"
+                @click="handleExposureClick"
+              >
+                <span class="user-account-drawer__balance-label">
+                  {{ t('header.user.drawer.exposure') }}
+                </span>
+                <span class="user-account-drawer__balance-value user-account-drawer__balance-value--danger">
+                  ₹ {{ exposureValue }}
+                </span>
+              </button>
+            </div>
 
-        <div v-if="showWalletSummary" class="user-account-drawer__stats">
-          <div
-            v-for="row in walletRows"
-            :key="row.key"
-            class="user-account-drawer__stat-row"
-            :class="{ 'user-account-drawer__stat-row--clickable': row.key === 'exposure' }"
-            :role="row.key === 'exposure' ? 'button' : undefined"
-            :tabindex="row.key === 'exposure' ? 0 : undefined"
-            @click="handleWalletRowClick(row)"
-            @keydown.enter.prevent="handleWalletRowClick(row)"
-            @keydown.space.prevent="handleWalletRowClick(row)"
-          >
-            <span class="user-account-drawer__stat-label">{{ t(row.labelKey) }}</span>
-            <span class="user-account-drawer__stat-value">{{ row.value }}</span>
-          </div>
-        </div>
+            <div v-if="showPaymentActions" class="user-account-drawer__payment-row">
+              <button
+                type="button"
+                class="user-account-drawer__payment-btn user-account-drawer__payment-btn--deposit"
+                @click="handleDeposit"
+              >
+                <v-icon size="22" class="user-account-drawer__payment-icon" icon="mdi-wallet-plus" />
+                <span>{{ t('header.user.drawer.deposit') }}</span>
+              </button>
+              <button
+                type="button"
+                class="user-account-drawer__payment-btn user-account-drawer__payment-btn--withdraw"
+                @click="handleWithdraw"
+              >
+                <v-icon size="22" class="user-account-drawer__payment-icon" icon="mdi-cash-minus" />
+                <span>{{ t('header.user.drawer.withdraw') }}</span>
+              </button>
+            </div>
 
-        <div v-if="showWalletSummary && showPaymentActions" class="user-account-drawer__payment-row">
-          <button
-            type="button"
-            class="user-account-drawer__payment-btn user-account-drawer__payment-btn--outline"
-            @click="handleDeposit"
-          >
-            {{ t('header.user.drawer.deposit') }}
-          </button>
-          <button
-            type="button"
-            class="user-account-drawer__payment-btn user-account-drawer__payment-btn--solid"
-            @click="handleWithdraw"
-          >
-            {{ t('header.user.drawer.withdraw') }}
-          </button>
-        </div>
+            <button
+              v-if="showClaimBonus"
+              type="button"
+              class="user-account-drawer__claim-btn"
+              @click="handleClaimBonus"
+            >
+              {{ t('header.user.drawer.claimBonuses') }}
+            </button>
+          </li>
 
-        <div v-if="showWalletSummary && showClaimBonus" class="user-account-drawer__claim-wrap">
-          <button
-            type="button"
-            class="user-account-drawer__claim-btn"
-            @click="handleClaimBonus"
-          >
-            {{ t('header.user.drawer.claimBonuses') }}
-          </button>
-        </div>
-
-        <nav v-if="navItems.length" class="user-account-drawer__nav">
-          <component
-            v-for="(item, index) in navItems"
-            :key="item.to || item.action || item.title"
-            :is="item.to ? 'router-link' : 'button'"
-            :to="item.to || undefined"
-            type="button"
-            class="user-account-drawer__nav-item"
-            :class="{ 'user-account-drawer__nav-item--last': index === navItems.length - 1 }"
-            @click="handleNavItem(item)"
-          >
-            <img
-              v-if="item.iconSrc"
-              :src="item.iconSrc"
-              alt=""
-              class="user-account-drawer__nav-icon-img"
-              width="20"
-              height="20"
-            />
-            <v-icon v-else size="20" class="user-account-drawer__nav-icon">{{ item.icon }}</v-icon>
-            <span class="user-account-drawer__nav-label">{{ t(item.title) }}</span>
-          </component>
-        </nav>
-
-        <div class="user-account-drawer__footer">
-          <button type="button" class="user-account-drawer__logout" @click="emit('logout')">
-            {{ t('header.user.drawer.logout') }}
-          </button>
-        </div>
-        </div>
+          <!-- Grouped nav -->
+          <template v-for="section in sections" :key="section.id">
+            <li v-if="section.titleKey" class="user-account-drawer__section-title">
+              {{ t(section.titleKey) }}
+            </li>
+            <li
+              v-for="item in section.items"
+              :key="item.to || item.action || item.title"
+              class="user-account-drawer__nav-li"
+            >
+              <component
+                :is="item.to ? 'router-link' : 'button'"
+                :to="item.to || undefined"
+                type="button"
+                class="user-account-drawer__nav-item"
+                @click="handleNavItem(item)"
+              >
+                <v-icon size="20" class="user-account-drawer__nav-icon">{{ item.icon }}</v-icon>
+                <span class="user-account-drawer__nav-label">{{ t(item.title) }}</span>
+              </component>
+            </li>
+          </template>
+        </ul>
       </div>
     </v-navigation-drawer>
   </Teleport>
@@ -222,7 +300,13 @@ function handleClaimBonus() {
   height: 100dvh !important;
   max-height: 100dvh !important;
   z-index: 3100 !important;
-  background: var(--color-header-bg, #360952) !important;
+  background: #1f1f1f !important;
+  background-color: #1f1f1f !important;
+  background-image: none !important;
+  border-left: 1px solid #333333;
+  /* Override Vuetify theme surface (was purple / light). */
+  --v-theme-surface: 31, 31, 31;
+  --v-theme-on-surface: 255, 255, 255;
 }
 
 .user-account-drawer.v-navigation-drawer + .v-navigation-drawer__scrim {
@@ -235,8 +319,9 @@ function handleClaimBonus() {
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 8px;
-  background: var(--color-header-bg, #360952);
+  padding: 0;
+  background: #1f1f1f !important;
+  background-color: #1f1f1f !important;
   color: #ffffff;
   overflow: hidden;
   box-sizing: border-box;
@@ -244,271 +329,238 @@ function handleClaimBonus() {
 
 .user-account-drawer__panel {
   flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
   height: 100%;
   min-height: 0;
-  width: 100%;
-  margin: 0;
   overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  background: transparent;
-  color: #ffffff;
-  padding: 0 8px calc(8px + env(safe-area-inset-bottom, 0px));
+  padding: 0 0 calc(12px + env(safe-area-inset-bottom, 0px));
   box-sizing: border-box;
+  background: #545454;
 }
 
-.user-account-drawer__shell {
-  position: relative;
-  flex: 1 1 auto;
+.user-account-drawer__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  min-height: 0;
+}
+
+.user-account-drawer__identity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  border-bottom: 1px solid #737373;
+  background: #545454;
+}
+
+.user-account-drawer__identity-main {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.user-account-drawer__accent-icon {
+  color: #4cae50 !important;
+  flex-shrink: 0;
+}
+
+.user-account-drawer__phone {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .user-account-drawer__close {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 50;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 32px;
   height: 32px;
-  padding: 6px;
-  margin: 0;
-  border: 0;
-  border-radius: 8px;
-  background: transparent;
-  color: #ffffff;
-  cursor: pointer;
-}
-
-.user-account-drawer__close-icon {
-  display: block;
-  width: 20px;
-  height: 20px;
-}
-
-.user-account-drawer__header {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 0;
   padding: 0;
-}
-
-.user-account-drawer__identity-row {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  min-height: 32px;
-  margin: 8px;
-  gap: 8px;
-}
-
-.user-account-drawer__identity {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin: 0 auto;
-  min-width: 0;
-}
-
-.user-account-drawer__avatar {
-  display: block;
-  width: 30px;
-  height: 30px;
-  border-radius: 8px;
-  object-fit: contain;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #4cae50;
+  cursor: pointer;
   flex-shrink: 0;
 }
 
-.user-account-drawer__name {
+.user-account-drawer__balance-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  border-bottom: 1px solid #737373;
+}
+
+.user-account-drawer__balance-heading {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   color: #ffffff;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
-  letter-spacing: normal;
-  line-height: 24px;
-  margin-top: 1px;
+}
+
+.user-account-drawer__balance-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  width: 100%;
+}
+
+.user-account-drawer__balance-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 8px;
+  border: 1px solid #d2d2d2;
+  border-radius: 6px;
+  background: #e8e8e8;
+  text-align: left;
+}
+
+.user-account-drawer__balance-card--full {
+  grid-column: 1 / -1;
+}
+
+.user-account-drawer__balance-card--clickable {
+  cursor: pointer;
+  font: inherit;
+}
+
+.user-account-drawer__balance-label {
+  color: #505050;
+  font-size: 8px;
+  font-weight: 500;
+  line-height: 1.2;
   text-transform: uppercase;
 }
 
-.user-account-drawer__section-title {
-  margin: 0;
-  color: #ffffff;
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 22.5px;
-  text-align: center;
-}
-
-.user-account-drawer__stats {
-  padding: 0;
-}
-
-.user-account-drawer__stat-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 8px 0;
-  margin: 8px 0;
-  border-bottom: 1px solid #ffffff;
-}
-
-.user-account-drawer__stat-row:last-child {
-  margin-bottom: 12px;
-}
-
-.user-account-drawer__stat-row--clickable {
-  cursor: pointer;
-}
-
-.user-account-drawer__stat-label {
-  color: #ffffff;
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 22.5px;
-  letter-spacing: 0.025em;
-  padding: 0 20px;
-}
-
-.user-account-drawer__stat-value {
-  color: #ffffff;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 27px;
-  letter-spacing: 0.025em;
+.user-account-drawer__balance-value {
+  color: #333333;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
   font-variant-numeric: tabular-nums;
-  flex-shrink: 0;
-  padding: 0 8px;
+}
+
+.user-account-drawer__balance-value--success {
+  color: #4cae50;
+}
+
+.user-account-drawer__balance-value--danger {
+  color: #eb244f;
 }
 
 .user-account-drawer__payment-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin: 20px 4px 0;
-  padding: 0;
+  gap: 6px;
+  width: 100%;
 }
 
 .user-account-drawer__payment-btn {
-  min-height: 35px;
-  height: 35px;
-  padding: 0;
-  border-radius: 3.12px;
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 18px;
-  letter-spacing: normal;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
-.user-account-drawer__payment-btn--outline {
-  border: 1px solid #ffffff;
-  background: transparent;
-  color: #ffffff;
-}
-
-.user-account-drawer__payment-btn--solid {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: 52px;
+  padding: 6px 8px;
   border: 0;
-  background: #ffffff;
-  color: var(--color-header-bg, #360952);
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-transform: capitalize;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
-.user-account-drawer__claim-wrap {
-  padding: 14px 0 8px;
+.user-account-drawer__payment-icon {
+  color: #ffffff !important;
+  flex-shrink: 0;
+  opacity: 1;
+}
+
+.user-account-drawer__payment-btn--deposit {
+  background: linear-gradient(90deg, #17c964, #2e924b);
+}
+
+.user-account-drawer__payment-btn--withdraw {
+  background: linear-gradient(90deg, #bd3726, #f9b134);
 }
 
 .user-account-drawer__claim-btn {
   width: 100%;
-  min-height: 40px;
-  padding: 0 16px;
-  border: 2px solid #ffffff;
-  border-radius: 8px;
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 6px;
   background: transparent;
   color: #ffffff;
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: 0.01em;
+  font-size: 13px;
+  font-weight: 700;
   cursor: pointer;
 }
 
-.user-account-drawer__nav {
-  display: flex;
-  flex-direction: column;
-  margin-top: 0;
-  padding: 0;
+.user-account-drawer__section-title {
+  width: 100%;
+  padding: 8px 12px;
+  background: #545454;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.3;
+  border-bottom: 1px solid #737373;
+}
+
+.user-account-drawer__nav-li {
+  border-bottom: 1px solid #737373;
+  background: #545454;
 }
 
 .user-account-drawer__nav-item {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 12px;
   width: 100%;
-  min-height: 57px;
-  height: 57px;
-  padding: 0 22px;
+  min-height: 36px;
+  padding: 8px 14px;
   border: 0;
-  border-bottom: 1px solid #ffffff;
   background: transparent;
   color: #ffffff;
   text-decoration: none;
   text-align: left;
   cursor: pointer;
   box-sizing: border-box;
+  transition: background-color 0.15s ease;
 }
 
-.user-account-drawer__nav-item--last {
-  border-bottom: 1px solid #ffffff;
+.user-account-drawer__nav-item:hover {
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .user-account-drawer__nav-icon {
-  color: #ffffff !important;
-  flex-shrink: 0;
-}
-
-.user-account-drawer__nav-icon-img {
-  display: block;
-  width: 20px;
-  height: 20px;
-  object-fit: fill;
+  color: #4cae50 !important;
   flex-shrink: 0;
 }
 
 .user-account-drawer__nav-label {
   font-size: 14px;
   font-weight: 500;
-  line-height: 21px;
-  letter-spacing: 0.025em;
-}
-
-.user-account-drawer__footer {
-  margin-top: auto;
-  padding: 8px 0 0;
-}
-
-.user-account-drawer__logout {
-  width: 100%;
-  min-height: 56px;
-  height: 56px;
-  padding: 11px 22px;
-  border: 0;
-  border-radius: 5px;
-  background: #ffffff;
-  color: var(--color-header-bg, #360952);
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
-  letter-spacing: normal;
-  text-transform: uppercase;
-  cursor: pointer;
+  line-height: 1.3;
 }
 </style>

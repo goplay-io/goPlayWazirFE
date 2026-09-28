@@ -335,17 +335,23 @@
     v-if="authStore.isDemoUser"
     v-model="userMenuOpen"
     :user-name="userName"
-    :wallet-rows="demoWalletSummaryRows"
-    :nav-items="USER_DRAWER_NAV_ITEMS"
+    :phone="userName"
+    balance="0"
+    free-cash="N/A"
+    exposure="0"
+    :nav-sections="USER_DRAWER_NAV_SECTIONS"
     :show-wallet-summary="true"
     :show-payment-actions="true"
-    :show-claim-bonus="true"
+    :show-claim-bonus="false"
+    :show-download-apk="apkDownloadEnabled"
     @logout="handleLogout"
     @navigate="handleDemoDrawerNavigate"
     @deposit="goToDemoDeposit"
     @withdraw="goToDemoWithdraw"
     @claim-bonus="goToDemoBonuses"
     @exposure-click="openExposureModal"
+    @customer-support="handleDemoCustomerSupport"
+    @download-apk="handleDemoDownloadApk"
   />
 </template>
 
@@ -363,7 +369,7 @@ import { useAuthStore } from '@/stores/auth.js'
 import { useEventsStore } from '@/stores/events/events'
 import { getCasinoGames } from '@/api/event/casino'
 import { sortCasinoGamesByPriority } from '@/utils/casinoGamePriority'
-import { USER_DRAWER_NAV_ITEMS } from '@/constants/userDrawerNavItems.js'
+import { USER_DRAWER_NAV_SECTIONS } from '@/constants/userDrawerNavItems.js'
 import HeaderBrandLink from '@/components/HeaderBrandLink.vue'
 import SearchResults from '@/components/SearchResults.vue'
 import SearchMagnify from '@/components/Icons/SearchMagnify.vue'
@@ -387,6 +393,7 @@ import { useExposureDialog } from '@/composables/useExposureDialog'
 import { useSettingsStore } from '@/stores/settings.js'
 import { openLoginModal } from '@/composables/useLoginModal.js'
 import { buildWhatsAppSupportUrl } from '@/utils/whatsappSupportUrl.js'
+import { useMobileAppConfig } from '@/composables/useMobileAppConfig.js'
 
 const { t } = useI18n()
 
@@ -395,6 +402,7 @@ const authStore = useAuthStore()
 const eventsStore = useEventsStore()
 const settingsStore = useSettingsStore()
 const { isMobile } = useDevices()
+const { apkDownloadEnabled, requestApkDownload } = useMobileAppConfig()
 
 const router = useRouter()
 const route = useRoute()
@@ -796,16 +804,14 @@ const userName = computed(() =>
   authStore.currentUser?.username || authStore.currentUser?.name || 'Demo User'
 )
 
-const demoWalletSummaryRows = computed(() => [
-  { key: 'balance', labelKey: 'header.user.walletSummary.balance', value: '0' },
-  { key: 'exposure', labelKey: 'header.user.walletSummary.exposure', value: '0' },
-  { key: 'bonus', labelKey: 'header.user.walletSummary.bonus', value: '₹ 0' },
-])
-
 function handleDemoDrawerNavigate(item) {
   if (item?.action === 'exposure') {
     userMenuOpen.value = false
     openExposureModal()
+    return
+  }
+  if (item?.action === 'language' || item?.action === 'bonus-rules') {
+    userMenuOpen.value = false
     return
   }
   userMenuOpen.value = false
@@ -825,6 +831,22 @@ function goToDemoWithdraw() {
 function goToDemoBonuses() {
   userMenuOpen.value = false
   router.push('/bonuses')
+}
+
+function handleDemoCustomerSupport() {
+  userMenuOpen.value = false
+  if (whatsappLink.value) {
+    window.open(whatsappLink.value, '_blank', 'noopener,noreferrer')
+  }
+}
+
+async function handleDemoDownloadApk() {
+  userMenuOpen.value = false
+  try {
+    await requestApkDownload()
+  } catch {
+    /* APK unavailable */
+  }
 }
 
 const userAvatar = computed(() => authStore.currentUser?.avatar || null)
