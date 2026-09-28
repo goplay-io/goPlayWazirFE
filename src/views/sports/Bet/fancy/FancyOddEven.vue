@@ -39,6 +39,10 @@ const props = defineProps({
   activeCategory: {
     type: String,
     default: 'All'
+  },
+  rowsOnly: {
+    type: Boolean,
+    default: false
   }
 });
 
@@ -200,6 +204,12 @@ const getPrices = (market) => getFancyTopPrices(market);
 const shouldShowMarket = (market) => shouldShowFancyMarket(market);
 const isMarketHidden = (market) => !shouldShowMarket(market);
 
+const isGroupVisible = (key, fancy) => (
+  (props.activeCategory === 'All' || props.activeCategory === key) &&
+  String(key).toLowerCase() === 'odd/even' &&
+  fancy.some((market) => !isMarketHidden(market))
+);
+
 const toOddEvenDisplayOddNumber = (fancyOdd) => {
   const value = Number(fancyOdd);
   if (!Number.isFinite(value)) return null;
@@ -243,8 +253,9 @@ const { t } = useI18n();
 
 <template>
   <template v-for="(fancy, key) in groupedFancyData" :key="key">
+    <template v-if="isGroupVisible(key, fancy)">
     <div
-      v-if="(props.activeCategory === 'All' || props.activeCategory === key) && String(key).toLowerCase() === 'odd/even' && fancy.some(m => !isMarketHidden(m))"
+      v-if="!rowsOnly"
       class="fancy-card-item fancy-market-block tw-bg-theme-surface tw-border tw-border-theme-border tw-overflow-hidden"
     >
       <div class="tw-flex tw-items-stretch tw-overflow-hidden tw-border-b tw-border-theme-border">
@@ -370,6 +381,113 @@ const { t } = useI18n();
         </div>
       </v-expand-transition>
     </div>
+
+    <div v-else class="tw-p-0">
+      <template v-for="(innerFancy, innerKey) in fancy" :key="innerFancy.market_id ?? innerKey">
+        <div v-show="!isMarketHidden(innerFancy)" class="fancy-row-shell">
+          <div
+            class="fancy-row-card"
+            :data-market-id="innerFancy.market_id"
+            :data-runner-id="innerFancy.market_id"
+          >
+          <div v-if="innerFancy.message" class="market-message-banner">
+            <marquee class="tw-text-xs tw-text-marquee">{{ innerFancy.message }}</marquee>
+          </div>
+          <div class="fancy-row-cols tw-items-center">
+            <div class="fancy-row-meta tw-flex tw-min-w-0 tw-flex-col tw-justify-center tw-gap-0.5 tw-pl-2 tw-pr-1">
+              <div class="fancy-row-meta-head tw-flex tw-min-w-0 tw-items-center tw-gap-0.5">
+                <h4 class="fancy-runner-name text-black-force tw-m-0 tw-min-w-0 tw-leading-snug">
+                  <span class="tw-whitespace-normal">{{ innerFancy?.name }}</span>
+                </h4>
+              </div>
+              <PayoutValue :value="getFancyOutcome(innerFancy.market_id)" small />
+            </div>
+            <div class="fancy-odds-wrap tw-relative tw-ml-auto tw-shrink-0 tw-flex tw-items-center tw-gap-2">
+              <BookLadderIcon
+                v-if="hasBookData(innerFancy.market_id)"
+                class="fancy-row-book-ladder"
+                @click="openPositionsDialog(innerFancy.market_id, innerFancy?.name)"
+              />
+              <FancyMinMaxInfo
+                :min="getMinMaxValues(innerFancy).min"
+                :max="getMinMaxValues(innerFancy).max"
+              />
+              <div
+                class="odd-even-odds-block tw-relative tw-grid tw-grid-cols-2 tw-gap-2 tw-w-[146px]"
+                :class="{ 'fancy-odds-block--status-active': isSuspended(innerFancy) || isBallRunning(innerFancy) }"
+              >
+                <FancyMarketStatusBlock
+                  :ball-running="getFancyRunnerOverlayStatus(innerFancy, { betAllow }) === 'BALL_RUNNING'"
+                  :suspended="getFancyRunnerOverlayStatus(innerFancy, { betAllow }) === 'SUSPENDED'"
+                />
+                <div class="tw-flex tw-justify-center tw-items-center">
+                  <v-btn size="default" rounded="0"
+                    :disabled="isSuspended(innerFancy) || isBallRunning(innerFancy) || !betAllow"
+                    class="odd-even-box fancy-odds-btn tw-bg-odds-back hover:tw-bg-odds-back-hover tw-flex-shrink-0 tw-text-black tw-font-bold"
+                    variant="elevated" @click="selectBet(
+                      getPrices(innerFancy).layOdd,
+                      'lay',
+                      innerFancy.market_id,
+                      innerFancy.name,
+                      innerFancy.market_id,
+                      innerFancy.event_id,
+                      getPrices(innerFancy).layAmount,
+                      getMinMaxValues(innerFancy).min,
+                      getMinMaxValues(innerFancy).max,
+                      1,
+                      getPrices(innerFancy).layAmount
+                    )">
+                    <div class="tw-text-center tw-w-full tw-text-black">
+                      <div class="fancy-odds-price mo-price tw-leading-tight">{{ toOddEvenDisplayOdd(getPrices(innerFancy).layAmount) ?? 0 }}</div>
+                      <div class="fancy-odds-size mo-size tw-leading-tight tw-flex tw-justify-center tw-items-center">
+                        {{ toOddEvenDisplayOdd(getPrices(innerFancy).layAmount) != null ? getOddEvenLowerValue(innerFancy) : '0.0' }}
+                      </div>
+                    </div>
+                  </v-btn>
+                </div>
+                <div class="tw-flex tw-justify-center tw-items-center">
+                  <v-btn size="default" rounded="0"
+                    :disabled="isSuspended(innerFancy) || isBallRunning(innerFancy) || !betAllow"
+                    class="odd-even-box fancy-odds-btn tw-bg-odds-back hover:tw-bg-odds-back-hover tw-flex-shrink-0 tw-text-black tw-font-bold"
+                    variant="elevated" @click="selectBet(
+                      getPrices(innerFancy).backOdd,
+                      'back',
+                      innerFancy.market_id,
+                      innerFancy.name,
+                      innerFancy.market_id,
+                      innerFancy.event_id,
+                      getPrices(innerFancy).backAmount,
+                      getMinMaxValues(innerFancy).min,
+                      getMinMaxValues(innerFancy).max,
+                      1,
+                      getPrices(innerFancy).backAmount
+                    )">
+                    <div class="tw-text-center tw-w-full tw-text-black">
+                      <div class="fancy-odds-price mo-price tw-leading-tight">{{ toOddEvenDisplayOdd(getPrices(innerFancy).backAmount) ?? 0 }}</div>
+                      <div class="fancy-odds-size mo-size tw-leading-tight tw-flex tw-justify-center tw-items-center">
+                        {{ toOddEvenDisplayOdd(getPrices(innerFancy).backAmount) != null ? getOddEvenLowerValue(innerFancy) : '0.0' }}
+                      </div>
+                    </div>
+                  </v-btn>
+                </div>
+              </div>
+              <div class="fancy-row-limits-wazir">
+                <div class="fancy-row-limits-wazir-line">
+                  <span class="fancy-row-limits-wazir-label">Min Bet :</span>
+                  <span class="fancy-row-limits-wazir-value">{{ getMinMaxValues(innerFancy).min ?? '—' }}</span>
+                </div>
+                <div class="fancy-row-limits-wazir-line">
+                  <span class="fancy-row-limits-wazir-label">Max Bet :</span>
+                  <span class="fancy-row-limits-wazir-value">{{ getMinMaxValues(innerFancy).max ?? '—' }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </template>
+    </div>
+    </template>
   </template>
 
   <FancyPositionsDialog v-model="showPositionsDialog" :title="dialogTitle" :positions="dialogPositions" />

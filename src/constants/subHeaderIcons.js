@@ -20,6 +20,7 @@ export const SUB_HEADER_ICON_MAP = {
   mixedMartialArts: { default: 'mma.svg', active: 'mma-green.svg' },
   darts: { default: 'darts.svg', active: 'darts-green.svg' },
   futsal: { default: 'futsal.svg', active: 'futsal-green.svg' },
+  mac88: { default: 'Mac88.svg', active: 'mac88-green.svg' },
   other: { default: 'featured-icon.svg', active: 'featured-icon.svg' },
 }
 

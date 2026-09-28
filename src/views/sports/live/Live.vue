@@ -785,70 +785,70 @@ onUnmounted(() => {
 
                             <!-- Default live page layout -->
                             <template v-else>
-                                <div class="events-table-section">
-                                    <Loading v-if="loading" min-height="240px" />
+                            <div class="events-table-section">
+                                <Loading v-if="loading" min-height="240px" />
 
-                                    <div v-else-if="error" class="tw-mt-5 tw-px-4 tw-pb-4">
-                                        <v-alert type="error" variant="tonal" class="tw-text-center">
-                                            {{ error }}
-                                        </v-alert>
-                                    </div>
-
-                                    <div v-else-if="showFilterEmptyState" class="sports-no-markets-empty">
-                                        {{ t('sports.home.noMarketsAvailable') }}
-                                    </div>
-
-                                    <template v-else-if="showCombinedEventList">
-                                        <div v-for="(sportGroup, sportIndex) in activeEventSections"
-                                            :key="sportGroup.id" class="sport-section-block"
-                                            :class="{
-                                                'sport-section-block--first': sportIndex === 0,
-                                                'sport-section-block--empty': !sportGroup.inplayEvents.length && !sportGroup.upcomingEvents.length
-                                            }">
-                                            <div class="sport-section-header">
-                                                <div class="sport-section-header__left">
-                                                    <div class="sport-section-header__brand">
-                                                        <span v-if="sportGroup.iconSrc || sportGroup.icon"
-                                                            class="sport-section-header__icon-wrap">
-                                                            <img v-if="sportGroup.iconSrc"
-                                                                :src="sportGroup.iconSrc" alt=""
-                                                                class="sport-section-header__icon" />
-                                                            <component v-else :is="sportGroup.icon" :width="15.37"
-                                                                :height="16.63" class="sport-section-header__icon" />
-                                                        </span>
-                                                        <h2 class="sport-section-header__title">
-                                                            {{ sportGroup.name }}
-                                                        </h2>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div v-if="!sportGroup.inplayEvents.length && !sportGroup.upcomingEvents.length"
-                                                class="sports-no-markets-empty sports-no-markets-empty--section">
-                                                {{ t('sports.home.noMarketsAvailable') }}
-                                            </div>
-                                            <template v-else>
-                                                <EventRow v-for="(event, eventIndex) in sportGroup.inplayEvents"
-                                                    :key="`in-${event.id}`" :event="event"
-                                                    :show-competition="!isMobile"
-                                                    :animation-delay="Math.min((sportIndex * 100 + eventIndex) * 0.02, 0.5)" />
-                                                <EventRow v-for="(event, eventIndex) in sportGroup.upcomingEvents"
-                                                    :key="`up-${event.id}`" :event="event"
-                                                    :show-competition="!isMobile"
-                                                    :show-upcoming-odds-overlay="stripFeedMode === 'upcoming' || stripFeedMode === 'combined'"
-                                                    :animation-delay="Math.min((sportIndex * 100 + sportGroup.inplayEvents.length + eventIndex) * 0.02, 0.5)" />
-                                            </template>
-                                        </div>
-                                    </template>
-
-                                    <div v-else-if="!showCombinedEventList" class="sports-no-markets-empty">
-                                        {{ t('sports.home.noMarketsAvailable') }}
-                                    </div>
+                                <div v-else-if="error" class="tw-mt-5 tw-px-4 tw-pb-4">
+                                    <v-alert type="error" variant="tonal" class="tw-text-center">
+                                        {{ error }}
+                                    </v-alert>
                                 </div>
 
-                                <LiveShowcaseSections
-                                    v-if="showMarketingSections"
-                                    :class="{ 'live-mobile-showcase': isMobile }"
-                                />
+                                <div v-else-if="showFilterEmptyState" class="sports-no-markets-empty">
+                                    {{ t('sports.home.noMarketsAvailable') }}
+                                </div>
+
+                                <template v-else-if="showCombinedEventList">
+                                        <div v-for="(sportGroup, sportIndex) in activeEventSections"
+                                        :key="sportGroup.id" class="sport-section-block"
+                                        :class="{
+                                            'sport-section-block--first': sportIndex === 0,
+                                            'sport-section-block--empty': !sportGroup.inplayEvents.length && !sportGroup.upcomingEvents.length
+                                        }">
+                                        <div class="sport-section-header">
+                                            <div class="sport-section-header__left">
+                                                <div class="sport-section-header__brand">
+                                                    <span v-if="sportGroup.iconSrc || sportGroup.icon"
+                                                        class="sport-section-header__icon-wrap">
+                                                        <img v-if="sportGroup.iconSrc"
+                                                            :src="sportGroup.iconSrc" alt=""
+                                                            class="sport-section-header__icon" />
+                                                        <component v-else :is="sportGroup.icon" :width="15.37"
+                                                            :height="16.63" class="sport-section-header__icon" />
+                                                    </span>
+                                                    <h2 class="sport-section-header__title">
+                                                        {{ sportGroup.name }}
+                                                    </h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div v-if="!sportGroup.inplayEvents.length && !sportGroup.upcomingEvents.length"
+                                            class="sports-no-markets-empty sports-no-markets-empty--section">
+                                            {{ t('sports.home.noMarketsAvailable') }}
+                                        </div>
+                                        <template v-else>
+                                            <EventRow v-for="(event, eventIndex) in sportGroup.inplayEvents"
+                                                :key="`in-${event.id}`" :event="event"
+                                                :show-competition="!isMobile"
+                                                :animation-delay="Math.min((sportIndex * 100 + eventIndex) * 0.02, 0.5)" />
+                                            <EventRow v-for="(event, eventIndex) in sportGroup.upcomingEvents"
+                                                :key="`up-${event.id}`" :event="event"
+                                                :show-competition="!isMobile"
+                                                :show-upcoming-odds-overlay="stripFeedMode === 'upcoming' || stripFeedMode === 'combined'"
+                                                :animation-delay="Math.min((sportIndex * 100 + sportGroup.inplayEvents.length + eventIndex) * 0.02, 0.5)" />
+                                        </template>
+                                    </div>
+                                </template>
+
+                                <div v-else-if="!showCombinedEventList" class="sports-no-markets-empty">
+                                    {{ t('sports.home.noMarketsAvailable') }}
+                                </div>
+                            </div>
+
+                            <LiveShowcaseSections
+                                v-if="showMarketingSections"
+                                :class="{ 'live-mobile-showcase': isMobile }"
+                            />
                             </template>
 
                         </div>

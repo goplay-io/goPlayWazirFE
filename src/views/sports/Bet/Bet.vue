@@ -36,7 +36,6 @@ import OneClickBetting from '@/components/OneClickBetting.vue';
 import TVLiveStream from '@/components/TVLiveStream.vue';
 import ScoreCardTVMobile from './ScoreCardTVMobile.vue';
 import BetMobileMatchedBetsSection from './BetMobileMatchedBetsSection.vue';
-import RecentCasinoBanner from '@/components/RecentCasinoBanner.vue';
 import { useScorecardTvStore } from '@/stores/scorecardTv';
 import { useI18n } from 'vue-i18n';
 import { setBetPlacementGuardContext, resetBetPlacementGuardContext } from '@/utils/betPlacementGuard';
@@ -745,7 +744,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="bet-page-container">
+  <div class="bet-page-container bet-page-container--wazir-ref">
     <!-- Main Betting Interface (kept mounted to avoid full-page flicker) -->
     <div class="bet-main-layout">
 
@@ -756,9 +755,9 @@ onUnmounted(() => {
           <div class="bet-markets-scrollable" @click.capture="captureOddClick"
           @cashout-slip-target="handleCashoutSlipTarget">
           <div class="bet-header-fixed">
-            <RecentCasinoBanner />
             <v-card class="tw-rounded-none tw-overflow-hidden" elevation="0">
               <BetHeader
+                wazir-ref-chrome
                 :event_name="!loading && event_name !== 'Unknown event' ? event_name : ''"
                 :competition_name="!loading ? competition_name : ''"
                 :sport-name="sport_name"
@@ -827,8 +826,8 @@ onUnmounted(() => {
               :tv-active="!!event?.tv_channel_active && hasTvStreamUrl"
               @scorecard-available="onScorecardAvailable"
             />
-            <!-- Market filter: ALL | MATCH ODDS | BOOKMAKER | FANCY -->
-            <div v-if="showMarketsFilter" class="bet-markets-filter" role="tablist" aria-label="Market filter">
+            <!-- Market filter hidden on WazirWin reference event detail (show all sections) -->
+            <div v-if="false && showMarketsFilter" class="bet-markets-filter" role="tablist" aria-label="Market filter">
               <button
                 v-for="tab in marketFilterTabs"
                 :key="tab.id"
@@ -964,7 +963,7 @@ onUnmounted(() => {
           <OneClickBetting />
         </div>
 
-        <SportsBetSlip :slipOpen="slipOpen" :toggleSlip="toggleSlip" :bet_error="betStore.bet_error"
+        <SportsBetSlip home-ref-chrome :slipOpen="slipOpen" :toggleSlip="toggleSlip" :bet_error="betStore.bet_error"
           :betAllow="betAllow" :bet="betStore.bet" :buttons="buttons" :changeAmount="betStore.changeAmount"
           :placeBet="betStore.placeBet" :betHistory="betStore.betHistory" v-model:bet_status="betStore.bet_status"
           v-model:bet_processing="bet_processing" v-model:showBetHistory="showBetHistory"
@@ -1398,6 +1397,7 @@ onUnmounted(() => {
     width: auto;
     min-width: var(--layout-sports-middle-width);
     max-width: none;
+    min-height: 0;
     display: flex;
     flex-direction: column;
     overflow: hidden !important;

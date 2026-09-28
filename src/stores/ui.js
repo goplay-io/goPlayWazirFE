@@ -8,6 +8,10 @@ export const useUIStore = defineStore('ui', {
         loginModalOpen: false,
         loginModalRedirect: null,
         loginModalForce: false,
+        /** 'login' | 'signup' | 'forgot' — single auth modal view (reference LoginBox). */
+        authModalView: 'login',
+        authModalCampaignId: '',
+        authModalReferralId: '',
         forgotPasswordModalOpen: false,
         /** Increment to remount the active route without a full browser reload. */
         pageRefreshKey: 0,
@@ -50,25 +54,40 @@ export const useUIStore = defineStore('ui', {
 
         openLoginModal(options = {}) {
             this.loginModalOpen = true
+            this.authModalView = options.view || 'login'
             this.loginModalRedirect =
                 typeof options.redirect === 'string' && options.redirect
                     ? options.redirect
                     : null
             this.loginModalForce = Boolean(options.force)
+            this.authModalCampaignId = String(options.campaignId || '').trim()
+            this.authModalReferralId = String(options.referralId || '').trim()
         },
 
         closeLoginModal() {
             this.loginModalOpen = false
             this.loginModalRedirect = null
             this.loginModalForce = false
+            this.authModalView = 'login'
+            this.authModalCampaignId = ''
+            this.authModalReferralId = ''
+        },
+
+        setAuthModalView(view) {
+            if (view === 'login' || view === 'signup' || view === 'forgot') {
+                this.authModalView = view
+            }
         },
 
         openForgotPasswordModal() {
-            this.forgotPasswordModalOpen = true
+            this.loginModalOpen = true
+            this.authModalView = 'forgot'
         },
 
         closeForgotPasswordModal() {
-            this.forgotPasswordModalOpen = false
+            if (this.authModalView === 'forgot') {
+                this.authModalView = 'login'
+            }
         },
 
         triggerPageRefresh() {

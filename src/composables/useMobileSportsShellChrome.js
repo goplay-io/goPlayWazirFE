@@ -181,6 +181,14 @@ export function useMobileSportsShellChrome() {
     return route.name === "live" || route.name === "e-sports";
   });
 
+  /** Reference home shell (dark bg + reference tables): live, e-sports, sport listing, and bet detail. */
+  const showReferenceSportsShell = computed(() => {
+    if (isCasinoShellPage.value) return false;
+    if (route.name === "sport-bet" || route.name === "races-bet") return true;
+    if (suppressMobileSportsShellMarketingChrome.value) return false;
+    return route.name === "live" || route.name === "e-sports" || route.name === "sport";
+  });
+
   return {
     isSportsShellPage,
     isCasinoShellPage,
@@ -197,6 +205,7 @@ export function useMobileSportsShellChrome() {
     showMobileProvidersInLayoutRail,
     showDesktopSportsShellRail,
     showHomeExchangeSection,
+    showReferenceSportsShell,
     isHorseGreyhoundRacingPage,
   };
 }

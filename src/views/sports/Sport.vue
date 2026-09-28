@@ -2,18 +2,23 @@
 import { ref, onMounted, onUnmounted, computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n'
+import Loading from '@/components/Loading.vue';
 import EventRow from '@/components/EventRow.vue';
 import FeedModePillPrefix from '@/components/sports/FeedModePillPrefix.vue';
+import HomeEventsSectionHeader from '@/components/home/HomeEventsSectionHeader.vue';
+import HomeProviderCarousel from '@/components/home/HomeProviderCarousel.vue';
+import HomePromotionQuickActions from '@/components/home/HomePromotionQuickActions.vue';
 import { useEventsStore } from '@/stores/events/events';
 import { useEventTypes, includeInSportNavMenu } from '@/composables/useEventTypes';
-import { getHomeMenuIconSrc } from '@/composables/useHomeMenuIcons.js';
+import { sportTableHeaderIconSrc } from '@/constants/subHeaderIcons.js';
+import { getReferenceSidebarIconSrc } from '@/constants/sidebarIcons.js';
 import { useOddsWebSocket } from '@/composables/useOddsWebSocket';
-import { useCompetitionGrouping } from '@/composables/useCompetitionGrouping';
 import { useStarredEvents } from '@/composables/useStarredEvents';
 import useDevices from '@/composables/useDevices.js';
 import { isPremiumEvent } from '@/utils/premiumStatus';
 import { isVirtualEvent } from '@/utils/virtualStatus';
-import SportPageTitleHeader from '@/components/sports/SportPageTitleHeader.vue';
+import { isLiveFeedEvent } from '@/utils/liveStatus';
+import { sortEventsWithStarPriority } from '@/utils/eventStarSort';
 import { useAuthStore } from '@/stores/auth';
 import { loadPrefetchEventDetails } from '@/composables/useBetEventPrefetch';
 
@@ -21,7 +26,7 @@ const route = useRoute();
 const { t } = useI18n()
 const authStore = useAuthStore();
 const eventsStore = useEventsStore();
-const { getEventTypeName, eventTypes: defaultEventTypes, getEventTypeIcon } = useEventTypes();
+const { getEventTypeName, eventTypes: defaultEventTypes, getEventTypeIcon, getEventTypeById } = useEventTypes();
 const { isMobile } = useDevices();
 
 const event_type_id = ref(parseInt(route.params.event_type_id));
@@ -30,22 +35,99 @@ const noEvent = ref(false);
 const events = ref([]);
 const finalData = ref([]);
 const error = ref(null);
-/** @type {import('vue').Ref<'live' | 'premium' | 'virtual' | null>} */
-const feedMode = ref(null);
+/** Per sport + section feed filters (inplay/upcoming are independent). */
+const sectionFeedModes = ref({});
+
+const getSectionFeedKey = (sportId, sectionMode) => `${String(sportId)}:${sectionMode}`;
 const visibleEventIds = ref([]);
-const renderedRowsLimit = ref(30);
-const isAppendingRows = ref(false);
-const loadMoreSentinel = ref(null);
 
 const PRELOAD_ODDS_COUNT = 24;
 const VIEWPORT_ROOT_MARGIN = '240px 0px';
-const RENDER_BATCH_COUNT = 20;
 
 let visibilityObserver = null;
-let loadMoreObserver = null;
 const observedElements = new WeakMap();
 
 const getEventId = (event) => String(event?.event_id ?? event?.id ?? '');
+
+const isInplayEvent = (event) =>
+    event?.in_play === true || event?.in_play === 1 || event?.in_play === '1';
+
+const isRedBlinkingEvent = (event) =>
+    isLiveFeedEvent({
+        eventName: event?.name,
+        competitionName: event?.competition_name,
+        inPlay: event?.in_play,
+        openDate: event?.open_date,
+    });
+
+const applyFeedModeToList = (list, { live, premium, virtual }) => {
+    const base = Array.isArray(list) ? list : [];
+    if (virtual) {
+        return base.filter(isVirtualEvent);
+    }
+    if (live && premium) {
+        return base.filter((event) => isRedBlinkingEvent(event) || isPremiumEvent(event));
+    }
+    if (live) {
+        return base.filter(isRedBlinkingEvent);
+    }
+    if (premium) {
+        return base.filter(isPremiumEvent);
+    }
+    return base;
+};
+
+const getFeedFlagsForSport = (sportId, sectionMode) => {
+    const key = getSectionFeedKey(sportId, sectionMode);
+    const stored = sectionFeedModes.value[key];
+    if (stored) {
+        return { live: !!stored.live, premium: !!stored.premium, virtual: !!stored.virtual };
+    }
+    return { live: false, premium: false, virtual: false };
+};
+
+const isSportFeedLiveActive = (sportId, sectionMode) => getFeedFlagsForSport(sportId, sectionMode).live;
+const isSportFeedPremiumActive = (sportId, sectionMode) => getFeedFlagsForSport(sportId, sectionMode).premium;
+const isSportFeedVirtualActive = (sportId, sectionMode) => getFeedFlagsForSport(sportId, sectionMode).virtual;
+
+const setSectionFeedMode = (sportId, sectionMode, patch) => {
+    const key = getSectionFeedKey(sportId, sectionMode);
+    const current = sectionFeedModes.value[key] || { live: false, premium: false, virtual: false };
+    sectionFeedModes.value = {
+        ...sectionFeedModes.value,
+        [key]: { ...current, ...patch },
+    };
+};
+
+const toggleSectionFeedLive = (sportId, sectionMode) => {
+    const { live, premium, virtual } = getFeedFlagsForSport(sportId, sectionMode);
+    const nextLive = !live;
+    setSectionFeedMode(sportId, sectionMode, {
+        live: nextLive,
+        premium: nextLive ? false : premium,
+        virtual: nextLive ? false : virtual,
+    });
+};
+
+const toggleSectionFeedPremium = (sportId, sectionMode) => {
+    const { live, premium, virtual } = getFeedFlagsForSport(sportId, sectionMode);
+    const nextPremium = !premium;
+    setSectionFeedMode(sportId, sectionMode, {
+        premium: nextPremium,
+        live: nextPremium ? false : live,
+        virtual: nextPremium ? false : virtual,
+    });
+};
+
+const toggleSectionFeedVirtual = (sportId, sectionMode) => {
+    const { live, premium, virtual } = getFeedFlagsForSport(sportId, sectionMode);
+    const nextVirtual = !virtual;
+    setSectionFeedMode(sportId, sectionMode, {
+        virtual: nextVirtual,
+        live: nextVirtual ? false : live,
+        premium: nextVirtual ? false : premium,
+    });
+};
 
 /** Full-page loader only when shared store has no events yet. */
 const loading = computed(
@@ -134,88 +216,41 @@ const pageTitle = computed(() => {
     return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
 });
 
-const currentSportIconSrc = computed(() => getHomeMenuIconSrc(event_type_id.value));
+/** Same green SVG icons as home in-play table headers (Live.vue / GamesTableHeader). */
+const currentSportIconSrc = computed(() => {
+    const id = Number(event_type_id.value);
+    const key = getEventTypeById(id)?.key;
+    if (key) return sportTableHeaderIconSrc(key);
+    return getReferenceSidebarIconSrc({ id, name: eventTypeName.value })
+        || sportTableHeaderIconSrc('other');
+});
 const currentSportIcon = computed(() => getEventTypeIcon(event_type_id.value));
 
-const isLiveForGrouping = computed(() => false);
+const { starredIds, isEventStarred } = useStarredEvents();
 
-const feedFilteredFinalData = computed(() => {
-    const base = finalData.value?.[0];
-    if (!base) return [];
-    let ev = Array.isArray(base.events) ? [...base.events] : [];
-    if (feedMode.value === 'live') {
-        ev = ev.filter((event) => event?.in_play === true || event?.in_play === 1 || event?.in_play === '1');
-    }
-    if (feedMode.value === 'premium') {
-        ev = ev.filter((event) => isPremiumEvent(event));
-    }
-    if (feedMode.value === 'virtual') {
-        ev = ev.filter((event) => isVirtualEvent(event));
-    }
-    return [{ ...base, events: ev }];
-});
+const sportEvents = computed(() => finalData.value?.[0]?.events || []);
 
-const { starredIds } = useStarredEvents();
-const { sortEvents, groupedEventsByCompetition } = useCompetitionGrouping(
-    feedFilteredFinalData,
-    sortBy,
-    isLiveForGrouping
-);
-
-const renderedEvents = computed(() => {
+const inplayEventsList = computed(() => {
     void starredIds.value;
-    const source = feedFilteredFinalData.value?.[0]?.events || [];
-    if (sortBy.value === 'competition') {
-        return (groupedEventsByCompetition.value || []).flatMap((group) => group.events || []);
-    }
-    return sortEvents(source);
+    const base = sportEvents.value.filter(isInplayEvent);
+    const filtered = applyFeedModeToList(base, getFeedFlagsForSport(event_type_id.value, 'inplay'));
+    return sortEventsWithStarPriority(filtered, isEventStarred);
 });
 
-const hasFilteredEvents = computed(() => renderedEvents.value.length > 0);
-
-const displayedTimeEvents = computed(() => renderedEvents.value.slice(0, renderedRowsLimit.value));
-
-const displayedCompetitionGroups = computed(() => {
-    const groups = groupedEventsByCompetition.value || [];
-    let remaining = renderedRowsLimit.value;
-    const output = [];
-
-    for (const group of groups) {
-        if (remaining <= 0) break;
-        const groupEvents = Array.isArray(group?.events) ? group.events : [];
-        if (groupEvents.length === 0) continue;
-
-        const visibleGroupEvents = groupEvents.slice(0, remaining);
-        if (visibleGroupEvents.length > 0) {
-            output.push({
-                ...group,
-                events: visibleGroupEvents
-            });
-            remaining -= visibleGroupEvents.length;
-        }
-    }
-
-    return output;
+const upcomingEventsList = computed(() => {
+    void starredIds.value;
+    const base = sportEvents.value.filter((event) => !isInplayEvent(event));
+    const filtered = applyFeedModeToList(base, getFeedFlagsForSport(event_type_id.value, 'upcoming'));
+    return sortEventsWithStarPriority(filtered, isEventStarred);
 });
 
-const renderedRowsForOdds = computed(() => {
-    if (sortBy.value === 'competition') {
-        return displayedCompetitionGroups.value.flatMap((group) => group.events || []);
-    }
-    return displayedTimeEvents.value;
-});
-
-const totalRowCount = computed(() => {
-    if (sortBy.value === 'competition') {
-        return (groupedEventsByCompetition.value || []).reduce((sum, group) => sum + ((group?.events || []).length), 0);
-    }
-    return renderedEvents.value.length;
-});
-
-const hasMoreRows = computed(() => renderedRowsLimit.value < totalRowCount.value);
+const allDisplayedEvents = computed(() => [
+    ...inplayEventsList.value,
+    ...upcomingEventsList.value,
+]);
 
 const oddsTargetEvents = computed(() => {
-    const list = renderedRowsForOdds.value;
+    const list = allDisplayedEvents.value;
     if (!Array.isArray(list) || list.length === 0) return [];
 
     const visibleSet = new Set(visibleEventIds.value);
@@ -230,24 +265,6 @@ const oddsTargetEvents = computed(() => {
 
     return list.slice(0, PRELOAD_ODDS_COUNT);
 });
-
-const resetRenderedRows = () => {
-    renderedRowsLimit.value = 30;
-    isAppendingRows.value = false;
-};
-
-const appendMoreRows = () => {
-    if (isAppendingRows.value || !hasMoreRows.value) return;
-
-    isAppendingRows.value = true;
-    setTimeout(() => {
-        renderedRowsLimit.value = Math.min(
-            renderedRowsLimit.value + RENDER_BATCH_COUNT,
-            totalRowCount.value
-        );
-        isAppendingRows.value = false;
-    }, 220);
-};
 
 const addVisibleEventId = (eventId) => {
     if (!eventId) return;
@@ -284,41 +301,12 @@ const initializeVisibilityObserver = () => {
     );
 };
 
-const initializeLoadMoreObserver = () => {
-    if (loadMoreObserver || typeof window === 'undefined' || !('IntersectionObserver' in window)) return;
-
-    loadMoreObserver = new IntersectionObserver(
-        (entries) => {
-            const entry = entries[0];
-            if (entry?.isIntersecting) {
-                appendMoreRows();
-            }
-        },
-        {
-            root: null,
-            threshold: 0,
-            rootMargin: '320px 0px'
-        }
-    );
-
-    if (loadMoreSentinel.value) {
-        loadMoreObserver.observe(loadMoreSentinel.value);
-    }
-};
-
 const cleanupVisibilityObserver = () => {
     if (visibilityObserver) {
         visibilityObserver.disconnect();
         visibilityObserver = null;
     }
     visibleEventIds.value = [];
-};
-
-const cleanupLoadMoreObserver = () => {
-    if (loadMoreObserver) {
-        loadMoreObserver.disconnect();
-        loadMoreObserver = null;
-    }
 };
 
 const vObserveEventVisibility = {
@@ -370,48 +358,19 @@ watch(
 
         stopOddsFetching();
         cleanupVisibilityObserver();
-        cleanupLoadMoreObserver();
-        resetRenderedRows();
         events.value = [];
         event_type_id.value = parseInt(newParams.event_type_id);
         competition_id.value = newParams.competition_id != null ? parseInt(newParams.competition_id) : null;
         if (typeChanged || competitionChanged) {
             sortBy.value = initSortBy(event_type_id.value);
         }
-        feedMode.value = null;
+        sectionFeedModes.value = {};
         noEvent.value = false;
         loadPrefetchEventDetails({ event_type_id: event_type_id.value });
         applySportFilter();
-        initializeLoadMoreObserver();
         watchForEvents();
     },
     { deep: true }
-);
-
-watch(
-    () => [sortBy.value, feedMode.value],
-    () => {
-        resetRenderedRows();
-    }
-);
-
-watch(
-    () => totalRowCount.value,
-    () => {
-        if (!hasMoreRows.value && renderedRowsLimit.value > totalRowCount.value) {
-            renderedRowsLimit.value = totalRowCount.value;
-        }
-    }
-);
-
-watch(
-    loadMoreSentinel,
-    (nextEl, prevEl) => {
-        if (!loadMoreObserver) return;
-        if (prevEl) loadMoreObserver.unobserve(prevEl);
-        if (nextEl) loadMoreObserver.observe(nextEl);
-    },
-    { flush: 'post' }
 );
 
 // Align with SportsTree sidebar grouping for ?league= filter
@@ -489,7 +448,6 @@ const { startOddsFetching, stopOddsFetching, watchForEvents } = useOddsWebSocket
 
 onMounted(async () => {
     initializeVisibilityObserver();
-    initializeLoadMoreObserver();
 
     // Paint immediately from AppLayout cache when available — no list API from this page.
     applySportFilter();
@@ -511,138 +469,290 @@ onMounted(async () => {
 
 onUnmounted(() => {
     cleanupVisibilityObserver();
-    cleanupLoadMoreObserver();
     stopOddsFetching();
 });
-
-const toggleFeedLive = () => {
-    feedMode.value = feedMode.value === 'live' ? null : 'live';
-};
-
-const toggleFeedPremium = () => {
-    feedMode.value = feedMode.value === 'premium' ? null : 'premium';
-};
-
-const toggleFeedVirtual = () => {
-    feedMode.value = feedMode.value === 'virtual' ? null : 'virtual';
-};
 
 </script>
 
 <template>
-    <div class="sports-home-layout sport-page-layout" :class="{ 'sports-home-layout--mobile': isMobile }">
-        <SportPageTitleHeader :title="pageTitle" />
-        <v-container fluid class="tw-px-0 sport-page-container">
-            <div v-if="!noEvent" class="sport-page-exchange-card"
-                :class="{ 'sport-page-exchange-card--empty': !loading && totalRowCount === 0 }">
-                <div class="sport-page-toolbar">
-                    <div class="sport-page-toolbar__inner">
-                        <div class="sport-page-toolbar__left">
-                            <span class="sport-page-toolbar__icon-wrap">
-                                <img v-if="currentSportIconSrc"
-                                    :src="currentSportIconSrc" alt=""
-                                    class="sport-page-toolbar__icon" width="16" height="16" />
-                                <component :is="currentSportIcon" v-else-if="currentSportIcon" :width="16"
-                                    :height="16" class="sport-page-toolbar__icon" />
-                                <v-icon v-else size="16"
-                                    class="sport-page-toolbar__icon">mdi-trophy-outline</v-icon>
-                            </span>
-                            <h1 class="sport-page-toolbar__title">
-                                {{ pageTitle }}
-                            </h1>
-                            <!-- <div class="feed-mode-pills">
-                                <button type="button" class="feed-mode-pill"
-                                    :class="{ 'feed-mode-pill--active': feedMode === 'live' }"
-                                    @click="toggleFeedLive">
-                                    <FeedModePillPrefix :active="feedMode === 'live'" />
-                                    {{ t('sports.home.live') }}
-                                </button>
-                                <button type="button" class="feed-mode-pill feed-mode-pill--virtual"
-                                    :class="{ 'feed-mode-pill--active': feedMode === 'virtual' }"
-                                    @click="toggleFeedVirtual">
-                                    <FeedModePillPrefix :active="feedMode === 'virtual'" />
-                                    Virtual
-                                </button>
-                                <button type="button" class="feed-mode-pill"
-                                    :class="{ 'feed-mode-pill--active': feedMode === 'premium' }"
-                                    @click="toggleFeedPremium">
-                                    <FeedModePillPrefix :active="feedMode === 'premium'" />
-                                    {{ t('sports.home.premium') }}
-                                </button>
-                            </div> -->
-                        </div>
-                        <div class="sport-page-toolbar__right">
-                            <div class="sport-page-toolbar__meta-spacer" aria-hidden="true" />
-                            <div class="sport-page-toolbar__market-cols">
-                                <span>1</span>
-                                <span>X</span>
-                                <span>2</span>
-                            </div>
-                        </div>
-                    </div>
+    <div
+        class="sports-home-layout sport-page-layout sport-page-layout--reference"
+        :class="{ 'sports-home-layout--mobile': isMobile }"
+    >
+        <v-container fluid class="tw-px-0 live-page-container sport-page-container">
+            <div class="sport-page-reference-stack">
+                <HomeProviderCarousel />
+                <HomePromotionQuickActions />
+
+                <Loading v-if="loading" min-height="240px" />
+
+                <div v-else-if="error" class="tw-mt-5 tw-px-4 tw-pb-4">
+                    <v-alert type="error" variant="tonal" class="tw-text-center">
+                        {{ error }}
+                    </v-alert>
                 </div>
 
-                <div class="sport-page-events">
-                    <div v-if="loading"
-                        class="sport-events-loading tw-flex tw-justify-center tw-items-center tw-min-h-[240px]">
-                        <v-progress-circular indeterminate color="primary" size="28" width="3" />
-                    </div>
-                    <template v-else>
-                        <div v-if="totalRowCount === 0" class="sports-no-markets-empty">
-                            {{ t('sports.home.noMarketsAvailable') }}
-                        </div>
-                        <template v-else>
-                            <template v-if="sortBy === 'time'">
-                                <div v-for="(event, index) in displayedTimeEvents" :key="event.id"
-                                    v-observe-event-visibility="getEventId(event)">
-                                    <EventRow :event="event"
-                                        :show-competition="!isMobile"
-                                        :animation-delay="Math.min(index * 0.02, 0.5)" />
+                <template v-else-if="!noEvent">
+                    <div class="home-events-stack">
+                        <div class="events-table-section events-table-section--reference">
+                            <HomeEventsSectionHeader
+                                mode="inplay"
+                                :title="t('components.homeEvents.inplayTitle')"
+                            />
+                            <div class="events-table-section__body">
+                                <div class="sport-section-block sport-section-block--first">
+                                    <div class="sport-section-header">
+                                        <div class="sport-section-header__left">
+                                            <div class="sport-section-header__brand">
+                                                <span
+                                                    v-if="currentSportIconSrc || currentSportIcon"
+                                                    class="sport-section-header__icon-wrap"
+                                                >
+                                                    <img
+                                                        v-if="currentSportIconSrc"
+                                                        :src="currentSportIconSrc"
+                                                        alt=""
+                                                        class="sport-section-header__icon"
+                                                        width="18"
+                                                        height="18"
+                                                    />
+                                                    <component
+                                                        v-else
+                                                        :is="currentSportIcon"
+                                                        :width="15.37"
+                                                        :height="16.63"
+                                                        class="sport-section-header__icon"
+                                                    />
+                                                </span>
+                                                <h3 class="sport-section-header__title">
+                                                    {{ pageTitle }}
+                                                </h3>
+                                            </div>
+                                            <div class="sport-section-header__filters">
+                                                <div class="feed-mode-pills">
+                                                    <button
+                                                        type="button"
+                                                        class="feed-mode-pill"
+                                                        :class="{ 'feed-mode-pill--active': isSportFeedLiveActive(event_type_id, 'inplay') }"
+                                                        @click="toggleSectionFeedLive(event_type_id, 'inplay')"
+                                                    >
+                                                        <FeedModePillPrefix :active="isSportFeedLiveActive(event_type_id, 'inplay')" />
+                                                        LIVE
+                                                    </button>
+                                                    <button
+                                                        type="button"
+                                                        class="feed-mode-pill feed-mode-pill--virtual"
+                                                        :class="{ 'feed-mode-pill--active': isSportFeedVirtualActive(event_type_id, 'inplay') }"
+                                                        @click="toggleSectionFeedVirtual(event_type_id, 'inplay')"
+                                                    >
+                                                        <FeedModePillPrefix :active="isSportFeedVirtualActive(event_type_id, 'inplay')" />
+                                                        VIRTUAL
+                                                    </button>
+                                                    <button
+                                                        type="button"
+                                                        class="feed-mode-pill feed-mode-pill--premium"
+                                                        :class="{ 'feed-mode-pill--active': isSportFeedPremiumActive(event_type_id, 'inplay') }"
+                                                        @click="toggleSectionFeedPremium(event_type_id, 'inplay')"
+                                                    >
+                                                        <FeedModePillPrefix :active="isSportFeedPremiumActive(event_type_id, 'inplay')" />
+                                                        PREMIUM
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div v-if="!isMobile" class="sport-section-header__right">
+                                            <span class="sport-section-header__meta-spacer" aria-hidden="true" />
+                                            <div class="sport-section-header__market-cols">
+                                                <span>1</span>
+                                                <span>x</span>
+                                                <span>2</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        v-if="!inplayEventsList.length"
+                                        class="sports-no-markets-empty sports-no-markets-empty--section"
+                                    >
+                                        {{ t('sports.home.noMarketsAvailable') }}
+                                    </div>
+                                    <div
+                                        v-for="(event, eventIndex) in inplayEventsList"
+                                        :key="`inplay-${event.id}`"
+                                        v-observe-event-visibility="getEventId(event)"
+                                    >
+                                        <EventRow
+                                            :event="event"
+                                            reference-layout
+                                            reference-play-mode="inplay"
+                                            :show-competition="false"
+                                            :animation-delay="Math.min(eventIndex * 0.02, 0.5)"
+                                        />
+                                    </div>
                                 </div>
-                            </template>
-
-                            <template v-else-if="sortBy === 'competition'">
-                                <template v-for="(group, groupIndex) in displayedCompetitionGroups"
-                                    :key="group.name">
-                                    <div v-if="isMobile"
-                                        class="competition-name-box tw-mb-1 tw-overflow-visible tw-mt-2">
-                                        <v-card-title
-                                            class="tw-flex tw-items-center tw-gap-2 tw-py-0 tw-overflow-visible">
-                                            <h2
-                                                class="tw-text-white tw-font-extrabold tw-text-sm md:tw-text-base tw-m-0 tw-break-words tw-whitespace-normal">
-                                                {{ group.name }}
-                                            </h2>
-                                        </v-card-title>
-                                    </div>
-                                    <div v-for="(event, eventIndex) in group.events" :key="event.id"
-                                        v-observe-event-visibility="getEventId(event)">
-                                        <EventRow :event="event" :show-star="false"
-                                            :show-competition="!isMobile"
-                                            :animation-delay="Math.min((groupIndex * 100 + eventIndex) * 0.02, 0.5)" />
-                                    </div>
-                                </template>
-                            </template>
-
-                            <div v-if="isAppendingRows"
-                                class="tw-flex tw-justify-center tw-items-center tw-py-3">
-                                <v-progress-circular indeterminate color="primary" size="22"
-                                    width="3" />
                             </div>
+                        </div>
 
-                            <div v-if="hasMoreRows" ref="loadMoreSentinel" class="tw-h-1 tw-w-full" />
-                        </template>
-                    </template>
+                        <div class="events-table-section events-table-section--reference events-table-section--upcoming">
+                            <HomeEventsSectionHeader
+                                mode="upcoming"
+                                :title="t('components.homeEvents.upcomingTitle')"
+                            />
+                            <div class="events-table-section__body">
+                                <div class="sport-section-block sport-section-block--first sport-section-block--upcoming">
+                                    <div class="sport-section-header">
+                                        <div class="sport-section-header__left">
+                                            <div class="sport-section-header__brand">
+                                                <span
+                                                    v-if="currentSportIconSrc || currentSportIcon"
+                                                    class="sport-section-header__icon-wrap"
+                                                >
+                                                    <img
+                                                        v-if="currentSportIconSrc"
+                                                        :src="currentSportIconSrc"
+                                                        alt=""
+                                                        class="sport-section-header__icon"
+                                                        width="18"
+                                                        height="18"
+                                                    />
+                                                    <component
+                                                        v-else
+                                                        :is="currentSportIcon"
+                                                        :width="15.37"
+                                                        :height="16.63"
+                                                        class="sport-section-header__icon"
+                                                    />
+                                                </span>
+                                                <h3 class="sport-section-header__title">
+                                                    {{ pageTitle }}
+                                                </h3>
+                                            </div>
+                                            <div class="sport-section-header__filters">
+                                                <div class="feed-mode-pills">
+                                                    <button
+                                                        type="button"
+                                                        class="feed-mode-pill"
+                                                        :class="{ 'feed-mode-pill--active': isSportFeedLiveActive(event_type_id, 'upcoming') }"
+                                                        @click="toggleSectionFeedLive(event_type_id, 'upcoming')"
+                                                    >
+                                                        <FeedModePillPrefix :active="isSportFeedLiveActive(event_type_id, 'upcoming')" />
+                                                        LIVE
+                                                    </button>
+                                                    <button
+                                                        type="button"
+                                                        class="feed-mode-pill feed-mode-pill--virtual"
+                                                        :class="{ 'feed-mode-pill--active': isSportFeedVirtualActive(event_type_id, 'upcoming') }"
+                                                        @click="toggleSectionFeedVirtual(event_type_id, 'upcoming')"
+                                                    >
+                                                        <FeedModePillPrefix :active="isSportFeedVirtualActive(event_type_id, 'upcoming')" />
+                                                        VIRTUAL
+                                                    </button>
+                                                    <button
+                                                        type="button"
+                                                        class="feed-mode-pill feed-mode-pill--premium"
+                                                        :class="{ 'feed-mode-pill--active': isSportFeedPremiumActive(event_type_id, 'upcoming') }"
+                                                        @click="toggleSectionFeedPremium(event_type_id, 'upcoming')"
+                                                    >
+                                                        <FeedModePillPrefix :active="isSportFeedPremiumActive(event_type_id, 'upcoming')" />
+                                                        PREMIUM
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div v-if="!isMobile" class="sport-section-header__right">
+                                            <span class="sport-section-header__meta-spacer" aria-hidden="true" />
+                                            <div class="sport-section-header__market-cols">
+                                                <span>1</span>
+                                                <span>x</span>
+                                                <span>2</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        v-if="!upcomingEventsList.length"
+                                        class="sports-no-markets-empty sports-no-markets-empty--section"
+                                    >
+                                        {{ t('sports.home.noMarketsAvailable') }}
+                                    </div>
+                                    <div
+                                        v-for="(event, eventIndex) in upcomingEventsList"
+                                        :key="`upcoming-${event.id}`"
+                                        v-observe-event-visibility="getEventId(event)"
+                                    >
+                                        <EventRow
+                                            :event="event"
+                                            reference-layout
+                                            reference-play-mode="upcoming"
+                                            :show-competition="false"
+                                            :show-upcoming-odds-overlay="true"
+                                            :animation-delay="Math.min(eventIndex * 0.02, 0.5)"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+
+                <div v-else class="sports-no-markets-empty">
+                    {{ t('sports.home.noMarketsAvailable') }}
                 </div>
-            </div>
-
-            <div v-else class="sports-no-markets-empty">
-                {{ t('sports.home.noMarketsAvailable') }}
             </div>
         </v-container>
     </div>
 </template>
 
 <style scoped>
+.sport-page-reference-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+}
+
+.home-events-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+}
+
+.events-table-section--reference {
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.events-table-section__body {
+    border: 1px solid rgba(84, 84, 84, 0.6);
+    border-top: 0;
+    border-radius: 0 0 10px 10px;
+    overflow: hidden;
+    background: var(--color-event-name, #333333);
+}
+
+@media (min-width: 1025px) {
+    .sport-page-container .events-table-section,
+    .sport-page-container .upcoming-match {
+        background: var(--color-event-name, #333333);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+    }
+}
+
+.sport-page-layout--reference.sports-home-layout {
+    gap: 0;
+    background: transparent;
+}
+
+.sport-page-layout--reference.sports-home-layout--mobile {
+    padding: 0;
+}
+
+.sport-page-container.live-page-container {
+    padding-left: 0;
+    padding-right: 0;
+}
+
 .tw-blinking-dot {
     animation: tw-blink-animation 1.5s linear infinite;
 }
@@ -869,28 +979,28 @@ const toggleFeedVirtual = () => {
         font-size: 9px !important;
     }
 
-    /* Event rows (mobile): keep compact rows flush with table header */
-    .sports-home-layout.sport-page-layout :deep(.event-row-card) {
+    /* Legacy non-reference sport rows only — reference home rows use theme.css + EventRow.vue */
+    .sports-home-layout.sport-page-layout:not(.sport-page-layout--reference) :deep(.event-row-card) {
         border-top: none !important;
         border-bottom: 1px solid #d1d5db !important;
         background: #ffffff !important;
     }
 
-    .sports-home-layout.sport-page-layout :deep(.event-row-content) {
+    .sports-home-layout.sport-page-layout:not(.sport-page-layout--reference) :deep(.event-row-content) {
         padding: 0 !important;
     }
 
-    .sports-home-layout :deep(.event-row-ref-colheads) {
+    .sports-home-layout:not(.sport-page-layout--reference) :deep(.event-row-ref-colheads) {
         display: none !important;
     }
 
-    .sports-home-layout :deep(.event-row-ref-odds) {
+    .sports-home-layout:not(.sport-page-layout--reference) :deep(.event-row-ref-odds) {
         margin-top: 2px;
         gap: 2px;
     }
 
-    .sports-home-layout.sport-page-layout :deep(.event-row-ref-btn),
-    .sports-home-layout.sport-page-layout :deep(.event-odd-btn) {
+    .sports-home-layout.sport-page-layout:not(.sport-page-layout--reference) :deep(.event-row-ref-btn),
+    .sports-home-layout.sport-page-layout:not(.sport-page-layout--reference) :deep(.event-odd-btn) {
         border-radius: 4px;
     }
 
@@ -1114,14 +1224,13 @@ const toggleFeedVirtual = () => {
     }
 }
 
-.sport-page-container {
+.sport-page-container:not(.live-page-container) {
     padding-top: 0;
     padding-left: 12px;
     padding-right: 12px;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     overflow: hidden;
-    /* padding-bottom: 80px; */
 }
 
 .sport-page-container .sport-page-exchange-card {

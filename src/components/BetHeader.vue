@@ -89,6 +89,11 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  /** WazirWin ExchAllMarkets / MatchInfo — green event title on #333 bar. */
+  wazirRefChrome: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 const emit = defineEmits(['toggle-slip', 'toggle-bet-history', 'toggle-live-score', 'toggle-open-bets'])
@@ -217,8 +222,18 @@ const formattedEventTime = computed(() => {
 </script>
 
 <template>
+  <!-- WazirWin reference event title (MatchInfo.tsx) -->
+  <div v-if="wazirRefChrome && !racingMarketHeader && !isMobile" class="bet-header-shell bet-header-shell--wazir-ref">
+    <div class="bet-header-wazir-ref">
+      <div class="bet-header-wazir-ref__inner">
+        <span class="bet-header-wazir-event-name" :title="titleAttr">{{ event_name }}</span>
+      </div>
+    </div>
+  </div>
+
   <!-- Full width of parent column — no horizontal inset so bar length matches main content strip -->
   <div
+    v-else
     class="bet-header-shell"
     :class="{ 'bet-header-shell--racing': racingMarketHeader && !isMobile }"
   >
@@ -361,6 +376,51 @@ const formattedEventTime = computed(() => {
 <style scoped>
 .bet-header-shell {
   width: 100%;
+}
+
+/* WazirWin MatchInfo — measured @ monkeydon event-details desktop */
+.bet-header-shell--wazir-ref {
+  width: 100%;
+}
+
+.bet-header-wazir-ref {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 44px;
+  min-height: 44px;
+  margin: 8px 0 0;
+  padding: 8px;
+  box-sizing: border-box;
+  background: var(--color-event-name, #333333);
+  border: 0;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.bet-header-wazir-ref__inner {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  width: 92%;
+  min-width: 0;
+}
+
+.bet-header-wazir-event-name {
+  display: block;
+  font-family: Lato, ui-sans-serif, system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: normal;
+  color: var(--color-wazir-green, #49915e);
+  text-transform: capitalize;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .bet-header-racing-divider {

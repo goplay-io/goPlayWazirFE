@@ -42,6 +42,10 @@ const props = defineProps({
   activeCategory: {
     type: String,
     default: 'All'
+  },
+  rowsOnly: {
+    type: Boolean,
+    default: false
   }
 });
 
@@ -236,6 +240,11 @@ const getPrices = (market) => getFancyTopPrices(market);
 const shouldShowMarket = (market) => shouldShowFancyMarket(market, { backOnly: true });
 const isMarketHidden = (market) => !shouldShowMarket(market);
 
+const isGroupVisible = (key, fancy) => (
+  (props.activeCategory === 'All' || props.activeCategory === key) &&
+  fancy.some((market) => !isMarketHidden(market))
+);
+
 // Dialog state for positions
 const showPositionsDialog = ref(false);
 const dialogPositions = ref([]);
@@ -271,8 +280,9 @@ const { t } = useI18n()
 <template>
   <!-- Fancy Markets Cards (no grid wrapper - parent handles grid) -->
   <template v-for="[key, fancy] in orderedGroupedFancyData" :key="key">
+    <template v-if="isGroupVisible(key, fancy)">
     <div
-      v-if="(props.activeCategory === 'All' || props.activeCategory === key) && fancy.some(m => !isMarketHidden(m))"
+      v-if="!rowsOnly"
       class="fancy-card-item fancy-market-block tw-bg-theme-surface tw-border tw-border-theme-border tw-overflow-hidden"
     >
       <div class="fancy-khadda-header-bar tw-flex tw-items-stretch tw-overflow-hidden tw-border-b tw-border-theme-border">
@@ -369,6 +379,88 @@ const { t } = useI18n()
         </div>
       </v-expand-transition>
     </div>
+
+    <div v-else class="tw-p-0 khadda-fancy-rows-wrap">
+      <template v-for="(innerFancy, innerKey) in fancy" :key="innerFancy.market_id ?? innerKey">
+        <div v-show="!isMarketHidden(innerFancy)" class="fancy-row-shell">
+          <div
+            class="fancy-row-card"
+            :data-market-id="innerFancy.market_id"
+            :data-runner-id="innerFancy.market_id"
+          >
+          <div v-if="innerFancy.message" class="market-message-banner">
+            <marquee class="tw-text-xs tw-text-marquee">{{ innerFancy.message }}</marquee>
+          </div>
+          <div class="fancy-row-cols-khadda tw-items-center">
+            <div class="fancy-row-meta tw-flex tw-min-w-0 tw-flex-col tw-justify-center tw-gap-0.5 tw-pl-2 tw-pr-1">
+              <div class="fancy-row-meta-head tw-flex tw-min-w-0 tw-items-center tw-gap-0.5">
+                <h4 class="fancy-runner-name text-black-force tw-m-0 tw-min-w-0 tw-leading-snug">
+                  <span class="tw-whitespace-normal">
+                    {{ innerFancy?.name }}<template v-if="getPrices(innerFancy).backAmount != null">- {{ getPrices(innerFancy).backAmount }}</template>
+                  </span>
+                </h4>
+              </div>
+              <PayoutValue :value="getFancyOutcome(innerFancy.market_id)" small />
+            </div>
+            <div class="fancy-odds-wrap tw-relative tw-ml-auto tw-shrink-0 tw-flex tw-items-center tw-gap-2">
+              <BookLadderIcon
+                v-if="hasBookData(innerFancy.market_id)"
+                class="fancy-row-book-ladder"
+                @click="openPositionsDialog(innerFancy.market_id, innerFancy?.name)"
+              />
+              <FancyMinMaxInfo
+                :min="getMinMaxValues(innerFancy).min"
+                :max="getMinMaxValues(innerFancy).max"
+              />
+              <div
+                class="khadda-odds-block tw-relative tw-w-[146px]"
+                :class="{ 'fancy-odds-block--status-active': isSuspended(innerFancy) || isBallRunning(innerFancy) }"
+              >
+                <FancyMarketStatusBlock
+                  :ball-running="getFancyRunnerOverlayStatus(innerFancy, { betAllow }) === 'BALL_RUNNING'"
+                  :suspended="getFancyRunnerOverlayStatus(innerFancy, { betAllow }) === 'SUSPENDED'"
+                />
+                <div class="khadda-odds-status-dim tw-w-full">
+                  <v-btn size="default" rounded="0"
+                    :disabled="isSuspended(innerFancy) || isBallRunning(innerFancy) || !betAllow"
+                    class="fancy-odds-btn khadda-odds-vbtn khadda-odds-vbtn--full tw-w-full tw-bg-odds-back hover:tw-bg-odds-back-hover tw-text-black tw-font-bold"
+                    variant="elevated" @click="selectBet(
+                      getPrices(innerFancy).backOdd,
+                      'back',
+                      innerFancy.market_id,
+                      innerFancy.name,
+                      innerFancy.market_id,
+                      innerFancy.event_id,
+                      getPrices(innerFancy).backAmount,
+                      getMinMaxValues(innerFancy).min,
+                      getMinMaxValues(innerFancy).max,
+                      1,
+                      getPrices(innerFancy).backAmount
+                    )">
+                    <div class="khadda-odds-btn-inner tw-text-black">
+                      <span class="fancy-odds-price khadda-odds-line khadda-odds-line--price">{{ getPrices(innerFancy).backOdd ?? 0 }}</span>
+                      <div class="fancy-odds-size khadda-odds-line khadda-odds-line--size">{{ getPrices(innerFancy).backOdd != null ? getMinMaxValues(innerFancy).min : '0.0' }}</div>
+                    </div>
+                  </v-btn>
+                </div>
+              </div>
+              <div class="fancy-row-limits-wazir">
+                <div class="fancy-row-limits-wazir-line">
+                  <span class="fancy-row-limits-wazir-label">Min Bet :</span>
+                  <span class="fancy-row-limits-wazir-value">{{ getMinMaxValues(innerFancy).min ?? '—' }}</span>
+                </div>
+                <div class="fancy-row-limits-wazir-line">
+                  <span class="fancy-row-limits-wazir-label">Max Bet :</span>
+                  <span class="fancy-row-limits-wazir-value">{{ getMinMaxValues(innerFancy).max ?? '—' }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </template>
+    </div>
+    </template>
   </template>
 
   <FancyPositionsDialog v-model="showPositionsDialog" :title="dialogTitle" :positions="dialogPositions" />

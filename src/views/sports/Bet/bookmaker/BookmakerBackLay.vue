@@ -1,5 +1,6 @@
 <script setup>
 import { defineProps, computed, inject } from 'vue';
+import useDevices from '@/composables/useDevices';
 import NonFancyCalculator from '@/composables/PayoutCalculators/NonFancyCalculator';
 import { useRunnerCppEmitter } from '@/composables/useRunnerCppEmitter';
 import RunnerPayouts from '@/components/sports/RunnerPayouts.vue';
@@ -21,6 +22,7 @@ import numeral from 'numeral';
 import { formatMarketBetLimit } from '@/utils/marketBetLimitFormat.js';
 
 const betStore = useBetStore();
+const { isDesktop } = useDevices();
 const { toggleFavorite, isFavorited } = useFavoriteMarkets();
 
 const props = defineProps({
@@ -238,6 +240,10 @@ const getSizeDisplay = (size) => {
                                 :title="(bookmaker?.title || bookmaker?.name || '').trim() || undefined">
                                 {{ (bookmaker?.title || bookmaker?.name || 'BOOKMAKER').trim() }}
                             </span>
+                            <span
+                                class="bookmaker-bl-header-max-inline match-odds-header-limit-text tw-hidden md:tw-inline tw-whitespace-nowrap">
+                                Max:{{ formatMarketBetLimit(bookmaker?.max_bet) }}
+                            </span>
                         </div>
                     </div>
 
@@ -279,6 +285,15 @@ const getSizeDisplay = (size) => {
 
                 </div>
 
+                <!-- Desktop: BACK over 3rd blue cell, LAY over 4th pink cell -->
+                <div
+                    class="bookmaker-bl-header-backlay-col tw-hidden tw-items-center tw-justify-center tw-bg-[#efefef] tw-border-b tw-border-[#d9d9d9] tw-py-1 tw-pr-0">
+                    <div class="odds-header-groups odds-header-groups--six tw-text-center">
+                        <span class="match-odds-header-col-label sports-bet-back-label">Back</span>
+                        <span class="match-odds-header-col-label sports-bet-lay-label">Lay</span>
+                    </div>
+                </div>
+
             </div>
             <!-- Runners -->
             <v-card-text class="bookmaker-bl-runners match-odds-runners tw-p-0"
@@ -307,9 +322,40 @@ const getSizeDisplay = (size) => {
                                 <div
                                     class="match-odds-odds-strip bookmaker-bl-odds-strip tw-relative tw-flex tw-items-center tw-gap-2 md:tw-gap-2">
                                     <div class="tw-flex tw-gap-2 md:tw-gap-2 back-group">
+                                        <v-btn v-if="isDesktop" size="default" rounded="0"
+                                            class="match-odds-price-cell odds-back-bg-3 tw-w-[69px] tw-h-[40px] md:tw-h-[34px] tw-bg-odds-back hover:tw-bg-odds-back-hover tw-flex-shrink-0 tw-text-black tw-font-bold"
+                                            variant="elevated"
+                                            :disabled="isRunnerBetDisabled(runner, bookmaker) || !hasActivePrice(runner?.back?.[2]?.price)"
+                                            @click="selectBet(runner?.back?.[2]?.price, 'back', runner?.selection_id || runner?.id, runner?.name, bookmaker?.name, bookmaker.market_id, bookmaker.min_bet, bookmaker.max_bet, bookmaker?.betting_type, bookmaker.runners.length)">
+                                            <div class="tw-text-center tw-w-full">
+                                                <div class="mo-price tw-font-bold tw-text-xs tw-leading-tight">{{
+                                                    getPriceDisplay(runner?.back?.[2]?.price) }}</div>
+                                                <div
+                                                    class="mo-size tw-text-[8px] tw-text-black tw-leading-tight tw-flex tw-justify-center tw-items-center">
+                                                    {{ getSizeDisplay(runner?.back?.[2]?.size) }}
+                                                </div>
+                                            </div>
+                                        </v-btn>
+
+                                        <v-btn v-if="isDesktop" size="default" rounded="0"
+                                            class="match-odds-price-cell odds-back-bg-2 tw-w-[69px] tw-h-[40px] md:tw-h-[34px] tw-bg-odds-back hover:tw-bg-odds-back-hover tw-flex-shrink-0 tw-text-black tw-font-bold"
+                                            variant="elevated"
+                                            :disabled="isRunnerBetDisabled(runner, bookmaker) || !hasActivePrice(runner?.back?.[1]?.price)"
+                                            @click="selectBet(runner?.back?.[1]?.price, 'back', runner?.selection_id || runner?.id, runner?.name, bookmaker?.name, bookmaker.market_id, bookmaker.min_bet, bookmaker.max_bet, bookmaker?.betting_type, bookmaker.runners.length)">
+                                            <div class="tw-text-center tw-w-full">
+                                                <div class="mo-price tw-font-bold tw-text-xs tw-leading-tight">{{
+                                                    getPriceDisplay(runner?.back?.[1]?.price) }}</div>
+                                                <div
+                                                    class="mo-size tw-text-[8px] tw-text-black tw-leading-tight tw-flex tw-justify-center tw-items-center">
+                                                    {{ getSizeDisplay(runner?.back?.[1]?.size) }}
+                                                </div>
+                                            </div>
+                                        </v-btn>
+
                                         <v-btn size="default" rounded="0"
                                             class="match-odds-price-cell odds-back-bg-1 tw-w-[69px] tw-h-[40px] md:tw-h-[34px] tw-bg-odds-back hover:tw-bg-odds-back-hover tw-flex-shrink-0 tw-text-black tw-font-bold"
-                                            variant="elevated" :disabled="isRunnerBetDisabled(runner, bookmaker) || !hasActivePrice(runner?.back?.[0]?.price)"
+                                            variant="elevated"
+                                            :disabled="isRunnerBetDisabled(runner, bookmaker) || !hasActivePrice(runner?.back?.[0]?.price)"
                                             @click="selectBet(runner?.back?.[0]?.price, 'back', runner?.selection_id || runner?.id, runner?.name, bookmaker?.name, bookmaker.market_id, bookmaker.min_bet, bookmaker.max_bet, bookmaker?.betting_type, bookmaker.runners.length)">
                                             <div class="tw-text-center tw-w-full">
                                                 <div class="mo-price tw-font-bold tw-text-xs tw-leading-tight">{{
@@ -325,7 +371,8 @@ const getSizeDisplay = (size) => {
                                     <div class="tw-flex tw-gap-2 md:tw-gap-2 lay-group">
                                         <v-btn size="default" rounded="0"
                                             class="match-odds-price-cell odds-lay-bg-1 tw-w-[69px] tw-h-[40px] md:tw-h-[34px] tw-bg-odds-lay hover:tw-bg-odds-lay-hover tw-flex-shrink-0 tw-text-black tw-font-bold"
-                                            variant="elevated" :disabled="isRunnerBetDisabled(runner, bookmaker) || !hasActivePrice(runner?.priceLay ?? runner?.lay?.[0]?.price)"
+                                            variant="elevated"
+                                            :disabled="isRunnerBetDisabled(runner, bookmaker) || !hasActivePrice(runner?.priceLay ?? runner?.lay?.[0]?.price)"
                                             @click="selectBet(runner?.priceLay ?? runner?.lay?.[0]?.price, 'lay', runner?.selection_id || runner?.id, runner?.name, bookmaker?.name, bookmaker.market_id, bookmaker.min_bet, bookmaker.max_bet, bookmaker?.betting_type, bookmaker.runners.length)">
                                             <div class="tw-text-center tw-w-full">
                                                 <div class="mo-price tw-font-bold tw-text-xs tw-leading-tight">{{
@@ -338,6 +385,36 @@ const getSizeDisplay = (size) => {
                                                             ? getSizeDisplay(runner.lay[0].size)
                                                             : getSizeDisplay(bookmaker?.max_bet))
                                                         : '0.0' }}
+                                                </div>
+                                            </div>
+                                        </v-btn>
+
+                                        <v-btn v-if="isDesktop" size="default" rounded="0"
+                                            class="match-odds-price-cell odds-lay-bg-2 tw-w-[69px] tw-h-[40px] md:tw-h-[34px] tw-bg-odds-lay hover:tw-bg-odds-lay-hover tw-flex-shrink-0 tw-text-black tw-font-bold"
+                                            variant="elevated"
+                                            :disabled="isRunnerBetDisabled(runner, bookmaker) || !hasActivePrice(runner?.lay?.[1]?.price)"
+                                            @click="selectBet(runner?.lay?.[1]?.price, 'lay', runner?.selection_id || runner?.id, runner?.name, bookmaker?.name, bookmaker.market_id, bookmaker.min_bet, bookmaker.max_bet, bookmaker?.betting_type, bookmaker.runners.length)">
+                                            <div class="tw-text-center tw-w-full">
+                                                <div class="mo-price tw-font-bold tw-text-xs tw-leading-tight">{{
+                                                    getPriceDisplay(runner?.lay?.[1]?.price) }}</div>
+                                                <div
+                                                    class="mo-size tw-text-[8px] tw-text-black tw-leading-tight tw-flex tw-justify-center tw-items-center">
+                                                    {{ getSizeDisplay(runner?.lay?.[1]?.size) }}
+                                                </div>
+                                            </div>
+                                        </v-btn>
+
+                                        <v-btn v-if="isDesktop" size="default" rounded="0"
+                                            class="match-odds-price-cell odds-lay-bg-3 tw-w-[69px] tw-h-[40px] md:tw-h-[34px] tw-bg-odds-lay hover:tw-bg-odds-lay-hover tw-flex-shrink-0 tw-text-black tw-font-bold"
+                                            variant="elevated"
+                                            :disabled="isRunnerBetDisabled(runner, bookmaker) || !hasActivePrice(runner?.lay?.[2]?.price)"
+                                            @click="selectBet(runner?.lay?.[2]?.price, 'lay', runner?.selection_id || runner?.id, runner?.name, bookmaker?.name, bookmaker.market_id, bookmaker.min_bet, bookmaker.max_bet, bookmaker?.betting_type, bookmaker.runners.length)">
+                                            <div class="tw-text-center tw-w-full">
+                                                <div class="mo-price tw-font-bold tw-text-xs tw-leading-tight">{{
+                                                    getPriceDisplay(runner?.lay?.[2]?.price) }}</div>
+                                                <div
+                                                    class="mo-size tw-text-[8px] tw-text-black tw-leading-tight tw-flex tw-justify-center tw-items-center">
+                                                    {{ getSizeDisplay(runner?.lay?.[2]?.size) }}
                                                 </div>
                                             </div>
                                         </v-btn>

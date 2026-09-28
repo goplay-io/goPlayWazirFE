@@ -53,14 +53,11 @@ const {
       'layout-right-rail--home-ref': homeReferenceLayout,
     }"
   >
-    <div
-      v-if="homeReferenceLayout || authStore.isUiAuthenticated"
-      class="layout-right-rail__slip"
-      :class="{ 'layout-right-rail__slip--home-ref': homeReferenceLayout }"
-    >
-      <HomeGuestBetSlipRail v-if="homeReferenceLayout && !authStore.isUiAuthenticated" />
+    <div class="layout-right-rail__slip layout-right-rail__slip--home-ref">
+      <HomeGuestBetSlipRail v-if="!authStore.isUiAuthenticated" />
       <SportsBetSlip
-        v-else-if="authStore.isUiAuthenticated"
+        v-else
+        home-ref-chrome
         :slipOpen="slipOpen"
         :toggleSlip="toggleSlip"
         :bet_error="betStore.bet_error"

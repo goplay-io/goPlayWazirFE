@@ -4,7 +4,15 @@ import { useWallet } from "../composables/useWallet";
 import { usePageSwitchStore } from "@/stores/pageSwitchStore";
 import i18n from "@/plugins/i18n";
 import { useSnackbar } from "@/composables/useSnackbar/useSnackbar.js";
-import { openLoginModal } from "@/composables/useLoginModal.js";
+import { openLoginModal, openSignupModal, openForgotPasswordModal } from "@/composables/useLoginModal.js";
+
+function pickSignupCampaignId(query = {}) {
+  return String(query.campaign_id || query.campaignId || query.campign_id || "").trim();
+}
+
+function pickSignupReferralId(query = {}) {
+  return String(query.referral_id || query.referralId || query.referalId || "").trim();
+}
 
 /** Footer info / legal pages — no sidebar or right rail; content spans full width. */
 const INFO_PAGE_LAYOUT = { layoutProps: { fullWidth: true } };
@@ -104,20 +112,33 @@ const routes = [
   {
     path: "/login",
     name: "login",
-    component: () => import("../views/auth/Login.vue"),
-    meta: { layout: "guest" },
+    beforeEnter: (to) => {
+      openLoginModal({
+        view: "login",
+        redirect: typeof to.query.redirect === "string" ? to.query.redirect : null,
+        force: to.query.force === "1" || to.query.force === "true",
+      });
+      return { path: "/", replace: true };
+    },
   },
   {
     path: "/signup",
     name: "signup",
-    component: () => import("../views/auth/signup/SignupView.vue"),
-    meta: { layout: "guest" },
+    beforeEnter: (to) => {
+      openSignupModal({
+        campaignId: pickSignupCampaignId(to.query),
+        referralId: pickSignupReferralId(to.query),
+      });
+      return { path: "/", replace: true };
+    },
   },
   {
     path: "/forgot-password",
     name: "forgot-password",
-    component: () => import("../views/auth/forgot-password/ForgotPasswordView.vue"),
-    meta: { layout: "guest" },
+    beforeEnter: () => {
+      openForgotPasswordModal();
+      return { path: "/", replace: true };
+    },
   },
   {
     path: "/logout",

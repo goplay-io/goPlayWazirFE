@@ -187,6 +187,7 @@ export function useEventTypes() {
     { id: 998917, key: 'volleyball', name: t('eventTypes.volleyball'), icon: iconComponents.Volleyball || null },
     { id: 2378961, key: 'politics', name: t('eventTypes.politics'), icon: iconComponents.Politics || null },
     { id: 26420387, key: 'mixedMartialArts', name: t('eventTypes.mixedMartialArts'), icon: iconComponents['Mixed Martial Arts'] || null },
+    { id: 99989, key: 'mac88', name: 'MAC88', icon: iconComponents.Other || null },
     { id: 100000, key: 'other', name: t('eventTypes.other'), icon: iconComponents.Other || null }
   ])
 

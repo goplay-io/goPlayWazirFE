@@ -123,6 +123,9 @@
   --bet-slip-rail-width: 406px;
   --bet-slip-rail-offset: 0px;
   --layout-sports-middle-width: 810px;
+  /* WazirWin event detail @ 1512px — 54% center + 26% slip inside main column */
+  --layout-bet-detail-markets-width: 728px;
+  --layout-bet-detail-slip-width: 350px;
   /* Logged-out homepage — reference zuplay.com @ 1512px: 290 + 860 + 350 (+6px gaps) */
   --layout-guest-middle-width: 860px;
   --layout-guest-rail-width: 350px;
@@ -250,7 +253,13 @@
     gap: 6px;
   }
 
-  .layout-home-shell-bg .live-page-container .events-table-section--reference {
+  .layout-home-shell-bg .live-page-container .events-table-section--reference,
+  .layout-home-shell-bg .sport-page-container .events-table-section--reference {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .layout-home-shell-bg .sport-page-container {
     padding-left: 0;
     padding-right: 0;
   }
@@ -1056,6 +1065,7 @@ marquee.tw-text-marquee {
 .layout-home-shell-bg .guest-sports-shell,
 .layout-home-shell-bg .guest-sports-shell__content,
 .layout-home-shell-bg .live-page-container,
+.layout-home-shell-bg .sport-page-container,
 .layout-home-shell-bg .live-showcase {
   background-color: var(--color-login-input-bg) !important;
 }
@@ -1108,19 +1118,23 @@ marquee.tw-text-marquee {
 
 /* Reference GamesContainer / GamesTableHeader: bg-eventNameColor card on dark shell */
 .layout-home-shell-bg .live-page-container .events-table-section,
-.layout-home-shell-bg .live-page-container .upcoming-match {
+.layout-home-shell-bg .sport-page-container .events-table-section,
+.layout-home-shell-bg .live-page-container .upcoming-match,
+.layout-home-shell-bg .sport-page-container .upcoming-match {
   background: transparent !important;
   border-radius: 0;
   overflow: visible;
   box-shadow: none;
 }
 
-.layout-home-shell-bg .live-page-container .events-table-section--reference {
+.layout-home-shell-bg .live-page-container .events-table-section--reference,
+.layout-home-shell-bg .sport-page-container .events-table-section--reference {
   background: transparent !important;
   box-shadow: none;
 }
 
-.layout-home-shell-bg .live-page-container .events-table-section__body {
+.layout-home-shell-bg .live-page-container .events-table-section__body,
+.layout-home-shell-bg .sport-page-container .events-table-section__body {
   background: var(--color-event-name) !important;
   border: 1px solid rgba(84, 84, 84, 0.6);
   border-top: 0;
@@ -1293,9 +1307,13 @@ marquee.tw-text-marquee {
   border-color: rgba(255, 255, 255, 0.35) !important;
 }
 
-/* Document shell — avoid white html/body/v-app gutters on home */
+/* Document shell — avoid white html/body/#app/v-app gutters on reference sports pages */
+html:has(.layout-home-shell-bg),
 body:has(.layout-home-shell-bg),
-.v-application:has(.layout-home-shell-bg) {
+#app:has(.layout-home-shell-bg),
+.app-scale-wrapper:has(.layout-home-shell-bg),
+.v-application:has(.layout-home-shell-bg),
+.v-application__wrap:has(.layout-home-shell-bg) {
   background-color: var(--color-login-input-bg) !important;
 }
 
@@ -1675,10 +1693,42 @@ body:has(.layout-home-shell-bg),
     gap: 6px;
   }
 
+  .guest-layout-body--with-right-rail .layout-right-rail__slip,
+  .guest-layout-body--with-right-rail .layout-right-rail__slip--home-ref,
   .guest-layout-body--with-right-rail .layout-right-rail__img,
   .guest-layout-body--with-right-rail .layout-right-rail__whatsapp {
     width: var(--layout-guest-rail-width);
     max-width: var(--layout-guest-rail-width);
+  }
+
+  .guest-layout-body--with-right-rail .layout-right-rail__slip--home-ref:has(.home-ref-bet-slip) {
+    padding: 0;
+    border: none;
+    background: transparent;
+  }
+
+  .guest-layout-body--with-right-rail .home-ref-bet-slip {
+    width: 100%;
+    min-width: 0;
+    min-height: calc(100vh - 126px);
+  }
+
+  .layout-content-row--with-right-rail .layout-right-rail__slip--home-ref,
+  .layout-content-row--with-right-rail .layout-right-rail__slip--home-ref .sports-bet-slip-root.home-ref-bet-slip,
+  .layout-content-row--with-right-rail .layout-right-rail__slip--home-ref .home-ref-bet-slip {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .layout-content-row--with-right-rail .layout-right-rail__slip--home-ref:has(.home-ref-bet-slip) {
+    padding: 0;
+    border: none;
+    background: transparent;
+  }
+
+  .layout-content-row--with-right-rail .home-ref-bet-slip {
+    min-height: calc(100vh - 126px);
   }
 
   /* Market/bet page: fill the main column (like homepage middle flex-grow).
