@@ -289,6 +289,9 @@ const showSiteFooter = computed(() => {
   if (isBetPage.value || isMultiMarketPage.value || isClearScreenPage.value) {
     return false;
   }
+  if (isCasinoListingPage.value) {
+    return false;
+  }
   if (isHorseGreyhoundRacingPage.value) {
     return !isMobile.value;
   }

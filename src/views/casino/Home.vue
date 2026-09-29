@@ -1,7 +1,6 @@
 <template>
-    <v-container fluid class="casino-page tw-px-0 tw-pb-2 md:tw-pb-4 tw-pt-0 md:tw-pt-0 max-w-[99vw] tw-mx-auto md:tw-max-w-[890px]">
-        <!-- Top bar: CASINO title + search (mobile search only) -->
-        <!-- <div v-if="props.showHeader" class="casino-listing-top-bar">
+    <v-container fluid class="casino-page tw-w-full tw-max-w-none tw-px-0 tw-pb-2 md:tw-pb-4 tw-pt-0 md:tw-pt-0">
+        <div class="casino-listing-top-bar">
             <h1 class="casino-listing-top-bar__title">
                 {{ t('casino.home.heading') }}
             </h1>
@@ -10,63 +9,76 @@
                 :result-count="filteredGames.length"
                 :games="filteredGames"
                 :placeholder="t('casino.home.searchPlaceholder')"
-                class="casino-listing-top-bar__search md:tw-hidden"
+                class="casino-listing-top-bar__search"
                 @game-selected="playGame"
             />
-        </div> -->
+        </div>
 
-        <div class="casino-page-body tw-px-1 md:tw-px-0 tw-mt-1">
-            <!-- Loading State -->
+        <div class="casino-page-body tw-px-1 md:tw-px-0">
             <Loading v-if="loading" />
 
-            <!-- Main Content -->
             <div v-else>
-                <CasinoSearch
-                    v-model="searchQuery"
-                    :result-count="filteredGames.length"
-                    :games="filteredGames"
-                    :placeholder="t('casino.home.searchPlaceholder')"
-                    class="casino-tabs-search-mobile md:tw-hidden"
-                    @game-selected="playGame"
-                />
-
-                <!-- Provider + game-type tab rails -->
                 <div class="casino-tabs-stack">
-                    <CasinoTabsL2Rail
-                        :items="gameTypeFilterItems"
-                        :active-key="activeGameType"
-                        @select="changeGameType"
+                    <CasinoTabsL1Rail
+                        :items="productFilterItems"
+                        :active-key="activeProduct"
+                        @select="changeProduct"
                     />
-
-                    <div class="casino-tabs-l1-search-row">
-                        <CasinoTabsL1Rail
-                            :items="productFilterItems"
-                            :active-key="activeProduct"
-                            @select="changeProduct"
-                        />
-
-                        <CasinoSearch
-                            v-model="searchQuery"
-                            :result-count="filteredGames.length"
-                            :games="filteredGames"
-                            :placeholder="t('casino.home.searchPlaceholder')"
-                            inline
-                            class="casino-tabs-search max-md:tw-hidden"
-                            @game-selected="playGame"
-                        />
-                    </div>
                 </div>
 
-                <!-- Games grid -->
+                <!-- Games: ALL = category sections; provider = flat grid -->
                 <div v-if="filteredGames.length > 0">
-                    <div
-                        class="casino-games-grid tw-grid tw-grid-cols-3 md:tw-grid-cols-6 tw-gap-1 md:tw-gap-2">
-                        <div v-for="(game, index) in displayedGames" :key="game.id" v-memo="[game.id]"
-                            class="casino-game-tile" @click="playGame(game)">
+                    <template v-if="showCategorySections">
+                        <section
+                            v-for="section in displayedSections"
+                            :key="section.title"
+                            class="casino-category-section"
+                        >
+                            <h2 class="casino-category-section__title">{{ section.title }}</h2>
+                            <div class="casino-games-grid">
+                                <div
+                                    v-for="(game, index) in section.games"
+                                    :key="game.id"
+                                    v-memo="[game.id]"
+                                    class="casino-game-tile"
+                                    @click="playGame(game)"
+                                >
+                                    <div class="casino-game-tile__media">
+                                        <img
+                                            :src="game.url_thumb"
+                                            :alt="game.name"
+                                            loading="lazy"
+                                            decoding="async"
+                                            :fetchpriority="index < 5 ? 'high' : 'low'"
+                                            @error="handleImageError($event)"
+                                        />
+                                        <div
+                                            class="tw-absolute tw-inset-0 tw-flex tw-items-center tw-justify-center tw-bg-black/50 tw-opacity-0 image-placeholder">
+                                            <v-icon icon="mdi-cards-variant" size="36" class="tw-text-white"></v-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </template>
+
+                    <div v-else class="casino-games-grid">
+                        <div
+                            v-for="(game, index) in displayedGames"
+                            :key="game.id"
+                            v-memo="[game.id]"
+                            class="casino-game-tile"
+                            @click="playGame(game)"
+                        >
                             <div class="casino-game-tile__media">
-                                <img :src="game.url_thumb" :alt="game.name" loading="lazy" decoding="async"
-                                    class="tw-w-full tw-h-full tw-object-cover tw-object-center"
-                                    :fetchpriority="index < 6 ? 'high' : 'low'" @error="handleImageError($event)" />
+                                <img
+                                    :src="game.url_thumb"
+                                    :alt="game.name"
+                                    loading="lazy"
+                                    decoding="async"
+                                    :fetchpriority="index < 6 ? 'high' : 'low'"
+                                    @error="handleImageError($event)"
+                                />
                                 <div
                                     class="tw-absolute tw-inset-0 tw-flex tw-items-center tw-justify-center tw-bg-black/50 tw-opacity-0 image-placeholder">
                                     <v-icon icon="mdi-cards-variant" size="36" class="tw-text-white"></v-icon>
@@ -75,8 +87,11 @@
                         </div>
                     </div>
 
-                    <div v-if="displayedGames.length < filteredGames.length" v-intersect="onIntersect"
-                        class="tw-flex tw-justify-center tw-items-center tw-py-2 md:tw-py-4">
+                    <div
+                        v-if="hasMoreGames"
+                        v-intersect="onIntersect"
+                        class="tw-flex tw-justify-center tw-items-center tw-py-2 md:tw-py-4"
+                    >
                         <v-progress-circular indeterminate class="nav-progress" size="28" />
                     </div>
                 </div>
@@ -84,21 +99,20 @@
                 <!-- Empty state -->
                 <div v-else class="tw-text-center tw-py-6 md:tw-py-8 tw-px-3">
                     <v-icon icon="mdi-casino-chip" size="52"
-                        class="tw-mb-3 tw-text-gray-400"></v-icon>
-                    <h3 class="tw-mb-1.5 tw-text-lg tw-font-semibold tw-text-gray-900">{{
+                        class="tw-mb-3 tw-text-white/40"></v-icon>
+                    <h3 class="tw-mb-1.5 tw-text-lg tw-font-semibold tw-text-white">{{
                         t('casino.home.noGamesFound') }}</h3>
-                    <p class="tw-mx-auto tw-max-w-md tw-text-gray-600">
+                    <p class="tw-mx-auto tw-max-w-md tw-text-white/60">
                         {{ searchQuery ? t('casino.home.noGamesSearchDescription') :
                             t('casino.home.noGamesFilterDescription') }}
                     </p>
-                    <v-btn v-if="searchQuery || activeProduct !== 'all' || activeGameType !== 'all'" variant="outlined"
+                    <v-btn v-if="searchQuery || activeProduct !== 'all'" variant="outlined"
                         class="tw-mt-4 nav-outline-btn" @click="clearFilters">
                         {{ t('casino.home.clearFilters') }}
                     </v-btn>
                 </div>
             </div>
         </div>
-        <!-- Bottom clearance for fixed mobile nav bar -->
         <div class="casino-mobile-nav-spacer md:tw-hidden" aria-hidden="true" />
     </v-container>
 </template>
@@ -113,11 +127,9 @@ import { useFavoriteGames } from '@/composables/useFavoriteGames';
 import { useAuthStore } from '@/stores/auth';
 import CasinoSearch from '../../components/CasinoSearch.vue';
 import CasinoTabsL1Rail from '@/components/casino/CasinoTabsL1Rail.vue';
-import CasinoTabsL2Rail from '@/components/casino/CasinoTabsL2Rail.vue';
 import Loading from '@/components/Loading.vue';
 import useDevices from '@/composables/useDevices';
 import { sortCasinoGamesByPriority } from '@/utils/casinoGamePriority';
-import ultrawinHtml from '../../assets/Ultrawin.html?raw';
 
 const route = useRoute();
 const router = useRouter();
@@ -143,7 +155,6 @@ let providerCategoryMap = {};
 
 const totalGames = ref(0);
 const activeProduct = ref('all');
-const activeGameType = ref('all');
 const searchQuery = ref('');
 const PAGE_SIZE = computed(() => (isMobile.value ? 12 : 24));
 const visibleCount = ref(PAGE_SIZE.value);
@@ -151,127 +162,20 @@ const isLoggedInUser = computed(() => authStore.isRealAuthenticated);
 
 const normalizeProviderKey = (value) => String(value ?? '').trim().toLowerCase();
 
-const findGameTypeMatch = (queryValue) => {
-    const normalized = normalizeCategoryKey(queryValue);
-    if (!normalized || normalized === 'all') return 'all';
-
-    return availableGameTypes.value.find(
-        (gameType) =>
-            normalizeCategoryKey(gameType) === normalized ||
-            normalizeCategoryKey(gameType).includes(normalized) ||
-            normalized.includes(normalizeCategoryKey(gameType)),
-    );
-};
-
 const applyFiltersFromRoute = () => {
     const providerFromQuery = String(route.query.provider ?? '').trim();
-    const gameFromQuery = String(route.query.gamename ?? route.query.game ?? '').trim();
 
-    if (providerFromQuery) {
-        if (normalizeProviderKey(providerFromQuery) === 'all') {
-            activeProduct.value = 'all';
-        } else {
-            const matchedProvider = providers.value.find(
-                (provider) => normalizeProviderKey(provider) === normalizeProviderKey(providerFromQuery),
-            );
-            if (matchedProvider) activeProduct.value = matchedProvider;
-        }
+    if (!providerFromQuery) return;
+
+    if (normalizeProviderKey(providerFromQuery) === 'all') {
+        activeProduct.value = 'all';
+        return;
     }
 
-    if (gameFromQuery) {
-        const matchedGameType = findGameTypeMatch(gameFromQuery);
-        if (matchedGameType) activeGameType.value = matchedGameType;
-    } else if (providerFromQuery && normalizeProviderKey(providerFromQuery) !== 'all') {
-        activeGameType.value = 'all';
-    }
-};
-
-const getGameTypeIcon = (key) => {
-    if (key === 'all') return 'mdi-view-grid-outline';
-    const k = String(key).toLowerCase();
-    const icons = {
-        'dragon tiger': 'mdi-fire',
-        baccarat: 'mdi-cards-playing',
-        sicbo: 'mdi-dice-multiple',
-        'sic bo': 'mdi-dice-multiple',
-        'live sic bo': 'mdi-dice-multiple',
-        roulette: 'mdi-circle-outline',
-        'live roulette': 'mdi-circle-outline',
-        'color prediction': 'mdi-chart-pie',
-        'chicken games': 'mdi-food-drumstick',
-        'andar bahar': 'mdi-cards',
-        mines: 'mdi-mine',
-        aviator: 'mdi-airplane',
-        teenpatti: 'mdi-cards-playing-club',
-        lottery: 'mdi-numeric',
-        'live poker': 'mdi-cards-playing-outline',
-        'live lobby': 'mdi-office-building',
-        'crash games': 'mdi-chart-line-variant',
-        'casual games': 'mdi-gamepad-variant',
-        'scratch cards': 'mdi-cards-outline',
-        blackjack: 'mdi-cards-playing-heart',
-        poker: 'mdi-cards-playing-club',
-        slots: 'mdi-slot-machine',
-        lightning: 'mdi-lightning-bolt',
-    };
-    for (const [frag, icon] of Object.entries(icons)) {
-        if (k.includes(frag)) return icon;
-    }
-    return 'mdi-cards-playing-outline';
-};
-
-const normalizeCategoryKey = (value) =>
-    String(value || '')
-        .toLowerCase()
-        .replace(/\s+/g, ' ')
-        .trim();
-
-const decodeEntities = (value) =>
-    String(value || '')
-        .replace(/&amp;/g, '&')
-        .replace(/&lt;/g, '<')
-        .replace(/&gt;/g, '>')
-        .replace(/&quot;/g, '"')
-        .replace(/&#39;/g, "'");
-
-const resolveUltrawinIconSrc = (rawSrc) => {
-    const src = decodeEntities(rawSrc).trim();
-    if (!src) return null;
-    if (src.startsWith('data:image')) return src;
-
-    const fileName = src.split('/').pop();
-    if (!fileName) return null;
-    return new URL(`../../assets/Ultrawin_files/${fileName}`, import.meta.url).href;
-};
-
-const buildUltrawinCategorySvgs = (html) => {
-    const map = {};
-    const cardRegex =
-        /<img[^>]*src="([^"]+)"[^>]*>\s*<div[^>]*>\s*([^<]+?)\s*<\/div>/gim;
-
-    let match;
-    while ((match = cardRegex.exec(html)) !== null) {
-        const [, src, label] = match;
-        const normalizedLabel = normalizeCategoryKey(decodeEntities(label));
-        const resolvedSrc = resolveUltrawinIconSrc(src);
-        if (!normalizedLabel || !resolvedSrc) continue;
-        if (!map[normalizedLabel]) map[normalizedLabel] = resolvedSrc;
-    }
-    return map;
-};
-
-const ULTRAWIN_CATEGORY_SVGS = Object.freeze(buildUltrawinCategorySvgs(ultrawinHtml));
-
-const getGameTypeIconSrc = (key) => {
-    if (key === 'all') return null;
-    const normalizedKey = normalizeCategoryKey(key);
-
-    if (ULTRAWIN_CATEGORY_SVGS[normalizedKey]) return ULTRAWIN_CATEGORY_SVGS[normalizedKey];
-
-    for (const [label, iconSrc] of Object.entries(ULTRAWIN_CATEGORY_SVGS)) {
-        if (normalizedKey.includes(label) || label.includes(normalizedKey)) return iconSrc;
-    }
-    return null;
+    const matchedProvider = providers.value.find(
+        (provider) => normalizeProviderKey(provider) === normalizeProviderKey(providerFromQuery),
+    );
+    if (matchedProvider) activeProduct.value = matchedProvider;
 };
 
 onMounted(async () => {
@@ -337,13 +241,6 @@ onMounted(async () => {
         }
 
         applyFiltersFromRoute();
-
-        if (activeProduct.value === 'all' && activeGameType.value === 'all') {
-            const dragonTiger = availableGameTypes.value.find(
-                (gt) => normalizeCategoryKey(gt) === 'dragon tiger',
-            );
-            if (dragonTiger) activeGameType.value = dragonTiger;
-        }
     } catch (error) {
         console.error('Error loading casino data:', error);
         activeProduct.value = 'all';
@@ -362,23 +259,8 @@ const productFilterItems = computed(() => {
     return [allItem, { key: 'recent', label: 'RECENT' }, ...rest];
 });
 
-const gameTypeFilterItems = computed(() => {
-    const items = [{ key: 'all', label: t('casino.home.allTypes') }];
-    availableGameTypes.value.forEach((gt) => {
-        items.push({
-            key: gt,
-            label: formatGameTypeName(gt),
-        });
-    });
-    return items;
-});
-
-watch([activeProduct, activeGameType, searchQuery], () => {
-    visibleCount.value = PAGE_SIZE.value;
-});
-
 watch(
-    () => [route.query.provider, route.query.gamename, route.query.game],
+    () => route.query.provider,
     () => {
         if (!loading.value) applyFiltersFromRoute();
     },
@@ -410,95 +292,94 @@ const recentGames = computed(() => {
         .filter((game) => game?.id);
 });
 
-const recentGameTypes = computed(() => {
-    const seen = new Set();
-    recentGames.value.forEach((game) => {
-        const category = String(game?.category ?? '').trim();
-        if (category) seen.add(category);
-    });
-    return Array.from(seen);
-});
-
-const availableGameTypes = computed(() => {
-    if (activeProduct.value === 'recent') return recentGameTypes.value;
-
-    if (!activeProduct.value || activeProduct.value === 'all') {
-        const seen = new Set();
-        providers.value.forEach((p) => (providerCategoryMap[p] || []).forEach((c) => seen.add(c)));
-        return Array.from(seen);
-    }
-    return providerCategoryMap[activeProduct.value] || [];
-});
-
 const filteredGames = computed(() => {
     const product = activeProduct.value;
-    const gameType = activeGameType.value;
     const query = searchQuery.value?.toLowerCase() || '';
 
+    const matchesQuery = (game) =>
+        !query ||
+        game.name?.toLowerCase().includes(query) ||
+        game.category?.toLowerCase().includes(query) ||
+        game.provider?.toLowerCase().includes(query) ||
+        game.product?.toLowerCase().includes(query) ||
+        game.game_type?.toLowerCase().includes(query);
+
     if (product === 'recent') {
-        return recentGames.value.filter((game) => {
-            if (gameType !== 'all' && game.category !== gameType) return false;
-            if (
-                query &&
-                !(
-                    game.name?.toLowerCase().includes(query) ||
-                    game.category?.toLowerCase().includes(query) ||
-                    game.provider?.toLowerCase().includes(query) ||
-                    game.product?.toLowerCase().includes(query) ||
-                    game.game_type?.toLowerCase().includes(query)
-                )
-            ) {
-                return false;
-            }
-            return true;
-        });
+        return recentGames.value.filter(matchesQuery);
     }
 
     return allGames.value.filter((game) => {
         if (product && product !== 'all' && game.provider !== product) return false;
-        if (gameType !== 'all' && game.category !== gameType) return false;
-        if (
-            query &&
-            !(
-                game.name?.toLowerCase().includes(query) ||
-                game.category?.toLowerCase().includes(query) ||
-                game.provider?.toLowerCase().includes(query) ||
-                game.product?.toLowerCase().includes(query) ||
-                game.game_type?.toLowerCase().includes(query)
-            )
-        )
-            return false;
-        return true;
+        return matchesQuery(game);
     });
 });
 
+const formatSectionTitle = (value) => {
+    const raw = String(value || '').trim();
+    if (!raw) return 'OTHER';
+    return raw
+        .split(/\s+/)
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ')
+        .toUpperCase();
+};
+
+const showCategorySections = computed(
+    () => activeProduct.value === 'all' && !searchQuery.value.trim(),
+);
+
+/** ALL view: one section per provider (Fantasy11, MAC88 Live, …) in tab order */
+const gamesByCategory = computed(() => {
+    const map = new Map();
+    filteredGames.value.forEach((game) => {
+        const key = String(game.provider || game.product || 'Other').trim() || 'Other';
+        if (!map.has(key)) map.set(key, []);
+        map.get(key).push(game);
+    });
+
+    const orderedKeys = [
+        ...providers.value.filter((p) => map.has(p)),
+        ...[...map.keys()].filter((k) => !providers.value.includes(k)),
+    ];
+
+    return orderedKeys.map((key) => ({
+        title: formatSectionTitle(key),
+        games: map.get(key) || [],
+    }));
+});
+
+const visibleSectionCount = ref(4);
+
 const displayedGames = computed(() => filteredGames.value.slice(0, visibleCount.value));
 
+const displayedSections = computed(() => {
+    if (!showCategorySections.value) return [];
+    return gamesByCategory.value.slice(0, visibleSectionCount.value);
+});
+
+const hasMoreGames = computed(() => {
+    if (showCategorySections.value) {
+        return visibleSectionCount.value < gamesByCategory.value.length;
+    }
+    return displayedGames.value.length < filteredGames.value.length;
+});
+
 const onIntersect = (isIntersecting) => {
-    if (isIntersecting) visibleCount.value += PAGE_SIZE.value;
+    if (!isIntersecting) return;
+    if (showCategorySections.value) {
+        visibleSectionCount.value += 3;
+        return;
+    }
+    visibleCount.value += PAGE_SIZE.value;
 };
+
+watch([activeProduct, searchQuery], () => {
+    visibleCount.value = PAGE_SIZE.value;
+    visibleSectionCount.value = 4;
+});
 
 const changeProduct = (product) => {
     activeProduct.value = product;
-    if (product === 'all') {
-        const dragonTiger = availableGameTypes.value.find(
-            (gt) => normalizeCategoryKey(gt) === 'dragon tiger',
-        );
-        activeGameType.value = dragonTiger || 'all';
-    } else {
-        activeGameType.value = 'all';
-    }
-};
-
-const changeGameType = (gameType) => {
-    activeGameType.value = gameType;
-};
-
-const formatGameTypeName = (gameType) => {
-    return gameType
-        .split(' ')
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' ');
 };
 
 const playGame = (game) => {
@@ -511,7 +392,6 @@ const playGame = (game) => {
 
 const clearFilters = () => {
     activeProduct.value = 'all';
-    activeGameType.value = 'all';
     searchQuery.value = '';
 };
 
