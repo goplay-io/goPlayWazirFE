@@ -1,17 +1,25 @@
+/* monkeydon/wazirwin account & report pages — dark charcoal + green */
 .account-page {
-  --account-purple: var(--color-header-bg, #360952);
-  --account-purple-mid: #8a19ce;
-  --account-submit-gradient: linear-gradient(135deg, #921ada 0%, #8a19ce 50%, #471368 100%);
-  --account-header-gradient: linear-gradient(90deg, #360952, #8a19ce);
+  --account-purple: #49915e;
+  --account-purple-mid: #4cae50;
+  --account-submit-gradient: #49915e;
+  --account-header-gradient: #49915e;
+  --account-page-bg: #23201f;
+  --account-filter-strip: #333333;
+  --account-input-bg: #d5d5d5;
+  --account-input-text: #343434;
+  --account-border: #545454;
+  --account-text: #ffffff;
+  --account-muted: #aaaaaa;
   display: flex;
   flex-direction: column;
   min-height: 100%;
-  background: #ffffff;
-  color: #111111;
+  background: var(--account-page-bg);
+  color: var(--account-text);
 }
 
-/* Pages with their own dark panels keep a dark shell */
-.account-page.affiliate-program {
+/* Static info pages keep a light shell when combined with .account-page */
+.info-page.account-page {
   background: #ffffff;
   color: #111111;
 }
@@ -41,7 +49,7 @@
 
 @media (min-width: 768px) {
   .account-page-header__breadcrumb {
-    display: inline-flex;
+    display: none;
   }
 }
 
@@ -79,11 +87,11 @@
 
 .account-page-header__title {
   margin: 0;
-  font-size: 15px;
+  font-size: 12px;
   font-weight: 600;
   line-height: 22.5px;
   letter-spacing: normal;
-  color: #ffffff;
+  color: #171716;
 }
 
 .account-page-header__actions {
@@ -110,22 +118,17 @@
 }
 
 .account-page-filters {
-  --account-page-filter-height: 44px;
+  --account-page-filter-height: 36px;
   --account-page-filter-width: 150px;
   --account-page-apply-width: 200px;
-  --account-page-filter-border: #3f3f46;
-  --account-page-filter-bg: #f9fafb;
-  --account-page-filter-text: #374151;
-  --account-page-submit-gradient: linear-gradient(
-    to left top,
-    rgb(64, 19, 92),
-    rgb(163, 27, 245),
-    rgb(202, 134, 243)
-  );
+  --account-page-filter-border: #e5e5ea;
+  --account-page-filter-bg: #d5d5d5;
+  --account-page-filter-text: #343434;
+  --account-page-submit-gradient: #49915e;
   display: block;
-  padding: 0;
-  margin: 28px 0 0;
-  background: transparent;
+  padding: 8px 0;
+  margin: 0;
+  background: #333333;
   box-shadow: none;
 }
 
@@ -133,8 +136,10 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   width: 100%;
+  padding: 0 8px;
+  box-sizing: border-box;
 }
 
 .account-page-filters__dates {
@@ -158,9 +163,9 @@
   min-width: 0;
   height: var(--account-page-filter-height);
   border: 1px solid var(--account-page-filter-border);
-  border-radius: 4px;
+  border-radius: 6px;
   background: var(--account-page-filter-bg);
-  padding: 8px;
+  padding: 0 8px;
   box-sizing: border-box;
 }
 
@@ -178,14 +183,14 @@
   height: var(--account-page-filter-height);
   padding: 0 16px;
   border: 0;
-  border-radius: 4px;
+  border-radius: 8px;
   background: var(--account-page-submit-gradient);
   color: #ffffff;
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
   letter-spacing: normal;
-  text-transform: uppercase;
+  text-transform: none;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -217,7 +222,7 @@
   border: 0;
   background: transparent;
   color: var(--account-page-filter-text);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
   font-family: inherit;
   cursor: pointer;
@@ -266,7 +271,7 @@
   height: auto !important;
   padding: 0 !important;
   margin: 0 !important;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
   color: var(--account-page-filter-text) !important;
   align-items: center !important;
@@ -282,7 +287,7 @@
 .account-page-games-select .v-select__selection,
 .account-page-games-select .v-select__selection-text {
   color: var(--account-page-filter-text) !important;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.5 !important;
   margin: 0 !important;
   overflow: hidden;
@@ -317,7 +322,7 @@
 /* ─── Account page tables ─────────────────────────────────────────────────── */
 .account-page-table-wrap {
   padding: 10px 0 1rem;
-  background: #ffffff;
+  background: var(--account-page-bg, #23201f);
   max-width: 100%;
   min-width: 0;
 }
@@ -328,16 +333,14 @@
   max-height: 70svh;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
-  box-shadow:
-    0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  box-shadow: none;
 }
 
 .account-page-cell {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 400;
-  line-height: 15px;
-  color: #000000;
+  line-height: 16px;
+  color: #ffffff;
 }
 
 .account-page-cell--nowrap {
@@ -356,12 +359,13 @@
 }
 
 .account-page-cell--remark {
-  color: #000000;
+  color: #ffffff;
   font-weight: 400;
 }
 
 .account-page-cell--link {
   text-decoration: none;
+  color: #4cae50;
 }
 
 .account-page-cell--link:hover {
@@ -371,7 +375,7 @@
 .account-page-cell--muted {
   font-size: 0.65rem;
   font-weight: 600;
-  color: #6b7280;
+  color: #aaaaaa;
   text-transform: uppercase;
   line-height: 1.2;
 }
@@ -402,11 +406,11 @@
 }
 
 .account-page-table thead th {
-  background: #f9fafb !important;
-  border: 1px solid #e5e7eb !important;
+  background: #333333 !important;
+  border: 1px solid #545454 !important;
   height: 35px !important;
   min-height: 35px !important;
-  color: #374151 !important;
+  color: #ffffff !important;
   padding: 1px !important;
   text-align: center !important;
 }
@@ -416,7 +420,7 @@
 }
 
 .account-page-table thead th:last-child {
-  border-right: 1px solid #e5e7eb !important;
+  border-right: 1px solid #545454 !important;
   border-radius: 4px 4px 0 0;
 }
 
@@ -425,37 +429,37 @@
   font-weight: 700;
   line-height: 16px;
   letter-spacing: normal;
-  color: #374151 !important;
+  color: #ffffff !important;
   text-transform: none;
   justify-content: center;
 }
 
 .account-page-table .v-data-table-header__sort-icon {
-  color: #374151 !important;
+  color: #ffffff !important;
   opacity: 1;
 }
 
 .account-page-table tbody td {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 400;
-  line-height: 15px;
-  color: #000000 !important;
-  background: #ffffff !important;
-  border: 1px solid #e5e7eb !important;
+  line-height: 16px;
+  color: #ffffff !important;
+  background: #23201f !important;
+  border: 1px solid #3a3736 !important;
   padding: 8px 0 !important;
   text-align: center;
 }
 
 .account-page-table tbody td:last-child {
-  border-right: 1px solid #e5e7eb !important;
+  border-right: 1px solid #3a3736 !important;
 }
 
 .account-page-table tbody tr:hover td {
-  background: #ffffff !important;
+  background: #2c2928 !important;
 }
 
 .account-page-table .account-page-empty {
-  background: #ffffff;
+  background: #23201f;
   padding: 2.5rem 1rem;
 }
 
@@ -467,7 +471,7 @@
   margin: 0;
   font-size: 0.9375rem;
   font-weight: 700;
-  color: #6b7280;
+  color: #aaaaaa;
 }
 
 .account-page-table .account-page-empty__note {
@@ -477,10 +481,10 @@
 .account-page-table .v-data-table-footer {
   margin-top: 12px;
   padding: 8px 12px;
-  background: #ffffff;
-  border: 1px solid #d1d5db;
+  background: #333333;
+  border: 1px solid #545454;
   border-radius: 8px;
-  color: #6b7280;
+  color: #aaaaaa;
   justify-content: center;
 }
 
@@ -498,7 +502,7 @@
 .account-page-table .v-data-table-footer .v-label,
 .account-page-table .v-data-table-footer .v-field-label,
 .account-page-table .v-pagination .v-btn__content {
-  color: #6b7280 !important;
+  color: #aaaaaa !important;
   font-size: 0.8125rem;
   opacity: 1 !important;
 }
@@ -507,23 +511,23 @@
 .account-page-table .v-data-table-footer .v-select .v-field__input,
 .account-page-table .v-data-table-footer .v-select .v-field__append-inner,
 .account-page-table .v-data-table-footer .v-select .v-icon {
-  color: #6b7280 !important;
+  color: #aaaaaa !important;
   opacity: 1 !important;
 }
 
 .account-page-table .v-data-table-footer .v-field {
-  color: #6b7280 !important;
+  color: #aaaaaa !important;
 }
 
 .account-page-table .v-btn--icon {
   background: transparent !important;
-  color: #9ca3af !important;
+  color: #aaaaaa !important;
   border-radius: 4px;
   box-shadow: none !important;
 }
 
 .account-page-table .v-btn--icon .v-icon {
-  color: #9ca3af !important;
+  color: #aaaaaa !important;
 }
 
 .account-page-table .v-pagination {
@@ -531,16 +535,16 @@
 }
 
 .account-page-table .v-pagination .v-btn {
-  color: #9ca3af !important;
+  color: #aaaaaa !important;
   min-width: 32px;
 }
 
 .account-page-table .v-pagination .v-btn .v-icon {
-  color: #9ca3af !important;
+  color: #aaaaaa !important;
 }
 
 .account-page-table .v-pagination__item--is-active .v-btn {
-  background: var(--account-purple) !important;
+  background: #49915e !important;
   color: #ffffff !important;
   border-radius: 6px;
   min-width: 36px;
@@ -553,7 +557,7 @@
 
 .account-page-table .tw-text-theme-text,
 .account-page-table .tw-text-theme-text-secondary {
-  color: #111111 !important;
+  color: #ffffff !important;
 }
 
 .account-page-table .tw-text-emerald-500,
@@ -580,24 +584,24 @@
 
 .account-page > .account-page-empty .account-page-empty__title,
 .account-page-table-wrap > .account-page-empty .account-page-empty__title {
-  color: var(--account-purple);
+  color: #aaaaaa;
   font-weight: 700;
 }
 
 /* ─── Shared account help / info dialogs ──────────────────────────────────── */
 .account-help-dialog-card {
-  --account-help-purple: var(--color-header-bg, #360952);
-  --account-help-gradient: linear-gradient(135deg, #921ada 0%, #8a19ce 50%, #471368 100%);
-  background: #ffffff !important;
-  border: none !important;
-  box-shadow: 0 18px 40px rgba(54, 9, 82, 0.28) !important;
+  --account-help-purple: #49915e;
+  --account-help-gradient: #49915e;
+  background: #23201f !important;
+  border: 1px solid #545454 !important;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45) !important;
   border-radius: 8px !important;
   overflow: hidden;
 }
 
 .account-help-dialog-title {
-  background: var(--account-help-purple, #360952) !important;
-  color: #ffffff !important;
+  background: #49915e !important;
+  color: #171716 !important;
   padding: 14px 16px 14px 20px !important;
   min-height: unset !important;
 }
@@ -616,22 +620,22 @@
 }
 
 .account-help-dialog-body {
-  background: #ffffff !important;
-  color: #1f2937 !important;
+  background: #23201f !important;
+  color: #ffffff !important;
 }
 
 .account-help-dialog-text {
-  color: #1f2937 !important;
+  color: #ffffff !important;
   line-height: 1.7;
 }
 
 .account-help-dialog-note {
-  color: #6b7280 !important;
+  color: #aaaaaa !important;
   line-height: 1.6;
 }
 
 .account-help-dialog-content {
-  color: #1f2937;
+  color: #ffffff;
   font-size: 0.875rem;
   line-height: 1.7;
 }
@@ -647,18 +651,18 @@
 }
 
 .account-help-dialog-actions {
-  background: #ffffff !important;
+  background: #23201f !important;
 }
 
 .account-help-dialog-btn {
-  background: var(--account-help-gradient, linear-gradient(135deg, #921ada 0%, #8a19ce 50%, #471368 100%)) !important;
+  background: #49915e !important;
   color: #ffffff !important;
   border: none !important;
-  box-shadow: 0 2px 8px rgba(54, 9, 82, 0.35) !important;
-  letter-spacing: 0.06em;
-  font-size: 0.8rem;
+  box-shadow: none !important;
+  letter-spacing: 0.04em;
+  font-size: 0.875rem;
   padding: 0 24px !important;
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 .account-help-dialog-btn .v-btn__content,
@@ -718,10 +722,10 @@
 
 .change-password-page__section-label {
   margin: 0;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   line-height: 22.5px;
-  color: var(--account-purple, #360952);
+  color: #ffffff;
   text-align: center;
 }
 
@@ -738,12 +742,12 @@
   display: block;
   width: 100%;
   height: 42px;
-  padding: 8px 44px 8px 8px;
-  border: 1px solid #52525b;
-  border-radius: 8px;
-  background: #f9fafb;
-  color: var(--account-purple, #360952);
-  font-size: 16px;
+  padding: 8px 44px 8px 11px;
+  border: 1px solid #e5e5ea;
+  border-radius: 6px;
+  background: #d5d5d5;
+  color: #343434;
+  font-size: 14px;
   font-weight: 400;
   line-height: 24px;
   outline: none;
@@ -751,12 +755,12 @@
 }
 
 .change-password-page__input::placeholder {
-  color: var(--account-purple, #360952);
-  opacity: 1;
+  color: #343434;
+  opacity: 0.7;
 }
 
 .change-password-page__input:focus {
-  border-color: var(--account-purple, #360952);
+  border-color: #49915e;
 }
 
 .change-password-page__toggle {

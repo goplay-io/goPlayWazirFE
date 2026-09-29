@@ -408,7 +408,7 @@ function handleExposureClick() {
   gap: 8px;
   color: #ffffff;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .user-account-drawer__balance-grid {

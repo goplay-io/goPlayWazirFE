@@ -41,11 +41,11 @@
         <!-- Desktop center search (reference layout) -->
         <div
           v-if="!isMobile && !isAuthPage"
-          class="header-desktop-search-slot tw-hidden md:tw-flex tw-flex-1 tw-justify-center tw-min-w-0 tw-px-4"
+          class="header-desktop-search-slot tw-hidden md:tw-flex tw-flex-1 tw-justify-center tw-min-w-0 tw-px-2"
         >
           <div
             ref="desktopInlineSearchRoot"
-            class="header-desktop-search tw-relative tw-flex tw-items-center tw-w-full tw-max-w-[280px] xl:tw-max-w-[380px]"
+            class="header-desktop-search tw-relative tw-flex tw-items-center tw-w-full tw-max-w-[450px]"
           >
             <SearchMagnify :size="15" :stroke-width="2" class="header-desktop-search__icon" />
             <input
@@ -74,7 +74,7 @@
 
         <!-- Right: wallet (demo) → profile / auth -->
         <div
-          class="guest-toolbar-right tw-flex tw-items-center tw-justify-end tw-min-w-0 tw-gap-1.5 md:tw-gap-4 tw-ml-auto">
+          class="guest-toolbar-right tw-flex tw-items-center tw-justify-end tw-min-w-0 tw-gap-1 md:tw-gap-2 tw-ml-auto">
           <button
             v-if="isMobile && (authStore.isUiAuthenticated || authStore.isDemoUser) && !isAuthPage"
             type="button"
@@ -137,6 +137,15 @@
                 <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--get-id" @click="handleGuestGetIdClick">
                   <v-icon size="17" class="guest-ref-auth-btn__icon">mdi-login</v-icon>
                   <span>{{ t('auth.login.getIdCta') }}</span>
+                </button>
+                <button
+                  type="button"
+                  class="header-ref-lang-btn"
+                  :aria-label="t('components.sidebar.selectlanguage')"
+                  @click="openHeaderLanguageModal"
+                >
+                  <v-icon size="16" class="header-ref-lang-btn__globe">mdi-earth</v-icon>
+                  <v-icon size="14" class="header-ref-lang-btn__chevron">mdi-chevron-down</v-icon>
                 </button>
               </div>
             </div>
@@ -353,6 +362,13 @@
     @customer-support="handleDemoCustomerSupport"
     @download-apk="handleDemoDownloadApk"
   />
+
+  <LanguageModal
+    v-if="showLanguageModal"
+    :available-locales="availableLocales"
+    @select="setLocale"
+    @close="closeLanguageDialog"
+  />
 </template>
 
 <script setup>
@@ -387,6 +403,7 @@ import { useMobileSportsShellChrome } from '@/composables/useMobileSportsShellCh
 import { useHeaderLayoutMetrics, useAppBarHeightObserver } from '@/composables/useHeaderLayoutMetrics.js'
 import WalletInfo from '@/components/WalletInfo.vue'
 import UserAccountDrawer from '@/components/UserAccountDrawer.vue'
+import LanguageModal from '@/components/LanguageModal.vue'
 import HeaderAnnouncementBar from '@/components/HeaderAnnouncementBar.vue'
 import HeaderSubHeader from '@/components/HeaderSubHeader.vue'
 import { useExposureDialog } from '@/composables/useExposureDialog'
@@ -394,8 +411,29 @@ import { useSettingsStore } from '@/stores/settings.js'
 import { openLoginModal, openSignupModal } from '@/composables/useLoginModal.js'
 import { buildWhatsAppSupportUrl } from '@/utils/whatsappSupportUrl.js'
 import { useMobileAppConfig } from '@/composables/useMobileAppConfig.js'
+import { AVAILABLE_LOCALES } from '@/constants/locales.js'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
+const showLanguageModal = ref(false)
+const availableLocales = AVAILABLE_LOCALES
+
+function setLocale(lang) {
+  locale.value = lang
+  try {
+    localStorage.setItem('locale', lang)
+  } catch (e) {
+    console.error('Failed to persist locale', e)
+  }
+  showLanguageModal.value = false
+}
+
+function openHeaderLanguageModal() {
+  showLanguageModal.value = true
+}
+
+function closeLanguageDialog() {
+  showLanguageModal.value = false
+}
 
 const uiStore = useUIStore()
 const authStore = useAuthStore()
@@ -811,7 +849,12 @@ function handleDemoDrawerNavigate(item) {
     openExposureModal()
     return
   }
-  if (item?.action === 'language' || item?.action === 'bonus-rules') {
+  if (item?.action === 'language') {
+    userMenuOpen.value = false
+    openHeaderLanguageModal()
+    return
+  }
+  if (item?.action === 'bonus-rules') {
     userMenuOpen.value = false
     return
   }
@@ -1256,7 +1299,8 @@ useAppBarHeightObserver(guestAppBarRef)
     box-sizing: border-box;
     border-bottom: none;
     background: var(--color-header-bg-gradient, var(--color-header-bg, #360952));
-    gap: 8px;
+    gap: 4px;
+    align-items: center;
   }
 
   .guest-header-brand {
@@ -1275,11 +1319,13 @@ useAppBarHeightObserver(guestAppBarRef)
 
   .guest-desktop-auth-cluster {
     gap: 8px;
+    align-items: center;
   }
 
   .guest-toolbar-right {
-    gap: 8px;
+    gap: 0;
     flex-shrink: 0;
+    align-items: center;
   }
 
   .header-logo-slot {
@@ -1309,8 +1355,8 @@ useAppBarHeightObserver(guestAppBarRef)
 
 @media (min-width: 1280px) {
   .guest-toolbar-row {
-    padding-left: 80px;
-    padding-right: 80px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
   .guest-ref-auth-btn--register {
@@ -1752,6 +1798,39 @@ useAppBarHeightObserver(guestAppBarRef)
 .guest-ref-auth-btn--get-id:hover,
 .guest-ref-auth-btn--register:hover {
   filter: brightness(1.06);
+}
+
+.header-ref-lang-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  height: 34px;
+  min-width: 56px;
+  padding: 8px;
+  margin-left: 8px;
+  border: 1px solid #545454;
+  border-radius: 9999px;
+  background: #23201f;
+  color: #ffffff;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: filter 0.15s ease, border-color 0.15s ease;
+}
+
+.header-ref-lang-btn:hover {
+  filter: brightness(1.1);
+  border-color: #6b6b6b;
+}
+
+.header-ref-lang-btn__globe,
+.header-ref-lang-btn__chevron,
+.header-ref-lang-btn :deep(.v-icon) {
+  color: #ffffff !important;
+}
+
+.header-ref-lang-btn__chevron {
+  margin-left: -2px;
 }
 
 .guest-auth-pair {

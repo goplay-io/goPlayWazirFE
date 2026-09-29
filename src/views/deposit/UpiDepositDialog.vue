@@ -10,7 +10,7 @@
     <template v-slot:default>
       <v-card class="deposit-dialog-card tw-rounded-2xl">
         <v-card-title class="deposit-dialog-title tw-border-b">
-          <UpiIcon :size="20" color="#ffffff" class="dialog-title-icon tw-shrink-0" />
+          <UpiIcon :size="20" color="#171716" class="dialog-title-icon tw-shrink-0" />
           <span class="tw-truncate">{{ t('wallet.deposit.upiDeposit') }}</span>
           <v-spacer class="tw-shrink" />
           <v-btn icon size="default" variant="text" :disabled="submitting" @click="closeDialog"

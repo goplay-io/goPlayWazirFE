@@ -79,7 +79,7 @@
             </div>
 
             <div v-if="loadingCampaigns" class="tw-flex tw-justify-center tw-py-10">
-              <v-progress-circular indeterminate color="var(--color-header-bg, #360952)" size="36" />
+              <v-progress-circular indeterminate color="#49915e" size="36" />
             </div>
 
             <div v-else-if="!campaigns.length" class="tw-flex tw-flex-col tw-items-center tw-justify-center tw-py-12 tw-gap-3">
@@ -237,7 +237,7 @@
                   <v-date-picker
                     v-model="withdrawalDate"
                     @update:model-value="handleDateChange"
-                    color="var(--color-header-bg, #360952)"
+                    color="#49915e"
                   />
                 </v-menu>
 
@@ -368,7 +368,7 @@
             :label="t('affiliateProgram.campaigns.createDialog.nameLabel')"
             variant="outlined"
             density="comfortable"
-            color="var(--color-header-bg, #360952)"
+            color="#49915e"
             base-color="theme-text-secondary"
             bg-color="theme-surface"
             class="tw-mb-3 affiliate-dialog-field"
@@ -378,7 +378,7 @@
             :label="t('affiliateProgram.campaigns.createDialog.campaignIdLabel')"
             variant="outlined"
             density="comfortable"
-            color="var(--color-header-bg, #360952)"
+            color="#49915e"
             base-color="theme-text-secondary"
             bg-color="theme-surface"
             :hint="t('affiliateProgram.campaigns.createDialog.campaignIdHint')"
@@ -705,14 +705,20 @@ watch(activeTab, async (newVal) => {
 
 <style scoped>
 .affiliate-program {
-  --affiliate-accent: var(--color-header-bg, #360952);
-  --affiliate-accent-mid: #8a19ce;
-  --affiliate-btn-gradient: linear-gradient(135deg, #921ada 0%, #8a19ce 50%, #471368 100%);
-  --affiliate-panel: #ffffff;
-  --affiliate-card: #ffffff;
-  --affiliate-muted: #6b7280;
-  --affiliate-border: #e5e7eb;
+  --affiliate-accent: #49915e;
+  --affiliate-accent-mid: #4cae50;
+  --affiliate-btn-gradient: #49915e;
+  --affiliate-panel: #333333;
+  --affiliate-card: #333333;
+  --affiliate-muted: #aaaaaa;
+  --affiliate-border: rgba(255, 255, 255, 0.16);
+  --affiliate-page-bg: #23201f;
+  --affiliate-text: #ffffff;
+  --affiliate-input-bg: #d5d5d5;
+  --affiliate-input-text: #343434;
   min-height: 100%;
+  background: var(--affiliate-page-bg);
+  color: var(--affiliate-text);
 }
 
 .affiliate-program__body {
@@ -723,15 +729,15 @@ watch(activeTab, async (newVal) => {
   background: var(--affiliate-card);
   border: 1px solid var(--affiliate-border);
   border-radius: 8px;
-  padding: 14px 16px;
-  box-shadow: rgba(100, 100, 111, 0.12) 0 4px 16px;
+  padding: 10px 15px;
+  box-shadow: none;
 }
 
 .affiliate-kpi-label {
-  font-size: 0.78rem;
+  font-size: 12px;
   letter-spacing: 0.03em;
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--affiliate-accent);
   margin-bottom: 8px;
 }
@@ -740,7 +746,7 @@ watch(activeTab, async (newVal) => {
   font-size: 1.75rem;
   line-height: 1.2;
   font-weight: 700;
-  color: #111111;
+  color: #ffffff;
 }
 
 .affiliate-kpi-note {
@@ -760,59 +766,55 @@ watch(activeTab, async (newVal) => {
 .affiliate-kpi-divider {
   width: 1px;
   height: 48px;
-  background: rgba(54, 9, 82, 0.2);
+  background: #49915e;
 }
 
 .affiliate-tabs {
-  gap: 20px;
-  border-bottom: 1px solid var(--affiliate-border);
-  padding: 0 4px;
-  background: #ffffff;
+  gap: 8px;
+  border-bottom: none;
+  padding: 0 0 12px;
+  background: transparent;
+  flex-wrap: wrap;
 }
 
 .affiliate-tab-btn {
   border: none;
   background: transparent;
-  color: var(--affiliate-muted);
-  font-size: 0.85rem;
-  font-weight: 600;
-  padding: 10px 0;
+  color: #d5d5d5;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 10px 16px;
   position: relative;
   cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
+  text-transform: none;
+  letter-spacing: normal;
+  border-radius: 30px;
 }
 
 .affiliate-tab-btn.tab-btn--active {
-  color: var(--affiliate-accent);
+  color: #171716;
+  background: #49915e;
 }
 
 .affiliate-tab-btn.tab-btn--active::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -1px;
-  height: 2px;
-  background: var(--affiliate-accent);
+  display: none;
 }
 
 .affiliate-main-panel {
   background: var(--affiliate-panel);
   border: 1px solid var(--affiliate-border);
-  border-top: none;
-  border-radius: 0 0 8px 8px;
+  border-radius: 8px;
   min-height: 360px;
-  box-shadow: rgba(100, 100, 111, 0.08) 0 4px 16px;
+  box-shadow: none;
 }
 
 .affiliate-campaign-card,
 .affiliate-funds-card,
 .affiliate-withdrawal-panel {
-  background: var(--affiliate-card);
+  background: #2c2928;
   border: 1px solid var(--affiliate-border);
   border-radius: 8px;
-  box-shadow: rgba(100, 100, 111, 0.1) 0 2px 10px;
+  box-shadow: none;
 }
 
 .affiliate-withdrawal-panel__header {
@@ -822,7 +824,7 @@ watch(activeTab, async (newVal) => {
 .affiliate-text-primary,
 .affiliate-program :deep(.tw-text-theme-text),
 .affiliate-program :deep(h3.tw-text-theme-text) {
-  color: #111111 !important;
+  color: #ffffff !important;
 }
 
 .affiliate-program :deep(.tw-text-theme-text-secondary),
@@ -840,7 +842,7 @@ watch(activeTab, async (newVal) => {
 }
 
 .affiliate-avatar {
-  background: rgba(54, 9, 82, 0.1) !important;
+  background: rgba(73, 145, 94, 0.2) !important;
 }
 
 .affiliate-avatar :deep(.v-icon) {
@@ -852,23 +854,28 @@ watch(activeTab, async (newVal) => {
 }
 
 .affiliate-date-btn {
-  color: var(--affiliate-accent) !important;
-  border-color: var(--affiliate-accent) !important;
+  color: #343434 !important;
+  border-color: #e5e5ea !important;
+  background: #d5d5d5 !important;
   text-transform: none;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  border-radius: 6px !important;
 }
 
 .affiliate-date-btn :deep(.v-btn__content),
 .affiliate-date-btn :deep(.v-icon) {
-  color: var(--affiliate-accent) !important;
+  color: #343434 !important;
 }
 
 .affiliate-btn-primary {
-  background: var(--affiliate-btn-gradient) !important;
+  background: #49915e !important;
   color: #ffffff !important;
   border: 0 !important;
-  box-shadow: 0 2px 8px rgba(54, 9, 82, 0.28) !important;
+  box-shadow: none !important;
   text-transform: none;
   font-weight: 700;
+  border-radius: 8px !important;
 }
 
 .affiliate-btn-primary :deep(.v-btn__content),
@@ -890,27 +897,29 @@ watch(activeTab, async (newVal) => {
   padding: 0 10px !important;
   font-size: 10px !important;
   border-radius: 6px !important;
+  border: 1px solid #ffffff !important;
+  box-shadow: 0 0 0 1px rgba(23, 23, 22, 0.35) !important;
 }
 
 .affiliate-btn-secondary {
   background: transparent !important;
-  color: #374151 !important;
-  border: 1px solid #d1d5db !important;
+  color: #ffffff !important;
+  border: 1px solid #545454 !important;
   text-transform: none;
 }
 
 .affiliate-btn-secondary :deep(.v-btn__content) {
-  color: #374151 !important;
+  color: #ffffff !important;
 }
 
 .affiliate-btn-secondary:hover {
-  background: rgba(54, 9, 82, 0.06) !important;
-  border-color: var(--affiliate-accent) !important;
-  color: var(--affiliate-accent) !important;
+  background: rgba(73, 145, 94, 0.15) !important;
+  border-color: #49915e !important;
+  color: #ffffff !important;
 }
 
 .affiliate-btn-secondary:hover :deep(.v-btn__content) {
-  color: var(--affiliate-accent) !important;
+  color: #ffffff !important;
 }
 
 .affiliate-btn-secondary :deep(.v-btn__overlay) {
@@ -918,14 +927,14 @@ watch(activeTab, async (newVal) => {
 }
 
 .affiliate-program .referral-link-box {
-  background: #f5f5f5 !important;
+  background: #2c2928 !important;
   border: 1px solid var(--affiliate-border);
 }
 
 .affiliate-program .referral-code {
-  color: var(--affiliate-accent) !important;
-  background: rgba(54, 9, 82, 0.06) !important;
-  border: 1px solid rgba(54, 9, 82, 0.2) !important;
+  color: #343434 !important;
+  background: #d5d5d5 !important;
+  border: 1px solid #e5e5ea !important;
 }
 
 .campaign-grid {
@@ -934,12 +943,12 @@ watch(activeTab, async (newVal) => {
 }
 
 .affiliate-funds-card .tw-w-px {
-  background: rgba(54, 9, 82, 0.18) !important;
+  background: #49915e !important;
 }
 
 .affiliate-program :deep(.campaign-dialog-card .tw-bg-theme-surface-alt),
 .affiliate-program :deep(.tw-bg-theme-surface-alt) {
-  background: #f5f5f5 !important;
+  background: #2c2928 !important;
   border-color: var(--affiliate-border) !important;
 }
 </style>
@@ -947,20 +956,20 @@ watch(activeTab, async (newVal) => {
 <style>
 .affiliate-dialog .affiliate-themed-dialog-card,
 .affiliate-create-dialog .affiliate-themed-dialog-card {
-  background: #ffffff !important;
-  border: none !important;
+  background: #23201f !important;
+  border: 1px solid #545454 !important;
   border-radius: 8px !important;
-  box-shadow: 0 18px 40px rgba(54, 9, 82, 0.28) !important;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45) !important;
   overflow: hidden;
 }
 
 .affiliate-dialog .affiliate-themed-dialog-title,
 .affiliate-create-dialog .affiliate-themed-dialog-title {
-  background: var(--color-header-bg, #360952) !important;
-  color: #ffffff !important;
+  background: #49915e !important;
+  color: #171716 !important;
   border-bottom: none;
   font-weight: 700 !important;
-  font-size: 15px !important;
+  font-size: 14px !important;
   letter-spacing: 0.02em;
   text-transform: none;
 }
@@ -969,37 +978,37 @@ watch(activeTab, async (newVal) => {
 .affiliate-create-dialog .affiliate-themed-dialog-title .tw-text-theme-text,
 .affiliate-dialog .affiliate-themed-dialog-title .tw-text-theme-text-secondary,
 .affiliate-create-dialog .affiliate-themed-dialog-title .tw-text-theme-text-secondary {
-  color: #ffffff !important;
+  color: #171716 !important;
 }
 
 .affiliate-dialog .affiliate-themed-dialog-body,
 .affiliate-create-dialog .affiliate-themed-dialog-body,
 .affiliate-dialog .v-card-text {
-  background: #ffffff;
-  color: #111111 !important;
+  background: #23201f;
+  color: #ffffff !important;
 }
 
 .affiliate-dialog .affiliate-dialog-field .v-field,
 .affiliate-create-dialog .affiliate-dialog-field .v-field {
-  background: #f5f5f5 !important;
-  border-radius: 8px !important;
+  background: #d5d5d5 !important;
+  border-radius: 6px !important;
 }
 
 .affiliate-dialog .affiliate-dialog-field .v-field__outline,
 .affiliate-create-dialog .affiliate-dialog-field .v-field__outline {
-  color: #9ca3af !important;
+  color: #e5e5ea !important;
 }
 
 .affiliate-dialog .affiliate-dialog-field .v-field--focused .v-field__outline,
 .affiliate-create-dialog .affiliate-dialog-field .v-field--focused .v-field__outline {
-  color: var(--color-header-bg, #360952) !important;
+  color: #49915e !important;
 }
 
 .affiliate-dialog .affiliate-dialog-field .v-label,
 .affiliate-create-dialog .affiliate-dialog-field .v-label,
 .affiliate-dialog .affiliate-dialog-field .v-field-label,
 .affiliate-create-dialog .affiliate-dialog-field .v-field-label {
-  color: #6b7280 !important;
+  color: #666666 !important;
   opacity: 1 !important;
 }
 
@@ -1007,24 +1016,25 @@ watch(activeTab, async (newVal) => {
 .affiliate-create-dialog .affiliate-dialog-field input,
 .affiliate-dialog .affiliate-dialog-field .v-field__input,
 .affiliate-create-dialog .affiliate-dialog-field .v-field__input {
-  color: #111111 !important;
-  -webkit-text-fill-color: #111111 !important;
-  font-weight: 600;
+  color: #343434 !important;
+  -webkit-text-fill-color: #343434 !important;
+  font-size: 14px !important;
+  font-weight: 400;
 }
 
 .affiliate-dialog .affiliate-dialog-field .v-messages__message,
 .affiliate-create-dialog .affiliate-dialog-field .v-messages__message {
-  color: #dc2626 !important;
+  color: #ef4444 !important;
 }
 
 .affiliate-dialog .affiliate-btn-primary,
 .affiliate-create-dialog .affiliate-btn-primary {
-  background: linear-gradient(135deg, #921ada 0%, #8a19ce 50%, #471368 100%) !important;
+  background: #49915e !important;
   color: #ffffff !important;
   border: 0 !important;
   text-transform: none;
   font-weight: 700;
-  box-shadow: 0 2px 8px rgba(54, 9, 82, 0.28) !important;
+  box-shadow: none !important;
 }
 
 .affiliate-dialog .affiliate-btn-primary .v-btn__content,
@@ -1037,25 +1047,25 @@ watch(activeTab, async (newVal) => {
 .affiliate-dialog .affiliate-btn-secondary,
 .affiliate-create-dialog .affiliate-btn-secondary {
   background: transparent !important;
-  color: #374151 !important;
-  border: 1px solid #d1d5db !important;
+  color: #ffffff !important;
+  border: 1px solid #545454 !important;
 }
 
 .affiliate-dialog .affiliate-btn-secondary .v-btn__content,
 .affiliate-create-dialog .affiliate-btn-secondary .v-btn__content {
-  color: #374151 !important;
+  color: #ffffff !important;
 }
 
 .affiliate-dialog .affiliate-btn-secondary:hover,
 .affiliate-create-dialog .affiliate-btn-secondary:hover {
-  background: rgba(54, 9, 82, 0.06) !important;
-  border-color: var(--color-header-bg, #360952) !important;
-  color: var(--color-header-bg, #360952) !important;
+  background: rgba(73, 145, 94, 0.15) !important;
+  border-color: #49915e !important;
+  color: #ffffff !important;
 }
 
 .affiliate-dialog .affiliate-btn-secondary:hover .v-btn__content,
 .affiliate-create-dialog .affiliate-btn-secondary:hover .v-btn__content {
-  color: var(--color-header-bg, #360952) !important;
+  color: #ffffff !important;
 }
 
 .affiliate-dialog .affiliate-btn-secondary .v-btn__overlay,
@@ -1065,15 +1075,15 @@ watch(activeTab, async (newVal) => {
 
 .affiliate-dialog .affiliate-avatar,
 .affiliate-create-dialog .affiliate-avatar {
-  background: rgba(255, 255, 255, 0.18) !important;
+  background: rgba(23, 23, 22, 0.18) !important;
 }
 
 .affiliate-dialog .affiliate-themed-dialog-title .affiliate-avatar .v-icon,
 .affiliate-create-dialog .affiliate-themed-dialog-title .affiliate-avatar .v-icon {
-  color: #ffffff !important;
+  color: #171716 !important;
 }
 
 .affiliate-dialog .affiliate-accent-text {
-  color: var(--color-header-bg, #360952) !important;
+  color: #49915e !important;
 }
 </style>

@@ -650,7 +650,8 @@
         "amount": "ପରିମାଣ",
         "payConfirm": "ଦେୟ ଏବଂ ନିଶ୍ଚିତ କର",
         "currencyType": "ମୁଦ୍ରା ପ୍ରକାର",
-        "bankAccount": "ବ୍ୟାଙ୍କ ଆକାଉଣ୍ଟ"
+        "bankAccount": "ବ୍ୟାଙ୍କ ଆକାଉଣ୍ଟ",
+        "cryptoAccount": "କ୍ରିପ୍ଟୋ ଆକାଉଣ୍ଟ"
       },
       "noRequests": "କ deposit ଣସି ଜମା ଅନୁରୋଧ ମିଳିଲା ନାହିଁ",
       "historyWillAppear": "ତୁମର ଜମା ଇତିହାସ ଏଠାରେ ଦେଖାଯିବ"

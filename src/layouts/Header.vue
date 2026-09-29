@@ -48,11 +48,11 @@
         <!-- Desktop center search (logged-in reference layout) -->
         <div
           v-if="authStore.isUiAuthenticated && !isMobile"
-          class="header-desktop-search-slot tw-hidden md:tw-flex tw-flex-1 tw-justify-center tw-min-w-0 tw-px-4"
+          class="header-desktop-search-slot tw-hidden md:tw-flex tw-flex-1 tw-justify-center tw-min-w-0 tw-px-2"
         >
           <div
             ref="desktopInlineSearchRoot"
-            class="header-desktop-search tw-relative tw-flex tw-items-center tw-w-full tw-max-w-[280px] xl:tw-max-w-[380px]"
+            class="header-desktop-search tw-relative tw-flex tw-items-center tw-w-full tw-max-w-[450px]"
           >
             <SearchMagnify :size="15" :stroke-width="2" class="header-desktop-search__icon" />
             <input
@@ -81,7 +81,7 @@
 
         <!-- Right cluster: nav links → tools → wallet (grouped + separated for scanability) -->
         <div
-          class="header-toolbar-right tw-flex tw-items-center tw-justify-end tw-min-w-0 tw-gap-1.5 sm:tw-gap-2 md:tw-gap-3 tw-ml-auto tw-mr-1.5 sm:tw-mr-2 md:tw-mr-4">
+          class="header-toolbar-right tw-flex tw-items-center tw-justify-end tw-min-w-0 tw-gap-1 sm:tw-gap-1.5 md:tw-gap-2 tw-ml-auto tw-mr-0">
 
           <!-- Deposit / Withdraw (logged-in + demo; desktop only — hidden on bet pages) -->
           <!-- <template v-if="authStore.isUiAuthenticated && !isMobile && !isBetPage">
@@ -116,6 +116,15 @@
                 <v-icon size="17" class="guest-ref-auth-btn__icon">mdi-login</v-icon>
                 <span>{{ t('auth.login.getIdCta') }}</span>
               </button>
+              <button
+                type="button"
+                class="header-ref-lang-btn"
+                :aria-label="t('components.sidebar.selectlanguage')"
+                @click="openHeaderLanguageModal"
+              >
+                <v-icon size="16" class="header-ref-lang-btn__globe">mdi-earth</v-icon>
+                <v-icon size="14" class="header-ref-lang-btn__chevron">mdi-chevron-down</v-icon>
+              </button>
             </div>
             <div v-else class="guest-auth-pair tw-inline-flex tw-items-center">
               <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--login guest-ref-auth-btn--mobile" @click="handleGuestLoginClick">
@@ -133,7 +142,7 @@
           <!-- Authenticated (real + full demo) -->
           <template v-else>
             <!-- Desktop: reference layout (search center, datetime, balance, deposit/withdraw, account) -->
-            <div v-if="!isMobile" class="header-desktop-auth-cluster tw-flex tw-items-center tw-gap-2 tw-shrink-0">
+            <div v-if="!isMobile" class="header-desktop-auth-cluster tw-flex tw-items-center tw-shrink-0">
               <div class="header-desktop-datetime">
                 <div class="header-desktop-datetime__date">{{ formattedHeaderDate }}</div>
                 <span class="header-desktop-datetime__time">{{ formattedHeaderTime }}</span>
@@ -208,6 +217,16 @@
               >
                 <v-icon size="18">mdi-cog-outline</v-icon>
                 <span>{{ t('components.mobileBottomNav.account') }}</span>
+              </button>
+
+              <button
+                type="button"
+                class="header-ref-lang-btn"
+                :aria-label="t('components.sidebar.selectlanguage')"
+                @click="openHeaderLanguageModal"
+              >
+                <v-icon size="16" class="header-ref-lang-btn__globe">mdi-earth</v-icon>
+                <v-icon size="14" class="header-ref-lang-btn__chevron">mdi-chevron-down</v-icon>
               </button>
             </div>
 
@@ -790,9 +809,12 @@ function setLocale(lang) {
   userMenuOpen.value = false
 }
 
+function openHeaderLanguageModal() {
+  showLanguageModal.value = true
+}
+
 function closeLanguageDialog() {
   showLanguageModal.value = false
-  userMenuOpen.value = false
 }
 
 // Computed properties for user display
@@ -1838,7 +1860,8 @@ button.header-announce-search.search-icon-btn:hover {
 .header-desktop-datetime {
   display: flex;
   flex-direction: column;
-  padding: 0 8px;
+  justify-content: center;
+  padding: 0;
   flex-shrink: 0;
 }
 
@@ -1861,7 +1884,7 @@ button.header-announce-search.search-icon-btn:hover {
   display: flex;
   align-items: center;
   gap: 4px;
-  padding: 4px 8px;
+  padding: 0;
   border-radius: 6px;
   flex-shrink: 0;
 }
@@ -1909,7 +1932,7 @@ button.header-announce-search.search-icon-btn:hover {
   justify-content: center;
   gap: 2px;
   height: 44px;
-  padding: 0 12px;
+  padding: 0 10px;
   border-radius: 6px;
   border: 1px solid #ffffff;
   font-size: 10px;
@@ -1969,6 +1992,39 @@ button.header-announce-search.search-icon-btn:hover {
   color: #000000 !important;
 }
 
+.header-ref-lang-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  height: 34px;
+  min-width: 56px;
+  padding: 8px;
+  margin-left: 0;
+  border: 1px solid #545454;
+  border-radius: 9999px;
+  background: #23201f;
+  color: #ffffff;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: filter 0.15s ease, border-color 0.15s ease;
+}
+
+.header-ref-lang-btn:hover {
+  filter: brightness(1.1);
+  border-color: #6b6b6b;
+}
+
+.header-ref-lang-btn__globe,
+.header-ref-lang-btn__chevron,
+.header-ref-lang-btn :deep(.v-icon) {
+  color: #ffffff !important;
+}
+
+.header-ref-lang-btn__chevron {
+  margin-left: -2px;
+}
+
 .balance-info-popup {
   background: rgba(20, 20, 20, 0.96);
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -2017,7 +2073,8 @@ button.header-announce-search.search-icon-btn:hover {
     border-bottom: none !important;
     padding: 0 16px;
     box-sizing: border-box;
-    gap: 8px;
+    gap: 4px;
+    align-items: center;
   }
 
   .header-logo-area {
@@ -2030,12 +2087,32 @@ button.header-announce-search.search-icon-btn:hover {
 
   .header-toolbar-right {
     margin-right: 0 !important;
-    gap: 8px !important;
+    gap: 0 !important;
     flex-shrink: 0;
+    align-items: center;
   }
 
   .header-desktop-auth-cluster {
     gap: 8px;
+    align-items: center;
+  }
+
+  .header-desktop-auth-cluster .header-ref-lang-btn {
+    margin-left: 0;
+  }
+
+  .guest-desktop-auth-actions {
+    gap: 4px;
+    align-items: center;
+  }
+
+  .guest-desktop-auth-actions .header-ref-lang-btn {
+    margin-left: 8px;
+  }
+
+  .header-desktop-search-slot {
+    padding-left: 8px;
+    padding-right: 8px;
   }
 
   .header-desktop-icon-btn {

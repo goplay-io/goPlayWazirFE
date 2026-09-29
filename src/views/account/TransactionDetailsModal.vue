@@ -290,7 +290,7 @@ function nationDisplay(item) {
 <style scoped>
 /* Theme-aligned modal header */
 .bet-details-modal-header {
-  background: var(--color-header-bg, #360952);
+  background: #49915e;
   box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.16);
 }
 
@@ -378,7 +378,7 @@ function nationDisplay(item) {
     padding: 8px 8px;
     font-size: 10px;
     letter-spacing: 0.02em;
-    background-color: var(--color-header-bg, #360952);
+    background-color: #333333;
     color: #ffffff;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     word-break: normal;
@@ -527,8 +527,8 @@ function nationDisplay(item) {
   padding: 8px 10px;
   font-size: 12px;
   font-weight: 700;
-  background: var(--color-header-bg, #360952);
-  border-bottom: 2px solid #8a19ce;
+  background: #333333;
+  border-bottom: 2px solid #49915e;
 }
 
 .bet-th-theme {

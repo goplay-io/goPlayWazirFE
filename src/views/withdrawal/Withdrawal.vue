@@ -81,7 +81,7 @@
         <div class="tw-grid tw-grid-cols-2 md:tw-grid-cols-[1fr_1fr_2fr] tw-gap-4 sm:tw-gap-6 tw-items-stretch">
           <BalanceCard :balance="balance" :cashable="cashable" title-key="wallet.balance.availableBalance" icon="mdi-wallet" :animation-delay="0.1" />
           <MetricCard :value="pendingAmount" :title="t('wallet.withdrawal.pending')" icon="mdi-clock-outline"
-            background-svg="/src/assets/pending.svg" :animation-delay="0.2" :trand-icon="false" color="#360952"
+            background-svg="/src/assets/pending.svg" :animation-delay="0.2" :trand-icon="false" color="#49915e"
             :amountColor="true" />
           <WithdrawalRequestForm
             class="tw-opacity-0 tw-animate-slideInUp tw-w-full tw-min-h-0 tw-col-span-2 md:tw-col-span-1"
@@ -338,14 +338,15 @@ onMounted(async () => {
 }
 
 .wallet-transaction-page :deep(.balance-card-theme) {
-  background: linear-gradient(135deg, #921ada 0%, #8a19ce 50%, #471368 100%) !important;
-  border: 1px solid var(--color-header-bg, #360952) !important;
+  background: #333333 !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
   border-radius: 8px;
+  color: #ffffff !important;
 }
 
 .wallet-transaction-page :deep(.metric-card-light) {
-  background: #360952 !important;
-  border: 1px solid #8a19ce !important;
+  background: #333333 !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
   border-radius: 8px;
 }
 
@@ -358,7 +359,7 @@ onMounted(async () => {
 }
 
 .wallet-transaction-page :deep(.deposit-request-box) {
-  background: #ffffff !important;
-  border: 1px solid var(--color-header-bg, #360952) !important;
+  background: #333333 !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
 }
 </style>

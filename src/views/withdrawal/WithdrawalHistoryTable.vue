@@ -395,10 +395,10 @@ const getStatusInfo = (status) => {
   const statusMap = {
     A: { text: 'approved', color: 'green' },
     R: { text: 'rejected', color: 'red' },
-    P: { text: 'pending', color: '#8a19ce' },
+    P: { text: 'pending', color: '#49915e' },
   }
 
-  return statusMap[status] || { text: 'pending', color: '#8a19ce' }
+  return statusMap[status] || { text: 'pending', color: '#49915e' }
 }
 
 const getPaymentTypeInfo = (type) => {
@@ -455,7 +455,7 @@ const tableHeaders = computed(() => [
   border-radius: 0 !important;
   box-shadow: none !important;
   background: transparent !important;
-  color: #111111;
+  color: #ffffff;
   padding: 0 !important;
 }
 
@@ -473,9 +473,9 @@ const tableHeaders = computed(() => [
 }
 
 :deep(.cancel-dialog-card) {
-  background: #ffffff !important;
-  border: 1px solid var(--color-header-bg, #360952);
-  color: #111111 !important;
+  background: #23201f !important;
+  border: 1px solid #545454;
+  color: #ffffff !important;
   border-radius: 8px !important;
   overflow: hidden;
 }
@@ -483,8 +483,8 @@ const tableHeaders = computed(() => [
 :deep(.cancel-dialog-card__title) {
   font-size: 1rem;
   font-weight: 700;
-  color: #ffffff !important;
-  background: var(--color-header-bg, #360952) !important;
+  color: #171716 !important;
+  background: #49915e !important;
   padding: 14px 16px !important;
   border-bottom: none;
 }
@@ -492,56 +492,56 @@ const tableHeaders = computed(() => [
 :deep(.cancel-dialog-card__body),
 :deep(.cancel-dialog-card__body) p,
 :deep(.cancel-dialog-card__body) span {
-  color: #1f2937 !important;
+  color: #ffffff !important;
 }
 
 :deep(.cancel-dialog-card__icon-wrap) {
   width: 3rem;
   height: 3rem;
   border-radius: 9999px;
-  background: #f3e8ff;
-  border: 1px solid #e9d5ff;
+  background: #333333;
+  border: 1px solid #545454;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 :deep(.cancel-dialog-card__summary) {
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
+  background: #333333;
+  border: 1px solid #545454;
   border-radius: 8px;
   padding: 0.75rem;
 }
 
 :deep(.cancel-dialog-card__actions) {
   padding-top: 0;
-  border-top: 1px solid #e5e7eb;
-  background: #ffffff;
+  border-top: 1px solid #545454;
+  background: #23201f;
 }
 
 :deep(.cancel-dialog-card__keep-btn) {
-  color: var(--color-header-bg, #360952) !important;
-  border-color: var(--color-header-bg, #360952) !important;
+  color: #ffffff !important;
+  border-color: #545454 !important;
 }
 </style>
 
 <style>
 .withdrawal-history-dropdown-menu .v-list {
-  background: #ffffff !important;
+  background: #333333 !important;
 }
 
 .withdrawal-history-dropdown-menu .v-list-item,
 .withdrawal-history-dropdown-menu .v-list-item-title,
 .withdrawal-history-dropdown-menu .v-list-item__content {
-  color: #111111 !important;
+  color: #ffffff !important;
   opacity: 1 !important;
 }
 
 .withdrawal-history-dropdown-menu .v-list-item--active {
-  background: rgba(54, 9, 82, 0.12) !important;
+  background: rgba(73, 145, 94, 0.25) !important;
 }
 
 .withdrawal-history-dropdown-menu .v-list-item:hover {
-  background: #f3e8ff !important;
+  background: #3a3736 !important;
 }
 </style>

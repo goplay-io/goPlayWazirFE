@@ -1,6 +1,6 @@
 <template>
   <nav class="header-subheader" aria-label="Sports navigation">
-    <div class="header-subheader__scroll scrollbar-hide">
+    <div class="header-subheader__scroll">
       <router-link
         v-for="tab in tabs"
         :key="tab.key"
@@ -153,12 +153,43 @@ function isTabActive(tab) {
   border-radius: 0;
   background: var(--color-login-input-bg);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  /* Desktop: thin light scrollbar bar (monkeydon reference) */
+  scrollbar-width: thin;
+  scrollbar-color: #cfcfcf transparent;
 }
 
 .header-subheader__scroll::-webkit-scrollbar {
+  height: 3px;
+}
+
+.header-subheader__scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.header-subheader__scroll::-webkit-scrollbar-thumb {
+  background: #cfcfcf;
+  border-radius: 2px;
+}
+
+.header-subheader__scroll::-webkit-scrollbar-thumb:hover {
+  background: #e0e0e0;
+}
+
+/* Hide left/right arrow buttons — thumb track only (monkeydon style) */
+.header-subheader__scroll::-webkit-scrollbar-button {
   display: none;
+  width: 0;
+  height: 0;
+}
+
+.header-subheader__scroll::-webkit-scrollbar-button:single-button,
+.header-subheader__scroll::-webkit-scrollbar-button:start:decrement,
+.header-subheader__scroll::-webkit-scrollbar-button:end:increment,
+.header-subheader__scroll::-webkit-scrollbar-button:horizontal:decrement,
+.header-subheader__scroll::-webkit-scrollbar-button:horizontal:increment {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 .header-subheader__tab {
@@ -205,20 +236,19 @@ function isTabActive(tab) {
   color: var(--color-wazir-green);
 }
 
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-
 @media (max-width: 767.98px) {
   /* Reference SubHeader.tsx: px-1 ps-4 */
   .header-subheader__scroll {
     padding: 0 4px 0 16px;
     gap: 8px;
+    /* Mobile: keep scrollbar hidden (touch scroll) */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .header-subheader__scroll::-webkit-scrollbar {
+    display: none;
+    height: 0;
   }
 
   .header-subheader__tab {

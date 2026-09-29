@@ -650,7 +650,8 @@
         "amount": "পৰিমাণ",
         "payConfirm": "পে এণ্ড কনফাৰ্ম",
         "currencyType": "মুদ্ৰাৰ ধৰণ",
-        "bankAccount": "বেংক একাউণ্ট"
+        "bankAccount": "বেংক একাউণ্ট",
+        "cryptoAccount": "ক্ৰিপ্টো একাউণ্ট"
       },
       "noRequests": "কোনো জমা অনুৰোধ পোৱা নগ'ল",
       "historyWillAppear": "আপোনাৰ জমা ধনৰ ইতিহাস ইয়াত ওলাব"

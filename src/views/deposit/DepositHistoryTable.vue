@@ -268,10 +268,10 @@ const getStatusInfo = (status) => {
   const statusMap = {
     A: { text: 'wallet.deposit.statusOptions.approved', color: 'green' },
     R: { text: 'wallet.deposit.statusOptions.rejected', color: 'red' },
-    P: { text: 'wallet.deposit.statusOptions.cancelled', color: '#8a19ce' },
+    P: { text: 'wallet.deposit.statusOptions.cancelled', color: '#49915e' },
   }
 
-  return statusMap[status] || { text: 'wallet.deposit.statusOptions.pending', color: '#8a19ce' }
+  return statusMap[status] || { text: 'wallet.deposit.statusOptions.pending', color: '#49915e' }
 }
 
 const getPaymentTypeInfo = (type) => {
@@ -328,7 +328,7 @@ const tableHeaders = computed(() => [
   border-radius: 0 !important;
   box-shadow: none !important;
   background: transparent !important;
-  color: #111111;
+  color: #ffffff;
   padding: 0 !important;
 }
 
@@ -355,21 +355,21 @@ const tableHeaders = computed(() => [
 
 <style>
 .deposit-history-dropdown-menu .v-list {
-  background: #ffffff !important;
+  background: #333333 !important;
 }
 
 .deposit-history-dropdown-menu .v-list-item,
 .deposit-history-dropdown-menu .v-list-item-title,
 .deposit-history-dropdown-menu .v-list-item__content {
-  color: #111111 !important;
+  color: #ffffff !important;
   opacity: 1 !important;
 }
 
 .deposit-history-dropdown-menu .v-list-item--active {
-  background: rgba(54, 9, 82, 0.12) !important;
+  background: rgba(73, 145, 94, 0.25) !important;
 }
 
 .deposit-history-dropdown-menu .v-list-item:hover {
-  background: #f3e8ff !important;
+  background: #3a3736 !important;
 }
 </style>

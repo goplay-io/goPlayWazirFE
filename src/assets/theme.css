@@ -139,6 +139,8 @@
   --layout-sidebar-wrap-pad-x: 8px;
   --layout-main-inner-pad-x: 4px;
   --layout-shell-section-gap: 6px;
+  /* Shared inset under subheader scrollbar — left / center / right stay on one line */
+  --layout-body-top-gap: 1px;
   /* Desktop sports/footer pages — reference gap before full-width footer @ scroll end */
   --layout-footer-doc-gap: 32px;
 
@@ -1081,7 +1083,7 @@ marquee.tw-text-marquee {
 
 .layout-home-shell-bg .layout-sidebar-column .sidebar-desktop {
   background-color: var(--color-event-name) !important;
-  border-radius: 8px;
+  border-radius: 0px;
   overflow: hidden;
 }
 
@@ -1390,6 +1392,9 @@ body:has(.layout-home-shell-bg),
   .guest-layout-body--reference-pad {
     padding-left: var(--layout-page-pad-lg);
     padding-right: var(--layout-page-pad-lg);
+    /* One shared top gap so sidebar / main / bet-slip start on the same line */
+    padding-top: var(--layout-body-top-gap);
+    align-items: flex-start;
     box-sizing: border-box;
   }
 
@@ -1400,13 +1405,15 @@ body:has(.layout-home-shell-bg),
     min-width: 0;
     padding-left: var(--layout-sidebar-wrap-pad-x);
     padding-right: var(--layout-sidebar-wrap-pad-x);
-    margin-top: 8px;
-    margin-bottom: 8px;
+    padding-top: 0;
+    padding-bottom: var(--layout-body-top-gap);
+    margin-top: 0;
+    margin-bottom: 0;
     align-self: flex-start;
     box-sizing: border-box;
     /* Reference: lg:h-[calc(100dvh-124px)] — parent must have height or tw-h-full children collapse to 0 */
-    height: calc(100dvh - var(--app-header-bar-height, 132px) - 16px);
-    max-height: calc(100dvh - var(--app-header-bar-height, 132px) - 16px);
+    height: calc(100dvh - var(--app-header-bar-height, 132px) - var(--layout-body-top-gap));
+    max-height: calc(100dvh - var(--app-header-bar-height, 132px) - var(--layout-body-top-gap));
     min-height: 0;
   }
 
@@ -1481,13 +1488,15 @@ body:has(.layout-home-shell-bg),
     min-width: 0 !important;
     max-width: var(--layout-home-rail-width) !important;
     margin-left: 0;
-    padding: 8px;
+    margin-top: 0;
+    /* Top gap comes from content-row padding — keep L/R/B only so tops align */
+    padding: 0 8px 8px;
     box-sizing: border-box;
     position: sticky;
-    top: 0;
+    top: var(--layout-sticky-top, 0px);
     align-self: flex-start;
-    height: calc(100vh - 110px);
-    max-height: calc(100vh - 110px);
+    height: calc(100vh - var(--app-header-bar-height, 110px) - var(--layout-body-top-gap));
+    max-height: calc(100vh - var(--app-header-bar-height, 110px) - var(--layout-body-top-gap));
     gap: 0;
   }
 
@@ -1512,6 +1521,7 @@ body:has(.layout-home-shell-bg),
     display: flex;
     flex-direction: column;
     gap: var(--layout-shell-section-gap);
+    /* Top gap comes from content-row — keep bottoms only */
     padding-top: 0;
     padding-bottom: 8px;
     box-sizing: border-box;
@@ -1543,9 +1553,10 @@ body:has(.layout-home-shell-bg),
 
   /* monkeydon.com reference rail — home + report pages (dark Bet Slip card, no promos) */
   .layout-content-row--with-right-rail .layout-right-rail.layout-right-rail--home-ref {
-    padding: 8px;
+    padding: 0 8px 8px;
     padding-left: 8px;
     gap: 0;
+    margin-top: 0;
   }
 
   .layout-content-row--with-right-rail .layout-right-rail--home-ref .layout-right-rail__slip,

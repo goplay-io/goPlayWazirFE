@@ -650,7 +650,8 @@
         "amount": "ಮೊತ್ತ",
         "payConfirm": "ಪಾವತಿಸಿ ಮತ್ತು ದೃಢೀಕರಿಸಿ",
         "currencyType": "ಕರೆನ್ಸಿ ಪ್ರಕಾರ",
-        "bankAccount": "ಬ್ಯಾಂಕ್ ಖಾತೆ"
+        "bankAccount": "ಬ್ಯಾಂಕ್ ಖಾತೆ",
+        "cryptoAccount": "ಕ್ರಿಪ್ಟೋ ಖಾತೆ"
       },
       "noRequests": "ಯಾವುದೇ ಠೇವಣಿ ವಿನಂತಿಗಳು ಕಂಡುಬಂದಿಲ್ಲ",
       "historyWillAppear": "ನಿಮ್ಮ ಠೇವಣಿ ಇತಿಹಾಸವು ಇಲ್ಲಿ ಕಾಣಿಸುತ್ತದೆ"
