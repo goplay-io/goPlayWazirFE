@@ -8,7 +8,7 @@ import RulesDialog from '@/components/RulesDialog.vue';
 import FancyPositionsDialog from './FancyPositionsDialog.vue';
 import FancyMarketStatusBlock from './FancyMarketStatusBlock.vue';
 import BookLadderIcon from '@/components/BookLadderIcon.vue';
-import FancyMinMaxInfo from '@/components/FancyMinMaxInfo.vue';
+import FancyRowCountdown from '@/components/FancyRowCountdown.vue';
 import {
   getBetLockOverlayStatus,
   isBetLockInteractionBlockedForMarket,
@@ -185,15 +185,16 @@ const { t } = useI18n();
           </div>
 
           <div class="fancy-odds-wrap tw-relative tw-ml-auto tw-shrink-0 tw-flex tw-items-center tw-gap-2">
-          <BookLadderIcon
-            v-if="hasBookData(market.market_id)"
-            class="fancy-row-book-ladder"
-            @click="openPositionsDialog(market.market_id, market?.name)"
-          />
-          <FancyMinMaxInfo
-            :min="getMinMaxValues(market).min"
-            :max="getMinMaxValues(market).max"
-          />
+          <div class="fancy-row-tools">
+            <FancyRowCountdown />
+            <BookLadderIcon
+              class="fancy-row-book-ladder"
+              :disabled="!hasBookData(market.market_id)"
+              size="18"
+              color="#d3d3d3"
+              @click="openPositionsDialog(market.market_id, market?.name)"
+            />
+          </div>
 
           <div
             class="fancy-odds-block tw-relative tw-grid tw-grid-cols-2 tw-gap-2 tw-w-[146px]"

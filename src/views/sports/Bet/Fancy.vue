@@ -29,10 +29,6 @@ const props = defineProps({
   eventTypeId: [String, Number],
   eventName: String,
   betAllow: Boolean,
-  inPlay: {
-    type: Boolean,
-    default: false,
-  },
   eventId: [String, Number],
 });
 
@@ -330,7 +326,6 @@ provide('openRules', showRules);
                   :eventTypeId="eventTypeId"
                   :eventName="eventName"
                   :betAllow="betAllow"
-                  :inPlay="inPlay"
                   :eventId="eventId"
                   :activeCategory="activeCategory"
                 />
@@ -345,7 +340,6 @@ provide('openRules', showRules);
                   :eventTypeId="eventTypeId"
                   :eventName="eventName"
                   :betAllow="betAllow"
-                  :inPlay="inPlay"
                   :eventId="eventId"
                   :activeCategory="activeCategory"
                 />
@@ -360,7 +354,6 @@ provide('openRules', showRules);
                   :eventTypeId="eventTypeId"
                   :eventName="eventName"
                   :betAllow="betAllow"
-                  :inPlay="inPlay"
                   :eventId="eventId"
                   :activeCategory="activeCategory"
                 />

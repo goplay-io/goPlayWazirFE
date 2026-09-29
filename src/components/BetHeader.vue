@@ -222,8 +222,52 @@ const formattedEventTime = computed(() => {
 </script>
 
 <template>
+  <!-- WazirWin reference mobile event column: title bar, then LIVE / Open Bets -->
+  <div v-if="wazirRefChrome && !racingMarketHeader && isMobile" class="bet-header-mobile-ref">
+    <div class="bet-header-mobile-ref__title">
+      <div class="bet-header-mobile-ref__lead">
+        <button
+          type="button"
+          class="bet-header-mobile-ref__back"
+          :aria-label="t('common.back')"
+          @click="goBack"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="none" aria-hidden="true">
+            <path d="M5.3673 11.2346L0 5.8673L5.3673 0.5L6.32 1.4527L1.90539 5.8673L6.32 10.2819L5.3673 11.2346Z" fill="currentColor" />
+          </svg>
+        </button>
+        <span class="bet-header-mobile-ref__name" :title="titleAttr">{{ event_name }}</span>
+      </div>
+    </div>
+    <div class="bet-header-mobile-ref__tabs">
+      <button
+        type="button"
+        class="bet-header-mobile-ref__tab"
+        :class="{ 'bet-header-mobile-ref__tab--active': !openBetsActive }"
+        @click="selectEventTab"
+      >
+        <span v-if="inPlay" class="bet-header-mobile-ref__dot" aria-hidden="true"></span>
+        {{ t('components.betHeader.live') }}
+      </button>
+      <button
+        type="button"
+        class="bet-header-mobile-ref__tab"
+        :class="{ 'bet-header-mobile-ref__tab--active': openBetsActive }"
+        @click="selectMyBetsTab"
+      >
+        {{ t('components.betMarketsToolbar.openBets') }}
+        <span class="bet-header-mobile-ref__count">({{ betHistoryCount || 0 }})</span>
+      </button>
+      <span
+        class="bet-header-mobile-ref__indicator"
+        :class="{ 'bet-header-mobile-ref__indicator--bets': openBetsActive }"
+        aria-hidden="true"
+      ></span>
+    </div>
+  </div>
+
   <!-- WazirWin reference event title (MatchInfo.tsx) -->
-  <div v-if="wazirRefChrome && !racingMarketHeader && !isMobile" class="bet-header-shell bet-header-shell--wazir-ref">
+  <div v-else-if="wazirRefChrome && !racingMarketHeader && !isMobile" class="bet-header-shell bet-header-shell--wazir-ref">
     <div class="bet-header-wazir-ref">
       <div class="bet-header-wazir-ref__inner">
         <span class="bet-header-wazir-event-name" :title="titleAttr">{{ event_name }}</span>
@@ -376,6 +420,129 @@ const formattedEventTime = computed(() => {
 <style scoped>
 .bet-header-shell {
   width: 100%;
+}
+
+.bet-header-mobile-ref {
+  width: 100%;
+  background: #23201f;
+}
+
+.bet-header-mobile-ref__title {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 36px;
+  min-height: 36px;
+  padding: 6px 4px;
+  box-sizing: border-box;
+  background: #333333;
+}
+
+.bet-header-mobile-ref__lead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 12px;
+  min-width: 0;
+  max-width: 92%;
+}
+
+.bet-header-mobile-ref__back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: #545454;
+  color: #49915e;
+  cursor: pointer;
+}
+
+.bet-header-mobile-ref__name {
+  min-width: 0;
+  margin-top: 0;
+  font-family: Lato, ui-sans-serif, system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: normal;
+  text-align: start;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bet-header-mobile-ref__tabs {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  width: 100%;
+  height: 36px;
+  margin-top: 8px;
+  background: #333333;
+  overflow: hidden;
+}
+
+.bet-header-mobile-ref__tab {
+  display: flex;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 36px;
+  margin: 0;
+  padding: 10px 12px;
+  border: 0;
+  background: transparent;
+  box-sizing: border-box;
+  font-family: Lato, ui-sans-serif, system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: #9a9898;
+  cursor: pointer;
+}
+
+.bet-header-mobile-ref__tab--active {
+  color: #49915e;
+}
+
+.bet-header-mobile-ref__dot {
+  width: 8px;
+  height: 8px;
+  margin-right: 4px;
+  border-radius: 9999px;
+  background: #49915e;
+  flex-shrink: 0;
+}
+
+.bet-header-mobile-ref__count {
+  font: inherit;
+  color: inherit;
+}
+
+.bet-header-mobile-ref__indicator {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 48%;
+  height: 2px;
+  border-radius: 8px;
+  background: #49915e;
+  z-index: 1;
+  transition: left 0.2s ease;
+}
+
+.bet-header-mobile-ref__indicator--bets {
+  left: 52%;
 }
 
 /* WazirWin MatchInfo — measured @ monkeydon event-details desktop */

@@ -70,24 +70,24 @@ const shouldShow = computed(() => {
 // Get status text for overlay
 const statusText = computed(() => {
     const marketStatus = normalizedMarketStatus.value;
-    if (marketStatus === 'BALL_RUNNING' || marketStatus === 'BALL RUNNING') return 'BALL_RUNNING';
-    if (isMarketUnavailable.value) return 'SUSPENDED';
+    if (marketStatus === 'BALL_RUNNING' || marketStatus === 'BALL RUNNING') return 'Ball Running';
+    if (isMarketUnavailable.value) return 'Suspended';
 
-    if (props.ballRunning) return 'BALL_RUNNING';
+    if (props.ballRunning) return 'Ball Running';
 
     const status = normalizedStatus.value;
     if (status === 'REMOVED') return 'REMOVED';
     if (status === 'LOSER') return 'LOSER';
     if (status === 'WINNER') return 'WINNER';
-    if (status === 'SUSPENDED') return 'SUSPENDED';
-    if (status === 'BALL_RUNNING' || status === 'BALL RUNNING') return 'BALL_RUNNING';
+    if (status === 'SUSPENDED') return 'Suspended';
+    if (status === 'BALL_RUNNING' || status === 'BALL RUNNING') return 'Ball Running';
 
     return '';
 });
 
 const overlayModifierClass = computed(() => {
-    if (statusText.value === 'SUSPENDED') return 'status-overlay--suspended';
-    if (statusText.value === 'BALL_RUNNING') return 'status-overlay--ball-running';
+    if (statusText.value === 'Suspended') return 'status-overlay--suspended';
+    if (statusText.value === 'Ball Running') return 'status-overlay--ball-running';
     if (statusText.value === 'WINNER') return 'status-overlay--winner';
     if (statusText.value === 'LOSER' || statusText.value === 'REMOVED') return 'status-overlay--loser';
     return 'status-overlay--default';

@@ -918,7 +918,7 @@ onUnmounted(() => {
                       <Fancy
                         :fancyData="Array.isArray(finalFancyData) ? finalFancyData : Object.values(finalFancyData || {})"
                         :fancyTabs="fancyTabs" :binaryData="binaryData" :betHistory="betStore.betHistory" :betOutcomes="betStore.betOutcomes"
-                        :eventTypeId="event_type_id" :eventName="event_name" :betAllow="betAllow" :inPlay="inPlay" :eventId="event_id" />
+                        :eventTypeId="event_type_id" :eventName="event_name" :betAllow="betAllow" :eventId="event_id" />
                     </v-window-item>
                     <v-window-item v-if="premiumActive" value="Premium">
                       <Premium :premium-url="premiumUrl" :loading="premiumLoading" :error="premiumError" />

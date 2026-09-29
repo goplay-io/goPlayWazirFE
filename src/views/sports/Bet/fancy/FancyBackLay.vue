@@ -19,7 +19,7 @@ import RulesDialog from '@/components/RulesDialog.vue';
 import FancyPositionsDialog from './FancyPositionsDialog.vue';
 import FancyMarketStatusBlock from './FancyMarketStatusBlock.vue';
 import BookLadderIcon from '@/components/BookLadderIcon.vue';
-import FancyMinMaxInfo from '@/components/FancyMinMaxInfo.vue';
+import FancyRowCountdown from '@/components/FancyRowCountdown.vue';
 
 const betStore = useBetStore();
 
@@ -308,15 +308,16 @@ const { t } = useI18n()
               <PayoutValue :value="getFancyOutcome(innerFancy.market_id)" small />
             </div>
             <div class="fancy-odds-wrap tw-relative tw-ml-auto tw-shrink-0 tw-flex tw-items-center tw-gap-2">
-            <BookLadderIcon
-              v-if="hasBookData(innerFancy.market_id)"
-              class="fancy-row-book-ladder"
-              @click="openPositionsDialog(innerFancy.market_id, innerFancy?.name)"
-            />
-            <FancyMinMaxInfo
-              :min="getMinMaxValues(innerFancy).min"
-              :max="getMinMaxValues(innerFancy).max"
-            />
+            <div class="fancy-row-tools">
+              <FancyRowCountdown />
+              <BookLadderIcon
+                class="fancy-row-book-ladder"
+                :disabled="!hasBookData(innerFancy.market_id)"
+                size="18"
+                color="#d3d3d3"
+                @click="openPositionsDialog(innerFancy.market_id, innerFancy?.name)"
+              />
+            </div>
             <div
               class="fancy-odds-block tw-relative tw-w-[146px]"
               :class="{
@@ -412,15 +413,16 @@ const { t } = useI18n()
               <PayoutValue :value="getFancyOutcome(innerFancy.market_id)" small />
             </div>
             <div class="fancy-odds-wrap tw-relative tw-ml-auto tw-shrink-0 tw-flex tw-items-center tw-gap-2">
-            <BookLadderIcon
-              v-if="hasBookData(innerFancy.market_id)"
-              class="fancy-row-book-ladder"
-              @click="openPositionsDialog(innerFancy.market_id, innerFancy?.name)"
-            />
-            <FancyMinMaxInfo
-              :min="getMinMaxValues(innerFancy).min"
-              :max="getMinMaxValues(innerFancy).max"
-            />
+            <div class="fancy-row-tools">
+              <FancyRowCountdown />
+              <BookLadderIcon
+                class="fancy-row-book-ladder"
+                :disabled="!hasBookData(innerFancy.market_id)"
+                size="18"
+                color="#d3d3d3"
+                @click="openPositionsDialog(innerFancy.market_id, innerFancy?.name)"
+              />
+            </div>
             <div
               class="fancy-odds-block tw-relative tw-w-[146px]"
               :class="{
