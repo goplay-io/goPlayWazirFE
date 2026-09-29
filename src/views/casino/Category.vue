@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="casino-page tw-px-0 tw-pb-2 md:tw-pb-4 tw-pt-0 md:tw-pt-0 max-w-[99vw] tw-mx-auto md:tw-max-w-[890px]">
+  <v-container fluid class="casino-page tw-w-full tw-max-w-none tw-px-0 tw-pb-2 md:tw-pb-4 tw-pt-0 md:tw-pt-0">
     <div class="casino-listing-top-bar">
       <h1 class="casino-listing-top-bar__title casino-listing-top-bar__title--category">
         {{ displayCategoryTitle }}
@@ -9,7 +9,7 @@
         :result-count="filteredGames.length"
         :games="filteredGames"
         :placeholder="t('casino.home.searchPlaceholder')"
-        class="casino-listing-top-bar__search md:tw-hidden"
+        class="casino-listing-top-bar__search"
         @game-selected="playGame"
       />
     </div>
@@ -17,31 +17,17 @@
     <div class="casino-page-body tw-px-1 md:tw-px-0">
       <Loading v-if="loading" speed="0.8s" />
       <div v-else>
-        <div class="casino-tabs-l1-search-row tw-mb-0 md:tw-mb-2">
-          <CasinoTabsL2Rail
-            :items="filterItems"
-            :active-key="activeGameType"
-            @select="changeGameType"
-          />
-
-          <CasinoSearch
-            v-model="searchQuery"
-            :result-count="filteredGames.length"
-            :games="filteredGames"
-            :placeholder="t('casino.home.searchPlaceholder')"
-            inline
-            class="casino-tabs-search max-md:tw-hidden"
-            @game-selected="playGame"
-          />
-        </div>
-
         <div v-if="filteredGames.length > 0">
-          <div
-            class="casino-games-grid tw-grid tw-grid-cols-4 md:tw-grid-cols-6 tw-gap-1 md:tw-gap-2">
+          <div class="casino-games-grid">
             <div v-for="game in filteredGames" :key="game.id" class="casino-game-tile" @click="playGame(game)">
               <div class="casino-game-tile__media">
-                <img :src="game.url_thumb" :alt="game.name" loading="lazy" decoding="async"
-                  class="tw-w-full tw-h-full tw-object-cover tw-object-center" @error="handleImageError($event)" />
+                <img
+                  :src="game.url_thumb"
+                  :alt="game.name"
+                  loading="lazy"
+                  decoding="async"
+                  @error="handleImageError($event)"
+                />
                 <div
                   class="tw-absolute tw-inset-0 tw-flex tw-items-center tw-justify-center tw-bg-black/50 tw-opacity-0 image-placeholder">
                   <v-icon icon="mdi-cards-variant" size="36" class="tw-text-white"></v-icon>
@@ -52,13 +38,13 @@
         </div>
 
         <div v-else class="tw-text-center tw-py-6 md:tw-py-8 tw-px-3">
-          <v-icon icon="mdi-casino-chip" size="52" class="tw-mb-3 tw-text-gray-400"></v-icon>
-          <h3 class="tw-mb-1.5 tw-text-lg tw-font-semibold tw-text-gray-900">{{
+          <v-icon icon="mdi-casino-chip" size="52" class="tw-mb-3 tw-text-white/40"></v-icon>
+          <h3 class="tw-mb-1.5 tw-text-lg tw-font-semibold tw-text-white">{{
             t('casino.home.noGamesFound') }}</h3>
-          <p class="tw-mx-auto tw-max-w-md tw-text-gray-600">
+          <p class="tw-mx-auto tw-max-w-md tw-text-white/60">
             {{ searchQuery ? t('casino.home.noGamesSearchDescription') : t('casino.home.noGamesFilterDescription') }}
           </p>
-          <v-btn v-if="searchQuery || activeGameType !== 'all'" variant="outlined" class="tw-mt-4 nav-outline-btn"
+          <v-btn v-if="searchQuery" variant="outlined" class="tw-mt-4 nav-outline-btn"
             @click="clearFilters">
             {{ t('casino.home.clearFilters') }}
           </v-btn>
@@ -71,13 +57,12 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed, watch } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { getCasinoGames } from '../../api/event/casino';
 import { useSelectedGame } from '@/composables/useSelectedGame';
 import CasinoSearch from '../../components/CasinoSearch.vue';
-import CasinoTabsL2Rail from '@/components/casino/CasinoTabsL2Rail.vue';
 import Loading from '@/components/Loading.vue';
 import { sortCasinoGamesByPriority } from '@/utils/casinoGamePriority';
 
@@ -116,7 +101,6 @@ const isSameCategory = (value) => normalizeCategoryValue(value) === normalizeCat
 
 const loading = ref(true);
 const allGames = ref([]);
-const activeGameType = ref('all');
 const searchQuery = ref('');
 
 onMounted(async () => {
@@ -156,105 +140,21 @@ onMounted(async () => {
   }
 });
 
-const availableGameTypes = computed(() => {
-  const categoryGames = allGames.value.filter((game) => isSameCategory(game.product));
-  const gameTypes = [...new Set(categoryGames.map((game) => game.game_type))];
-  return gameTypes.sort();
-});
-
-const filterItems = computed(() => {
-  const items = [{ key: 'all', label: t('casino.home.allTypes') }];
-  availableGameTypes.value.forEach((gt) => {
-    items.push({
-      key: gt,
-      label: formatGameTypeName(gt),
-    });
-  });
-  return items;
-});
-
 const filteredGames = computed(() => {
   let games = allGames.value.filter((game) => isSameCategory(game.product));
-  if (activeGameType.value !== 'all') {
-    games = games.filter((game) => game.game_type === activeGameType.value);
-  }
   if (searchQuery.value) {
     const query = searchQuery.value.toLowerCase();
     games = games.filter(
       (game) =>
-        game.name.toLowerCase().includes(query) ||
-        game.category.toLowerCase().includes(query) ||
-        game.product.toLowerCase().includes(query) ||
-        game.game_type.toLowerCase().includes(query),
+        game.name?.toLowerCase().includes(query) ||
+        game.category?.toLowerCase().includes(query) ||
+        game.product?.toLowerCase().includes(query) ||
+        game.game_type?.toLowerCase().includes(query),
     );
   }
   games = [...games].sort((a, b) => (a.position || 0) - (b.position || 0));
   return games;
 });
-
-watch(categoryFromRoute, () => {
-  activeGameType.value = 'all';
-});
-
-const changeGameType = (gameType) => {
-  activeGameType.value = gameType;
-};
-
-const getProductIcon = (product) => {
-  const icons = {
-    'MAC88 LIVE': 'mdi-cards-playing-spade',
-    'MAC EXCITE': 'mdi-lightning-bolt',
-    'MAC88 VIRTUALS': 'mdi-virtual-reality',
-    'MAC88 LIVE PREDICTION': 'mdi-palette',
-    'COLOR AND CHICKEN GAMES': 'mdi-palette',
-    'FUN GAMES': 'mdi-gamepad-variant',
-    EVOLUTION: 'mdi-cards-variant',
-    PRAGMATIC: 'mdi-diamond-stone',
-    EZUGI: 'mdi-crown',
-  };
-  return icons[product] || 'mdi-casino-chip';
-};
-
-const getGameTypeIcon = (key) => {
-  if (key === 'all') return 'mdi-view-grid-outline';
-  const k = String(key).toLowerCase();
-  const icons = {
-    'dragon tiger': 'mdi-dragon',
-    baccarat: 'mdi-cards-playing',
-    sicbo: 'mdi-dice-multiple',
-    'sic bo': 'mdi-dice-multiple',
-    'live sic bo': 'mdi-dice-multiple',
-    roulette: 'mdi-circle-outline',
-    'live roulette': 'mdi-circle-outline',
-    'color prediction': 'mdi-chart-pie',
-    'chicken games': 'mdi-food-drumstick',
-    'andar bahar': 'mdi-cards',
-    mines: 'mdi-mine',
-    aviator: 'mdi-airplane',
-    teenpatti: 'mdi-cards-playing-club',
-    lottery: 'mdi-numeric',
-    'live poker': 'mdi-cards-playing-outline',
-    'live lobby': 'mdi-office-building',
-    'crash games': 'mdi-chart-line-variant',
-    'casual games': 'mdi-gamepad-variant',
-    'scratch cards': 'mdi-cards-outline',
-    blackjack: 'mdi-cards-playing-heart',
-    poker: 'mdi-cards-playing-club',
-    slots: 'mdi-slot-machine',
-    lightning: 'mdi-lightning-bolt',
-  };
-  for (const [frag, icon] of Object.entries(icons)) {
-    if (k.includes(frag)) return icon;
-  }
-  return 'mdi-cards-playing-outline';
-};
-
-const formatGameTypeName = (gameType) => {
-  return gameType
-    .split(' ')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
-};
 
 const playGame = (game) => {
   setSelectedGame(game);
@@ -265,7 +165,6 @@ const playGame = (game) => {
 };
 
 const clearFilters = () => {
-  activeGameType.value = 'all';
   searchQuery.value = '';
 };
 

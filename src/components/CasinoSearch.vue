@@ -20,6 +20,14 @@
           @input="onInputNative"
           @keydown.escape.prevent="$emit('update:modelValue', '')"
         />
+        <button
+          type="button"
+          class="casino-search-bar__btn"
+          :aria-label="placeholder || t('common.search')"
+          tabindex="-1"
+        >
+          <SearchMagnify :size="14" :stroke-width="2" class="casino-search-bar__btn-icon" />
+        </button>
       </div>
     </div>
   </div>
@@ -28,6 +36,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import SearchMagnify from '@/components/Icons/SearchMagnify.vue'
 
 const { t } = useI18n()
 

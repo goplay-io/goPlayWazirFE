@@ -32,7 +32,7 @@ function onSelect(key) {
 </script>
 
 <template>
-  <div class="casino-tabs-l2-wrap tw-mt-5">
+  <div class="casino-tabs-l2-wrap">
     <div class="casino-tabs-l2-scroll-shell">
       <button
         type="button"
@@ -75,6 +75,18 @@ function onSelect(key) {
           :class="{ 'casino-tabs-l2__btn--active': activeKey === item.key }"
           @click="onSelect(item.key)"
         >
+          <img
+            v-if="item.iconSrc"
+            :src="item.iconSrc"
+            alt=""
+            class="casino-tabs-l2__icon"
+          />
+          <v-icon
+            v-else-if="item.glyph"
+            :icon="item.glyph"
+            size="22"
+            class="casino-tabs-l2__glyph"
+          />
           <span class="casino-tabs-l2__label">{{ item.label }}</span>
         </button>
       </div>

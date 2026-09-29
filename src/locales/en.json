@@ -247,7 +247,7 @@
       "noGamesFilterDescription": "No games available for the selected filters",
       "clearFilters": "Clear Filters",
       "playNow": "Play now",
-      "searchPlaceholder": "Search Games"
+      "searchPlaceholder": "Search Game..."
     },
     "gameType": {
       "default": "Game Type"
