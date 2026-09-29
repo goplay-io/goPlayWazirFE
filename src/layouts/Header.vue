@@ -2089,8 +2089,7 @@ button.header-announce-search.search-icon-btn:hover {
     width: auto;
     max-width: 330px;
     justify-content: flex-start;
-    /* Inset to left sidebar start (page pad − header pad) */
-    margin-left: calc(var(--layout-page-pad-lg, 48px) - 16px);
+    margin-left: 0;
   }
 
   .header-block--logo .header-logo-area,
@@ -2303,10 +2302,16 @@ button.header-announce-search.search-icon-btn:hover {
 
 }
 
-/* Logo inset aligns with left sidebar column start */
+/* Logo inset — match GuestLayout logout header (toolbar pad = page pad) */
 @media (min-width: 1024px) {
-  .header-toolbar-row--auth-desktop .header-block--logo {
-    margin-left: calc(var(--layout-page-pad-lg, 48px) - 16px);
+  .header-toolbar-row--auth-desktop {
+    padding-left: var(--layout-page-pad-lg, 48px) !important;
+    padding-right: 16px !important;
+  }
+
+  .header-toolbar-row--auth-desktop .header-block--logo,
+  .header-toolbar-row .header-block--logo {
+    margin-left: 0 !important;
   }
 }
 
@@ -2316,8 +2321,14 @@ button.header-announce-search.search-icon-btn:hover {
     padding-right: 16px;
   }
 
-  .header-toolbar-row--auth-desktop .header-block--logo {
-    margin-left: calc(var(--layout-page-pad-xl, 80px) - 16px);
+  .header-toolbar-row--auth-desktop {
+    padding-left: var(--layout-page-pad-xl, 80px) !important;
+    padding-right: 16px !important;
+  }
+
+  .header-toolbar-row--auth-desktop .header-block--logo,
+  .header-toolbar-row .header-block--logo {
+    margin-left: 0 !important;
   }
 }
 

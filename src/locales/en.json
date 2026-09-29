@@ -1267,6 +1267,7 @@
         "affiliateProgram": "Manage your affiliate program"
       },
       "selectlanguage": "Select Language",
+      "languageHint": "Choose your preferred language from the list below:",
       "managePaymentMethods": "Manage bank, UPI & crypto",
       "affiliateProgram": "Affiliate Program",
       "becomeAffiliate": "Become an Affiliate"

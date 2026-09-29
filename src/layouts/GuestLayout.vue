@@ -50,7 +50,7 @@
             ref="desktopInlineSearchRoot"
             class="header-desktop-search tw-relative tw-flex tw-items-center tw-w-full"
           >
-            <SearchMagnify :size="15" :stroke-width="2" class="header-desktop-search__icon" />
+            <SearchMagnify :size="16" :stroke-width="1.5" class="header-desktop-search__icon" />
             <input
               ref="headerSearchInput"
               v-model="inlineSearchQuery"
@@ -75,7 +75,7 @@
           </div>
         </div>
 
-        <!-- Block 3: Date/time (guest desktop only — equal gap sibling) -->
+        <!-- Block 3: Date/time (guest desktop only) -->
         <div
           v-if="!isMobile && !authStore.isDemoUser && !isAuthPage"
           class="guest-header-block guest-header-block--datetime"
@@ -133,30 +133,44 @@
 
           <!-- Pure guest auth actions -->
           <template v-else>
-            <div v-if="!isMobile" class="guest-desktop-auth-actions tw-flex tw-items-center tw-gap-1">
-              <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--login" @click="handleGuestLoginClick">
-                <v-icon size="17" class="guest-ref-auth-btn__icon">mdi-login</v-icon>
-                <span>{{ t('components.mobileBottomNav.login') }}</span>
-              </button>
-              <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--register" @click="handleGuestSignupClick">
-                <v-icon size="16" class="guest-ref-auth-btn__icon">mdi-account-plus-outline</v-icon>
-                <span>{{ t('auth.login.registerCta') }}</span>
-              </button>
-              <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--get-id" @click="handleGuestGetIdClick">
-                <v-icon size="17" class="guest-ref-auth-btn__icon">mdi-login</v-icon>
-                <span>{{ t('auth.login.getIdCta') }}</span>
+            <div v-if="!isMobile" class="guest-desktop-auth-actions">
+              <div class="guest-desktop-auth-pair">
+                <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--login" @click="handleGuestLoginClick">
+                  <svg class="guest-ref-auth-btn__svg" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#171716" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M15 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                    <path d="M21 12h-13l3 -3" />
+                    <path d="M11 15l-3 -3" />
+                  </svg>
+                  <span>{{ t('components.mobileBottomNav.login') }}</span>
+                </button>
+                <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--register" @click="handleGuestSignupClick">
+                  <svg class="guest-ref-auth-btn__svg" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#49915e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                    <path d="M16 19h6" />
+                    <path d="M19 16v6" />
+                    <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
+                  </svg>
+                  <span>{{ t('auth.login.signupCta') }}</span>
+                </button>
+              </div>
+              <button
+                type="button"
+                class="header-ref-lang-btn"
+                :aria-label="t('components.sidebar.selectlanguage')"
+                @click="openHeaderLanguageModal"
+              >
+                <svg class="header-ref-lang-btn__globe" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
+                  <path d="M3.6 9h16.8" />
+                  <path d="M3.6 15h16.8" />
+                  <path d="M11.5 3a17 17 0 0 0 0 18" />
+                  <path d="M12.5 3a17 17 0 0 1 0 18" />
+                </svg>
+                <svg class="header-ref-lang-btn__chevron" fill="currentColor" width="12" height="12" viewBox="0 0 330 330" aria-hidden="true">
+                  <path d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393 c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393 s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z" />
+                </svg>
               </button>
             </div>
-            <button
-              v-if="!isMobile"
-              type="button"
-              class="header-ref-lang-btn"
-              :aria-label="t('components.sidebar.selectlanguage')"
-              @click="openHeaderLanguageModal"
-            >
-              <v-icon size="16" class="header-ref-lang-btn__globe">mdi-earth</v-icon>
-              <v-icon size="14" class="header-ref-lang-btn__chevron">mdi-chevron-down</v-icon>
-            </button>
             <div v-else class="guest-auth-pair tw-inline-flex tw-items-center">
               <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--login guest-ref-auth-btn--mobile" @click="handleGuestLoginClick">
                 <span>{{ t('components.mobileBottomNav.login') }}</span>
@@ -1330,8 +1344,7 @@ useAppBarHeightObserver(guestAppBarRef)
     width: auto;
     max-width: 330px;
     justify-content: flex-start;
-    /* Inset to left sidebar start (page pad − header pad) */
-    margin-left: calc(var(--layout-page-pad-lg, 48px) - 16px);
+    margin-left: 0;
   }
 
   .guest-header-brand {
@@ -1423,14 +1436,59 @@ useAppBarHeightObserver(guestAppBarRef)
   }
 }
 
+@media (min-width: 1024px) {
+  .guest-toolbar-row {
+    justify-content: space-between;
+  }
+
+  .guest-toolbar-left {
+    width: 338px;
+    min-width: 338px;
+    gap: 0;
+  }
+
+  .guest-header-brand {
+    margin-left: 8px;
+  }
+
+  .guest-header-brand :deep(.header-brand-img) {
+    width: 330px;
+    height: 45px;
+    max-width: 330px;
+    object-fit: contain;
+    object-position: center center;
+  }
+
+  .header-desktop-search-slot {
+    flex: 1 1 auto;
+    max-width: 384px;
+    width: 100%;
+    min-width: 0;
+    padding-left: 0;
+    padding-right: 0;
+    justify-content: stretch;
+  }
+
+  .guest-toolbar-right {
+    margin-left: 0;
+  }
+}
+
 @media (min-width: 1280px) {
   .guest-toolbar-row {
     padding-left: 16px;
     padding-right: 16px;
   }
 
-  .guest-toolbar-row--guest-desktop .guest-header-block--logo {
-    margin-left: calc(var(--layout-page-pad-xl, 80px) - 16px);
+  /* Same page-pad inset as auth header — logo lines up with sidebar */
+  .guest-toolbar-row--guest-desktop {
+    padding-left: var(--layout-page-pad-xl, 80px) !important;
+    padding-right: 16px !important;
+  }
+
+  .guest-toolbar-row--guest-desktop .guest-header-block--logo,
+  .guest-toolbar-row .guest-header-block--logo {
+    margin-left: 0 !important;
   }
 
   .guest-ref-auth-btn--register {
@@ -1445,8 +1503,14 @@ useAppBarHeightObserver(guestAppBarRef)
 }
 
 @media (min-width: 1024px) and (max-width: 1279px) {
-  .guest-toolbar-row--guest-desktop .guest-header-block--logo {
-    margin-left: calc(var(--layout-page-pad-lg, 48px) - 16px);
+  .guest-toolbar-row--guest-desktop {
+    padding-left: var(--layout-page-pad-lg, 48px) !important;
+    padding-right: 16px !important;
+  }
+
+  .guest-toolbar-row--guest-desktop .guest-header-block--logo,
+  .guest-toolbar-row .guest-header-block--logo {
+    margin-left: 0 !important;
   }
 }
 
@@ -1782,11 +1846,12 @@ useAppBarHeightObserver(guestAppBarRef)
 
 /* WazirWin guest auth buttons (reference Header logged-out) */
 .header-desktop-search {
-  height: 36px;
+  height: 34px;
   border-radius: 9999px;
   border: 1px solid var(--color-search-input-border, #545454);
   background: var(--color-search-input-bg, #333333);
-  padding: 0 12px 0 36px;
+  padding: 0 0 0 36px;
+  box-sizing: border-box;
 }
 
 .header-desktop-search__icon {
@@ -1801,8 +1866,8 @@ useAppBarHeightObserver(guestAppBarRef)
 
 .header-desktop-search__input {
   color: #ffffff !important;
-  font-size: 12px;
-  line-height: 1.25;
+  font-size: 14px;
+  line-height: 16px;
   width: 100%;
   height: 100%;
 }
@@ -1826,17 +1891,29 @@ useAppBarHeightObserver(guestAppBarRef)
 
 .header-desktop-datetime__date {
   font-size: 12px;
-  line-height: 1.25;
+  line-height: 18px;
   color: var(--color-header-date-text, #eed1d5);
   white-space: nowrap;
 }
 
 .header-desktop-datetime__time {
   font-size: 14px;
-  line-height: 1.25;
+  line-height: 16px;
   font-weight: 600;
   color: #ffffff;
   white-space: nowrap;
+}
+
+.guest-desktop-auth-actions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.guest-desktop-auth-pair {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .guest-ref-auth-btn {
@@ -1844,13 +1921,15 @@ useAppBarHeightObserver(guestAppBarRef)
   align-items: center;
   justify-content: center;
   gap: 4px;
-  height: 35px;
-  padding: 4px 16px;
+  box-sizing: border-box;
+  height: 34px;
+  padding: 8px 16px 8px 12px;
   border: none;
   border-radius: 9999px;
   font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  line-height: 16px;
+  letter-spacing: normal;
   text-decoration: none !important;
   white-space: nowrap;
   cursor: pointer;
@@ -1858,20 +1937,21 @@ useAppBarHeightObserver(guestAppBarRef)
   transition: filter 0.15s ease, background-color 0.15s ease;
 }
 
-.guest-ref-auth-btn__icon {
-  color: #000000 !important;
+.guest-ref-auth-btn__svg {
+  display: block;
   flex-shrink: 0;
 }
 
 .guest-ref-auth-btn--login,
 .guest-ref-auth-btn--get-id {
-  background: var(--color-wazir-green, #49915e);
-  color: #000000;
+  background: #49915e;
+  color: #171716;
 }
 
 .guest-ref-auth-btn--register {
-  background: var(--color-signup-btn-bg, #48494b);
-  color: var(--color-wazir-green, #49915e);
+  background: #333333;
+  color: #ffffff;
+  border: 1px solid #60a3b3;
 }
 
 .guest-ref-auth-btn--login:hover,
@@ -1884,9 +1964,9 @@ useAppBarHeightObserver(guestAppBarRef)
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 2px;
+  box-sizing: border-box;
   height: 34px;
-  min-width: 56px;
+  width: 56px;
   padding: 8px;
   margin-left: 8px;
   border: 1px solid #545454;
@@ -1903,14 +1983,18 @@ useAppBarHeightObserver(guestAppBarRef)
   border-color: #6b6b6b;
 }
 
-.header-ref-lang-btn__globe,
-.header-ref-lang-btn__chevron,
-.header-ref-lang-btn :deep(.v-icon) {
-  color: #ffffff !important;
+.header-ref-lang-btn__globe {
+  width: 16px;
+  height: 16px;
+  margin-right: 2px;
+  flex-shrink: 0;
 }
 
 .header-ref-lang-btn__chevron {
-  margin-left: -2px;
+  width: 12px;
+  height: 12px;
+  margin-left: 8px;
+  flex-shrink: 0;
 }
 
 .guest-auth-pair {
@@ -1922,6 +2006,7 @@ useAppBarHeightObserver(guestAppBarRef)
 .guest-ref-auth-btn--mobile {
   height: 27px;
   padding: 4px 8px;
+  border: none;
   border-radius: 6px;
   font-size: 10px;
   letter-spacing: 0.06em;
