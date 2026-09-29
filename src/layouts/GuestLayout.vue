@@ -1210,6 +1210,7 @@ useAppBarHeightObserver(guestAppBarRef)
     background-image: var(--color-header-bg-gradient, none) !important;
     box-shadow: none !important;
     border: none !important;
+    overflow: visible !important;
   }
 
   /* Full-bleed like reference #navbar toolbar (lg:px-10 lives on the row, not Vuetify) */
@@ -1217,6 +1218,10 @@ useAppBarHeightObserver(guestAppBarRef)
     padding: 0 !important;
     width: 100% !important;
     max-width: 100% !important;
+  }
+
+  .header-subheader-wrap {
+    overflow: visible;
   }
 }
 
@@ -1342,26 +1347,27 @@ useAppBarHeightObserver(guestAppBarRef)
   .guest-header-block--logo {
     flex: 0 0 auto;
     width: auto;
-    max-width: 330px;
+    min-width: 0;
+    max-width: none;
     justify-content: flex-start;
     margin-left: 0;
   }
 
   .guest-header-brand {
-    margin-left: 0;
+    margin-left: 0 !important;
     flex: none;
     display: inline-flex;
     align-items: center;
     width: auto;
-    max-width: 100%;
+    max-width: none;
   }
 
   .guest-header-brand :deep(.header-brand-img) {
-    height: 58px;
-    width: auto;
-    max-width: 280px;
-    object-fit: contain;
-    object-position: left center;
+    height: 58px !important;
+    width: auto !important;
+    max-width: 280px !important;
+    object-fit: contain !important;
+    object-position: left center !important;
   }
 
   /* Reference: flex-grow search-box max-w-96 */
@@ -1441,22 +1447,25 @@ useAppBarHeightObserver(guestAppBarRef)
     justify-content: space-between;
   }
 
-  .guest-toolbar-left {
-    width: 338px;
-    min-width: 338px;
-    gap: 0;
+  /* Logo glyph left edge = sidebar icon column (no wide centered box) */
+  .guest-header-block--logo {
+    width: auto;
+    min-width: 0;
+    max-width: none;
   }
 
   .guest-header-brand {
-    margin-left: 8px;
+    margin-left: 0 !important;
+    display: inline-flex;
+    align-items: center;
   }
 
   .guest-header-brand :deep(.header-brand-img) {
-    width: 330px;
-    height: 45px;
-    max-width: 330px;
-    object-fit: contain;
-    object-position: center center;
+    width: auto !important;
+    height: 58px !important;
+    max-width: 280px !important;
+    object-fit: contain !important;
+    object-position: left center !important;
   }
 
   .header-desktop-search-slot {
@@ -1480,9 +1489,9 @@ useAppBarHeightObserver(guestAppBarRef)
     padding-right: 16px;
   }
 
-  /* Same page-pad inset as auth header — logo lines up with sidebar */
+  /* Logo left edge aligns with sidebar sport icons (same as auth header) */
   .guest-toolbar-row--guest-desktop {
-    padding-left: var(--layout-page-pad-xl, 80px) !important;
+    padding-left: var(--header-logo-inset-xl) !important;
     padding-right: 16px !important;
   }
 
@@ -1504,7 +1513,7 @@ useAppBarHeightObserver(guestAppBarRef)
 
 @media (min-width: 1024px) and (max-width: 1279px) {
   .guest-toolbar-row--guest-desktop {
-    padding-left: var(--layout-page-pad-lg, 48px) !important;
+    padding-left: var(--header-logo-inset-lg) !important;
     padding-right: 16px !important;
   }
 
