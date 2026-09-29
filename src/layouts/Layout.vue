@@ -42,7 +42,7 @@
       <div
         class="layout-content-row tw-flex tw-min-w-0 tw-gap-0"
         :class="[
-          showReferenceSportsShell ? '' : 'tw-bg-white',
+          showReferenceSportsShell ? '' : 'tw-bg-black',
           useMobileBodyScroll ? 'layout-content-row--mobile-bet' : '',
           showSiteFooter
             ? 'layout-content-row--footer-doc'
@@ -335,6 +335,8 @@ const REPORT_PAGE_NAMES = new Set([
   'bonus-statement',
   'turnover-history',
   'deposit-turnovers',
+  'deposit',
+  'withdrawal',
 ])
 
 const isReportPage = computed(() => REPORT_PAGE_NAMES.has(String(route.name || '')))

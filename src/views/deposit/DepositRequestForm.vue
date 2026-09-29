@@ -10,7 +10,7 @@
     <div v-else class="deposit-request-box__actions">
       <button v-if="canShowBankDeposit" type="button" class="deposit-request-option" @click="showBankDialog = true">
         <span class="deposit-request-option__icon">
-          <BankDepositIcon :size="optionIconSize" color="var(--color-header-bg, #360952)" />
+          <BankDepositIcon :size="optionIconSize" color="#49915e" />
         </span>
         <span class="deposit-request-option__label">{{ t('wallet.deposit.bankDeposit') }}</span>
         <v-icon :size="chevronIconSize" class="deposit-request-option__chevron">mdi-chevron-right</v-icon>
@@ -204,8 +204,8 @@ const handleRequestCreated = (requestData) => {
 }
 
 .deposit-request-box {
-  background: #ffffff !important;
-  border: 1px solid var(--color-header-bg, #360952) !important;
+  background: #333333 !important;
+  border: 1px solid #545454 !important;
   border-radius: 8px !important;
   box-shadow: none !important;
 }
@@ -216,12 +216,12 @@ const handleRequestCreated = (requestData) => {
   gap: 0.75rem;
   width: 100%;
   padding: 0.625rem 0.75rem;
-  border: 1px solid #e5e7eb;
+  border: 1px solid #545454;
   border-radius: 6px;
-  background: #f9fafb;
-  color: #111111;
-  font-size: 0.8125rem;
-  font-weight: 700;
+  background: #d5d5d5;
+  color: #343434;
+  font-size: 14px;
+  font-weight: 400;
   cursor: pointer;
   box-shadow: none;
   transition: border-color 0.25s ease, background 0.25s ease;
@@ -230,16 +230,16 @@ const handleRequestCreated = (requestData) => {
 }
 
 .deposit-request-option:hover {
-  border-color: var(--color-header-bg, #360952);
-  background: #f3e8ff;
+  border-color: #49915e;
+  background: #e0e0e0;
 }
 
 .deposit-request-option:active {
-  border-color: #8a19ce;
+  border-color: #49915e;
 }
 
 .deposit-request-option:focus-visible {
-  outline: 2px solid var(--color-header-bg, #360952);
+  outline: 2px solid #49915e;
   outline-offset: 2px;
 }
 
@@ -259,7 +259,7 @@ const handleRequestCreated = (requestData) => {
   height: 2.25rem;
   border-radius: 0;
   background: transparent;
-  color: var(--color-header-bg, #360952);
+  color: #49915e;
 }
 
 .deposit-request-option__label {
@@ -271,13 +271,13 @@ const handleRequestCreated = (requestData) => {
 }
 
 .deposit-request-option__chevron {
-  color: #9ca3af;
+  color: #666666;
   flex-shrink: 0;
   transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .deposit-request-option:hover .deposit-request-option__chevron {
-  color: var(--color-header-bg, #360952);
+  color: #49915e;
   transform: translateX(2px);
 }
 

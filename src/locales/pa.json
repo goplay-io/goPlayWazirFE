@@ -650,7 +650,8 @@
         "amount": "ਰਕਮ",
         "payConfirm": "ਭੁਗਤਾਨ ਕਰੋ ਅਤੇ ਪੁਸ਼ਟੀ ਕਰੋ",
         "currencyType": "ਮੁਦਰਾ ਦੀ ਕਿਸਮ",
-        "bankAccount": "ਬੈਂਕ ਖਾਤਾ"
+        "bankAccount": "ਬੈਂਕ ਖਾਤਾ",
+        "cryptoAccount": "ਕ੍ਰਿਪਟੋ ਖਾਤਾ"
       },
       "noRequests": "ਕੋਈ ਜਮ੍ਹਾਂ ਬੇਨਤੀਆਂ ਨਹੀਂ ਮਿਲੀਆਂ",
       "historyWillAppear": "ਤੁਹਾਡਾ ਜਮ੍ਹਾ ਇਤਿਹਾਸ ਇੱਥੇ ਦਿਖਾਈ ਦੇਵੇਗਾ"

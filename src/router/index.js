@@ -17,8 +17,8 @@ function pickSignupReferralId(query = {}) {
 /** Footer info / legal pages — no sidebar or right rail; content spans full width. */
 const INFO_PAGE_LAYOUT = { layoutProps: { fullWidth: true } };
 
-/** Deposit / withdrawal — full content width, no sidebar or right rail. */
-const WALLET_TRANSACTION_LAYOUT = { requiresAuth: true, layoutProps: { fullWidth: true } };
+/** Deposit / withdrawal — auth required; use standard left sidebar + right rail. */
+const WALLET_TRANSACTION_LAYOUT = { requiresAuth: true };
 
 const routes = [
   {

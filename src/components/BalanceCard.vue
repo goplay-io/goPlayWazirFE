@@ -1,6 +1,6 @@
 <template>
   <div
-    class="balance-card-theme tw-relative tw-p-4 sm:tw-p-5 tw-flex-1 tw-h-full tw-overflow-hidden tw-transition-all tw-duration-300 tw-opacity-0 tw-animate-slideInUp"
+    class="balance-card-theme tw-relative tw-p-4 sm:tw-p-5 tw-flex-1 tw-h-full tw-overflow-visible tw-transition-all tw-duration-300 tw-opacity-0 tw-animate-slideInUp"
     :style="`animation-delay: ${animationDelay}s`">
     <div class="tw-relative tw-z-10 tw-flex tw-flex-col tw-h-full">
       <!-- Icon at top left (hidden on mobile) -->
@@ -12,14 +12,14 @@
       </v-avatar>
 
       <!-- Balances -->
-      <div class="tw-flex tw-items-stretch tw-w-full">
+      <div class="tw-flex tw-items-stretch tw-w-full tw-min-w-0">
 
         <!-- Available Balance (left + mobile cashable stacked) -->
         <div class="tw-flex tw-flex-col tw-justify-end tw-gap-1 tw-flex-1 tw-min-w-0">
           <p class="tw-text-xs sm:tw-text-sm tw-text-white/90 tw-leading-none tw-tracking-wide tw-truncate">
             {{ t(titleKey) }}
           </p>
-          <span :class="['tw-font-bold tw-text-white tw-leading-tight tw-block tw-truncate', amountSizeClass]">
+          <span :class="['balance-card-amount tw-font-bold tw-text-white tw-leading-tight tw-block', amountSizeClass]">
             <NumberFlow
               :value="displayBalance"
               :format="{ minimumFractionDigits: 2, maximumFractionDigits: 2 }"
@@ -29,10 +29,10 @@
 
           <!-- Cashable (mobile: stacked under balance) -->
           <div class="tw-mt-2 sm:tw-hidden">
-            <p class="tw-text-xs tw-text-white/85 tw-leading-none tw-tracking-wide">
+            <p class="tw-text-xs tw-text-white/85 tw-leading-none tw-tracking-wide tw-truncate">
               {{ t('components.balanceCard.cashable') }}
             </p>
-            <span :class="['tw-font-semibold tw-text-white tw-leading-tight tw-block tw-truncate', amountSizeClass]">
+            <span :class="['balance-card-amount tw-font-semibold tw-text-white tw-leading-tight tw-block', amountSizeClass]">
               <NumberFlow
                 :value="displayCashable"
                 :format="{ minimumFractionDigits: 2, maximumFractionDigits: 2 }"
@@ -43,14 +43,14 @@
         </div>
 
         <!-- Vertical divider (desktop only) -->
-        <div class="tw-hidden sm:tw-block tw-w-px tw-bg-white/20 tw-mx-3 sm:tw-mx-4 tw-self-stretch tw-rounded-full"></div>
+        <div class="tw-hidden sm:tw-block tw-w-px tw-bg-white/20 tw-mx-2 tw-self-stretch tw-rounded-full tw-shrink-0"></div>
 
         <!-- Cashable Balance (right, desktop only) -->
         <div class="tw-hidden sm:tw-flex tw-flex-col tw-justify-end tw-gap-1 tw-flex-1 tw-min-w-0">
           <p class="tw-text-xs sm:tw-text-sm tw-text-white/90 tw-leading-none tw-tracking-wide tw-truncate">
             {{ t('components.balanceCard.cashable') }}
           </p>
-          <span :class="['tw-font-bold tw-text-white tw-leading-tight tw-block tw-truncate', amountSizeClass]">
+          <span :class="['balance-card-amount tw-font-bold tw-text-white tw-leading-tight tw-block', amountSizeClass]">
             <NumberFlow
               :value="displayCashable"
               :format="{ minimumFractionDigits: 2, maximumFractionDigits: 2 }"
@@ -133,9 +133,9 @@ const maxDigitCount = computed(() => {
 const amountSizeClass = computed(() => {
   const d = maxDigitCount.value
 
-  if (d <= 4) return 'tw-text-lg sm:tw-text-xl'
-  if (d <= 6) return 'tw-text-base sm:tw-text-lg'
-  if (d <= 9) return 'tw-text-sm sm:tw-text-base'
+  if (d <= 3) return 'tw-text-lg sm:tw-text-xl'
+  if (d <= 5) return 'tw-text-base sm:tw-text-lg'
+  if (d <= 7) return 'tw-text-sm sm:tw-text-base'
   return 'tw-text-xs sm:tw-text-sm'
 })
 </script>
@@ -149,13 +149,21 @@ const amountSizeClass = computed(() => {
   box-shadow: none;
 }
 
+.balance-card-amount {
+  min-width: 0;
+  overflow: visible;
+  white-space: nowrap;
+}
+
 :deep(number-flow-vue) {
-  --number-flow-mask-width: 1.2em;
+  --number-flow-mask-width: 0.25em;
   --number-flow-char-height: 1.2em;
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.02em;
-  overflow: hidden;
+  overflow: visible;
   position: relative;
+  display: inline-block;
+  max-width: 100%;
   font-size: inherit !important;
   font-weight: 700 !important;
   line-height: inherit;

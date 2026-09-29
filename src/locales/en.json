@@ -763,7 +763,8 @@
         "amount": "Amount",
         "payConfirm": "Pay & Confirm",
         "currencyType": "Currency type",
-        "bankAccount": "Bank Account"
+        "bankAccount": "Bank Account",
+        "cryptoAccount": "Crypto Account"
       },
       "noRequests": "No deposit requests found",
       "historyWillAppear": "Your deposit history will appear here"

@@ -7,8 +7,8 @@
   min-width: 0;
   min-height: calc(100vh - 126px);
   padding: 8px;
-  border: 1px solid #545454;
-  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
   background: #333333;
   box-sizing: border-box;
 }
@@ -48,8 +48,7 @@
   font-family: inherit;
   font-size: 12px;
   font-weight: 400;
-  line-height: 16px;
-  text-transform: capitalize;
+  line-height: 1.2;
   white-space: nowrap;
   cursor: pointer;
 }

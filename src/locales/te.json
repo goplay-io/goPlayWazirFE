@@ -650,7 +650,8 @@
         "amount": "మొత్తం",
         "payConfirm": "చెల్లించండి & నిర్ధారించండి",
         "currencyType": "కరెన్సీ రకం",
-        "bankAccount": "బ్యాంక్ ఖాతా"
+        "bankAccount": "బ్యాంక్ ఖాతా",
+        "cryptoAccount": "క్రిప్టో ఖాతా"
       },
       "noRequests": "డిపాజిట్ అభ్యర్థనలు ఏవీ కనుగొనబడలేదు",
       "historyWillAppear": "మీ డిపాజిట్ చరిత్ర ఇక్కడ కనిపిస్తుంది"

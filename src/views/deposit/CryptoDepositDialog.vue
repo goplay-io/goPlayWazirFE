@@ -72,7 +72,7 @@
                     {{ t('wallet.deposit.noCryptoAccounts') }}
                   </div>
                   <div class="deposit-field-wrap">
-                    <v-text-field v-model="depositAmount" :label="t('wallet.deposit.enterAmount')" type="number" step="0.01" min="1"
+                    <v-text-field v-model="depositAmount" type="number" step="0.01" min="1"
                       variant="outlined" density="comfortable" hide-details :loading="submitting"
                       rounded="lg" :disabled="submitting" ref="amountField" color="primary"
                       base-color="theme-text" bg-color="theme-surface" placeholder="0.00">
@@ -996,6 +996,6 @@ const confirmSubmit = async () => {
 }
 
 .dialog-title-icon {
-  color: var(--color-nav) !important;
+  color: #171716 !important;
 }
 </style>

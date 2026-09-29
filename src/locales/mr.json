@@ -650,7 +650,8 @@
         "amount": "रक्कम",
         "payConfirm": "पैसे द्या आणि पुष्टी करा",
         "currencyType": "चलन प्रकार",
-        "bankAccount": "बँक खाते"
+        "bankAccount": "बँक खाते",
+        "cryptoAccount": "क्रिप्टो खाते"
       },
       "noRequests": "कोणत्याही ठेव विनंत्या आढळल्या नाहीत",
       "historyWillAppear": "तुमचा ठेव इतिहास येथे दिसेल"

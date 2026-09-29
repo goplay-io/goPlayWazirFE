@@ -650,7 +650,8 @@
         "amount": "தொகை",
         "payConfirm": "பணம் செலுத்தி உறுதிப்படுத்தவும்",
         "currencyType": "நாணய வகை",
-        "bankAccount": "வங்கி கணக்கு"
+        "bankAccount": "வங்கி கணக்கு",
+        "cryptoAccount": "கிரிப்டோ கணக்கு"
       },
       "noRequests": "டெபாசிட் கோரிக்கைகள் எதுவும் இல்லை",
       "historyWillAppear": "உங்கள் வைப்பு வரலாறு இங்கே தோன்றும்"

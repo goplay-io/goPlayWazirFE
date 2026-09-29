@@ -650,7 +650,8 @@
         "amount": "રકમ",
         "payConfirm": "ચૂકવણી કરો અને પુષ્ટિ કરો",
         "currencyType": "ચલણ પ્રકાર",
-        "bankAccount": "બેંક ખાતું"
+        "bankAccount": "બેંક ખાતું",
+        "cryptoAccount": "ક્રિપ્ટો ખાતું"
       },
       "noRequests": "કોઈ ડિપોઝિટ વિનંતીઓ મળી નથી",
       "historyWillAppear": "તમારો ડિપોઝિટ ઇતિહાસ અહીં દેખાશે"

@@ -650,7 +650,8 @@
         "amount": "मात्रा",
         "payConfirm": "भुगतान करें और पुष्टि करें",
         "currencyType": "मुद्रा प्रकार",
-        "bankAccount": "बैंक खाता"
+        "bankAccount": "बैंक खाता",
+        "cryptoAccount": "क्रिप्टो खाता"
       },
       "noRequests": "कोई जमा अनुरोध नहीं मिला",
       "historyWillAppear": "आपका जमा इतिहास यहां दिखाई देगा"

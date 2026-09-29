@@ -198,7 +198,7 @@ watch(carouselProviders, () => {
   }
 
   .home-provider-carousel__track {
-    padding-top: 2px;
+    padding-top: 0;
     padding-left: 0;
   }
 }
