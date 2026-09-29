@@ -14,38 +14,41 @@
       />
 
       <div
-        class="guest-toolbar-row tw-flex tw-items-center tw-w-full tw-min-h-[39px] tw-h-[54px] md:tw-min-h-[90px] md:tw-h-[90px] tw-shrink-0">
-        <div class="guest-toolbar-left tw-inline-flex tw-items-center tw-gap-0 tw-flex-none md:tw-gap-3">
-        <router-link v-if="isCasinoPage && authStore.isUiAuthenticated" to="/sports/live"
-          class="guest-mobile-menu-btn guest-mobile-home-btn md:tw-hidden"
-          :aria-label="t('components.mobileBottomNav.live')">
-          <v-icon size="24">mdi-home</v-icon>
-        </router-link>
-        <button v-else type="button" class="guest-mobile-menu-btn md:tw-hidden" :aria-label="t('common.menu')"
-          @click="uiStore.toggleSidebar()">
-          <img
-            src="/svg/burger-menu.png"
-            alt=""
-            class="guest-mobile-menu-btn__icon"
-            width="12"
-            height="14"
-          />
-        </button>
+        class="guest-toolbar-row tw-flex tw-items-center tw-w-full tw-min-h-[39px] tw-h-[54px] md:tw-min-h-[90px] md:tw-h-[90px] tw-shrink-0"
+        :class="{ 'guest-toolbar-row--guest-desktop': !isMobile && !authStore.isDemoUser && !isAuthPage }"
+      >
+        <!-- Block 1: Logo (+ mobile menu) -->
+        <div class="guest-header-block guest-header-block--logo">
+          <router-link v-if="isCasinoPage && authStore.isUiAuthenticated" to="/sports/live"
+            class="guest-mobile-menu-btn guest-mobile-home-btn md:tw-hidden"
+            :aria-label="t('components.mobileBottomNav.live')">
+            <v-icon size="24">mdi-home</v-icon>
+          </router-link>
+          <button v-else type="button" class="guest-mobile-menu-btn md:tw-hidden" :aria-label="t('common.menu')"
+            @click="uiStore.toggleSidebar()">
+            <img
+              src="/svg/burger-menu.png"
+              alt=""
+              class="guest-mobile-menu-btn__icon"
+              width="12"
+              height="14"
+            />
+          </button>
 
-        <HeaderBrandLink
-          class="guest-header-brand"
-          :alt="t('components.guestLayout.logoAlt')"
-        />
+          <HeaderBrandLink
+            class="guest-header-brand"
+            :alt="t('components.guestLayout.logoAlt')"
+          />
         </div>
 
-        <!-- Desktop center search (reference layout) -->
+        <!-- Block 2: Desktop search -->
         <div
           v-if="!isMobile && !isAuthPage"
-          class="header-desktop-search-slot tw-hidden md:tw-flex tw-flex-1 tw-justify-center tw-min-w-0 tw-px-2"
+          class="guest-header-block guest-header-block--search"
         >
           <div
             ref="desktopInlineSearchRoot"
-            class="header-desktop-search tw-relative tw-flex tw-items-center tw-w-full tw-max-w-[450px]"
+            class="header-desktop-search tw-relative tw-flex tw-items-center tw-w-full"
           >
             <SearchMagnify :size="15" :stroke-width="2" class="header-desktop-search__icon" />
             <input
@@ -72,9 +75,19 @@
           </div>
         </div>
 
-        <!-- Right: wallet (demo) → profile / auth -->
+        <!-- Block 3: Date/time (guest desktop only — equal gap sibling) -->
         <div
-          class="guest-toolbar-right tw-flex tw-items-center tw-justify-end tw-min-w-0 tw-gap-1 md:tw-gap-2 tw-ml-auto">
+          v-if="!isMobile && !authStore.isDemoUser && !isAuthPage"
+          class="guest-header-block guest-header-block--datetime"
+        >
+          <div class="header-desktop-datetime">
+            <div class="header-desktop-datetime__date">{{ formattedHeaderDate }}</div>
+            <span class="header-desktop-datetime__time">{{ formattedHeaderTime }}</span>
+          </div>
+        </div>
+
+        <!-- Block 4: Auth / demo / mobile actions (right end) -->
+        <div class="guest-header-block guest-header-block--auth guest-toolbar-right tw-flex tw-items-center tw-justify-end tw-min-w-0">
           <button
             v-if="isMobile && (authStore.isUiAuthenticated || authStore.isDemoUser) && !isAuthPage"
             type="button"
@@ -118,37 +131,32 @@
             </div>
           </template>
 
-          <!-- Pure guest: WazirWin reference auth actions -->
+          <!-- Pure guest auth actions -->
           <template v-else>
-            <div v-if="!isMobile" class="guest-desktop-auth-cluster tw-flex tw-items-center tw-gap-2 tw-shrink-0">
-              <div class="header-desktop-datetime">
-                <div class="header-desktop-datetime__date">{{ formattedHeaderDate }}</div>
-                <span class="header-desktop-datetime__time">{{ formattedHeaderTime }}</span>
-              </div>
-              <div class="guest-desktop-auth-actions tw-flex tw-items-center tw-gap-1">
-                <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--login" @click="handleGuestLoginClick">
-                  <v-icon size="17" class="guest-ref-auth-btn__icon">mdi-login</v-icon>
-                  <span>{{ t('components.mobileBottomNav.login') }}</span>
-                </button>
-                <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--register" @click="handleGuestSignupClick">
-                  <v-icon size="16" class="guest-ref-auth-btn__icon">mdi-account-plus-outline</v-icon>
-                  <span>{{ t('auth.login.registerCta') }}</span>
-                </button>
-                <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--get-id" @click="handleGuestGetIdClick">
-                  <v-icon size="17" class="guest-ref-auth-btn__icon">mdi-login</v-icon>
-                  <span>{{ t('auth.login.getIdCta') }}</span>
-                </button>
-                <button
-                  type="button"
-                  class="header-ref-lang-btn"
-                  :aria-label="t('components.sidebar.selectlanguage')"
-                  @click="openHeaderLanguageModal"
-                >
-                  <v-icon size="16" class="header-ref-lang-btn__globe">mdi-earth</v-icon>
-                  <v-icon size="14" class="header-ref-lang-btn__chevron">mdi-chevron-down</v-icon>
-                </button>
-              </div>
+            <div v-if="!isMobile" class="guest-desktop-auth-actions tw-flex tw-items-center tw-gap-1">
+              <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--login" @click="handleGuestLoginClick">
+                <v-icon size="17" class="guest-ref-auth-btn__icon">mdi-login</v-icon>
+                <span>{{ t('components.mobileBottomNav.login') }}</span>
+              </button>
+              <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--register" @click="handleGuestSignupClick">
+                <v-icon size="16" class="guest-ref-auth-btn__icon">mdi-account-plus-outline</v-icon>
+                <span>{{ t('auth.login.registerCta') }}</span>
+              </button>
+              <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--get-id" @click="handleGuestGetIdClick">
+                <v-icon size="17" class="guest-ref-auth-btn__icon">mdi-login</v-icon>
+                <span>{{ t('auth.login.getIdCta') }}</span>
+              </button>
             </div>
+            <button
+              v-if="!isMobile"
+              type="button"
+              class="header-ref-lang-btn"
+              :aria-label="t('components.sidebar.selectlanguage')"
+              @click="openHeaderLanguageModal"
+            >
+              <v-icon size="16" class="header-ref-lang-btn__globe">mdi-earth</v-icon>
+              <v-icon size="14" class="header-ref-lang-btn__chevron">mdi-chevron-down</v-icon>
+            </button>
             <div v-else class="guest-auth-pair tw-inline-flex tw-items-center">
               <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--login guest-ref-auth-btn--mobile" @click="handleGuestLoginClick">
                 <span>{{ t('components.mobileBottomNav.login') }}</span>
@@ -1301,6 +1309,29 @@ useAppBarHeightObserver(guestAppBarRef)
     background: var(--color-header-bg-gradient, var(--color-header-bg, #360952));
     gap: 4px;
     align-items: center;
+    justify-content: space-between;
+  }
+
+  /* 4 equal-gap blocks: logo | search | datetime | auth+lang */
+  .guest-toolbar-row--guest-desktop {
+    justify-content: space-between;
+    gap: 4px;
+  }
+
+  .guest-header-block {
+    display: flex;
+    align-items: center;
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+
+  .guest-header-block--logo {
+    flex: 0 0 auto;
+    width: auto;
+    max-width: 330px;
+    justify-content: flex-start;
+    /* Inset to left sidebar start (page pad − header pad) */
+    margin-left: calc(var(--layout-page-pad-lg, 48px) - 16px);
   }
 
   .guest-header-brand {
@@ -1308,24 +1339,74 @@ useAppBarHeightObserver(guestAppBarRef)
     flex: none;
     display: inline-flex;
     align-items: center;
+    width: auto;
+    max-width: 100%;
   }
 
   .guest-header-brand :deep(.header-brand-img) {
     height: 58px;
     width: auto;
-    max-width: 240px;
+    max-width: 280px;
     object-fit: contain;
+    object-position: left center;
   }
 
-  .guest-desktop-auth-cluster {
+  /* Reference: flex-grow search-box max-w-96 */
+  .guest-header-block--search {
+    flex: 1 1 auto;
+    flex-grow: 1;
+    max-width: 24rem;
+    min-width: 0;
+  }
+
+  .guest-header-block--search .header-desktop-search {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .guest-header-block--datetime {
+    flex: 0 1 auto;
+    flex-shrink: 0;
+  }
+
+  /* Flush right end; lang has 8px after auth buttons (reference ml-2) */
+  .guest-header-block--auth {
     gap: 8px;
-    align-items: center;
+    flex: 0 1 auto;
+    flex-shrink: 0;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .guest-toolbar-right {
-    gap: 0;
+    gap: 8px;
+    flex: 0 1 auto;
     flex-shrink: 0;
     align-items: center;
+    margin-left: 0;
+  }
+
+  .guest-desktop-auth-actions {
+    gap: 4px;
+  }
+
+  .guest-desktop-auth-actions + .header-ref-lang-btn,
+  .guest-header-block--auth .header-ref-lang-btn {
+    margin-left: 0;
+  }
+
+  .header-desktop-search-slot {
+    flex: 1 1 auto;
+    flex-grow: 1;
+    justify-content: flex-start;
+    padding: 0;
+    max-width: 24rem;
+    min-width: 0;
+  }
+
+  .header-desktop-search-slot .header-desktop-search {
+    width: 100%;
+    max-width: 100%;
   }
 
   .header-logo-slot {
@@ -1340,23 +1421,16 @@ useAppBarHeightObserver(guestAppBarRef)
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
   }
-
-  /* Force demo wallet/user cluster area to black like reference header row */
-  /* .guest-demo-user-cluster {
-    background: #000000 !important;
-  } */
-
-  /* .guest-demo-user-cluster .guest-header-wallet-desktop,
-  .guest-demo-user-cluster :deep(.wallet-info-root),
-  .guest-demo-user-cluster :deep(.wallet-info-root--desktop) {
-    background: #000000 !important;
-  } */
 }
 
 @media (min-width: 1280px) {
   .guest-toolbar-row {
     padding-left: 16px;
     padding-right: 16px;
+  }
+
+  .guest-toolbar-row--guest-desktop .guest-header-block--logo {
+    margin-left: calc(var(--layout-page-pad-xl, 80px) - 16px);
   }
 
   .guest-ref-auth-btn--register {
@@ -1367,6 +1441,12 @@ useAppBarHeightObserver(guestAppBarRef)
 
   .guest-ref-auth-btn--register .guest-ref-auth-btn__icon {
     color: var(--color-wazir-green, #49915e) !important;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .guest-toolbar-row--guest-desktop .guest-header-block--logo {
+    margin-left: calc(var(--layout-page-pad-lg, 48px) - 16px);
   }
 }
 
