@@ -9,99 +9,179 @@
         @dismiss="dismissAnnouncementStrip"
       />
 
-      <!-- Primary toolbar row -->
+      <!--
+        Desktop auth: 6 blocks with equal gaps (reference header_body):
+        1 logo | 2 search | 3 datetime | 4 balance | 5 deposit+withdraw | 6 account+lang
+      -->
       <div
-        class="header-toolbar-row tw-flex tw-items-center tw-w-full tw-min-h-[41px] tw-h-[54px] md:tw-min-h-[90px] md:tw-h-[90px] tw-shrink-0">
-        <div class="header-toolbar-left tw-inline-flex tw-items-center tw-gap-0 tw-flex-none md:tw-gap-3">
-        <router-link
-          v-if="isCasinoPage && authStore.isUiAuthenticated"
-          to="/sports/live"
-          class="header-mobile-menu-btn header-mobile-home-btn md:tw-hidden"
-          :aria-label="t('components.mobileBottomNav.live')"
-        >
-          <v-icon size="24">mdi-home</v-icon>
-        </router-link>
-        <button
-          v-else
-          type="button"
-          class="header-mobile-menu-btn md:tw-hidden"
-          :aria-label="t('common.menu')"
-          @click="emit('toggle-drawer')"
-        >
-          <img
-            src="/svg/burger-menu.png"
-            alt=""
-            class="header-mobile-menu-btn__icon"
-            width="12"
-            height="14"
-          />
-        </button>
-
-        <!-- Left side - Logo + desktop tools -->
-        <div class="header-logo-area tw-flex tw-items-center md:tw-ml-4">
-          <HeaderBrandLink :alt="t('components.header.logoAlt')" />
-
-          <!-- Desktop logged-in: icons removed per design -->
-        </div>
-        </div>
-
-        <!-- Desktop center search (logged-in reference layout) -->
-        <div
-          v-if="authStore.isUiAuthenticated && !isMobile"
-          class="header-desktop-search-slot tw-hidden md:tw-flex tw-flex-1 tw-justify-center tw-min-w-0 tw-px-2"
-        >
-          <div
-            ref="desktopInlineSearchRoot"
-            class="header-desktop-search tw-relative tw-flex tw-items-center tw-w-full tw-max-w-[450px]"
+        class="header-toolbar-row tw-flex tw-items-center tw-w-full tw-min-h-[41px] tw-h-[54px] md:tw-min-h-[90px] md:tw-h-[90px] tw-shrink-0"
+        :class="{ 'header-toolbar-row--auth-desktop': authStore.isUiAuthenticated && !isMobile }"
+      >
+        <!-- Block 1: Logo (+ mobile menu) -->
+        <div class="header-block header-block--logo">
+          <router-link
+            v-if="isCasinoPage && authStore.isUiAuthenticated"
+            to="/sports/live"
+            class="header-mobile-menu-btn header-mobile-home-btn md:tw-hidden"
+            :aria-label="t('components.mobileBottomNav.live')"
           >
-            <SearchMagnify :size="15" :stroke-width="2" class="header-desktop-search__icon" />
-            <input
-              ref="headerSearchInput"
-              v-model="inlineSearchQuery"
-              type="text"
-              :placeholder="t('components.searchDialog.desktopPlaceholder')"
-              class="header-desktop-search__input tw-flex-1 tw-min-w-0 tw-bg-transparent tw-border-0 tw-outline-none"
-              @focus="ensureInlineSearchData"
-              @keydown.enter.prevent="submitInlineSearch"
+            <v-icon size="24">mdi-home</v-icon>
+          </router-link>
+          <button
+            v-else
+            type="button"
+            class="header-mobile-menu-btn md:tw-hidden"
+            :aria-label="t('common.menu')"
+            @click="emit('toggle-drawer')"
+          >
+            <img
+              src="/svg/burger-menu.png"
+              alt=""
+              class="header-mobile-menu-btn__icon"
+              width="12"
+              height="14"
             />
-            <div v-if="showSearchDropdown" class="header-search-dropdown header-search-dropdown--desktop">
-              <div class="header-search-dropdown__body">
-                <SearchResults
-                  :search-query="debouncedSearchQuery"
-                  :loading="searchLoading"
-                  :error="searchError"
-                  :casino-games="casinoGames"
-                  @event-selected="handleInlineEventSelected"
-                  @game-selected="handleInlineGameSelected"
-                />
-              </div>
-            </div>
+          </button>
+          <div class="header-logo-area tw-flex tw-items-center">
+            <HeaderBrandLink :alt="t('components.header.logoAlt')" />
           </div>
         </div>
 
-        <!-- Right cluster: nav links → tools → wallet (grouped + separated for scanability) -->
+        <!-- Desktop authenticated: blocks 2–6 as siblings -->
+        <template v-if="authStore.isUiAuthenticated && !isMobile">
+          <!-- Block 2: Search -->
+          <div class="header-block header-block--search">
+            <div
+              ref="desktopInlineSearchRoot"
+              class="header-desktop-search tw-relative tw-flex tw-items-center tw-w-full"
+            >
+              <SearchMagnify :size="15" :stroke-width="2" class="header-desktop-search__icon" />
+              <input
+                ref="headerSearchInput"
+                v-model="inlineSearchQuery"
+                type="text"
+                :placeholder="t('components.searchDialog.desktopPlaceholder')"
+                class="header-desktop-search__input tw-flex-1 tw-min-w-0 tw-bg-transparent tw-border-0 tw-outline-none"
+                @focus="ensureInlineSearchData"
+                @keydown.enter.prevent="submitInlineSearch"
+              />
+              <div v-if="showSearchDropdown" class="header-search-dropdown header-search-dropdown--desktop">
+                <div class="header-search-dropdown__body">
+                  <SearchResults
+                    :search-query="debouncedSearchQuery"
+                    :loading="searchLoading"
+                    :error="searchError"
+                    :casino-games="casinoGames"
+                    @event-selected="handleInlineEventSelected"
+                    @game-selected="handleInlineGameSelected"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Block 3: Date / time -->
+          <div class="header-block header-block--datetime">
+            <div class="header-desktop-datetime">
+              <div class="header-desktop-datetime__date">{{ formattedHeaderDate }}</div>
+              <span class="header-desktop-datetime__time">{{ formattedHeaderTime }}</span>
+            </div>
+          </div>
+
+          <!-- Block 4: Balance -->
+          <div class="header-block header-block--wallet">
+            <div class="header-desktop-wallet">
+              <div class="header-desktop-wallet__lines">
+                <span>
+                  <span class="header-desktop-wallet__label">{{ t('header.user.walletSummary.balance') }}:</span>
+                  {{ formattedBalance }}
+                </span>
+                <span
+                  class="header-desktop-wallet__exp"
+                  role="button"
+                  tabindex="0"
+                  @click="openModal"
+                  @keydown.enter.prevent="openModal"
+                  @keydown.space.prevent="openModal"
+                >
+                  <span class="header-desktop-wallet__label">{{ t('header.user.walletSummary.exposure') }}:</span>
+                  {{ formattedExposure }}
+                </span>
+              </div>
+              <v-menu
+                location="bottom end"
+                :z-index="4000"
+                :open-on-hover="true"
+                :open-delay="150"
+                :close-delay="250"
+                :close-on-content-click="false"
+                transition="scale-transition"
+              >
+                <template #activator="{ props: menuProps }">
+                  <button
+                    type="button"
+                    class="header-desktop-wallet__info"
+                    v-bind="menuProps"
+                    :aria-label="t('components.walletInfo.balanceBreakdown')"
+                  >
+                    <v-icon size="16">mdi-information-outline</v-icon>
+                  </button>
+                </template>
+                <div class="balance-info-popup">
+                  <div class="balance-info-popup__row">
+                    <span class="balance-info-popup__label">{{ t('components.walletInfo.cashable') }}</span>
+                    <span class="balance-info-popup__value">{{ formattedCashableBreakdown }}</span>
+                  </div>
+                  <div class="balance-info-popup__row">
+                    <span class="balance-info-popup__label">{{ t('components.walletInfo.non-cashable') }}</span>
+                    <span class="balance-info-popup__value">{{ formattedNonCashableBreakdown }}</span>
+                  </div>
+                </div>
+              </v-menu>
+            </div>
+          </div>
+
+          <!-- Block 5: Deposit + Withdraw -->
+          <div class="header-block header-block--pay">
+            <router-link to="/deposit" class="header-ref-pay-btn header-ref-pay-btn--deposit">
+              <img src="/svg/header-deposit-icon.svg" alt="" class="header-ref-pay-btn__icon" width="21" height="19" />
+              <span>{{ t('wallet.deposit.title') }}</span>
+            </router-link>
+            <router-link to="/withdrawal" class="header-ref-pay-btn header-ref-pay-btn--withdraw">
+              <img src="/svg/header-withdraw-icon.svg" alt="" class="header-ref-pay-btn__icon" width="21" height="19" />
+              <span>{{ t('wallet.withdrawal.title') }}</span>
+            </router-link>
+          </div>
+
+          <!-- Block 6: Account + Language -->
+          <div class="header-block header-block--account">
+            <button
+              type="button"
+              class="header-ref-account-btn"
+              :aria-label="t('components.mobileBottomNav.account')"
+              @click="userMenuOpen = true"
+            >
+              <v-icon size="18">mdi-account-circle</v-icon>
+              <span>{{ t('components.mobileBottomNav.account') }}</span>
+            </button>
+            <button
+              type="button"
+              class="header-ref-lang-btn"
+              :aria-label="t('components.sidebar.selectlanguage')"
+              @click="openHeaderLanguageModal"
+            >
+              <v-icon size="16" class="header-ref-lang-btn__globe">mdi-earth</v-icon>
+              <v-icon size="14" class="header-ref-lang-btn__chevron">mdi-chevron-down</v-icon>
+            </button>
+          </div>
+        </template>
+
+        <!-- Guest / mobile right cluster (unchanged flow) -->
         <div
-          class="header-toolbar-right tw-flex tw-items-center tw-justify-end tw-min-w-0 tw-gap-1 sm:tw-gap-1.5 md:tw-gap-2 tw-ml-auto tw-mr-0">
-
-          <!-- Deposit / Withdraw (logged-in + demo; desktop only — hidden on bet pages) -->
-          <!-- <template v-if="authStore.isUiAuthenticated && !isMobile && !isBetPage">
-            <router-link to="/deposit" class="header-wallet-action-btn header-wallet-action-btn--deposit">
-              <BankDepositIcon :size="14" color="#ffffff" class="header-wallet-action-btn__icon" />
-              <span class="header-wallet-action-btn__label">{{ t('wallet.deposit.title') }}</span>
-            </router-link>
-            <router-link to="/withdrawal" class="header-wallet-action-btn header-wallet-action-btn--withdraw">
-              <WalletIcon :size="14" color="#ffffff" class="header-wallet-action-btn__icon" />
-              <span class="header-wallet-action-btn__label">{{ t('wallet.withdrawal.title') }}</span>
-            </router-link>
-          </template> -->
-
-          <!-- Rules Link -->
-          <!-- <router-link v-if="!authStore.isDemoUser" to="/rules"
-            class="header-rules-btn tw-hidden md:tw-inline-flex tw-items-center tw-no-underline tw-whitespace-nowrap tw-shrink-0">
-            {{ t('components.mobileBottomNav.rules') }}
-          </router-link> -->
-
-          <!-- Guest auth (reference Header.tsx mobile: Login / Sign Up / Get ID) -->
+          v-else
+          class="header-toolbar-right tw-flex tw-items-center tw-justify-end tw-min-w-0 tw-flex-none tw-ml-auto"
+        >
+          <!-- Guest auth -->
           <template v-if="!authStore.isUiAuthenticated">
             <div v-if="!isMobile" class="guest-desktop-auth-actions tw-flex tw-items-center tw-gap-1">
               <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--login" @click="handleGuestLoginClick">
@@ -139,138 +219,46 @@
             </div>
           </template>
 
-          <!-- Authenticated (real + full demo) -->
-          <template v-else>
-            <!-- Desktop: reference layout (search center, datetime, balance, deposit/withdraw, account) -->
-            <div v-if="!isMobile" class="header-desktop-auth-cluster tw-flex tw-items-center tw-shrink-0">
-              <div class="header-desktop-datetime">
-                <div class="header-desktop-datetime__date">{{ formattedHeaderDate }}</div>
-                <span class="header-desktop-datetime__time">{{ formattedHeaderTime }}</span>
-              </div>
+          <!-- Authenticated mobile -->
+          <div v-else class="header-mobile-auth-cluster">
+            <button
+              type="button"
+              class="header-mobile-search-btn"
+              :aria-label="t('common.search')"
+              @click="openInlineSearch"
+            >
+              <SearchMagnify :size="22" :stroke-width="2" class="header-mobile-search-btn__icon" />
+            </button>
 
-              <div class="header-desktop-wallet">
-                <div class="header-desktop-wallet__lines">
-                  <span>
-                    <span class="header-desktop-wallet__label">{{ t('header.user.walletSummary.balance') }}:</span>
-                    {{ formattedBalance }}
-                  </span>
-                  <span
-                    class="header-desktop-wallet__exp"
-                    role="button"
-                    tabindex="0"
-                    @click="openModal"
-                    @keydown.enter.prevent="openModal"
-                    @keydown.space.prevent="openModal"
-                  >
-                    <span class="header-desktop-wallet__label">{{ t('header.user.walletSummary.exposure') }}:</span>
-                    {{ formattedExposure }}
-                  </span>
+            <div class="header-mobile-wallet-pill">
+              <div class="header-mobile-wallet-pill__lines">
+                <div class="header-mobile-wallet-pill__row">
+                  {{ t('components.walletInfo.balanceShort') }}:
+                  <span>{{ formattedBalance }}</span>
                 </div>
-                <v-menu
-                  location="bottom end"
-                  :z-index="4000"
-                  :open-on-hover="true"
-                  :open-delay="150"
-                  :close-delay="250"
-                  :close-on-content-click="false"
-                  transition="scale-transition"
+                <div
+                  class="header-mobile-wallet-pill__row header-mobile-wallet-pill__row--exp"
+                  role="button"
+                  tabindex="0"
+                  @click="openModal"
+                  @keydown.enter.prevent="openModal"
+                  @keydown.space.prevent="openModal"
                 >
-                  <template #activator="{ props: menuProps }">
-                    <button
-                      type="button"
-                      class="header-desktop-wallet__info"
-                      v-bind="menuProps"
-                      :aria-label="t('components.walletInfo.balanceBreakdown')"
-                    >
-                      <v-icon size="16">mdi-information-outline</v-icon>
-                    </button>
-                  </template>
-                  <div class="balance-info-popup">
-                    <div class="balance-info-popup__row">
-                      <span class="balance-info-popup__label">{{ t('components.walletInfo.cashable') }}</span>
-                      <span class="balance-info-popup__value">{{ formattedCashableBreakdown }}</span>
-                    </div>
-                    <div class="balance-info-popup__row">
-                      <span class="balance-info-popup__label">{{ t('components.walletInfo.non-cashable') }}</span>
-                      <span class="balance-info-popup__value">{{ formattedNonCashableBreakdown }}</span>
-                    </div>
-                  </div>
-                </v-menu>
-              </div>
-
-              <div class="header-desktop-pay-actions">
-                <router-link to="/deposit" class="header-ref-pay-btn header-ref-pay-btn--deposit">
-                  <img src="/svg/header-deposit-icon.svg" alt="" class="header-ref-pay-btn__icon" width="21" height="19" />
-                  <span>{{ t('wallet.deposit.title') }}</span>
-                </router-link>
-                <router-link to="/withdrawal" class="header-ref-pay-btn header-ref-pay-btn--withdraw">
-                  <img src="/svg/header-withdraw-icon.svg" alt="" class="header-ref-pay-btn__icon" width="21" height="19" />
-                  <span>{{ t('wallet.withdrawal.title') }}</span>
-                </router-link>
-              </div>
-
-              <button
-                type="button"
-                class="header-ref-account-btn"
-                :aria-label="t('components.mobileBottomNav.account')"
-                @click="userMenuOpen = true"
-              >
-                <v-icon size="18">mdi-cog-outline</v-icon>
-                <span>{{ t('components.mobileBottomNav.account') }}</span>
-              </button>
-
-              <button
-                type="button"
-                class="header-ref-lang-btn"
-                :aria-label="t('components.sidebar.selectlanguage')"
-                @click="openHeaderLanguageModal"
-              >
-                <v-icon size="16" class="header-ref-lang-btn__globe">mdi-earth</v-icon>
-                <v-icon size="14" class="header-ref-lang-btn__chevron">mdi-chevron-down</v-icon>
-              </button>
-            </div>
-
-            <!-- Mobile: reference search + wallet pill + account icon -->
-            <div v-else class="header-mobile-auth-cluster">
-              <button
-                type="button"
-                class="header-mobile-search-btn"
-                :aria-label="t('common.search')"
-                @click="openInlineSearch"
-              >
-                <SearchMagnify :size="22" :stroke-width="2" class="header-mobile-search-btn__icon" />
-              </button>
-
-              <div class="header-mobile-wallet-pill">
-                <div class="header-mobile-wallet-pill__lines">
-                  <div class="header-mobile-wallet-pill__row">
-                    {{ t('components.walletInfo.balanceShort') }}:
-                    <span>{{ formattedBalance }}</span>
-                  </div>
-                  <div
-                    class="header-mobile-wallet-pill__row header-mobile-wallet-pill__row--exp"
-                    role="button"
-                    tabindex="0"
-                    @click="openModal"
-                    @keydown.enter.prevent="openModal"
-                    @keydown.space.prevent="openModal"
-                  >
-                    {{ t('components.walletInfo.exposureShort') }}:
-                    <span>{{ formattedExposure }}</span>
-                  </div>
+                  {{ t('components.walletInfo.exposureShort') }}:
+                  <span>{{ formattedExposure }}</span>
                 </div>
               </div>
-
-              <button
-                type="button"
-                class="header-mobile-user-btn"
-                :aria-label="userName"
-                @click="userMenuOpen = true"
-              >
-                <v-icon size="20">mdi-account-circle</v-icon>
-              </button>
             </div>
-          </template>
+
+            <button
+              type="button"
+              class="header-mobile-user-btn"
+              :aria-label="userName"
+              @click="userMenuOpen = true"
+            >
+              <v-icon size="20">mdi-account-circle</v-icon>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -2075,6 +2063,47 @@ button.header-announce-search.search-icon-btn:hover {
     box-sizing: border-box;
     gap: 4px;
     align-items: center;
+    justify-content: space-between;
+  }
+
+  /*
+   * Reference header_body: justify-between + gap-1 (4px) + md:px-4.
+   * Search flex-grows up to max-w-96; leftover width becomes equal gaps.
+   * Last block sits at the right end (16px from edge).
+   */
+  .header-toolbar-row--auth-desktop {
+    justify-content: space-between;
+    gap: 4px;
+  }
+
+  .header-block {
+    display: flex;
+    align-items: center;
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+
+  .header-block--logo {
+    gap: 0;
+    flex: 0 0 auto;
+    width: auto;
+    max-width: 330px;
+    justify-content: flex-start;
+    margin-left: 0;
+  }
+
+  .header-block--logo .header-logo-area,
+  .header-block--logo .header-brand-link {
+    width: auto;
+    max-width: 100%;
+  }
+
+  .header-block--logo :deep(.header-brand-img) {
+    height: 58px;
+    width: auto;
+    max-width: 280px;
+    object-fit: contain;
+    object-position: left center;
   }
 
   .header-logo-area {
@@ -2085,20 +2114,49 @@ button.header-announce-search.search-icon-btn:hover {
     margin-left: 0 !important;
   }
 
+  /* Reference: flex-grow search-box max-w-96 */
+  .header-block--search {
+    flex: 1 1 auto;
+    flex-grow: 1;
+    max-width: 24rem;
+    min-width: 0;
+  }
+
+  .header-block--search .header-desktop-search {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .header-block--datetime,
+  .header-block--wallet {
+    flex: 0 1 auto;
+    flex-shrink: 0;
+  }
+
+  .header-block--pay {
+    gap: 4px;
+    flex: 0 1 auto;
+    flex-shrink: 0;
+  }
+
+  /* Flush to right end; lang sits 8px after account (reference ml-2) */
+  .header-block--account {
+    gap: 8px;
+    flex: 0 1 auto;
+    flex-shrink: 0;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .header-block--account .header-ref-lang-btn {
+    margin-left: 0;
+  }
+
   .header-toolbar-right {
     margin-right: 0 !important;
     gap: 0 !important;
-    flex-shrink: 0;
+    flex: 0 0 auto;
     align-items: center;
-  }
-
-  .header-desktop-auth-cluster {
-    gap: 8px;
-    align-items: center;
-  }
-
-  .header-desktop-auth-cluster .header-ref-lang-btn {
-    margin-left: 0;
   }
 
   .guest-desktop-auth-actions {
@@ -2108,11 +2166,6 @@ button.header-announce-search.search-icon-btn:hover {
 
   .guest-desktop-auth-actions .header-ref-lang-btn {
     margin-left: 8px;
-  }
-
-  .header-desktop-search-slot {
-    padding-left: 8px;
-    padding-right: 8px;
   }
 
   .header-desktop-icon-btn {
@@ -2242,16 +2295,40 @@ button.header-announce-search.search-icon-btn:hover {
   .header-brand-link :deep(.header-brand-img) {
     height: 58px;
     width: auto;
-    max-width: 240px;
+    max-width: 330px;
     object-fit: contain;
+    object-position: left center;
   }
 
 }
 
+/* Logo inset — match GuestLayout logout header (toolbar pad = page pad) */
+@media (min-width: 1024px) {
+  .header-toolbar-row--auth-desktop {
+    padding-left: var(--layout-page-pad-lg, 48px) !important;
+    padding-right: 16px !important;
+  }
+
+  .header-toolbar-row--auth-desktop .header-block--logo,
+  .header-toolbar-row .header-block--logo {
+    margin-left: 0 !important;
+  }
+}
+
 @media (min-width: 1280px) {
   .header-toolbar-row {
-    padding-left: 80px;
-    padding-right: 80px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .header-toolbar-row--auth-desktop {
+    padding-left: var(--layout-page-pad-xl, 80px) !important;
+    padding-right: 16px !important;
+  }
+
+  .header-toolbar-row--auth-desktop .header-block--logo,
+  .header-toolbar-row .header-block--logo {
+    margin-left: 0 !important;
   }
 }
 
