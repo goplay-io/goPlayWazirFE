@@ -1119,11 +1119,32 @@ body:has(.bet-page-container--wazir-ref),
   }
 }
 
-/* Right rail — hide purple LIVE STREAM / one-click chrome borders on reference layout */
-.bet-page-container--wazir-ref .bet-slip-fixed > .tw-mb-2:first-child {
-  margin-bottom: 4px !important;
+/* Right rail — hide TV / one-click chrome; match reference slip-only sidebar */
+.bet-page-container--wazir-ref .bet-slip-fixed > .tw-mb-2 {
+  display: none !important;
 }
 
-.bet-page-container--wazir-ref .home-ref-bet-slip {
-  min-height: 0;
+.bet-page-container--wazir-ref .home-ref-bet-slip .slip-body-card--wazir-ref {
+  min-width: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.bet-page-container--wazir-ref .home-ref-bet-slip .bet-slip-vcard,
+.bet-page-container--wazir-ref .home-ref-bet-slip .bet-slip-vcard--empty,
+.bet-page-container--wazir-ref .home-ref-bet-slip .bet-slip-empty-state {
+  min-width: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  background: transparent !important;
+}
+
+.bet-page-container--wazir-ref .home-ref-bet-slip .bet-slip-open-bet-pane,
+.bet-page-container--wazir-ref .home-ref-bet-slip .bet-history-root--home-ref,
+.bet-page-container--wazir-ref .home-ref-bet-slip .home-ref-open-bets,
+.bet-page-container--wazir-ref .home-ref-bet-slip .home-ref-matched-bets,
+.bet-page-container--wazir-ref .home-ref-bet-slip .home-ref-matched-bets__header-wrap {
+  min-width: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
 }

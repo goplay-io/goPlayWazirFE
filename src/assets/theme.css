@@ -1509,6 +1509,23 @@ body:has(.layout-home-shell-bg),
     max-width: 100% !important;
   }
 
+  .layout-home-shell-bg .layout-right-rail__slip--home-ref .sports-bet-slip-root,
+  .layout-home-shell-bg .layout-right-rail__slip--home-ref .home-ref-bet-slip {
+    width: 100%;
+    min-width: 0;
+    padding: 8px;
+    border: 1px solid #545454;
+    border-radius: 8px;
+    background: #333333;
+    box-sizing: border-box;
+  }
+
+  .layout-home-shell-bg .layout-right-rail__slip--home-ref:has(.home-ref-bet-slip) {
+    padding: 0;
+    border: none;
+    background: transparent;
+  }
+
   .layout-home-shell-bg .layout-right-rail__slip--home-ref .bet-slip-tabs__group,
   .layout-home-shell-bg .layout-right-rail__slip--home-ref .bet-slip-empty-state,
   .layout-home-shell-bg .layout-right-rail__slip--home-ref .slip-body-card--desktop-selection {
