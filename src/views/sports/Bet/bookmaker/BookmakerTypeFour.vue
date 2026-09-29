@@ -167,7 +167,7 @@ const isBookmakerBetAllow = (bookmaker) =>
 
                   <div v-if="value[bookMakerIndex.status.isSuspended] == 1"
                     class="suspended-overlay tw-absolute tw-inset-0 tw-flex tw-items-center tw-justify-center tw-z-10">
-                    <span class="suspended-overlay__text">SUSPENDED</span>
+                    <span class="suspended-overlay__text">Suspended</span>
                   </div>
                 </div>
               </div>

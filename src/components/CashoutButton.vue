@@ -4,6 +4,8 @@ import { useBetStore } from '@/stores/bet';
 import useCashout, { getSpeedCashCooldownSeconds } from '@/composables/useCashout';
 import useDevices from '@/composables/useDevices';
 
+defineOptions({ inheritAttrs: false });
+
 const betStore = useBetStore();
 const { isMobile } = useDevices();
 const {
@@ -267,7 +269,7 @@ const confirmSpeedCash = async () => {
 </script>
 
 <template>
-  <div v-if="shouldRender" ref="rootEl" class="tw-flex tw-gap-1">
+  <div v-if="shouldRender" ref="rootEl" class="tw-flex tw-gap-1" v-bind="$attrs">
     <v-btn
       v-if="showSpeedCashButton"
       :size="isMobile ? 'x-small' : size"

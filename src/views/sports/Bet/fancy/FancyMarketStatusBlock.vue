@@ -13,8 +13,8 @@ const props = defineProps({
 });
 
 const label = computed(() => {
-    if (props.ballRunning) return 'BALL_RUNNING';
-    if (props.suspended) return 'SUSPENDED';
+    if (props.ballRunning) return 'Ball Running';
+    if (props.suspended) return 'Suspended';
     return '';
 });
 

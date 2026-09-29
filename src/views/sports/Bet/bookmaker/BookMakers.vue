@@ -164,8 +164,6 @@ provide('openRules', showRules);
       :isFavorite="isFavorite"
       :onToggleFavorite="onToggleFavorite"
       :onRunnerCppUpdate="onRunnerCppUpdate"
-      :cashoutActive="cashoutActive"
-      :speedCashoutActive="speedCashoutActive"
     />
   </template>
 
@@ -184,8 +182,6 @@ provide('openRules', showRules);
       :isFavorite="isFavorite"
       :onToggleFavorite="onToggleFavorite"
       :onRunnerCppUpdate="onRunnerCppUpdate"
-      :cashoutActive="cashoutActive"
-      :speedCashoutActive="speedCashoutActive"
     />
   </template>
 

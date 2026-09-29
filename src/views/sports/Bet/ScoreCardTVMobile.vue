@@ -45,12 +45,11 @@ const canShowPanel = computed(
 
 const showPanel = computed(() => canShowPanel.value && panelVisible.value);
 
-/** Mobile market page: open scorecard by default when score is available. */
+/** Reference mobile column shows markets under the LIVE tab, not an open score panel. */
 watch(
-  [() => props.eventId, showScoreTab],
-  () => {
-    if (!isMobile.value || !props.eventId || !showScoreTab.value) return;
-    scorecardTvStore.openPanel('score');
+  isMobile,
+  (mobile) => {
+    if (mobile) scorecardTvStore.closePanel();
   },
   { immediate: true },
 );

@@ -1,5 +1,5 @@
 <script setup>
-defineProps({
+const props = defineProps({
   size: {
     type: [String, Number],
     default: 12,
@@ -12,37 +12,46 @@ defineProps({
     type: String,
     default: 'View book',
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits(['click']);
+
+const onClick = (event) => {
+  if (props.disabled) return;
+  emit('click', event);
+};
 </script>
 
 <template>
   <button
     type="button"
-    class="book-ladder-icon tw-inline-flex tw-items-center tw-justify-center tw-shrink-0 tw-border-0 tw-bg-transparent tw-p-0 tw-cursor-pointer"
-    :title="title"
-    :aria-label="title"
+    class="book-ladder-icon tw-inline-flex tw-items-center tw-justify-center tw-shrink-0 tw-border-0 tw-bg-transparent tw-p-0"
+    :class="{ 'book-ladder-icon--disabled': disabled, 'tw-cursor-pointer': !disabled }"
+    :title="disabled ? 'Book unavailable' : title"
+    :aria-label="disabled ? 'Book unavailable' : title"
+    :aria-disabled="disabled ? 'true' : 'false'"
+    :disabled="disabled"
     :style="{ color, width: `${size}px`, height: `${size}px` }"
-    @click.stop="emit('click', $event)"
+    @click.stop="onClick"
   >
-    <!-- Heroicons table-cells outline, rotated 90° — matches zuplay.com book icon -->
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
-      viewBox="0 0 24 24"
-      stroke-width="1.5"
-      stroke="currentColor"
+      viewBox="0 0 16 16"
       class="book-ladder-icon__svg"
       :width="size"
       :height="size"
       aria-hidden="true"
     >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M9 4.5v15m6-15v15m-10.875 0h15.75c.621 0 1.125-.504 1.125-1.125V5.625c0-.621-.504-1.125-1.125-1.125H4.125C3.504 4.5 3 5.004 3 5.625v12.75c0 .621.504 1.125 1.125 1.125Z"
-      />
+      <path d="M5.21875 3.13672V13.1367" stroke="currentColor" stroke-width="1" />
+      <path d="M5.21875 5.48047H10.5312" stroke="currentColor" stroke-width="1" />
+      <path d="M5.21875 8.13672H10.5312" stroke="currentColor" stroke-width="1" />
+      <path d="M5.21875 11.1055H10.5312" stroke="currentColor" stroke-width="1" />
+      <path d="M10.5312 3.13672V13.1367" stroke="currentColor" stroke-width="1" />
     </svg>
   </button>
 </template>
@@ -57,11 +66,16 @@ const emit = defineEmits(['click']);
 .book-ladder-icon__svg {
   display: block;
   flex-shrink: 0;
-  transform: rotate(90deg);
 }
 
 .book-ladder-icon:focus-visible {
   outline: 2px solid rgba(0, 0, 0, 0.35);
   outline-offset: 1px;
+}
+
+.book-ladder-icon--disabled,
+.book-ladder-icon:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 </style>

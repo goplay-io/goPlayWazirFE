@@ -134,7 +134,8 @@ function formatQuickAmountMobile(amount) {
 }
 
 function formatQuickLabel(amount) {
-  return props.inline ? formatQuickAmountMobile(amount) : formatQuickAmount(amount);
+  if (props.inline) return `+ ${amount}`;
+  return formatQuickAmount(amount);
 }
 
 function formatLimitShort(amount) {
@@ -151,6 +152,29 @@ const slipProfit = computed(() => {
   if (!props.bet?.is_back) return stake.toFixed(2);
   const decimalOdd = usesExchangeOddsLadder(props.bet) ? odd : (odd + 100) / 100;
   return (stake * (decimalOdd - 1)).toFixed(2);
+});
+
+const slipProfitLabel = computed(() => {
+  const value = Number(slipProfit.value);
+  if (!Number.isFinite(value) || value === 0) return '0';
+  return Number.isInteger(value) ? String(value) : value.toFixed(2);
+});
+
+const referenceQuickButtons = [
+  { id: 'ref-100', amount: 100 },
+  { id: 'ref-200', amount: 200 },
+  { id: 'ref-300', amount: 300 },
+  { id: 'ref-500', amount: 500 },
+  { id: 'ref-1000', amount: 1000 },
+  { id: 'ref-2000', amount: 2000 },
+];
+
+const quickButtons = computed(() => (props.inline ? referenceQuickButtons : finalButtons.value));
+
+const slipDelayLabel = computed(() => {
+  const value = Number(props.bet?.bet_delay);
+  if (!Number.isFinite(value)) return '';
+  return `${value}s`;
 });
 
 const isButtonDisabled = () => !betAllow.value || !props.bet?.odd;
@@ -250,32 +274,35 @@ watch(() => bet_status.value, (newStatus) => {
           class="slip-odds-stake-row"
           :class="{ 'slip-odds-stake-row--mobile': inline }"
         >
-          <div v-if="inline" class="slip-odds-stepper">
-            <button
-              type="button"
-              :disabled="!canAdjustOdds || !betAllow"
-              class="slip-odds-step slip-odds-step--minus"
-              :aria-label="t('sports.home.decreaseOdds')"
-              @click="decreaseOdd"
-            >
-              −
-            </button>
-            <input
-              :value="displayOdd"
-              readonly
-              tabindex="-1"
-              class="slip-odds-input"
-              :aria-label="t('sports.home.odds')"
-            />
-            <button
-              type="button"
-              :disabled="!canAdjustOdds || !betAllow"
-              class="slip-odds-step slip-odds-step--plus"
-              :aria-label="t('sports.home.increaseOdds')"
-              @click="increaseOdd"
-            >
-              +
-            </button>
+          <div v-if="inline" class="slip-odds-field">
+            <label class="slip-field-label">{{ t('sports.home.odds') }}</label>
+            <div class="slip-odds-stepper">
+              <button
+                type="button"
+                :disabled="!canAdjustOdds || !betAllow"
+                class="slip-odds-step slip-odds-step--minus"
+                :aria-label="t('sports.home.decreaseOdds')"
+                @click="decreaseOdd"
+              >
+                −
+              </button>
+              <input
+                :value="displayOdd"
+                readonly
+                tabindex="-1"
+                class="slip-odds-input"
+                :aria-label="t('sports.home.odds')"
+              />
+              <button
+                type="button"
+                :disabled="!canAdjustOdds || !betAllow"
+                class="slip-odds-step slip-odds-step--plus"
+                :aria-label="t('sports.home.increaseOdds')"
+                @click="increaseOdd"
+              >
+                +
+              </button>
+            </div>
           </div>
           <template v-else>
             <button
@@ -304,7 +331,22 @@ watch(() => bet_status.value, (newStatus) => {
               +
             </button>
           </template>
+          <div v-if="inline" class="slip-stake-field">
+            <label class="slip-field-label">{{ t('sports.home.stake') }}</label>
+            <input
+              :value="bet.stake"
+              @input="handleStakeInput"
+              type="number"
+              name="stake"
+              inputmode="decimal"
+              step="0.01"
+              :placeholder="`Max bet: ${formatLimitShort(maxAmount)}`"
+              :disabled="!betAllow"
+              class="slip-stake-input"
+            />
+          </div>
           <input
+            v-else
             :value="bet.stake"
             @input="handleStakeInput"
             type="number"
@@ -317,9 +359,10 @@ watch(() => bet_status.value, (newStatus) => {
           />
         </div>
 
+        <div class="slip-quick-box" :class="{ 'slip-quick-box--mobile': inline }">
         <div class="slip-quick-grid">
           <button
-            v-for="button in finalButtons"
+            v-for="button in quickButtons"
             :key="button.id"
             type="button"
             :disabled="isButtonDisabled()"
@@ -330,10 +373,11 @@ watch(() => bet_status.value, (newStatus) => {
             {{ formatQuickLabel(button.amount) }}
           </button>
         </div>
+        </div>
 
         <div
+          v-if="!inline"
           class="slip-util-row"
-          :class="{ 'slip-util-row--mobile': inline }"
         >
           <v-btn
             rounded="0"
@@ -395,7 +439,7 @@ watch(() => bet_status.value, (newStatus) => {
             class="slip-reset-btn"
             @click="clearSlipSelection"
           >
-            {{ inline ? t('sports.home.betslipCancel') : t('sports.home.cancelBet') }}
+            {{ t('sports.home.cancelBet') }}
           </v-btn>
           <v-btn
             rounded="0"
@@ -407,7 +451,16 @@ watch(() => bet_status.value, (newStatus) => {
           >
             <template v-if="bet_status == 'processing'">{{ t('sports.home.processing') }}</template>
             <template v-else-if="inline">
-              {{ t('sports.home.placeBet') }}
+              <span class="slip-place-btn__stack">
+                <span class="slip-place-btn__label">{{ t('sports.home.placeBet') }}</span>
+                <span class="slip-place-btn__profit">{{ t('sports.home.profit') }} : {{ slipProfitLabel }}</span>
+              </span>
+              <span v-if="slipDelayLabel" class="slip-place-btn__delay">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <path d="M9.91095 3.68857L10.3814 3.21808C10.5643 3.03525 10.5643 2.7388 10.3814 2.55606C10.1986 2.37323 9.90225 2.37323 9.71942 2.55606L9.24893 3.02655C8.45956 2.36884 7.50037 1.9715 6.47717 1.87848V0.93631H6.92972C7.18826 0.93631 7.39783 0.726654 7.39783 0.468109C7.39783 0.209564 7.18826 0 6.92972 0H5.08832C4.82977 0 4.62021 0.209564 4.62021 0.468109C4.62021 0.726654 4.82977 0.93631 5.08832 0.93631H5.54086V1.87848C2.97958 2.11139 0.9375 4.26306 0.9375 6.92844C0.9375 9.73141 3.20572 12 6.00906 12C8.81195 12 11.0805 9.73178 11.0805 6.92844C11.0805 5.73111 10.6682 4.59723 9.91095 3.68857ZM6.00897 11.0637C3.72885 11.0637 1.87372 9.20865 1.87372 6.92844C1.87372 4.64832 3.72885 2.79327 6.00897 2.79327C8.28918 2.79327 10.1442 4.64832 10.1442 6.92844C10.1442 9.20865 8.28918 11.0637 6.00897 11.0637ZM8.1785 4.759C8.36133 4.94183 8.36133 5.23828 8.1785 5.42102L6.34003 7.25949C6.1572 7.44232 5.86075 7.44232 5.67801 7.25949C5.49518 7.07666 5.49518 6.78021 5.67801 6.59747L7.51639 4.759C7.69922 4.57617 7.99567 4.57617 8.1785 4.759Z" fill="currentColor" />
+                </svg>
+                <span>{{ slipDelayLabel }}</span>
+              </span>
             </template>
             <template v-else>
               <span class="slip-place-btn__label">{{ t('sports.home.placeBet') }}</span>
@@ -452,7 +505,7 @@ watch(() => bet_status.value, (newStatus) => {
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  background: #ffffff;
+  background: transparent;
 }
 
 .slip-form-root--mobile-inline :deep(.slip-body-card) {
