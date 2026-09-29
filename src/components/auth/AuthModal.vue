@@ -61,7 +61,7 @@ import { useMobileAppConfig } from '@/composables/useMobileAppConfig.js'
 import AuthLoginPanel from '@/components/auth/AuthLoginPanel.vue'
 import AuthForgotPasswordPanel from '@/components/auth/AuthForgotPasswordPanel.vue'
 import AuthSignupPanel from '@/components/auth/AuthSignupPanel.vue'
-import goplayLogo from '@/assets/goplay-logo.png'
+import goplayLogo from '@/assets/goplay-wordmark.png'
 import '@/assets/auth-modal-ref.css'
 
 const LOGIN_REDIRECT_MESSAGE_KEY = 'login_redirect_message'

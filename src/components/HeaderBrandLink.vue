@@ -11,7 +11,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import goplayLogo from '@/assets/goplay-logo.png'
+import goplayLogo from '@/assets/goplay-wordmark.png'
 
 defineProps({
   alt: { type: String, required: true },

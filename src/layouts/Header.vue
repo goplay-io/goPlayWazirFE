@@ -2240,7 +2240,7 @@ button.header-announce-search.search-icon-btn:hover {
   }
 
   .header-brand-link :deep(.header-brand-img) {
-    height: 45px;
+    height: 58px;
     width: auto;
     max-width: 240px;
     object-fit: contain;
