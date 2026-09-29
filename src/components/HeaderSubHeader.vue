@@ -145,41 +145,47 @@ function isTabActive(tab) {
   display: flex;
   align-items: center;
   width: 100%;
-  min-height: 38px;
-  gap: 8px;
-  padding: 0 16px;
+  /* Reference nav ~44px: tabs 28 + py 5+5 + scrollbar track ~6 */
+  min-height: 44px;
+  height: 44px;
+  gap: 0;
+  padding: 2px 12px 0;
+  box-sizing: border-box;
   overflow-x: auto;
   overflow-y: hidden;
   border-radius: 0;
   background: var(--color-login-input-bg);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  /* Desktop: thin light scrollbar bar (monkeydon reference) */
+  /* Desktop: always show thin light scrollbar like monkeydon */
   scrollbar-width: thin;
-  scrollbar-color: #cfcfcf transparent;
+  scrollbar-color: #d0d0d0 #3a3a3a;
+  scrollbar-gutter: stable;
 }
 
 .header-subheader__scroll::-webkit-scrollbar {
-  height: 3px;
+  height: 6px;
+  display: block;
 }
 
 .header-subheader__scroll::-webkit-scrollbar-track {
-  background: transparent;
+  background: #3a3a3a;
+  border-radius: 0;
 }
 
 .header-subheader__scroll::-webkit-scrollbar-thumb {
-  background: #cfcfcf;
-  border-radius: 2px;
+  background: #d0d0d0;
+  border-radius: 3px;
 }
 
 .header-subheader__scroll::-webkit-scrollbar-thumb:hover {
-  background: #e0e0e0;
+  background: #e8e8e8;
 }
 
-/* Hide left/right arrow buttons — thumb track only (monkeydon style) */
 .header-subheader__scroll::-webkit-scrollbar-button {
-  display: none;
-  width: 0;
-  height: 0;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent;
 }
 
 .header-subheader__scroll::-webkit-scrollbar-button:single-button,
@@ -187,23 +193,31 @@ function isTabActive(tab) {
 .header-subheader__scroll::-webkit-scrollbar-button:end:increment,
 .header-subheader__scroll::-webkit-scrollbar-button:horizontal:decrement,
 .header-subheader__scroll::-webkit-scrollbar-button:horizontal:increment {
-  display: none;
-  width: 0;
-  height: 0;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
+.header-subheader__scroll::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Reference: min-h-[28px] px-[9px] py-1 gap-x-1 rounded-md justify-center */
 .header-subheader__tab {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   flex-shrink: 0;
   gap: 4px;
-  min-width: 0;
-  height: 28px;
-  padding: 0 9px;
+  min-width: 80px;
+  min-height: 26px;
+  height: 26px;
+  padding: 4px 9px;
   border-radius: 6px;
   text-decoration: none;
   text-transform: uppercase;
   background: transparent;
+  box-sizing: border-box;
   transition: background-color 0.15s ease, color 0.15s ease;
 }
 
@@ -226,10 +240,11 @@ function isTabActive(tab) {
 
 .header-subheader__label {
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 400;
+  font-family:'Lato' !important;
   line-height: 1;
   white-space: nowrap;
-  color: #8f8f8f;
+  color: #ffffff;
 }
 
 .header-subheader__tab--active .header-subheader__label {
@@ -237,13 +252,15 @@ function isTabActive(tab) {
 }
 
 @media (max-width: 767.98px) {
-  /* Reference SubHeader.tsx: px-1 ps-4 */
+  /* Reference SubHeader.tsx: px-1 ps-4 — hide scrollbar on mobile */
   .header-subheader__scroll {
-    padding: 0 4px 0 16px;
-    gap: 8px;
-    /* Mobile: keep scrollbar hidden (touch scroll) */
+    min-height: 38px;
+    height: 38px;
+    padding: 5px 4px 5px 16px;
+    gap: 0;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    scrollbar-gutter: auto;
   }
 
   .header-subheader__scroll::-webkit-scrollbar {
@@ -252,8 +269,10 @@ function isTabActive(tab) {
   }
 
   .header-subheader__tab {
+    min-height: 28px;
     height: 28px;
-    padding: 0 9px;
+    padding: 4px 9px;
+    min-width: 80px;
   }
 
   .header-subheader__label {

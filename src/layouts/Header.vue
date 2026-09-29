@@ -1001,8 +1001,18 @@ onUnmounted(() => {
 }
 
 @media (min-width: 768px) {
+  /* Let subheader horizontal scrollbar paint inside the app bar */
+  .header-bar,
+  :deep(.v-toolbar__content) {
+    overflow: visible !important;
+  }
+
   :deep(.v-toolbar__content) {
     padding: 0 !important;
+  }
+
+  .header-subheader-wrap {
+    overflow: visible;
   }
 }
 
@@ -2087,23 +2097,27 @@ button.header-announce-search.search-icon-btn:hover {
     gap: 0;
     flex: 0 0 auto;
     width: auto;
-    max-width: 330px;
+    min-width: 0;
+    max-width: none;
     justify-content: flex-start;
     margin-left: 0;
   }
 
   .header-block--logo .header-logo-area,
   .header-block--logo .header-brand-link {
-    width: auto;
-    max-width: 100%;
+    width: auto !important;
+    max-width: none !important;
+    margin-left: 0 !important;
+    display: inline-flex;
+    align-items: center;
   }
 
   .header-block--logo :deep(.header-brand-img) {
-    height: 58px;
-    width: auto;
-    max-width: 280px;
-    object-fit: contain;
-    object-position: left center;
+    height: 58px !important;
+    width: auto !important;
+    max-width: 280px !important;
+    object-fit: contain !important;
+    object-position: left center !important;
   }
 
   .header-logo-area {
@@ -2293,19 +2307,19 @@ button.header-announce-search.search-icon-btn:hover {
   }
 
   .header-brand-link :deep(.header-brand-img) {
-    height: 58px;
-    width: auto;
-    max-width: 330px;
-    object-fit: contain;
-    object-position: left center;
+    height: 58px !important;
+    width: auto !important;
+    max-width: 280px !important;
+    object-fit: contain !important;
+    object-position: left center !important;
   }
 
 }
 
-/* Logo inset — match GuestLayout logout header (toolbar pad = page pad) */
+/* Logo left edge aligns with sidebar sport icons */
 @media (min-width: 1024px) {
   .header-toolbar-row--auth-desktop {
-    padding-left: var(--layout-page-pad-lg, 48px) !important;
+    padding-left: var(--header-logo-inset-lg) !important;
     padding-right: 16px !important;
   }
 
@@ -2322,7 +2336,7 @@ button.header-announce-search.search-icon-btn:hover {
   }
 
   .header-toolbar-row--auth-desktop {
-    padding-left: var(--layout-page-pad-xl, 80px) !important;
+    padding-left: var(--header-logo-inset-xl) !important;
     padding-right: 16px !important;
   }
 

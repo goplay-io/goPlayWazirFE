@@ -2,7 +2,7 @@ import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
 /** Inner scroll row min-height (reference: min-h-[38px]). */
-export const SUB_HEADER_STRIP_PX = 38
+export const SUB_HEADER_STRIP_PX = 44
 
 export const SUB_HEADER_TOTAL_PX = SUB_HEADER_STRIP_PX
 

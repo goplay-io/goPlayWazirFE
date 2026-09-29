@@ -139,6 +139,15 @@
   --layout-sidebar-wrap-pad-x: 8px;
   --layout-main-inner-pad-x: 4px;
   --layout-shell-section-gap: 6px;
+  /* SportsTree desktop row pad-left (sidebar-menu-row padding: 16px 24px) */
+  --layout-sidebar-icon-inset: 24px;
+  /* Header logo left edge = sidebar icon left edge */
+  --header-logo-inset-lg: calc(
+    var(--layout-page-pad-lg) + var(--layout-sidebar-wrap-pad-x) + var(--layout-sidebar-icon-inset)
+  );
+  --header-logo-inset-xl: calc(
+    var(--layout-page-pad-xl) + var(--layout-sidebar-wrap-pad-x) + var(--layout-sidebar-icon-inset)
+  );
   /* Shared inset under subheader scrollbar — left / center / right stay on one line */
   --layout-body-top-gap: 1px;
   /* Desktop sports/footer pages — reference gap before full-width footer @ scroll end */
