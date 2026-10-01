@@ -61,7 +61,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  padding: 0 0.25rem 0.5rem;
+  padding: 0 4px 2px;
 }
 
 .auth-ref-modal-title {
@@ -105,7 +105,7 @@
   color: #fff;
   font-family: inherit;
   font-size: 0.8125rem;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.2;
   cursor: pointer;
 }
@@ -118,16 +118,16 @@
 
 .auth-ref-login-tab--active {
   background: var(--color-wazir-green, #49915e);
-  color: #000;
+  color: #000 !important;
 }
 
 .auth-ref-field-label {
   display: block;
-  margin: 0 0 0.25rem;
+  margin: 0 0 0.1rem;
   color: #fff;
   font-size: 0.875rem;
   font-weight: 400;
-  line-height: 1.3;
+  line-height: 1;
 }
 
 .auth-ref-field {
@@ -219,12 +219,18 @@
   color: #fff;
   font-family: inherit;
   font-size: 0.75rem;
+  line-height: 1.2;
   text-decoration: underline;
   cursor: pointer;
 }
 
 .auth-ref-link-row {
-  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: -4px;
+  margin-bottom: 0px;
+  line-height: 1.2;
 }
 
 .auth-ref-btn {
@@ -234,7 +240,7 @@
   border: none;
   border-radius: 6px;
   background: var(--color-wazir-green, #49915e);
-  color: #000;
+  color: #000 !important;
   font-family: inherit;
   font-size: 1rem;
   font-weight: 600;
@@ -375,7 +381,7 @@
 
 .auth-ref-form--login {
   margin-top: 0.5rem;
-  gap: 1rem;
+  gap: 14px;
   padding: 0 0.5rem;
 }
 

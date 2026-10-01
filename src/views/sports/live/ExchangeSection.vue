@@ -161,17 +161,17 @@ const toggleFeedVirtual = () => {
                 <button type="button" class="live-exchange__mode-pill"
                     :class="{ 'live-exchange__mode-pill--active': feedLive }" @click="toggleFeedLive">
                     <FeedModePillPrefix :active="feedLive" />
-                    LIVE
+                    Live
                 </button>
                 <button type="button" class="live-exchange__mode-pill live-exchange__mode-pill--premium"
                     :class="{ 'live-exchange__mode-pill--active': feedPremium }" @click="toggleFeedPremium">
                     <FeedModePillPrefix :active="feedPremium" />
-                    PREMIUM
+                    Premium
                 </button>
                 <button type="button" class="live-exchange__mode-pill live-exchange__mode-pill--virtual"
                     :class="{ 'live-exchange__mode-pill--active': feedVirtual }" @click="toggleFeedVirtual">
                     <FeedModePillPrefix :active="feedVirtual" />
-                    VIRTUAL
+                    Virtual
                 </button>
             </div>
         </header>

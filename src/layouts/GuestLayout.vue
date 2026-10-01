@@ -2038,15 +2038,15 @@ useAppBarHeightObserver(guestAppBarRef)
 }
 
 .header-ref-lang-btn__globe {
-  width: 16px;
-  height: 16px;
+  width: 8px;
+  height: 8px;
   margin-right: 2px;
   flex-shrink: 0;
 }
 
 .header-ref-lang-btn__chevron {
-  width: 12px;
-  height: 12px;
+  width: 6px;
+  height: 6px;
   margin-left: 8px;
   flex-shrink: 0;
 }

@@ -537,7 +537,7 @@ onUnmounted(() => {
                                                         @click="toggleSectionFeedLive(event_type_id, 'inplay')"
                                                     >
                                                         <FeedModePillPrefix :active="isSportFeedLiveActive(event_type_id, 'inplay')" />
-                                                        LIVE
+                                                        Live
                                                     </button>
                                                     <button
                                                         type="button"
@@ -546,7 +546,7 @@ onUnmounted(() => {
                                                         @click="toggleSectionFeedVirtual(event_type_id, 'inplay')"
                                                     >
                                                         <FeedModePillPrefix :active="isSportFeedVirtualActive(event_type_id, 'inplay')" />
-                                                        VIRTUAL
+                                                        Virtual
                                                     </button>
                                                     <button
                                                         type="button"
@@ -555,7 +555,7 @@ onUnmounted(() => {
                                                         @click="toggleSectionFeedPremium(event_type_id, 'inplay')"
                                                     >
                                                         <FeedModePillPrefix :active="isSportFeedPremiumActive(event_type_id, 'inplay')" />
-                                                        PREMIUM
+                                                        Premium
                                                     </button>
                                                 </div>
                                             </div>
@@ -635,7 +635,7 @@ onUnmounted(() => {
                                                         @click="toggleSectionFeedLive(event_type_id, 'upcoming')"
                                                     >
                                                         <FeedModePillPrefix :active="isSportFeedLiveActive(event_type_id, 'upcoming')" />
-                                                        LIVE
+                                                        Live
                                                     </button>
                                                     <button
                                                         type="button"
@@ -644,7 +644,7 @@ onUnmounted(() => {
                                                         @click="toggleSectionFeedVirtual(event_type_id, 'upcoming')"
                                                     >
                                                         <FeedModePillPrefix :active="isSportFeedVirtualActive(event_type_id, 'upcoming')" />
-                                                        VIRTUAL
+                                                        Virtual
                                                     </button>
                                                     <button
                                                         type="button"
@@ -653,7 +653,7 @@ onUnmounted(() => {
                                                         @click="toggleSectionFeedPremium(event_type_id, 'upcoming')"
                                                     >
                                                         <FeedModePillPrefix :active="isSportFeedPremiumActive(event_type_id, 'upcoming')" />
-                                                        PREMIUM
+                                                        Premium
                                                     </button>
                                                 </div>
                                             </div>
