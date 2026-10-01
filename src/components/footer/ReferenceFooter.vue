@@ -23,14 +23,6 @@ const quickLinks = [
   { titleKey: 'footer.links.terms', to: '/terms-and-conditions' },
 ]
 
-const telegramLink = computed(() => {
-  const value = settingsStore.telegramChannel?.trim()
-  if (!value) return ''
-  if (/^https?:\/\//i.test(value)) return value
-  const path = value.startsWith('@') ? value.slice(1) : value
-  return `https://t.me/${path.replace(/\s/g, '')}`
-})
-
 const whatsappLink = computed(() =>
   buildWhatsAppSupportUrl(settingsStore.whatsappChannel),
 )
@@ -46,25 +38,9 @@ onMounted(() => {
 
 <template>
   <div class="reference-footer">
-    <div class="reference-footer__section reference-footer__section--padded">
+    <div class="reference-footer__section reference-footer__section--padded reference-footer__section--connect">
       <span class="reference-footer__heading">{{ t('footer.connectWithUs') }}</span>
       <div class="reference-footer__social">
-        <a
-          v-if="telegramLink"
-          :href="telegramLink"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="reference-footer__social-btn"
-          aria-label="Telegram"
-        >
-          <img
-            src="/svg/footer-icons/telegram-green-icon.svg"
-            alt=""
-            class="reference-footer__social-icon"
-            width="30"
-            height="30"
-          />
-        </a>
         <a
           v-if="whatsappLink"
           :href="whatsappLink"
@@ -138,7 +114,7 @@ onMounted(() => {
 .reference-footer {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   width: 100%;
   padding-top: 12px;
   border-radius: 10px;
@@ -218,21 +194,45 @@ onMounted(() => {
   }
 }
 
+.reference-footer__section--connect {
+  padding-bottom: 12px;
+}
+
 .reference-footer__heading {
-  font-size: 20px;
+  display: none;
+  font-size: 18px;
   font-weight: 700;
+  line-height: 1.3;
   color: #ffffff;
+  text-align: left;
+}
+
+@media (min-width: 768px) {
+  .reference-footer__heading {
+    display: block;
+    font-size: 20px;
+  }
 }
 
 .reference-footer__social {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  margin-top: 8px;
+  margin-top: 0;
+}
+
+@media (min-width: 768px) {
+  .reference-footer__social {
+    justify-content: flex-start;
+    margin-top: 10px;
+  }
 }
 
 .reference-footer__social-btn {
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 8px;
   border-radius: 6px;
   background: var(--color-login-input-bg, #23201f);

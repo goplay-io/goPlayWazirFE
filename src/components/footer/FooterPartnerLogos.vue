@@ -26,35 +26,36 @@ const logos = [
 .footer-partner-logos {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px 16px;
+  gap: 18px 12px;
   place-items: center;
   width: 100%;
-  padding: 0 8px;
+  padding: 0 12px;
   box-sizing: border-box;
-}
-
-@media (min-width: 640px) {
-  .footer-partner-logos {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
 }
 
 @media (min-width: 1024px) {
   .footer-partner-logos {
     grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 20px 16px;
+    padding: 0 8px;
   }
 }
 
 .footer-partner-logos__img {
   width: auto;
-  max-width: 140px;
-  height: 32px;
+  max-width: 148px;
+  height: 30px;
   object-fit: contain;
+  /* Match reference muted grey logos on dark charcoal */
+  opacity: 0.72;
+  filter: grayscale(0.15) brightness(0.92);
 }
 
 @media (min-width: 768px) {
   .footer-partner-logos__img {
-    height: 40px;
+    height: 36px;
+    opacity: 0.8;
+    filter: none;
   }
 }
 </style>
