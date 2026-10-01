@@ -683,7 +683,6 @@ onUnmounted(() => {
                                             reference-layout
                                             reference-play-mode="upcoming"
                                             :show-competition="false"
-                                            :show-upcoming-odds-overlay="true"
                                             :animation-delay="Math.min(eventIndex * 0.02, 0.5)"
                                         />
                                     </div>

@@ -40,7 +40,7 @@ const BUTTON_SIZE = 44
 const EDGE_MARGIN = 16
 const DRAG_THRESHOLD = 6
 const STORAGE_KEY = 'floating-bonus-btn-pos'
-const BOTTOM_NAV_HEIGHT = 60 // matches --mobile-bottom-nav-height in main.css
+const BOTTOM_NAV_HEIGHT = 0
 
 const buttonRef = ref(null)
 const pos = ref({ x: 0, y: 0 })

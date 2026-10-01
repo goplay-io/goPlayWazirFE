@@ -6,8 +6,7 @@
 @tailwind utilities;
 
 :root {
-  /* Mobile tab bar (MobileBottomNav.vue); keep FloatingBonusButton BOTTOM_NAV_HEIGHT in sync */
-  --mobile-bottom-nav-height: 60px;
+  --mobile-bottom-nav-height: 0px;
   --mobile-bottom-nav-inset: calc(
     var(--mobile-bottom-nav-height) + env(safe-area-inset-bottom, 0px)
   );

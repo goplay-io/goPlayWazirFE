@@ -159,14 +159,9 @@
       />
       </div>
 
-      <!-- Reserve space for fixed bottom nav at the body-stack level (reliable vs v-main__wrap flex) -->
-      <div v-if="showMobileBottomNav" class="layout-mobile-bottom-nav-spacer md:tw-hidden" aria-hidden="true" />
-
       <!-- Full-width footer: after main content; reached via document scroll -->
       <Footer v-if="showSiteFooter" />
     </div>
-
-    <MobileBottomNav v-if="showMobileBottomNav" />
 
     <!-- Mobile floating actions -->
     <Teleport to="body">
@@ -189,7 +184,6 @@ import { useRoute, useRouter } from 'vue-router'
 import Footer from '@/components/Footer.vue'
 import DesktopCustomerSupportFloat from '@/components/DesktopCustomerSupportFloat.vue'
 import HomeMobileEndSections from '@/components/home/HomeMobileEndSections.vue'
-import MobileBottomNav from '@/components/MobileBottomNav.vue'
 import HomeReferenceMiddleSections from '@/components/home/HomeReferenceMiddleSections.vue'
 import SportsMainBanner from '@/components/sports/SportsMainBanner.vue'
 import SportsSharedGifRow from '@/components/sports/SportsSharedGifRow.vue'
@@ -276,11 +270,7 @@ const useReferenceSportsLayout = computed(
     !isFullWidthPage.value,
 )
 
-const showMobileBottomNav = computed(
-  () => isMobile.value && !isClearScreenPage.value,
-)
-
-/** Mobile: document/body scroll (pull-to-refresh + bottom nav clearance). Casino game keeps inner scroll. */
+/** Mobile: document/body scroll (pull-to-refresh). Casino game keeps inner scroll. */
 const useMobileBodyScroll = computed(
   () => isMobile.value && !isClearScreenPage.value && !showSiteFooter.value,
 )

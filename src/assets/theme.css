@@ -2685,6 +2685,10 @@ code::-webkit-scrollbar-track,
   }
 }
 
+.casino-mobile-back {
+  display: none;
+}
+
 .casino-listing-top-bar {
   display: flex;
   align-items: flex-end;
@@ -3290,29 +3294,59 @@ code::-webkit-scrollbar-track,
     max-width: 100% !important;
   }
 
+  .layout-page-content:has(.casino-page) {
+    background: #23201f;
+  }
+
+  .casino-mobile-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: 24px;
+    height: 24px;
+    margin: 0 0 0 12px;
+    padding: 0;
+    border: 0;
+    border-radius: 4px;
+    background: #545454;
+    cursor: pointer;
+  }
+
   .casino-listing-top-bar {
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 0.5rem;
-    padding: 0.5rem 0.75rem 0.35rem;
-    margin-bottom: 0.25rem;
-    min-height: auto;
-    max-height: none;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0 6px;
     height: auto;
+    min-height: 34px;
+    padding: 0;
+    margin: 0;
   }
 
   .casino-listing-top-bar__title {
-    display: block;
-    font-size: 0.8125rem;
-    padding-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    flex: 1 1 auto;
+    height: 34px;
+    margin: 0 0 0 4px;
+    padding: 0;
+    font-family: Lato, "Helvetica Neue", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: normal;
+    text-transform: none;
+    color: #ffffff;
   }
 
   .casino-listing-top-bar__search {
-    width: auto;
-    flex: 1 1 auto;
-    max-width: 14rem !important;
+    flex: 1 0 100%;
+    width: 100%;
+    max-width: none !important;
     min-width: 0;
+    padding: 2px 8px 0;
+    box-sizing: border-box;
   }
 
   .casino-listing-top-bar .casino-search-root,
@@ -3321,23 +3355,66 @@ code::-webkit-scrollbar-track,
     max-width: 100%;
   }
 
+  .casino-listing-top-bar .casino-search-root,
+  .casino-listing-top-bar .casino-search-inner,
   .casino-listing-top-bar .casino-search-bar {
-    min-height: 32px;
-    height: 32px;
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+  }
+
+  .casino-listing-top-bar .casino-search-bar {
+    position: relative;
+    min-height: 36px;
+    height: 36px;
+    background: #ffffff;
+    border-radius: 4px;
   }
 
   .casino-listing-top-bar .casino-search-bar__input {
-    height: 32px;
-    min-height: 32px;
-    padding: 0 8px;
-    font-size: 13px;
-    line-height: 20px;
+    height: 36px;
+    min-height: 36px;
+    padding: 8px 8px 8px 32px !important;
+    border: 0 !important;
+    border-radius: 4px !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-family: Lato, "Helvetica Neue", sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    line-height: 20px !important;
+  }
+
+  .casino-listing-top-bar .casino-search-bar__input::placeholder {
+    color: #9ca3af;
+    opacity: 1;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .casino-listing-top-bar .casino-search-bar__input:focus {
+    border: 0;
+    outline: none;
   }
 
   .casino-listing-top-bar .casino-search-bar__btn {
-    width: 32px;
-    min-width: 32px;
-    height: 32px;
+    position: absolute;
+    left: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    min-width: 20px;
+    height: 20px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: #999999;
+  }
+
+  .casino-listing-top-bar .casino-search-bar__btn svg {
+    width: 20px;
+    height: 20px;
   }
 
   .casino-tabs-stack {
@@ -3353,13 +3430,14 @@ code::-webkit-scrollbar-track,
   }
 
   .casino-tabs-l1-wrap {
-    padding: 0 6px;
+    padding: 0 8px;
+    margin-top: 6px;
   }
 
   .casino-tabs-l1__track {
-    gap: 0;
+    gap: 6px;
     padding: 0;
-    align-items: stretch;
+    align-items: center;
     border-bottom: none;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -3369,28 +3447,24 @@ code::-webkit-scrollbar-track,
     display: none;
   }
 
-  .casino-tabs-l1__btn {
-    border: none !important;
-    border-right: 1px solid var(--casino-accent, #49915e) !important;
-    min-width: auto;
-    height: 32px;
-    min-height: 32px;
-    max-height: 32px;
-    padding: 0 0.65rem;
-    font-size: 11px !important;
-    font-weight: 600;
-    line-height: 1;
-    background: #2a2a2a;
-    color: #ffffff;
-    border-radius: 0;
-    text-transform: uppercase;
-    box-sizing: border-box;
-  }
-
+  .casino-tabs-l1__btn,
   .casino-tabs-l1__btn:first-child:not(.casino-tabs-l1__btn--active),
   .casino-tabs-l1__btn:last-child:not(.casino-tabs-l1__btn--active) {
-    border-left: none !important;
-    border-right: 1px solid var(--casino-accent, #49915e) !important;
+    border: 1px solid #545454 !important;
+    min-width: auto;
+    height: 30px;
+    min-height: 30px;
+    max-height: 30px;
+    padding: 6px 16px !important;
+    font-family: Lato, "Helvetica Neue", sans-serif;
+    font-size: 12px !important;
+    font-weight: 700;
+    line-height: 16px;
+    background: #333333;
+    color: #ffffff;
+    border-radius: 9999px !important;
+    text-transform: uppercase;
+    box-sizing: border-box;
   }
 
   .casino-tabs-l1__btn:hover:not(.casino-tabs-l1__btn--active) {
@@ -3398,11 +3472,12 @@ code::-webkit-scrollbar-track,
     color: #ffffff;
   }
 
-  .casino-tabs-l1__btn--active {
-    background: var(--casino-accent, #49915e) !important;
-    color: #ffffff !important;
-    border: none !important;
-    border-right: 1px solid var(--casino-accent, #49915e) !important;
+  .casino-tabs-l1__btn--active,
+  .casino-tabs-l1__btn--active:first-child,
+  .casino-tabs-l1__btn--active:last-child {
+    background: #49915e !important;
+    color: #171716 !important;
+    border: 1px solid #545454 !important;
     font-weight: 700;
   }
 
@@ -3469,17 +3544,44 @@ code::-webkit-scrollbar-track,
     height: 18px;
   }
 
-  .casino-games-grid {
-    gap: 0.5rem !important;
-    padding: 0.25rem 0 !important;
+  .casino-page-body {
+    padding: 0 !important;
+  }
+
+  .casino-category-section {
+    margin: 0;
+    padding: 2px 6px 16px;
+  }
+
+  .casino-category-section__title {
+    margin: 0;
+    padding: 4px;
+    font-family: Lato, "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: normal;
+    text-transform: none;
+    color: #ffffff;
+  }
+
+  .casino-category-section .casino-games-grid {
+    display: flex !important;
+    flex-wrap: nowrap;
+    gap: 4px !important;
+    padding: 0 !important;
+    overflow-x: auto;
     background: transparent !important;
+    scrollbar-width: none;
+  }
+
+  .casino-category-section .casino-games-grid::-webkit-scrollbar {
+    display: none;
   }
 
   .casino-game-tile {
-    border-radius: 10px !important;
-  }
-
-  .casino-game-tile__media {
+    flex: 0 0 117px;
+    width: 117px;
     border-radius: 10px !important;
   }
 
@@ -3487,9 +3589,11 @@ code::-webkit-scrollbar-track,
     transform: none;
   }
 
-  .casino-category-section__title {
-    font-size: 0.8125rem;
-    margin-bottom: 0.5rem;
+  .casino-game-tile__media {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px !important;
   }
 }
 
@@ -3650,7 +3754,7 @@ code::-webkit-scrollbar-track,
 
 /* iOS Safari: prevent focus zoom on text inputs (minimum 16px; bet slip keeps 13px — see sports-bet-slip-form.css) */
 @media screen and (max-width: 767.98px) {
-  input:not([type='checkbox']):not([type='radio']):not([type='range']):not(.slip-stake-input):not(.slip-odds-input):not(.signup-plain-field__input):not(.auth-page-input):not(.signup-ref-otp-digit):not(.sidebar-mobile-search__input):not(.change-password-page__input),
+  input:not([type='checkbox']):not([type='radio']):not([type='range']):not(.slip-stake-input):not(.slip-odds-input):not(.signup-plain-field__input):not(.auth-page-input):not(.signup-ref-otp-digit):not(.sidebar-mobile-search__input):not(.change-password-page__input):not(.casino-search-bar__input),
   textarea,
   select,
   .v-field input,

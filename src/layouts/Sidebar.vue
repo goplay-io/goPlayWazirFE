@@ -5,7 +5,6 @@ import useDevices from '@/composables/useDevices.js'
 import SportsTree from '@/components/SportsTree.vue'
 import LanguageModal from '@/components/LanguageModal.vue'
 import { AVAILABLE_LOCALES } from '@/constants/locales.js'
-import goplayLogo from '@/assets/goplay-logo.png'
 
 const { isMobile } = useDevices()
 const { locale } = useI18n()
@@ -27,8 +26,8 @@ const drawerModel = computed({
   set: (v) => emit('update:modelValue', v),
 })
 
-/** Must match Vuetify `:width` — CSS-only width breaks close translateX. */
-const mobileDrawerWidth = computed(() => Math.min(320, Math.round(viewportWidth.value * 0.8)))
+/** Must match Vuetify `:width` — CSS-only width breaks close translateX. Reference drawer is 70%, max 384px. */
+const mobileDrawerWidth = computed(() => Math.min(384, Math.round(viewportWidth.value * 0.7)))
 
 function syncViewportWidth() {
   viewportWidth.value = window.innerWidth
@@ -45,10 +44,6 @@ onUnmounted(() => {
 
 function onNavigate() {
   if (isMobile.value) drawerModel.value = false
-}
-
-function closeDrawer() {
-  drawerModel.value = false
 }
 
 function setLocale(lang) {
@@ -69,23 +64,10 @@ function setLocale(lang) {
     v-model="drawerModel"
     :width="mobileDrawerWidth"
     temporary
-    touchless
     location="left"
     class="sidebar-root sidebar-root--mobile"
   >
     <div class="sidebar-mobile-shell">
-      <div class="sidebar-mobile-header">
-        <img :src="goplayLogo" alt="Goplay" class="sidebar-mobile-logo" />
-        <button
-          type="button"
-          class="sidebar-mobile-close"
-          :aria-label="'Close'"
-          @click="closeDrawer"
-        >
-          <v-icon size="22">mdi-close</v-icon>
-        </button>
-      </div>
-
       <div class="sidebar-content sidebar-content--mobile">
         <div class="sidebar-tree-wrap">
           <SportsTree
@@ -191,68 +173,54 @@ function setLocale(lang) {
   }
 }
 
-/* Mobile purple drawer — do not override width/transform; Vuetify owns close slide. */
+/* Mobile drawer — do not override width/transform; Vuetify owns close slide. */
 .sidebar-root--mobile {
-  background: #360952 !important;
+  background: #04141a !important;
   top: 0 !important;
   height: 100% !important;
   max-height: 100dvh !important;
   z-index: 3001 !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-root--mobile :deep(.v-navigation-drawer__scrim) {
+  background: rgba(0, 0, 0, 0.4) !important;
+  opacity: 1 !important;
 }
 
 .sidebar-root--mobile :deep(.v-navigation-drawer__content) {
   width: 100%;
   height: 100%;
-  background: #360952;
+  background: #04141a;
+  overflow-y: auto;
 }
 
 .sidebar-mobile-shell {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: #360952;
+  min-height: 100%;
+  background: #04141a;
+  color: #ffffff;
+  font-family: Lato, "Helvetica Neue", sans-serif;
+}
+
+.sidebar-content--mobile,
+.layout-home-shell-bg .sidebar-content--mobile,
+.layout-home-shell-bg .sidebar-content--mobile .sidebar-tree-wrap {
+  background: #04141a !important;
+  background-color: #04141a !important;
   color: #ffffff;
 }
+</style>
 
-.sidebar-mobile-header {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  min-height: 46px;
-  padding: 8px 12px;
-  background: #360952;
-}
-
-.sidebar-mobile-logo {
-  display: block;
-  height: 30px;
-  width: auto;
-  max-width: 138px;
-  object-fit: contain;
-}
-
-.sidebar-mobile-close {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  padding: 0;
-  border: 0;
-  border-radius: 8px;
-  background: transparent;
-  color: #ffffff;
-  cursor: pointer;
-}
-
-.sidebar-content--mobile {
-  background: #360952;
-  color: #ffffff;
+<style>
+.v-navigation-drawer__scrim {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: rgba(0, 0, 0, 0.4) !important;
+  opacity: 1 !important;
 }
 </style>
