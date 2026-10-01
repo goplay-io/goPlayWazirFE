@@ -12,8 +12,6 @@ import {
     getUniqueCountryCodes,
     getRacingFlagCode,
 } from '@/utils/raceUtils';
-import SportPageTitleHeader from '@/components/sports/SportPageTitleHeader.vue';
-
 const { t } = useI18n();
 const route = useRoute();
 const router = useRouter();
@@ -27,13 +25,12 @@ const regions = ref([]);
 const loading = ref(false);
 const noEvent = ref(false);
 
-const displayEventName = computed(() => {
-    const name = eventName.value
+const sportTitle = computed(() =>
+    eventName.value
         .split('_')
         .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' ');
-    return `${name} Schedule`;
-});
+        .join(' ')
+);
 
 const navigateToRace = (eventId, marketId) => {
     router.push(`/racing/bet/${eventId}/${marketId}`);
@@ -105,18 +102,14 @@ watch(() => route.params.event_type_name, async (newName) => {
     }
 });
 
-/** Match reference: 12-hour clock with space after colon — e.g. "7: 20 PM" */
 const formatTime = (timeString) => {
     if (!timeString) return '';
     try {
         const date = new Date(timeString);
         if (Number.isNaN(date.getTime())) return timeString;
-        const formatted = date.toLocaleString('en-US', {
-            hour: 'numeric',
-            minute: '2-digit',
-            hour12: true,
-        });
-        return formatted.replace(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i, '$1: $2 $3');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        return `${hours}:${minutes}`;
     } catch {
         return timeString;
     }
@@ -135,27 +128,17 @@ const isRaceLiveSoon = (market) => {
     }
 };
 
-/** Venue label without trailing date / region clutter */
-const venueDisplayName = (eventGroup) => {
-    const raw = (eventGroup?.eventName ?? '').trim();
-    if (!raw) return '';
-    return raw
-        .replace(/\s+\d{1,2}(st|nd|rd|th)?\s+[A-Za-z]{3}\b.*$/i, '')
-        .replace(/\s*\([A-Z]{2,4}\)\s*$/i, '')
-        .trim() || raw;
-};
 </script>
 
 <template>
     <div class="racing-page">
-        <SportPageTitleHeader :title="displayEventName" />
-        <v-container fluid class="racing-page__inner tw-px-2 md:tw-px-3">
-            <v-row no-gutters>
-                <v-col cols="12" class="tw-p-0">
-                    <div v-if="!loading">
-                        <div v-if="regions.length > 0" class="races-schedule">
-                            <!-- Country / region tabs -->
-                            <div class="races-schedule__tabs scrollbar-hide" role="tablist" aria-label="Region">
+        <div v-if="!loading" class="racing-card">
+            <div class="racing-card__header">
+                <span class="racing-card__title">{{ sportTitle }}</span>
+                <button type="button" class="racing-card__today">Today</button>
+            </div>
+            <div v-if="regions.length > 0" class="races-schedule">
+                            <div class="races-schedule__tabs" role="tablist" aria-label="Region">
                                 <button
                                     v-for="region in regions"
                                     :key="region"
@@ -166,13 +149,15 @@ const venueDisplayName = (eventGroup) => {
                                     :class="{ 'races-region-tab--active': selectedRegion === region }"
                                     @click="selectedRegion = region"
                                 >
-                                    <Flag
-                                        :code="getRacingFlagCode(region)"
-                                        size="md"
-                                        square
-                                        class="races-region-tab__flag"
-                                    />
-                                    <span class="races-region-tab__code">{{ region }}</span>
+                                    <span class="races-region-tab__face">
+                                        <Flag
+                                            :code="getRacingFlagCode(region)"
+                                            size="md"
+                                            square
+                                            class="races-region-tab__flag"
+                                        />
+                                        <span class="races-region-tab__code">{{ region }}</span>
+                                    </span>
                                 </button>
                             </div>
 
@@ -184,7 +169,7 @@ const venueDisplayName = (eventGroup) => {
                                     class="races-venue-card"
                                 >
                                     <h2 class="races-venue-card__name">
-                                        {{ venueDisplayName(eventGroup) }}
+                                        {{ eventGroup.eventName }}
                                     </h2>
                                     <div class="races-venue-card__times">
                                         <template v-for="(market, idx) in eventGroup.races" :key="market.market_id ?? idx">
@@ -213,193 +198,201 @@ const venueDisplayName = (eventGroup) => {
                             </div>
                         </div>
 
-                        <div v-else class="sports-no-markets-empty">
-                            {{ t('sports.home.noMarketsAvailable') }}
-                        </div>
-                    </div>
-
-                    <Loading v-else />
-                </v-col>
-            </v-row>
-        </v-container>
+            <div v-else class="sports-no-markets-empty">
+                {{ t('sports.home.noMarketsAvailable') }}
+            </div>
+        </div>
+        <Loading v-else />
     </div>
 </template>
 
 <style scoped>
 .racing-page {
     min-height: 100%;
-    background: #ffffff;
-    font-family: inherit;
+    background: #23201f;
+    color: #ffffff;
+}
+
+.racing-card {
+    margin: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 2px;
+    background: #333333;
+    box-sizing: border-box;
+}
+
+.racing-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 38px;
+    padding: 0 8px;
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 2px 2px 0 0;
+    box-sizing: border-box;
+}
+
+.racing-card__title {
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 30px;
+}
+
+.racing-card__today {
+    display: inline-block;
+    height: 25px;
+    min-width: 79px;
+    padding: 2px 6px;
+    border: 0;
+    border-radius: 2px;
+    background: #49915e;
+    color: #000000;
     font-size: 12px;
-    line-height: 1.25;
-    color: #111111;
-    -webkit-font-smoothing: antialiased;
+    font-weight: 500;
+    line-height: 21px;
+    cursor: pointer;
 }
 
-.racing-page__inner {
-    padding-top: 12px;
-    padding-bottom: 56px;
-    background: transparent;
-}
-
-.races-schedule {
-    width: 100%;
-}
-
-/* Centered country tabs — flag + code */
 .races-schedule__tabs {
     display: flex;
     flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    gap: 0;
-    min-height: 50px;
-    height: 50px;
-    margin-bottom: 12px;
-    padding: 0 4px;
-    overflow-x: auto;
+    align-items: stretch;
+    height: 40.5px;
+    border-bottom: 1px solid #dee2e6;
+    overflow: visible;
+    scrollbar-width: auto;
+    scrollbar-color: #d2d2d2 transparent;
+}
+
+.races-schedule__tabs::-webkit-scrollbar {
+    width: 4px;
+    height: 6px;
+    background: transparent;
+}
+
+.races-schedule__tabs::-webkit-scrollbar-track {
+    background: transparent;
+    border: 0;
+}
+
+.races-schedule__tabs::-webkit-scrollbar-thumb {
+    background: #d2d2d2;
+    border: 0;
+    border-radius: 8px;
 }
 
 .races-region-tab {
-    display: inline-flex;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    flex: 1 1 0;
+    min-width: 0;
+    height: 39.5px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #ffffff;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.races-region-tab__face {
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex: 0 0 auto;
-    gap: 6px;
-    width: 70px;
-    min-width: 70px;
-    height: 50px;
-    margin: 0 2px;
-    padding: 0;
-    border: none;
-    border-radius: 5px;
-    background: #d1d5db;
-    color: #111111;
-    font-family: inherit;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-    transition: background 0.15s ease, color 0.15s ease;
+    height: 40.5px;
+    margin-bottom: -1px;
+    padding: 2px 10px;
+    border: 1px solid transparent;
+    border-radius: 4px;
     box-sizing: border-box;
+}
+
+.races-region-tab--active .races-region-tab__face {
+    background: #ffffff;
+    color: #000000;
+    border-color: #dee2e6;
+    border-bottom-color: #ffffff;
 }
 
 .races-region-tab__flag {
     display: block;
-    width: 24px;
-    height: 18px;
-    border-radius: 0;
-    overflow: hidden;
+    width: 18px !important;
+    height: 18px !important;
+    min-width: 18px;
+    margin: 0 5px 0 2px;
+    flex-shrink: 0;
 }
 
-.races-region-tab__flag :deep(img) {
+.races-region-tab__flag :deep(img),
+.races-region-tab__flag :deep(span) {
     display: block;
-    width: 24px !important;
+    width: 18px !important;
     height: 18px !important;
     border-radius: 0 !important;
     object-fit: contain;
 }
 
 .races-region-tab__code {
-    display: block;
-    height: 12.47px;
-    margin-top: -4px;
-    font-size: 9.38px;
-    font-weight: 600;
-    line-height: 14.07px;
-    letter-spacing: 0;
+    margin: 0 4px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: normal;
     text-transform: uppercase;
-    text-align: center;
-}
-
-.races-region-tab--active {
-    background: var(--color-header-bg, #360952);
-    color: #ffffff;
-}
-
-.races-region-tab:focus-visible {
-    outline: 2px solid var(--color-header-bg, #360952);
-    outline-offset: 2px;
+    color: inherit;
 }
 
 .races-schedule__list {
     display: flex;
     flex-direction: column;
-    gap: 0;
 }
 
-/* Venue card — bordered row matching reference layout */
 .races-venue-card {
     display: flex;
-    align-items: center;
-    gap: 8px;
-    width: calc(100% - 16px);
-    margin: 8px 0px 0;
-    padding: 20px 0;
-    border: 1px solid #e5e7eb;
-    border-radius: 4px;
-    background: #ffffff;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 4px 10px;
+    background: transparent;
     box-sizing: border-box;
-    font-size: 11px;
-    font-weight: 600;
-    line-height: 16.5px;
 }
 
 .races-venue-card__name {
-    flex: 0 0 100px;
-    width: 100px;
-    min-width: 100px;
-    margin: 0 8px;
-    font-size: 12px;
-    font-weight: 600;
-    line-height: 18px;
-    color: var(--color-header-bg, #360952);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    margin: 0 3px 0 0;
+    padding: 8px 2px;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 22px;
 }
 
 .races-venue-card__times {
-    display: inline-flex;
+    display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    gap: 8px;
-    margin-left: 40px;
+    align-items: flex-start;
     min-width: 0;
 }
 
 .races-time-chip {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 70px;
-    height: 21px;
-    min-width: 70px;
-    min-height: 21px;
-    margin: 0;
-    padding: 0;
-    border: none;
-    border-radius: 4px;
-    background: #d1d5db;
-    color: #111111;
-    font-family: inherit;
-    font-size: 11px;
-    font-weight: 600;
-    line-height: 16.5px;
+    display: inline-block;
+    margin: 0 5px 4px 0;
+    padding: 2px 8px;
+    border: 1px solid #d3d3d3;
+    border-radius: 2px;
+    background: #f7f7f7;
+    color: #000000;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 19.5px;
     white-space: nowrap;
     text-align: center;
     cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-    transition: background 0.15s ease, color 0.15s ease, opacity 0.15s ease;
     box-sizing: border-box;
-}
-
-.races-time-chip:hover:not(.races-time-chip--disabled) {
-    opacity: 0.9;
-}
-
-.races-time-chip--live {
-    background: var(--color-header-bg, #360952);
-    color: #ffffff;
 }
 
 .races-time-chip--disabled {
@@ -408,51 +401,30 @@ const venueDisplayName = (eventGroup) => {
     pointer-events: none;
 }
 
-.races-time-chip:focus-visible {
-    outline: 2px solid var(--color-header-bg, #360952);
-    outline-offset: 2px;
-}
-
-.scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-    display: none;
-}
-
-@media (min-width: 768px) {
-    .races-venue-card__name {
-        margin: 0 20px;
+@media (min-width: 1024px) {
+    .racing-card {
+        width: 54%;
+        margin-top: 8px;
     }
 
-    .races-venue-card__times {
-        margin-left: 80px;
-    }
-}
-
-@media (max-width: 767.98px) {
-    .racing-page {
-        margin-top: 5px;
-        padding-left: 2px;
-        padding-right: 2px;
-    }
-
-    .races-region-tab__code {
-        height: auto;
-        font-size: 12px;
-        line-height: 18px;
-    }
-}
-
-@media (max-width: 640px) {
     .races-venue-card {
-        width: calc(100% - 4px);
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .races-venue-card__name {
+        flex: 0 0 16.666%;
+        width: 16.666%;
     }
 
     .races-venue-card__times {
-        gap: 8px;
+        flex: 1 1 auto;
     }
+}
+</style>
+
+<style>
+.layout-content-row:has(.racing-page) {
+    background-color: #23201f !important;
 }
 </style>

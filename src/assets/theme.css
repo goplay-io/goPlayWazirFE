@@ -468,17 +468,23 @@ marquee.tw-text-marquee {
   color: var(--color-marquee) !important;
 }
 
-/* Market announcement strip — white bg, black text (shared by Match Odds / Bookmaker / Fancy) */
+/* Market announcement sits under the table, white text, no strip background. */
+:has(> .market-message-banner) {
+  display: flex;
+  flex-direction: column;
+}
+
 .market-message-banner {
-  background: #ffffff;
-  border-bottom: 1px solid #e5e7eb;
+  order: 1;
+  background: transparent;
+  border: 0;
   padding: 1px 10px;
-  color: #000000;
+  color: #ffffff;
 }
 
 .market-message-banner marquee,
 .market-message-banner .tw-text-marquee {
-  color: #000000 !important;
+  color: #ffffff !important;
 }
 
 /* Primary blue heading bar (Matched Bets, market ribbons, slip history) */

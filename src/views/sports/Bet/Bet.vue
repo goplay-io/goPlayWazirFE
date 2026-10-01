@@ -34,7 +34,6 @@ import { useOneClickBettingStore } from '@/stores/oneClickBetting';
 import { useInlineBetSlipHost } from '@/composables/useInlineBetSlipHost';
 import OneClickBetting from '@/components/OneClickBetting.vue';
 import TVLiveStream from '@/components/TVLiveStream.vue';
-import ScoreCardTVMobile from './ScoreCardTVMobile.vue';
 import BetMobileMatchedBetsSection from './BetMobileMatchedBetsSection.vue';
 import { useScorecardTvStore } from '@/stores/scorecardTv';
 import { useI18n } from 'vue-i18n';
@@ -69,6 +68,7 @@ const {
 const showBetHistory = ref(false);
 const mobileToolbarView = ref('markets');
 const mobileOpenBetCount = ref(0);
+const mobileWatchLiveOpen = ref(false);
 
 const toggleMobileOpenBets = () => {
   mobileToolbarView.value = mobileToolbarView.value === 'openBets' ? 'markets' : 'openBets';
@@ -140,6 +140,7 @@ watch(
   () => event.value?.event_id,
   () => {
     scorecardContentAvailable.value = false;
+    mobileWatchLiveOpen.value = false;
     scorecardTvStore.reset();
   }
 );
@@ -815,17 +816,59 @@ onUnmounted(() => {
                 @scorecard-available="onScorecardAvailable"
               />
             </div>
-            <!-- ScoreCard + TV (mobile only, above Match Odds, toggle in header) -->
-            <ScoreCardTVMobile v-if="!isBinaryEvent && (event?.score_active || (event?.tv_channel_active && hasTvStreamUrl)) && event?.event_id != null"
-              :event-id="event.event_id"
-              :event-type-id="event_type_id"
-              :score-active="!!event?.score_active"
-              :score-type="event.score_type"
-              :scorecard-url="sportsRadarScorecardUrl"
-              :tv-src="tvLiveStreamSrc"
-              :tv-active="!!event?.tv_channel_active && hasTvStreamUrl"
-              @scorecard-available="onScorecardAvailable"
-            />
+            <!-- Mobile LIVE tab: scorecard only. TV opens from the button below. -->
+            <div
+              v-if="isMobile && !isBinaryEvent && showScorecardWidget && event?.event_id != null"
+              class="bet-mobile-live-score"
+            >
+              <SrWidgetScoreCard
+                v-if="isSrCardScorecard"
+                :event-id="event.event_id"
+                :event-type-id="event_type_id"
+                :score-active="!!event.score_active"
+                :collapsible="false"
+              />
+              <ScoreCard
+                v-else
+                :event-id="event.event_id"
+                :score-active="!!event.score_active"
+                :score-type="event.score_type"
+                :scorecard-url="sportsRadarScorecardUrl"
+                :collapsible="false"
+                @scorecard-available="onScorecardAvailable"
+              />
+            </div>
+            <div
+              v-if="isMobile && !isBinaryEvent && !!event?.tv_channel_active && hasTvStreamUrl"
+              class="bet-watch-live"
+            >
+              <button
+                v-if="!mobileWatchLiveOpen"
+                type="button"
+                class="bet-watch-live__btn"
+                @click="mobileWatchLiveOpen = true"
+              >
+                Watch And Enjoy Live Action...
+              </button>
+              <div v-else class="bet-watch-live__player">
+                <iframe
+                  :src="tvLiveStreamSrc"
+                  title="TV Live Stream"
+                  allowfullscreen
+                  allow="autoplay; encrypted-media"
+                />
+                <button
+                  type="button"
+                  class="bet-watch-live__close"
+                  aria-label="Close live stream"
+                  @click="mobileWatchLiveOpen = false"
+                >
+                  <svg width="24" height="24" viewBox="0 0 512 512" aria-hidden="true">
+                    <path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
+                  </svg>
+                </button>
+              </div>
+            </div>
             <!-- Market filter hidden on WazirWin reference event detail (show all sections) -->
             <div v-if="false && showMarketsFilter" class="bet-markets-filter" role="tablist" aria-label="Market filter">
               <button
@@ -1001,6 +1044,63 @@ onUnmounted(() => {
 /* .bet-markets-scrollable {
   background: #ececec;
 } */
+
+.bet-mobile-live-score {
+  width: 100%;
+}
+
+.bet-watch-live {
+  width: 100%;
+  padding: 0 8px;
+  box-sizing: border-box;
+}
+
+.bet-watch-live__btn {
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+  padding: 8px 0;
+  border: 0;
+  border-radius: 6px;
+  background: #49915e;
+  color: #171716;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.bet-watch-live__player {
+  position: relative;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.bet-watch-live__player iframe {
+  display: block;
+  width: 100%;
+  height: 55vw;
+  max-height: 309px;
+  border: 0;
+  background: transparent;
+}
+
+.bet-watch-live__close {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  z-index: 10;
+  display: flex;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #ffffff;
+  cursor: pointer;
+}
 
 .bet-markets-loading {
   min-height: 360px;

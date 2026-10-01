@@ -37,6 +37,8 @@ import {
   sortEventTypesForSportNav,
   CASINO_EVENT_TYPE_ID,
   TENNIS_EVENT_TYPE_ID,
+  HORSE_RACING_EVENT_TYPE_ID,
+  GREYHOUND_RACING_EVENT_TYPE_ID,
 } from '@/composables/useEventTypes'
 import { useAuthStore } from '@/stores/auth'
 import { subHeaderIconSrc } from '@/constants/subHeaderIcons'
@@ -91,7 +93,7 @@ const tabs = computed(() => {
   const toSportTab = (eventType) => ({
     key: `sport-${eventType.id}`,
     iconKey: eventType.key,
-    label: eventType.name,
+    label: sportTabLabel(eventType),
     path: getEventTypeRoute(eventType),
     eventType,
     disabled: isDemoUser.value && eventType.name === 'Sports book',
@@ -110,6 +112,13 @@ const tabs = computed(() => {
 
   return [homeTab, affiliateTab, ...sportTabs]
 })
+
+function sportTabLabel(eventType) {
+  const id = Number(eventType?.id)
+  if (id === HORSE_RACING_EVENT_TYPE_ID || eventType.key === 'horseRacing') return 'Horse'
+  if (id === GREYHOUND_RACING_EVENT_TYPE_ID || eventType.key === 'greyhoundRacing') return 'Greyhound'
+  return eventType.name
+}
 
 function getEventTypeRoute(eventType) {
   if (eventType.name === 'Sports book') {
@@ -149,7 +158,10 @@ function isTabActive(tab) {
     return route.path.startsWith('/casino')
   }
 
-  if (getRacingRacesListRoute(eventType)) return false
+  const racingList = getRacingRacesListRoute(eventType)
+  if (racingList && (route.path === racingList || route.path.startsWith(`${racingList}/`))) {
+    return true
+  }
 
   if (route.path === '/sports-book' && eventType.name === 'Sports book') return true
 
@@ -290,7 +302,7 @@ function isTabActive(tab) {
     height: 44px;
     padding: 5px 12px;
     gap: 0;
-    overflow-x: auto;
+    overflow-x: scroll;
     overflow-y: auto;
     scrollbar-width: auto;
     scrollbar-color: auto;
@@ -299,9 +311,25 @@ function isTabActive(tab) {
   }
 
   .header-subheader__scroll::-webkit-scrollbar {
+    -webkit-appearance: none;
+    appearance: none;
     display: block;
     height: 6px;
-    width: 6px;
+    width: 4px;
+    background: transparent;
+  }
+
+  .header-subheader__scroll::-webkit-scrollbar-track {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+  }
+
+  .header-subheader__scroll::-webkit-scrollbar-thumb,
+  .header-subheader__scroll::-webkit-scrollbar-thumb:hover {
+    background: #d2d2d2;
+    border: none;
+    border-radius: 8px;
   }
 
   .header-subheader__tab {

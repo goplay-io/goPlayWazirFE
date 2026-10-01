@@ -254,13 +254,13 @@
 
 @media (max-width: 767.98px) {
   .bookmaker-bo-root .bookmaker-bo-odds-strip:has(.status-overlay) {
-    background: rgb(107, 114, 128) !important;
-    border-radius: var(--sports-bet-odds-btn-radius) !important;
+    background: transparent !important;
+    border-radius: 0 !important;
   }
 
   .bookmaker-bo-root .bookmaker-bo-odds-strip:has(.status-overlay) .bookmaker-bo-back-cell {
-    background: transparent !important;
-    border-radius: 0 !important;
+    background: rgb(107, 114, 128) !important;
+    border-radius: var(--sports-bet-odds-btn-radius) !important;
   }
 }
 
