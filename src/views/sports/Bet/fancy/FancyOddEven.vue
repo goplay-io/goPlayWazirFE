@@ -18,6 +18,7 @@ import FancyPositionsDialog from './FancyPositionsDialog.vue';
 import FancyMarketStatusBlock from './FancyMarketStatusBlock.vue';
 import BookLadderIcon from '@/components/BookLadderIcon.vue';
 import FancyRowCountdown from '@/components/FancyRowCountdown.vue';
+import { formatOddEvenDisplayOdd } from '@/utils/oddEvenOdds';
 
 const betStore = useBetStore();
 
@@ -163,13 +164,14 @@ const selectBet = async (odd, backOrLay, runnerId, runnerName, marketId, eventId
       marketId,
       eventId: eventId || props.eventId,
       type: 'F',
-      betting_type: 'F',
-      marketTypeName: 'Fancy',
+      betting_type: 'ODD_EVEN',
+      marketTypeName: 'OddEven',
+      is_odd_even: true,
       base,
       minAmount,
       maxAmount,
       rate: fancyOdd,
-    bet_delay: props.fancyData?.find((market) => String(market?.market_id) === String(marketId))?.bet_delay,
+      bet_delay: props.fancyData?.find((market) => String(market?.market_id) === String(marketId))?.bet_delay,
     },
     props.eventTypeId,
     props.eventName,
@@ -196,7 +198,7 @@ const getMinMaxValues = (market) => {
 
 const getOddEvenLowerValue = (market) => {
   const maxBet = market?.max_bet;
-  return maxBet == null ? '0.0' : maxBet;
+  return maxBet == null ? '-' : maxBet;
 };
 
 const getPrices = (market) => getFancyTopPrices(market);
@@ -210,16 +212,7 @@ const isGroupVisible = (key, fancy) => (
   fancy.some((market) => !isMarketHidden(market))
 );
 
-const toOddEvenDisplayOddNumber = (fancyOdd) => {
-  const value = Number(fancyOdd);
-  if (!Number.isFinite(value)) return null;
-  return 1 + value / 100;
-};
-
-const toOddEvenDisplayOdd = (fancyOdd) => {
-  const converted = toOddEvenDisplayOddNumber(fancyOdd);
-  return converted == null ? null : converted.toFixed(2);
-};
+const toOddEvenDisplayOdd = (fancyOdd) => formatOddEvenDisplayOdd(fancyOdd);
 
 const showPositionsDialog = ref(false);
 const dialogPositions = ref([]);
@@ -328,7 +321,7 @@ const { t } = useI18n();
                         class="odd-even-box fancy-odds-btn tw-bg-odds-back hover:tw-bg-odds-back-hover tw-flex-shrink-0 tw-text-black tw-font-bold"
                         variant="elevated" @click="selectBet(
                           getPrices(innerFancy).layOdd,
-                          'lay',
+                          'back',
                           innerFancy.market_id,
                           innerFancy.name,
                           innerFancy.market_id,
@@ -428,7 +421,7 @@ const { t } = useI18n();
                     class="odd-even-box fancy-odds-btn tw-bg-odds-back hover:tw-bg-odds-back-hover tw-flex-shrink-0 tw-text-black tw-font-bold"
                     variant="elevated" @click="selectBet(
                       getPrices(innerFancy).layOdd,
-                      'lay',
+                      'back',
                       innerFancy.market_id,
                       innerFancy.name,
                       innerFancy.market_id,

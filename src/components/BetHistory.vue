@@ -4,6 +4,8 @@ import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
 import { useBetStore } from '@/stores/bet'
 import { useDemoUser } from '@/composables/useDemoUser'
+import { isBackBetForDisplay } from '@/utils/betSideDisplay'
+import { formatBetRecordDisplayOdds } from '@/utils/oddEvenOdds'
 
 const { t } = useI18n()
 
@@ -198,41 +200,15 @@ const toggleEmbeddedEvent = (eventKey) => {
   embeddedExpandedEvents.value = next
 }
 
-/** API may send is_back as 0/1, strings, or alternate field names */
-const isBackBet = (bet) => {
-  const raw =
-    bet?.is_back ??
-    bet?.isBack ??
-    bet?.back_lay ??
-    bet?.backLay ??
-    bet?.BackLay ??
-    bet?.back_or_lay ??
-    bet?.backOrLay
-
-  if (raw === true || raw === 1) return true
-  if (raw === false || raw === 0) return false
-  if (raw == null || raw === '') return false
-
-  if (typeof raw === 'string') {
-    const s = raw.trim().toLowerCase()
-    if (s === '1' || s === 'true' || s === 'back' || s === 'b') return true
-    if (s === '0' || s === 'false' || s === 'lay' || s === 'l' || s === '') return false
-    return false
-  }
-
-  return false
-}
+const isBackBet = (bet) => isBackBetForDisplay(bet)
 
 const getBackLayLabel = (bet) => (isBackBet(bet) ? 'Back' : 'Lay')
 
 const formatEmbeddedTeam = (bet) =>
   bet?.runner_name || bet?.nation || bet?.selection_name || bet?.market_name || '-'
 
-const formatEmbeddedOdds = (bet) => {
-  if (bet?.rate) return `${bet.odd}/${bet.rate}`
-  if (bet?.fancy_odd) return `${bet.odd}/${bet.fancy_odd}`
-  return bet?.odd ?? '-'
-}
+const formatEmbeddedOdds = (bet) => formatBetRecordDisplayOdds(bet, '-')
+const formatBetHistoryOdds = formatEmbeddedOdds
 
 const formatEmbeddedStake = (bet) => bet?.stake ?? bet?.amount ?? '-'
 
@@ -583,7 +559,7 @@ onMounted(async () => {
                                 </div>
                               </div>
                               <div class="tw-text-right tw-text-[11px] tw-font-bold tw-text-[#111827] tw-tabular-nums tw-leading-tight">
-                                {{ bet.odd }}<span v-if="bet?.rate">/{{ bet.rate }}</span>
+                                {{ formatBetHistoryOdds(bet) }}
                               </div>
                               <div class="tw-text-right tw-text-[11px] tw-font-bold tw-text-[#111827] tw-tabular-nums tw-leading-tight">
                                 {{ bet.stake }}
@@ -627,7 +603,7 @@ onMounted(async () => {
                             {{ bet.market_name || bet.runner_name }}
                           </div>
                           <div class="bet-history-odd-cell">
-                            {{ bet.odd }}<span v-if="bet?.rate">/{{ bet.rate }}</span>
+                            {{ formatBetHistoryOdds(bet) }}
                           </div>
                           <div class="bet-history-stake-cell">
                             {{ bet.stake }}
@@ -651,7 +627,7 @@ onMounted(async () => {
                         </div>
                         <div class="tw-text-right tw-text-[11px] tw-font-bold tw-tabular-nums tw-leading-tight"
                           :class="mobileSection ? '' : 'tw-text-[#111827]'">
-                          {{ bet.odd }}<span v-if="bet?.rate">/{{ bet.rate }}</span>
+                          {{ formatBetHistoryOdds(bet) }}
                         </div>
                         <div class="tw-text-right tw-text-[11px] tw-font-bold tw-tabular-nums tw-leading-tight"
                           :class="mobileSection ? '' : 'tw-text-[#111827]'">

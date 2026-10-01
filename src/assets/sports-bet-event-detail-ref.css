@@ -1055,9 +1055,62 @@ body:has(.bet-page-container--wazir-ref),
   }
 
   .bet-page-container--wazir-ref .bet-markets-scrollable .fancy-odds-block .fancy-odds-single,
-  .bet-page-container--wazir-ref .bet-markets-scrollable .fancy-odds-block .fancy-odds-level,
   .bet-page-container--wazir-ref .bet-markets-scrollable .odd-even-odds-block > .tw-flex {
     display: contents !important;
+  }
+
+  /* Fancy 3-level ladder (Diamond): stack No/Yes pairs — do not flatten into one 2-col grid */
+  .bet-page-container--wazir-ref .bet-markets-scrollable .fancy-odds-block.fancy-odds-block--stacked {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2px !important;
+    height: auto !important;
+    min-height: 48px !important;
+    max-height: none !important;
+    grid-template-columns: unset !important;
+    align-items: stretch !important;
+    padding: 1px 0 !important;
+  }
+
+  .bet-page-container--wazir-ref .bet-markets-scrollable .fancy-odds-block--stacked .fancy-odds-level {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 2px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .bet-page-container--wazir-ref .bet-markets-scrollable .fancy-odds-block--stacked .fancy-odds-single {
+    display: contents !important;
+  }
+
+  .bet-page-container--wazir-ref .bet-markets-scrollable .fancy-odds-block--stacked .fancy-odds-btn.v-btn {
+    height: auto !important;
+    min-height: 14px !important;
+    max-height: none !important;
+    flex: 1 1 0 !important;
+  }
+
+  .bet-page-container--wazir-ref .bet-markets-scrollable .fancy-row-cols:has(.fancy-odds-block--stacked),
+  .bet-page-container--wazir-ref .bet-markets-scrollable .fancy-row-cols-khadda:has(.fancy-odds-block--stacked) {
+    height: auto !important;
+    min-height: 48px !important;
+    max-height: none !important;
+    align-items: stretch !important;
+  }
+
+  .bet-page-container--wazir-ref .bet-markets-scrollable .fancy-odds-wrap:has(.fancy-odds-block--stacked) {
+    height: auto !important;
+    min-height: 48px !important;
+    max-height: none !important;
+    align-items: stretch !important;
+  }
+
+  .bet-page-container--wazir-ref .bet-markets-scrollable .fancy-row-cols:has(.fancy-odds-block--stacked) .fancy-row-meta,
+  .bet-page-container--wazir-ref .bet-markets-scrollable .fancy-row-cols-khadda:has(.fancy-odds-block--stacked) .fancy-row-meta {
+    height: auto !important;
+    min-height: 48px !important;
+    align-self: stretch !important;
   }
 
   .bet-page-container--wazir-ref .bet-markets-scrollable .fancy-odds-btn.fancy-odds-btn.v-btn,
@@ -1747,6 +1800,12 @@ body:has(.bet-page-container--wazir-ref),
     box-sizing: border-box !important;
   }
 
+  .bet-page-container--wazir-ref .fancy-row-cols:has(.fancy-odds-block--stacked),
+  .bet-page-container--wazir-ref .fancy-row-cols-khadda:has(.fancy-odds-block--stacked) {
+    height: auto !important;
+    max-height: none !important;
+  }
+
   .bet-page-container--wazir-ref .fancy-row-meta.fancy-row-meta {
     display: flex !important;
     flex-direction: column !important;
@@ -1855,6 +1914,48 @@ body:has(.bet-page-container--wazir-ref),
     padding: 1px 2px 1px 0 !important;
     box-sizing: border-box !important;
     align-items: center !important;
+  }
+
+  .bet-page-container--wazir-ref .fancy-markets-root .fancy-odds-block.fancy-odds-block--stacked {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2px !important;
+    height: auto !important;
+    min-height: 48px !important;
+    max-height: none !important;
+    grid-template-columns: unset !important;
+    align-items: stretch !important;
+  }
+
+  .bet-page-container--wazir-ref .fancy-markets-root .fancy-odds-block--stacked .fancy-odds-level {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 2px !important;
+    width: 100% !important;
+  }
+
+  .bet-page-container--wazir-ref .fancy-markets-root .fancy-odds-block--stacked .fancy-odds-single {
+    display: contents !important;
+  }
+
+  .bet-page-container--wazir-ref .fancy-markets-root .fancy-odds-block--stacked .fancy-odds-btn.v-btn {
+    height: auto !important;
+    min-height: 14px !important;
+    max-height: none !important;
+  }
+
+  .bet-page-container--wazir-ref .fancy-markets-root .fancy-row-cols:has(.fancy-odds-block--stacked),
+  .bet-page-container--wazir-ref .fancy-markets-root .fancy-row-cols-khadda:has(.fancy-odds-block--stacked) {
+    height: auto !important;
+    min-height: 48px !important;
+    max-height: none !important;
+    align-items: stretch !important;
+  }
+
+  .bet-page-container--wazir-ref .fancy-markets-root .fancy-row-cols:has(.fancy-odds-block--stacked) .fancy-row-meta {
+    height: auto !important;
+    min-height: 48px !important;
+    align-self: stretch !important;
   }
 
   .bet-page-container--wazir-ref .fancy-markets-root .odd-even-odds-block > .tw-flex {

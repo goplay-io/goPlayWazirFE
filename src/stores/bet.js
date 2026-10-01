@@ -36,7 +36,8 @@ export const useBetStore = defineStore('bet', () => {
         betting_type: null,
         bet_delay: 0,
         runner_count: null,
-        is_cashout_hedge: false
+        is_cashout_hedge: false,
+        is_odd_even: false,
     })
 
     const bet_status = ref(null)
@@ -118,6 +119,7 @@ export const useBetStore = defineStore('bet', () => {
         bet.value.betting_type = null
         bet.value.bet_delay = 0
         bet.value.is_cashout_hedge = false
+        bet.value.is_odd_even = false
         selectedRunnerId.value = null
         selectedMarketId.value = null
         selectedMarketType.value = null
@@ -145,6 +147,7 @@ export const useBetStore = defineStore('bet', () => {
         bet.value.betting_type = null
         bet.value.bet_delay = 0
         bet.value.is_cashout_hedge = false
+        bet.value.is_odd_even = false
         selectedRunnerId.value = null
         selectedMarketId.value = null
         selectedMarketType.value = null
@@ -219,6 +222,12 @@ export const useBetStore = defineStore('bet', () => {
         bet.value.bet_delay = normalizeBetDelay(bet_delay)
         bet.value.runner_count = runner_count
         bet.value.is_cashout_hedge = Boolean(isCashoutHedge)
+        bet.value.is_odd_even = Boolean(
+            betDetails.is_odd_even ||
+            betDetails.isOddEven ||
+            betDetails.betting_type === 'ODD_EVEN' ||
+            betting_type === 'ODD_EVEN',
+        )
 
         selectedRunnerId.value = runnerId
         selectedMarketId.value = marketId

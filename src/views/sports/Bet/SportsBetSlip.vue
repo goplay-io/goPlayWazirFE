@@ -17,6 +17,8 @@ import { applyStakeInput } from '@/utils/stakeInput.js';
 import BetSlipFeedbackBanner from '@/components/sports/BetSlipFeedbackBanner.vue';
 import BetPlacingOverlay from '@/components/BetPlacingOverlay.vue';
 import { useBetSlipFeedback } from '@/composables/useBetSlipFeedback';
+import { isBackBetForDisplay } from '@/utils/betSideDisplay';
+import { formatBetSlipDisplayOdd } from '@/utils/oddEvenOdds';
 
 
 const props = defineProps({
@@ -151,7 +153,7 @@ const loadUnsettledOpenBets = async () => {
   await refreshUnsettledBets()
 }
 
-const displayOdd = computed(() => props.bet?.odd ?? null);
+const displayOdd = computed(() => formatBetSlipDisplayOdd(props.bet) ?? props.bet?.odd ?? null);
 
 const { increaseOdd, decreaseOdd, canAdjustOdds, usesExchangeOddsLadder } = useOddsLadder(() => props.bet);
 
@@ -164,7 +166,7 @@ const slipPanelFillsRail = computed(
 
 /** Colored panel body (back = blue, lay = pink) when a selection is active */
 const slipTinted = computed(() => !!(props.bet?.odd));
-const slipIsBack = computed(() => slipTinted.value && props.bet?.is_back);
+const slipIsBack = computed(() => slipTinted.value && isBackBetForDisplay(props.bet));
 
 const slipSportName = computed(() => {
   if (props.sportName) return props.sportName;

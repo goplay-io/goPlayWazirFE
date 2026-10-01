@@ -59,3 +59,36 @@ export function getFancyRunnerOverlayStatus(market, { betAllow = true } = {}) {
 
   return 'ACTIVE';
 }
+
+/** Odd/Even fancy markets are both back-side bets in UI and reports. */
+export function isOddEvenBetRecord(item) {
+  if (!item) return false
+
+  const bettingType = String(
+    item.betting_type ?? item.bettingType ?? item.odd_type ?? item.oddType ?? '',
+  )
+    .trim()
+    .toUpperCase()
+    .replace(/\s+/g, '_')
+  if (bettingType === 'ODD_EVEN' || bettingType === 'ODDEVEN') return true
+
+  const fields = [
+    item.market_type_name,
+    item.market_type,
+    item.market_name,
+    item.market,
+    item.type,
+    item.fancy_category,
+    item.category,
+    item.tab_name,
+  ]
+    .filter(Boolean)
+    .map((value) => String(value).toLowerCase())
+
+  return fields.some(
+    (value) =>
+      value.includes('odd/even') ||
+      value.includes('odd even') ||
+      value.includes('oddeven'),
+  )
+}
