@@ -1,24 +1,27 @@
 <template>
     <v-container fluid class="casino-page tw-w-full tw-max-w-none tw-px-0 tw-pb-2 md:tw-pb-4 tw-pt-0 md:tw-pt-0">
         <div class="casino-listing-top-bar">
-            <div class="casino-listing-top-bar__title-row">
-                <button
-                    type="button"
-                    class="casino-listing-top-bar__back"
-                    :aria-label="t('common.back')"
-                    @click="goBack"
-                >
-                    <v-icon icon="mdi-chevron-left" size="22" />
-                </button>
-                <h1 class="casino-listing-top-bar__title">
-                    {{ t('casino.home.title') }}
-                </h1>
-            </div>
+<div class="casino-listing-top-bar__title-row">
+    <button
+        type="button"
+        class="casino-listing-top-bar__back casino-mobile-back"
+        :aria-label="t ? t('common.back') : 'Back'"
+        @click="goBack"
+    >
+        <v-icon v-if="typeof t === 'function'" icon="mdi-chevron-left" size="22" />
+        <svg v-else xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 7 12" fill="none" aria-hidden="true">
+            <path d="M5.3673 11.2346L0 5.8673L5.3673 0.5L6.32 1.4527L1.90539 5.8673L6.32 10.2819L5.3673 11.2346Z" fill="#49915e" />
+        </svg>
+    </button>
+    <h1 class="casino-listing-top-bar__title">
+        {{ t('casino.home.title') }}
+    </h1>
+</div>
             <CasinoSearch
                 v-model="searchQuery"
                 :result-count="filteredGames.length"
                 :games="filteredGames"
-                :placeholder="t('casino.home.searchPlaceholder')"
+                placeholder="Search Games (Atleast 3 chars.....)"
                 class="casino-listing-top-bar__search"
                 @game-selected="playGame"
             />
@@ -421,6 +424,11 @@ watch(isLoggedInUser, async (isLoggedIn) => {
         activeProduct.value = 'all';
     }
 });
+
+function goBack() {
+    if (window.history.length > 1) router.back()
+    else router.push('/sports/live')
+}
 
 const handleImageError = (event) => {
     event.target.style.display = 'none';

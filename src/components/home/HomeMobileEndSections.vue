@@ -16,7 +16,9 @@ const props = defineProps({
 })
 
 /** Homepage bottom copy lives in LiveShowcaseSections (below providers). */
-const showBottomText = computed(() => !props.footerOnly && route.name !== 'live')
+const showBottomText = computed(
+  () => !props.footerOnly && route.name !== 'live' && route.name !== 'sport',
+)
 </script>
 
 <template>

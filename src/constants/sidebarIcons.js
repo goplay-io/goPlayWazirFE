@@ -40,6 +40,12 @@ export const REFERENCE_SIDEBAR_ICON_FILES = {
   100000: 'featured-icon.svg',
   99989: 'Mac88.svg',
   'sidebar-slots': 'slots.svg',
+  'sidebar-aviator': 'aviator.svg',
+  'sidebar-download-apk': 'download-apk.svg',
+  'sidebar-responsible': 'responsible-gambling.svg',
+  'sidebar-privacy': 'privacy-policy.svg',
+  'sidebar-exclusion': 'exclusion-policy.svg',
+  'sidebar-rules': 'rules.svg',
   'quick-fantasy11': 'featured-icon.svg',
   'quick-cricket-battle': 'cricket.svg',
 }

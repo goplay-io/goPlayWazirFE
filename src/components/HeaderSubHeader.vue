@@ -7,6 +7,7 @@
         :to="tab.path"
         :class="[
           'header-subheader__tab',
+          tab.key === 'affiliate' ? 'header-subheader__tab--affiliate' : '',
           isTabActive(tab) ? 'header-subheader__tab--active' : '',
           tab.disabled ? 'header-subheader__tab--disabled' : '',
         ]"
@@ -16,9 +17,10 @@
         <img
           :src="subHeaderIconSrc(tab.iconKey, isTabActive(tab))"
           alt=""
-          class="header-subheader__icon"
-          width="16"
-          height="16"
+          :class="['header-subheader__icon', tab.iconKey === 'affiliate' ? 'header-subheader__icon--affiliate' : '']"
+          :width="iconSize(tab.iconKey)"
+          :height="iconSize(tab.iconKey)"
+          :style="{ width: iconSize(tab.iconKey) + 'px', height: iconSize(tab.iconKey) + 'px' }"
         />
         <span class="header-subheader__label">{{ tab.label }}</span>
       </router-link>
@@ -38,6 +40,17 @@ import {
 } from '@/composables/useEventTypes'
 import { useAuthStore } from '@/stores/auth'
 import { subHeaderIconSrc } from '@/constants/subHeaderIcons'
+
+const ICON_PX = {
+  home: 17,
+  affiliate: 15,
+  sportsBook: 20,
+  kabaddi: 20,
+}
+
+function iconSize(iconKey) {
+  return ICON_PX[iconKey] || 16
+}
 
 const route = useRoute()
 const { t } = useI18n()
@@ -66,6 +79,13 @@ const tabs = computed(() => {
     path: '/sports/live',
   }
 
+  const affiliateTab = {
+    key: 'affiliate',
+    iconKey: 'affiliate',
+    label: t('components.mobileBottomNav.affiliate'),
+    path: '/affiliate',
+  }
+
   const list = orderedSportEventTypes.value
   const tennisIdx = list.findIndex((type) => Number(type.id) === TENNIS_EVENT_TYPE_ID)
   const toSportTab = (eventType) => ({
@@ -88,7 +108,7 @@ const tabs = computed(() => {
     ]
   }
 
-  return [homeTab, ...sportTabs]
+  return [homeTab, affiliateTab, ...sportTabs]
 })
 
 function getEventTypeRoute(eventType) {
@@ -112,6 +132,7 @@ function isHomeActive() {
 
 function isTabActive(tab) {
   if (tab.key === 'home') return isHomeActive()
+  if (tab.key === 'affiliate') return route.path.startsWith('/affiliate')
 
   const eventType = tab.eventType
   if (!eventType) return false
@@ -238,6 +259,16 @@ function isTabActive(tab) {
   object-fit: contain;
 }
 
+.header-subheader__tab--affiliate {
+  min-width: 100px;
+}
+
+.header-subheader__icon--affiliate {
+  width: 15px;
+  height: 15px;
+  filter: invert(1);
+}
+
 .header-subheader__label {
   font-size: 12px;
   font-weight: 400;
@@ -252,20 +283,25 @@ function isTabActive(tab) {
 }
 
 @media (max-width: 767.98px) {
-  /* Reference SubHeader.tsx: px-1 ps-4 — hide scrollbar on mobile */
+  /* Reference mobile nav: 44px bar, tabs on top, horizontal scrollbar along the bottom */
   .header-subheader__scroll {
-    min-height: 38px;
-    height: 38px;
-    padding: 5px 4px 5px 16px;
+    align-items: flex-start;
+    min-height: 44px;
+    height: 44px;
+    padding: 5px 12px;
     gap: 0;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    overflow-x: auto;
+    overflow-y: auto;
+    scrollbar-width: auto;
+    scrollbar-color: auto;
     scrollbar-gutter: auto;
+    -ms-overflow-style: auto;
   }
 
   .header-subheader__scroll::-webkit-scrollbar {
-    display: none;
-    height: 0;
+    display: block;
+    height: 6px;
+    width: 6px;
   }
 
   .header-subheader__tab {
@@ -273,10 +309,29 @@ function isTabActive(tab) {
     height: 28px;
     padding: 4px 9px;
     min-width: 80px;
+    color: #d2d2d2;
+  }
+
+  .header-subheader__tab--affiliate {
+    min-width: 100px;
+  }
+
+  .header-subheader__tab--active .header-subheader__icon:not(.header-subheader__icon--affiliate) {
+    width: 17px;
+    height: 17px;
   }
 
   .header-subheader__label {
     font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    color: #d2d2d2;
+  }
+
+  .header-subheader__tab--active .header-subheader__label {
+    font-weight: 600;
+    line-height: 20px;
+    color: #49915e;
   }
 }
 </style>

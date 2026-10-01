@@ -26,6 +26,8 @@
 
   .header-subheader-wrap {
     background: var(--color-login-input-bg, #23201f) !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 
   /*
@@ -49,12 +51,24 @@
 
   .header-toolbar-row,
   .guest-toolbar-row {
-    padding: 0 8px;
+    padding: 0 4px 0 0;
     min-height: 54px !important;
     height: 54px !important;
     box-sizing: border-box;
     align-items: center !important;
+    justify-content: space-between;
+    gap: 4px !important;
     border-bottom: none;
+  }
+
+  .guest-header-block--logo {
+    display: flex !important;
+    align-items: center !important;
+    align-self: stretch !important;
+    height: 54px !important;
+    flex: 1 1 auto;
+    min-width: 0;
+    gap: 0;
   }
 
   .header-toolbar-left,
@@ -85,33 +99,40 @@
   .header-brand-img.img-fluid,
   .guest-header-brand .header-brand-img {
     display: block;
-    height: auto;
-    max-height: 45px;
-    width: auto;
-    max-width: 130px;
-    object-fit: contain;
-    object-position: left center;
+    height: 45px !important;
+    max-height: 45px !important;
+    width: auto !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+    object-position: left center !important;
   }
 
   .guest-header-brand.logo.header-brand-link,
   .header-logo-area .logo.header-brand-link {
-    padding-left: 8px;
+    display: flex !important;
+    align-items: center !important;
+    height: 54px !important;
+    min-width: 0;
+    padding-left: 0 !important;
   }
 
+  .guest-app-bar .guest-toolbar-row .header-mobile-menu-btn,
+  .guest-app-bar .guest-toolbar-row .guest-mobile-menu-btn,
+  .header-bar .header-toolbar-row .header-mobile-menu-btn,
   .header-mobile-menu-btn,
   .guest-mobile-menu-btn {
     flex-shrink: 0;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 28px !important;
-    height: 28px !important;
-    margin-top: 4px;
-    margin-left: 0 !important;
-    margin-right: 0;
-    padding: 0;
+    width: auto !important;
+    height: 54px !important;
+    margin-top: 0 !important;
+    margin-left: 4px !important;
+    margin-right: 0 !important;
+    padding: 0 4px !important;
     border: 0;
-    border-radius: 8px;
+    border-radius: 0 !important;
     background: transparent;
     color: #ffffff;
   }
@@ -119,10 +140,10 @@
   .header-mobile-menu-btn__icon,
   .guest-mobile-menu-btn__icon {
     display: block;
-    width: 12px !important;
-    height: 14px !important;
-    max-width: 12px !important;
-    max-height: 14px !important;
+    width: 16px !important;
+    height: 19px !important;
+    max-width: 16px !important;
+    max-height: 19px !important;
     object-fit: contain;
   }
 
@@ -141,10 +162,116 @@
     align-items: center !important;
   }
 
+  .guest-toolbar-right:has(.guest-auth-pair) {
+    gap: 0 !important;
+  }
+
   .guest-auth-pair {
     gap: 4px !important;
-    margin: 0;
+    margin: 0 !important;
     flex-shrink: 0;
+  }
+
+  .guest-header-search-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin: 0 2px 0 0;
+    padding: 0 4px;
+    border: 0;
+    background: transparent;
+    color: #49915e;
+    cursor: pointer;
+  }
+
+  .guest-header-search-btn svg {
+    display: block;
+    width: 14px;
+    height: 14px;
+  }
+
+  .guest-header-block--searching {
+    flex: 1 1 auto !important;
+    width: auto !important;
+    max-width: none !important;
+    min-width: 0 !important;
+  }
+
+  .guest-header-search-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: 1 1 auto;
+    min-width: 0;
+    width: 100%;
+    height: 54px;
+    margin-left: 8px;
+  }
+
+  .guest-header-search-field__input {
+    width: 100%;
+    height: 24px;
+    margin: 0;
+    padding: 0 24px 0 0;
+    border: 0;
+    border-radius: 0;
+    outline: none;
+    background: transparent;
+    color: #ffffff;
+    caret-color: #ffffff;
+    font-family: Lato, "Helvetica Neue", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+  }
+
+  .guest-header-search-field__input::placeholder {
+    color: #9ca3af;
+    opacity: 1;
+    font-family: Lato, "Helvetica Neue", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  .guest-header-search-field__close {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    right: 4px;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0 0 16px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .guest-header-search-field__close svg {
+    display: block;
+    width: 14px;
+    height: 19px;
+  }
+
+  .guest-header-search-dropdown {
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    z-index: 2000;
+  }
+
+  .header-ref-lang-btn--mobile {
+    height: 34px !important;
+    width: auto !important;
+    padding: 8px !important;
+    margin-left: 8px !important;
+    border: 1px solid #545454 !important;
+    border-radius: 9999px !important;
+    background: #23201f !important;
+    color: #ffffff !important;
   }
 
   /* Reference Header.tsx guest-ref-auth-btn (shared GuestLayout + Header) */
@@ -184,17 +311,28 @@
   }
 
   .guest-ref-auth-btn--mobile {
-    height: 27px;
-    min-height: 27px;
-    padding: 4px 8px;
-    border-radius: 6px;
-    font-size: 10px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    height: 30px !important;
+    min-height: 30px !important;
+    padding: 6px 10px !important;
+    border: 0 !important;
+    border-radius: 6px !important;
+    font-family: Lato, "Helvetica Neue", sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 800 !important;
+    line-height: 18px !important;
+    letter-spacing: normal !important;
+    text-transform: none !important;
+  }
+
+  .guest-ref-auth-btn--mobile.guest-ref-auth-btn--login {
+    background: #49915e !important;
+    color: #171716 !important;
   }
 
   .guest-ref-auth-btn--mobile.guest-ref-auth-btn--register {
-    color: var(--color-wazir-green, #49915e);
+    background: #48494b !important;
+    color: #49915e !important;
+    border: 0 !important;
   }
 
   .guest-ref-auth-btn--mobile .guest-ref-auth-btn__icon {

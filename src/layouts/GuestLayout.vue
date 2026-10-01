@@ -6,7 +6,7 @@
     app
     :height="guestAppBarHeightPx"
     class="tw-bg-theme-header guest-app-bar tw-py-0"
-    :class="{ 'guest-app-bar--search-open': !isMobile && showSearchDropdown }" elevation="0">
+    :class="{ 'guest-app-bar--search-open': (!isMobile && showSearchDropdown) || (isMobile && showInlineSearch) }" elevation="0">
     <div class="guest-app-bar-inner header-shell tw-flex tw-flex-col tw-w-full tw-max-w-full tw-min-h-0">
       <HeaderAnnouncementBar
         v-if="showAnnouncementStrip"
@@ -18,7 +18,10 @@
         :class="{ 'guest-toolbar-row--guest-desktop': !isMobile && !authStore.isDemoUser && !isAuthPage }"
       >
         <!-- Block 1: Logo (+ mobile menu) -->
-        <div class="guest-header-block guest-header-block--logo">
+        <div
+          class="guest-header-block guest-header-block--logo"
+          :class="{ 'guest-header-block--searching': isMobile && showInlineSearch }"
+        >
           <router-link v-if="isCasinoPage && authStore.isUiAuthenticated" to="/sports/live"
             class="guest-mobile-menu-btn guest-mobile-home-btn md:tw-hidden"
             :aria-label="t('components.mobileBottomNav.live')">
@@ -26,16 +29,47 @@
           </router-link>
           <button v-else type="button" class="guest-mobile-menu-btn md:tw-hidden" :aria-label="t('common.menu')"
             @click="uiStore.toggleSidebar()">
-            <img
-              src="/svg/burger-menu.png"
-              alt=""
-              class="guest-mobile-menu-btn__icon"
-              width="12"
-              height="14"
-            />
+            <svg class="guest-mobile-menu-btn__icon" xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 448 512" fill="#ffffff" aria-hidden="true">
+              <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+            </svg>
           </button>
 
+          <div v-if="isMobile && showInlineSearch" class="guest-header-search-field">
+            <input
+              ref="mobileSearchInput"
+              v-model="inlineSearchQuery"
+              type="text"
+              class="guest-header-search-field__input"
+              placeholder=" Search Events(At least 3 letters)..."
+              @focus="ensureInlineSearchData"
+              @keydown.enter.prevent="submitInlineSearch"
+            />
+            <button
+              type="button"
+              class="guest-header-search-field__close"
+              aria-label="Cancel Search"
+              @click="closeInlineSearch"
+            >
+              <svg width="14" height="19" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M7.96881 6.99994L12.448 2.70994C12.6441 2.52164 12.7543 2.26624 12.7543 1.99994C12.7543 1.73364 12.6441 1.47825 12.448 1.28994C12.2518 1.10164 11.9858 0.99585 11.7084 0.99585C11.431 0.99585 11.165 1.10164 10.9688 1.28994L6.50006 5.58994L2.03131 1.28994C1.83516 1.10164 1.56912 0.99585 1.29173 0.99585C1.01433 0.99585 0.748292 1.10164 0.552142 1.28994C0.355992 1.47825 0.245796 1.73364 0.245796 1.99994C0.245796 2.26624 0.355992 2.52164 0.552142 2.70994L5.03131 6.99994L0.552142 11.2899C0.454508 11.3829 0.377014 11.4935 0.32413 11.6154C0.271246 11.7372 0.244019 11.8679 0.244019 11.9999C0.244019 12.132 0.271246 12.2627 0.32413 12.3845C0.377014 12.5064 0.454508 12.617 0.552142 12.7099C0.648978 12.8037 0.764188 12.8781 0.891124 12.9288C1.01806 12.9796 1.15421 13.0057 1.29173 13.0057C1.42924 13.0057 1.56539 12.9796 1.69233 12.9288C1.81926 12.8781 1.93447 12.8037 2.03131 12.7099L6.50006 8.40994L10.9688 12.7099C11.0656 12.8037 11.1809 12.8781 11.3078 12.9288C11.4347 12.9796 11.5709 13.0057 11.7084 13.0057C11.8459 13.0057 11.9821 12.9796 12.109 12.9288C12.2359 12.8781 12.3511 12.8037 12.448 12.7099C12.5456 12.617 12.6231 12.5064 12.676 12.3845C12.7289 12.2627 12.7561 12.132 12.7561 11.9999C12.7561 11.8679 12.7289 11.7372 12.676 11.6154C12.6231 11.4935 12.5456 11.3829 12.448 11.2899L7.96881 6.99994Z" fill="#49915e" />
+              </svg>
+            </button>
+            <div v-if="showSearchDropdown" class="header-search-dropdown guest-header-search-dropdown">
+              <div class="header-search-dropdown__body">
+                <SearchResults
+                  compact
+                  :search-query="debouncedSearchQuery"
+                  :loading="searchLoading"
+                  :error="searchError"
+                  :casino-games="casinoGames"
+                  @event-selected="handleInlineEventSelected"
+                  @game-selected="handleInlineGameSelected"
+                />
+              </div>
+            </div>
+          </div>
           <HeaderBrandLink
+            v-else
             class="guest-header-brand"
             :alt="t('components.guestLayout.logoAlt')"
           />
@@ -87,7 +121,10 @@
         </div>
 
         <!-- Block 4: Auth / demo / mobile actions (right end) -->
-        <div class="guest-header-block guest-header-block--auth guest-toolbar-right tw-flex tw-items-center tw-justify-end tw-min-w-0">
+        <div
+          v-show="!(isMobile && showInlineSearch)"
+          class="guest-header-block guest-header-block--auth guest-toolbar-right tw-flex tw-items-center tw-justify-end tw-min-w-0"
+        >
           <button
             v-if="isMobile && (authStore.isUiAuthenticated || authStore.isDemoUser) && !isAuthPage"
             type="button"
@@ -171,17 +208,43 @@
                 </svg>
               </button>
             </div>
-            <div v-else class="guest-auth-pair tw-inline-flex tw-items-center">
-              <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--login guest-ref-auth-btn--mobile" @click="handleGuestLoginClick">
-                <span>{{ t('components.mobileBottomNav.login') }}</span>
+            <template v-else>
+              <button
+                type="button"
+                class="guest-header-search-btn"
+                :aria-label="t('common.search')"
+                @click="openInlineSearch"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M23.7068 22.2929L16.8818 15.468C18.2038 13.835 18.9998 11.76 18.9998 9.50008C18.9998 4.26213 14.7378 0.000152588 9.49988 0.000152588C4.26193 0.000152588 0 4.26208 0 9.50003C0 14.738 4.26197 19 9.49992 19C11.7599 19 13.8349 18.204 15.4678 16.882L22.2928 23.7069C22.4878 23.9019 22.7438 23.9999 22.9998 23.9999C23.2558 23.9999 23.5118 23.9019 23.7068 23.7069C24.0978 23.3159 24.0978 22.6839 23.7068 22.2929ZM9.49992 17C5.36395 17 2 13.636 2 9.50003C2 5.36405 5.36395 2.0001 9.49992 2.0001C13.6359 2.0001 17 5.36405 17 9.50003C17 13.636 13.6359 17 9.49992 17Z" fill="currentColor" />
+                </svg>
               </button>
-              <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--register guest-ref-auth-btn--mobile" @click="handleGuestSignupClick">
-                <span>{{ t('auth.login.signupCta') }}</span>
+              <div class="guest-auth-pair tw-inline-flex tw-items-center">
+                <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--login guest-ref-auth-btn--mobile" @click="handleGuestLoginClick">
+                  <span>{{ t('components.mobileBottomNav.login') }}</span>
+                </button>
+                <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--register guest-ref-auth-btn--mobile" @click="handleGuestSignupClick">
+                  <span>{{ t('auth.login.signupCta') }}</span>
+                </button>
+              </div>
+              <button
+                type="button"
+                class="header-ref-lang-btn header-ref-lang-btn--mobile"
+                :aria-label="t('components.sidebar.selectlanguage')"
+                @click="openHeaderLanguageModal"
+              >
+                <svg class="header-ref-lang-btn__globe" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
+                  <path d="M3.6 9h16.8" />
+                  <path d="M3.6 15h16.8" />
+                  <path d="M11.5 3a17 17 0 0 0 0 18" />
+                  <path d="M12.5 3a17 17 0 0 1 0 18" />
+                </svg>
+                <svg class="header-ref-lang-btn__chevron" fill="currentColor" width="12" height="12" viewBox="0 0 330 330" aria-hidden="true">
+                  <path d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393 c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393 s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z" />
+                </svg>
               </button>
-              <button type="button" class="guest-ref-auth-btn guest-ref-auth-btn--get-id guest-ref-auth-btn--mobile" @click="handleGuestGetIdClick">
-                <span>{{ t('auth.login.getIdCta') }}</span>
-              </button>
-            </div>
+            </template>
           </template>
         </div>
       </div>
@@ -197,34 +260,6 @@
 
   </v-app-bar>
 
-  <MobileSearchModal
-    :open="isMobile && showInlineSearch && !isAuthPage"
-    :title="t('common.search')"
-    :close-label="t('common.close')"
-    @close="closeInlineSearch"
-  >
-    <template #input>
-      <input
-        ref="mobileSearchInput"
-        v-model="inlineSearchQuery"
-        type="text"
-        :placeholder="t('components.searchDialog.mobilePlaceholder')"
-        @focus="ensureInlineSearchData"
-        @keydown.enter.prevent="submitInlineSearch"
-      />
-    </template>
-    <template v-if="showSearchDropdown" #results>
-      <SearchResults
-        compact
-        :search-query="debouncedSearchQuery"
-        :loading="searchLoading"
-        :error="searchError"
-        :casino-games="casinoGames"
-        @event-selected="handleInlineEventSelected"
-        @game-selected="handleInlineGameSelected"
-      />
-    </template>
-  </MobileSearchModal>
 
   <!-- Main content with sidebar -->
   <div
@@ -355,13 +390,9 @@
       />
     </div>
 
-    <div v-if="showMobileBottomNav" class="layout-mobile-bottom-nav-spacer md:tw-hidden" aria-hidden="true" />
-
     <Footer v-if="showSiteFooter" />
     </div>
   </div>
-
-  <MobileBottomNav v-if="showMobileBottomNav" />
 
   <Teleport to="body">
     <DesktopCustomerSupportFloat />
@@ -416,8 +447,6 @@ import { USER_DRAWER_NAV_SECTIONS } from '@/constants/userDrawerNavItems.js'
 import HeaderBrandLink from '@/components/HeaderBrandLink.vue'
 import SearchResults from '@/components/SearchResults.vue'
 import SearchMagnify from '@/components/Icons/SearchMagnify.vue'
-import MobileSearchModal from '@/components/MobileSearchModal.vue'
-import MobileBottomNav from '@/components/MobileBottomNav.vue'
 import DesktopCustomerSupportFloat from '@/components/DesktopCustomerSupportFloat.vue'
 import SportsSharedRail from '@/components/sports/SportsSharedRail.vue'
 import LayoutRightRail from '@/components/layout/LayoutRightRail.vue'
@@ -546,10 +575,6 @@ const useReferenceSportsLayout = computed(
     !isCasinoListingPage.value &&
     !isSportsBookPage.value &&
     !isFullWidthPage.value,
-)
-
-const showMobileBottomNav = computed(
-  () => isMobile.value && !isClearScreenPage.value,
 )
 
 const useMobileBodyScroll = computed(
@@ -832,7 +857,8 @@ watch(inlineSearchQuery, (value) => {
 
 watch(showInlineSearch, (isOpen) => {
   if (typeof document === 'undefined') return
-  document.body.style.overflow = isOpen ? 'hidden' : ''
+  document.body.style.overflow = ''
+  if (isOpen && !isMobile.value) document.body.style.overflow = 'hidden'
 })
 
 watch(isAuthPage, (onAuthPage) => {
@@ -2103,7 +2129,10 @@ useAppBarHeightObserver(guestAppBarRef)
   }
 
   .guest-app-bar--search-open .mobile-inline-search-wrap,
-  .guest-app-bar--search-open .mobile-inline-search-wrap * {
+  .guest-app-bar--search-open .mobile-inline-search-wrap *,
+  .guest-app-bar--search-open .guest-header-search-field,
+  .guest-app-bar--search-open .guest-header-search-field *,
+  .guest-app-bar--search-open .guest-mobile-menu-btn {
     pointer-events: auto;
   }
 

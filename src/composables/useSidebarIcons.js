@@ -48,13 +48,13 @@ export function getSidebarIconSrc(item, isMobileDrawer = false) {
 
   const id = item.id
 
+  const referenceIcon = getReferenceSidebarIconSrc(item)
+  if (referenceIcon) return referenceIcon
+
   if (isMobileDrawer) {
     if (MOBILE_DRAWER_ICON_PATHS[id]) return MOBILE_DRAWER_ICON_PATHS[id]
     const mobileEntry = MOBILE_DRAWER_ICON_BY_EVENT_ID[id]
     if (mobileEntry) return mobileEntry
-  } else {
-    const referenceIcon = getReferenceSidebarIconSrc(item)
-    if (referenceIcon) return referenceIcon
   }
 
   const normalizedName = String(item.name || '').toLowerCase().replace(/[^a-z0-9]/g, '')
