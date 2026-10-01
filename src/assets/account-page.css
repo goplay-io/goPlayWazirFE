@@ -18,6 +18,13 @@
   color: var(--account-text);
 }
 
+@media (max-width: 767px) {
+  .account-page {
+    min-height: calc(100dvh - var(--app-header-inset, 44px) - var(--mobile-bottom-nav-inset, 0px));
+    background: var(--account-page-bg) !important;
+  }
+}
+
 /* Static info pages keep a light shell when combined with .account-page */
 .info-page.account-page {
   background: #ffffff;
@@ -88,7 +95,7 @@
 .account-page-header__title {
   margin: 0;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 22.5px;
   letter-spacing: normal;
   color: #171716;
@@ -108,6 +115,7 @@
     width: calc(100% - (var(--account-page-mobile-gutter) * 2));
     margin-left: var(--account-page-mobile-gutter);
     margin-right: var(--account-page-mobile-gutter);
+    margin-bottom: 5px;
   }
 
   .account-page .account-page-filters {

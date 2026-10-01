@@ -614,7 +614,7 @@ onUnmounted(() => {
                                                                             @click="toggleSectionFeedLive(sportGroup.id)"
                                                                         >
                                                                             <FeedModePillPrefix :active="isSportFeedLiveActive(sportGroup.id)" />
-                                                                            LIVE
+                                                                            Live
                                                                         </button>
                                                                         <button
                                                                             type="button"
@@ -623,7 +623,7 @@ onUnmounted(() => {
                                                                             @click="toggleSectionFeedVirtual(sportGroup.id)"
                                                                         >
                                                                             <FeedModePillPrefix :active="isSportFeedVirtualActive(sportGroup.id)" />
-                                                                            VIRTUAL
+                                                                            Virtual
                                                                         </button>
                                                                         <button
                                                                             type="button"
@@ -632,7 +632,7 @@ onUnmounted(() => {
                                                                             @click="toggleSectionFeedPremium(sportGroup.id)"
                                                                         >
                                                                             <FeedModePillPrefix :active="isSportFeedPremiumActive(sportGroup.id)" />
-                                                                            PREMIUM
+                                                                            Premium
                                                                         </button>
                                                                     </div>
                                                                 </div>
@@ -730,7 +730,7 @@ onUnmounted(() => {
                                                                     @click="toggleSectionFeedLive(sportGroup.id)"
                                                                 >
                                                                     <FeedModePillPrefix :active="isSportFeedLiveActive(sportGroup.id)" />
-                                                                    LIVE
+                                                                    Live
                                                                 </button>
                                                                 <button
                                                                     type="button"
@@ -739,7 +739,7 @@ onUnmounted(() => {
                                                                     @click="toggleSectionFeedVirtual(sportGroup.id)"
                                                                 >
                                                                     <FeedModePillPrefix :active="isSportFeedVirtualActive(sportGroup.id)" />
-                                                                    VIRTUAL
+                                                                    Virtual
                                                                 </button>
                                                                 <button
                                                                     type="button"
@@ -748,7 +748,7 @@ onUnmounted(() => {
                                                                     @click="toggleSectionFeedPremium(sportGroup.id)"
                                                                 >
                                                                     <FeedModePillPrefix :active="isSportFeedPremiumActive(sportGroup.id)" />
-                                                                    PREMIUM
+                                                                    Premium
                                                                 </button>
                                                             </div>
                                                         </div>
@@ -1357,14 +1357,17 @@ onUnmounted(() => {
     }
 
     .live-inplay-header.live-inplay-header--mobile .feed-mode-pill {
-        padding: 8px 7px;
-        min-height: 24px;
-        font-size: 10px;
+        padding: 2px 8px;
+        min-height: 20px;
+        height: 20px;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: capitalize;
     }
 
     .live-inplay-header.live-inplay-header--mobile .feed-mode-pill--active {
         background: #00ad6f;
-        border-color: transparent;
+        border-color: #00ad6f;
         color: #ffffff;
     }
 
@@ -1429,39 +1432,41 @@ onUnmounted(() => {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 1px;
+    gap: 2px;
     margin: 0;
-    padding: 8px 10px;
-    min-height: 26px;
+    padding: 2px 8px;
+    min-height: 20px;
+    height: 20px;
     box-sizing: border-box;
     border-radius: 9999px;
-    border: 1px solid #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.95);
     background: transparent;
     box-shadow: none;
     color: #ffffff;
-    font-size: 12px; /*9px*/
-    font-weight: 600; /*400*/
+    font-family: var(--font-family-sports, ui-sans-serif, system-ui, sans-serif);
+    font-size: 11px;
+    font-weight: 600;
     line-height: 1;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    text-transform: capitalize;
     cursor: pointer;
     white-space: nowrap;
     -webkit-tap-highlight-color: transparent;
     transition:
-        background 0.25s ease,
-        border-color 0.25s ease,
-        color 0.25s ease,
-        box-shadow 0.25s ease;
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
 }
 
 .feed-mode-pill__prefix {
-    font-weight: 800;
+    font-weight: 700;
     opacity: 1;
+    line-height: 1;
 }
 
 .feed-mode-pill--active {
     background: #00ad6f;
-    border-color: transparent;
+    border-color: #00ad6f;
     color: #ffffff;
     box-shadow: none;
 }

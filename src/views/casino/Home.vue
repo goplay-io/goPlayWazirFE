@@ -1,14 +1,22 @@
 <template>
     <v-container fluid class="casino-page tw-w-full tw-max-w-none tw-px-0 tw-pb-2 md:tw-pb-4 tw-pt-0 md:tw-pt-0">
         <div class="casino-listing-top-bar">
-            <button type="button" class="casino-mobile-back" aria-label="Back" @click="goBack">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 7 12" fill="none" aria-hidden="true">
-                    <path d="M5.3673 11.2346L0 5.8673L5.3673 0.5L6.32 1.4527L1.90539 5.8673L6.32 10.2819L5.3673 11.2346Z" fill="#49915e" />
-                </svg>
-            </button>
-            <h1 class="casino-listing-top-bar__title">
-                {{ t('casino.home.title') }}
-            </h1>
+<div class="casino-listing-top-bar__title-row">
+    <button
+        type="button"
+        class="casino-listing-top-bar__back casino-mobile-back"
+        :aria-label="t ? t('common.back') : 'Back'"
+        @click="goBack"
+    >
+        <v-icon v-if="typeof t === 'function'" icon="mdi-chevron-left" size="22" />
+        <svg v-else xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 7 12" fill="none" aria-hidden="true">
+            <path d="M5.3673 11.2346L0 5.8673L5.3673 0.5L6.32 1.4527L1.90539 5.8673L6.32 10.2819L5.3673 11.2346Z" fill="#49915e" />
+        </svg>
+    </button>
+    <h1 class="casino-listing-top-bar__title">
+        {{ t('casino.home.title') }}
+    </h1>
+</div>
             <CasinoSearch
                 v-model="searchQuery"
                 :result-count="filteredGames.length"
@@ -385,6 +393,14 @@ watch([activeProduct, searchQuery], () => {
 
 const changeProduct = (product) => {
     activeProduct.value = product;
+};
+
+const goBack = () => {
+    if (window.history.length > 1) {
+        router.back();
+        return;
+    }
+    router.push('/sports/live');
 };
 
 const playGame = (game) => {

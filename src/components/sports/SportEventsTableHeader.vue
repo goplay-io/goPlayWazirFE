@@ -20,6 +20,7 @@
             <FeedModePillPrefix :active="feedVirtualActive" />
             Virtual
           </button>
+
           <button type="button" class="feed-mode-pill"
             :class="{ 'feed-mode-pill--active': feedPremiumActive }"
             @click="$emit('toggle-premium')">
@@ -68,8 +69,8 @@ defineProps({
   feedLiveActive: { type: Boolean, default: false },
   feedPremiumActive: { type: Boolean, default: false },
   feedVirtualActive: { type: Boolean, default: false },
-  liveLabel: { type: String, default: 'LIVE' },
-  premiumLabel: { type: String, default: 'PREMIUM' },
+  liveLabel: { type: String, default: 'Live' },
+  premiumLabel: { type: String, default: 'Premium' },
   sortBy: { type: String, default: 'time' },
   showViewBy: { type: Boolean, default: true },
   viewByOptions: {

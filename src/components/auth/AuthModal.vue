@@ -8,12 +8,18 @@
       @keydown.esc="handleClose"
     >
       <div class="auth-ref-modal-panel" role="dialog" aria-modal="true" :aria-labelledby="titleId" @click.stop>
-        <header class="auth-ref-modal-header">
-          <div class="auth-ref-modal-header__top">
-            <button type="button" class="auth-ref-modal-close" :aria-label="t('components.globalSnackbar.close')" @click="handleClose">
-              <v-icon size="16">mdi-close</v-icon>
-            </button>
-          </div>
+        <button
+          v-if="!isForceLogin"
+          type="button"
+          class="auth-ref-modal-close"
+          :aria-label="t('components.globalSnackbar.close')"
+          @click.stop.prevent="handleClose"
+          @pointerdown.stop
+          @touchstart.stop
+        >
+          <v-icon size="16">mdi-close</v-icon>
+        </button>
+        <header class="auth-ref-modal-header" :class="{ 'auth-ref-modal-header--force': isForceLogin }">
           <div class="auth-ref-modal-header__row">
             <h2 :id="titleId" class="auth-ref-modal-title">{{ modalTitle }}</h2>
             <img :src="logoSrc" :alt="t('auth.login.logoAlt')" class="auth-ref-modal-logo" />
@@ -88,6 +94,7 @@ const loginForceMessage = ref('')
 const logoSrc = goplayLogo
 
 const titleId = 'auth-modal-title'
+const isForceLogin = computed(() => uiStore.loginModalForce)
 
 const modalTitle = computed(() => {
   if (authModalView.value === 'signup') return t('auth.signup.signUpTitle')
@@ -116,7 +123,7 @@ function getStoredRedirectMessage() {
 }
 
 function handleClose() {
-  if (uiStore.loginModalForce) return
+  if (isForceLogin.value) return
   setAuthModalView('login')
   closeLoginModal()
 }

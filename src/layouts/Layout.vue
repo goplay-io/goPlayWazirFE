@@ -10,7 +10,7 @@
       (useMobileBodyScroll || showSiteFooter)
         ? 'tw-min-h-screen'
         : 'tw-h-full tw-max-h-full tw-overflow-hidden',
-      { 'layout-home-shell-bg': showReferenceSportsShell },
+      { 'layout-home-shell-bg': showReferenceSportsShell || isMobile },
     ]"
   >
     <!-- Full Width Header (mobile casino game uses in-page bar only — reference has no app header) -->
@@ -42,7 +42,11 @@
       <div
         class="layout-content-row tw-flex tw-min-w-0 tw-gap-0"
         :class="[
-          showReferenceSportsShell ? '' : 'tw-bg-black',
+          showReferenceSportsShell
+            ? ''
+            : isCasinoListingPage
+              ? 'layout-content-row--casino'
+              : 'tw-bg-black',
           useMobileBodyScroll ? 'layout-content-row--mobile-bet' : '',
           showSiteFooter
             ? 'layout-content-row--footer-doc'
@@ -459,11 +463,27 @@ useWalletRefresh(2)
   background: var(--color-login-input-bg) !important;
 }
 
+.layout-content-row--casino {
+  background: #23201f !important;
+  background-color: #23201f !important;
+}
+
 .casino-layout-main {
   position: relative;
   min-height: 0;
   flex: 1 1 auto;
   z-index: 0;
+  background: #23201f !important;
+  background-color: #23201f !important;
+}
+
+.casino-layout-main .layout-app-main-scroll,
+.casino-layout-main .layout-page-content,
+.layout-content-row--casino .layout-page-content,
+.layout-content-row:has(.casino-page),
+.layout-page-content:has(.casino-page) {
+  background: #23201f !important;
+  background-color: #23201f !important;
 }
 
 @media (max-width: 767px) {

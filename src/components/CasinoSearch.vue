@@ -1,15 +1,18 @@
 <template>
   <div
-    class="casino-search-root tw-flex tw-min-w-0 tw-justify-end"
+    class="casino-search-root tw-flex tw-min-w-0"
     :class="inline
-      ? 'casino-search-root--inline tw-flex-none tw-w-auto'
-      : 'tw-flex-1 max-md:tw-w-full max-md:tw-flex-initial md:tw-flex-initial'"
+      ? 'casino-search-root--inline tw-flex-none tw-w-auto tw-justify-end'
+      : 'tw-w-full tw-justify-stretch'"
   >
     <div
-      class="casino-search-inner tw-flex tw-w-full tw-min-w-[120px]"
-      :class="inline ? 'tw-max-w-none' : 'tw-max-w-sm max-md:tw-max-w-none md:tw-max-w-sm'"
+      class="casino-search-inner tw-flex tw-w-full tw-min-w-0"
+      :class="inline ? 'tw-max-w-none' : 'tw-max-w-none'"
     >
       <div class="casino-search-bar tw-flex tw-w-full tw-items-stretch">
+        <span class="casino-search-bar__icon" aria-hidden="true">
+          <SearchMagnify :size="24" :stroke-width="2" class="casino-search-bar__icon-svg" />
+        </span>
         <input
           ref="desktopInput"
           type="text"
@@ -20,14 +23,6 @@
           @input="onInputNative"
           @keydown.escape.prevent="$emit('update:modelValue', '')"
         />
-        <button
-          type="button"
-          class="casino-search-bar__btn"
-          :aria-label="placeholder || t('common.search')"
-          tabindex="-1"
-        >
-          <SearchMagnify :size="14" :stroke-width="2" class="casino-search-bar__btn-icon" />
-        </button>
       </div>
     </div>
   </div>

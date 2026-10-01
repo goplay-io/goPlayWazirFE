@@ -146,8 +146,8 @@
   .header-mobile-menu-btn__icon,
   .guest-mobile-menu-btn__icon {
     display: block;
-    width: 16px !important;
-    height: 19px !important;
+    width: 12px !important;
+    height: 14px !important;
     max-width: 16px !important;
     max-height: 19px !important;
     object-fit: contain;
@@ -193,8 +193,8 @@
 
   .guest-header-search-btn svg {
     display: block;
-    width: 14px;
-    height: 14px;
+    width: 12px;
+    height: 10px;
   }
 
   .guest-header-block--searching {
@@ -324,7 +324,7 @@
     border-radius: 6px !important;
     font-family: Lato, "Helvetica Neue", sans-serif !important;
     font-size: 12px !important;
-    font-weight: 800 !important;
+    font-weight: 700 !important;
     line-height: 18px !important;
     letter-spacing: normal !important;
     text-transform: none !important;
