@@ -1,9 +1,19 @@
 <template>
   <v-container fluid class="casino-page tw-w-full tw-max-w-none tw-px-0 tw-pb-2 md:tw-pb-4 tw-pt-0 md:tw-pt-0">
     <div class="casino-listing-top-bar">
-      <h1 class="casino-listing-top-bar__title casino-listing-top-bar__title--category">
-        {{ displayCategoryTitle }}
-      </h1>
+      <div class="casino-listing-top-bar__title-row">
+        <button
+          type="button"
+          class="casino-listing-top-bar__back"
+          :aria-label="t('common.back')"
+          @click="goBack"
+        >
+          <v-icon icon="mdi-chevron-left" size="22" />
+        </button>
+        <h1 class="casino-listing-top-bar__title casino-listing-top-bar__title--category">
+          {{ displayCategoryTitle }}
+        </h1>
+      </div>
       <CasinoSearch
         v-model="searchQuery"
         :result-count="filteredGames.length"
@@ -162,6 +172,14 @@ const playGame = (game) => {
     name: 'casino-game',
     params: { gameId: game.id },
   });
+};
+
+const goBack = () => {
+  if (window.history.length > 1) {
+    router.back();
+    return;
+  }
+  router.push('/casino');
 };
 
 const clearFilters = () => {

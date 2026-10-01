@@ -16,7 +16,7 @@ defineProps({
   <div class="home-events-section-header">
     <div class="home-events-section-header__inner">
       <span v-if="mode === 'inplay'" class="home-events-section-header__icon home-events-section-header__icon--inplay" aria-hidden="true">
-        <v-icon size="12" class="home-events-section-header__play-icon">mdi-play</v-icon>
+        <v-icon size="18" class="home-events-section-header__play-icon">mdi-play</v-icon>
       </span>
       <span v-else class="home-events-section-header__icon home-events-section-header__icon--upcoming" aria-hidden="true">
         <svg width="20" height="20" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
@@ -32,15 +32,21 @@ defineProps({
 .home-events-section-header {
   width: 100%;
   border-bottom: none;
-  border-radius: 12px 12px 0 0;
+  border-radius: 10px 10px 0 0;
   background: var(--color-header-bg-gradient, linear-gradient(90deg, #1e9146 -13.95%, #2c2c2c 83.91%));
+  border: 1px solid rgba(84, 84, 84, 0.6);
+  border-bottom: 0;
+  box-sizing: border-box;
 }
 
 .home-events-section-header__inner {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 12px;
+  min-height: 36px;
+  height: 36px;
+  padding: 0 12px;
+  box-sizing: border-box;
 }
 
 .home-events-section-header__icon {
@@ -52,8 +58,8 @@ defineProps({
 }
 
 .home-events-section-header__icon--inplay {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   border-radius: 9999px;
   background: #ffffff;
 }
@@ -61,20 +67,49 @@ defineProps({
 .home-events-section-header__play-icon {
   color: var(--color-wazir-green, #49915e) !important;
   margin-left: 1px;
+  font-size: 16px !important;
 }
 
 .home-events-section-header__icon--upcoming {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
 }
 
 .home-events-section-header__title {
   margin: 0;
   color: #ffffff;
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 700;
   line-height: 1;
   letter-spacing: normal;
   text-transform: capitalize;
+}
+
+@media (max-width: 767.98px) {
+  .home-events-section-header {
+    border-radius: 8px 8px 0 0;
+  }
+
+  .home-events-section-header__inner {
+    min-height: 42px;
+    height: 42px;
+    padding: 0 10px;
+    gap: 6px;
+  }
+
+  .home-events-section-header__icon--inplay,
+  .home-events-section-header__icon--upcoming {
+    width: 20px;
+    height: 20px;
+  }
+
+  .home-events-section-header__play-icon {
+    font-size: 14px !important;
+  }
+
+  .home-events-section-header__title {
+    font-size: 18px;
+    font-weight: 700;
+  }
 }
 </style>

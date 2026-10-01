@@ -158,7 +158,7 @@ function close() {
   height: 36px;
   margin: 0;
   padding: 8px 12px;
-  border: 0 solid #f38221;
+  border: 0 solid #49915e;
   border-radius: 6px;
   background: transparent;
   color: #ffffff;

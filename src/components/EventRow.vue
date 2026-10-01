@@ -1412,6 +1412,13 @@ function handleOddsButtonClick(e) {
     object-fit: contain;
 }
 
+/* Hide event TV icon on mobile / tablet home section */
+@media (max-width: 1023.98px) {
+    .event-row-reference-tv-icon {
+        display: none !important;
+    }
+}
+
 .event-row-reference-odds {
     position: relative;
     display: grid;

@@ -255,7 +255,11 @@
     <div
       class="guest-layout-body tw-flex tw-min-w-0 tw-gap-0"
       :class="[
-        showReferenceSportsShell ? '' : 'tw-bg-white',
+        showReferenceSportsShell
+          ? ''
+          : isCasinoListingPage
+            ? 'guest-layout-body--casino'
+            : 'tw-bg-white',
         useMobileBodyScroll ? 'guest-layout-body--mobile-body' : '',
         showSiteFooter
           ? 'guest-layout-body--footer-doc'
@@ -274,8 +278,9 @@
 
       <!-- Scrollable content column: spacer sits outside the scrollport so content never paints under the nav -->
       <div
-        class="guest-layout-main tw-flex tw-flex-1 tw-flex-col tw-min-w-0 tw-bg-theme-background"
+        class="guest-layout-main tw-flex tw-flex-1 tw-flex-col tw-min-w-0"
         :class="[
+          isCasinoListingPage ? 'guest-layout-main--casino' : 'tw-bg-theme-background',
           showSiteFooter ? 'guest-layout-main--footer-doc' : (useMobileBodyScroll ? 'guest-layout-main--mobile-body' : 'tw-overflow-hidden tw-min-h-0'),
           isFullWidthPage ? 'guest-layout-main--full-width' : '',
         ]"
@@ -1037,6 +1042,17 @@ useAppBarHeightObserver(guestAppBarRef)
   display: flex;
   flex-direction: column;
   min-height: 0;
+}
+
+.guest-layout-body--casino,
+.guest-layout-main--casino,
+.guest-layout-main--casino .layout-app-main-scroll,
+.guest-layout-main--casino .layout-page-content,
+.guest-layout-body:has(.casino-page),
+.guest-layout-main:has(.casino-page),
+.layout-page-content:has(.casino-page) {
+  background: #23201f !important;
+  background-color: #23201f !important;
 }
 
 .layout-right-rail--footer-doc {
