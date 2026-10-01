@@ -173,8 +173,8 @@ const quickButtons = computed(() => (props.inline ? referenceQuickButtons : fina
 
 const slipDelayLabel = computed(() => {
   const value = Number(props.bet?.bet_delay);
-  if (!Number.isFinite(value)) return '';
-  return `${value}s`;
+  const seconds = Number.isFinite(value) && value > 0 ? Math.ceil(value) : 3;
+  return `${seconds}s`;
 });
 
 const isButtonDisabled = () => !betAllow.value || !props.bet?.odd;

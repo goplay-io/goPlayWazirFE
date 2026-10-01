@@ -61,7 +61,8 @@
     border-bottom: none;
   }
 
-  .guest-header-block--logo {
+  .guest-header-block--logo,
+  .header-block--logo {
     display: flex !important;
     align-items: center !important;
     align-self: stretch !important;
@@ -69,6 +70,11 @@
     flex: 1 1 auto;
     min-width: 0;
     gap: 0;
+    overflow: hidden;
+  }
+
+  .header-block--logo.header-block--searching {
+    overflow: visible !important;
   }
 
   .header-toolbar-left,
@@ -418,70 +424,126 @@
     color: var(--color-wazir-green, #49915e);
   }
 
-  /* Reference logged-in mobile: bg-signupBtnBg wallet pill + user icon */
+  .header-toolbar-right:has(.header-mobile-auth-cluster) {
+    flex: 0 0 auto;
+    min-width: 0;
+    margin-left: auto !important;
+    justify-content: flex-end;
+  }
+
+  /* Reference logged-in mobile: search, Deposit, balance + account icon */
   .header-mobile-auth-cluster {
     display: flex;
     align-items: center;
-    gap: 4px;
+    justify-content: flex-end;
+    column-gap: 6px;
     flex-shrink: 0;
     min-width: 0;
+    width: 100%;
   }
 
-  .header-mobile-wallet-pill {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-    padding: 4px 6px;
+  .header-mobile-auth-cluster .header-mobile-search-btn {
+    margin-right: 2px;
+    padding: 0 4px !important;
+    height: 20px;
+    color: #49915e;
+  }
+
+  .header-mobile-auth-cluster .header-mobile-search-btn__icon {
+    display: block;
+    width: 30px;
+    height: 20px;
+    color: #49915e;
+  }
+
+  .header-mobile-deposit-btn {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    min-height: 35px;
+    height: 35px;
+    padding: 6px 8px;
+    border: 0;
     border-radius: 6px;
-    background: var(--color-signup-btn-bg, #48494b);
-  }
-
-  .header-mobile-wallet-pill__lines {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    justify-content: center;
-  }
-
-  .header-mobile-wallet-pill__row {
-    font-size: 11px;
-    font-weight: 700;
-    line-height: 1;
-    color: #ffffff;
+    overflow: hidden;
+    background: #49915e;
+    color: #171716;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: center;
     white-space: nowrap;
-  }
-
-  .header-mobile-wallet-pill__row span {
-    color: #ffffff;
-  }
-
-  .header-mobile-wallet-pill__row--exp {
     cursor: pointer;
+    flex-shrink: 0;
   }
 
-  .header-mobile-user-btn {
+  .header-mobile-deposit-btn:active {
+    transform: scale(0.95);
+  }
+
+  .header-mobile-deposit-btn__label {
+    display: flex;
+    flex-direction: row;
+    font-family: Lato, "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 21px;
+    color: #171716;
+  }
+
+  .header-mobile-deposit-btn__shimmer {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 50%;
+    height: 200%;
+    pointer-events: none;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0) 30%,
+      rgba(255, 255, 255, 0.5) 50%,
+      rgba(255, 255, 255, 0) 70%,
+      rgba(255, 255, 255, 0)
+    );
+    transform-origin: center center;
+    animation: header-deposit-shimmer 2s ease infinite;
+  }
+
+  @keyframes header-deposit-shimmer {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(300%) rotate(45deg); }
+  }
+
+  .header-mobile-balance-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
-    height: 20px;
-    padding: 0;
-    border: none;
-    background: transparent;
-    color: var(--color-wazir-green, #49915e);
+    gap: 4px;
+    box-sizing: border-box;
+    min-height: 35px;
+    padding: 6px;
+    border: 0;
+    border-radius: 6px;
+    background: linear-gradient(to right, #48494b, #48494b);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    color: #f9e7eb;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 16px;
+    white-space: nowrap;
     cursor: pointer;
     flex-shrink: 0;
   }
 
-  .header-mobile-user-btn .v-icon {
-    color: var(--color-wazir-green, #49915e) !important;
-  }
-
-  .header-mobile-user-btn__img {
+  .header-mobile-balance-btn__icon {
     display: block;
-    width: 20px;
-    height: 20px;
-    object-fit: contain;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    color: #49915e;
   }
 }
 

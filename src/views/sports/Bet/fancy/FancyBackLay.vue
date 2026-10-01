@@ -212,7 +212,18 @@ const getMinMaxValues = (market) => {
   };
 };
 
-const getPriceLevels = (market) => getFancyDisplayPriceLevels(market);
+const getPriceLevels = (market) => {
+  if (!isBinaryMarket(market)) return getFancyDisplayPriceLevels(market);
+
+  const prices = getBinaryPrices(market);
+  const hasPrice = (value) => value != null && value !== '' && Number(value) > 0;
+  return [{
+    layOdd: hasPrice(prices.layOdd) ? prices.layOdd : null,
+    layAmount: hasPrice(prices.layOdd) ? (prices.layAmount ?? null) : null,
+    backOdd: hasPrice(prices.backOdd) ? prices.backOdd : null,
+    backAmount: hasPrice(prices.backOdd) ? (prices.backAmount ?? null) : null,
+  }];
+};
 
 const getPrices = (market) => {
   if (isBinaryMarket(market)) return getBinaryPrices(market);
@@ -335,7 +346,7 @@ const { t } = useI18n()
                     :class="getPriceLevels(innerFancy).length > 1 ? 'fancy-odds-level' : 'fancy-odds-single'"
                   >
                     <v-btn size="default" rounded="0"
-                      :disabled="isSuspended(innerFancy) || isBallRunning(innerFancy) || !betAllow"
+                      :disabled="isSuspended(innerFancy) || isBallRunning(innerFancy) || !betAllow || level.layOdd == null"
                       class="fancy-odds-btn tw-bg-odds-lay hover:tw-bg-odds-lay-hover tw-flex-shrink-0 tw-text-black tw-font-bold"
                       variant="elevated" @click="selectBet(
                         level.layOdd,
@@ -355,11 +366,11 @@ const { t } = useI18n()
                           <div class="fancy-odds-price mo-price">{{ level.layOdd }}</div>
                           <div v-if="level.layAmount != null" class="fancy-odds-size mo-size">{{ level.layAmount }}</div>
                         </template>
-                        <div v-else class="fancy-odds-price mo-price">0</div>
+                        <div v-else class="fancy-odds-price mo-price">{{ isBinaryMarket(innerFancy) ? '-' : '0' }}</div>
                       </div>
                     </v-btn>
                     <v-btn size="default" rounded="0"
-                      :disabled="isSuspended(innerFancy) || isBallRunning(innerFancy) || !betAllow"
+                      :disabled="isSuspended(innerFancy) || isBallRunning(innerFancy) || !betAllow || level.backOdd == null"
                       class="fancy-odds-btn tw-bg-odds-back hover:tw-bg-odds-back-hover tw-flex-shrink-0 tw-text-black tw-font-bold"
                       variant="elevated" @click="selectBet(
                         level.backOdd,
@@ -379,7 +390,7 @@ const { t } = useI18n()
                           <div class="fancy-odds-price mo-price">{{ level.backOdd }}</div>
                           <div v-if="level.backAmount != null" class="fancy-odds-size mo-size">{{ level.backAmount }}</div>
                         </template>
-                        <div v-else class="fancy-odds-price mo-price">0</div>
+                        <div v-else class="fancy-odds-price mo-price">{{ isBinaryMarket(innerFancy) ? '-' : '0' }}</div>
                       </div>
                     </v-btn>
                   </div>
@@ -440,7 +451,7 @@ const { t } = useI18n()
                     :class="getPriceLevels(innerFancy).length > 1 ? 'fancy-odds-level' : 'fancy-odds-single'"
                   >
                     <v-btn size="default" rounded="0"
-                      :disabled="isSuspended(innerFancy) || isBallRunning(innerFancy) || !betAllow"
+                      :disabled="isSuspended(innerFancy) || isBallRunning(innerFancy) || !betAllow || level.layOdd == null"
                       class="fancy-odds-btn tw-bg-odds-lay hover:tw-bg-odds-lay-hover tw-flex-shrink-0 tw-text-black tw-font-bold"
                       variant="elevated" @click="selectBet(
                         level.layOdd,
@@ -460,11 +471,11 @@ const { t } = useI18n()
                           <div class="fancy-odds-price mo-price">{{ level.layOdd }}</div>
                           <div v-if="level.layAmount != null" class="fancy-odds-size mo-size">{{ level.layAmount }}</div>
                         </template>
-                        <div v-else class="fancy-odds-price mo-price">0</div>
+                        <div v-else class="fancy-odds-price mo-price">{{ isBinaryMarket(innerFancy) ? '-' : '0' }}</div>
                       </div>
                     </v-btn>
                     <v-btn size="default" rounded="0"
-                      :disabled="isSuspended(innerFancy) || isBallRunning(innerFancy) || !betAllow"
+                      :disabled="isSuspended(innerFancy) || isBallRunning(innerFancy) || !betAllow || level.backOdd == null"
                       class="fancy-odds-btn tw-bg-odds-back hover:tw-bg-odds-back-hover tw-flex-shrink-0 tw-text-black tw-font-bold"
                       variant="elevated" @click="selectBet(
                         level.backOdd,
@@ -484,7 +495,7 @@ const { t } = useI18n()
                           <div class="fancy-odds-price mo-price">{{ level.backOdd }}</div>
                           <div v-if="level.backAmount != null" class="fancy-odds-size mo-size">{{ level.backAmount }}</div>
                         </template>
-                        <div v-else class="fancy-odds-price mo-price">0</div>
+                        <div v-else class="fancy-odds-price mo-price">{{ isBinaryMarket(innerFancy) ? '-' : '0' }}</div>
                       </div>
                     </v-btn>
                   </div>

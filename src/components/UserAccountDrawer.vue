@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { USER_DRAWER_NAV_SECTIONS } from '@/constants/userDrawerNavItems.js'
 
@@ -73,6 +73,21 @@ const emit = defineEmits([
 ])
 
 const { t } = useI18n()
+
+const drawerWidth = ref(384)
+
+function syncDrawerWidth() {
+  drawerWidth.value = Math.min(384, Math.round(window.innerWidth * 0.7))
+}
+
+onMounted(() => {
+  syncDrawerWidth()
+  window.addEventListener('resize', syncDrawerWidth)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', syncDrawerWidth)
+})
 
 const drawerOpen = computed({
   get: () => props.modelValue,
@@ -176,9 +191,9 @@ function handleExposureClick() {
       v-model="drawerOpen"
       location="right"
       temporary
-      :width="384"
+      :width="drawerWidth"
       class="user-account-drawer"
-      scrim="rgba(0, 0, 0, 0.55)"
+      scrim="rgba(0, 0, 0, 0.4)"
       :style="{ top: '0px', height: '100dvh' }"
     >
       <div class="user-account-drawer__panel">
@@ -186,7 +201,7 @@ function handleExposureClick() {
           <!-- Identity -->
           <li class="user-account-drawer__identity">
             <div class="user-account-drawer__identity-main">
-              <v-icon size="22" class="user-account-drawer__accent-icon">mdi-cellphone</v-icon>
+              <v-icon size="24" class="user-account-drawer__accent-icon">mdi-cellphone</v-icon>
               <span class="user-account-drawer__phone">{{ displayPhone }}</span>
             </div>
             <button
@@ -195,14 +210,16 @@ function handleExposureClick() {
               aria-label="Close"
               @click="closeDrawer"
             >
-              <v-icon size="20">mdi-close</v-icon>
+              <svg width="20" height="21" viewBox="0 0 20 21" fill="none" aria-hidden="true">
+                <path d="M5.1875 16.5891L4.3125 15.7141L9.125 10.9016L4.3125 6.08905L5.1875 5.21405L10 10.0266L14.8125 5.21405L15.6875 6.08905L10.875 10.9016L15.6875 15.7141L14.8125 16.5891L10 11.7766L5.1875 16.5891Z" fill="currentColor" />
+              </svg>
             </button>
           </li>
 
           <!-- Balance -->
           <li v-if="showWalletSummary" class="user-account-drawer__balance-block">
             <div class="user-account-drawer__balance-heading">
-              <v-icon size="20" class="user-account-drawer__accent-icon">mdi-bank-outline</v-icon>
+              <v-icon size="22" class="user-account-drawer__accent-icon">mdi-bank-outline</v-icon>
               <span>{{ t('header.user.drawer.balanceInformation') }}</span>
             </div>
 
@@ -283,7 +300,7 @@ function handleExposureClick() {
                 class="user-account-drawer__nav-item"
                 @click="handleNavItem(item)"
               >
-                <v-icon size="20" class="user-account-drawer__nav-icon">{{ item.icon }}</v-icon>
+                <v-icon size="16" class="user-account-drawer__nav-icon">{{ item.icon }}</v-icon>
                 <span class="user-account-drawer__nav-label">{{ t(item.title) }}</span>
               </component>
             </li>
@@ -300,12 +317,12 @@ function handleExposureClick() {
   height: 100dvh !important;
   max-height: 100dvh !important;
   z-index: 3100 !important;
-  background: #1f1f1f !important;
-  background-color: #1f1f1f !important;
+  background: #545454 !important;
+  background-color: #545454 !important;
   background-image: none !important;
-  border-left: 1px solid #333333;
-  /* Override Vuetify theme surface (was purple / light). */
-  --v-theme-surface: 31, 31, 31;
+  border-left: 0;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --v-theme-surface: 84, 84, 84;
   --v-theme-on-surface: 255, 255, 255;
 }
 
@@ -320,10 +337,10 @@ function handleExposureClick() {
   flex-direction: column;
   height: 100%;
   padding: 0;
-  background: #1f1f1f !important;
-  background-color: #1f1f1f !important;
+  background: #545454 !important;
+  background-color: #545454 !important;
   color: #ffffff;
-  overflow: hidden;
+  overflow: auto;
   box-sizing: border-box;
 }
 
@@ -334,7 +351,7 @@ function handleExposureClick() {
   overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 0 0 calc(12px + env(safe-area-inset-bottom, 0px));
+  padding: 0 0 calc(4px + env(safe-area-inset-bottom, 0px));
   box-sizing: border-box;
   background: #545454;
 }
@@ -351,29 +368,31 @@ function handleExposureClick() {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
-  padding: 10px 12px;
-  border-bottom: 1px solid #737373;
+  gap: 6px;
+  padding: 8px 12px;
+  border-bottom: 0;
+  box-shadow: inset 0 -1px 0 #737373;
   background: #545454;
 }
 
 .user-account-drawer__identity-main {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   min-width: 0;
 }
 
 .user-account-drawer__accent-icon {
-  color: #4cae50 !important;
+  color: #49915e !important;
   flex-shrink: 0;
 }
 
 .user-account-drawer__phone {
   color: #ffffff;
+  font-family: Lato, "Helvetica Neue", sans-serif;
   font-size: 14px;
   font-weight: 600;
-  line-height: 1.3;
+  line-height: 20px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -383,38 +402,45 @@ function handleExposureClick() {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 20px;
+  height: 21px;
   padding: 0;
   border: 0;
-  border-radius: 6px;
   background: transparent;
-  color: #4cae50;
+  color: #49915e;
   cursor: pointer;
   flex-shrink: 0;
+}
+
+.user-account-drawer__close svg {
+  display: block;
+  width: 20px;
+  height: 21px;
 }
 
 .user-account-drawer__balance-block {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 12px;
+  gap: 8px;
+  padding: 8px 12px;
   border-bottom: 1px solid #737373;
 }
 
 .user-account-drawer__balance-heading {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   color: #ffffff;
+  font-family: Lato, "Helvetica Neue", sans-serif;
   font-size: 14px;
   font-weight: 600;
+  line-height: 20px;
 }
 
 .user-account-drawer__balance-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 4px;
+  gap: 2px;
   width: 100%;
 }
 
@@ -422,12 +448,14 @@ function handleExposureClick() {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 2px;
-  padding: 8px;
-  border: 1px solid #d2d2d2;
-  border-radius: 6px;
+  gap: 0;
+  padding: 4px 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
   background: #e8e8e8;
   text-align: left;
+  box-sizing: border-box;
+  min-height: 42px;
 }
 
 .user-account-drawer__balance-card--full {
@@ -440,18 +468,19 @@ function handleExposureClick() {
 }
 
 .user-account-drawer__balance-label {
-  color: #505050;
+  color: #000000;
   font-size: 8px;
-  font-weight: 500;
-  line-height: 1.2;
+  font-weight: 400;
+  line-height: 12px;
   text-transform: uppercase;
 }
 
 .user-account-drawer__balance-value {
-  color: #333333;
+  color: #000000;
+  font-family: Lato, "Helvetica Neue", sans-serif;
   font-size: 14px;
-  font-weight: 600;
-  line-height: 1.3;
+  font-weight: 500;
+  line-height: 20px;
   font-variant-numeric: tabular-nums;
 }
 
@@ -466,7 +495,7 @@ function handleExposureClick() {
 .user-account-drawer__payment-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 6px;
+  gap: 4px;
   width: 100%;
 }
 
@@ -475,18 +504,20 @@ function handleExposureClick() {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
-  min-height: 52px;
-  padding: 6px 8px;
+  gap: 0;
+  width: 100%;
+  height: 42px;
+  min-height: 42px;
+  padding: 4px 12px;
   border: 0;
-  border-radius: 6px;
+  border-radius: 4px;
   color: #ffffff;
   font-size: 10px;
-  font-weight: 700;
-  line-height: 1.2;
+  font-weight: 600;
+  line-height: 15px;
   text-transform: capitalize;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
 }
 
 .user-account-drawer__payment-icon {
@@ -518,13 +549,15 @@ function handleExposureClick() {
 
 .user-account-drawer__section-title {
   width: 100%;
-  padding: 8px 12px;
+  padding: 4px 12px;
   background: #545454;
   color: #ffffff;
+  font-family: Lato, "Helvetica Neue", sans-serif;
   font-size: 12px;
-  font-weight: 700;
-  line-height: 1.3;
+  font-weight: 600;
+  line-height: 16px;
   border-bottom: 1px solid #737373;
+  box-sizing: border-box;
 }
 
 .user-account-drawer__nav-li {
@@ -538,7 +571,8 @@ function handleExposureClick() {
   gap: 12px;
   width: 100%;
   min-height: 36px;
-  padding: 8px 14px;
+  height: 36px;
+  padding: 8px 12px 8px 22px;
   border: 0;
   background: transparent;
   color: #ffffff;
@@ -554,13 +588,17 @@ function handleExposureClick() {
 }
 
 .user-account-drawer__nav-icon {
-  color: #4cae50 !important;
+  color: #49915e !important;
   flex-shrink: 0;
+  font-size: 16px !important;
+  width: 16px;
+  height: 16px;
 }
 
 .user-account-drawer__nav-label {
   font-size: 14px;
   font-weight: 500;
-  line-height: 1.3;
+  line-height: 20px;
+  color: #ffffff;
 }
 </style>
