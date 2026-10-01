@@ -90,6 +90,8 @@
 <script setup>
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { isBackBetForDisplay } from '@/utils/betSideDisplay'
+import { formatBetRecordDisplayOdds } from '@/utils/oddEvenOdds'
 import { formatDate } from '@/utils/dateUtils.js'
 
 const { t } = useI18n()
@@ -124,9 +126,7 @@ const getProfitLossClass = (amount) => {
   return amount > 0 ? 'account-page-cell--positive' : 'account-page-cell--negative'
 }
 
-const isBackBet = (item) => {
-  return item?.is_back === true || item?.is_back === 1 || item?.is_back === '1'
-}
+const isBackBet = (item) => isBackBetForDisplay(item)
 
 const getBetTypeBadgeClass = (item) => {
   if (isBackBet(item)) {
@@ -135,12 +135,7 @@ const getBetTypeBadgeClass = (item) => {
   return 'bet-type-badge bet-type-badge--lay'
 }
 
-const formatOdds = (item) => {
-  if (!item.odd && !item.rate) return t('common.dash')
-  const mainOdd = item.odd || item.rate
-  const fancyOdd = item.fancy_odd
-  return fancyOdd ? `${mainOdd}/${fancyOdd}` : mainOdd.toString()
-}
+const formatOdds = (item) => formatBetRecordDisplayOdds(item, t('common.dash'))
 
 const getEventTypeLabel = (item) => {
   return item?.event_type_name || item?.event_type || item?.sport_name || ''

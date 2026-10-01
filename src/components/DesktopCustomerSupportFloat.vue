@@ -195,6 +195,7 @@ function openSupport() {
     display: flex;
     position: fixed;
     top: calc(100dvh - 130px);
+    bottom: auto;
     left: 12px;
     z-index: 50;
     width: max-content;

@@ -1195,6 +1195,17 @@
       "label": "24x7 Customer Support",
       "close": "Close customer support"
     },
+    "miniGames": {
+      "title": "Mini Games",
+      "shortLabel": "Mini Games",
+      "open": "Open mini games",
+      "lobby": "Lobby",
+      "collapse": "Collapse mini games",
+      "backToLobby": "Back to lobby",
+      "miniTitle": "Mini {name}",
+      "retry": "Try again",
+      "loadError": "Unable to load this game right now."
+    },
     "mobileBottomNav": {
       "sports": "Sports",
       "racing": "Racing",

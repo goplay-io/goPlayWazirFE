@@ -17,6 +17,7 @@
 
   <Teleport to="body">
     <SkinDock />
+    <FloatingMiniGames />
   </Teleport>
 </template>
 
@@ -36,6 +37,7 @@ import GlobalSnackbar from '@/components/GlobalSnackbar.vue'
 import ExposureDialog from '@/layouts/ExposureDialog.vue'
 import BonusRulesModal from '@/components/BonusRulesModal.vue'
 import SkinDock from '@/components/SkinDock.vue'
+import FloatingMiniGames from '@/components/FloatingMiniGames.vue'
 import useBannerPopup from '@/composables/useBannerPopup.js'
 import { useExposureDialog } from '@/composables/useExposureDialog'
 import { useBonusRulesModal } from '@/composables/useBonusRulesModal'

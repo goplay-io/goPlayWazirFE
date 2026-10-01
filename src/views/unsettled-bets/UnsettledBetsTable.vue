@@ -89,6 +89,8 @@
 import { computed } from 'vue'
 import { formatDate } from '@/utils/dateUtils.js'
 import { useI18n } from 'vue-i18n'
+import { isBackBetForDisplay } from '@/utils/betSideDisplay'
+import { formatBetRecordDisplayOdds } from '@/utils/oddEvenOdds'
 
 const { t } = useI18n()
 
@@ -136,12 +138,7 @@ const formatAmount = (amount) => {
   })
 }
 
-const formatOdds = (item) => {
-  if (!item.odd && !item.rate) return t('common.dash')
-  const mainOdd = item.odd || item.rate
-  const fancyOdd = item.fancy_odd
-  return fancyOdd ? `${mainOdd}/${fancyOdd}` : mainOdd.toString()
-}
+const formatOdds = (item) => formatBetRecordDisplayOdds(item, t('common.dash'))
 
 const getMarketName = (item) => {
   const marketTypeMap = {
@@ -162,28 +159,7 @@ const getMarketTypeLabel = (item) => {
   return item?.market_type_name || item?.market_type || item?.type || ''
 }
 
-const isBackBet = (item) => {
-  const raw =
-    item?.is_back ??
-    item?.isBack ??
-    item?.back_lay ??
-    item?.backLay ??
-    item?.BackLay ??
-    item?.back_or_lay ??
-    item?.backOrLay
-
-  if (raw === true || raw === 1) return true
-  if (raw === false || raw === 0) return false
-  if (raw == null || raw === '') return false
-
-  if (typeof raw === 'string') {
-    const s = raw.trim().toLowerCase()
-    if (s === '1' || s === 'true' || s === 'back' || s === 'b') return true
-    if (s === '0' || s === 'false' || s === 'lay' || s === 'l') return false
-  }
-
-  return false
-}
+const isBackBet = (item) => isBackBetForDisplay(item)
 
 const getBetTypeBadgeClass = (item) => {
   if (isBackBet(item)) {

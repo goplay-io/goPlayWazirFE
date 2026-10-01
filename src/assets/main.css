@@ -10,6 +10,7 @@
   --mobile-bottom-nav-inset: calc(
     var(--mobile-bottom-nav-height) + env(safe-area-inset-bottom, 0px)
   );
+  --mini-games-fab-size: 70px;
 }
 
 html.mobile-bottom-nav-collapsed {

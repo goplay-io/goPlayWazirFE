@@ -10,6 +10,8 @@ import { applyStakeInput } from '@/utils/stakeInput.js';
 import BetSlipFeedbackBanner from '@/components/sports/BetSlipFeedbackBanner.vue';
 import BetPlacingOverlay from '@/components/BetPlacingOverlay.vue';
 import { useBetSlipFeedback } from '@/composables/useBetSlipFeedback';
+import { isBackBetForDisplay } from '@/utils/betSideDisplay';
+import { formatBetSlipDisplayOdd } from '@/utils/oddEvenOdds';
 
 const SLIP_WIDTH = 400;
 const SLIP_APPROX_HEIGHT = 274;
@@ -96,7 +98,7 @@ const showDemoDialog = ref(false);
 const showUpdateForm = ref(false);
 const betAllow = ref(props.betAllow || false);
 
-const displayOdd = computed(() => props.bet?.odd ?? null);
+const displayOdd = computed(() => formatBetSlipDisplayOdd(props.bet) ?? props.bet?.odd ?? null);
 
 const { increaseOdd, decreaseOdd, canAdjustOdds, usesExchangeOddsLadder } = useOddsLadder(() => props.bet);
 
@@ -116,7 +118,7 @@ const finalButtons = computed(() => {
   return props.buttons;
 });
 
-const slipIsBack = computed(() => !!(props.bet?.odd) && props.bet?.is_back);
+const slipIsBack = computed(() => !!(props.bet?.odd) && isBackBetForDisplay(props.bet));
 const slipDensity = computed(() => 'comfortable');
 
 function formatQuickAmount(amount) {
