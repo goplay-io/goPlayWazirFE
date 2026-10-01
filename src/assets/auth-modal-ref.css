@@ -3,7 +3,7 @@
 .auth-ref-modal-root {
   position: fixed;
   inset: 0;
-  z-index: 2400;
+  z-index: 12000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,30 +30,37 @@
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-  padding: 0.35rem 0.75rem 0;
+  padding: 0.65rem 2.75rem 0 0.75rem;
 }
 
-.auth-ref-modal-header__top {
-  display: flex;
-  justify-content: flex-end;
+.auth-ref-modal-header--force {
+  padding-right: 0.75rem;
 }
 
 .auth-ref-modal-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 6;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
+  width: 36px;
+  height: 36px;
   padding: 0;
   border: none;
   border-radius: 9999px;
   background: #000;
   color: #fff;
   cursor: pointer;
+  pointer-events: auto;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.auth-ref-modal-close :deep(.v-icon) {
+.auth-ref-modal-close .v-icon {
   color: #fff !important;
+  pointer-events: none;
 }
 
 .auth-ref-modal-header__row {

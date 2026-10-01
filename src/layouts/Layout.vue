@@ -10,7 +10,7 @@
       (useMobileBodyScroll || showSiteFooter)
         ? 'tw-min-h-screen'
         : 'tw-h-full tw-max-h-full tw-overflow-hidden',
-      { 'layout-home-shell-bg': showReferenceSportsShell },
+      { 'layout-home-shell-bg': showReferenceSportsShell || isMobile },
     ]"
   >
     <!-- Full Width Header (mobile casino game uses in-page bar only — reference has no app header) -->

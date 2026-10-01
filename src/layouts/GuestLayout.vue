@@ -2097,10 +2097,9 @@ useAppBarHeightObserver(guestAppBarRef)
 
 .guest-mobile-menu-btn__icon {
   display: block;
-  height: 15px;
-  width: auto;
-  max-width: 21px;
-  object-fit: contain;
+  width: 16px;
+  height: 19px;
+  flex-shrink: 0;
 }
 
 .guest-mobile-menu-btn :deep(.v-icon) {
