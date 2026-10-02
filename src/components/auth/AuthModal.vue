@@ -9,7 +9,6 @@
     >
       <div class="auth-ref-modal-panel" role="dialog" aria-modal="true" :aria-labelledby="titleId" @click.stop>
         <button
-          v-if="!isForceLogin"
           type="button"
           class="auth-ref-modal-close"
           :aria-label="t('components.globalSnackbar.close')"
@@ -19,7 +18,7 @@
         >
           <v-icon size="16">mdi-close</v-icon>
         </button>
-        <header class="auth-ref-modal-header" :class="{ 'auth-ref-modal-header--force': isForceLogin }">
+        <header class="auth-ref-modal-header">
           <div class="auth-ref-modal-header__row">
             <h2 :id="titleId" class="auth-ref-modal-title">{{ modalTitle }}</h2>
             <img :src="logoSrc" :alt="t('auth.login.logoAlt')" class="auth-ref-modal-logo" />
@@ -123,7 +122,7 @@ function getStoredRedirectMessage() {
 }
 
 function handleClose() {
-  if (isForceLogin.value) return
+  if (isForceLogin.value) uiStore.dismissAutoLoginModal()
   setAuthModalView('login')
   closeLoginModal()
 }

@@ -8,6 +8,8 @@ export const useUIStore = defineStore('ui', {
         loginModalOpen: false,
         loginModalRedirect: null,
         loginModalForce: false,
+        /** User dismissed an automatic session-expired login prompt. */
+        autoLoginModalDismissed: false,
         /** 'login' | 'signup' | 'forgot' — single auth modal view (reference LoginBox). */
         authModalView: 'login',
         authModalCampaignId: '',
@@ -53,15 +55,26 @@ export const useUIStore = defineStore('ui', {
         },
 
         openLoginModal(options = {}) {
+            const force = Boolean(options.force)
+            if (force && this.autoLoginModalDismissed) return
+
             this.loginModalOpen = true
             this.authModalView = options.view || 'login'
             this.loginModalRedirect =
                 typeof options.redirect === 'string' && options.redirect
                     ? options.redirect
                     : null
-            this.loginModalForce = Boolean(options.force)
+            this.loginModalForce = force
             this.authModalCampaignId = String(options.campaignId || '').trim()
             this.authModalReferralId = String(options.referralId || '').trim()
+        },
+
+        dismissAutoLoginModal() {
+            this.autoLoginModalDismissed = true
+        },
+
+        clearAutoLoginDismissal() {
+            this.autoLoginModalDismissed = false
         },
 
         closeLoginModal() {

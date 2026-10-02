@@ -185,16 +185,20 @@ export const getApiClient = (serviceName) => {
               if (shouldClearToken) {
                 console.warn('[API] Clearing auth state due to unauthorized response');
                 const activePinia = getActivePinia();
+                let hadUiSession = false;
                 if (activePinia) {
                   const { useAuthStore } = await import('../stores/auth.js');
                   const authStore = useAuthStore(activePinia);
-                  authStore.$patch({ token: null, user: null });
+                  hadUiSession = authStore.isUiAuthenticated;
+                  authStore.$patch({ token: null, user: null, hasValidatedSession: false });
                 }
                 removeStoredUser();
                 unauthorizedCount = 0; // Reset counter
                 
-                // Only redirect if not already on login page and not already redirecting
-                if (shouldRedirect && !isRedirecting) {
+                // Only prompt when a signed-in session actually failed.
+                // Guests and "no token" calls must not pop a locked login modal.
+                const isMissingToken = /no token provided/i.test(apiErrorMessage);
+                if (shouldRedirect && !isRedirecting && hadUiSession && !isMissingToken) {
                   isRedirecting = true;
                   console.warn('[API] Opening login modal');
                   storeLoginRedirectMessage(apiErrorMessage);

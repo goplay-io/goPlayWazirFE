@@ -3,6 +3,7 @@ import { loginUser, logout, demoLogin } from "../api/user/login.js";
 import { getProfile } from "../api/user/profile.js";
 import { getChipInfo } from "../api/wallet/wallet.js";
 import { useWalletStore } from "./wallet.js";
+import { useUIStore } from "./ui.js";
 import appConstants from "../constants/appConstants.js";
 import router from "@/router";
 import {
@@ -152,6 +153,9 @@ export const useAuthStore = defineStore("auth", {
       this.user = formattedUser;
       this.hasValidatedSession = true;
       setStoredUser(formattedUser);
+      if (!formattedUser.is_demo) {
+        useUIStore().clearAutoLoginDismissal();
+      }
     },
 
     clearLocalSession() {
