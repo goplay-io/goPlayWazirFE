@@ -105,6 +105,14 @@ const gameKey = (game) => game.id || game.gameId;
       <div class="popular-games-section__card">
         <div class="popular-games-section__header">
           <button type="button" class="popular-games-section__title-btn" @click="onSeeAll">
+            <img
+              class="popular-games-section__title-icon"
+              src="/svg/sports-icons/featured-icon.svg"
+              alt=""
+              width="18"
+              height="18"
+              aria-hidden="true"
+            />
             <span class="popular-games-section__title">Popular Games</span>
           </button>
           <div class="popular-games-section__actions">
@@ -197,11 +205,22 @@ const gameKey = (game) => game.id || game.gameId;
 }
 
 .popular-games-section__title-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   min-width: 0;
   padding: 0;
   border: 0;
   background: transparent;
   cursor: pointer;
+}
+
+.popular-games-section__title-icon {
+  display: block;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  object-fit: contain;
 }
 
 .popular-games-section__title {
@@ -291,7 +310,7 @@ const gameKey = (game) => game.id || game.gameId;
   min-width: 0;
   padding: 0;
   border: 0;
-  border-radius: 0;
+  border-radius: 6px;
   background: #2a2d31;
   overflow: hidden;
   cursor: pointer;
@@ -307,7 +326,7 @@ const gameKey = (game) => game.id || game.gameId;
   width: 100%;
   aspect-ratio: 3 / 4;
   object-fit: cover;
-  border-radius: 0;
+  border-radius: 6px;
   transition: transform 0.2s ease;
 }
 
