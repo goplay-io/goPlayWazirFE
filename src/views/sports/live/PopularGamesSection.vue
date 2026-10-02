@@ -49,7 +49,9 @@ const games = computed(() => {
 const scrollBy = (direction) => {
   const container = scrollRef.value;
   if (!container) return;
-  const amount = direction === 'forward' ? 320 : -320;
+  const tileWidth = container.querySelector('.popular-games-section__tile')?.offsetWidth ?? 120;
+  const gap = 4;
+  const amount = direction === 'forward' ? tileWidth + gap : -(tileWidth + gap);
   container.scrollBy({ left: amount, behavior: 'smooth' });
 };
 
@@ -103,6 +105,14 @@ const gameKey = (game) => game.id || game.gameId;
       <div class="popular-games-section__card">
         <div class="popular-games-section__header">
           <button type="button" class="popular-games-section__title-btn" @click="onSeeAll">
+            <img
+              class="popular-games-section__title-icon"
+              src="/svg/sports-icons/featured-icon.svg"
+              alt=""
+              width="18"
+              height="18"
+              aria-hidden="true"
+            />
             <span class="popular-games-section__title">Popular Games</span>
           </button>
           <div class="popular-games-section__actions">
@@ -195,11 +205,22 @@ const gameKey = (game) => game.id || game.gameId;
 }
 
 .popular-games-section__title-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   min-width: 0;
   padding: 0;
   border: 0;
   background: transparent;
   cursor: pointer;
+}
+
+.popular-games-section__title-icon {
+  display: block;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  object-fit: contain;
 }
 
 .popular-games-section__title {
@@ -247,16 +268,40 @@ const gameKey = (game) => game.id || game.gameId;
   padding: 10px;
 }
 
-/* Reference: grid-flow-col grid-rows-2, ~160×213 tiles */
+/* Reference: grid-flow-col grid-rows-2, match Indian Card tile width on mobile */
 .popular-games-section__track {
   display: grid;
   grid-template-rows: repeat(2, auto);
   grid-auto-flow: column;
-  grid-auto-columns: 160px;
+  grid-auto-columns: 120px;
   gap: 4px;
   overflow-x: auto;
   scroll-behavior: smooth;
   padding-bottom: 2px;
+}
+
+@media (min-width: 640px) {
+  .popular-games-section__track {
+    grid-auto-columns: 140px;
+  }
+}
+
+@media (min-width: 768px) {
+  .popular-games-section__track {
+    grid-auto-columns: 160px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .popular-games-section__track {
+    grid-auto-columns: 180px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .popular-games-section__track {
+    grid-auto-columns: 200px;
+  }
 }
 
 .popular-games-section__tile {
@@ -281,11 +326,12 @@ const gameKey = (game) => game.id || game.gameId;
   width: 100%;
   aspect-ratio: 3 / 4;
   object-fit: cover;
+  border-radius: 6px;
   transition: transform 0.2s ease;
 }
 
 .popular-games-section__tile:hover .popular-games-section__tile-img {
-  transform: scale(1.05);
+  transform: none;
 }
 
 /* Legacy layout */

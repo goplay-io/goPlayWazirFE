@@ -227,7 +227,7 @@ onMounted(() => {
   height: 22px;
   border: 0;
   border-radius: 4px;
-  background: rgba(73, 145, 94, 0.18);
+  background: #545454;
   color: #49915e;
   font-size: 16px;
   line-height: 1;
@@ -288,51 +288,61 @@ onMounted(() => {
   transform: scale(1.05);
 }
 
-/* Reference (monkeydon Indian Card Games): min-w 120→200, 3:4, gap-1, no radius */
+/* Reference (monkeydon Indian Card Games): 3-row horizontal slider on mobile */
 .home-games-section--reference-images .home-games-section__body {
   padding: 10px;
 }
 
 .home-games-section--reference-images .home-games-section__track {
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  grid-auto-flow: column;
+  grid-auto-columns: 120px;
   gap: 4px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 2px;
 }
 
 .home-games-section--reference-images .home-games-section__game {
-  width: 120px;
-  min-width: 120px;
+  flex: unset;
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: #2a2d31;
+  overflow: hidden;
+  line-height: 0;
 }
 
 @media (min-width: 640px) {
-  .home-games-section--reference-images .home-games-section__game {
-    width: 140px;
-    min-width: 140px;
+  .home-games-section--reference-images .home-games-section__track {
+    grid-auto-columns: 140px;
   }
 }
 
 @media (min-width: 768px) {
-  .home-games-section--reference-images .home-games-section__game {
-    width: 160px;
-    min-width: 160px;
+  .home-games-section--reference-images .home-games-section__track {
+    grid-auto-columns: 160px;
   }
 }
 
 @media (min-width: 1024px) {
-  .home-games-section--reference-images .home-games-section__game {
-    width: 180px;
-    min-width: 180px;
+  .home-games-section--reference-images .home-games-section__track {
+    grid-auto-columns: 180px;
   }
 }
 
 @media (min-width: 1280px) {
-  .home-games-section--reference-images .home-games-section__game {
-    width: 200px;
-    min-width: 200px;
+  .home-games-section--reference-images .home-games-section__track {
+    grid-auto-columns: 200px;
   }
 }
 
 .home-games-section--reference-images .home-games-section__game-img {
   aspect-ratio: 3 / 4;
-  border-radius: 0;
+  border-radius: 6px;
   box-shadow: none;
 }
 
