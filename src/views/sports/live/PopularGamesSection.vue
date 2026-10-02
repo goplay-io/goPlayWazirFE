@@ -11,10 +11,6 @@ import casinoSections from '@/constants/casinoSections';
 import { usePublicCasinoSection } from '@/composables/usePublicCasinoSection';
 import { resolveGameImageTiles } from '@/utils/sectionItems';
 import { pushCasinoSectionNavItem } from '@/utils/casinoSectionNavigation';
-import casinoSections from '@/constants/casinoSections';
-import { usePublicCasinoSection } from '@/composables/usePublicCasinoSection';
-import { resolveGameImageTiles } from '@/utils/sectionItems';
-import { pushCasinoSectionNavItem } from '@/utils/casinoSectionNavigation';
 
 const props = defineProps({
   hideHeading: {
