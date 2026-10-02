@@ -1,15 +1,72 @@
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { useAuthStore } from '@/stores/auth';
+import { useSelectedGame } from '@/composables/useSelectedGame';
+import { openLoginModal } from '@/composables/useLoginModal.js';
 import { HOME_ORIGINALS_TABS } from '@/data/homeOriginalsGames';
+import { loadCasinoSectionItems } from '@/utils/publicInfoCache';
+import { pushCasinoSectionNavItem } from '@/utils/casinoSectionNavigation';
+import { resolveGameImageTiles } from '@/utils/sectionItems';
+
+const router = useRouter();
+const authStore = useAuthStore();
+const { setSelectedGame } = useSelectedGame();
 
 const activeTabId = ref(HOME_ORIGINALS_TABS[0]?.id ?? 'originals');
 const scrollRef = ref(null);
+const cmsGamesByTab = ref({});
 
 const activeTab = computed(() =>
   HOME_ORIGINALS_TABS.find((tab) => tab.id === activeTabId.value) ?? HOME_ORIGINALS_TABS[0],
 );
 
-const visibleGames = computed(() => activeTab.value?.games ?? []);
+const visibleGames = computed(() => {
+  const tab = activeTab.value;
+  if (!tab) return [];
+  const cmsItems = cmsGamesByTab.value[tab.id] || [];
+  return resolveGameImageTiles(cmsItems, tab.games ?? []);
+});
+
+onMounted(async () => {
+  const next = {};
+  await Promise.all(
+    HOME_ORIGINALS_TABS.map(async (tab) => {
+      if (!tab.sectionCode) return;
+      try {
+        next[tab.id] = await loadCasinoSectionItems(tab.sectionCode);
+      } catch (error) {
+        console.warn(`Failed to load ${tab.sectionCode}:`, error);
+        next[tab.id] = [];
+      }
+    }),
+  );
+  cmsGamesByTab.value = next;
+});
+
+const openGame = (game) => {
+  if (game.navItem && !game.staticTile) {
+    if (game.navItem.navType === 'game' && !authStore.isUiAuthenticated) {
+      openLoginModal({ redirect: `/casino/game/${game.navItem.gameId}` });
+      return;
+    }
+    pushCasinoSectionNavItem(router, game.navItem, { setSelectedGame });
+    return;
+  }
+
+  const gameId = game.id;
+  if (!gameId) return;
+  if (!authStore.isUiAuthenticated) {
+    openLoginModal({ redirect: `/casino/game/${gameId}` });
+    return;
+  }
+  setSelectedGame({
+    id: gameId,
+    game_id: String(gameId),
+    name: game.name || 'Casino game',
+  });
+  router.push({ name: 'casino-game', params: { gameId: String(gameId) } });
+};
 
 const scrollBy = (direction) => {
   const container = scrollRef.value;
@@ -55,10 +112,12 @@ const selectTab = (tabId) => {
 
       <div class="home-originals-section__body">
         <div ref="scrollRef" class="home-originals-section__track scrollbar-hide">
-          <div
+          <button
             v-for="game in visibleGames"
             :key="`${activeTabId}-${game.id}`"
+            type="button"
             class="home-originals-section__game"
+            @click="openGame(game)"
           >
             <img
               :src="game.image"
@@ -67,7 +126,7 @@ const selectTab = (tabId) => {
               loading="lazy"
               decoding="async"
             />
-          </div>
+          </button>
         </div>
       </div>
     </div>
@@ -221,6 +280,12 @@ const selectTab = (tabId) => {
 .home-originals-section__game {
   flex: 0 0 auto;
   width: 118px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
 }
 
 @media (min-width: 640px) {

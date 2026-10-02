@@ -769,7 +769,6 @@ onUnmounted(() => {
                                                     reference-layout
                                                     reference-play-mode="upcoming"
                                                     :show-competition="false"
-                                                    :show-upcoming-odds-overlay="true"
                                                     :animation-delay="Math.min((sportIndex * 100 + eventIndex) * 0.02, 0.5)"
                                                 />
                                             </div>
@@ -834,7 +833,6 @@ onUnmounted(() => {
                                             <EventRow v-for="(event, eventIndex) in sportGroup.upcomingEvents"
                                                 :key="`up-${event.id}`" :event="event"
                                                 :show-competition="!isMobile"
-                                                :show-upcoming-odds-overlay="stripFeedMode === 'upcoming' || stripFeedMode === 'combined'"
                                                 :animation-delay="Math.min((sportIndex * 100 + sportGroup.inplayEvents.length + eventIndex) * 0.02, 0.5)" />
                                         </template>
                                     </div>

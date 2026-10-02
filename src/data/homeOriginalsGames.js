@@ -2,12 +2,15 @@
  * Originals tabbed section — matched to monkeydon.com reference home.
  * Static luckmedia.link thumbnails per tab (Originals, Scratch Card, Lottery, Crash Games).
  */
+import casinoSections from '@/constants/casinoSections';
+
 const thumb = (slug) => `https://luckmedia.link/${slug}/thumb_3_4_custom.webp`;
 
 export const HOME_ORIGINALS_TABS = [
   {
     id: 'originals',
     label: 'Originals',
+    sectionCode: casinoSections.SECTION_CODES.WAZIR_ORIGINALS,
     seeAllQuery: { provider: 'MAC88' },
     games: [
       { id: 'evo_dream_catcher', name: 'Dream Catcher', image: thumb('evo_dream_catcher') },
@@ -21,6 +24,7 @@ export const HOME_ORIGINALS_TABS = [
   {
     id: 'scratch-card',
     label: 'Scratch Card',
+    sectionCode: casinoSections.SECTION_CODES.WAZIR_SCRATCH_CARD,
     seeAllQuery: { gamename: 'scratch card' },
     games: [
       { id: 'hcw_gold_rush', name: 'Gold Rush', image: thumb('hcw_gold_rush') },
@@ -34,6 +38,7 @@ export const HOME_ORIGINALS_TABS = [
   {
     id: 'lottery',
     label: 'Lottery',
+    sectionCode: casinoSections.SECTION_CODES.WAZIR_LOTTERY,
     seeAllQuery: { gamename: 'lottery' },
     games: [
       { id: 'tvb_keno', name: 'Keno', image: thumb('tvb_keno') },
@@ -46,6 +51,7 @@ export const HOME_ORIGINALS_TABS = [
   {
     id: 'crash-games',
     label: 'Crash Games',
+    sectionCode: casinoSections.SECTION_CODES.WAZIR_CRASH_GAMES,
     seeAllQuery: { gamename: 'crash games' },
     games: [
       { id: 'pgp_spaceman', name: 'Spaceman', image: thumb('pgp_spaceman') },

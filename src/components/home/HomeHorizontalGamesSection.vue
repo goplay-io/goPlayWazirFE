@@ -6,6 +6,10 @@ import { useSelectedGame } from '@/composables/useSelectedGame';
 import { openLoginModal } from '@/composables/useLoginModal.js';
 import { filterHomeCasinoGames, useHomeCasinoGames } from '@/composables/useHomeCasinoGames';
 import { HOME_INDIAN_CARD_GAMES } from '@/data/homeIndianCardGames.js';
+import casinoSections from '@/constants/casinoSections';
+import { usePublicCasinoSection } from '@/composables/usePublicCasinoSection';
+import { resolveGameImageTiles } from '@/utils/sectionItems';
+import { pushCasinoSectionNavItem } from '@/utils/casinoSectionNavigation';
 
 const props = defineProps({
   title: {
@@ -41,13 +45,22 @@ const { setSelectedGame } = useSelectedGame();
 const { games, loading, loadGames } = useHomeCasinoGames();
 const scrollRef = ref(null);
 
-const referenceGames = computed(() =>
-  HOME_INDIAN_CARD_GAMES.slice(0, props.maxGames).map((game) => ({
+const { items: cmsIndianCardItems } = usePublicCasinoSection(
+  props.useReferenceImages ? casinoSections.SECTION_CODES.WAZIR_INDIAN_CARD_GAMES : '',
+  [],
+);
+
+const referenceGames = computed(() => {
+  const staticGames = HOME_INDIAN_CARD_GAMES.slice(0, props.maxGames);
+  const tiles = resolveGameImageTiles(cmsIndianCardItems.value, staticGames);
+  return tiles.slice(0, props.maxGames).map((game) => ({
     id: game.id,
     name: game.name,
     url_thumb: game.image,
-  })),
-);
+    navItem: game.navItem,
+    staticTile: game.staticTile,
+  }));
+});
 
 const visibleGames = computed(() => {
   if (props.useReferenceImages) return referenceGames.value;
@@ -70,6 +83,15 @@ const onSeeAll = () => {
 };
 
 const openGame = (game) => {
+  if (game?.navItem && !game.staticTile) {
+    if (game.navItem.navType === 'game' && !authStore.isUiAuthenticated) {
+      openLoginModal({ redirect: `/casino/game/${game.navItem.gameId}` });
+      return;
+    }
+    pushCasinoSectionNavItem(router, game.navItem, { setSelectedGame });
+    return;
+  }
+
   if (!game?.id) return;
   if (!authStore.isUiAuthenticated) {
     openLoginModal({ redirect: `/casino/game/${game.id}` });

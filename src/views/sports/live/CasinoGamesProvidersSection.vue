@@ -52,8 +52,8 @@ onMounted(async () => {
   try {
     const info = await loadPublicInfo();
     const section = findPublicSection(getCurrentSkinSections(info), {
-      code: casinoSections.SECTION_CODES.ZUPLAY_CASINO_PROVIDERS,
-      aliases: ['zuplaycasinoproviders', 'casinoproviders', 'providers', 'provider'],
+      code: casinoSections.SECTION_CODES.WAZIR_CASINO_PROVIDERS,
+      aliases: ['wazircasinoproviders', 'casinoproviders', 'providers', 'provider'],
     });
     if (!section) return;
 
@@ -71,7 +71,7 @@ onMounted(async () => {
       cmsProviderCards.value = items;
     }
   } catch (error) {
-    console.warn('Failed to load zuplay_casino_providers section:', error);
+    console.warn('Failed to load wazir_casino_providers section:', error);
   }
 });
 

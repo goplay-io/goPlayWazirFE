@@ -17,7 +17,15 @@ export const getCurrentSkinSections = (info) => {
 
   const hostname = typeof window !== 'undefined' ? window.location.hostname.toLowerCase() : ''
   const skins = Array.isArray(info?.skins) ? info.skins : []
+  const wazirSkinMatch = (candidate) => {
+    const key = normalized(candidate?.key)
+    const name = normalized(candidate?.name)
+    return key === 'wazir' || key === 'wazirwin' || key === 'monkeydon'
+      || name.includes('wazir') || name.includes('monkeydon')
+  }
+
   const skin = skins.find((candidate) => getHost(candidate?.url) === hostname)
+    || skins.find(wazirSkinMatch)
     || skins.find((candidate) => normalized(candidate?.name) === 'zuplay')
     || skins.find((candidate) => normalized(candidate?.key) === 'zuplay')
   if (skin?.id != null) return Array.isArray(sections[String(skin.id)]) ? sections[String(skin.id)] : []

@@ -1,5 +1,7 @@
 import { getPublicInfo } from '@/api/user/info'
 import { setSkins } from '@/constants/skins'
+import { findPublicSection, getCurrentSkinSections, getPublicSectionItems } from '@/utils/publicCasinoSections'
+import { normalizeCasinoSectionNavItems } from '@/utils/casinoSectionNavigation'
 
 let publicInfoPromise = null
 let inMemoryPublicInfo = null
@@ -44,3 +46,11 @@ export const loadPublicInfo = () => {
 }
 
 export const getCachedPublicInfo = () => inMemoryPublicInfo
+
+export const loadCasinoSectionItems = async (sectionCode) => {
+  if (!sectionCode) return []
+  const info = await loadPublicInfo()
+  const sections = getCurrentSkinSections(info)
+  const section = findPublicSection(sections, { code: sectionCode })
+  return normalizeCasinoSectionNavItems(getPublicSectionItems(section))
+}
