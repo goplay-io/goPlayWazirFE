@@ -23,7 +23,7 @@
 
       <v-card-text class="tw-pt-4 tw-pb-2 account-help-dialog-body">
         <div v-if="loading" class="tw-flex tw-justify-center tw-py-8">
-          <v-progress-circular indeterminate color="#360952" size="36" />
+          <v-progress-circular indeterminate color="#49915e" size="36" />
         </div>
 
         <div

@@ -377,6 +377,7 @@
     font-size: 11px !important;
     font-weight: 700 !important;
     line-height: 16px !important;
+    text-transform: none !important;
   }
 
   .layout-home-shell-bg .events-table-section--reference .event-row-ref-mobile-score-line {
@@ -390,32 +391,48 @@
   .layout-home-shell-bg .events-table-section--reference .event-row-ref-mobile-btn__price,
   .layout-home-shell-bg .events-table-section--reference .event-row-ref-mobile-btn__stake {
     font-family: inherit !important;
-    border-radius: 2px !important;
+    border-radius: 3px !important;
     color: #000 !important;
   }
 
   .layout-home-shell-bg .events-table-section--reference .event-row-ref-mobile-btn__price {
-    font-size: 12px !important;
-    font-weight: 600 !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
     line-height: 16px !important;
   }
 
   .layout-home-shell-bg .events-table-section--reference .event-row-ref-mobile-btn__stake {
     font-size: 9px !important;
-    font-weight: 400 !important;
+    font-weight: 700 !important;
     line-height: 11px !important;
   }
 
-  .layout-home-shell-bg .events-table-section--reference .event-row-ref-mobile-btn--back {
+  .layout-home-shell-bg .events-table-section--reference .event-row-ref-mobile-btn--back,
+  .layout-home-shell-bg .events-table-section--reference .event-row-ref-mobile-btn--empty.event-row-ref-mobile-btn--back {
     background: #a7d8fd !important;
   }
 
-  .layout-home-shell-bg .events-table-section--reference .event-row-ref-mobile-btn--lay {
+  .layout-home-shell-bg .events-table-section--reference .event-row-ref-mobile-btn--lay,
+  .layout-home-shell-bg .events-table-section--reference .event-row-ref-mobile-btn--empty.event-row-ref-mobile-btn--lay {
     background: #f9c9d4 !important;
   }
 
-  .layout-home-shell-bg .events-table-section--reference .event-row-ref-mobile-btn--empty {
-    background: #a3a3a3 !important;
+  .layout-home-shell-bg .events-table-section--reference .event-row-ref-mobile-odds-panel {
+    gap: 1px !important;
+    padding: 0 !important;
+    background: #23201f !important;
+  }
+
+  .layout-home-shell-bg .events-table-section--reference .event-row-card + .event-row-card {
+    margin-top: 0 !important;
+  }
+
+  .layout-home-shell-bg .events-table-section--reference .event-row-card {
+    border-top: 1px solid #23201f !important;
+  }
+
+  .layout-home-shell-bg .events-table-section--reference .event-row-ref-mobile-odds-track {
+    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1) !important;
   }
 
   .layout-home-shell-bg .live-page-container .events-table-section__body,
@@ -596,12 +613,12 @@ marquee.tw-text-marquee {
   }
 
   .buttons-page {
-    padding: 0 0 1rem !important;
+    padding: 0 !important;
   }
 
   .buttons-page__card {
-    margin-left: 1rem !important;
-    margin-right: 1rem !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
 
   .buttons-page-heading.user-menu-mobile-heading {
@@ -1405,6 +1422,10 @@ body:has(.layout-home-shell-bg),
 .layout-home-shell-bg .event-row-desktop__date-secondary,
 .layout-home-shell-bg .event-row-time-pill {
   color: rgba(255, 255, 255, 0.92) !important;
+}
+
+.layout-home-shell-bg .event-row-mobile-name {
+  text-transform: none !important;
 }
 
 /* Reference home table body — GamesTableData row layout */

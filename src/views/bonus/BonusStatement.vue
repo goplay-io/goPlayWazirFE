@@ -124,9 +124,14 @@ onMounted(async () => {
   width: 28px;
   height: 28px;
   padding: 0;
-  border: 0;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 999px;
   background: transparent;
-  color: var(--color-header-bg, #360952);
+  color: #ffffff;
   cursor: pointer;
+}
+
+.bonus-statement-help-btn :deep(.v-icon) {
+  color: #ffffff !important;
 }
 </style>

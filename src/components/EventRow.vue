@@ -1,8 +1,7 @@
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, nextTick, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStarredEvents } from '@/composables/useStarredEvents';
-import { useMobileEventOddsSide } from '@/composables/useMobileEventOddsSide';
 import { isPremiumEvent } from '@/utils/premiumStatus';
 import { isVirtualEvent } from '@/utils/virtualStatus';
 import { isTruthyInPlay, isILive } from '@/utils/liveStatus';
@@ -10,7 +9,7 @@ import { getEventBetRoute } from '@/composables/useEventTypes';
 import { prefetchBetEvent } from '@/composables/useBetEventPrefetch';
 import { formatMarketBetLimit } from '@/utils/marketBetLimitFormat.js';
 
-const MOBILE_ODDS_SWIPE_THRESHOLD_PX = 48;
+const MOBILE_ODDS_SWIPE_THRESHOLD_PX = 36;
 const MOBILE_ODDS_TEAMS = ['TEAM_2', 'TEAM_3', 'TEAM_1'];
 const MONTH_SHORT = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -51,18 +50,31 @@ const props = defineProps({
 
 const router = useRouter();
 const { isEventStarred, toggleEventStarred, starredIds } = useStarredEvents();
-const { sides, getSportKey, setOddsSide } = useMobileEventOddsSide();
 
-const touchStartX = ref(0);
+/** Per-row back/lay — each event slides independently (reference mobile). */
+const mobileOddsSide = ref('back');
+const isOddsDragging = ref(false);
+const oddsDragX = ref(0);
+const oddsPanelWidth = ref(0);
+const oddsTouchStartX = ref(0);
+const oddsDragStartX = ref(0);
 
 const isStarred = computed(() => {
     void starredIds.value;
     return isEventStarred(props.event);
 });
 
-const sportKey = computed(() => getSportKey(props.event));
-
-const mobileOddsSide = computed(() => sides.value[sportKey.value] ?? 'back');
+const oddsTrackStyle = computed(() => {
+    if (!isOddsDragging.value && oddsPanelWidth.value <= 0 && oddsDragX.value === 0 && mobileOddsSide.value === 'back') {
+        return undefined;
+    }
+    return {
+        transform: `translate3d(${oddsDragX.value}px, 0, 0)`,
+        transition: isOddsDragging.value
+            ? 'none'
+            : 'transform 0.28s cubic-bezier(0.22, 1, 0.36, 1)',
+    };
+});
 
 const isPremium = computed(() => isPremiumEvent(props.event));
 
@@ -102,13 +114,22 @@ const competitionName = computed(() => {
     return name ? String(name).trim() : '';
 });
 
+/** Title case: first letter of each word upper, rest lower (works even if API sends ALL CAPS). */
+function toTitleCase(value) {
+    return String(value)
+        .toLowerCase()
+        .replace(/\b([a-z0-9])/g, (ch) => ch.toUpperCase());
+}
+
 /** Split "Home v Away" / "Home vs Away" into two lines (ZU reference `.teamName`). */
 const teamNameLines = computed(() => {
     const raw = String(props.event?.name || '').trim();
     if (!raw) return [];
     const parts = raw.split(/\s+v(?:s)?\s+/i).map((p) => p.trim()).filter(Boolean);
-    if (parts.length >= 2) return [parts[0], parts.slice(1).join(' v ')];
-    return [raw];
+    if (parts.length >= 2) {
+        return [toTitleCase(parts[0]), toTitleCase(parts.slice(1).join(' v '))];
+    }
+    return [toTitleCase(raw)];
 });
 
 const formattedDate = computed(() => {
@@ -259,16 +280,53 @@ const handleStarClick = () => {
     toggleEventStarred(props.event);
 };
 
+function clampOddsTranslate(px) {
+    const width = oddsPanelWidth.value || 0;
+    if (width <= 0) return 0;
+    return Math.max(-width, Math.min(0, px));
+}
+
 function onMobileOddsTouchStart(e) {
-    touchStartX.value = e.touches[0]?.clientX ?? 0;
+    const container = e.currentTarget;
+    oddsPanelWidth.value = container?.clientWidth ?? 0;
+    oddsTouchStartX.value = e.touches[0]?.clientX ?? 0;
+    oddsDragStartX.value = mobileOddsSide.value === 'lay' ? -oddsPanelWidth.value : 0;
+    oddsDragX.value = oddsDragStartX.value;
+    isOddsDragging.value = true;
+}
+
+function onMobileOddsTouchMove(e) {
+    if (!isOddsDragging.value || oddsPanelWidth.value <= 0) return;
+    const x = e.touches[0]?.clientX ?? oddsTouchStartX.value;
+    const delta = x - oddsTouchStartX.value;
+    oddsDragX.value = clampOddsTranslate(oddsDragStartX.value + delta);
 }
 
 function onMobileOddsTouchEnd(e) {
-    const endX = e.changedTouches[0]?.clientX ?? touchStartX.value;
-    const delta = endX - touchStartX.value;
-    if (Math.abs(delta) < MOBILE_ODDS_SWIPE_THRESHOLD_PX) return;
-    e.stopPropagation();
-    setOddsSide(sportKey.value, delta < 0 ? 'lay' : 'back');
+    if (!isOddsDragging.value) return;
+    const endX = e.changedTouches[0]?.clientX ?? oddsTouchStartX.value;
+    const delta = endX - oddsTouchStartX.value;
+    const width = oddsPanelWidth.value || 1;
+    const finalX = clampOddsTranslate(oddsDragStartX.value + delta);
+    oddsDragX.value = finalX;
+
+    let nextSide = mobileOddsSide.value;
+    if (Math.abs(delta) >= MOBILE_ODDS_SWIPE_THRESHOLD_PX) {
+        nextSide = delta < 0 ? 'lay' : 'back';
+    } else {
+        nextSide = finalX < -width / 2 ? 'lay' : 'back';
+    }
+
+    if (nextSide !== mobileOddsSide.value) {
+        e.stopPropagation();
+    }
+    mobileOddsSide.value = nextSide;
+    isOddsDragging.value = false;
+
+    const targetX = nextSide === 'lay' ? -width : 0;
+    nextTick(() => {
+        oddsDragX.value = targetX;
+    });
 }
 
 function handleOddsButtonClick(e) {
@@ -314,7 +372,9 @@ function handleOddsButtonClick(e) {
                 <div
                     class="event-row-ref-mobile-odds"
                     @touchstart.passive="onMobileOddsTouchStart"
+                    @touchmove.passive="onMobileOddsTouchMove"
                     @touchend="onMobileOddsTouchEnd"
+                    @touchcancel="onMobileOddsTouchEnd"
                 >
                     <div
                         v-if="shouldShowUpcomingOddsOverlay"
@@ -325,17 +385,16 @@ function handleOddsButtonClick(e) {
                     </div>
                     <div
                         class="event-row-ref-mobile-odds-track"
-                        :class="{ 'event-row-ref-mobile-odds-track--lay': mobileOddsSide === 'lay' }"
+                        :class="{ 'event-row-ref-mobile-odds-track--lay': !oddsPanelWidth && mobileOddsSide === 'lay' }"
+                        :style="oddsTrackStyle"
                     >
                         <div class="event-row-ref-mobile-odds-panel">
                             <button
                                 v-for="teamKey in MOBILE_ODDS_TEAMS"
                                 :key="`ref-back-${teamKey}`"
                                 type="button"
-                                class="event-row-ref-mobile-btn"
-                                :class="teamKey === 'TEAM_3'
-                                    ? 'event-row-ref-mobile-btn--empty'
-                                    : 'event-row-ref-mobile-btn--back'"
+                                class="event-row-ref-mobile-btn event-row-ref-mobile-btn--back"
+                                :class="{ 'event-row-ref-mobile-btn--empty': teamKey === 'TEAM_3' }"
                                 @click="handleOddsButtonClick"
                             >
                                 <span class="event-row-ref-mobile-btn__price">
@@ -355,10 +414,8 @@ function handleOddsButtonClick(e) {
                                 v-for="teamKey in MOBILE_ODDS_TEAMS"
                                 :key="`ref-lay-${teamKey}`"
                                 type="button"
-                                class="event-row-ref-mobile-btn"
-                                :class="teamKey === 'TEAM_3'
-                                    ? 'event-row-ref-mobile-btn--empty'
-                                    : 'event-row-ref-mobile-btn--lay'"
+                                class="event-row-ref-mobile-btn event-row-ref-mobile-btn--lay"
+                                :class="{ 'event-row-ref-mobile-btn--empty': teamKey === 'TEAM_3' }"
                                 @click="handleOddsButtonClick"
                             >
                                 <span class="event-row-ref-mobile-btn__price">
@@ -405,11 +462,13 @@ function handleOddsButtonClick(e) {
                     <span v-else-if="timePillLabel" class="event-row-time-pill">{{ timePillLabel }}</span>
                 </div>
 
-                <!-- Swipe odds: keep handlers/structure untouched -->
+                <!-- Swipe odds: per-row back/lay (color flip on standard mobile) -->
                 <div
                     class="event-row-mobile__odds"
                     @touchstart.passive="onMobileOddsTouchStart"
+                    @touchmove.passive="onMobileOddsTouchMove"
                     @touchend="onMobileOddsTouchEnd"
+                    @touchcancel="onMobileOddsTouchEnd"
                 >
                     <div
                         v-if="shouldShowUpcomingOddsOverlay"
@@ -858,6 +917,7 @@ function handleOddsButtonClick(e) {
         font-weight: 700;
         line-height: 16px;
         color: rgba(255, 255, 255, 0.95);
+        text-transform: none;
     }
 
     .event-row-ref-mobile-odds {
@@ -866,6 +926,7 @@ function handleOddsButtonClick(e) {
         height: 100%;
         overflow: hidden;
         box-sizing: border-box;
+        background: #23201f;
     }
 
     .event-row-ref-mobile-odds-overlay {
@@ -887,12 +948,15 @@ function handleOddsButtonClick(e) {
         display: flex;
         width: 200%;
         height: 100%;
-        transition: transform 0.2s ease;
+        transform: translate3d(0, 0, 0);
+        transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+        will-change: transform;
         touch-action: pan-y;
+        gap: 1px;
     }
 
     .event-row-ref-mobile-odds-track--lay {
-        transform: translateX(-50%);
+        transform: translate3d(-50%, 0, 0);
     }
 
     .event-row-ref-mobile-odds-panel {
@@ -901,9 +965,10 @@ function handleOddsButtonClick(e) {
         gap: 1px;
         width: 50%;
         height: 100%;
-        padding: 1px;
+        padding: 0;
         box-sizing: border-box;
         flex-shrink: 0;
+        background: #23201f;
     }
 
     .event-row-ref-mobile-btn {
@@ -911,9 +976,9 @@ function handleOddsButtonClick(e) {
         height: 100%;
         min-height: 0;
         margin: 0;
-        padding: 1px 4px;
+        padding: 1px 2px;
         border: none;
-        border-radius: 2px;
+        border-radius: 0;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -921,6 +986,7 @@ function handleOddsButtonClick(e) {
         box-sizing: border-box;
         cursor: pointer;
         color: #000;
+        transition: background-color 0.18s ease, filter 0.18s ease;
     }
 
     .event-row-ref-mobile-btn--back {
@@ -931,9 +997,21 @@ function handleOddsButtonClick(e) {
         background: #f9c9d4;
     }
 
+    /* Keep empty draw column in back/lay colors (match desktop reference) */
     .event-row-ref-mobile-btn--empty {
-        background: #a3a3a3;
         cursor: default;
+    }
+
+    .event-row-ref-mobile-btn--empty.event-row-ref-mobile-btn--back {
+        background: #a7d8fd;
+    }
+
+    .event-row-ref-mobile-btn--empty.event-row-ref-mobile-btn--lay {
+        background: #f9c9d4;
+    }
+
+    .event-row-ref-mobile-btn:active:not(.event-row-ref-mobile-btn--empty) {
+        filter: brightness(0.92);
     }
 
     .event-row-ref-mobile-btn__price {
@@ -1051,6 +1129,7 @@ function handleOddsButtonClick(e) {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        text-transform: none;
     }
 
     .event-row-mobile-date {

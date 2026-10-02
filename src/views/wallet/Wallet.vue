@@ -23,7 +23,7 @@
             background-svg="/src/assets/pending.svg"
             :animation-delay="0.2"
             :trand-icon="false"
-            color="#360952"
+            color="#49915e"
             :amount-color="true"
           />
           <MetricCard
@@ -33,7 +33,7 @@
             background-svg="/src/assets/pending.svg"
             :animation-delay="0.3"
             :trand-icon="false"
-            color="#8a19ce"
+            color="#4cae50"
             :amount-color="true"
           />
         </div>
@@ -97,14 +97,14 @@ onMounted(() => {
 }
 
 .wallet-page :deep(.balance-card-theme) {
-  background: linear-gradient(135deg, #921ada 0%, #8a19ce 50%, #471368 100%) !important;
-  border: 1px solid var(--color-header-bg, #360952) !important;
+  background: #49915e !important;
+  border: 1px solid #4cae50 !important;
   border-radius: 8px;
 }
 
 .wallet-page :deep(.metric-card-light) {
-  background: #360952 !important;
-  border: 1px solid #8a19ce !important;
+  background: #333333 !important;
+  border: 1px solid #545454 !important;
   border-radius: 8px;
 }
 
