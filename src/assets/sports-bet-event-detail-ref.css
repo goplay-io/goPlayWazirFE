@@ -56,10 +56,16 @@ body:has(.bet-page-container--wazir-ref),
  */
 @media (min-width: 1024px) {
   .guest-layout-body--reference-pad:has(.bet-page-container--wazir-ref) > .guest-layout-main,
-  .layout-content-row--reference-pad:has(.bet-page-container--wazir-ref) > .layout-v-main {
+  .layout-content-row--reference-pad:has(.bet-page-container--wazir-ref) > .v-main {
     align-self: stretch;
     min-height: 0;
     overflow: hidden;
+  }
+
+  .layout-content-row--reference-pad:has(.bet-page-container--wazir-ref) > .v-main > .v-main__wrap {
+    flex: 1 1 auto;
+    min-height: 0;
+    height: 100%;
   }
 
   .guest-layout-body--reference-pad:has(.bet-page-container--wazir-ref) .layout-page-content,
