@@ -2122,10 +2122,10 @@ body:has(.bet-page-container--wazir-ref),
   .bet-page-container--wazir-ref .bet-markets-scrollable .fancy-market-status-overlay--ball-running .fancy-market-status-overlay__label {
     color: #000000 !important;
     font-size: 12px !important;
-    font-weight: 400 !important;
+    font-weight: 700 !important;
     line-height: 16px !important;
     letter-spacing: normal !important;
-    text-transform: none !important;
+    text-transform: uppercase !important;
     text-shadow: none !important;
     text-align: center !important;
   }

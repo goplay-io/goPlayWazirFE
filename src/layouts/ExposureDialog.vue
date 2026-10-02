@@ -250,13 +250,13 @@ function goToEvent(event_id) {
 <style scoped>
 .exposure-dialog {
     position: relative;
-    background: #ffffff !important;
-    border: 1px solid var(--color-header-bg, #360952);
+    background: #23201f !important;
+    border: 1px solid #545454;
     border-radius: 8px;
     box-shadow: 0 8px 32px rgba(54, 9, 82, 0.28);
     overflow: hidden;
     width: 100%;
-    color: #111111 !important;
+    color: #ffffff !important;
 }
 
 .exposure-dialog--mobile {
@@ -267,7 +267,7 @@ function goToEvent(event_id) {
     flex-direction: column;
     border: none;
     border-radius: 8px;
-    background: #ffffff !important;
+    background: #23201f !important;
 }
 
 .exposure-dialog__header {
@@ -277,7 +277,7 @@ function goToEvent(event_id) {
     gap: 8px;
     flex-shrink: 0;
     padding: 12px 14px;
-    background: var(--color-header-bg, #360952);
+    background: #49915e;
     color: #ffffff;
 }
 
@@ -370,23 +370,23 @@ function goToEvent(event_id) {
     padding: 0;
     border: none;
     background: transparent;
-    color: var(--color-header-bg, #360952) !important;
-    -webkit-text-fill-color: var(--color-header-bg, #360952) !important;
+    color: #49915e !important;
+    -webkit-text-fill-color: #49915e !important;
     cursor: pointer;
     line-height: 1;
 }
 
 .exposure-dialog__close :deep(.v-icon) {
-    color: var(--color-header-bg, #360952) !important;
+    color: #49915e !important;
 }
 
 .exposure-dialog__close:hover {
     opacity: 0.75;
-    color: #8a19ce !important;
+    color: #4cae50 !important;
 }
 
 .exposure-dialog__close:hover :deep(.v-icon) {
-    color: #8a19ce !important;
+    color: #4cae50 !important;
 }
 
 .exposure-dialog__body {
@@ -395,7 +395,7 @@ function goToEvent(event_id) {
     min-height: 0;
     display: flex;
     flex-direction: column;
-    background: #ffffff;
+    background: #23201f;
 }
 
 .exposure-dialog--mobile .exposure-dialog__body {
@@ -406,7 +406,7 @@ function goToEvent(event_id) {
     align-items: center;
     justify-content: center;
     min-height: 7rem;
-    background: #ffffff;
+    background: #23201f;
 }
 
 .exposure-dialog__empty-message {
@@ -416,7 +416,7 @@ function goToEvent(event_id) {
     font-size: 14px;
     font-weight: 400;
     text-align: center;
-    background: #ffffff;
+    background: #23201f;
 }
 
 .exposure-dialog__table-wrap {
@@ -424,7 +424,7 @@ function goToEvent(event_id) {
     flex: 1;
     min-height: 0;
     border: none;
-    background: #ffffff;
+    background: #23201f;
     -webkit-overflow-scrolling: touch;
 }
 
@@ -445,7 +445,7 @@ function goToEvent(event_id) {
     top: 0;
     z-index: 1;
     padding: 10px 12px;
-    background: var(--color-header-bg, #360952) !important;
+    background: #49915e !important;
     color: #ffffff !important;
     -webkit-text-fill-color: #ffffff !important;
     font-weight: 800;
@@ -484,17 +484,17 @@ function goToEvent(event_id) {
 }
 
 .exposure-dialog__row:hover .exposure-dialog__td {
-    background: #f9fafb;
+    background: #333333;
 }
 
 .exposure-dialog__td {
     padding: 10px 12px;
-    color: #111111 !important;
-    -webkit-text-fill-color: #111111 !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
     vertical-align: middle;
     border-bottom: 1px solid #e5e7eb;
     border-right: 1px solid #e5e7eb;
-    background: #ffffff;
+    background: #23201f;
     word-break: break-word;
     font-size: 0.78rem;
 }
@@ -518,22 +518,22 @@ function goToEvent(event_id) {
 }
 
 .exposure-dialog__link {
-    color: var(--color-header-bg, #360952) !important;
-    -webkit-text-fill-color: var(--color-header-bg, #360952) !important;
+    color: #49915e !important;
+    -webkit-text-fill-color: #49915e !important;
     text-decoration: underline;
     text-underline-offset: 2px;
 }
 
 .exposure-dialog__row:hover .exposure-dialog__link {
-    color: #8a19ce !important;
-    -webkit-text-fill-color: #8a19ce !important;
+    color: #4cae50 !important;
+    -webkit-text-fill-color: #4cae50 !important;
 }
 
 .exposure-dialog__empty-cell {
     padding: 12px 12px;
     color: #6b7280 !important;
     -webkit-text-fill-color: #6b7280 !important;
-    background: #ffffff;
+    background: #23201f;
     border: 1px solid #d1d5db;
     border-top: 1px solid #d1d5db;
     text-align: left;
@@ -547,7 +547,7 @@ function goToEvent(event_id) {
 }
 
 .exposure-dialog__skeleton :deep(.v-skeleton-loader__bone) {
-    background: rgba(54, 9, 82, 0.12) !important;
+    background: rgba(73, 145, 94, 0.18) !important;
 }
 
 @media (max-width: 768px) {

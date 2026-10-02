@@ -29,7 +29,7 @@
           <v-window-item value="bank">
             <div class="tw-pt-4">
               <div v-if="loading" class="tw-flex tw-justify-center tw-items-center tw-h-64">
-                <v-progress-circular indeterminate size="48" color="var(--color-header-bg, #360952)" />
+                <v-progress-circular indeterminate size="48" color="#49915e" />
               </div>
               <div v-else-if="bankAccounts.length === 0" class="payment-methods-empty tw-text-center tw-py-16">
                 <v-icon size="64" class="tw-mb-4 payment-methods-empty-icon">mdi-bank-outline</v-icon>
@@ -59,7 +59,7 @@
           <v-window-item value="upi">
             <div class="tw-pt-4">
               <div v-if="loading" class="tw-flex tw-justify-center tw-items-center tw-h-64">
-                <v-progress-circular indeterminate size="48" color="var(--color-header-bg, #360952)" />
+                <v-progress-circular indeterminate size="48" color="#49915e" />
               </div>
               <div v-else-if="upiAccounts.length === 0" class="payment-methods-empty tw-text-center tw-py-16">
                 <v-icon size="64" class="tw-mb-4 payment-methods-empty-icon">mdi-cellphone</v-icon>
@@ -89,7 +89,7 @@
           <v-window-item value="crypto">
             <div class="tw-pt-4">
               <div v-if="loading" class="tw-flex tw-justify-center tw-items-center tw-h-64">
-                <v-progress-circular indeterminate size="48" color="var(--color-header-bg, #360952)" />
+                <v-progress-circular indeterminate size="48" color="#49915e" />
               </div>
               <div v-else-if="cryptoAccountsWithName.length === 0" class="payment-methods-empty tw-text-center tw-py-16">
                 <v-icon size="64" class="tw-mb-4 payment-methods-empty-icon">mdi-currency-btc</v-icon>
@@ -490,24 +490,24 @@ watch(activeTab, (tab) => {
 }
 
 .payment-methods-empty-title {
-  color: #111111 !important;
+  color: #ffffff !important;
 }
 
 .payment-methods-empty-text {
-  color: #6b7280 !important;
+  color: #aaaaaa !important;
 }
 
 .payment-methods-empty-icon {
-  color: var(--color-header-bg, #360952) !important;
+  color: #49915e !important;
   opacity: 0.85;
 }
 
 .payment-methods-tabs {
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid #545454;
 }
 
 .payment-methods-tabs :deep(.v-tab) {
-  color: #6b7280 !important;
+  color: #aaaaaa !important;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.03em;
@@ -515,18 +515,18 @@ watch(activeTab, (tab) => {
 }
 
 .payment-methods-tabs :deep(.v-tab--selected) {
-  color: var(--color-header-bg, #360952) !important;
+  color: #49915e !important;
 }
 
 .payment-methods-tabs :deep(.v-tab__slider) {
-  background-color: var(--color-header-bg, #360952) !important;
+  background-color: #49915e !important;
   height: 2px;
 }
 
 .payment-methods-btn-primary {
-  background: linear-gradient(135deg, #921ada 0%, #8a19ce 50%, #471368 100%) !important;
+  background: #49915e !important;
   color: #ffffff !important;
-  border: 0 !important;
+  border: 1px solid #fff !important;
   box-shadow: none !important;
   letter-spacing: 0.02em;
   text-transform: none;
@@ -577,15 +577,15 @@ watch(activeTab, (tab) => {
 <style>
 /* v-dialog content is teleported to <body>, so these rules must be unscoped */
 .payment-methods-dialog .payment-methods-dialog-card {
-  background: #ffffff !important;
-  border: 1px solid var(--color-header-bg, #360952) !important;
-  box-shadow: 0 18px 40px rgba(54, 9, 82, 0.28) !important;
+  background: #23201f !important;
+  border: 1px solid #545454 !important;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45) !important;
   overflow: hidden;
-  color: #111111 !important;
+  color: #ffffff !important;
 }
 
 .payment-methods-dialog .payment-methods-dialog-title {
-  background: var(--color-header-bg, #360952) !important;
+  background: #49915e !important;
   color: #ffffff !important;
   border-bottom: none;
   padding: 14px 20px !important;
@@ -596,56 +596,56 @@ watch(activeTab, (tab) => {
 }
 
 .payment-methods-dialog .payment-methods-dialog-body {
-  background: #ffffff;
-  color: #111111 !important;
+  background: #23201f;
+  color: #ffffff !important;
 }
 
 .payment-methods-dialog .payment-methods-dialog-text {
-  color: #6b7280 !important;
+  color: #aaaaaa !important;
   font-size: 0.92rem;
 }
 
 .payment-methods-dialog .payment-methods-dialog-field .v-field {
-  background: #ffffff !important;
-  border-radius: 8px !important;
+  background: #d5d5d5 !important;
+  border-radius: 6px !important;
 }
 
 .payment-methods-dialog .payment-methods-dialog-field .v-field__outline {
   --v-field-border-width: 1.5px;
   --v-field-border-opacity: 1;
-  color: #d1d5db !important;
+  color: #545454 !important;
 }
 
 .payment-methods-dialog .payment-methods-dialog-field .v-field--focused .v-field__outline {
   --v-field-border-width: 2px;
-  color: var(--color-header-bg, #360952) !important;
+  color: #49915e !important;
 }
 
 .payment-methods-dialog .payment-methods-dialog-field .v-label,
 .payment-methods-dialog .payment-methods-dialog-field .v-field-label {
-  color: #6b7280 !important;
+  color: #343434 !important;
   opacity: 1 !important;
   font-weight: 600;
 }
 
 .payment-methods-dialog .payment-methods-dialog-field input,
 .payment-methods-dialog .payment-methods-dialog-field .v-field__input {
-  color: #111111 !important;
-  -webkit-text-fill-color: #111111 !important;
+  color: #343434 !important;
+  -webkit-text-fill-color: #343434 !important;
   font-weight: 600;
 }
 
 .payment-methods-dialog .payment-methods-dialog-field .v-select__selection-text {
-  color: #111111 !important;
+  color: #343434 !important;
   font-weight: 600;
 }
 
 .payment-methods-dialog .payment-methods-dialog-field .v-icon {
-  color: #6b7280 !important;
+  color: #aaaaaa !important;
 }
 
 .payment-methods-dialog .payment-methods-btn-primary {
-  background: linear-gradient(135deg, #921ada 0%, #8a19ce 50%, #471368 100%) !important;
+  background: #49915e !important;
   color: #ffffff !important;
   border: 0 !important;
   box-shadow: none !important;
@@ -668,13 +668,13 @@ watch(activeTab, (tab) => {
 }
 
 .payment-methods-dialog .payment-methods-btn-cancel {
-  color: #6b7280 !important;
+  color: #aaaaaa !important;
   font-weight: 600;
   text-transform: none;
 }
 
 .payment-methods-dialog .payment-methods-btn-cancel .v-btn__content {
-  color: #6b7280 !important;
+  color: #aaaaaa !important;
 }
 
 .payment-methods-dialog .payment-methods-btn-delete {

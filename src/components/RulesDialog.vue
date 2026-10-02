@@ -127,7 +127,7 @@ function close() {
     min-height: 42px;
     padding: 8px;
     border-radius: 4px 4px 0 0;
-    background: #360952;
+    background: #49915e;
     color: #ffffff;
     font-size: 16px;
     font-weight: 600;

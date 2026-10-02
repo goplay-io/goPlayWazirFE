@@ -78,9 +78,9 @@ function onCardClick() {
 
 <style scoped>
 .upi-card {
-  background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
-  border: 2px solid #8a19ce;
-  box-shadow: 0 10px 30px rgba(54, 9, 82, 0.12), 0 4px 15px rgba(15, 23, 42, 0.06);
+  background: #333333;
+  border: 2px solid #545454;
+  box-shadow: none;
   backdrop-filter: blur(10px);
   transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
 }
@@ -92,19 +92,15 @@ function onCardClick() {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(138, 25, 206, 0.10) 0%,
-    rgba(54, 9, 82, 0.04) 100%
-  );
+  background: transparent;
   border-radius: inherit;
   pointer-events: none;
   z-index: 1;
 }
 
 .upi-card:hover {
-  border-color: #360952;
-  box-shadow: 0 20px 40px rgba(54, 9, 82, 0.2), 0 8px 25px rgba(15, 23, 42, 0.1);
+  border-color: #49915e;
+  box-shadow: none;
 }
 
 .upi-card-bg {
@@ -112,29 +108,29 @@ function onCardClick() {
 }
 
 .upi-card-icon {
-  background: rgba(138, 25, 206, 0.15);
-  border: 1px solid rgba(138, 25, 206, 0.4);
+  background: rgba(73, 145, 94, 0.18);
+  border: 1px solid rgba(73, 145, 94, 0.45);
 }
 
 .upi-card :deep(.tw-text-theme-text) {
-  color: #1f2937 !important;
+  color: #ffffff !important;
 }
 
 .upi-card :deep(.tw-text-theme-text-secondary) {
-  color: #6b7280 !important;
+  color: #aaaaaa !important;
 }
 
 .upi-card :deep(.upi-card-icon .v-icon) {
-  color: #8a19ce !important;
+  color: #4cae50 !important;
 }
 
 .upi-card :deep(.upi-card-actions .v-btn) {
-  background: rgba(138, 25, 206, 0.12) !important;
-  border: 1.5px solid #8a19ce !important;
+  background: rgba(73, 145, 94, 0.18) !important;
+  border: 1.5px solid #49915e !important;
 }
 
 .upi-card :deep(.upi-card-actions .v-btn .v-icon) {
-  color: #8a19ce !important;
+  color: #4cae50 !important;
 }
 
 .upi-card :deep(.upi-card-actions .v-btn--color-error) {

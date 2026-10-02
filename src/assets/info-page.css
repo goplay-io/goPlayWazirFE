@@ -1,24 +1,24 @@
-/* Shared static / footer info pages — matches account purple chrome on a light shell. */
+/* Static info / legal pages — dark charcoal + green (matches account pages) */
 
 .info-page {
-  --info-purple: var(--color-header-bg, #360952);
-  --info-purple-mid: #8a19ce;
-  --info-purple-deep: #471368;
-  --info-soft: #f6f0fb;
-  --info-border: #e5d4f3;
-  --info-text: #111111;
-  --info-muted: #555555;
-  --info-submit-gradient: linear-gradient(135deg, #921ada 0%, #8a19ce 50%, #471368 100%);
-  --info-header-gradient: linear-gradient(90deg, #360952, #8a19ce);
+  --info-purple: #49915e;
+  --info-purple-mid: #4cae50;
+  --info-purple-deep: #3d7a4e;
+  --info-soft: #333333;
+  --info-border: #545454;
+  --info-text: #ffffff;
+  --info-muted: #aaaaaa;
+  --info-submit-gradient: #49915e;
+  --info-header-gradient: #49915e;
   min-height: 100%;
-  background: #ffffff;
+  background: #23201f;
   color: var(--info-text);
 }
 
 .reference-info-page {
   width: 100%;
   max-width: 100%;
-  color: #000000;
+  color: #ffffff;
 }
 
 .reference-info-page .account-page-header {
@@ -29,8 +29,8 @@
 .info-page__shell {
   display: flex;
   flex-direction: column;
-  background: #ffffff;
-  color: #000000;
+  background: #23201f;
+  color: #ffffff;
   padding: 8px 8px;
 }
 
@@ -47,7 +47,7 @@
 
 .info-page__content {
   margin-top: 8px;
-  color: #000000;
+  color: #ffffff;
   font-size: 16px;
   line-height: 24px;
 }
@@ -57,7 +57,7 @@
   padding: 10px 0;
   font-size: inherit;
   line-height: inherit;
-  color: #000000;
+  color: #ffffff;
 }
 
 .reference-prose h2,
@@ -67,7 +67,7 @@
   font-size: inherit;
   font-weight: 700;
   line-height: inherit;
-  color: #000000;
+  color: #ffffff;
 }
 
 .reference-prose strong {
@@ -93,7 +93,7 @@
   padding: 0;
   font-size: inherit;
   line-height: inherit;
-  color: #000000;
+  color: #ffffff;
 }
 
 .reference-prose li p {
@@ -123,7 +123,7 @@
 }
 
 .reference-prose a {
-  color: #000000;
+  color: #4cae50;
   text-decoration: underline;
 }
 
@@ -238,7 +238,7 @@
   padding: 10px 12px;
   border: 1px solid var(--info-border);
   border-radius: 8px;
-  background: #fafafa;
+  background: #2c2928;
   font-size: 13px;
   line-height: 1.5;
   color: var(--info-muted);
@@ -310,7 +310,7 @@
   padding: 18px 16px;
   border: 1px solid var(--info-border);
   border-radius: 10px;
-  background: linear-gradient(180deg, #faf5ff 0%, #ffffff 100%);
+  background: #333333;
   text-align: center;
 }
 
@@ -360,7 +360,7 @@
 }
 
 .info-page__btn--outline {
-  background: #ffffff;
+  background: #333333;
   color: var(--info-purple);
   border: 1px solid var(--info-purple);
 }
@@ -380,7 +380,7 @@
   padding: 0 14px;
   border: 1.5px solid var(--info-purple);
   border-radius: 6px;
-  background: #ffffff;
+  background: #333333;
   color: var(--info-purple);
   font-size: 12px;
   font-weight: 700;
@@ -398,19 +398,19 @@
   color: inherit !important;
 }
 
-/* Rules expansion panels on light shell */
+/* Rules expansion panels on dark shell */
 .info-page.rules-page {
-  --rules-header-bg: var(--info-purple);
-  --rules-header-bg-hover: var(--info-purple-mid);
+  --rules-header-bg: #49915e;
+  --rules-header-bg-hover: #4cae50;
   --rules-header-text: #ffffff;
-  --rules-body-bg: #fafafa;
-  --rules-row-bg: #ffffff;
-  --rules-row-border: var(--info-border);
-  --rules-rule-text: #333333;
+  --rules-body-bg: #2c2928;
+  --rules-row-bg: #333333;
+  --rules-row-border: #545454;
+  --rules-rule-text: #ffffff;
 }
 
 .info-page .rules-shell {
-  background: #ffffff;
+  background: #23201f;
   border: 1px solid var(--info-border);
   border-radius: 0 0 8px 8px;
   box-shadow: none;
@@ -430,7 +430,7 @@
 }
 
 .info-page :deep(.rules-panel.v-expansion-panel) {
-  background-color: #ffffff !important;
+  background-color: #333333 !important;
   border-radius: 8px !important;
   border: 1px solid var(--info-border) !important;
   margin-bottom: 8px;

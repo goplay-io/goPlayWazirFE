@@ -23,9 +23,9 @@
         :hide-details="!couponError"
         :error="!!couponError"
         :error-messages="couponError ? [couponError] : []"
-        color="var(--color-header-bg, #360952)"
-        base-color="#999999"
-        bg-color="#f5f5f5"
+        color="#49915e"
+        base-color="#545454"
+        bg-color="#d5d5d5"
         :disabled="claimingCode"
         @keyup.enter="handleClaimCode"
         @update:model-value="couponError = ''"
@@ -45,7 +45,7 @@
       <div v-if="loading" class="bonuses-loading">
         <v-progress-circular
           indeterminate
-          color="var(--color-header-bg, #360952)"
+          color="#49915e"
           size="48"
         />
       </div>
@@ -176,13 +176,13 @@ onMounted(() => {
 
 <style scoped>
 .bonuses-page {
-  --bonuses-purple: var(--color-header-bg, #360952);
-  --bonuses-purple-mid: #8a19ce;
-  --bonuses-soft: #f6f0fb;
-  --bonuses-border: #e5d4f3;
-  --bonuses-gradient: linear-gradient(135deg, #921ada 0%, #8a19ce 50%, #471368 100%);
-  background: #ffffff;
-  color: #111111;
+  --bonuses-accent: #49915e;
+  --bonuses-accent-mid: #4cae50;
+  --bonuses-soft: #333333;
+  --bonuses-border: #545454;
+  --bonuses-gradient: #49915e;
+  background: var(--account-page-bg, #23201f);
+  color: var(--account-text, #ffffff);
 }
 
 .bonuses-help-btn {
@@ -210,8 +210,8 @@ onMounted(() => {
   justify-content: center;
   gap: 10px;
   padding: 16px 12px;
-  background: #ffffff;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  background: var(--account-filter-strip, #333333);
+  box-shadow: none;
 }
 
 .bonuses-coupon-field {
@@ -221,28 +221,28 @@ onMounted(() => {
 }
 
 .bonuses-coupon-field :deep(.v-field) {
-  background: #f5f5f5 !important;
+  background: #d5d5d5 !important;
   border-radius: 6px !important;
 }
 
 .bonuses-coupon-field :deep(.v-field__outline) {
   --v-field-border-width: 1px;
   --v-field-border-opacity: 1;
-  color: #111111 !important;
+  color: #545454 !important;
 }
 
 .bonuses-coupon-field :deep(.v-field--focused .v-field__outline) {
   --v-field-border-width: 2px;
-  color: var(--bonuses-purple) !important;
+  color: var(--bonuses-accent) !important;
 }
 
 .bonuses-coupon-field :deep(.v-label) {
-  color: #666666 !important;
+  color: #343434 !important;
   opacity: 1 !important;
 }
 
 .bonuses-coupon-field :deep(input) {
-  color: #111111 !important;
+  color: #343434 !important;
   font-weight: 600;
 }
 
@@ -252,7 +252,7 @@ onMounted(() => {
 }
 
 .bonuses-coupon-field :deep(.v-messages__message) {
-  color: #b91c1c !important;
+  color: #f87171 !important;
 }
 
 .bonuses-btn-primary {
@@ -260,7 +260,7 @@ onMounted(() => {
   min-width: 90px !important;
   padding: 0 16px !important;
   border: 0 !important;
-  border-radius: 6px !important;
+  border-radius: 8px !important;
   background: var(--bonuses-gradient) !important;
   color: #ffffff !important;
   font-weight: 700 !important;
@@ -307,13 +307,13 @@ onMounted(() => {
 }
 
 .bonuses-empty-icon {
-  color: var(--bonuses-purple-mid) !important;
+  color: var(--bonuses-accent-mid) !important;
   opacity: 0.9;
 }
 
 .bonuses-empty-text {
   margin: 0;
-  color: #666666;
+  color: var(--account-muted, #aaaaaa);
   font-size: 14px;
   font-weight: 500;
 }
@@ -328,14 +328,13 @@ onMounted(() => {
   padding: 14px;
   border: 1px solid var(--bonuses-border);
   border-radius: 10px;
-  background: #ffffff;
-  box-shadow: 0 2px 10px rgba(54, 9, 82, 0.06);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  background: #333333;
+  box-shadow: none;
+  transition: border-color 0.15s ease;
 }
 
 .bonuses-item-card:hover {
-  border-color: var(--bonuses-purple-mid);
-  box-shadow: 0 4px 16px rgba(54, 9, 82, 0.1);
+  border-color: var(--bonuses-accent-mid);
 }
 
 .bonuses-item-head {
@@ -344,14 +343,14 @@ onMounted(() => {
 
 .bonuses-item-title {
   margin: 0;
-  color: var(--bonuses-purple);
+  color: #ffffff;
   font-size: 15px;
   font-weight: 700;
 }
 
 .bonuses-item-amount {
   margin: 6px 0 0;
-  color: #16a34a;
+  color: var(--bonuses-accent-mid);
   font-size: 15px;
   font-weight: 700;
 }
@@ -374,7 +373,7 @@ onMounted(() => {
 }
 
 .bonuses-item-label {
-  color: #666666;
+  color: var(--account-muted, #aaaaaa);
   font-size: 13px;
   font-weight: 500;
 }
@@ -383,8 +382,8 @@ onMounted(() => {
   padding: 4px 8px;
   border: 1px solid var(--bonuses-border);
   border-radius: 6px;
-  background: var(--bonuses-soft);
-  color: var(--bonuses-purple);
+  background: #23201f;
+  color: #ffffff;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -401,7 +400,7 @@ onMounted(() => {
 }
 
 .bonus-banner :deep(a) {
-  color: var(--bonuses-purple-mid);
+  color: var(--bonuses-accent-mid);
 }
 
 @media (max-width: 640px) {
