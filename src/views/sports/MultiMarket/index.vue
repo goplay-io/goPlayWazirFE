@@ -545,26 +545,26 @@ onUnmounted(() => {
         />
       </Teleport>
 
-    <!-- Mobile Bet History Overlay (explicit light chrome — theme tokens are tuned for dark nav and read as white-on-white here) -->
+    <!-- Mobile Bet History Overlay -->
     <v-overlay v-model="showBetHistory" v-if="isMobile" class="tw-z-50 mm-bet-history-overlay" persistent>
-      <div class="mm-bet-history-sheet tw-w-screen tw-h-screen tw-flex tw-flex-col tw-bg-white">
+      <div class="mm-bet-history-sheet tw-w-screen tw-h-screen tw-flex tw-flex-col tw-bg-[#23201f]">
         <!-- Header -->
         <div
-          class="theme-heading-bar tw-flex tw-shrink-0 tw-items-center tw-justify-between tw-border-b tw-border-[#d9d9d9] tw-px-3 tw-py-2">
-          <span class="theme-heading-bar__title tw-text-sm">{{ t('pages.multiMarket.betHistory') }}</span>
+          class="theme-heading-bar tw-flex tw-shrink-0 tw-items-center tw-justify-between tw-border-b tw-border-[#545454] tw-px-3 tw-py-2 tw-bg-[#49915e]">
+          <span class="theme-heading-bar__title tw-text-sm tw-text-white">{{ t('pages.multiMarket.betHistory') }}</span>
           <v-btn
             icon
             variant="text"
             density="comfortable"
             aria-label="Close"
-            class="mm-bet-history-close"
+            class="mm-bet-history-close tw-text-white"
             @click="showBetHistory = false"
           >
             <v-icon size="22">mdi-close</v-icon>
           </v-btn>
         </div>
         <!-- Content -->
-        <div class="tw-flex-1 tw-overflow-y-auto tw-bg-white tw-px-0 tw-pb-4">
+        <div class="tw-flex-1 tw-overflow-y-auto tw-bg-[#23201f] tw-px-0 tw-pb-4">
           <BetHistory
             :betHistory="aggregatedBetHistory"
             :groupByEvent="true"
@@ -631,8 +631,8 @@ onUnmounted(() => {
 /* Theme variables on this page resolve to white-on-white, so paint the page
    header and empty state explicitly to keep the multi-market page readable. */
 .multi-market-header {
-  border-bottom: 1px solid #6b7280;
-  background: linear-gradient(to bottom, #d1d1d1, #e8e8e8);
+  border-bottom: 1px solid #545454;
+  background: #333333;
 }
 
 .multi-market-page-heading__icon {
@@ -648,7 +648,7 @@ onUnmounted(() => {
 }
 
 .multi-market-empty-icon {
-  color: #f26c20 !important;
+  color: #49915e !important;
 }
 
 .multi-market-empty-title {
@@ -656,7 +656,7 @@ onUnmounted(() => {
 }
 
 .multi-market-empty-hint {
-  color: #5b5b5b !important;
+  color: #aaaaaa !important;
   max-width: 320px;
   line-height: 1.4;
 }

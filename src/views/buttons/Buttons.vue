@@ -1,142 +1,132 @@
 <script setup>
-import { onMounted, ref } from 'vue';
-import { fetchButtons, updateButtons } from "@/api/user/profile.js";
-import { useRouter } from 'vue-router';
-import { useI18n } from 'vue-i18n';
-import Loading from "@/components/Loading.vue";
-import { useSnackbar } from '@/composables/useSnackbar/useSnackbar';
+import { onMounted, ref } from 'vue'
+import { fetchButtons, updateButtons } from '@/api/user/profile.js'
+import { useI18n } from 'vue-i18n'
+import Loading from '@/components/Loading.vue'
+import AccountPageHeader from '@/components/account/AccountPageHeader.vue'
+import { useSnackbar } from '@/composables/useSnackbar/useSnackbar'
 
-const router = useRouter();
-const { t } = useI18n();
-const { showSuccess, showError } = useSnackbar();
+const { t } = useI18n()
+const { showSuccess, showError } = useSnackbar()
 
-const formData = ref([]);
-const isLoading = ref(false);
-const isSubmitting = ref(false);
+const formData = ref([])
+const isLoading = ref(false)
+const isSubmitting = ref(false)
 
-// Fetch buttons data on component mount
 onMounted(async () => {
-    await loadButtons();
-});
+  await loadButtons()
+})
 
 const loadButtons = async () => {
-    try {
-        isLoading.value = true;
-        
-        const response = await fetchButtons();
-        
-        if (response.buttons && response.buttons.length > 0) {
-            formData.value = response.buttons.map(button => ({
-                id: button.id,
-                title: button.title,
-                amount: button.amount
-            }));
-        }
-    } catch (error) {
-        console.error("Error fetching buttons:", error);
-        showError(t('buttons.errorLoading'));
-    } finally {
-        isLoading.value = false;
+  try {
+    isLoading.value = true
+
+    const response = await fetchButtons()
+
+    if (response.buttons && response.buttons.length > 0) {
+      formData.value = response.buttons.map((button) => ({
+        id: button.id,
+        title: button.title,
+        amount: button.amount,
+      }))
     }
-};
+  } catch (error) {
+    console.error('Error fetching buttons:', error)
+    showError(t('buttons.errorLoading'))
+  } finally {
+    isLoading.value = false
+  }
+}
 
 const handleSubmit = async () => {
-    try {
-        isSubmitting.value = true;
+  try {
+    isSubmitting.value = true
 
-        // Format the data according to the API structure
-        const apiData = {};
+    const apiData = {}
 
-        // Map array data to numbered fields (title1, amount1, etc.)
-        formData.value.forEach((button, index) => {
-            const num = index + 1;
-            apiData[`title${num}`] = button.title;
-            apiData[`amount${num}`] = button.amount;
-        });
+    formData.value.forEach((button, index) => {
+      const num = index + 1
+      apiData[`title${num}`] = button.title
+      apiData[`amount${num}`] = button.amount
+    })
 
-        // Call the API to update the buttons
-        await updateButtons(apiData);
+    await updateButtons(apiData)
 
-        showSuccess(t('buttons.successUpdate'));
-
-    } catch (error) {
-        console.error("Error updating buttons:", error);
-        showError(t('buttons.errorUpdating'));
-    } finally {
-        isSubmitting.value = false;
-    }
-};
+    showSuccess(t('buttons.successUpdate'))
+  } catch (error) {
+    console.error('Error updating buttons:', error)
+    showError(t('buttons.errorUpdating'))
+  } finally {
+    isSubmitting.value = false
+  }
+}
 </script>
 
 <template>
-    <!-- Loading overlay -->
-    <Loading v-if="isLoading" />    <div class="tw-container tw-mx-auto tw-p-3 buttons-page">
-      <div class="buttons-page-heading user-menu-mobile-heading user-menu-mobile-heading--spaced">
-        <h1 class="tw-text-lg tw-font-bold buttons-page__title user-menu-mobile-heading__title">{{ t('buttons.updateStake') }}</h1>
-      </div>
-      
-      <!-- Main Content Card -->
-      <div class="tw-relative tw-border tw-rounded-lg tw-p-4 tw-shadow-md tw-max-w-4xl tw-mx-auto buttons-page__card">
-        <!-- Form -->
-        <form @submit.prevent="handleSubmit" class="tw-space-y-3">
-          <!-- Headers -->
-          <div class="tw-grid tw-grid-cols-2 tw-gap-4 tw-mb-2">
-            <div class="tw-font-semibold tw-text-sm tw-pb-1 tw-border-b buttons-page__header-cell">
+  <Loading v-if="isLoading" />
+  <div class="account-page buttons-page">
+    <AccountPageHeader :title="t('buttons.updateStake')" />
+
+    <div class="buttons-page__body">
+      <div class="buttons-page__card">
+        <form class="buttons-page__form" @submit.prevent="handleSubmit">
+          <div class="buttons-page__headers">
+            <div class="buttons-page__header-cell">
               {{ t('buttons.buttonLabel') }}
             </div>
-            <div class="tw-font-semibold tw-text-sm tw-pb-1 tw-border-b buttons-page__header-cell">
+            <div class="buttons-page__header-cell">
               {{ t('buttons.stakeAmount') }}
             </div>
-          </div>          <!-- Button Fields -->
-          <div class="tw-space-y-2">
-            <div 
-              v-for="(button, index) in formData" 
-              :key="button.id" 
-              class="tw-grid tw-grid-cols-2 tw-gap-3"
-            >
-              <div>
-                <v-text-field
-                  v-model="button.title"
-                  :placeholder="t('buttons.buttonPlaceholder', { n: index + 1 })"
-                  variant="outlined"
-                  density="compact"
-                  hide-details
-                  class="tw-bg-theme-surface buttons-page__field"
-                ></v-text-field>
-              </div>
+          </div>
 
-              <div>
-                <v-text-field
-                  v-model="button.amount"
-                  :placeholder="t('buttons.amountPlaceholder', { n: index + 1 })"
-                  type="number"
-                  variant="outlined"
-                  density="compact"
-                  hide-details
-                  class="tw-bg-theme-surface buttons-page__field"
-                ></v-text-field>
-              </div>
+          <div class="buttons-page__rows">
+            <div
+              v-for="(button, index) in formData"
+              :key="button.id"
+              class="buttons-page__row"
+            >
+              <v-text-field
+                v-model="button.title"
+                :placeholder="t('buttons.buttonPlaceholder', { n: index + 1 })"
+                variant="outlined"
+                density="compact"
+                hide-details
+                color="#49915e"
+                base-color="#545454"
+                bg-color="#d5d5d5"
+                class="buttons-page__field"
+              />
+              <v-text-field
+                v-model="button.amount"
+                :placeholder="t('buttons.amountPlaceholder', { n: index + 1 })"
+                type="number"
+                variant="outlined"
+                density="compact"
+                hide-details
+                color="#49915e"
+                base-color="#545454"
+                bg-color="#d5d5d5"
+                class="buttons-page__field"
+              />
             </div>
-          </div>          <!-- Action Buttons -->
-          <div class="tw-flex tw-justify-between tw-items-center tw-pt-4 tw-border-t buttons-page__actions">
-            <!-- Reset Button -->
+          </div>
+
+          <div class="buttons-page__actions">
             <v-btn
-              @click="loadButtons"
               variant="outlined"
               :disabled="isLoading || isSubmitting"
               class="buttons-page__reset-btn"
+              @click="loadButtons"
             >
               <v-icon start>mdi-refresh</v-icon>
               {{ t('buttons.reset') }}
             </v-btn>
-            
-            <!-- Update Button -->
+
             <v-btn
               type="submit"
+              variant="flat"
               :loading="isSubmitting"
               :disabled="isSubmitting || isLoading"
-              color="primary"
-              variant="flat"
               class="buttons-page__update-btn"
             >
               <template v-if="isSubmitting">
@@ -148,54 +138,107 @@ const handleSubmit = async () => {
                 {{ t('buttons.update') }}
               </template>
             </v-btn>
-          </div></form>
-      </div>    </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style scoped>
-.buttons-page__title {
-  color: #111827 !important;
+.buttons-page {
+  background: var(--account-page-bg, #23201f);
+  color: var(--account-text, #ffffff);
+}
+
+.buttons-page__body {
+  padding: 16px 12px 28px;
 }
 
 .buttons-page__card {
-  background: #121212 !important;
-  border-color: #d6c59b !important;
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: 16px;
+  border: 1px solid #545454;
+  border-radius: 10px;
+  background: #333333;
+  box-shadow: none;
+}
+
+.buttons-page__form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.buttons-page__headers,
+.buttons-page__row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
 }
 
 .buttons-page__header-cell {
-  color: #ffffff !important;
-  border-color: #d6c59b !important;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #545454;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
 }
 
-.buttons-page__actions {
-  border-color: #d6c59b !important;
+.buttons-page__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .buttons-page__field :deep(.v-field) {
-  background: #121212 !important;
+  background: #d5d5d5 !important;
+  border-radius: 6px !important;
 }
 
 .buttons-page__field :deep(.v-field__input),
-.buttons-page__field :deep(input),
-.buttons-page__field :deep(.v-field-label),
-.buttons-page__field :deep(.v-label) {
-  color: #ffffff !important;
+.buttons-page__field :deep(input) {
+  color: #343434 !important;
   opacity: 1 !important;
+  font-weight: 600;
 }
 
 .buttons-page__field :deep(.v-field__outline) {
-  --v-field-border-opacity: 1 !important;
-  color: #333 !important;
+  --v-field-border-width: 1px;
+  --v-field-border-opacity: 1;
+  color: #545454 !important;
 }
 
 .buttons-page__field :deep(.v-field--focused .v-field__outline) {
-  color: #f26c20 !important;
+  --v-field-border-width: 2px;
+  color: #49915e !important;
+}
+
+.buttons-page__field :deep(input::placeholder) {
+  color: #343434 !important;
+  opacity: 0.65;
+}
+
+.buttons-page__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid #545454;
 }
 
 .buttons-page__update-btn {
-  background: #f26c20 !important;
-  border: 1px solid #f26c20 !important;
+  min-height: 36px !important;
+  padding: 0 16px !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  background: #49915e !important;
   color: #ffffff !important;
+  font-weight: 700 !important;
+  text-transform: none !important;
+  box-shadow: none !important;
 }
 
 .buttons-page__update-btn :deep(.v-btn__content),
@@ -203,10 +246,20 @@ const handleSubmit = async () => {
   color: #ffffff !important;
 }
 
+.buttons-page__update-btn:hover {
+  filter: brightness(1.05);
+}
+
 .buttons-page__reset-btn {
-  background: #121212 !important;
-  border: 1px solid #333 !important;
+  min-height: 36px !important;
+  padding: 0 16px !important;
+  border: 1px solid #545454 !important;
+  border-radius: 8px !important;
+  background: #23201f !important;
   color: #ffffff !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  box-shadow: none !important;
 }
 
 .buttons-page__reset-btn :deep(.v-btn__content),
@@ -215,7 +268,27 @@ const handleSubmit = async () => {
 }
 
 .buttons-page__reset-btn:hover {
-  background: #333 !important;
-  border-color: #333 !important;
+  background: #333333 !important;
+  border-color: #49915e !important;
+}
+
+@media (max-width: 640px) {
+  .buttons-page__body {
+    padding: 12px 8px 24px;
+  }
+
+  .buttons-page__card {
+    padding: 12px;
+  }
+
+  .buttons-page__actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .buttons-page__update-btn,
+  .buttons-page__reset-btn {
+    width: 100%;
+  }
 }
 </style>

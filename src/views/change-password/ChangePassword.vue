@@ -11,175 +11,191 @@
         <div class="tw-text-sm">{{ t('changePassword.mustChangeBeforeAccess') }}</div>
       </v-alert>
 
-      <div class="change-password-page__hero">
-        <img
-          src="/zuplay/svg/key.png"
-          alt=""
-          class="change-password-page__key-icon"
-          width="52"
-          height="52"
-        />
+      <div class="change-password-page__panel">
+        <form class="change-password-page__form" @submit.prevent="updateLoginPassword">
+          <div class="change-password-page__field">
+            <label class="change-password-page__label">{{ t('changePassword.oldPassword') }}</label>
+            <div class="change-password-page__input-wrap">
+              <v-icon class="change-password-page__lock" size="20">mdi-lock-outline</v-icon>
+              <input
+                v-model="loginPassword.currentPassword"
+                :type="showLoginCurrentPassword ? 'text' : 'password'"
+                class="change-password-page__input"
+                :placeholder="t('changePassword.oldPassword')"
+                autocomplete="current-password"
+                required
+              />
+              <button
+                type="button"
+                class="change-password-page__toggle"
+                :aria-label="showLoginCurrentPassword ? 'Hide password' : 'Show password'"
+                @click="showLoginCurrentPassword = !showLoginCurrentPassword"
+              >
+                <v-icon size="20">{{ showLoginCurrentPassword ? 'mdi-eye-outline' : 'mdi-eye-off-outline' }}</v-icon>
+              </button>
+            </div>
+          </div>
+
+          <div class="change-password-page__field">
+            <label class="change-password-page__label">{{ t('changePassword.newPassword') }}</label>
+            <div class="change-password-page__input-wrap">
+              <v-icon class="change-password-page__lock" size="20">mdi-lock-outline</v-icon>
+              <input
+                v-model="loginPassword.newPassword"
+                :type="showLoginNewPassword ? 'text' : 'password'"
+                class="change-password-page__input"
+                :placeholder="t('changePassword.newPassword')"
+                autocomplete="new-password"
+                required
+              />
+              <button
+                type="button"
+                class="change-password-page__toggle"
+                :aria-label="showLoginNewPassword ? 'Hide password' : 'Show password'"
+                @click="showLoginNewPassword = !showLoginNewPassword"
+              >
+                <v-icon size="20">{{ showLoginNewPassword ? 'mdi-eye-outline' : 'mdi-eye-off-outline' }}</v-icon>
+              </button>
+            </div>
+          </div>
+
+          <div class="change-password-page__field">
+            <label class="change-password-page__label">{{ t('changePassword.confirmPasswordShort') }}</label>
+            <div class="change-password-page__input-wrap">
+              <v-icon class="change-password-page__lock" size="20">mdi-lock-outline</v-icon>
+              <input
+                v-model="loginPassword.confirmPassword"
+                :type="showLoginConfirmPassword ? 'text' : 'password'"
+                class="change-password-page__input"
+                :placeholder="t('changePassword.confirmPasswordShort')"
+                autocomplete="new-password"
+                required
+              />
+              <button
+                type="button"
+                class="change-password-page__toggle"
+                :aria-label="showLoginConfirmPassword ? 'Hide password' : 'Show password'"
+                @click="showLoginConfirmPassword = !showLoginConfirmPassword"
+              >
+                <v-icon size="20">{{ showLoginConfirmPassword ? 'mdi-eye-outline' : 'mdi-eye-off-outline' }}</v-icon>
+              </button>
+            </div>
+          </div>
+
+          <div class="change-password-page__actions">
+            <button
+              v-if="!isForcedPasswordChange"
+              type="button"
+              class="change-password-page__cancel"
+              @click="handleCancel"
+            >
+              {{ t('common.cancel') }}
+            </button>
+            <button
+              type="submit"
+              class="change-password-page__save"
+              :disabled="loginPasswordLoading || !isLoginFormComplete"
+              :aria-busy="loginPasswordLoading"
+            >
+              {{ loginPasswordLoading ? t('changePassword.updating') : t('common.save') }}
+            </button>
+          </div>
+        </form>
+
+        <form
+          v-if="!isForcedPasswordChange"
+          class="change-password-page__form change-password-page__form--wallet"
+          @submit.prevent="updateWithdrawalPassword"
+        >
+          <p class="change-password-page__section-label">
+            {{ hasWithdrawalPassword ? t('changePassword.walletPassword') : t('changePassword.setWalletPassword') }}
+          </p>
+
+          <div v-if="hasWithdrawalPassword" class="change-password-page__field">
+            <label class="change-password-page__label">{{ t('changePassword.currentWalletPassword') }}</label>
+            <div class="change-password-page__input-wrap">
+              <v-icon class="change-password-page__lock" size="20">mdi-lock-outline</v-icon>
+              <input
+                v-model="withdrawalPassword.currentPassword"
+                :type="showWithdrawalCurrentPassword ? 'text' : 'password'"
+                class="change-password-page__input"
+                :placeholder="t('changePassword.currentWalletPassword')"
+                autocomplete="current-password"
+                required
+              />
+              <button
+                type="button"
+                class="change-password-page__toggle"
+                :aria-label="showWithdrawalCurrentPassword ? 'Hide password' : 'Show password'"
+                @click="showWithdrawalCurrentPassword = !showWithdrawalCurrentPassword"
+              >
+                <v-icon size="20">{{ showWithdrawalCurrentPassword ? 'mdi-eye-outline' : 'mdi-eye-off-outline' }}</v-icon>
+              </button>
+            </div>
+          </div>
+
+          <div class="change-password-page__field">
+            <label class="change-password-page__label">{{ t('changePassword.newPassword') }}</label>
+            <div class="change-password-page__input-wrap">
+              <v-icon class="change-password-page__lock" size="20">mdi-lock-outline</v-icon>
+              <input
+                v-model="withdrawalPassword.newPassword"
+                :type="showWithdrawalNewPassword ? 'text' : 'password'"
+                class="change-password-page__input"
+                :placeholder="t('changePassword.walletPassword')"
+                autocomplete="new-password"
+                required
+              />
+              <button
+                type="button"
+                class="change-password-page__toggle"
+                :aria-label="showWithdrawalNewPassword ? 'Hide password' : 'Show password'"
+                @click="showWithdrawalNewPassword = !showWithdrawalNewPassword"
+              >
+                <v-icon size="20">{{ showWithdrawalNewPassword ? 'mdi-eye-outline' : 'mdi-eye-off-outline' }}</v-icon>
+              </button>
+            </div>
+          </div>
+
+          <div class="change-password-page__field">
+            <label class="change-password-page__label">{{ t('changePassword.confirmPasswordShort') }}</label>
+            <div class="change-password-page__input-wrap">
+              <v-icon class="change-password-page__lock" size="20">mdi-lock-outline</v-icon>
+              <input
+                v-model="withdrawalPassword.confirmPassword"
+                :type="showWithdrawalConfirmPassword ? 'text' : 'password'"
+                class="change-password-page__input"
+                :placeholder="t('changePassword.confirmPasswordShort')"
+                autocomplete="new-password"
+                required
+              />
+              <button
+                type="button"
+                class="change-password-page__toggle"
+                :aria-label="showWithdrawalConfirmPassword ? 'Hide password' : 'Show password'"
+                @click="showWithdrawalConfirmPassword = !showWithdrawalConfirmPassword"
+              >
+                <v-icon size="20">{{ showWithdrawalConfirmPassword ? 'mdi-eye-outline' : 'mdi-eye-off-outline' }}</v-icon>
+              </button>
+            </div>
+          </div>
+
+          <div class="change-password-page__actions">
+            <button
+              type="submit"
+              class="change-password-page__save"
+              :disabled="withdrawalPasswordLoading || !isWithdrawalFormComplete"
+              :aria-busy="withdrawalPasswordLoading"
+            >
+              {{
+                withdrawalPasswordLoading
+                  ? (hasWithdrawalPassword ? t('changePassword.updating') : t('changePassword.setting'))
+                  : t('common.save')
+              }}
+            </button>
+          </div>
+        </form>
       </div>
-
-      <form class="change-password-page__form" @submit.prevent="updateLoginPassword">
-        <div class="change-password-page__field">
-          <div class="change-password-page__input-wrap">
-            <input
-              v-model="loginPassword.currentPassword"
-              :type="showLoginCurrentPassword ? 'text' : 'password'"
-              class="change-password-page__input"
-              :placeholder="t('changePassword.currentPassword')"
-              autocomplete="current-password"
-              required
-            />
-            <button
-              type="button"
-              class="change-password-page__toggle"
-              :aria-label="showLoginCurrentPassword ? 'Hide password' : 'Show password'"
-              @click="showLoginCurrentPassword = !showLoginCurrentPassword"
-            >
-              <img src="/svg/passwordhide.png" alt="" class="change-password-page__toggle-icon" width="28" height="28" />
-            </button>
-          </div>
-        </div>
-
-        <div class="change-password-page__field">
-          <div class="change-password-page__input-wrap">
-            <input
-              v-model="loginPassword.newPassword"
-              :type="showLoginNewPassword ? 'text' : 'password'"
-              class="change-password-page__input"
-              :placeholder="t('changePassword.newPassword')"
-              autocomplete="new-password"
-              required
-            />
-            <button
-              type="button"
-              class="change-password-page__toggle"
-              :aria-label="showLoginNewPassword ? 'Hide password' : 'Show password'"
-              @click="showLoginNewPassword = !showLoginNewPassword"
-            >
-              <img src="/svg/passwordhide.png" alt="" class="change-password-page__toggle-icon" width="28" height="28" />
-            </button>
-          </div>
-        </div>
-
-        <div class="change-password-page__field">
-          <div class="change-password-page__input-wrap">
-            <input
-              v-model="loginPassword.confirmPassword"
-              :type="showLoginConfirmPassword ? 'text' : 'password'"
-              class="change-password-page__input"
-              :placeholder="t('changePassword.confirmPassword')"
-              autocomplete="new-password"
-              required
-            />
-            <button
-              type="button"
-              class="change-password-page__toggle"
-              :aria-label="showLoginConfirmPassword ? 'Hide password' : 'Show password'"
-              @click="showLoginConfirmPassword = !showLoginConfirmPassword"
-            >
-              <img src="/svg/passwordhide.png" alt="" class="change-password-page__toggle-icon" width="28" height="28" />
-            </button>
-          </div>
-        </div>
-
-        <button
-          type="submit"
-          class="change-password-page__submit"
-          :disabled="loginPasswordLoading || !isLoginFormComplete"
-          :aria-busy="loginPasswordLoading"
-        >
-          {{ loginPasswordLoading ? t('changePassword.updating') : t('changePassword.update') }}
-        </button>
-      </form>
-
-      <form
-        v-if="!isForcedPasswordChange"
-        class="change-password-page__form change-password-page__form--wallet"
-        @submit.prevent="updateWithdrawalPassword"
-      >
-        <p class="change-password-page__section-label">
-          {{ hasWithdrawalPassword ? t('changePassword.walletPassword') : t('changePassword.setWalletPassword') }}
-        </p>
-
-        <div v-if="hasWithdrawalPassword" class="change-password-page__field">
-          <div class="change-password-page__input-wrap">
-            <input
-              v-model="withdrawalPassword.currentPassword"
-              :type="showWithdrawalCurrentPassword ? 'text' : 'password'"
-              class="change-password-page__input"
-              :placeholder="t('changePassword.currentWalletPassword')"
-              autocomplete="current-password"
-              required
-            />
-            <button
-              type="button"
-              class="change-password-page__toggle"
-              :aria-label="showWithdrawalCurrentPassword ? 'Hide password' : 'Show password'"
-              @click="showWithdrawalCurrentPassword = !showWithdrawalCurrentPassword"
-            >
-              <img src="/svg/passwordhide.png" alt="" class="change-password-page__toggle-icon" width="28" height="28" />
-            </button>
-          </div>
-        </div>
-
-        <div class="change-password-page__field">
-          <div class="change-password-page__input-wrap">
-            <input
-              v-model="withdrawalPassword.newPassword"
-              :type="showWithdrawalNewPassword ? 'text' : 'password'"
-              class="change-password-page__input"
-              :placeholder="t('changePassword.walletPassword')"
-              autocomplete="new-password"
-              required
-            />
-            <button
-              type="button"
-              class="change-password-page__toggle"
-              :aria-label="showWithdrawalNewPassword ? 'Hide password' : 'Show password'"
-              @click="showWithdrawalNewPassword = !showWithdrawalNewPassword"
-            >
-              <img src="/svg/passwordhide.png" alt="" class="change-password-page__toggle-icon" width="28" height="28" />
-            </button>
-          </div>
-        </div>
-
-        <div class="change-password-page__field">
-          <div class="change-password-page__input-wrap">
-            <input
-              v-model="withdrawalPassword.confirmPassword"
-              :type="showWithdrawalConfirmPassword ? 'text' : 'password'"
-              class="change-password-page__input"
-              :placeholder="t('changePassword.confirmPassword')"
-              autocomplete="new-password"
-              required
-            />
-            <button
-              type="button"
-              class="change-password-page__toggle"
-              :aria-label="showWithdrawalConfirmPassword ? 'Hide password' : 'Show password'"
-              @click="showWithdrawalConfirmPassword = !showWithdrawalConfirmPassword"
-            >
-              <img src="/svg/passwordhide.png" alt="" class="change-password-page__toggle-icon" width="28" height="28" />
-            </button>
-          </div>
-        </div>
-
-        <button
-          type="submit"
-          class="change-password-page__submit"
-          :disabled="withdrawalPasswordLoading || !isWithdrawalFormComplete"
-          :aria-busy="withdrawalPasswordLoading"
-        >
-          {{
-            withdrawalPasswordLoading
-              ? (hasWithdrawalPassword ? t('changePassword.updating') : t('changePassword.setting'))
-              : (hasWithdrawalPassword ? t('changePassword.update') : t('changePassword.set'))
-          }}
-        </button>
-      </form>
     </div>
   </div>
 </template>
@@ -212,13 +228,13 @@ const showWithdrawalConfirmPassword = ref(false)
 const loginPassword = ref({
   currentPassword: '',
   newPassword: '',
-  confirmPassword: ''
+  confirmPassword: '',
 })
 
 const withdrawalPassword = ref({
   currentPassword: '',
   newPassword: '',
-  confirmPassword: ''
+  confirmPassword: '',
 })
 
 const isForcedPasswordChange = computed(() => {
@@ -243,6 +259,14 @@ onMounted(async () => {
     console.error('Error checking withdrawal password status:', error)
   }
 })
+
+function handleCancel() {
+  if (window.history.length > 1) {
+    router.back()
+  } else {
+    router.push('/')
+  }
+}
 
 const validatePasswords = (current, newPassword, confirm) => {
   if (newPassword !== confirm) {
@@ -269,14 +293,14 @@ const updateLoginPassword = async () => {
     validatePasswords(
       loginPassword.value.currentPassword,
       loginPassword.value.newPassword,
-      loginPassword.value.confirmPassword
+      loginPassword.value.confirmPassword,
     )
 
     const response = await changePassword({
       type: 'password',
       old_password: loginPassword.value.currentPassword,
       password: loginPassword.value.newPassword,
-      password_confirmation: loginPassword.value.confirmPassword
+      password_confirmation: loginPassword.value.confirmPassword,
     })
 
     if (response.success) {
@@ -285,20 +309,21 @@ const updateLoginPassword = async () => {
       if (authStore.user) {
         authStore.setUser({
           ...authStore.user,
-          require_password_change: false
+          require_password_change: false,
         })
       }
 
       loginPassword.value = {
         currentPassword: '',
         newPassword: '',
-        confirmPassword: ''
+        confirmPassword: '',
       }
 
       const rawRedirect = router.currentRoute.value.query.redirect || '/'
-      const redirectPath = (typeof rawRedirect === 'string' && rawRedirect.startsWith('/') && !rawRedirect.startsWith('//'))
-        ? rawRedirect
-        : '/'
+      const redirectPath =
+        typeof rawRedirect === 'string' && rawRedirect.startsWith('/') && !rawRedirect.startsWith('//')
+          ? rawRedirect
+          : '/'
       router.push(redirectPath)
     } else {
       throw new Error(response.message || t('changePassword.passwordError'))
@@ -317,14 +342,14 @@ const updateWithdrawalPassword = async () => {
     validatePasswords(
       hasWithdrawalPassword.value ? withdrawalPassword.value.currentPassword : null,
       withdrawalPassword.value.newPassword,
-      withdrawalPassword.value.confirmPassword
+      withdrawalPassword.value.confirmPassword,
     )
 
     const response = await changePassword({
       type: 'withdrawal_password',
       old_password: hasWithdrawalPassword.value ? withdrawalPassword.value.currentPassword : undefined,
       password: withdrawalPassword.value.newPassword,
-      password_confirmation: withdrawalPassword.value.confirmPassword
+      password_confirmation: withdrawalPassword.value.confirmPassword,
     })
 
     if (response.success) {
@@ -340,7 +365,7 @@ const updateWithdrawalPassword = async () => {
       withdrawalPassword.value = {
         currentPassword: '',
         newPassword: '',
-        confirmPassword: ''
+        confirmPassword: '',
       }
     } else {
       throw new Error(response.message || t('changePassword.passwordError'))
