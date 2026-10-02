@@ -2728,6 +2728,22 @@ code::-webkit-scrollbar-track,
   border-color: rgba(255, 255, 255, 0.4) !important;
 }
 
+/* Casino game detail — dark shell (mobile + desktop) */
+.layout-content-row:has(.game-view),
+.layout-page-content:has(.game-view),
+.guest-layout-body:has(.game-view),
+.guest-layout-main:has(.game-view),
+.layout-app-main-scroll:has(.game-view),
+.layout-v-main--clear-screen:has(.game-view),
+.layout-v-main--clear-screen.casino-layout-main {
+  background: #000000 !important;
+  background-color: #000000 !important;
+}
+
+.layout-home-shell-bg:has(.game-view) {
+  background: #000000 !important;
+}
+
 /* Casino listing — dark shell + underline game tabs (monkeydon reference) */
 .casino-page {
   --casino-accent: var(--color-wazir-green, #49915e);

@@ -1,63 +1,65 @@
 <template>
-    <div class="game-view" :class="{ 'game-view--mobile-shell': isMobile }">
-      <button
-        v-if="isMobile"
-        type="button"
-        class="game-view__bar"
-        :aria-label="t('casino.game.goBack')"
-        @click="goBack"
-      >
-        <img
-          src="/zuplay/svg/arrow1.png"
-          alt=""
-          class="game-view__back-icon"
-          width="20"
-          height="13"
-        />
-        <span v-if="gameTitle" class="game-view__title">{{ gameTitle }}</span>
-      </button>
-
-      <div class="game-view__stage">
-        <!-- Loading State -->
-        <div v-if="loading" class="tw-absolute tw-inset-0 tw-bg-theme-background">
-          <Loading minHeight="100%" />
-        </div>
-
-        <!-- Error State -->
-        <div v-else-if="error" class="tw-flex tw-justify-center tw-items-center tw-absolute tw-inset-0 tw-bg-theme-background">
-          <div class="tw-text-center tw-animate-fadeIn">
-            <div class="tw-mb-6 tw-relative tw-w-24 tw-h-24 tw-mx-auto">
-              <v-icon
-                icon="mdi mdi-controller"
-                size="80"
-                class="tw-text-theme-text-secondary tw-animate-bounce"
-              ></v-icon>
-            </div>
-            <h3 class="tw-text-2xl tw-font-bold tw-text-theme-text tw-mb-3">
-              {{ t('casino.game.notAvailable') }}
-            </h3>
-            <p class="tw-text-theme-text-secondary tw-mb-6 tw-max-w-sm tw-mx-auto">
-              {{ t('casino.game.temporarilyUnavailable') }}
-            </p>
-            <div class="tw-flex tw-gap-3 tw-justify-center">
-              <v-btn @click="goBack" color="primary" variant="elevated" class="tw-px-8">
-                {{ t('casino.game.goBack') }}
-              </v-btn>
-            </div>
-          </div>
-        </div>
-
-        <!-- Game Iframe -->
-        <iframe
-          v-else-if="gameUrl"
-          :src="gameUrl"
-          class="game-iframe"
-          frameborder="0"
-          allowfullscreen
-          allow="payment; autoplay; encrypted-media; fullscreen"
-        ></iframe>
+  <div class="game-view" :class="{ 'game-view--mobile-shell': isMobile }">
+    <div class="game-view__stage">
+      <!-- Loading State -->
+      <div v-if="loading" class="game-view__state game-view__state--loading">
+        <Loading minHeight="100%" />
       </div>
+
+      <!-- Error State -->
+      <div v-else-if="error" class="game-view__state game-view__state--error">
+        <div class="game-view__error">
+          <v-icon
+            icon="mdi mdi-controller"
+            size="72"
+            class="game-view__error-icon"
+          />
+          <h3 class="game-view__error-title">
+            {{ t('casino.game.notAvailable') }}
+          </h3>
+          <p class="game-view__error-text">
+            {{ t('casino.game.temporarilyUnavailable') }}
+          </p>
+          <button type="button" class="game-view__error-btn" @click="goBack">
+            {{ t('casino.game.goBack') }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Game Iframe -->
+      <iframe
+        v-else-if="gameUrl"
+        :src="gameUrl"
+        class="game-iframe"
+        frameborder="0"
+        allowfullscreen
+        allow="payment; autoplay; encrypted-media; fullscreen"
+      ></iframe>
     </div>
+
+    <button
+      type="button"
+      class="game-view__bar"
+      :class="{ 'game-view__bar--desktop': !isMobile }"
+      :aria-label="t('casino.game.goBack')"
+      @click="goBack"
+    >
+      <svg
+        class="game-view__back-icon"
+        viewBox="0 0 24 24"
+        width="30"
+        height="30"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <path
+          d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"
+          fill="currentColor"
+        />
+      </svg>
+      <span v-if="gameTitle" class="game-view__title">{{ gameTitle }}</span>
+    </button>
+  </div>
 </template>
 
 <script setup>
@@ -72,6 +74,7 @@ import { useSelectedGame } from '../../composables/useSelectedGame';
 import { useSnackbar } from '../../composables/useSnackbar/useSnackbar';
 import { useAuthStore } from '../../stores/auth';
 import { enrichGameForFavorite } from '@/utils/casinoGameLookup';
+import Loading from '@/components/Loading.vue';
 
 const { t } = useI18n();
 const route = useRoute();
@@ -114,7 +117,7 @@ const isDemoUpgradeRestriction = (err) => {
 
 const loadGame = async () => {
   const gameId = route.params.gameId;
-  
+
   if (!gameId) {
     error.value = t('casino.game.idRequired');
     loading.value = false;
@@ -126,8 +129,7 @@ const loadGame = async () => {
 
   try {
     const response = await getCasinoGame(gameId);
-    
-    // Handle different possible response structures
+
     if (response.url) {
       gameUrl.value = response.url;
     } else if (response.data && response.data.url) {
@@ -140,7 +142,6 @@ const loadGame = async () => {
       throw new Error(t('casino.game.invalidResponse'));
     }
 
-    // Add game to favorites only after iframe URL loads successfully
     const game = getSelectedGame();
     if (game?.name) {
       gameTitle.value = game.name;
@@ -150,7 +151,6 @@ const loadGame = async () => {
       addFavoriteGame(enriched);
       clearSelectedGame();
     }
-
   } catch (err) {
     console.error('Error loading game:', err);
     if (isDemoUpgradeRestriction(err)) {
@@ -167,7 +167,10 @@ const loadGame = async () => {
       }
       return;
     }
-    error.value = err.response?.data?.message || err.message || 'Failed to load game. Please try again.';
+    error.value =
+      err.response?.data?.message ||
+      err.message ||
+      'Failed to load game. Please try again.';
   } finally {
     loading.value = false;
   }
@@ -175,20 +178,15 @@ const loadGame = async () => {
 
 onMounted(() => {
   loadGame();
-  
-  // Fetch balance immediately (handle errors gracefully)
-  fetchWalletBalance().catch((error) => {
-    // Silently handle balance fetch errors - don't let them break the game page
-    console.warn('Failed to fetch wallet balance on game page:', error);
+
+  fetchWalletBalance().catch((err) => {
+    console.warn('Failed to fetch wallet balance on game page:', err);
   });
-  
-  // Set up interval to fetch balance every 5 seconds
+
   balanceInterval = setInterval(() => {
-    fetchWalletBalance().catch((error) => {
-      // Silently handle balance fetch errors in interval
-      console.warn('Failed to fetch wallet balance in interval:', error);
-      // Stop interval if we get 401/403 (token expired)
-      if (error.response && [401, 403].includes(error.response.status)) {
+    fetchWalletBalance().catch((err) => {
+      console.warn('Failed to fetch wallet balance in interval:', err);
+      if (err.response && [401, 403].includes(err.response.status)) {
         if (balanceInterval) {
           clearInterval(balanceInterval);
           balanceInterval = null;
@@ -199,7 +197,6 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  // Clean up interval when component is unmounted
   if (balanceInterval) {
     clearInterval(balanceInterval);
     balanceInterval = null;
@@ -209,18 +206,32 @@ onUnmounted(() => {
 
 <style scoped>
 .game-view {
+  --game-shell-bg: #000000;
+  --game-bar-bg: #23201f;
+  --game-accent: var(--color-wazir-green, #49915e);
+
   position: fixed;
   top: calc(env(safe-area-inset-top, 0px) + var(--app-header-bar-height, 56px));
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--game-shell-bg);
+  color: #ffffff;
 }
 
 .game-view--mobile-shell {
   top: 0;
-  display: flex;
-  flex-direction: column;
+}
+
+.game-view__stage {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  background: var(--game-shell-bg);
 }
 
 .game-view__bar {
@@ -228,43 +239,104 @@ onUnmounted(() => {
   align-items: center;
   gap: 8px;
   width: 100%;
-  height: 34px;
-  min-height: 34px;
-  flex: 0 0 34px;
-  padding: 8px;
+  height: 40px;
+  min-height: 40px;
+  flex: 0 0 40px;
+  padding: 8px 12px;
   margin: 0;
   border: 0;
-  background: var(--color-header-bg, #360952);
-  color: #ffffff;
+  border-top: 1px solid rgba(84, 84, 84, 0.55);
+  background: var(--game-bar-bg);
+  color: var(--game-accent);
   cursor: pointer;
   box-sizing: border-box;
+  padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+  min-height: calc(40px + env(safe-area-inset-bottom, 0px));
+  flex-basis: calc(40px + env(safe-area-inset-bottom, 0px));
+}
+
+.game-view__bar--desktop {
+  height: 36px;
+  min-height: 36px;
+  flex-basis: 36px;
+  padding-bottom: 8px;
 }
 
 .game-view__back-icon {
   display: block;
-  width: 20px;
-  height: 13.3281px;
-  object-fit: fill;
-  transform: rotate(-90deg);
   flex-shrink: 0;
+  color: var(--game-accent);
 }
 
 .game-view__title {
   font-size: 12px;
   line-height: 18px;
-  font-weight: 400;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.92);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.game-view__state {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--game-shell-bg);
+}
+
+.game-view__state--loading :deep(.loading-spinner) {
+  border-color: rgba(255, 255, 255, 0.18);
+  border-top-color: var(--game-accent);
+}
+
+.game-view__error {
+  text-align: center;
+  padding: 24px 16px;
+  max-width: 360px;
+}
+
+.game-view__error-icon {
+  color: rgba(255, 255, 255, 0.45) !important;
+  margin-bottom: 16px;
+}
+
+.game-view__error-title {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
   color: #ffffff;
 }
 
-.game-view__stage {
-  position: absolute;
-  inset: 0;
+.game-view__error-text {
+  margin: 0 0 20px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.65);
 }
 
-.game-view--mobile-shell .game-view__stage {
-  position: relative;
-  flex: 1 1 auto;
-  min-height: 0;
+.game-view__error-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 140px;
+  padding: 10px 24px;
+  border: 0;
+  border-radius: 4px;
+  background: var(--game-accent);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.game-view__error-btn:hover {
+  filter: brightness(1.08);
 }
 
 .game-iframe {
@@ -272,20 +344,6 @@ onUnmounted(() => {
   height: 100%;
   border: 0;
   display: block;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.tw-animate-fadeIn {
-  animation: fadeIn 0.6s ease-out;
+  background: #000000;
 }
 </style>

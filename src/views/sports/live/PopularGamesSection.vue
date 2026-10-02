@@ -49,7 +49,9 @@ const games = computed(() => {
 const scrollBy = (direction) => {
   const container = scrollRef.value;
   if (!container) return;
-  const amount = direction === 'forward' ? 320 : -320;
+  const tileWidth = container.querySelector('.popular-games-section__tile')?.offsetWidth ?? 120;
+  const gap = 4;
+  const amount = direction === 'forward' ? tileWidth + gap : -(tileWidth + gap);
   container.scrollBy({ left: amount, behavior: 'smooth' });
 };
 
@@ -247,16 +249,40 @@ const gameKey = (game) => game.id || game.gameId;
   padding: 10px;
 }
 
-/* Reference: grid-flow-col grid-rows-2, ~160×213 tiles */
+/* Reference: grid-flow-col grid-rows-2, match Indian Card tile width on mobile */
 .popular-games-section__track {
   display: grid;
   grid-template-rows: repeat(2, auto);
   grid-auto-flow: column;
-  grid-auto-columns: 160px;
+  grid-auto-columns: 120px;
   gap: 4px;
   overflow-x: auto;
   scroll-behavior: smooth;
   padding-bottom: 2px;
+}
+
+@media (min-width: 640px) {
+  .popular-games-section__track {
+    grid-auto-columns: 140px;
+  }
+}
+
+@media (min-width: 768px) {
+  .popular-games-section__track {
+    grid-auto-columns: 160px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .popular-games-section__track {
+    grid-auto-columns: 180px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .popular-games-section__track {
+    grid-auto-columns: 200px;
+  }
 }
 
 .popular-games-section__tile {
@@ -265,7 +291,7 @@ const gameKey = (game) => game.id || game.gameId;
   min-width: 0;
   padding: 0;
   border: 0;
-  border-radius: 6px;
+  border-radius: 0;
   background: #2a2d31;
   overflow: hidden;
   cursor: pointer;
@@ -281,11 +307,12 @@ const gameKey = (game) => game.id || game.gameId;
   width: 100%;
   aspect-ratio: 3 / 4;
   object-fit: cover;
+  border-radius: 0;
   transition: transform 0.2s ease;
 }
 
 .popular-games-section__tile:hover .popular-games-section__tile-img {
-  transform: scale(1.05);
+  transform: none;
 }
 
 /* Legacy layout */
