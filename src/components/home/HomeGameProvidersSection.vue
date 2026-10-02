@@ -3,12 +3,21 @@ import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { HOME_REFERENCE_PROVIDERS } from '@/data/homeReferenceProviders.js';
+import casinoSections from '@/constants/casinoSections';
+import { usePublicCasinoSection } from '@/composables/usePublicCasinoSection';
+import { resolveProviderTiles } from '@/utils/sectionItems';
+import { pushCasinoSectionNavItem } from '@/utils/casinoSectionNavigation';
 
 const router = useRouter();
 const { t } = useI18n();
 const scrollRef = ref(null);
 
-const providers = computed(() => HOME_REFERENCE_PROVIDERS);
+const { items: cmsProviderItems } = usePublicCasinoSection(
+  casinoSections.SECTION_CODES.WAZIR_CASINO_PROVIDERS,
+  [],
+);
+
+const providers = computed(() => resolveProviderTiles(cmsProviderItems.value, HOME_REFERENCE_PROVIDERS));
 const midpoint = computed(() => Math.ceil(providers.value.length / 2));
 const firstRow = computed(() => providers.value.slice(0, midpoint.value));
 const secondRow = computed(() => providers.value.slice(midpoint.value));
@@ -25,6 +34,10 @@ const onSeeAll = () => {
 };
 
 const openProvider = (provider) => {
+  if (provider.navItem) {
+    pushCasinoSectionNavItem(router, provider.navItem);
+    return;
+  }
   router.push({
     name: 'casino-home',
     query: {

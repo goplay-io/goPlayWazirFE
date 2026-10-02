@@ -425,11 +425,6 @@ watch(isLoggedInUser, async (isLoggedIn) => {
     }
 });
 
-function goBack() {
-    if (window.history.length > 1) router.back()
-    else router.push('/sports/live')
-}
-
 const handleImageError = (event) => {
     event.target.style.display = 'none';
     const media = event.target.closest('.casino-game-tile__media');

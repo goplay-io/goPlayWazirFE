@@ -87,17 +87,17 @@ const fallbackMobileSlides = computed(() => MAIN_BANNER_SLIDES.map((slide) => ({
   src: slide.mobileSrc || slide.src,
 })));
 
-/** Prefer reference banner slides; CMS is fallback when reference list is empty. */
+/** CMS banners when the section has images; otherwise static reference slides. */
 const desktopSlides = computed(() => (
-  fallbackDesktopSlides.value.length > 0
-    ? fallbackDesktopSlides.value
-    : configuredDesktopSlides.value
+  configuredDesktopSlides.value.length > 0
+    ? configuredDesktopSlides.value
+    : fallbackDesktopSlides.value
 ));
 
 const mobileSlides = computed(() => (
-  fallbackMobileSlides.value.length > 0
-    ? fallbackMobileSlides.value
-    : configuredMobileSlides.value
+  configuredMobileSlides.value.length > 0
+    ? configuredMobileSlides.value
+    : fallbackMobileSlides.value
 ));
 
 const slides = computed(() => (isMobile.value ? mobileSlides.value : desktopSlides.value));
@@ -154,8 +154,8 @@ onMounted(async () => {
     const skinSections = getCurrentSkinSections(info);
 
     const desktopSection = findPublicSection(skinSections, {
-      code: casinoSections.SECTION_CODES.ZUPLAY_BANNER_DESKTOP,
-      aliases: ['zuplaybannerdesktop', 'bannerdesktop', 'desktopbanner'],
+      code: casinoSections.SECTION_CODES.WAZIR_BANNER_DESKTOP,
+      aliases: ['wazirbannerdesktop', 'bannerdesktop', 'desktopbanner'],
     });
     if (desktopSection) {
       const slides = normalizeSliderSlides(desktopSection, 'banner-desktop');
@@ -165,8 +165,8 @@ onMounted(async () => {
     }
 
     const mobileSection = findPublicSection(skinSections, {
-      code: casinoSections.SECTION_CODES.ZUPLAY_BANNER_MOBILE,
-      aliases: ['zuplaybannermobile', 'bannermobile', 'mobilebanner'],
+      code: casinoSections.SECTION_CODES.WAZIR_BANNER_MOBILE,
+      aliases: ['wazirbannermobile', 'bannermobile', 'mobilebanner'],
     });
     if (mobileSection) {
       const slides = normalizeSliderSlides(mobileSection, 'banner-mobile');
@@ -175,7 +175,7 @@ onMounted(async () => {
       }
     }
   } catch (error) {
-    console.warn('Failed to load zuplay banner sections:', error);
+    console.warn('Failed to load wazir banner sections:', error);
   }
 });
 </script>

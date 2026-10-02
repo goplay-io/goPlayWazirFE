@@ -7,6 +7,14 @@ import { openLoginModal } from '@/composables/useLoginModal.js';
 import { POPULAR_GAMES } from '@/data/popularGames.js';
 import { HOME_REFERENCE_POPULAR_GAMES } from '@/data/homeReferencePopularGames.js';
 import LiveShowcaseHeading from '@/views/sports/live/LiveShowcaseHeading.vue';
+import casinoSections from '@/constants/casinoSections';
+import { usePublicCasinoSection } from '@/composables/usePublicCasinoSection';
+import { resolveGameImageTiles } from '@/utils/sectionItems';
+import { pushCasinoSectionNavItem } from '@/utils/casinoSectionNavigation';
+import casinoSections from '@/constants/casinoSections';
+import { usePublicCasinoSection } from '@/composables/usePublicCasinoSection';
+import { resolveGameImageTiles } from '@/utils/sectionItems';
+import { pushCasinoSectionNavItem } from '@/utils/casinoSectionNavigation';
 
 const props = defineProps({
   hideHeading: {
@@ -25,9 +33,22 @@ const authStore = useAuthStore();
 const { setSelectedGame } = useSelectedGame();
 const scrollRef = ref(null);
 
-const games = computed(() => (
-  props.referenceLayout ? HOME_REFERENCE_POPULAR_GAMES : POPULAR_GAMES
-));
+const { items: cmsPopularItems } = usePublicCasinoSection(
+  props.referenceLayout ? casinoSections.SECTION_CODES.WAZIR_POPULAR_GAMES : '',
+  [],
+);
+
+const games = computed(() => {
+  if (!props.referenceLayout) return POPULAR_GAMES;
+  return resolveGameImageTiles(cmsPopularItems.value, HOME_REFERENCE_POPULAR_GAMES).map((game) => ({
+    id: game.id,
+    gameId: game.id,
+    name: game.name,
+    image: game.image,
+    navItem: game.navItem,
+    staticTile: game.staticTile,
+  }));
+});
 
 const scrollBy = (direction) => {
   const container = scrollRef.value;
@@ -41,6 +62,15 @@ const onSeeAll = () => {
 };
 
 const openGame = (game) => {
+  if (props.referenceLayout && game?.navItem && !game.staticTile) {
+    if (game.navItem.navType === 'game' && !authStore.isUiAuthenticated) {
+      openLoginModal({ redirect: `/casino/game/${game.navItem.gameId}` });
+      return;
+    }
+    pushCasinoSectionNavItem(router, game.navItem, { setSelectedGame });
+    return;
+  }
+
   const gameId = game?.id || game?.gameId;
   if (!gameId) return;
 
@@ -57,7 +87,10 @@ const openGame = (game) => {
   router.push({ name: 'casino-game', params: { gameId: String(gameId) } });
 };
 
-const gameImage = (game) => (props.referenceLayout ? game.image : game.src);
+const gameImage = (game) => {
+  if (props.referenceLayout) return game.image;
+  return game.src;
+};
 const gameKey = (game) => game.id || game.gameId;
 </script>
 

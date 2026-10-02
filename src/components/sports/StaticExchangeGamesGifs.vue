@@ -48,8 +48,8 @@ onMounted(async () => {
   try {
     const info = await loadPublicInfo();
     const section = findPublicSection(getCurrentSkinSections(info), {
-      code: casinoSections.SECTION_CODES.ZUPLAY_HOT_GAMES,
-      aliases: ['zuplayhotgames', 'hotgames', 'hotgame'],
+      code: casinoSections.SECTION_CODES.WAZIR_HOT_GAMES,
+      aliases: ['wazirhotgames', 'hotgames', 'hotgame'],
     });
     if (!section) return;
 
@@ -69,7 +69,7 @@ onMounted(async () => {
       cmsItems.value = items;
     }
   } catch (error) {
-    console.warn('Failed to load zuplay_hot_games section:', error);
+    console.warn('Failed to load wazir_hot_games section:', error);
   }
 });
 
