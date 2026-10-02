@@ -6,11 +6,17 @@ import iconReddybook from '@/assets/reddy-logo.png'
 import iconUltrawin from '@/assets/ultrawin-logo.png'
 import iconWinbuzz from '@/assets/winbuzz-logo.png'
 import iconZuplay from '@/assets/zuplay-logo.png'
-import iconSky from '@/assets/sky-logo.png'
+import iconWazirwin from '@/assets/wazirwin-logo.png'
 
-const DEFAULT_SKIN_KEY = 'zuplay'
+const DEFAULT_SKIN_KEY = 'wazirwin'
 
 const DEFAULT_SKINS = [
+  {
+    key: 'wazirwin',
+    label: 'WazirWin',
+    url: import.meta.env.VITE_WAZIRWIN_SITE_URL || 'https://monkeydon.com/',
+    icon: iconWazirwin,
+  },
   { key: 'goplay',    label: 'Goplay',     url: import.meta.env.VITE_GOPLAY_SITE_URL || 'https://goplaybet.io/',           icon: iconGoplay    },
   { key: 'diamond',   label: 'Diamond',    url: import.meta.env.VITE_DIAMOND_SITE_URL || 'https://diamond.goplaybet.io/',   icon: iconDiamond   },
   { key: 'zuplay',    label: 'Zu Play',    url: import.meta.env.VITE_ZUPLAY_SITE_URL || 'https://zuplay.goplaybet.io/',    icon: iconZuplay    },
@@ -22,7 +28,7 @@ const DEFAULT_SKINS = [
 
 export const skins = reactive([...DEFAULT_SKINS])
 
-export const FALLBACK_SKIN_ICON = iconSky
+export const FALLBACK_SKIN_ICON = iconWazirwin
 
 export function resolveSkinIcon(icon) {
   if (typeof icon === 'string' && icon.trim()) return icon
@@ -54,6 +60,9 @@ const SKIN_ALIASES = {
   zuplay: 'zuplay',
   zuptvy: 'zuplay',
   goplay: 'goplay',
+  wazir: 'wazirwin',
+  wazirwin: 'wazirwin',
+  monkeydon: 'wazirwin',
 }
 
 const findDefaultSkin = (key, hostname, name) => {
@@ -80,7 +89,7 @@ export const normalizeSkinConfig = (skin) => {
     ...skin,
     key: fallback?.key || key,
     label: skin.label || skin.name || fallback?.label,
-    icon: resolveSkinIcon(fallback?.icon || skin.icon || skin.logo),
+    icon: resolveSkinIcon(skin.icon || skin.logo || fallback?.icon),
   }
 }
 

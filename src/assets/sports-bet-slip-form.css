@@ -299,14 +299,26 @@
   border-color: #be185d;
 }
 
-.slip-form-root .slip-quick-cell:hover:not(:disabled) {
-  background: #f4ecfd;
+.slip-form-root .slip-quick-cell:hover:not(:disabled),
+.slip-form-root .slip-quick-cell:active:not(:disabled),
+.slip-form-root .slip-quick-cell:focus,
+.slip-form-root .slip-quick-cell:focus-visible,
+.slip-form-root .slip-quick-cell--active,
+.slip-form-root .slip-quick-cell--active:hover,
+.slip-form-root .slip-quick-cell--active:active {
+  background: #ffffff;
+  border-color: #000000;
+  color: #0c0a09;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.slip-form-root .slip-quick-cell--active {
-  background: #ca86f3;
-  border-color: #ca86f3;
-  color: #ffffff;
+.slip-form-root .slip-body-card--lay .slip-quick-cell:hover:not(:disabled),
+.slip-form-root .slip-body-card--lay .slip-quick-cell:active:not(:disabled),
+.slip-form-root .slip-body-card--lay .slip-quick-cell--active,
+.slip-form-root .slip-body-card--lay .slip-quick-cell--active:hover,
+.slip-form-root .slip-body-card--lay .slip-quick-cell--active:active {
+  border-color: #be185d;
 }
 
 .slip-form-root .slip-quick-cell:disabled {
@@ -706,10 +718,23 @@
   line-height: 18px;
 }
 
-.slip-form-root--mobile-inline .slip-quick-box--mobile .slip-quick-cell--active {
+.slip-form-root--mobile-inline .slip-quick-box--mobile .slip-quick-cell:hover:not(:disabled),
+.slip-form-root--mobile-inline .slip-quick-box--mobile .slip-quick-cell:active:not(:disabled),
+.slip-form-root--mobile-inline .slip-quick-box--mobile .slip-quick-cell:focus,
+.slip-form-root--mobile-inline .slip-quick-box--mobile .slip-quick-cell:focus-visible,
+.slip-form-root--mobile-inline .slip-quick-box--mobile .slip-quick-cell--active,
+.slip-form-root--mobile-inline .slip-quick-box--mobile .slip-quick-cell--active:hover,
+.slip-form-root--mobile-inline .slip-quick-box--mobile .slip-quick-cell--active:active,
+.slip-form-root--mobile-inline .slip-body-card--lay .slip-quick-box--mobile .slip-quick-cell:hover:not(:disabled),
+.slip-form-root--mobile-inline .slip-body-card--lay .slip-quick-box--mobile .slip-quick-cell:active:not(:disabled),
+.slip-form-root--mobile-inline .slip-body-card--lay .slip-quick-box--mobile .slip-quick-cell--active,
+.slip-form-root--mobile-inline .slip-body-card--lay .slip-quick-box--mobile .slip-quick-cell--active:hover,
+.slip-form-root--mobile-inline .slip-body-card--lay .slip-quick-box--mobile .slip-quick-cell--active:active {
   background: transparent;
   border-color: #49915e;
   color: #ffffff;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .slip-form-root--mobile-inline .slip-action-row--mobile {

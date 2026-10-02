@@ -354,8 +354,18 @@
   line-height: 18px;
 }
 
-.home-ref-bet-slip .slip-quick-grid--wazir-ref .slip-quick-cell--active {
-  background: rgba(73, 145, 94, 0.2);
+.home-ref-bet-slip .slip-quick-grid--wazir-ref .slip-quick-cell:hover:not(:disabled),
+.home-ref-bet-slip .slip-quick-grid--wazir-ref .slip-quick-cell:active:not(:disabled),
+.home-ref-bet-slip .slip-quick-grid--wazir-ref .slip-quick-cell:focus,
+.home-ref-bet-slip .slip-quick-grid--wazir-ref .slip-quick-cell:focus-visible,
+.home-ref-bet-slip .slip-quick-grid--wazir-ref .slip-quick-cell--active,
+.home-ref-bet-slip .slip-quick-grid--wazir-ref .slip-quick-cell--active:hover,
+.home-ref-bet-slip .slip-quick-grid--wazir-ref .slip-quick-cell--active:active {
+  background: transparent;
+  border-color: #49915e;
+  color: #ffffff;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .home-ref-bet-slip .slip-action-row--wazir-ref {

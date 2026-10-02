@@ -3,7 +3,7 @@ import { computed, ref } from 'vue'
 const configCache = new Map()
 const pendingRequests = new Map()
 
-const appKey = String(import.meta.env.VITE_MOBILE_APP_KEY || 'zuplay').trim()
+const appKey = String(import.meta.env.VITE_MOBILE_APP_KEY || 'wazirwin').trim()
 
 function getPublicApiBase() {
   const explicitBase =

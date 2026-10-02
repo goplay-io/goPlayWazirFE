@@ -467,7 +467,7 @@ watch(visible, (show) => {
   user-select: none;
   -webkit-user-select: none;
   pointer-events: auto;
-  filter: drop-shadow(0 0 10px rgba(40, 221, 67, 0.55));
+  filter: drop-shadow(0 0 12px rgba(73, 145, 94, 0.55));
   transition: transform 0.2s ease, filter 0.2s ease;
 }
 
@@ -476,13 +476,13 @@ watch(visible, (show) => {
   transform: scale(1.08);
   opacity: 1;
   visibility: visible;
-  filter: drop-shadow(0 4px 16px rgba(40, 221, 67, 0.85));
+  filter: drop-shadow(0 4px 16px rgba(73, 145, 94, 0.85));
   transition: filter 0.1s ease;
 }
 
 .skin-dock:not(.is-dragging) .skin-dock-fab:hover {
   transform: scale(1.06);
-  filter: drop-shadow(0 0 14px rgba(40, 221, 67, 0.75));
+  filter: drop-shadow(0 0 14px rgba(73, 145, 94, 0.75));
 }
 
 .skin-dock:not(.is-dragging) .skin-dock-fab:active {
@@ -490,7 +490,7 @@ watch(visible, (show) => {
 }
 
 .skin-dock.is-expanded .skin-dock-fab {
-  filter: drop-shadow(0 0 16px rgba(40, 221, 67, 0.85));
+  filter: drop-shadow(0 0 16px rgba(73, 145, 94, 0.85));
 }
 
 .skin-dock-fab-icon {
@@ -555,7 +555,7 @@ watch(visible, (show) => {
 }
 
 .skin-dock-item.is-active .skin-dock-icon {
-  outline: 1.5px solid rgba(40, 221, 67, 0.85);
+  outline: 1.5px solid rgba(73, 145, 94, 0.9);
   outline-offset: 1px;
   border-radius: 9999px;
 }

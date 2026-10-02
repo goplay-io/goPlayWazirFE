@@ -18,6 +18,8 @@ const isClearScreenPage = computed(() => {
   return path === '/casino/game' || path.startsWith('/casino/game/')
 })
 
+const isHomePage = computed(() => route.path === '/sports/live')
+
 const showWidget = computed(() => visible.value && !isClearScreenPage.value)
 
 const whatsappUrl = computed(() =>
@@ -85,7 +87,7 @@ function openSupport() {
   </div>
 
   <a
-    v-if="!isClearScreenPage"
+    v-if="isHomePage"
     class="mobile-whatsapp-float"
     :href="whatsappUrl"
     target="_blank"

@@ -1418,12 +1418,20 @@ body:has(.bet-page-container--wazir-ref),
   .bet-page-container--wazir-ref .match-odds-root .match-odds-runner-row .tw-flex-1 {
     grid-column: 1 !important;
     display: flex !important;
-    align-items: center !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
     min-width: 0 !important;
     width: auto !important;
     height: 48px !important;
     padding: 2px 3px 2px 10px !important;
     box-sizing: border-box !important;
+  }
+
+  .bet-page-container--wazir-ref .match-odds-root .runner-payouts.runner-payouts {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
   }
 
   .bet-page-container--wazir-ref .match-odds-root .match-odds-runner-name.match-odds-runner-name {
@@ -1582,6 +1590,13 @@ body:has(.bet-page-container--wazir-ref),
     min-width: 0 !important;
   }
 
+  .bet-page-container--wazir-ref .bet-markets-scrollable .who-win-root .who-win-header-limits.who-win-header-limits span {
+    color: #ffffff !important;
+    font-size: 9px !important;
+    font-weight: 300 !important;
+    line-height: 16px !important;
+  }
+
   .bet-page-container--wazir-ref .sports-bet-header-limits .match-odds-header-limit-text:first-child {
     display: none !important;
   }
@@ -1661,6 +1676,28 @@ body:has(.bet-page-container--wazir-ref),
     max-width: none !important;
   }
 
+  .bet-page-container--wazir-ref .other-markets-root .other-markets-header-backlay-inline .match-odds-header-col-label.sports-bet-back-label,
+  .bet-page-container--wazir-ref .other-markets-root .other-markets-header-backlay-inline .match-odds-header-col-label.sports-bet-lay-label {
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: center !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: 25px !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    color: #ffffff !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    line-height: 12px !important;
+    letter-spacing: 0.2px !important;
+    text-transform: uppercase !important;
+  }
+
   .bet-page-container--wazir-ref .bookmaker-bl-root .bookmaker-bl-header-backlay-inline .odds-header-groups.odds-header-groups--dual,
   .bet-page-container--wazir-ref .other-markets-root .other-markets-header-backlay-inline .odds-header-groups.odds-header-groups--dual,
   .bet-page-container--wazir-ref .who-win-root .who-win-header-grey .odds-header-groups.odds-header-groups--dual,
@@ -1675,6 +1712,137 @@ body:has(.bet-page-container--wazir-ref),
     align-items: flex-end !important;
     justify-items: stretch !important;
     gap: 0 !important;
+  }
+
+  /* Tied Match / other markets — same runner card and odds column as Match Odds */
+  .bet-page-container--wazir-ref .other-markets-root.other-markets-root .other-markets-runners.other-markets-runners {
+    background: #333333 !important;
+    border-radius: 3px !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12) !important;
+    padding: 1px 0 !important;
+    overflow: hidden !important;
+  }
+
+  .bet-page-container--wazir-ref .other-markets-root.other-markets-root .other-markets-runner-row.other-markets-runner-row {
+    display: grid !important;
+    grid-template-columns: 58.3333% 41.6667% !important;
+    align-items: stretch !important;
+    height: 49px !important;
+    min-height: 49px !important;
+    max-height: 49px !important;
+    padding: 0 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    border-bottom: 1px solid #676767 !important;
+    box-sizing: border-box !important;
+  }
+
+  .bet-page-container--wazir-ref .other-markets-root.other-markets-root .other-markets-runner-row.other-markets-runner-row:last-child {
+    border-bottom: 1px solid #676767 !important;
+  }
+
+  .bet-page-container--wazir-ref .other-markets-root .other-markets-runner-row > .tw-flex {
+    display: contents !important;
+  }
+
+  .bet-page-container--wazir-ref .other-markets-root .other-markets-runner-row .tw-flex-1 {
+    grid-column: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    min-width: 0 !important;
+    width: auto !important;
+    height: 48px !important;
+    padding: 2px 3px 2px 10px !important;
+    box-sizing: border-box !important;
+  }
+
+  .bet-page-container--wazir-ref .other-markets-root .runner-payouts.runner-payouts {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .bet-page-container--wazir-ref .other-markets-root .other-markets-runner-name.other-markets-runner-name {
+    margin: 0 !important;
+    color: #ffffff !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    line-height: 16.5px !important;
+    text-transform: capitalize !important;
+  }
+
+  .bet-page-container--wazir-ref .other-markets-root .other-markets-odds-ladder,
+  .bet-page-container--wazir-ref .other-markets-root .other-markets-odds-strip,
+  .bet-page-container--wazir-ref .other-markets-root .back-group,
+  .bet-page-container--wazir-ref .other-markets-root .lay-group {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    gap: 2px !important;
+  }
+
+  .bet-page-container--wazir-ref .other-markets-root .other-markets-odds-ladder {
+    grid-column: 2 !important;
+    display: flex !important;
+    align-items: center !important;
+    position: relative !important;
+    height: 48px !important;
+    padding: 1px 2px 1px 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .bet-page-container--wazir-ref .other-markets-root .other-markets-odds-strip {
+    position: relative !important;
+  }
+
+  .bet-page-container--wazir-ref .other-markets-root .match-odds-price-cell.match-odds-price-cell.v-btn {
+    flex: 1 1 0 !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 46px !important;
+    min-height: 46px !important;
+    max-height: 46px !important;
+    padding: 1px 4px !important;
+    border: 0 !important;
+    border-radius: 2px !important;
+    box-shadow: none !important;
+  }
+
+  .bet-page-container--wazir-ref .other-markets-root .bet-allow-disabled .match-odds-price-cell.odds-back-bg-1.v-btn,
+  .bet-page-container--wazir-ref .other-markets-root .bet-allow-disabled .match-odds-price-cell.odds-back-bg-2.v-btn,
+  .bet-page-container--wazir-ref .other-markets-root .bet-allow-disabled .match-odds-price-cell.odds-back-bg-3.v-btn,
+  .bet-page-container--wazir-ref .other-markets-root .match-odds-price-cell.odds-back-bg-1.v-btn,
+  .bet-page-container--wazir-ref .other-markets-root .match-odds-price-cell.odds-back-bg-2.v-btn,
+  .bet-page-container--wazir-ref .other-markets-root .match-odds-price-cell.odds-back-bg-3.v-btn {
+    background: #a7d8fd !important;
+    background-color: #a7d8fd !important;
+  }
+
+  .bet-page-container--wazir-ref .other-markets-root .bet-allow-disabled .match-odds-price-cell.odds-lay-bg-1.v-btn,
+  .bet-page-container--wazir-ref .other-markets-root .bet-allow-disabled .match-odds-price-cell.odds-lay-bg-2.v-btn,
+  .bet-page-container--wazir-ref .other-markets-root .bet-allow-disabled .match-odds-price-cell.odds-lay-bg-3.v-btn,
+  .bet-page-container--wazir-ref .other-markets-root .match-odds-price-cell.odds-lay-bg-1.v-btn,
+  .bet-page-container--wazir-ref .other-markets-root .match-odds-price-cell.odds-lay-bg-2.v-btn,
+  .bet-page-container--wazir-ref .other-markets-root .match-odds-price-cell.odds-lay-bg-3.v-btn {
+    background: #f9c9d4 !important;
+    background-color: #f9c9d4 !important;
+  }
+
+  .bet-page-container--wazir-ref .other-markets-root .match-odds-price-cell .mo-price {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    line-height: 20px !important;
+    color: #000000 !important;
+  }
+
+  .bet-page-container--wazir-ref .other-markets-root .match-odds-price-cell .mo-size {
+    font-size: 10px !important;
+    font-weight: 400 !important;
+    line-height: 12px !important;
+    color: #000000 !important;
   }
 
   /* Fancy sits in the same 8px inset as the other tables */
