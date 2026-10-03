@@ -217,7 +217,7 @@ const openProvider = (provider) => {
   padding: 8px;
   border: 0;
   border-radius: 6px;
-  background: #2a2d31;
+  background: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
   cursor: pointer;
   line-height: 0;

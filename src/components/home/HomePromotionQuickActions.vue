@@ -138,7 +138,7 @@ const onPromotionClick = () => {
   width: 100%;
   min-height: 52px;
   padding: 10px 12px;
-  border-radius: 14px;
+  border-radius: 6px;
   border: 1px solid transparent;
   cursor: pointer;
   text-align: left;
